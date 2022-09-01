@@ -1,0 +1,23 @@
+# Personal additions...
+
+# ParaView Outputs
+*.pvd
+*.vtu
+*.pvtu
+
+# TeX Miscellanea
+*.bcf
+*.synctex.gz
+*.synctex(busy)
+*.xml
+*.log
+#*.pdf
+
+# TeX Trash
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
