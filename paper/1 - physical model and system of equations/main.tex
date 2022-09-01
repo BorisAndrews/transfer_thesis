@@ -1,0 +1,80 @@
+\section{Physical Model and System of Equations}
+    \BA{Room for lots of pictures here.}
+    
+    \BA{What physics characterise a (magnetised) neutral plasma? Quasi-neutral mix of \emph{separated} electrically-charged phases. (Check out the \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{plasma Wikipedia page}.)}
+    
+    \BA{Creates a coupled system with the EM field.}
+    
+    \BA{What causes a fluid to turn into a plasma? Ionisation. (High heat/strong EM field.)}
+    
+    \BA{What makes a tozmahok plasma special (give stats):
+    \begin{itemize}
+        \item  \emph{Massive} heat.
+        \item  \emph{Massive} magnetic field- highly magnetised. (Talk about particle gyro-orbits and drifts.)
+        \item  \emph{Minimal} density. (Why?)
+    \end{itemize}.}
+    
+    \BA{Will make the assumptions:
+    \begin{itemize}
+        \item  Only 2 phases- this is generally the case in edge plasmas (i.e. outside the divertor) provided impurity effects are negligible. (A bold assumption?)
+        \item  Only (thermalising) Coulomb collisions are considered- these are generally dominant over the others in a tozmahok. (N.B. No fusion.)
+    \end{itemize}}
+    
+    \BA{Complicated BCs in a tozmahok.}
+    
+    
+    \subsection{Kinetic Models}
+        \BA{What is a ``kinetic'' model.}
+        
+        \subsubsection{Typical Fluids}
+            \BA{The resultant kinetic PDE. (Boltzmann equation.)}
+                        
+            \BA{How we traditionally convert that to a ``fluid'' model.}
+            
+            \BA{Will use this simpler case as a reference study to develop the ideas for the more complicated tozmahok plasma case.}
+        
+        \subsubsection{Tozmahok Plasmas}
+            \BA{Why the fluid/MHD model reductions aren't necessarily valid in tozmahok plasmas. (Incorrectly assumed dominant collisional term- get some estimates on the scale of these terms in the edge plasma. Good content \href{https://en.wikipedia.org/wiki/Plasma_(physics)#Mathematical_descriptions}{here}.)}
+            
+            \BA{Many effects not captured my MHD/2 fluid models (check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or the ):
+            \begin{itemize}
+                \item  Most plasma waves
+                \item  Most plasma/kinetic instabilities
+                \item  Landau damping/bump-on-tail instability
+                \item  Leakage
+                \item  Structures (Beams/double layers)
+                \item  Anisotropic pressure
+            \end{itemize}}
+            
+            \BA{The resultant kinetic PDE. (Boltzmann/Vlasov equations.)}
+            
+            \BA{Talk about gyrokinetic model:
+            \begin{itemize}
+                \item  The model's physical basis/mathematics. (Equations provide good insight into the origin of some behavioural effects, e.g. gyro-orbits/drifts.)
+                \item  Why we don't use it:
+                \begin{itemize}
+                    \item  High mathematical (more terms in lower dimensions doesn't necessarily mean faster computation)/computational (really don't want to do a 5D simulation) complexity.
+                    \item  Errors from neglection of terms. (Non-physical behaviour over long times/resonances and adiabatic invariants can be lost.)
+                \end{itemize}
+            \end{itemize}}
+    
+    
+    \subsection{Coupled Maxwellian/Perturbation Decomposition}
+        \BA{How we can re-adapt the techniques that traditionally give a fluid model when the collision operator is non-dominant to get an accurate fluid model, to apply modern techniques in fluid simulation?}
+        
+        \BA{Expand as a sum of a Maxwellian and some perturbation!}
+        
+        \subsubsection{Maxwellian Background: A \emph{Fluid} Model}
+            \BA{Ideas already well-developed!}
+            
+            \BA{Perturbation contribuation not too problematic (hopefully).}
+            
+        \subsubsection{Anisotropic Perturbation: A \emph{Kinetic} Model}
+            \BA{Not just kicking the problem down the road- plasma is thermalised/Maxwellian in ``most places'' for ``most physically relevant simulations'', so the perturbations is (compartively) small in ``most places''.}
+            
+            \BA{How do we model this:
+            \begin{itemize}
+                \item  Lattice Boltzmann?
+                \item  Some series expansion?
+                \item  Particle-in-cell (PIC)?
+            \end{itemize}}

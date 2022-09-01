@@ -1,0 +1,44 @@
+\documentclass[12pt, a4paper]{article}
+
+\input{paper/template/main.tex}
+
+\title{Numerical Bifurcation Analysis for Heat Transfer by the Edge Plasma of a Tokamak}
+\author{Boris Andrews}
+\affil{Mathematical Institute, University of Oxford}
+\date{March 2022}
+
+
+
+\begin{document}
+    \pagenumbering{gobble}
+    \maketitle
+    
+    
+    
+    \begin{abstract}
+        \BA{Abstract.}
+    \end{abstract}
+    
+    
+    
+    \newpage
+    \tableofcontents
+    \BA{I'm aware having a contents page is ridiculous, it's just nice to have for now for navigation purposes.}
+    
+    
+    
+    \newpage
+    \pagenumbering{arabic}
+        \input{paper/0 - introduction/main.tex}
+        \input{paper/1 - physical model and system of equations/main.tex}
+        \input{paper/2 - numerical simulation and preconditioning/main.tex}
+        \input{paper/3 - bifurcation analysis/main.tex}
+        \input{paper/4 - summary and further work/main.tex}
+    
+    
+    
+    %\section{}
+    \newpage
+    \pagenumbering{gobble}
+        \printbibliography
+\end{document}
