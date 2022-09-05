@@ -1,4 +1,4 @@
-\section{Physical Model and System of Equations}
+\chapter{Physical Model and System of Equations}
     \BA{Room for lots of pictures here.}
     
     \BA{What physics characterise a (magnetised) neutral plasma? Quasi-neutral mix of \emph{separated} electrically-charged phases. (Check out the \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{plasma Wikipedia page}.)}
@@ -23,17 +23,17 @@
     \BA{Complicated BCs in a tozmahok.}
     
     
-    \subsection{Kinetic Models}
+    \section{Kinetic Models}
         \BA{What is a ``kinetic'' model.}
         
-        \subsubsection{Typical Fluids}
+        \subsection{Typical Fluids}
             \BA{The resultant kinetic PDE. (Boltzmann equation.)}
                         
             \BA{How we traditionally convert that to a ``fluid'' model.}
             
             \BA{Will use this simpler case as a reference study to develop the ideas for the more complicated tozmahok plasma case.}
         
-        \subsubsection{Tozmahok Plasmas}
+        \subsection{Tozmahok Plasmas}
             \BA{Why the fluid/MHD model reductions aren't necessarily valid in tozmahok plasmas. (Incorrectly assumed dominant collisional term- get some estimates on the scale of these terms in the edge plasma. Good content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.)}
             
             \BA{Many effects not captured my MHD/2 fluid models (check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.):
@@ -59,17 +59,17 @@
             \end{itemize}}
     
     
-    \subsection{Coupled Maxwellian/Correction Decomposition}
+    \section{Coupled Maxwellian/Correction Decomposition}
         \BA{How we can re-adapt the techniques that traditionally give a fluid model when the collision operator is non-dominant to get an accurate fluid model, to apply modern techniques in fluid simulation?}
         
         \BA{Expand as a sum of a Maxwellian and some correction!}
         
-        \subsubsection{Maxwellian Background: A \emph{Fluid} Model}
+        \subsection{Maxwellian Background: A \emph{Fluid} Model}
             \BA{Ideas already well-developed!}
             
             \BA{Correction contribution not too problematic (hopefully).}
             
-        \subsubsection{Anisotropic Correction: A \emph{Kinetic} Model}
+        \subsection{Anisotropic Correction: A \emph{Kinetic} Model}
             \BA{Not just kicking the problem down the road- plasma is thermalised/Maxwellian in ``most places'' for ``most physically relevant simulations'', so the correction is (compartively) small in ``most places''.}
             
             \BA{How do we model this:
@@ -80,7 +80,7 @@
             \end{itemize}}
     
     
-    \subsection{Edge Plasma Model}
+    \section{Edge Plasma Model}
         \BA{Little about the edge plasma model we're going to consider:
         \begin{itemize}
             \item  Looking for symmetric structures on a low aspect ratio?

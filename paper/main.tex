@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper]{report}
 
 \input{template/main.tex}
 
@@ -28,12 +28,14 @@
     
     \newpage
     \pagenumbering{arabic}
-        \input{0 - introduction/main.tex}
-        \input{1 - physical model and system of equations/main.tex}
-        \input{2 - numerical simulation and preconditioning/main.tex}
-        \input{3 - bifurcation analysis/main.tex}
-        \input{4 - research plan/main.tex}
-        \input{5 - summary/main.tex}
+            \input{0 - introduction/main.tex}
+        \part{Research}
+            \input{1 - physical model and system of equations/main.tex}
+            \input{2 - numerical simulation and preconditioning/main.tex}
+            \input{3 - bifurcation analysis/main.tex}
+        \part{Project Overview}
+            \input{4 - research plan/main.tex}
+            \input{5 - summary/main.tex}
     
     
     

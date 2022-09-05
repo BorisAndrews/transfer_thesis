@@ -1,19 +1,19 @@
-\section{Numerical Simulation and Preconditioning}    
-    \subsection{Maxwellian Background: A Fluid Simulation}
+\chapter{Numerical Simulation and Preconditioning}    
+    \section{Maxwellian Background: A Fluid Simulation}
         \BA{Important thing of note here is the fact that this is necessarily a \emph{compressible}, and therefore partially \emph{hyperbolic} system, which can cause a lot of difficulties for creating good discretisations and simulations. (C.F. Numerical dissipation.)}
         
-        \subsubsection{Augmented Lagrangian (AL) Preconditioning}
+        \subsection{Augmented Lagrangian (AL) Preconditioning}
             \BA{Very high Reynolds, so these fluid equations are \emph{primed} for augmented Lagrangian preconditioning.}
 
             \BA{Problem is, these equations are necessarily compressible- AL preconditioners have never been done for \emph{compressible} fluid simulations before. How to transfer the ideas across is not immediate.}
 
             \BA{Crucially: Need exact satisfaction of the mass conservation equations- can tackle this by using the vector of momentum, $\rho\bfu$, instead of velocity, $\bfu$.}
 
-            \paragraph{Stationary State Simulations}
+            \subsubsection{Stationary State Simulations}
 
-            \paragraph{Transient (State) Simulations}
+            \subsubsection{Transient (State) Simulations}
         
-        \subsubsection{Fast Diagonalisation Method (FDM)}
+        \subsection{Fast Diagonalisation Method (FDM)}
             \BA{NEPTUNE interested in high-order methods- why?:
             \begin{itemize}
                 \item  Better approximation properties (provided sufficient regularity- N.B. \emph{Not} necessarily the case with funky BCs in a tozmahok, but \emph{should} be fine in my case if I pick a nice model with nice BCs on a nice domain).
@@ -26,9 +26,9 @@
             \end{itemize}}
     
     
-    \subsection{Anisotropic Correction: A Kinetic Simulation}
+    \section{Anisotropic Correction: A Kinetic Simulation}
         \BA{What approach?}
         
-        \subsubsection{Lattice Boltzmann?}
-        \subsubsection{Series Expansion?}
-        \subsubsection{Particle-in-Cell (PIC)?}
+        \subsection{Lattice Boltzmann?}
+        \subsection{Series Expansion?}
+        \subsection{Particle-in-Cell (PIC)?}
