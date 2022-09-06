@@ -1,4 +1,7 @@
-\chapter{Numerical Simulation and Preconditioning}    
+\chapter{Numerical Simulation and Preconditioning}
+    \BA{Introduction.}
+
+    
     \section{Maxwellian Background: A Fluid Simulation}
         \BA{Important thing of note here is the fact that this is necessarily a \emph{compressible}, and therefore partially \emph{hyperbolic} system, which can cause a lot of difficulties for creating good discretisations and simulations. (C.F. Numerical dissipation.)}
         
@@ -32,3 +35,6 @@
         \subsection{Lattice Boltzmann?}
         \subsection{Series Expansion?}
         \subsection{Particle-in-Cell (PIC)?}
+            \BA{Would be a great opportunity to work in the ideas of gyrokinetic theory, especially the more mathematical aspects such as the Lie transformations overviewed in Lapillone's thesis (I'm sure there's a more original source for these ideas of course).}
+
+            \BA{Will Saunders at NEPTUNE said there's evidence thatthis decomposition gives a ``low-noise'' PIC simulation- quite what this means I don't know — potentially the reduction of high-wavenumber perturbations in the fluid portion? that's the impression I got off James Cook in his NEPTUNE presentation — \emph{however}, the key takeaway is there is \emph{solid evidence} that this is \emph{the way to go}. Just google ``low noise particle in cell'' and you find there's a \emph{solid} amount of literature on the idea.}
