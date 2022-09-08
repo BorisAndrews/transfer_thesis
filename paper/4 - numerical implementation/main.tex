@@ -1,42 +1,38 @@
 \chapter{Numerical Implementation}
-    \BA{Introduction}
-    
-    \BA{Perhaps the best way to do this would be to create a table of all the different software options available ({\tt Firedrake} [Firedrake emoji]/{\tt Nektar++}/{\tt deal.ii}/bespoke) vs. the presence/difficulty of implementation of all the different features I'd like (for each of the different non-Maxwellian correction modelling techniques too).}
+    \BA{Introduction.}
 
     \begin{figure}[!h]
         \centering
-        \begin{tabular}{ c || c | c | c | c }
-            Support for:  &  {\tt Firedrake} [Firedrake emoji]  &  {\tt Nektar++}  &  \texttt{deal.ii}  &  Bespoke  \\
+        \begin{tabular}{ c || c | c | c | c | c }
+            Support for:  &  {\tt Firedrake}  &  {\tt Nektar++}  &  {\tt NGSolve}  &  {\tt deal.ii}  &  Bespoke  \\
             \hline\hline
-            Open source  &  \bftick  &    &    &  \bftick  \\
-            \hline\hline
-            FEEC elements  &  \bftick  &  \bfcross  &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            Open source  &  \bftick  &    &  \bftick  &    &  \bftick  \\
             \hline
-            Block/AL preconditioning  &  \bftick  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline
-            Multigrid preconditioning  &  \bftick  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            Portable  &  \bftick  &  \bftick  &  \bftick  &  \bftick  &  \bfcross  \\
             \hline\hline
-            $> 3$ dimensions  &  \bfcross  &    &  \bftick  &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            FEEC elements  &  \bftick  &  \bfcross  &  \ast\textcolor{darkyellow}{$^{\bf 5}$}  &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
             \hline
-            Fluid/PIC interaction  &  \ast\textcolor{darkyellow}{$^{\bf 2}$}  &  \ast\textcolor{darkyellow}{$^{\bf 3}$}  &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            Block/AL preconditioning  &  \bftick  &    &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            \hline
+            Multigrid preconditioning  &  \bftick  &    &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
             \hline\hline
-            Deflation  &  \ast\textcolor{darkyellow}{$^{\bf 4}$}  &  \bfcross  &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            $> 3$ dimensions  &  \bfcross  &    &    &  \bftick  &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            \hline
+            Fluid/PIC interaction  &  \ast\textcolor{darkyellow}{$^{\bf 2}$}  &  \ast\textcolor{darkyellow}{$^{\bf 3}$}  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
+            \hline\hline
+            Deflation  &  \ast\textcolor{darkyellow}{$^{\bf 4}$}  &  \bfcross  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
         \end{tabular}
-        \caption{\BA{Applicability of different numerical implementation frameworks:} \BA{Details about what the \bftick's, \bfcross's and \ast's mean.}}
+        \caption{\BA{Applicability of different numerical implementation frameworks.} \BA{Details about what the \bftick's, \bfcross's and \ast's mean.}}
     \end{figure}
     
-    \BA{Why {\tt Firedrake} [Firedrake emoji]?:
+    \BA{What each of the \ast's means:
     \begin{itemize}
-        \item  {\tt PETSc} integration allows (comparitively) easy implementation of the preconditioner.
-        \item  Open source nature.
-        \item  Some support for the fluid/PIC integration in {\tt DMSWARM} in {\tt PETSc}. (Will Saunders has concerns about the way particles are passed between MPI ranks- the particles are distributed from one rank to \emph{all possible receiving ranks} — computationally intense already! — then has no checks for existence and uniqueness for a receiving rank. Apparently solving this would be a parallelisation nightmare too.)
-        \item  {\tt Firedrake} [Firedrake emoji] has {\tt DefCon}.
-        \item  Ask Patrick.
+        \item[\ast\textcolor{darkyellow}{$^{\bf 1}$}]  Obviously all of this is supported in a bespoke implementation, in as far as I would have to implement it, however I would have much more control over how it was done in this case.
+        \item[\ast\textcolor{darkyellow}{$^{\bf 2}$}]  There's various possibilities here. Patrick mentioned {\tt DMSwarm} in {\tt PETSc},\footnote{Will Saunders has concerns about the way {\tt DMWarm} passed particles between MPI ranks- the particles are distributed from one rank to \emph{all possible receiving ranks} — computationally intense already! — then has no checks for existence and uniqueness for a receiving rank. Apparently solving this would be a parallelisation nightmare too.} Pablo mentioned a few other ideas and people to get in contact with about this- I'm confident that some of the ideas I'd like to try should already be supported in some form, \emph{without} me having to delve into the nitty-gritty of parallelising the PIC.
+        \item[\ast\textcolor{darkyellow}{$^{\bf 3}$}]  Some of the fluid/PIC integration is implemented in \emph{certain} cases within the ExCALIBUR NEPTUNE project in {\tt NESO} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO}{link}), {\tt NESO-Particles} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Particles}{link}) and {\tt NESO-Spack} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Spack}{link}) within {\tt Nektar++}- works on GPUs and everything!
+        \item[\ast\textcolor{darkyellow}{$^{\bf 4}$}]  Firedrake has DefCon! Obviously, that's going to require some tweaks — as detailed in the Bifurcation Analysis chapter — for the applications I'd like to apply it to, but that's going to be the case for any premade deflation package.
+        \item[\ast\textcolor{darkyellow}{$^{\bf 5}$}]  I'm not sure if {\tt NGSolve} has support for FEEC elements on \emph{non-simplicial} domains- it's unclear from the \href{https://docu.ngsolve.org/latest/i-tutorials/unit-2.3-hcurlhdiv/hcurlhdiv.html}{documentation}.
     \end{itemize}}
 
-    \BA{Why \emph{not} {\tt Firedrake} [Firedrake emoji]?:
-    \begin{itemize}
-        \item  No support for meshes of dimension $> 3$ at the moment, if I went down the route of simulating the non-Maxwellian correction through a \emph{kinetic} model.
-        \item  Some of the fluid/PIC integration is well-implemented within the ExCALIBUR NEPTUNE project in {\tt NESO} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO}{link}), {\tt NESO-Particles} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Particles}{link}) and {\tt NESO-Spack} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Spack}{link}) within {\tt Nektar++}- works on GPUs and everything!
-        \item  Ask Patrick.
-    \end{itemize}}
+    \section*{Summary}
+        \BA{Summary.}
