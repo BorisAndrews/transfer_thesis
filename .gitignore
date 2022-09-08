@@ -11,7 +11,7 @@
 *.synctex(busy)
 *.xml
 *.log
-*.pdf
+#*.pdf
 
 # TeX Trash
 *.aux
