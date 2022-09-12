@@ -5,17 +5,6 @@
     
     \BA{What physics characterise a (magnetised) neutral plasma? Quasi-neutral mix of \emph{separated} electrically-charged phases. (Check out the \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{plasma Wikipedia page}.)}
     
-    \BA{Creates a coupled system with the EM field.}
-    
-    \BA{What causes a fluid to turn into a plasma? Ionisation. (High heat/strong EM field.)}
-    
-    \BA{What makes a tozmahok plasma special (give stats):
-    \begin{itemize}
-        \item  \emph{Massive} heat.
-        \item  \emph{Massive} magnetic field- highly magnetised. (Talk about particle gyro-orbits and drifts.)
-        \item  \emph{Minimal} density. (Why?)
-    \end{itemize}.}
-    
     \BA{Will make the assumptions:
     \begin{itemize}
         \item  Only 2 phases (positive and negative) i.e.:
@@ -27,97 +16,12 @@
         \item  Relativistic effects are negligible. (Is observing that the velocity scale is much smaller than $c$ sufficient justification? Imperial guy at the NEPTUNE workshop appeared to think not.)
     \end{itemize}}
     
-    \BA{Complicated BCs in a tozmahok.}
     
-    \begin{figure}[!h]
-        \centering
-        \begin{tikzpicture}[align = center, node distance = 4cm, auto]
-            \node[1] (11) at (0, 0) {{\bf Fluid} Single-Phase Model (Navier–Stokes)};
-            \node[2] (12) at (0, -1.75) {{\bf Kinetic} Single-Phase Model};
-            \node[2] (21) at (5.5, 0) {{\bf Fluid} Multi-phase Model};
-            \node[3] (22) at (5.5, -1.75) {{\bf Kinetic} Multi-phase model};
-            \node[3] (31) at (11, 0) {{\bf Fluid} Plasma Model (MHD)};
-            \node[4] (32) at (11, -1.75) {{\bf Kinetic} \\ Plasma Model};
+    \input{1 - physical model and system of equations/1 - tozmahok plasma dynamics/main.tex}
+    \input{1 - physical model and system of equations/2 - kinetic models/main.tex}
+    \input{1 - physical model and system of equations/3 - coupled maxellian correction decomposition/main.tex}
+    \input{1 - physical model and system of equations/4 - edge plasma model/main.tex}
     
-            \path[arrow] (11) -- (12);
-            \path[arrow] (11) -- (21);
-            \path[arrow] (12) -- (22);
-            \path[arrow] (21) -- (22);
-            \path[arrow] (21) -- (31);
-            \path[arrow] (22) -- (32);
-            \path[arrow] (31) -- (32);
-        \end{tikzpicture}
-        \caption{\BA{Diagram of workflow for creating a kinetic plasma model to account for pressure anisotropy.}}
-    \end{figure}
-    
-    
-    \section{Kinetic Models}
-        \BA{What is a ``kinetic'' model.}
-        
-        \subsection{Single-Phase Fluids}
-            \BA{The resultant kinetic PDE. (Boltzmann equation.)}
-                        
-            \BA{How we traditionally convert that to a ``fluid'' model.}
-            
-            \BA{Will use this simpler case as a reference study to develop the ideas for the more complicated tozmahok plasma case.}
-
-        \subsection{Multiphase Fluids}
-            \BA{Similar analysis for a multiphase fluid, in preparation for handling the tozmahok plasmas.}
-        
-        \subsection{Tozmahok Plasmas}
-            \BA{Why the fluid/MHD model reductions aren't necessarily valid in tozmahok plasmas. (Incorrectly assumed dominant collisional term- get some estimates on the scale of these terms in the edge plasma. Good content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.)}
-            
-            \BA{Many effects not captured my MHD/2 fluid models (check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.):
-            \begin{itemize}
-                \item  Most plasma waves
-                \item  Most plasma/kinetic instabilities
-                \item  Landau damping/bump-on-tail instability
-                \item  Leakage
-                \item  Structures (Beams/Double layers)
-                \item  Anisotropic pressure
-            \end{itemize}}
-            
-            \BA{The resultant kinetic PDE. (Boltzmann/Vlasov equations.)}
-            
-            \BA{Talk about gyrokinetic model:
-            \begin{itemize}
-                \item  The model's physical basis/mathematics. (Equations provide good insight into the origin of some behavioural effects, e.g. gyro-orbits/drifts.)
-                \item  Why we don't use it on the general kinetic equation:
-                \begin{itemize}
-                    \item  High mathematical (more terms in lower dimensions doesn't necessarily mean faster computation)/computational (really don't want to do a 5D simulation) complexity.
-                    \item  Errors from neglection of terms. (Non-physical behaviour over long times/resonances and adiabatic invariants can be lost.)
-                \end{itemize}
-                \item  We \emph{will} however use it for the PIC correction.
-            \end{itemize}}
-    
-    
-    \section{Coupled Maxwellian/Correction Decomposition}
-        \BA{How we can re-adapt the techniques that traditionally give a fluid model when the collision operator is non-dominant to get an accurate fluid model, to apply modern techniques in fluid simulation?}
-        
-        \BA{Expand as a sum of a Maxwellian and some correction!}
-        
-        \subsection{Maxwellian Background: A \emph{Fluid} Model}
-            \BA{Ideas already well-developed!}
-            
-            \BA{Correction contribution not too problematic (hopefully).}
-            
-        \subsection{Anisotropic Correction: A \emph{Kinetic} Model}
-            \BA{Not just kicking the problem down the road- plasma is thermalised/Maxwellian in ``most places'' for ``most physically relevant simulations'', so the correction is (compartively) small in ``most places''.}
-            
-            \BA{How do we model this:
-            \begin{itemize}
-                \item  Lattice Boltzmann?
-                \item  Some series expansion?
-                \item  Particle-in-cell (PIC)?
-            \end{itemize}}
-    
-    
-    \section{Edge Plasma Model}
-        \BA{Little about the edge plasma model we're going to consider:
-        \begin{itemize}
-            \item  Looking for symmetric structures on a low aspect ratio?
-            \item  Idk there's a lot of ways to consider this- I could very well end up doing different kinds of simulations with all different kinds of BCs in the final product, and seeing how my results match up.
-        \end{itemize}}
 
     \section*{Summary}
         \BA{Summary.}
