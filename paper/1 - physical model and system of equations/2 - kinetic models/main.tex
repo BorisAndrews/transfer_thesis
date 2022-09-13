@@ -1,4 +1,4 @@
-\section{Kinetic Models}
+\section{Kinetic Models: The General Theory}
     \BA{What is a ``kinetic'' model?}
     
     \begin{definition}[Kinetic model]
@@ -25,11 +25,11 @@
         \centering
         \begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node[1] (11) at (0, 0) {{\bf Fluid} Single-Phase Model (Navier–Stokes)};
-            \node[2] (12) at (0, -1.75) {{\bf Kinetic} Single-Phase Model};
+            \node[2] (12) at (0.5, -1.75) {{\bf Kinetic} Single-Phase Model};
             \node[2] (21) at (5.5, 0) {{\bf Fluid} Multi-phase Model};
-            \node[3] (22) at (5.5, -1.75) {{\bf Kinetic} Multi-phase model};
+            \node[3] (22) at (6, -1.75) {{\bf Kinetic} Multi-phase model};
             \node[3] (31) at (11, 0) {{\bf Fluid} Plasma Model (MHD)};
-            \node[4] (32) at (11, -1.75) {{\bf Kinetic} \\ Plasma Model};
+            \node[4] (32) at (11.5, -1.75) {{\bf Kinetic} \\ Plasma Model};
     
             \path[arrow] (11) -- (12);
             \path[arrow] (11) -- (21);
@@ -42,98 +42,6 @@
         \caption{\BA{Diagram of workflow for creating a kinetic plasma model to account for pressure anisotropy.}}
     \end{figure}
     
-    \subsection{Single-Phase Fluids}
-        \BA{The resultant kinetic PDE. (Boltzmann equation.)}
-                    
-        \BA{How we traditionally convert that to a ``fluid'' model.}
-        
-        \BA{Will use this simpler case as a reference study to develop the ideas for the more complicated tozmahok plasma case.}
-        
-        \BA{The way I've got this section structured with reference to introducing the moments is a bit funny.}
-        
-        Consider first a single-phase fluid. Let a single particle of mass $m$ in this fluid have position $\bfx(t)$ and velocity $\bfv(t)$, and be subject to a force $\bfF(\bfx, \bfv; t)$. We seek a (system of) ODEs governing the behaviour of this particle:
-        \begin{itemize}
-            \item  The position evolves simply according to the ODE
-            \begin{equation}\label{velocity ODE}
-                d\bfx  =  \bfv dt
-            \end{equation}
-            \item  The velocity evolves according to the ODE, $d\bfv  =  \frac{1}{m}\bfF dt + \frac{1}{m}${\bf ``Collisional forces''}$dt$. \BA{(Note here with references about how tough it is to model collisional terms- \emph{got} to make \emph{some} assumptions, \emph{especially} if we want to do simulations!)} To model the collisional forces, consider the following 2 assumptions:
-            \begin{itemize}
-                \item  The molecular chaos hypothesis:
-                \begin{definition}[Molecular chaos hypothesis]
-                    The ``molecular chaos hypothesis'' postulates that the velocities of colliding particles are uncorrelated, and independent of position. \BA{[Ref]} \BA{(Justification that this is valid here? Particle number sufficiently large?)}
-                \end{definition}
-                \item  Collisional forces on the particles are dominated by those from Coulomb collisions: \BA{(Is this the right way of phrasing this?)}
-                \begin{definition}[Coulomb collision]
-                    A ``Coulomb collision'' is an elastic collision between two charged particles interacting through their own electric field. \BA{[Ref]} \BA{(Justification that this is valid here?)}
-                \end{definition}
-            \end{itemize}
-            We can then model the collision forces through a Wiener process, with forces proportional to the:  \BA{(Give justification for this model. That might be tough...)}
-            \begin{itemize}
-                \item  Difference in momentum between that of the particle, $m\bfv$, and the average particle at that position's space, $m\bfu$ \BA{(Why?)}
-                \begin{equation}
-                    \mu m(\bfu - \bfv)
-                \end{equation}
-                \item  Derivative of some Wiener process, representing the random forces from collisions at random angles from the molecular chaos hypothesis
-                \begin{equation}
-                    \sigma\frac{d\bfB}{dt}
-                \end{equation}
-            \end{itemize}
-            
-            \BA{Here's where I think I should state that we have the relation $\frac{\mu}{\sigma^{2}}  =  \frac{k_{B}T}{m}$. Is this from conservation of energy? Would like to give a proper derivation of the scale of $\sigma$, and am sure I'll have to for the dimensional analysis.}
-            
-            By convention, mapping $\bfx, \bfv  \mapsto  \bfX, \bfV$ to represent the switch from an ODE to an SDE (and accordingly in (\ref{velocity ODE})) gives the SDE for the velocity evolution
-            \begin{equation}
-                \item  d\bfV  =  \frac{1}{m}\bfF dt + \mu m(\bfu - \bfv)dt + \sigma d\bfB
-            \end{equation}
-            This resembles a combination of an Ornstein–Uhlenbeck process and a forcing term.
-        \end{itemize}
-        Applying the Fokker-Planck equation, the particle density function, $f(\bfx, \bfv; t)$ evolves according to the PDE
-        \begin{equation}
-            \partial_{t}[f] + \nabla_{\bfx}\cdot[f\bfv] + \frac{1}{m}\nabla_{\bfv}\cdot[f\bfF]  =  \underset{\textrm{Collisional terms}}{\underbrace{\mu\nabla_{\bfv}\cdot[f(\bfv - \bfu)] + \frac{\sigma^{2}}{2}\Delta_{\bfv}[f]}}
-        \end{equation}
-        This is a form of the Boltzmann equation, where the approximation to the collisional term is explicitly derived from the above assumptions.
-        
-        \BA{Think what I've got written going forwards here should be in the \emph{next} subsection.}
-        
-        It is often the case that on the typical parameter scales of interest, collisional terms massively dominate the above PDE. \BA{(Dimensional analysis here?)} As such, up to leading order we would expect
-        \begin{align}
-            0  &\sim  \mu\nabla_{\bfv}\cdot[f(\bfv - \bfu)] + \frac{\sigma^{2}}{2}\Delta_{\bfv}[f]  \\
-            f  &\sim  \frac{\rho}{m}\sqrt{\frac{m}{k_{B}T}}^{3}\exp\left(- \frac{m}{2k_{B}T}\|\bfv - \bfu\|^{2}\right)  \\
-        \end{align}
-        where $\rho$, $\bfu$, $T$—functions of $\bfx$ (and $t$)—are moments characterising the conserved quantities of mass, momentum and energy:
-        \begin{align}
-            \rho  &=  \int fmd\bfv  \\
-            \rho\bfu  &=  \int fm\bfvd\bfv d\bfv  \\
-            \frac{1}{2}\rho\left(\|\bfu\|^{2} + 3\frac{k_{B}T}{m}\right)  &=  \int f\frac{1}{2}m\|\bfv\|^{2}d\bfv  \\
-        \end{align}
-        \BA{(Is my energy equation right there? I think so, have checked a little, plus the dimensions seem right.)} and, by its definition from the energy equation here, \BA{(Don't like the way that's phrased...)} $k_{B}  \approx  1.381\times10^{- 23}\rmJ\rmK^{- 1}$ is the Boltzmann constant.
-    
-    \subsection{Multiphase Fluids}
-        \BA{Similar analysis for a multiphase fluid, in preparation for handling the tozmahok plasmas.}
-    
-    \subsection{Tozmahok Plasmas}
-        \BA{Why the fluid/MHD model reductions aren't necessarily valid in tozmahok plasmas. (Incorrectly assumed dominant collisional term- get some estimates on the scale of these terms in the edge plasma. Good content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.)}
-        
-        \BA{Many effects not captured my MHD/2 fluid models (check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.):
-        \begin{itemize}
-            \item  Most plasma waves
-            \item  Most plasma/kinetic instabilities
-            \item  Landau damping/bump-on-tail instability
-            \item  Leakage
-            \item  Structures (Beams/Double layers)
-            \item  Anisotropic pressure
-        \end{itemize}}
-        
-        \BA{The resultant kinetic PDE. (Boltzmann/Vlasov equations.)}
-        
-        \BA{Talk about gyrokinetic model:
-        \begin{itemize}
-            \item  The model's physical basis/mathematics. (Equations provide good insight into the origin of some behavioural effects, e.g. gyro-orbits/drifts.)
-            \item  Why we don't use it on the general kinetic equation:
-            \begin{itemize}
-                \item  High mathematical (more terms in lower dimensions doesn't necessarily mean faster computation)/computational (really don't want to do a 5D simulation) complexity.
-                \item  Errors from neglection of terms. (Non-physical behaviour over long times/resonances and adiabatic invariants can be lost.)
-            \end{itemize}
-            \item  We \emph{will} however use it for the PIC correction.
-        \end{itemize}}
+    \input{1 - physical model and system of equations/2 - kinetic models/1 - single-phase fluids/main.tex}
+    \input{1 - physical model and system of equations/2 - kinetic models/2 - multiphase fluids/main.tex}
+    \input{1 - physical model and system of equations/2 - kinetic models/3 - tozmahok plasmas/main.tex}

@@ -1,0 +1,15 @@
+\subsection{Multiphase Fluids}
+    \BA{Similar analysis for a multiphase fluid, in preparation for handling the tozmahok plasmas.}
+
+    Working towards the full plasma kinetic equation, consider a general multiphase fluid, where each phase is subject to a different external force. We index each phase, $i$, through the upper index $*^{(i)}$.
+
+    The collisional forces (\ref{single-phase drag force}) and (\ref{single-phase brownian motion}) on phase $i$ will be modified to the form:  \BA{(This will definitely be switched around in the future when I switch around my notation for $\mu^{(i, j)}$, $\sigma^{(i)}$. In particular there should be some symmetry relations on $\mu^{(i, j)}$ from conservation of momentum between phases $i$, $j$- I'd like to scale $\mu^{(i, j)}$ such that $\mu^{(i, j)} = \mu^{(j, i)}$.)}
+    \begin{align}
+        \mu m[(\bfu + \nabla_{\bfx}\cdot\bftau) - \bfv]  &\mapsto  \sum_{j}\mu^{(i, j)}m^{(i)}\left[\left(\bfu^{(j)} + \nabla_{\bfx}\cdot\bftau^{(i, j)}\right) - \bfv\right]  \\
+        \sigma m\frac{d\bfW}{dt}  &\mapsto  \sigma^{(i)}m^{(i)}\frac{d\bfW^{(i)}}{dt}
+    \end{align}
+
+    Accordingly, for each phase $i$ the single-phase Boltzmann equation (\ref{single-phase Boltzmann equation}) takes the multiphase form
+    \begin{multline}\label{multiphase Boltzmann equation}
+        \partial_{t}\left[f^{(i)}\right] + \underset{\textrm{Convection}}{\underbrace{\nabla_{\bfx}\cdot\left[f^{(i)}\bfv\right]}} + \underset{\textrm{Forces}}{\underbrace{\frac{1}{m^{(i)}}\nabla_{\bfv}\cdot\left[f^{(i)}\bfF^{(i)}\right]}}  \\  =  - \underset{\textrm{Viscosity}}{\underbrace{\sum_{j}\mu^{(i, j)}\nabla_{\bfv}\cdot\nabla_{\bfx}\cdot\left[\bftau^{(i, j)}\right]}} + \underset{\textrm{Collisions}}{\underbrace{\sum_{j}\mu^{(i, j)}\nabla_{\bfv}\cdot\left[f\left(\bfv - \bfu^{(j)}\right)\right] + \frac{(\sigma^{(i)})^{2}}{2}\Delta_{\bfv}\left[f^{(i)}\right]}}
+    \end{multline}
