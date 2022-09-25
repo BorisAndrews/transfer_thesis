@@ -6,8 +6,9 @@
     The collisional forces (\ref{single-phase drag force}) and (\ref{single-phase brownian motion}) on phase $i$ will be modified to the form:  \BA{(This will definitely be switched around in the future when I switch around my notation for $\mu^{(i, j)}$, $\sigma^{(i)}$. In particular there should be some symmetry relations on $\mu^{(i, j)}$ from conservation of momentum between phases $i$, $j$- I'd like to scale $\mu^{(i, j)}$ such that $\mu^{(i, j)} = \mu^{(j, i)}$.)}
     \begin{align}
         \mu m[(\bfu + \nabla_{\bfx}\cdot\bftau) - \bfv]  &\mapsto  \sum_{j}\mu^{(i, j)}m^{(i)}\left[\left(\bfu^{(j)} + \nabla_{\bfx}\cdot\bftau^{(i, j)}\right) - \bfv\right]  \\
-        \sigma m\frac{d\bfW}{dt}  &\mapsto  \sigma^{(i)}m^{(i)}\frac{d\bfW^{(i)}}{dt}
+        \sigma m\frac{d\bfW}{dt}  &\mapsto  \sum_{i}\sigma^{(i)}m^{(j)}\frac{d\bfW^{(i)}}{dt}
     \end{align}
+    \BA{We should similarly here have the relation $\frac{\mu^{(i)}}{{\sigma^{(i)}}^{2}} = \frac{k_{B}T^{(i)}}{m^{(i)}}$ I believe.}
 
     Accordingly, for each phase $i$ the single-phase Boltzmann equation (\ref{single-phase Boltzmann equation}) takes the multiphase form
     \begin{multline}\label{multiphase Boltzmann equation}

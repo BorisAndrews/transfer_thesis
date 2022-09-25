@@ -1,45 +1,10 @@
 \chapter{Numerical Simulation and Preconditioning}
     \BA{Introduction.}
-
-    
-    \section{Maxwellian Background: A Fluid Simulation}
-        \BA{Important thing of note here is the fact that this is necessarily a \emph{compressible}, and therefore partially \emph{hyperbolic} system, which can cause a lot of difficulties for creating good discretisations and simulations. (C.F. Numerical dissipation.)}
-        
-        \subsection{Augmented Lagrangian (AL) Preconditioning}
-            \BA{Very high Reynolds, so these fluid equations are \emph{primed} for augmented Lagrangian preconditioning.}
-
-            \BA{Problem is, these equations are necessarily compressible- AL preconditioners have never been done for \emph{compressible} fluid simulations before. How to transfer the ideas across is not immediate.}
-
-            \BA{Crucially: Need exact satisfaction of the mass conservation equations- can tackle this by using the vector of momentum, $\rho\bfu$, instead of velocity, $\bfu$.}
-
-            \subsubsection{Stationary State Simulations}
-
-            \subsubsection{Transient (State) Simulations}
-        
-        \subsection{Fast Diagonalisation Method (FDM)}
-            \BA{NEPTUNE interested in high-order methods- why?:
-            \begin{itemize}
-                \item  Better approximation properties (provided sufficient regularity- N.B. \emph{Not} necessarily the case with funky BCs in a tozmahok, but \emph{should} be fine in my case if I pick a nice model with nice BCs on a nice domain).
-                \item  Better numerical approximation properties. (Recall that diagram from the NEPTUNE workshop with the travelling bump).
-                \item  Better suited to modern computer architectures. (Ask Pablo for more clarification here.)
-            \end{itemize}
-            Why not?:
-            \begin{itemize}
-                \item  Massively worse computational complexity- very dense matrices, unless we find some way to mitigate this...
-            \end{itemize}}
     
     
-    \section{Anisotropic Correction: A Kinetic Simulation}
-        \BA{What approach?}
-        
-        \subsection{Lattice Boltzmann?}
-        \subsection{Series Expansion?}
-        \subsection{Particle-in-Cell (PIC)?}
-            \BA{Would be a great opportunity to work in the ideas of gyrokinetic theory, especially the more mathematical aspects such as the Lie transformations overviewed in Lapillone's thesis (I'm sure there's a more original source for these ideas of course).}
+    \input{paper/2 - numerical simulation and preconditioning/1 - maxwellian background/main.tex}
+    \input{paper/2 - numerical simulation and preconditioning/2 - non-maxwellian correction/main.tex}
 
-            \BA{Will Saunders at NEPTUNE said there's evidence thatthis decomposition gives a ``low-noise'' PIC simulation- quite what this means I don't know — potentially the reduction of high-wavenumber perturbations in the fluid portion? that's the impression I got off James Cook in his NEPTUNE presentation — \emph{however}, the key takeaway is there is \emph{solid evidence} that this is \emph{the way to go}. Just Google ``low noise particle in cell'' and you find there's a \emph{solid} amount of literature on the idea.}
-
-            \BA{A gyro-averaged model would shine here! Plus lots of opportunity for interesting (and actually accurate, in constrast to most physics gyrokinetic model papers) maths and multiscale analysis, especially with the addition of the stochastic Wiener process term. (Not sure I've ever seen a multiscale analysis with a stochastic term in before, I should ask the perturbation methods lecturer!)}
-
+    
     \section*{Summary}
         \BA{Summary.}
