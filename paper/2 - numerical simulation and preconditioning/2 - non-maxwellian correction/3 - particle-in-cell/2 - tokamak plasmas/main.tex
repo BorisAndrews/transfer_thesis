@@ -1,4 +1,4 @@
-\subsubsection{Tozmahok Plasmas}
+\subsubsection{Tokamak Plasmas}
     \BA{Would be a great opportunity to work in the ideas of gyrokinetic theory, especially the more mathematical aspects such as the Lie transformations overviewed in Lapillone's thesis (I'm sure there's a more original source for these ideas of course).}
     
     \BA{A gyro-averaged model would shine here! Plus lots of opportunity for interesting (and actually accurate, in contrast to most physics gyrokinetic model papers) maths and multiscale analysis, especially with the addition of the stochastic Wiener process term. (Not sure I've ever seen a multiscale analysis with a stochastic term in before, I should ask the perturbation methods lecturer!)}
@@ -10,7 +10,7 @@
         d\bfX  &=  \bfV dt  \\
         d\bfV  &=  \frac{1}{\varepsilon^{2}}([\bfE + \bfV\wedge\bfB] + \mu[(\bfu + \nabla_{\bfx}\cdot\bftau) - \bfV])dt + \frac{\sigma}{\varepsilon}d\bfW
     \end{align}
-    $\bfV$ here varies on the timescale of $\calO(\varepsilon)$, at the cyclotron frequency, such that if we were to attempt to directly simulate the motion of such a charged particle, we would require a timestepping scheme with timestep frequency on the order of the cyclotron frequency, which would be potentially computationally prohibitive as $\varepsilon \rightarrow 0$ in the highly-magnetised limit. \BA{(Compare with the value of $\varepsilon$ in a typical tozmahok and make some computational estimates.)}
+    $\bfV$ here varies on the timescale of $\calO(\varepsilon)$, at the cyclotron frequency, such that if we were to attempt to directly simulate the motion of such a charged particle, we would require a timestepping scheme with timestep frequency on the order of the cyclotron frequency, which would be potentially computationally prohibitive as $\varepsilon \rightarrow 0$ in the highly-magnetised limit. \BA{(Compare with the value of $\varepsilon$ in a typical tokamak and make some computational estimates.)}
     
     We can combat this using a multiscale analysis, with the transport on the $\calO(1)$ timescale, and the gyrations on the $\calO(\varepsilon)$ timescale. This is the assumption that is typically done in deriving the gyrokinetic model and resulting gyrocentre drifts. Defining $T = \frac{1}{\varepsilon}t$, write $\bfX$, $\bfV$ as each respectively the sum of a gyro-averaged value dependent only on the transport timescale $\overline{\bfX}(t; \varepsilon)$, $\overline{\bfV}(t; \varepsilon)$, and a $\calO(1)$ perturbation $\delta\bfX(t, T; \varepsilon)$, $\delta\bfV(t, T; \varepsilon)$ oscillating on the cyclotron timescale with amplitudes dependent on $t$:
     \begin{align}
