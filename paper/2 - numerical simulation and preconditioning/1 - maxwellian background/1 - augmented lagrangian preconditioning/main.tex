@@ -1,0 +1,10 @@
+\subsection{Augmented Lagrangian (AL) Preconditioning}
+    \BA{Very high Reynolds, so these fluid equations are \emph{primed} for augmented Lagrangian preconditioning.}
+
+    \BA{Problem is, these equations are necessarily compressible- AL preconditioners have never been done for \emph{compressible} fluid simulations before. How to transfer the ideas across is not immediate.}
+
+    \BA{Crucially: Need exact satisfaction of the mass conservation equations- can tackle this by using the vector of momentum, $\rho\bfu$, instead of velocity, $\bfu$.}
+
+    \subsubsection{Stationary State Simulations}
+
+    \subsubsection{Transient (State) Simulations}
