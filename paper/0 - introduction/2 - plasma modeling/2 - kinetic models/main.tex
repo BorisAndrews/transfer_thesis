@@ -1,2 +1,16 @@
-\subsection{Kinetic Models}
+\subsection*{Kinetic Models}
+    \begin{definition}[Kinetic Models]
+        Here, ``kinetic'' models refer to those wherein the distribution of particles positions and velocities is modelled through a single distribution function, as a function of both position and velocity.
+    \end{definition}
+    For each phase, $s$, we define the (1-particle) distribution function $(f_{s}(\bfx, \bfv; \bft))_{s}$
+    \begin{equation}
+        f_{s}(\bfx, \bfv; \bft)  :=  \sum_{i}\delta^{3}(\bfx - \bfx_{si})\delta^{3}(\bfv - \bfv_{si})
+    \end{equation}
+    From equations (\ref{patricle motion}–\ref{particle forcing}), we see $(f_{s})_{s}$ satisfy the PDE
+    \begin{equation}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  0
+    \end{equation}
+    When considered in isolation, this is referred to as the ``Vlasov'' equation, and can be interpreted as a collision-less version of the Boltzmann equation (\BA{...}).
+    
+    While this could \emph{in theory} be used to model all the particle exactly and simultaneously, variations of each $f_{s}$ in $\bfx$ occur on the length scale of the distances between particles, i.e. on the order of $10^{- 6}\rmm$. We would therefore need a mesh resolution on a similar (if not finer) length scale to capture the physical nature of each $f_{s}$. Again: computationally infeasible.
     
