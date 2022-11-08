@@ -8,46 +8,68 @@
     \end{equation}
     While working with such $(f_{s})_{s}$ could \emph{in theory} be used to model all the particles exactly and simultaneously, variations of each $f_{s}$ in $\bfx$ occur on the length scale of the distances between particles, i.e. on the order of $10^{- 6}\rmm$ in a tokamak plasma. We would therefore need a mesh resolution on a similar (if not finer) length scale to capture the physical nature of each $f_{s}$. Again: computationally infeasible.
 
-    Since, however, the \emph{precise} position of each particle is generally irrelevant to the general fluid behavior when not working on the atomic scale (in particular on tokamak plasma scales) the key idea of kinetic theory is to model this distribution function as a \emph{random} distribution, as one might do in Bayesian statistics to model a parameter that is known to be of fixed value as a random variable when full information on it is unknown. One defines the 1-particle distribution functions, denoted here as $\left(\widetilde{f}_{s}(\bfx, \bfv)\right)_{s}$, such that $\forall \phi(\bfx, \bfv)$
+    Since, however, the \emph{precise} position of each particle is generally irrelevant to the general fluid behavior when not working on the atomic scale (in particular on tokamak plasma scales) the key idea of kinetic theory is to model this distribution function as a \emph{random} distribution, as one might do in Bayesian statistics to model a parameter that is known to be of fixed value as a random variable when full information on it is unknown. One defines the 1-particle distribution functions, denoted here as $\left(\widetilde{f_{s}}(\bfx, \bfv)\right)_{s}$, such that $\forall \phi(\bfx, \bfv)$,
     \begin{equation}
         \bbE\left\{\int_{\bfx, \bfv}f_{s}(\bfx, \bfv)\phi(\bfx, \bfv)\right\}
         \left(=  \sum_{i}\bbE\{\phi(\bfx_{si}, \bfv_{si})\}\right)
-        =  \int_{\bfx, \bfv}\widetilde{f}_{s}(\bfx, \bfv)\phi(\bfx, \bfv)
+        =  \int_{\bfx, \bfv}\widetilde{f_{s}}(\bfx, \bfv)\phi(\bfx, \bfv)
     \end{equation}
-    Similarly the electromagnetic field must be modeled as a random distribution, with $\widetilde{\bfE}$, $\widetilde{\bfB}$ defined, such that $\forall \bfphi(\bfx)$
+    Similarly the electromagnetic field must be modeled as a random distribution, with $\widetilde{\bfE}$, $\widetilde{\bfB}$ defined, such that $\forall \bfphi(\bfx)$,
     \begin{align}
         \bbE\left\{\int_{\bfx}\bfE(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfE}(\bfx)\cdot\bfphi(\bfx),  && 
         \bbE\left\{\int_{\bfx}\bfB(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfB}(\bfx)\cdot\bfphi(\bfx)
     \end{align}
-    We seek a model in $\left(\widetilde{f}_{s}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$ \emph{only}.
+    We seek a model in $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$ \emph{only}. To do so, one must consider also the 2-particle distribution functions, denoted here as $\left(\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right)_{s_{1}s_{2}}$, defined such that $\forall \phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfrefv_{2})]$,
+    \begin{multline}
+        \bbE\left\{\int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}f_{s_{1}}(\bfx_{1}, \bfv_{1})f_{s_{2}}(\bfx_{2}, \bfv_{2})\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right\}  \\
+        \left(=  \sum_{i_{1}, i_{2}}\bbE\{\phi[(\bfx_{s_{1}i_{1}}, \bfv_{s_{1}i_{1}}), (\bfx_{s_{2}i_{2}}, \bfv_{s_{2}i_{2}})]\}\right)  \\
+        =  \int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]
+    \end{multline}
+    These capture (some of) the nature of how the positions of particles are correlated with each other.
+    
+    Since attempting to then track the behavior of the 2-particle correlation functions requires tracking certain 3-particle correlation functions etc., one must approximate $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$ in terms of $\left(\widetilde{f_{s}}\right)_{s}$.\footnote{This is often referred to as the ``\emph{closure problem}''.} To do so, we make the 2 following assumptions:
+    \begin{itemize}
+        \item  The ``\emph{molecular chaos hypothesis}'' holds as the distance between particles tends to infinity.
+        \begin{definition}[Molecular chaos hypothesis]
+            The ``molecular chaos hypothesis'' asserts that the velocity of colliding particles are uncorrelated. \BA{[Ref]}
+        \end{definition}
+        In our case this would surmount to the assumption that
+        \begin{equation}
+            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  =  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
+        \end{equation}
+        We assume that this holds as the distance between particles tends to infinity, i.e. roughly speaking, as $\|\bfx_{1} - \bfx_{2}\|  \rightarrow  \infty$,
+        \begin{equation}
+            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  \sim  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
+        \end{equation}
+    \end{itemize}
 
     \BA{I think I wanna put the precise derivation of the Boltzmann equations in an appendix.}
 
-    To cast an equation from the exact determinstic form to one in these random distribution parameters, one can follow the workflow in Figure \ref{kinetic model construction workflow}.
+    To cast an equation from the exact deterministic form to one in these random distribution parameters, one can follow the workflow in Figure \ref{kinetic model construction workflow}.
     \begin{figure}[!h]
         \centering
         \begin{tikzpicture}[align = center, auto]
             \node (1) at (0, 0) {Cast into variational form: $f_{s}  \mapsto  \int_{\bfx, \bfv}f_{s}\phi$};
             \node (2) at (1, -1.25) {Take expectations: $\int_{\bfx, \bfv}f_{s}\phi  \mapsto  \bbE\left\{\int_{\bfx, \bfv}f_{s}\phi\right\}$};
-            \node (3) at (2, -2.5) {Convert to be in terms of distribution parameters: $\bbE\left\{\int_{\bfx, \bfv}f_{s}\phi\right\}  =  \int_{\bfx, \bfv}\widetilde{f}_{s}\phi$};
-            \node (4) at (3, -3.75) {Cast back into strong form: $\int_{\bfx, \bfv}\widetilde{f}_{s}^{(1)}\phi  \mapsto  \widetilde{f}_{s}^{(1)}$};
+            \node (3) at (2, -2.5) {Convert to be in terms of distribution parameters: $\bbE\left\{\int_{\bfx, \bfv}f_{s}\phi\right\}  =  \int_{\bfx, \bfv}\widetilde{f_{s}}\phi$};
+            \node (4) at (3, -3.75) {Cast back into strong form: $\int_{\bfx, \bfv}\widetilde{f_{s}}^{(1)}\phi  \mapsto  \widetilde{f_{s}}^{(1)}$};
 
             \draw[->] (1) -- (2);
             \draw[->] (2) -- (3);
             \draw[->] (3) -- (4);
         \end{tikzpicture}
-        \caption{Diagram of workflow for contruction of a kinetic model}
+        \caption{Diagram of workflow for construction of a kinetic model}
         \label{kinetic model construction workflow}
     \end{figure}
 
     Since this is entirely linear, Maxwell's equations—themselves linear—carry over identically:
     \begin{align*}
-        \partial_{t}\widetilde{\bfE}  &=  c^{2}\nabla\wedge\widetilde{\bfB} - \frac{1}{\varepsilon_{0}}\sum_{s}q_{s}\int_{\bfv}\widetilde{f}_{s}\bfv,  &
+        \partial_{t}\widetilde{\bfE}  &=  c^{2}\nabla\wedge\widetilde{\bfB} - \frac{1}{\varepsilon_{0}}\sum_{s}q_{s}\int_{\bfv}\widetilde{f_{s}}\bfv,  &
         \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE}  \\
-        \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\sum_{s}q_{s}\int_{\bfv}\widetilde{f}_{s},  &
+        \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\sum_{s}q_{s}\int_{\bfv}\widetilde{f_{s}},  &
         \nabla\cdot\widetilde{\bfB}  &=  0
     \end{align*}
-    As for the evoluation equations for $(f_{s})_{s}$ however, this is sadly \emph{not} the case, due to the non-linear forcing term. \BA{Introduce the 2-particle correlation functions!}
+    As for the evolution equations for $(f_{s})_{s}$ however, this is sadly \emph{not} the case, due to the non-linear forcing term. \BA{Introduce the 2-particle correlation functions!}
 
     \BA{Old text...}
 
