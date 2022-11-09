@@ -19,33 +19,7 @@
         \bbE\left\{\int_{\bfx}\bfE(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfE}(\bfx)\cdot\bfphi(\bfx),  && 
         \bbE\left\{\int_{\bfx}\bfB(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfB}(\bfx)\cdot\bfphi(\bfx)
     \end{align}
-    We seek a model in $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$ \emph{only}. To do so, one must consider also the 2-particle distribution functions, denoted here as $\left(\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right)_{s_{1}s_{2}}$, defined such that $\forall \phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfrefv_{2})]$,
-    \begin{multline}
-        \bbE\left\{\int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}f_{s_{1}}(\bfx_{1}, \bfv_{1})f_{s_{2}}(\bfx_{2}, \bfv_{2})\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right\}  \\
-        \left(=  \sum_{i_{1}, i_{2}}\bbE\{\phi[(\bfx_{s_{1}i_{1}}, \bfv_{s_{1}i_{1}}), (\bfx_{s_{2}i_{2}}, \bfv_{s_{2}i_{2}})]\}\right)  \\
-        =  \int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]
-    \end{multline}
-    These capture (some of) the nature of how the positions of particles are correlated with each other.
-    
-    Since attempting to then track the behavior of the 2-particle correlation functions requires tracking certain 3-particle correlation functions etc., one must approximate $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$ in terms of $\left(\widetilde{f_{s}}\right)_{s}$.\footnote{This is often referred to as the ``\emph{closure problem}''.} To do so, we make the 2 following assumptions:
-    \begin{itemize}
-        \item  The ``\emph{molecular chaos hypothesis}'' holds as the distance between particles tends to infinity.
-        \begin{definition}[Molecular chaos hypothesis]
-            The ``molecular chaos hypothesis'' asserts that the velocity of colliding particles are uncorrelated. \BA{[Ref]}
-        \end{definition}
-        In our case this would surmount to the assumption that
-        \begin{equation}
-            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  =  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
-        \end{equation}
-        We assume that this holds as the distance between particles tends to infinity, i.e. roughly speaking, as $\|\bfx_{1} - \bfx_{2}\|  \rightarrow  \infty$,
-        \begin{equation}
-            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  \sim  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
-        \end{equation}
-    \end{itemize}
-
-    \BA{I think I wanna put the precise derivation of the Boltzmann equations in an appendix.}
-
-    To cast an equation from the exact deterministic form to one in these random distribution parameters, one can follow the workflow in Figure \ref{kinetic model construction workflow}.
+    We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{kinetic model construction workflow} to each equation.
     \begin{figure}[!h]
         \centering
         \begin{tikzpicture}[align = center, auto]
@@ -69,15 +43,35 @@
         \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\sum_{s}q_{s}\int_{\bfv}\widetilde{f_{s}},  &
         \nabla\cdot\widetilde{\bfB}  &=  0
     \end{align*}
-    As for the evolution equations for $(f_{s})_{s}$ however, this is sadly \emph{not} the case, due to the non-linear forcing term. \BA{Introduce the 2-particle correlation functions!}
-
-    \BA{Old text...}
-
-    From equations (\ref{patricle motion}–\ref{particle forcing}), we see $(f_{s})_{s}$ satisfy the PDE
-    \begin{equation}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  0
+    The evolution equation for $(f_{s})_{s}$ or $\left(\widetilde{f_{s}}\right)_{s}$ is not so simple however, due to its non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'',
+    \begin{equation}\label{Boltzmann equation}
+        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}(\bfE + \bfv\wedge\bfB)\right]  =  0
     \end{equation}
-    When considered in isolation, this is referred to as the ``Vlasov'' equation, and can be interpreted as a collision-less version of the Boltzmann equation (\BA{...}).
+    where one defines $\left(\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right)_{s_{1}s_{2}}$, the 2-particle distributions functions, such that $\forall \phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]$,
+    \begin{multline}
+        \bbE\left\{\int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}f_{s_{1}}(\bfx_{1}, \bfv_{1})f_{s_{2}}(\bfx_{2}, \bfv_{2})\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right\}  \\
+        \left(=  \sum_{i_{1}, i_{2}}\bbE\{\phi[(\bfx_{s_{1}i_{1}}, \bfv_{s_{1}i_{1}}), (\bfx_{s_{2}i_{2}}, \bfv_{s_{2}i_{2}})]\}\right)  \\
+        =  \int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]
+    \end{multline}
+    These capture the nature of how the positions of pairs of particles are correlated. For a full derivation of (\ref{Boltzmann equation}) see Appendix \ref{Boltzmann equation derivation}.
+
+    \BA{Don't like how this bit is phrased...}
+    
+    Since attempting to then track the behavior of the 2-particle correlation functions requires tracking certain 3-particle correlation functions etc., one must approximate $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$ in terms of $\left(\widetilde{f_{s}}\right)_{s}$.\footnote{This is often referred to as the ``\emph{closure problem}''.} To do so, we make the 2 following assumptions:
+    \begin{itemize}
+        \item  The ``\emph{molecular chaos hypothesis}'' holds as the distance between particles tends to infinity.
+        \begin{definition}[Molecular chaos hypothesis]
+            The ``molecular chaos hypothesis'' asserts that the velocity of colliding particles are uncorrelated. \BA{[Ref]}
+        \end{definition}
+        In our case this would surmount to the assumption that
+        \begin{equation}
+            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  =  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
+        \end{equation}
+        We assume that this holds as the distance between particles tends to infinity, i.e. roughly speaking, as $\|\bfx_{1} - \bfx_{2}\|  \rightarrow  \infty$,
+        \begin{equation}
+            \widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]  \sim  \widetilde{f_{s_{1}}}(\bfx_{1}, \bfv_{1})\widetilde{f_{s_{2}}}(\bfx_{2}, \bfv_{2})
+        \end{equation}
+    \end{itemize}
 
     \BA{Note here about dropping the tildes from here on out.}
     

@@ -1,3 +1,27 @@
 \chapter{Derivation of the Boltzmann Equation}\label{Boltzmann equation derivation}
-    \BA{Introduction.}
+    From equations (\ref{patricle motion}–\ref{particle forcing}), we see $(f_{s})_{s}$ satisfy the PDE
+    \begin{equation}\label{exact Boltzmann equation}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]  =  0
+    \end{equation}
+    where $\widehat{\bfE}(\bfx)$, $\widehat{\bfB}(\bfx)$ in represent the EM fields produced by particles \emph{not} at $\bfx$, such that they are well-defined where $(f_{s})_{s}$ are non-zero, defined as:
+    \begin{align}
+        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \\
+    \end{align}
+    where ${\bf ker}_{\bfE}$, ${\bf ker}_{\bfB}$ in $\bfx', \bfv'$ represent the electric and magnetic fields produced at the origin by a particle of unit charge at position $\bfx'$ with velocity $\bfv'$ at time $t' (< 0)$, and $t'(t; \bfx, \bfx') := t - \frac{1}{c}\|\bfx - \bfx'\|$. Note, crucially, the standard electric and magnetic fields, $\bfE$ and $\bfB$ respectively, can be defined from ${\bf ker}_{\bfE}$, ${\bf ker}_{\bfB}$ as:
+    \begin{align}
+        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \\
+    \end{align}
+
+    Applying the workflow from Figure \ref{kinetic model construction workflow} to (\ref{exact Boltzmann equation}), $\forall \phi(\bfx, \bfv)$,
+    \begin{align*}
+        \int_{\bfx, \bfv}\partial_{t}f_{s}\phi + \int_{\bfx, \bfv}\nabla_{\bfx}\cdot[f_{s}\bfv]\phi + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\phi  &=  0  \\
+        \int_{\bfx, \bfv}\partial_{t}f_{s}\phi - \int_{\bfx, \bfv}f_{s}\bfv\cdot\nabla_{\bfx}\phi - \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
+        \cdots + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left[\nabla_{\bfx}\widehat{\varphi} + \left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\widehat{\bfA}\right]\cdot\nabla_{\bfv}\phi  &=  0  \\
+        \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\nabla_{\bfx}\left[\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\right]\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
+        \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
+        \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
+        \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0
+    \end{align*}
     
