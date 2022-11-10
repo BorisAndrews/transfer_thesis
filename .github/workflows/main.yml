@@ -7,9 +7,9 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
       - name: Compile LaTeX document
-        uses: BorisAndrews/Transfer_Thesis/paper
+        uses: BorisAndrews/Transfer_Thesis
         with:
-          root_file: main.tex
+          root_file: paper/main.tex
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
