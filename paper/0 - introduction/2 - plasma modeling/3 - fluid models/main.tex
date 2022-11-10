@@ -1,2 +1,26 @@
 \subsection*{Fluid Models}
+    \begin{definition}[Fluid model]
+        Here, ``fluid'' models refer to those wherein the system is reduced from one in \emph{both} position and velocity space (and time) to one in \emph{just} position space (and time) through some kind of approximation to the distibution function.
+    \end{definition}
+    Recall the Boltzmann equation (\ref{eqn:Boltzmann equation})
+    \begin{equation*}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]  =  \calC_{s}
+    \end{equation*}
+    On the parameter scales of many plasmas, it is the case that this equation is dominated by the forcing and collisional terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$ and $\calC_{s}$ respectively.
+    
+    Define the charge and mass density, $\rho^{C}$ and $\rho^{M}$ respectively, functions of $\bfx$, $t$:
+    \begin{align}
+        \rho^{C}  :=  \sum_{s}q_{s}\int_{\bfv}f_{s},  &&
+        \rho^{M}  :=  \sum_{s}m_{s}\int_{\bfv}f_{s}
+    \end{align}
+    Rewriting the Boltzmann equation in the form
+    {\small \begin{equation}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rho^{C}}{\rho^{M}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)] + \left(\frac{q_{s}}{m_{s}} - \frac{\rho^{C}}{\rho^{M}}\right)\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]  =  \calC_{s}
+    \end{equation}}
+
+    \BA{Considering an expansion of the collision operator of the form
+    \begin{multline}
+        \calC_{s}  =  \nabla_{\bfv}\cdot\left[f_{s}\sum_{s'}\rho_{s'}(\bfmu_{ss'}(\bfu_{s'} - \bfv) + \nabla_{\bfx}\cdot[\bftau_{ss'}({\bf sym}(\nabla_{\bfx}\bfu_{s}))] + \cdots)\right]  \\
+        + \left(\nabla_{\bfv}\cdot\right)^{2}\left[f_{s}\sum_{s'}\rho_{s'}(\bfD_{ss'}(\bfu_{s'} - \bfv) + \cdots)\right] + \cdots
+    \end{multline}}
     
