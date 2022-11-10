@@ -19,7 +19,7 @@
         \bbE\left\{\int_{\bfx}\bfE(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfE}(\bfx)\cdot\bfphi(\bfx),  && 
         \bbE\left\{\int_{\bfx}\bfB(\bfx)\cdot\bfphi(\bfx)\right\}  =  \int_{\bfx}\widetilde{\bfB}(\bfx)\cdot\bfphi(\bfx)
     \end{align}
-    We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{kinetic model construction workflow} to each equation.
+    We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{fig:kinetic model construction workflow} to each equation.
     \begin{figure}[!h]
         \centering
         \begin{tikzpicture}[align = center, auto]
@@ -33,7 +33,7 @@
             \draw[->] (3) -- (4);
         \end{tikzpicture}
         \caption{Diagram of workflow for construction of a kinetic model}
-        \label{kinetic model construction workflow}
+        \label{fig:kinetic model construction workflow}
     \end{figure}
 
     Since this is entirely linear, Maxwell's equations—themselves linear—carry over identically:
@@ -44,7 +44,7 @@
         \nabla\cdot\widetilde{\bfB}  &=  0
     \end{align*}
     The evolution equation for $(f_{s})_{s}$ or $\left(\widetilde{f_{s}}\right)_{s}$ is not so simple however, due to its non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'',
-    \begin{equation}\label{Boltzmann equation}
+    \begin{equation}\label{eqn:Boltzmann equation}
         \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}(\bfE + \bfv\wedge\bfB)\right]  =  0
     \end{equation}
     where one defines $\left(\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\right)_{s_{1}s_{2}}$, the 2-particle distributions functions, such that $\forall \phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]$,
@@ -53,7 +53,7 @@
         \left(=  \sum_{i_{1}, i_{2}}\bbE\{\phi[(\bfx_{s_{1}i_{1}}, \bfv_{s_{1}i_{1}}), (\bfx_{s_{2}i_{2}}, \bfv_{s_{2}i_{2}})]\}\right)  \\
         =  \int_{\bfx_{1}, \bfv_{1}}\int_{\bfx_{2}, \bfv_{2}}\widetilde{f_{s_{1}}f_{s_{2}}}[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]\phi[(\bfx_{1}, \bfv_{1}), (\bfx_{2}, \bfv_{2})]
     \end{multline}
-    These capture the nature of how the positions of pairs of particles are correlated. For a full derivation of (\ref{Boltzmann equation}) see Appendix \ref{Boltzmann equation derivation}.
+    These capture the nature of how the positions of pairs of particles are correlated. For a full derivation of (\ref{eqn:Boltzmann equation}) see Appendix \ref{sec:Boltzmann equation derivation}.
 
     \BA{Don't like how this bit is phrased...}
     

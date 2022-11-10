@@ -14,7 +14,7 @@
     
     We can combat this using a multiscale analysis, with the transport on the $\calO(1)$ timescale, and the gyrations on the $\calO(\varepsilon)$ timescale. This is the assumption that is typically done in deriving the gyrokinetic model and resulting gyrocentre drifts. Defining $T = \frac{1}{\varepsilon}t$, write $\bfX$, $\bfV$ as each respectively the sum of a gyro-averaged value dependent only on the transport timescale $\overline{\bfX}(t; \varepsilon)$, $\overline{\bfV}(t; \varepsilon)$, and a $\calO(1)$ perturbation $\delta\bfX(t, T; \varepsilon)$, $\delta\bfV(t, T; \varepsilon)$ oscillating on the cyclotron timescale with amplitudes dependent on $t$:
     \begin{align}
-          \label{multiscale position SDE}  \left[\overline{\bfX}_{t} + \left(\delta\bfX_{t} + \frac{1}{\varepsilon}\delta\bfX_{T}\right)\right]dt  &= 
+          \label{eqn:multiscale position SDE}  \left[\overline{\bfX}_{t} + \left(\delta\bfX_{t} + \frac{1}{\varepsilon}\delta\bfX_{T}\right)\right]dt  &= 
  \left[\overline{\bfV} + \delta\bfV\right]dt  \\
         \begin{split}
             \left[\overline{\bfV}_{t} + \left(\delta\bfV_{t} + \frac{1}{\varepsilon}\delta\bfV_{T}\right)\right]dt  &=  \frac{1}{\varepsilon^{2}}([\bfE + \left[\overline{\bfV} + \delta\bfV\right]\wedge\bfB] + \mu[(\bfu + \nabla_{\bfx}\cdot\bftau)  \\
@@ -22,7 +22,7 @@
         \end{split}
     \end{align}
     \BA{[Ref]} This is modified from the classical gyrokinetic theory by the inclusion of the stochastic collisional terms, giving a multiscale \emph{stochastic} system. Compare with the systems as defined in \BA{[pretty much any paper on multiscale methods for SDEs]}. We similarly expand the Wiener process $\bfW$ as the sum of a gyro-averaged $\overline{\bfW}$ and perturbation $\delta\bfW$. \BA{(Do this by splitting the Fourier series at frequencies $\calO\left(\frac{1}{\sqrt{\varepsilon}}\right)$!}
-    \begin{multline}\label{multiscale velocity SDE}
+    \begin{multline}\label{eqn:multiscale velocity SDE}
         \left[\overline{\bfV}_{t} + \left(\delta\bfV_{t} + \frac{1}{\varepsilon}\delta\bfV_{T}\right)\right]dt  =  \frac{1}{\varepsilon^{2}}([\bfE + \left[\overline{\bfV} + \delta\bfV\right]\wedge\bfB] + \mu[(\bfu + \nabla_{\bfx}\cdot\bftau) -  \\
         \left[\overline{\bfV} + \delta\bfV\right]])dt + \frac{\sigma}{\varepsilon}\left[d\overline{\bfW} + d\delta\bfW\right]
     \end{multline}
@@ -30,9 +30,9 @@
     \begin{align}
         *(\cdots; \varepsilon)  =  \sum_{i}\varepsilon^{i}*^{(i)}(\cdots)  \left(=  *^{(0)}(\cdots) + \varepsilon*^{(1)}(\cdots) + \varepsilon^{2}*^{(2)}(\cdots) + \cdots\right)
     \end{align}
-    we solve each of (\ref{multiscale position SDE}) and (\ref{multiscale velocity SDE}) at each order in $\varepsilon$: \BA{(A lot of technicalities coming up, maybe good to put in an appendix?)}
+    we solve each of (\ref{eqn:multiscale position SDE}) and (\ref{eqn:multiscale velocity SDE}) at each order in $\varepsilon$: \BA{(A lot of technicalities coming up, maybe good to put in an appendix?)}
     \begin{itemize}
-        \item[(\ref{multiscale position SDE}).]  At order $\calO\left(\varepsilon^{(i)}\right)$
+        \item[(\ref{eqn:multiscale position SDE}).]  At order $\calO\left(\varepsilon^{(i)}\right)$
         \begin{equation}
             \overline{\bfX}^{(i)}_{t} + \left(\delta\bfX^{(i)}_{t} + \delta\bfX^{(i - 1)}_{T}\right)  =  \overline{\bfV}^{(i)} + \delta\bfV^{(i)}
         \end{equation}
@@ -47,5 +47,5 @@
             \delta\bfV^{(i)}  &=  \delta\bfX^{(i)}_{t} + \delta\bfX^{(i - 1)}_{T}
         \end{align}
         
-        \item[(\ref{multiscale velocity SDE}).]  ...
+        \item[(\ref{eqn:multiscale velocity SDE}).]  ...
     \end{itemize}

@@ -9,7 +9,7 @@
         
         \BA{Correction contribution not too problematic (hopefully).}
 
-        \BA{Often for high-energy species in tokamak plasmas, it might even be the case that the background would be better modelled using, say a damped Maxwellian (see figure \ref{sharp cut-off energy distributions}) like the ones I implemented in GENE, due to Alfvénic damping.}
+        \BA{Often for high-energy species in tokamak plasmas, it might even be the case that the background would be better modelled using, say a damped Maxwellian (see figure \ref{eqn:sharp cut-off energy distributions}) like the ones I implemented in GENE, due to Alfvénic damping.}
 
     
     \subsubsection*{Non-Maxwellian Correction: A \emph{Kinetic} Model}
@@ -22,7 +22,7 @@
             \item  Lattice Boltzmann?
             \item  Some series expansion?
             \item  Particle-in-cell (PIC)?  \\
-            One thing worthy of note that I'm concerned about is how a PIC model would handle different tail behaviours for very-high-energy particles. In tokamak plasmas for example, Alfvénic damping of particles with velocities above the Alfvén velocity causes particle energy distributions to have a cut-off that is $\ll  \exp\left(- {\rm const.}\|\bfv\|^2\right)$ as $\|\bfv\|  \rightarrow  \infty$ (see figure \ref{sharp cut-off energy distributions}). Salomon seems to believe this has a strong effect on the plasma behaviour, and things Wayne has said would hint in this direction too. Honestly I think the response to this is just to ensure the particles are generated with enough fidelity on the tails to capture these varying behaviours, and otherwise not worry about it, unless the people at Warwick have any better suggestions? I mean honestly, how much can I do about this? Would need to understand the theory a little better first.
+            One thing worthy of note that I'm concerned about is how a PIC model would handle different tail behaviours for very-high-energy particles. In tokamak plasmas for example, Alfvénic damping of particles with velocities above the Alfvén velocity causes particle energy distributions to have a cut-off that is $\ll  \exp\left(- {\rm const.}\|\bfv\|^2\right)$ as $\|\bfv\|  \rightarrow  \infty$ (see figure \ref{eqn:sharp cut-off energy distributions}). Salomon seems to believe this has a strong effect on the plasma behaviour, and things Wayne has said would hint in this direction too. Honestly I think the response to this is just to ensure the particles are generated with enough fidelity on the tails to capture these varying behaviours, and otherwise not worry about it, unless the people at Warwick have any better suggestions? I mean honestly, how much can I do about this? Would need to understand the theory a little better first.
         \end{itemize}}
         
         \begin{figure}[!h]

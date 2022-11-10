@@ -1,6 +1,6 @@
-\chapter{Derivation of the Boltzmann Equation}\label{Boltzmann equation derivation}
-    From equations (\ref{patricle motion}–\ref{particle forcing}), we see $(f_{s})_{s}$ satisfy the PDE
-    \begin{equation}\label{exact Boltzmann equation}
+\chapter{Derivation of the Boltzmann Equation}\label{sec:Boltzmann equation derivation}
+    From equations (\ref{eqn:particle motion}–\ref{eqn:particle forcing}), we see $(f_{s})_{s}$ satisfy the PDEs
+    \begin{equation}\label{eqn:exact Boltzmann equation}
         \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]  =  0
     \end{equation}
     where $\widehat{\bfE}(\bfx)$, $\widehat{\bfB}(\bfx)$ in represent the EM fields produced by particles \emph{not} at $\bfx$, such that they are well-defined where $(f_{s})_{s}$ are non-zero, defined as:
@@ -14,7 +14,7 @@
         \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \\
     \end{align}
 
-    Applying the workflow from Figure \ref{kinetic model construction workflow} to (\ref{exact Boltzmann equation}), $\forall \phi(\bfx, \bfv)$,
+    Applying the workflow from Figure \ref{fig:kinetic model construction workflow} to (\ref{eqn:exact Boltzmann equation}), $\forall \phi(\bfx, \bfv)$,
     \begin{align*}
         \int_{\bfx, \bfv}\partial_{t}f_{s}\phi + \int_{\bfx, \bfv}\nabla_{\bfx}\cdot[f_{s}\bfv]\phi + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\phi  &=  0  \\
         \int_{\bfx, \bfv}\partial_{t}f_{s}\phi - \int_{\bfx, \bfv}f_{s}\bfv\cdot\nabla_{\bfx}\phi - \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi  &=  0  \\

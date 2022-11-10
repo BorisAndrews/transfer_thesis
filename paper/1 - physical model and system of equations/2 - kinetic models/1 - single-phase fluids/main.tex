@@ -11,7 +11,7 @@
     Consider first a single-phase fluid. Let a single particle of mass $m$ in this fluid have position $\bfx(t)$ and velocity $\bfv(t)$, and be subject to a force $\bfF(\bfx, \bfv; t)$. We seek a (system of) ODEs governing the behaviour of this particle:
     \begin{itemize}
         \item  The position evolves simply according to the ODE
-        \begin{equation}\label{velocity ODE}
+        \begin{equation}\label{eqn:velocity ODE}
             d\bfx  =  \bfv dt
         \end{equation}
         \item  The velocity evolves according to the ODE, $d\bfv  =  \frac{1}{m}\bfF dt + \frac{1}{m}${\bf ``Collisional forces''}$dt$. \BA{(Note here with references about how tough it is to model collisional terms- \emph{got} to make \emph{some} assumptions, \emph{especially} if we want to do simulations!)} To model the collisional forces, consider the following 2 assumptions:
@@ -28,25 +28,25 @@
         We can then model the collision forces through a Wiener process, with forces proportional to the:  \BA{(Give justification for this model. That might be tough...)}
         \begin{itemize}
             \item  Difference in momentum between that of the particle, $m\bfv$, and the average particle with which the particle in question is colliding, $m(\bfu + \nabla_{\bfx}\cdot\bftau)$ \BA{(I think this is right for the stress contribution? Maybe off by a scaling of $m$ or something...)}, where $\bftau(\bfx)$ denotes an internal stress from variation in momentum \BA{($\bftau$ should be symmetric, right? But why?)} \BA{(Should this be $\bftau$ or $\bfsigma$? I've written $\bftau$ so as not to clash in notation, but this could change.)} \BA{(Why?)}
-            \begin{equation}\label{single-phase drag force}
+            \begin{equation}\label{eqn:single-phase drag force}
                 \mu m[(\bfu + \nabla_{\bfx}\cdot\bftau) - \bfv]
             \end{equation}
             \item  ``Derivative'' of some Wiener process \BA{(Obviously the ``derivative of a Wiener process'' is not a rigorously defined concept, so I may see if I can switch around the way this is structured...)}, representing the random forces from collisions at random angles from the molecular chaos hypothesis
-            \begin{equation}\label{single-phase brownian motion}
+            \begin{equation}\label{eqn:single-phase brownian motion}
                 \sigma m\frac{d\bfW}{dt}
             \end{equation}
         \end{itemize}
         
         \BA{Here's where I think I should state that we have the relation $\frac{\mu}{\sigma^{2}}  =  \frac{k_{B}T}{m}$. Is this from conservation of energy? Would like to give a proper derivation of the scale of $\sigma$, and am sure I'll have to for the dimensional analysis.}
         
-        By convention, mapping $\bfx, \bfv  \mapsto  \bfX, \bfV$ to represent the switch from an ODE to an SDE (and accordingly in (\ref{velocity ODE})) gives the SDE for the velocity evolution
+        By convention, mapping $\bfx, \bfv  \mapsto  \bfX, \bfV$ to represent the switch from an ODE to an SDE (and accordingly in (\ref{eqn:velocity ODE})) gives the SDE for the velocity evolution
         \begin{equation}
             d\bfV  =  \frac{1}{m}\bfF dt + \mu[(\bfu + \nabla_{\bfx}\cdot\bftau) - \bfV]dt + \sigma d\bfW
         \end{equation}
         This resembles a combination of an Ornstein–Uhlenbeck process and a forcing term.
     \end{itemize}
     Applying the Fokker-Planck equation, the particle density function, $f(\bfx, \bfv; t)$ evolves according to the PDE
-    \begin{equation}\label{single-phase Boltzmann equation}
+    \begin{equation}\label{eqn:single-phase Boltzmann equation}
         \partial_{t}[f] + \underset{\textrm{Convection}}{\underbrace{\nabla_{\bfx}\cdot[f\bfv]}} + \underset{\textrm{Forces}}{\underbrace{\frac{1}{m}\nabla_{\bfv}\cdot[f\bfF]}}  =  - \underset{\textrm{Viscosity}}{\underbrace{\mu\nabla_{\bfv}\cdot\nabla_{\bfx}\cdot[\bftau]}} + \underset{\textrm{Collisions}}{\underbrace{\mu\nabla_{\bfv}\cdot[f(\bfv - \bfu)] + \frac{\sigma^{2}}{2}\Delta_{\bfv}[f]}}
     \end{equation}
     This is a form of the Boltzmann equation, where the approximation to the collisional term is explicitly derived from the above assumptions.
