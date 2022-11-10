@@ -15,13 +15,13 @@
     \end{align}
 
     Applying the workflow from Figure \ref{fig:kinetic model construction workflow} to (\ref{eqn:exact Boltzmann equation}), $\forall \phi(\bfx, \bfv)$,
-    \begin{align*}
-        \int_{\bfx, \bfv}\partial_{t}f_{s}\phi + \int_{\bfx, \bfv}\nabla_{\bfx}\cdot[f_{s}\bfv]\phi + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\phi  &=  0  \\
-        \int_{\bfx, \bfv}\partial_{t}f_{s}\phi - \int_{\bfx, \bfv}f_{s}\bfv\cdot\nabla_{\bfx}\phi - \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
-        \cdots + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left[\nabla_{\bfx}\widehat{\varphi} + \left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\widehat{\bfA}\right]\cdot\nabla_{\bfv}\phi  &=  0  \\
-        \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\nabla_{\bfx}\left[\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\right]\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
-        \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
-        \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
-        \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0
-    \end{align*}
+    %\begin{align*}
+    %    \int_{\bfx, \bfv}\partial_{t}f_{s}\phi + \int_{\bfx, \bfv}\nabla_{\bfx}\cdot[f_{s}\bfv]\phi + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\phi  &=  0  \\
+    %    \int_{\bfx, \bfv}\partial_{t}f_{s}\phi - \int_{\bfx, \bfv}f_{s}\bfv\cdot\nabla_{\bfx}\phi - \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
+    %    \cdots + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left[\nabla_{\bfx}\widehat{\varphi} + \left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\widehat{\bfA}\right]\cdot\nabla_{\bfv}\phi  &=  0  \\
+    %    \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\nabla_{\bfx}\left[\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\right]\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
+    %    \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
+    %    \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
+    %    \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0
+    %\end{align*}
     
