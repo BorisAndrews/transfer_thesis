@@ -5,23 +5,39 @@
     \end{equation}
     where $\widehat{\bfE}(\bfx)$, $\widehat{\bfB}(\bfx)$ in represent the EM fields produced by particles \emph{not} at $\bfx$, such that they are well-defined where $(f_{s})_{s}$ are non-zero, defined as:
     \begin{align}
-        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
-        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)
     \end{align}
-    where ${\bf ker}_{\bfE}$, ${\bf ker}_{\bfB}$ in $\bfx', \bfv'$ represent the electric and magnetic fields produced at the origin by a particle of unit charge at position $\bfx'$ with velocity $\bfv'$ at time $t' (< 0)$, and $t'(t; \bfx, \bfx') := t - \frac{1}{c}\|\bfx - \bfx'\|$. Note, crucially, the standard electric and magnetic fields, $\bfE$ and $\bfB$ respectively, can be defined from ${\bf ker}_{\bfE}$, ${\bf ker}_{\bfB}$ as:
+    where the kernels $\bfk_{\bfE}$, $\bfk_{\bfB}$ in $\bfx', \bfv'$ represent the electric and magnetic fields produced at the origin by a particle of unit charge at position $\bfx'$ with velocity $\bfv'$ at time $t' (< 0)$, and $t'(t; \bfx, \bfx') := t - \frac{1}{c}\|\bfx - \bfx'\|$. \BA{(Explicit definitions of the kernels.)} Crucially, $\widetilde{\bfE}$, $\widetilde{\bfB}$ can be defined explicitly from $\bfk_{\bfE}$, $\bfk_{\bfB}$ as:
     \begin{align}
-        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
-        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'}f_{s'}(\bfx', \bfv'; t'){\bf ker}_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widetilde{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \label{eqn:explicit electric field}  \\
+        \widetilde{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)  \label{eqn:explicit magnetic field}
     \end{align}
 
-    Applying the workflow from Figure \ref{fig:kinetic model construction workflow} to (\ref{eqn:exact Boltzmann equation}), $\forall \phi(\bfx, \bfv)$,
-    %\begin{align*}
-    %    \int_{\bfx, \bfv}\partial_{t}f_{s}\phi + \int_{\bfx, \bfv}\nabla_{\bfx}\cdot[f_{s}\bfv]\phi + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\phi  &=  0  \\
-    %    \int_{\bfx, \bfv}\partial_{t}f_{s}\phi - \int_{\bfx, \bfv}f_{s}\bfv\cdot\nabla_{\bfx}\phi - \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
-    %    \cdots + \frac{q_{s}}{m_{s}}\int_{\bfx, \bfv}f_{s}\left[\nabla_{\bfx}\widehat{\varphi} + \left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\widehat{\bfA}\right]\cdot\nabla_{\bfv}\phi  &=  0  \\
-    %    \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\nabla_{\bfx}\left[\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\right]\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
-    %    \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0  \\
-    %    \cdots + \frac{q_{s}}{4\pi m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv}f_{s}(\bfx, \bfv; t)\left(\frac{1}{\varepsilon_{0}}\int_{\bfx' \neq \bfx, \bfv'}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\;\;\;\;\;\;\;\;\;\;\;\;\;\;&  \right.  \\
-    %    \left.  + \mu_{0}\left(\partial_{t} - \bfv\wedge\nabla_{\bfx}\wedge\right)\left[\int_{\bfx' \neq \bfx, \bfv}f_{s'}(\bfx', \bfv'; t')\frac{1}{\|\bfx - \bfx'\|}\bfv'\right]\right)\cdot\nabla_{\bfv}\phi  &=  0
-    %\end{align*}
+    Applying the workflow from Figure \ref{fig:kinetic model construction workflow} to (\ref{eqn:exact Boltzmann equation}), $\forall \phi(\bfx, \bfv; t)$,
+    {\small \begin{align}
+        \int_{\bfx, \bfv; t}\left(\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\right)\phi  &=  0  \\
+        - \int_{\bfx, \bfv; t}f_{s}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
+        - \int_{\bfx, \bfv; t}f_{s}\left(\cdots + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')(\bfk_{\bfE} + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
+        - \bbE\left\{\int_{\bfx, \bfv; t}f_{s}[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi] + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s}f_{s'}[\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB}]\cdot\nabla_{\bfv}\phi\right\}  &=  0  \\
+        \begin{split}
+            - \left(\int_{\bfx, \bfv; t}\widetilde{f_{s}}[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi]\right.  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;&\;  \\
+            \left.  + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')](\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0
+        \end{split}  \\
+        \begin{split}
+            - \left(\int_{\bfx, \bfv; t}\widetilde{f_{s}}\left[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right]\right.  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;&\;  \\
+            \left.  + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}f_{s'}} - \widetilde{f_{s}}\widetilde{f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi(\bfx, \bfv; t)\right)  &=  0
+        \end{split}
+    \end{align}}
+    Defining the collisional forces for each phase $(\bfC_{s}(\bfx, \bfv; t))_{s}$
+    \begin{equation}
+        \bfC_{s}  :=  q_{s}\sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}\frac{\widetilde{f_{s}f_{s'}} - \widetilde{f_{s}}\widetilde{f_{s'}}}{\widetilde{f_{s}}}(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})
+    \end{equation}
+    and noting equations (\ref{eqn:explicit electric field}), (\ref{eqn:explicit magnetic field}) for $\widetilde{\bfE}$, $\widetilde{\bfB}$, this takes the from
+    \begin{align}
+        - \int_{\bfx, \bfv; t}\widetilde{f_{s}}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\cdot\nabla_{\bfv}\phi + \frac{1}{m_{s}}\bfC_{s}\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
+        \int_{\bfx, \bfv; t}\left(\partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right] + \frac{1}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\bfC_{s}\right]\right)\phi  &=  0  \\
+        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right] + \frac{1}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\bfC_{s}\right]  &=  0
+    \end{align}
+
     
