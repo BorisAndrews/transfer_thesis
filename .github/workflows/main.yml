@@ -10,6 +10,7 @@ jobs:
         uses: BorisAndrews/Transfer_Thesis@main
         with:
           root_file: paper/main.tex
+          compiler: pdflatex
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
