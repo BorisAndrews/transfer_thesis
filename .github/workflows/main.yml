@@ -1,36 +1,18 @@
-name: Build PDF
+name: Build LaTeX document
 on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Setting up Git repository
-        uses: actions/checkout@v2
-      - name: Building initial PDF (pdflatex)
-        uses: dante-ev/latex-action@latest
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+      - name: Compile LaTeX document
+        uses: BorisAndrews/Transfer_Thesis/paper
         with:
-          root_file: paper/main.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-      - name: Compiling bibliography (bibtex)
-        uses: dante-ev/latex-action@latest
+          root_file: main.tex
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v3
         with:
-          root_file: paper/references.bib
-          compiler: bibtex
-      - name: Recompiling PDF with bibliography (pdflatex)
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: paper/main.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-      - name: Cross referencing (pdflatex)
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: paper/main.tex
-          compiler: pdflatex
-          args: -interaction=nonstopmode -shell-escape
-      - name: Uploading PDF
-        uses: actions/upload-artifact@v2
-        with:
-          name: main.pdf
-          path: paper/main.pdf
+          name: PDF
+          path: main.pdf
+FAQs
