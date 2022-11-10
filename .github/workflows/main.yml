@@ -7,12 +7,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@main
       - name: Compile LaTeX document
-        uses: BorisAndrews/Transfer_Thesis@main
+        uses: xu-cheng/latex-action@master
         with:
           root_file: paper/main.tex
           compiler: pdflatex
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: PDF
           path: main.pdf
