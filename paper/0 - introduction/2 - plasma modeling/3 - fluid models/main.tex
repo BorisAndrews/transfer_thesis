@@ -1,24 +1,61 @@
 \subsection*{Fluid Models}
     \begin{definition}[Fluid model]
-        Here, ``fluid'' models refer to those wherein the system is reduced from one in \emph{both} position and velocity space (and time) to one in \emph{just} position space (and time) through some kind of approximation to the distibution function.
+        Here, ``fluid'' models refer to those wherein the system is reduced from one in \emph{both} position and velocity space (and time) to one in \emph{just} position space (and time) through some kind of approximation to the distribution function.
     \end{definition}
     Recall the Boltzmann equation (\ref{eqn:Boltzmann equation})
     \begin{equation*}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]  =  \calC_{s}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \calC_{s}[(f_{s'})_{s'}]
     \end{equation*}
-    On the parameter scales of many plasmas, it is the case that this equation is dominated by the forcing and collisional terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$ and $\calC_{s}$ respectively.
+    whereby through some approximation to the 2-particle distribution functions, $(\calC_{s})_{s}$ is written in terms of $(f_{s'})_{s'}$.
     
-    Define the charge and mass density, $\rho^{C}$ and $\rho^{M}$ respectively, functions of $\bfx$, $t$:
+    On the parameter scales of many plasmas, it is the case that these equations are dominated by the forcing terms and the leading-order components of collisional terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$ and $\calC_{s}^{(0)}$ respectively. Fluid models will often seek to exploit this fact to say that the system has a set of leading-order solutions, $\left(f_{s}^{(0)}\right)_{s}$, satisfying the leading-order PDEs
+    \begin{equation}
+        \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]  =  \calC_{s}^{(0)}\left[\left(f_{s'}^{(0)}\right)_{s'}\right]
+    \end{equation}
+    Since, however, the collision operators conserve momentum at any specific position, $\bfx$, the above system does not necessarily have a solution. To resolve this, define the mass and charge density, $\rho_{M}$ and $\rho_{C}$ respectively:
     \begin{align}
-        \rho^{C}  :=  \sum_{s}q_{s}\int_{\bfv}f_{s},  &&
-        \rho^{M}  :=  \sum_{s}m_{s}\int_{\bfv}f_{s}
+        \rho_{M}  :=  \sum_{s}\int_{\bfv}f_{s}m_{s},  &&
+        \rho_{C}  :=  \sum_{s}\int_{\bfv}f_{s}q_{s}
     \end{align}
+    alongside the momentum and current density, $\bfp$ and $\bfJ$ respectively:
+    \begin{align}
+        \bfp  :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv,  &&
+        \bfJ  :=  \sum_{s}\int_{\bfv}f_{s}q_{s}\bfv
+    \end{align}
+    all functions of $\bfx$, $t$ \emph{only}.
+    
     Rewriting the Boltzmann equation in the form
-    {\small \begin{equation}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rho^{C}}{\rho^{M}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)] + \left(\frac{q_{s}}{m_{s}} - \frac{\rho^{C}}{\rho^{M}}\right)\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]  =  \calC_{s}
-    \end{equation}}
+    {\small \begin{multline}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{1}{\rho_{M}}\nabla_{\bfv}\cdot\left[f_{s}(\rho_{C}\bfE + \bfJ\wedge\bfB)\right]  \\
+        + \nabla_{\bfv}\cdot\left[f_{s}\left(\left(\frac{q_{s}}{m_{s}} - \frac{\rho_{C}}{\rho_{M}}\right)\bfE + \left(\frac{q_{s}}{m_{s}}\bfv - \frac{1}{\rho_{m}}\bfJ\right)\wedge\bfB\right)\right]  =  \calC_{s}[(f_{s'})_{s'}]
+    \end{multline}}
+    the leading-order system
+    \begin{equation}
+        \nabla_{\bfv}\cdot\left[f_{s}^{(0)}\left(\left(\frac{q_{s}}{m_{s}} - \frac{\rho_{C}}{\rho_{M}}\right)\bfE + \left(\frac{q_{s}}{m_{s}}\bfv - \frac{1}{\rho_{m}}\bfJ\right)\wedge\bfB\right)\right]  =  \calC_{s}^{(0)}\left[\left(f_{s'}^{(0)}\right)_{s'}\right]
+    \end{equation}
+    \emph{does} admit solutions, which can be written as a function of just the functions in $\bfx$, t conserved by the collision operator, the density for each phase, total momentum and total internal energy:
+    \begin{align}
+        \rho_{s}  :=  \int_{\bfv}f_{s}m_{s},  &&
+        \bfp  :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv,  &&
+        E  :=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2} - \frac{1}{2\rho_{M}}\|\bfp\|^{2}
+    \end{align}
+    Assuming $f_{s}  \sim  f_{s}^{(0)}$ (i.e. that the plasma has ``thermalised'') and taking the above moments of the Boltzmann equation, we retrieve a system in $(\rho_{s})_{s}$, $\bfp$, $E$ only. This techniques allows the reduction of the system from one in the 6 (or 7) dimensions of a full kinetic model, to a fluid mode in just 3 (or 4).
+    
+    The problem however with applying this technique directly to tokamak plasmas fundamentally lies in the assumption of collision-dominant dynamics. \BA{(Some estimates on the scale of these terms in the plasma/edge plasma- some nice parameter scale estimates/values in that gyrokinetics manuscript- Multiscale Gyrokinetics for Rotating Tokamak Plasmas: Fluctuations, Transport and Energy Flows.} Many highly influential so-called ``kinetic'' effects are not captured by these MHD fluid models, including: \BA{([Ref, Ref, Ref, …])}
+    \begin{itemize}
+        \item  Most plasma waves
+        \item  Most plasma/kinetic instabilities
+        \item  Landau damping/Bump-on-tail instabilities
+        \item  Leakage
+        \item  Kinetic structures (Beams/Double layers)
+        \item  Anisotropic pressures
+        \item  …
+    \end{itemize}
+     Techniques for the numerical solution of the MHD equations have been very well developed over recent years however \BA{([Ref, Ref, Ref, Ref, Ref, …])}. The question therefore lies in how these more efficient techniques, can be reapplied to the more accurate kinetic models, when the two are so qualitatively different.
+    
+    \BA{(Check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.):
 
-    \BA{Considering an expansion of the collision operator of the form
+    \BA{Would like to consider an expansion of the collision operator of the form
     \begin{multline}
         \calC_{s}  =  \nabla_{\bfv}\cdot\left[f_{s}\sum_{s'}\rho_{s'}(\bfmu_{ss'}(\bfu_{s'} - \bfv) + \nabla_{\bfx}\cdot[\bftau_{ss'}({\bf sym}(\nabla_{\bfx}\bfu_{s}))] + \cdots)\right]  \\
         + \left(\nabla_{\bfv}\cdot\right)^{2}\left[f_{s}\sum_{s'}\rho_{s'}(\bfD_{ss'}(\bfu_{s'} - \bfv) + \cdots)\right] + \cdots
