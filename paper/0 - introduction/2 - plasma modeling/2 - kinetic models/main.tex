@@ -45,12 +45,12 @@
     \end{align*}
     The evolution equation for $(f_{s})_{s}$ or $\left(\widetilde{f_{s}}\right)_{s}$ is not so simple however, due to its non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'', \BA{[Ref]}
     \begin{equation}\label{eqn:Boltzmann equation}
-        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =   \calC_{s}
+        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =   \nabla_{\bfv}\cdot\bfC_{s}
     \end{equation}
-    where the collision operators $(\calC_{s}(\bfx, \bfv; t))_{s}$ are terms characterising the Coulomb collisions, defined as
+    where the collision terms $(\bfC_{s}(\bfx, \bfv; t))_{s}$ are terms characterising the Coulomb collisions, defined as
     \begin{multline}\label{eqn:collision operator}
-        \calC_{s}  :=  \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}(\bfx, \bfv; t)\widetilde{f_{s'}}(\bfx', \bfv'; t') - \widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')]\right)  \right.  \\
-        \left.{\color{white} \int}  [\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t) + \bfv\wedge\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)]\right]
+        \bfC_{s}  :=  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}(\bfx, \bfv; t)\widetilde{f_{s'}}(\bfx', \bfv'; t') - \widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')]\right)  \\
+        [\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t) + \bfv\wedge\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)]
     \end{multline}
     where in turn:
     \begin{itemize}

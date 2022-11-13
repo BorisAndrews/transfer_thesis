@@ -4,42 +4,44 @@
     \end{definition}
     Recall the Boltzmann equation (\ref{eqn:Boltzmann equation})
     \begin{equation*}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \calC_{s}[(f_{s'})_{s'}]
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \nabla_{\bfv}\cdot[\bfC_{s}((f_{s'})_{s'})]
     \end{equation*}
-    whereby through some approximation to the 2-particle distribution functions, $(\calC_{s})_{s}$ is written in terms of $(f_{s'})_{s'}$.
+    whereby through some approximation to the 2-particle distribution functions, $(\bfC_{s})_{s}$ are written in terms of $(f_{s'})_{s'}$.
     
-    On the parameter scales of many plasmas, it is the case that these equations are dominated by the forcing terms and the leading-order components of collisional terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$ and $\calC_{s}^{(0)}$ respectively. Fluid models will often seek to exploit this fact to say that the system has a set of leading-order solutions, $\left(f_{s}^{(0)}\right)_{s}$, satisfying the leading-order PDEs
+    On the parameter scales of many plasmas, it is the case that these equations are dominated by those components of the collisional terms which are only affected by $(f_{s'}|_{\bfx})_{s'}$ \BA{(Really don't like the phrasing there...)}, $\bfC_{s}^{(0)}$, and the forcing terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$. Fluid models will often seek to exploit this fact to say that the system has a set of leading-order solutions, $\left(f_{s}^{(0)}\right)_{s}$, satisfying the leading-order PDEs
     \begin{equation}
-        \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]  =  \calC_{s}^{(0)}\left[\left(f_{s'}^{(0)}\right)_{s'}\right]
+        \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]  =  \nabla_{\bfv}\cdot\left[\bfC_{s}^{(0)}\left(\left(f_{s'}^{(0)}|_{\bfx}\right)_{s'}\right)\right]
     \end{equation}
-    Since, however, the collision operators conserve momentum at any specific position, $\bfx$, the above system does not necessarily have a solution. To resolve this, define the mass and charge density, $\rho_{M}$ and $\rho_{C}$ respectively:
+    Since, however, the leading-order collision operators $\left(\bfC_{s}^{(0)}\right)_{s}$ conserve both momentum and energy, the above system does not (necessarily) have a solution. To resolve this, define the mass and charge density, $\rho_{M}$ and $\rho_{C}$ respectively:
     \begin{align}
         \rho_{M}  :=  \sum_{s}\int_{\bfv}f_{s}m_{s},  &&
         \rho_{C}  :=  \sum_{s}\int_{\bfv}f_{s}q_{s}
     \end{align}
-    alongside the momentum and current density, $\bfp$ and $\bfJ$ respectively:
+    alongside the momentum and current density, $\bfp$ and $\bfj$ respectively:
     \begin{align}
         \bfp  :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv,  &&
-        \bfJ  :=  \sum_{s}\int_{\bfv}f_{s}q_{s}\bfv
+        \bfj  :=  \sum_{s}\int_{\bfv}f_{s}q_{s}\bfv
     \end{align}
     all functions of $\bfx$, $t$ \emph{only}.
     
     Rewriting the Boltzmann equation in the form
     {\small \begin{multline}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{1}{\rho_{M}}\nabla_{\bfv}\cdot\left[f_{s}(\rho_{C}\bfE + \bfJ\wedge\bfB)\right]  \\
-        + \nabla_{\bfv}\cdot\left[f_{s}\left(\left(\frac{q_{s}}{m_{s}} - \frac{\rho_{C}}{\rho_{M}}\right)\bfE + \left(\frac{q_{s}}{m_{s}}\bfv - \frac{1}{\rho_{m}}\bfJ\right)\wedge\bfB\right)\right]  =  \calC_{s}[(f_{s'})_{s'}]
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right] + \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  \\
+        + \nabla_{\bfv}\cdot\left[f_{s}\frac{q_{s}}{m_{s}}(\bfE + \bfv\wedge\bfB)\right] - \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right]  \\
+        - \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  =  \nabla_{\bfv}\cdot[\bfC_{s}((f_{s'})_{s'})]
     \end{multline}}
     the leading-order system
-    \begin{equation}
-        \nabla_{\bfv}\cdot\left[f_{s}^{(0)}\left(\left(\frac{q_{s}}{m_{s}} - \frac{\rho_{C}}{\rho_{M}}\right)\bfE + \left(\frac{q_{s}}{m_{s}}\bfv - \frac{1}{\rho_{m}}\bfJ\right)\wedge\bfB\right)\right]  =  \calC_{s}^{(0)}\left[\left(f_{s'}^{(0)}\right)_{s'}\right]
-    \end{equation}
-    \emph{does} admit solutions, which can be written as a function of just the functions in $\bfx$, t conserved by the collision operator, the density for each phase, total momentum and total internal energy:
+    {\small \begin{multline}
+        \nabla_{\bfv}\cdot\left[f_{s}\frac{q_{s}}{m_{s}}(\bfE + \bfv\wedge\bfB)\right] - \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right]  \\
+        - \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  =  \nabla_{\bfv}\cdot\left[\bfC_{s}^{(0)}((f_{s'}|_{\bfx})_{s'})\right]
+    \end{multline}}
+    \emph{does} admit solutions, which can be written as a function of just the functions in $\bfx$, t conserved by the collision operator, the density for each phase, total momentum and total energy:
     \begin{align}
-        \rho_{s}  :=  \int_{\bfv}f_{s}m_{s},  &&
+        \rho_{Ms}  :=  \int_{\bfv}f_{s}m_{s},  &&
         \bfp  :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv,  &&
-        E  :=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2} - \frac{1}{2\rho_{M}}\|\bfp\|^{2}
+        E  :=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2}
     \end{align}
-    Assuming $f_{s}  \sim  f_{s}^{(0)}$ (i.e. that the plasma has ``thermalised'') and taking the above moments of the Boltzmann equation, we retrieve a system in $(\rho_{s})_{s}$, $\bfp$, $E$ only. This techniques allows the reduction of the system from one in the 6 (or 7) dimensions of a full kinetic model, to a fluid mode in just 3 (or 4).
+    Assuming $f_{s}  \sim  f_{s}^{(0)}$ (i.e. that the plasma has ``thermalised'') and taking the above moments of the Boltzmann equation, we retrieve a system in $(\rho_{Ms})_{s}$, $\bfp$, $E$ only. This techniques allows the reduction of the system from one in the 6 (or 7) dimensions of a full kinetic model, to a fluid mode in just 3 (or 4).
     
     The problem however with applying this technique directly to tokamak plasmas fundamentally lies in the assumption of collision-dominant dynamics. \BA{(Some estimates on the scale of these terms in the plasma/edge plasma- some nice parameter scale estimates/values in that gyrokinetics manuscript- Multiscale Gyrokinetics for Rotating Tokamak Plasmas: Fluctuations, Transport and Energy Flows.} Many highly influential so-called ``kinetic'' effects are not captured by these MHD fluid models, including: \BA{([Ref, Ref, Ref, …])}
     \begin{itemize}
