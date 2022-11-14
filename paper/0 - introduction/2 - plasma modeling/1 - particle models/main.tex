@@ -1,8 +1,10 @@
 \subsection*{Particle Models}
-    Perhaps the most fundamental mathematical model for a plasma is the particle model.
+    Perhaps the most fundamental mathematical model for a plasma is the particle model.       
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
     \begin{definition}[Particle model]
         Here, ``particle'' models refer to those wherein every single particle is modelled individually.
     \end{definition}
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
     Supposing particle indexed via the index $i$ in a phase indexed via the index $s$, has position $\bfx_{si}(t)$ and velocity $\bfv_{si}(t)$, $(\bfx_{si})_{si}$ and $(\bfv_{si})_{si}$ satisfy the systems of ODEs:
     \begin{align}
         \bfd\bfx_{si}  &=  \bfv_{si} dt  \label{eqn:particle motion}  \\
@@ -15,5 +17,5 @@
         \nabla\cdot\bfE_{si}  &=  \frac{1}{\varepsilon_{0}}\sum_{s', i' : (s', i') \neq (s, i)}q_{s'}\delta^{3}(\bfx - \bfx_{s'i'}),  &
         \nabla\cdot\bfB_{si}  &=  0
     \end{align*}
-    Naturally this leads to the most complete dynamical model, however on the tokamak scale with particle densities on the order of $10^{- 5}{\rm mol}^{- 1}$ this is computationally impossible. We must therefore begin to make certain assumptions to simplify the model to bring it within reach of analysis.
+    Naturally, this leads to the most complete dynamical model, however on the tokamak scale with particle densities on the order of $10^{- 5}{\rm mol}^{- 1}$ this is computationally impossible. We must therefore begin to make certain assumptions to simplify the model to bring it within reach of analysis.
     

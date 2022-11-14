@@ -1,6 +1,54 @@
 \chapter{Fluid Component}
     \BA{Introduction.}
 
+
+    \BA{Just making some notes here...}
+
+    Fluid component should look something like:
+    \begin{align}
+        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
+        \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
+        \begin{split}
+            \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \mu\Delta\bfu  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  - m_{+}\nabla\cdot\left[\int_{\bfv}\phi_{+}\bfv^{\otimes 2}\right]
+        \end{split}  \\
+        \begin{split}
+            \partial_{t}\bfj  &=  - \frac{\mu_{+-}}{m_{+}m_{-}}\rho_{M}\bfj - \frac{q_{+}q_{-}}{m_{+}m_{-}}\rho_{M}(\bfE + \bfu\wedge\bfB) + \frac{q_{-}}{m_{-}}\bfj\wedge\bfB + \lambda\Delta\bfj  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;   - \sum_{\pm}q_{\pm}\nabla\cdot\left[\int_{\bfv}\phi_{\pm}\bfv^{\otimes 2}\right]
+        \end{split}  \\
+        \begin{split}
+            \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{2}{3}\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \kappa\Delta p  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  - \frac{1}{3}m_{+}\nabla\cdot\left[\int_{\bfv}\phi_{+}\|\bfv - \bfu\|^{2}\bfv\right] - \frac{2}{3}\sum_{s, s'}\mu_{ss'}n_{s'}\int_{\bfv}\phi_{s}v^{2}
+        \end{split}
+    \end{align}
+    where $\bfu  :=  \frac{1}{\rho_{M}}\bfp$ for simplicity, up to leading order. Discarding the contributions from $(\phi_{s})_{s}$, this can be non-dimensionalised as:
+    \begin{align}
+        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
+        \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
+        \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \rmEu\left(\frac{1}{2}\nabla p + \frac{1}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB)\right) + \frac{1}{\rmReu}\Delta\bfu  \\
+        \frac{1}{\rmT}\partial_{t}\bfj  &=  - \frac{1}{\rmRem}\rho_{M}\bfj + \rho_{M}(\bfE + \bfu\wedge\bfB) - \rmRH\bfj\wedge\bfB + \frac{1}{\rmRej}\Delta\bfj  \\
+        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{4}{3}\beta\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \frac{1}{\rmPe}\Delta p
+    \end{align}
+    with dimensionless constants:
+    
+    \begin{center}\begin{tabular}{ c c c c }
+        Name  &  Symbol  &  Value  &  Ratio  \\
+        \hline\hline
+        Fluid Reynolds number  &  $\rmReu$  &  $\frac{\bfx\bfp}{\mu}$  &  Momentum (advection : diffusion)  \\
+        Magnetic Reynolds number  &  $\rmRem$  &  $\frac{q_{+}q_{-}\mu_{0}\bfx\bfp}{m_{+}m_{-}\nu_{\rm Coll}}$  &  Magnetic (advection : diffusion)  \\
+        Current Reynolds number  &  $\rmRej$  &  $\frac{\bfx\bfp}{\lambda}$  &  Current (advection : diffusion)  \\
+        Peclet number  &  $\rmPe$  &  $\frac{\bfx\bfp}{\kappa}$  &  Pressure (advection : diffusion)  \\
+        \hline
+        Euler number  &  $\rmEu$  &  $\frac{2p\rho_{M}}{\bfp^{2}}$  &  (Pressure : Interial) forces  \\
+        Plasma beta  &  $\beta$  &  $\frac{2\mu_{0}p}{\bfB^{2}}$  &  (Plasma : Magnetic) pressure  \\
+        \BA{??}  &  $\rmT$  &  $\frac{q_{+}q_{-}\rho_{M}\bfx\bfB}{m_{+}m_{-}\bfj}$  &  (EM : Interial) forces on current  \\
+        Hall number  &  $\rmRH$  &  $\frac{m_{+}\bfB^{2}}{q_{+}\mu_{0}\rho_{M}\bfx}$  &  \BA{??}  \\
+    \end{tabular}\end{center}
+    \BA{Note, for collision frequency $\nu_{\rm Coll}$,
+    \begin{equation}
+        m_{+}m_{-}\nu_{\rm Coll}  =  \mu_{+-}\rho_{M}
+    \end{equation}}
+
     
     \input{2 - fluid component/1 - analysis/main.tex}
     \input{2 - fluid component/2 - numerics/main.tex}
