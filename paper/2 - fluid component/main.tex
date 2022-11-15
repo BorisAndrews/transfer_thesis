@@ -1,26 +1,23 @@
 \chapter{Fluid Component}
     \BA{Introduction.}
 
-
-    \BA{Just making some notes here...}
-
-    Neglecting $(\phi_{s})_{s}$ terms, fluid component look something like:
+    Neglecting $(\phi_{s})_{s}$ terms, fluid component look something like, up to leading order: \BA{(I want to double check and write out a derivation of these equations of course, but up to perhaps some variation in the constants, this is how the equations look. That's why I've written that so vaguely.)}
     \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \mu\Delta\bfu  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{2}{3}\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \kappa\Delta p
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \mu\Delta\bfp  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  \frac{2}{3}\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \kappa\Delta\left[\frac{p}{\rho_{M}}\right]
     \end{align}
-    where $\bfu  :=  \frac{1}{\rho_{M}}\bfp$ for simplicity, up to leading order. This can be non-dimensionalised as:
+    This can be non-dimensionalised \BA{(Assuming $[t] = \left[\frac{\rho_{M}\bfx}{\bfp}\right]$, $[\rho_{C}] = \left[\frac{\rho_{M}\bfB}{\mu_{0}\bfx\bfp}\right]$, $[\bfj] = \left[\frac{\bfB}{\mu_{0}\bfx}\right]$, $[\bfE] = \left[\frac{\bfB\bfp}{\rho_{M}}\right]$. Any others I've missed? I don't think so...)} as:
     \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \rmEu\left(\frac{1}{2}\nabla p + \frac{1}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB)\right) + \frac{1}{\rmRef}\Delta\bfu  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{4}{3}\beta\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \frac{1}{\rmPe}\Delta p
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB)\right) + \frac{1}{\rmRef}\Delta\bfp  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  \frac{4}{3}\beta\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]
     \end{align}
     alongside the equilibrium relation for $\bfj$,
-    \begin{equation}
-        \bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB
+    \begin{equation}\label{eqn:current identity}
+        \bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \frac{1}{\rho_{M}}\bfp\wedge\bfB\right) + \rmRH\bfj\wedge\bfB
     \end{equation}
     This is coupled with Maxwell's equations:
     \begin{align*}
@@ -36,8 +33,7 @@
         \rmM^{2}\nabla\cdot\bfE  &=  \rho_{C},  &
         \nabla\cdot\bfB  &=  0
     \end{align*}
-    These take the dimensionless constants:
-    
+    These take the dimensionless constants: \BA{(Need better notation for how I define the values of these quantities.)}
     \begin{center}\begin{tabular}{ c c c c }
         Name  &  Symbol  &  Value  &  Ratio  \\
         \hline\hline
@@ -52,19 +48,24 @@
     \end{tabular}\end{center}
     Assuming $\rmM  \ll  1$, we derive the quasi-neutral hypothesis $\rho_{C}  \sim  0$, with the system of equations:
     \begin{align}
-        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \rmEu\left(\frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\bfu  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{4}{3}\beta\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta p
+        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \label{eqn:mass conservation} 
+         \\
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\bfp  \label{eqn:momentum conservation}  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  \frac{4}{3}\beta\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta p  \label{eqn:energy conservation}
     \end{align}
     coupled with Maxwell's equations:
-    \begin{align*}
-        \bfzero  =  \nabla\wedge\bfB - \bfj,  &&
-        \partial_{t}\bfB  =  - \nabla\wedge\bfE,  &&
-        \nabla\cdot\bfB  =  0
-    \end{align*}
-    The equilibrium relation for $\bfj$ remains unchanged.
+    \begin{align}
+        \bfzero  &=  \nabla\wedge\bfB - \bfj  \label{eqn:Ampère's law}  \\
+        \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
+        \nabla\cdot\bfB  &=  0  \label{eqn:Gauss's law}
+    \end{align}
+    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged.
+
+    This system resembles the Hall MHD system presented in \BA{[LHF22]}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques. These equations are also written in terms of the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner. The authors also use the notation $\rmS$ for the ``coupling constant'', for what is denoted here as $\frac{\rmEu}{\beta}$. We choose the notation here to align more with the literature
+
+    With $\rho_{C}$ eliminated, from here we shall denote $\rho_{M}$ as simply $\rho$.
     
-    \BA{Note, for collision frequency $\nu_{\rm Coll}$,
+    \BA{Note to self, for collision frequency $\nu_{\rm Coll}$,
     \begin{equation}
         m_{+}m_{-}\nu_{\rm Coll}  =  \mu_{+-}\rho_{M}
     \end{equation}}
