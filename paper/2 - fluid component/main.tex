@@ -4,14 +4,14 @@
 
     \BA{Just making some notes here...}
 
-    Neglecting $(\phi_{s})_{s}$ terms, fluid component should look something like:
+    Neglecting $(\phi_{s})_{s}$ terms, fluid component look something like:
     \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
         \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \mu\Delta\bfu  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{2}{3}\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \kappa\Delta p  \\
+        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{2}{3}\bfE\cdot\left(\bfj - \frac{\rho_{C}}{\rho_{M}}\bfp\right) + \kappa\Delta p
     \end{align}
-    where $\bfu  :=  \frac{1}{\rho_{M}}\bfp$ for simplicity, up to leading order. Discarding the contributions from $(\phi_{s})_{s}$, this can be non-dimensionalised as:
+    where $\bfu  :=  \frac{1}{\rho_{M}}\bfp$ for simplicity, up to leading order. This can be non-dimensionalised as:
     \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
@@ -50,6 +50,19 @@
         Hall number  &  $\rmRH$  &  $\frac{m_{+}\bfB^{2}}{q_{+}\mu_{0}\rho_{M}\bfx}$  &  \BA{??}  \\
         (Light) Mach number  &  $\rmM$  &  $\frac{\bfp}{\rho_{M}c}$  &  (Plasma : Light) speed
     \end{tabular}\end{center}
+    Assuming $\rmM  \ll  1$, we derive the quasi-neutral hypothesis $\rho_{C}  \sim  0$, with the system of equations:
+    \begin{align}
+        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
+        \partial_{t}\bfp + \nabla\cdot[\bfp\otimes\bfu]  &=  - \rmEu\left(\frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\bfu  \\
+        \partial_{t}p + \nabla\cdot[p\bfu]  &=  \frac{4}{3}\beta\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta p
+    \end{align}
+    coupled with Maxwell's equations:
+    \begin{align*}
+        \bfzero  =  \nabla\wedge\bfB - \bfj,  &&
+        \partial_{t}\bfB  =  - \nabla\wedge\bfE,  &&
+        \nabla\cdot\bfB  =  0
+    \end{align*}
+    The equilibrium relation for $\bfj$ remains unchanged.
     
     \BA{Note, for collision frequency $\nu_{\rm Coll}$,
     \begin{equation}
