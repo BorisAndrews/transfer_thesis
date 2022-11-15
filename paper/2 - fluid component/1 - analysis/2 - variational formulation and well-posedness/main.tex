@@ -1,5 +1,20 @@
-\subsection*{Variational Formulation and Well-Posedness}
+\subsection{Variational Formulation and Well-Posedness}
     \BA{Introduction.}
     
-    Casting (\ref{eqn:current identity}–\ref{eqn:Gauss's law}) into variational form, \cite{LHF22} considers test functions...
+    To apply the finite element method, let us first cast the model (\ref{eqn:current identity}–\ref{eqn:Gauss's law}) into variational form.
+    
+    \subsubsection*{Stationary State}
+        Consider first the stationary state system. \cite{LHF22} considers the incompressible limit, where $\rho_{M}$ is constant, $\rmEu  =  2$, and the energy conservation equation (\ref{eqn:energy conservation}) is discounted. The authors consider test functions for each equation in the space:\footnote{The notation there differs slightly.}
+        \begin{center}\begin{tabular}{ c c c | c }
+            \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
+            \hline\hline
+            Mass conservation  &  $\nabla\cdot\bfp  =  0$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
+            Momentum conservation  &  $\nabla\cdot\left[\bfp^{\otimes 2}\right]  =  \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
+            \hline
+            Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
+            \hline
+            Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calE$  \\
+            Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calB$  \\
+            Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\calB$  \\
+        \end{tabular}\end{center}
     

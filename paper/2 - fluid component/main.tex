@@ -51,7 +51,7 @@
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \label{eqn:mass conservation} 
          \\
         \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\bfp  \label{eqn:momentum conservation}  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  \frac{4}{3}\beta\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta p  \label{eqn:energy conservation}
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  \frac{4}{3}\beta\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]  \label{eqn:energy conservation}
     \end{align}
     coupled with Maxwell's equations:
     \begin{align}
@@ -61,7 +61,7 @@
     \end{align}
     The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged.
 
-    This system resembles the Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques. These equations are also written in terms of the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner. The authors also use the notation $\rmS$ for the ``coupling constant'', for what is denoted here as $\frac{\rmEu}{\beta}$. We choose the notation here to align more with the literature
+    This system resembles the Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques. These equations are also written in terms of the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner.
 
     With $\rho_{C}$ eliminated, from here we shall denote $\rho_{M}$ as simply $\rho$.
     
