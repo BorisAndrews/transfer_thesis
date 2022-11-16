@@ -1,13 +1,18 @@
 \subsection*{Preliminaries and Notation}
     \BA{Introduction.}
 
-    Let $\bfOmega  \subset  \bbR^{3}$ denote a \BA{(sufficiently smooth and compact etc.)} domain, with boundary $\bfGamma  :=  \partial\bfOmega$, and denote the outward-pointing normal on $\bfGamma$ as $\bfn$. Supported on $\bfOmega$, denote the ($L^{2}$) inner product
+    Let $\bfOmega  \subset  \bbR^{3}$ denote a \BA{(sufficiently smooth and compact etc.)} domain, with boundary $\bfGamma  :=  \partial\bfOmega$, and denote the outward-pointing normal on $\bfGamma$ as $\bfn$. Supported on $\bfOmega$, denote the $L^{2}$ inner product on a domain $\bfS$ (e.g. $\bfOmega$, $\bfGamma$)
+    \begin{align}
+        \langle u, v\rangle_{\bfS}  :=  \int_{\bfS}uv,  &&
+        \text{or}  &&
+        \langle \bfu, \bfv\rangle_{\bfS}  :=  \int_{\bfS}\bfu\cdot\bfv,  &&
+        \text{or}  &&
+        \langle \bfu, \bfv\rangle_{\bfS}  :=  \int_{\bfS}\bfu:\bfv,  &&
+        \text{etc.}
+    \end{align}
+    with associated $L^{2}$ norm on $\bfOmega$
     \begin{equation}
-        \langle u, v\rangle  :=  \int_{\bfOmega}uv
-    \end{equation}
-    with associated ($L^{2}$) norm
-    \begin{equation}
-        \|u\|  :=  \langle u, v\rangle^{\frac{1}{2}}
+        \|u\|  :=  {\langle u, v\rangle_{\bfOmega}}^{\frac{1}{2}}
     \end{equation}
     
     Define the Hilbert spaces: \BA{(Delete any of these that I don't use later.)}
@@ -15,7 +20,7 @@
         L^{2}  &:=  \left\{u \in L^{1}_{\rm loc} : \|u\| < \infty\right\}  \\
         \bfH(\rmdiv)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\cdot\bfu \in L^{2}\right\}  \\
         \bfH(\bfcurl)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\wedge\bfu \in \left(L^{2}\right)^{3}\right\}  \\
-        H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \nabla u \in L^{2}\right\}
+        H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \nabla u \in \left(L^{2}\right)^{3}\right\}
     \end{align}
     These spaces form a complex \BA{([Ref])}
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
