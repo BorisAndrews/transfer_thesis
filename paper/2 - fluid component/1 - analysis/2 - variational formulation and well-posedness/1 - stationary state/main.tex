@@ -5,7 +5,7 @@
         \hline\hline
         Mass conservation  &  $0  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \nabla\cdot\left[\bfp^{\otimes 2}\right] + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
+         =  - \nabla\cdot\left[\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
         \hline
         Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
         \hline
@@ -17,8 +17,8 @@
     \begin{align}
         \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
         \begin{split}
-            \forall \bfq \in \calU,  0  &=  \left(\left\langle\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left(- \langle(\bfp\cdot\bfn)\bfp, \bfq\rangle + \frac{1}{\rmRe_{f}}\langle\bfn\cdot\nabla\bfp, \nabla\bfq\rangle\right)_{\bfGamma}
+            \forall \bfq \in \calU,  0  &=  \left(\left\langle\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)_{\bfOmega}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left(- \langle(\bfp\cdot\bfn)\bfp, \bfq\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfp, \nabla\bfq\rangle\right)_{\bfGamma}
         \end{split}  \\
         \forall \bfk \in \calJ,  0  &=  \left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfp\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)_{\bfOmega}  \\
         \forall \bfF \in \calE,  0  &=  \left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)_{\bfOmega} - \langle\bfB\wedge\bfn, \bfF\rangle_{\bfGamma}  \\
