@@ -1,0 +1,49 @@
+\subsection*{Preliminaries and Notation}
+    \BA{Introduction.}
+
+    Let $\bfOmega  \subset  \bbR^{3}$ denote a \BA{(sufficiently smooth and compact etc.)} domain, with boundary $\bfGamma  :=  \partial\bfOmega$, and denote the outward-pointing normal on $\bfGamma$ as $\bfn$. Supported on $\bfOmega$, denote the ($L^{2}$) inner product
+    \begin{equation}
+        \langle u, v\rangle  :=  \int_{\bfOmega}uv
+    \end{equation}
+    with associated ($L^{2}$) norm
+    \begin{equation}
+        \|u\|  :=  \langle u, v\rangle^{\frac{1}{2}}
+    \end{equation}
+    
+    Define the Hilbert spaces: \BA{(Delete any of these that I don't use later.)}
+    \begin{align}
+        L^{2}  &:=  \left\{u \in L^{1}_{\rm loc} : \|u\| < \infty\right\}  \\
+        \bfH(\rmdiv)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\cdot\bfu \in L^{2}\right\}  \\
+        \bfH(\bfcurl)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\wedge\bfu \in \left(L^{2}\right)^{3}\right\}  \\
+        H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \nabla u \in L^{2}\right\}
+    \end{align}
+    These spaces form a complex \BA{([Ref])}
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (H1)    at (0,    0) {$H^{1}$};
+        \node (Hcurl) at (3.5,  0) {$\bfH(\bfcurl)$};
+        \node (Hdiv)  at (7,    0) {$\bfH(\rmdiv)$};
+        \node (L2)    at (10.5, 0) {$L^{2}$};
+
+        \draw[->] (H1) -- (Hcurl) node[above, midway] {$\bfgrad$};
+        \draw[->] (Hcurl) -- (Hdiv) node[above, midway] {$\bfcurl$};
+        \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+    \end{tikzpicture}\end{center}
+    Similarly, define the Hilbert spaces:
+    \begin{align}
+        L^{2}_{0}  &:=  \left\{u \in L^{2} : \int_{\bfOmega}u  = 
+         0\right\}  \\
+        \bfH_{0}(\rmdiv)  &:=  \left\{\bfu \in \bfH(\rmdiv) : \bfu\cdot\bfn = 0|_{\bfGamma}\right\}  \\
+        \bfH_{0}(\bfcurl)  &:=  \left\{\bfu \in \bfH(\bfcurl) : \bfu\wedge\bfn = \bfzero|_{\bfGamma}\right\}  \\
+        H^{1}_{0}  &:=  \left\{u \in H^{1} : u = 0|_{\bfGamma}\right\}
+    \end{align}
+    similarly forming a complex \BA{([Ref])}
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (H1)    at (0,    0) {$H^{1}_{0}$};
+        \node (Hcurl) at (3.5,  0) {$\bfH_{0}(\bfcurl)$};
+        \node (Hdiv)  at (7,    0) {$\bfH_{0}(\rmdiv)$};
+        \node (L2)    at (10.5, 0) {$L^{2}_{0}$};
+
+        \draw[->] (H1) -- (Hcurl) node[above, midway] {$\bfgrad$};
+        \draw[->] (Hcurl) -- (Hdiv) node[above, midway] {$\bfcurl$};
+        \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+    \end{tikzpicture}\end{center}

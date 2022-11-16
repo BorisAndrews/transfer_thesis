@@ -1,7 +1,7 @@
 \subsection{Variational Formulation and Well-Posedness}
     \BA{Introduction.}
     
-    To apply the finite element method, let us first cast the model (\ref{eqn:current identity}–\ref{eqn:Gauss's law}) into variational form.
+    To apply the finite element method, one must first cast the model (\ref{eqn:current identity}–\ref{eqn:Gauss's law}) into a chosen variational form, by asserting that its inner product, in this case under the $L^{2}$ norm, is equal to $0$ upon integration by all function in some chosen function space, in this case ones derived from $\calD$, $\cdots$, $\calB$.
     
     \subsubsection*{Stationary State}
         Consider first the stationary state system. \cite{LHF22} considers the incompressible limit, where $\rho_{M}$ is constant, $\rmEu  =  2$, and the energy conservation equation (\ref{eqn:energy conservation}) is discounted. The authors consider test functions for each equation in the space:\footnote{The notation there differs slightly.}
@@ -17,4 +17,5 @@
             Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calB$  \\
             Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\calB$  \\
         \end{tabular}\end{center}
+        where $\langle-
     
