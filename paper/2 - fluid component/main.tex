@@ -59,9 +59,9 @@
         \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
         \nabla\cdot\bfB  &=  0  \label{eqn:Gauss's law}
     \end{align}
-    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged.
+    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged. For transient models, Gauss's law (\ref{eqn:Gauss's law}) is discarded from the system.
 
-    This system resembles the Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques. These equations are also written in terms of the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner.
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques, although the notation here differs slightly in places. These equations are also written in terms of ``conservation variables'' via the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner.
 
     With $\rho_{C}$ eliminated, from here we shall denote $\rho_{M}$ as simply $\rho$.
     
@@ -71,6 +71,7 @@
     \end{equation}}
 
     
+    \input{2 - fluid component/0 - preliminaries and notation/main.tex}
     \input{2 - fluid component/1 - preserved structures/main.tex}
     \input{2 - fluid component/2 - analysis/main.tex}
     \input{2 - fluid component/3 - numerics/1 - discretization/main.tex}

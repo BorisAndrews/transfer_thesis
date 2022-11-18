@@ -1,0 +1,20 @@
+\section{Preserved Structures}
+    Consider first those quantities that are conserved by the transient system, so as to seek discretisations which better represent the physical behaviour of the system by \emph{also} conserved these quantities. 
+    
+    \cite{LHF22} considers conservation of the following 3 quantities, which the authors define in the incompressible case as: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
+    \begin{center}\begin{tabular}{ c c c }
+        Properties  &  Symbol  &  Definition  \\
+        \hline\hline
+        Energy  &  $\rmE$  &  $\int_{\bfOmega}\BA{\cdots}$  \\
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\int_{\bfOmega}\bfA\cdot\bfB$  \\
+        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \nabla\wedge\bfp)$
+    \end{tabular}\end{center}
+    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$. \BA{(What do these represent \emph{physically}?)} Taking the derivatives of these quantities over time (still in the incompressible system gives)
+    \begin{align}
+        \frac{d\rmE}{dt}  &=  \BA{\cdots}  \\
+        \frac{d\rmH_{\rmM}}{dt}  &=  \int_{\bfGamma}(- \varphi\bfB + \bfA\wedge\bfE)\cdot\bfn - \frac{2}{\rmRem}\int_{\bfOmega}\bfB\cdot\bfj  \\
+        \frac{d\rmH_{\rmH}}{dt}  &=  \BA{\cdots} \\
+    \end{align}
+    
+    \BA{Introduction.}
+    
