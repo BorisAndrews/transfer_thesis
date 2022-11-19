@@ -8,7 +8,7 @@
         \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bfsigma]  \\
         \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \nu\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \kappa\Delta\left[\frac{p}{\rho_{M}}\right]
     \end{align}
-    where $\nu$ is the (kinematic) viscosity, and $\bfsigma$ is the (deviatoric) strain
+    where $\nu$ is the (kinematic) viscosity, and, for conciseness, $\bfsigma$ is the (deviatoric) strain
     \begin{equation}\label{eqn:strain equation}
         \bfsigma  :=  2\sym\left(\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right) - \frac{2}{3}\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right]\bfI
     \end{equation}
@@ -32,7 +32,7 @@
         \item  $\overline{\rho_{C}}  :=  \frac{\overline{\rho_{M}}\overline{\bfB}}{\mu_{0}\overline{\bfx}\overline{\bfp}}  \left(=  \frac{\overline{\bfj}\overline{t}}{\overline{\bfx}}\right)$, as charge is induced by divergence in the current.
         \item  $\overline{p}  :=  \frac{\overline{\bfp}^{2}}{\overline{\rho_{M}}}$, such that kinetic and internal energy are on the same scale.
         \item  $\overline{\bfE}  :=  \frac{\overline{\bfB}\overline{\bfp}}{\overline{\rho_{M}}}  \left(=  \frac{\overline{\bfB}\overline{\bfx}}{\overline{t}}\right)$, as the curl in electric field is brought to balance the change in the magnetic field.
-        \item  $\overline{\bfsigma}  :=  \frac{\oveline{\bfp}}{\overline{\rho_{M}}\overline{\bfx}}$, from its definition.
+        \item  $\overline{\bfsigma}  :=  \frac{\overline{\bfp}}{\overline{\rho_{M}}\overline{\bfx}}$, from its definition.
     \end{itemize}
     Defining the dimensionless constants in Figure \ref{fig:dimensionless quantities}, this takes the non-dimensionalized form:
     {\small \begin{align}
@@ -60,7 +60,7 @@
             \hline\hline
             Fluid Reynolds number  &  $\rmRef$  &  $\frac{\overline{\rho_{M}}\overline{\bfx}\overline{\bfp}}{\nu}$  &  Momentum (advection : diffusion)  \\
             Magnetic Reynolds number  &  $\rmRem$  &  $\frac{q_{+}q_{-}\mu_{0}\overline{\bfx}\overline{\bfp}}{\mu_{+-}\overline{\rho_{M}}}$  &  Magnetic (advection : diffusion)  \\
-            Péclet number  &  $\rmPe$  &  $\frac{\overline{\bfx}\overline{\bfp}}{\kappa}$  &  Pressure (advection : diffusion)  \\
+            Péclet number  &  $\rmPe$  &  $\frac{\overline{\bfx}\overline{\bfp}}{\kappa}$  &  Pressure (advection : diffusslightlyion)  \\
             \hline
             Plasma beta  &  $\beta$  &  $\frac{2\mu_{0}\overline{\bfp}^{2}}{\overline{\rho_{M}}\overline{\bfB}^{2}}$  &  (Plasma : Magnetic) pressure  \\
             Hall number  &  $\rmRH$  &  \BA{$\frac{m_{+}\overline{\bfB}^{2}}{q_{+}\mu_{0}\overline{\rho_{M}}\overline{\bfx}}$}  &  \BA{??}  \\
@@ -83,9 +83,19 @@
         \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
         \nabla\cdot\bfB  &=  0  \label{eqn:Gauss's law}
     \end{align}
-    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged. For transient models, Gauss's law, (\ref{eqn:Gauss's law}), is discarded from the system, as it ensured by Faraday's law, (\ref{eqn:Faraday's law}).
+    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged, as does the strain equation, (\ref{eqn:strain equation}). For transient models, Gauss's law, (\ref{eqn:Gauss's law}), is discarded from the system, as it ensured by Faraday's law, (\ref{eqn:Faraday's law}).
 
-    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques, although the notation here differs slightly in places. These equations are also written in terms of ``conservation variables'' via the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner.
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}), with the notation differing slightly in places. The system there can be written in the form
+    \begin{align}
+        \nabla\cdot\bfp  &=  0  \label{eqn:incompressible mass conservation} 
+         \\
+        \partial_{t}\bfp + \nabla\cdot\left[\bfp^{\otimes 2}\right]  &=  - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp  \label{eqn:incompressible momentum conservation}
+    \end{align}
+    alongside the equilibrium relation for $\bfj$,
+    \begin{equation}\label{eqn:current identity}
+        \bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB
+    \end{equation}
+    with the remaining equations unchanged. As such, one can seek to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the notation in \cite{LHF22} differs slightly to that used here. The model there is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{M}$, the two are functionally equivalent after non-dimensionalization. The compressible system here must be written in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation, (\ref{eqn:mass conservation}), is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
 
     From here, the quasi-neutral hypothesis shall be assumed. With $\rho_{C}$ eliminated, $\rho_{M}$ shall be denoted as simply $\rho$.
     

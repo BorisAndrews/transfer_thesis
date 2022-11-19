@@ -7,7 +7,7 @@
     \begin{center}\begin{tabular}{ c c c }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
-        Energy  &  $\rmE$  &  $\int_{\bfOmega}\left[\frac{1}{\rmEu\rho}\|\bfp\|^{2} + p + \frac{1}{\beta}\|\bfB\|^{2}\right]$  \\
+        Energy  &  $\rmE$  &  $\int_{\bfOmega}\left(\frac{1}{2\rho}\|\bfp\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right)$  \\
         Magnetic helicity  &  $\rmH_{\rmM}$  &  $\int_{\bfOmega}\bfA\cdot\bfB$  \\
         Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \nabla\wedge\bfp)$
     \end{tabular}\end{center}
@@ -18,8 +18,9 @@
         \frac{d\rmH_{\rmH}}{dt}  &=  \BA{\cdots} \\
     \end{align}
 
-    \BA{Proven that in the \emph{compressible} case, $\frac{d\rmE}{dt}$ evaluates as
+    \BA{Proven that in the \emph{compressible} case, for $E  := 
+     \int_{\bfOmega}\left[\frac{1}{2\rho}\|\bfp\|^{2} + p + \frac{1}{\beta}\|\bfB\|^{2}\right]$, $\frac{d\rmE}{dt}$ evaluates as
     {\small \begin{equation}
-        \frac{d\rmE}{dt}  =  \int_{\bfGamma}\left[- \frac{1}{2\rmEu\rho}\|\bfp\|^{2}\bfp - \frac{p}{2\rho}\bfp + \frac{1}{\rmEu\rmRe_{f}}\nabla\left[\frac{1}{\rho}\bfp\right]\cdot\frac{1}{\rho}\bfp - \frac{p}{2\rho}\bfp + \frac{1}{2\rmPe}\nabla\left[\frac{p}{\rho} + \frac{1}{\beta}\bfB\wedge\bfE\right]\right]\cdot\bfn
+        \frac{d\rmE}{dt}  =  \int_{\bfGamma}\left(- \frac{1}{2\rho}\|\bfp\|^{2}\bfp - \frac{p}{\rho}\bfp + \frac{1}{\rmRef}\bfsigma\cdot\bfp + \frac{1}{\rmPe}\nabla\left[\frac{p}{\rho}\right] + \frac{1}{\beta}\bfB\wedge\bfE\right)\cdot\bfn
     \end{equation}}}
     
