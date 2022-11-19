@@ -1,16 +1,20 @@
 \chapter{Fluid Component}
     \BA{Introduction.}
 
-    \BA{(This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.)} Without the $(\delta f_{s})_{s}$ corrections, the fluid component of the system takes the following form, up to leading order: \BA{(Also, too many $\mu$'s! And that's not to mention the $p$s and $\bfp$s! Might change the $\mu$s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)}
+    \BA{(This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.)} Without the $(\delta f_{s})_{s}$ corrections, the fluid component of the system takes the following form, up to leading order: \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)}
     \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \mu\Delta\left[\frac{1}{\rho_{M}}\bfp\right]  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \mu\left\|\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right\|^{2} + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \kappa\Delta\left[\frac{p}{\rho_{M}}\right]
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bfsigma]  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \nu\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \kappa\Delta\left[\frac{p}{\rho_{M}}\right]
     \end{align}
+    where $\nu$ is the (kinematic) viscosity, and $\bfsigma$ is the (deviatoric) strain
+    \begin{equation}\label{eqn:strain equation}
+        \bfsigma  :=  2\sym\left(\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right) - \frac{2}{3}\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right]\bfI
+    \end{equation}
     alongside the equilibrium relation for $\bfj$,
     \begin{equation}
-        \bfzero  =  \frac{\mu_{+-}}{q_{+}q_{-}}\bfj - \left(\bfE + \frac{1}{\rho_{M}}\bfp\wedge\bfB\right) - \BA{\rm const.}\bfj\wedge\bfB
+        \bfzero  =  \frac{\mu_{+-}}{q_{+}q_{-}}\bfj - \left(\bfE + \frac{1}{\rho_{M}}\bfp\wedge\bfB\right) + \BA{\rm const.}\bfj\wedge\bfB
     \end{equation}
     This is coupled with Maxwell's equations:
     \begin{align*}
@@ -21,19 +25,21 @@
     \end{align*}
     where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light.
 
-    To non-dimensionalize the above system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, $\overline{p}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. The remaining scales, $\overline{t}$, $\overline{\rho_{C}}$, $\overline{\bfj}$ and $\overline{\bfE}$ are defined as:  \BA{(Don't like much of the phrasing or the format here. I feel the equations are a little hard to read.)}
+    To non-dimensionalize the above system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. The remaining scales, $\overline{t}$, $\overline{\rho_{C}}$, $\overline{\bfj}$, $\overline{p}$, $\overline{\bfE}$, and $\overline{\bfsigma}$ are defined as:  \BA{(Don't like much of the phrasing or the format here. I feel the equations are a little hard to read.)}
     \begin{itemize}
         \item  $\overline{t}  :=  \frac{\overline{\rho_{M}}\overline{\bfx}}{\overline{\bfp}}$, such that we are working on \emph{convective} timescales.
         \item  $\overline{\bfj}  :=  \frac{\overline{\bfB}}{\mu_{0}\overline{\bfx}}$, as $\bfj$ is brought to the scale of $\nabla\wedge\bfB$.
         \item  $\overline{\rho_{C}}  :=  \frac{\overline{\rho_{M}}\overline{\bfB}}{\mu_{0}\overline{\bfx}\overline{\bfp}}  \left(=  \frac{\overline{\bfj}\overline{t}}{\overline{\bfx}}\right)$, as charge is induced by divergence in the current.
+        \item  $\overline{p}  :=  \frac{\overline{\bfp}^{2}}{\overline{\rho_{M}}}$, such that kinetic and internal energy are on the same scale.
         \item  $\overline{\bfE}  :=  \frac{\overline{\bfB}\overline{\bfp}}{\overline{\rho_{M}}}  \left(=  \frac{\overline{\bfB}\overline{\bfx}}{\overline{t}}\right)$, as the curl in electric field is brought to balance the change in the magnetic field.
+        \item  $\overline{\bfsigma}  :=  \frac{\oveline{\bfp}}{\overline{\rho_{M}}\overline{\bfx}}$, from its definition.
     \end{itemize}
     Defining the dimensionless constants in Figure \ref{fig:dimensionless quantities}, this takes the non-dimensionalized form:
     {\small \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB)\right) + \frac{1}{\rmRef}\Delta\left[\frac{1}{\rho_{M}}\bfp\right]  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\rmEu\rmRef}\left\|\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \nabla p + \frac{2}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB) + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bfsigma]  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]
     \end{align}}
     alongside the equilibrium relation for $\bfj$,
     \begin{equation}\label{eqn:current identity}
@@ -46,16 +52,17 @@
         \rmM^{2}\nabla\cdot\bfE  &=  \rho_{C},  &
         \nabla\cdot\bfB  &=  0
     \end{align*}
+    The equation for $\bfsigma$, equation (\ref{eqn:strain equation}), remains unchanged.
+    
     \begin{figure}[!h]
         \begin{tabular}{ c c c c }
             Name  &  Symbol  &  Value  &  Ratio  \\
             \hline\hline
-            Fluid Reynolds number  &  $\rmRef$  &  $\frac{\overline{\bfx}\overline{\bfp}}{\mu}$  &  Momentum (advection : diffusion)  \\
-            Magnetic Reynolds number  &  $\rmRem$  &  $\frac{q_{+}q_{-}\mu_{0}\overline{\bfx}\overline{\bfp}}{m_{+}m_{-}\nu_{\rm Coll}}$  &  Magnetic (advection : diffusion)  \\
-            Peclet number  &  $\rmPe$  &  $\frac{\overline{\bfx}\overline{\bfp}}{\kappa}$  &  Pressure (advection : diffusion)  \\
+            Fluid Reynolds number  &  $\rmRef$  &  $\frac{\overline{\rho_{M}}\overline{\bfx}\overline{\bfp}}{\nu}$  &  Momentum (advection : diffusion)  \\
+            Magnetic Reynolds number  &  $\rmRem$  &  $\frac{q_{+}q_{-}\mu_{0}\overline{\bfx}\overline{\bfp}}{\mu_{+-}\overline{\rho_{M}}}$  &  Magnetic (advection : diffusion)  \\
+            Péclet number  &  $\rmPe$  &  $\frac{\overline{\bfx}\overline{\bfp}}{\kappa}$  &  Pressure (advection : diffusion)  \\
             \hline
-            Euler number  &  $\rmEu$  &  $\frac{2p\overline{\rho_{M}}}{\overline{\bfp}^{2}}$  &  (Internal : Kinetic) energy  \\
-            Plasma beta  &  $\beta$  &  $\frac{2\mu_{0}\overline{p}}{\overline{\bfB}^{2}}$  &  (Plasma : Magnetic) pressure  \\
+            Plasma beta  &  $\beta$  &  $\frac{2\mu_{0}\overline{\bfp}^{2}}{\overline{\rho_{M}}\overline{\bfB}^{2}}$  &  (Plasma : Magnetic) pressure  \\
             Hall number  &  $\rmRH$  &  \BA{$\frac{m_{+}\overline{\bfB}^{2}}{q_{+}\mu_{0}\overline{\rho_{M}}\overline{\bfx}}$}  &  \BA{??}  \\
             (Light) Mach number  &  $\rmM$  &  $\frac{\overline{\bfp}}{\overline{\rho_{M}}c}$  &  (Plasma : Light) speed
         \end{tabular}
@@ -64,23 +71,23 @@
     \end{figure}
 
     Assuming $\rmM  \ll  1$, we derive the quasi-neutral hypothesis $\rho_{C}  \sim  0$, with the system of equations:
-    \begin{align}
+    {\small \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \label{eqn:mass conservation} 
          \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\left[\frac{1}{\rho_{M}}\bfp\right]  \label{eqn:momentum conservation}  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\rmEu\rmRef}\left\|\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]  \label{eqn:energy conservation}
-    \end{align}
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bfsigma]  \label{eqn:momentum conservation}  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho_{M}}\right]  \label{eqn:energy conservation}
+    \end{align}}
     coupled with Maxwell's equations:
     \begin{align}
         \bfzero  &=  \nabla\wedge\bfB - \bfj  \label{eqn:Ampère's law}  \\
         \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
         \nabla\cdot\bfB  &=  0  \label{eqn:Gauss's law}
     \end{align}
-    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged. For transient models, Gauss's law (\ref{eqn:Gauss's law}) is discarded from the system.
+    The equilibrium relation for $\bfj$, (\ref{eqn:current identity}), remains unchanged. For transient models, Gauss's law, (\ref{eqn:Gauss's law}), is discarded from the system, as it ensured by Faraday's law, (\ref{eqn:Faraday's law}).
 
     This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility—a necessary factor for kinetic effects—through the introduction of the variable $\rho_{M}$, and the energy equation, (\ref{eqn:energy conservation}). As such, one can seek to analyse, discretize and precondition this system through similar techniques, although the notation here differs slightly in places. These equations are also written in terms of ``conservation variables'' via the momentum $\bfp$, instead of the velocity $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, such that the mass conservation equation (\ref{eqn:mass conservation}) is linear, a fact that will be exploited when constructing the augmented Lagrangian preconditioner.
 
-    With $\rho_{C}$ eliminated, from here we shall denote $\rho_{M}$ as simply $\rho$.
+    From here, the quasi-neutral hypothesis shall be assumed. With $\rho_{C}$ eliminated, $\rho_{M}$ shall be denoted as simply $\rho$.
     
     \BA{Note to self, for collision frequency $\nu_{\rm Coll}$,
     \begin{equation}
