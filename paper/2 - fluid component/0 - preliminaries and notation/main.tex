@@ -10,14 +10,14 @@
         \langle \bfu, \bfv\rangle_{\bfS}  :=  \int_{\bfS}\bfu:\bfv,  &&
         \text{etc.}
     \end{align}
-    with associated $L^{2}$ norm on $\bfOmega$
+    with associated $L^{2}$ norm on $\bfS$
     \begin{equation}
-        \|u\|  :=  {\langle u, v\rangle_{\bfOmega}}^{\frac{1}{2}}
+        \|u\|_{\bfS}  :=  \langle u, u\rangle_{\bfS}^{\frac{1}{2}}
     \end{equation}
     
     Define the Hilbert spaces: \BA{(Delete any of these that I don't use later.)}
     \begin{align}
-        L^{2}  &:=  \left\{u \in L^{1}_{\rm loc} : \|u\| < \infty\right\}  \\
+        L^{2}  &:=  \left\{u \in L^{1}_{\rm loc} : \|u\|_{\bfOmega} < \infty\right\}  \\
         \bfH(\rmdiv)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\cdot\bfu \in L^{2}\right\}  \\
         \bfH(\bfcurl)  &:=  \left\{\bfu \in \left(L^{1}_{\rm loc}\right)^{3} : \nabla\wedge\bfu \in \left(L^{2}\right)^{3}\right\}  \\
         H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \nabla u \in \left(L^{2}\right)^{3}\right\}
@@ -52,3 +52,8 @@
         \draw[->] (Hcurl) -- (Hdiv) node[above, midway] {$\bfcurl$};
         \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
     \end{tikzpicture}\end{center}
+    
+    Define the helicity, $H(\bfv)$, of a vector field $\bfv : \bfOmega \rightarrow \bbR^{3}$,
+    \begin{equation}
+        H(\bfv)  :=  \int_{\bfOmega}\bfv\cdot(\nabla\wedge\bfv)
+    \end{equation}
