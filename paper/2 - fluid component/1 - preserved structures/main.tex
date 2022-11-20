@@ -8,7 +8,7 @@
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $H(\bfA)$  \\
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$  \\
         Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \nabla\wedge\bfp)$
     \end{tabular}\end{center}
     where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$. \BA{(What do these represent \emph{physically}? Diagrams!)} Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
@@ -17,11 +17,11 @@
             \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfp\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfp^{T}\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left.\left(\frac{1}{\rmRef}\|\nabla\bfp\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)\right|_{\bfOmega}
         \end{split}  \\
-        \frac{d\rmH_{\rmM}}{dt}  &=  \oint_{\bfGamma}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn - \frac{2}{\rmRem}H(\bfB)  \\
+        \frac{d\rmH_{\rmM}}{dt}  &=  \oint_{\bfGamma}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn - \frac{2}{\rmRem}\calH(\bfB)  \\
         \begin{split}
             \frac{d\rmH_{\rmH}}{dt}  &=  \oint_{\bfGamma}\left[ab\bfA\wedge(\bfE - \nabla\varphi) + (a + b)\left(\bfp\wedge\bfE - p\bfB - \frac{1}{2}\|\bfp\|^{2}\bfB\right)\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ a\bfA\wedge\bfp + \left(\partial_{t}\bfp\wedge\bfp - \|\bfp\|^{2}\bfomega - 2p\bfomega + \frac{1}{\rmRef}\bfB\wedge\bfomega\right)\right]\cdot\bfn  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}H(\bfB) + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}H(\bfomega)\right]
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH(\bfB) + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH(\bfomega)\right]
         \end{split}
     \end{align}
     noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$, where we define the vorticity $\bfomega  :=  \nabla\wedge\bfp$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
@@ -38,16 +38,16 @@
 
     \BA{\cite{LHF22} showed that certain discretizations preserve these properties.}
 
-    For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy, and magnetic helicity, $\rmH_{\rmM}$
+    For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy, and magnetic helicity, $\rmH_{\rmM}$, with definition unchanged
     \begin{center}\begin{tabular}{ c | r l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $H(\bfA)$
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
     \end{tabular}\end{center}
-    \BA{(Not sure about the hybrid helicity, $\rmH_{\rmH}$. I can't get anything to work...)} The time derivative for the energy then only includes boundary contributions, \BA{(Proof in appendix?)}
+    \BA{(Not sure about the hybrid helicity, $\rmH_{\rmH}$. I can't get anything to work...)} The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
     \begin{equation}
-        \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2\rho}\|\bfp\|^{2}\bfI + \frac{p}{\rho}\bfI - \frac{1}{\rmRef}\bfsigma\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\left[\frac{p}{\rho}\right]\right]\cdot\bfn
+        \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2\rho}\|\bfp\|^{2}\bfI + \frac{p}{\rho}\bfI - \frac{1}{\rmRef}\bftau\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\left[\frac{p}{\rho}\right]\right]\cdot\bfn
     \end{equation}
     In the ideal limit therefore, for $\rmRef, \rmRem, \rmPe  =  \infty$,
     \begin{equation}

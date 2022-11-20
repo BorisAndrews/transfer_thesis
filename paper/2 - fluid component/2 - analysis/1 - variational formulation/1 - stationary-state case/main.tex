@@ -18,7 +18,7 @@
         \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
         \begin{split}
             \forall \bfq \in \calU,  0  &=  \left.\left(\left\langle\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle(\bfp\cdot\bfn)\bfp, \bfq\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfGamma}
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle(\bfp\cdot\bfn)\bfp, \bfq\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfp, \bfq\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfp\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
         \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} - \langle\bfB\wedge\bfn, \bfF\rangle_{\bfGamma}  \\
@@ -31,22 +31,23 @@
         \hline\hline
         $\vdots$  &  $\vdots$  &  $\vdots$  &  $\vdots$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \nabla\cdot\left[\frac{1}{\rho}\bfp^{\otimes 2}\right] + \rmEu\left(- \frac{1}{2}\nabla p + \frac{1}{\beta}\bfj\wedge\bfB\right) + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
-        Energy conservation  &  $0  =  - \nabla\cdot\left[\frac{p}{\rho}\bfp\right] + \frac{4\beta}{3}\bfE\cdot\bfj + \frac{1}{\rmPe}\Delta\left[\frac{p}{\rho}\right]$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
+         =  - \nabla\cdot\left[\frac{1}{\rho}\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
+        Energy conservation  &  $0  =  - \nabla\cdot\left[\frac{p}{\rho}\bfp\right] - p\nabla\cdot\left[\frac{1}{\rho}\bfp\right] + \frac{1}{\rmRef}\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho\nabla\left[\frac{p}{\rho}\right]\right]$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
         \hline
         Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \frac{1}{\rho}\bfp\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
         \hline
         $\vdots$  &  $\vdots$  &  $\vdots$  &  $\vdots$  \\
     \end{tabular}\end{center}
-    giving the corresponding modified/new variational formulation equations:
+    giving the corresponding \emph{compressible} variational formulation equations:
     \begin{align}
         \begin{split}
-            \forall \bfq \in \calU,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \frac{\rmEu}{2}\langle p, \nabla\cdot\bfq\rangle + \frac{\rmEu}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfGamma}
+            \forall \bfq \in \calU,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau\cdot\bfn, \bfq\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \begin{split}
-            \forall \sigma \in \calD,  0  &=  \left.\left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle + \frac{4\beta}{3}\langle\bfE\cdot\bfj, \sigma\rangle - \frac{1}{\rmPe}\left\langle\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\bfn\cdot\nabla\left[\frac{p}{\rho}\right], \sigma\right\rangle\right)\right|_{\bfGamma}
+            \forall \sigma \in \calD,  0  &=  \left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
     \end{align}

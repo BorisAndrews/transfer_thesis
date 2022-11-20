@@ -5,12 +5,16 @@
     {\small \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bfsigma]  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \nu\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \kappa\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bftau]  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \nu\rho_{M}\bftau:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \kappa\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]
     \end{align}}
-    where $\nu$ is the (kinematic) viscosity, and, for conciseness, $\bfsigma$ is the (deviatoric) strain
+    where $\nu$ is the (kinematic) viscosity, and, for conciseness, $\bftau$ is the (deviatoric) strain
     \begin{equation}\label{eqn:strain equation}
-        \bfsigma  :=  2\sym\left(\nabla\left[\frac{1}{\rho_{M}}\bfp\right]\right) - \frac{2}{3}\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right]\bfI
+        \bftau  :=  2\nabla_{s}\left[\frac{1}{\rho_{M}}\bfp\right] - \frac{2}{3}\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right]\bfI
+    \end{equation}
+    and $\nabla_{s}$ is the symmetric gradient,
+    \begin{equation}
+        \nabla_{s}\bfv  :=  \frac{1}{2}\left(\nabla\bfv + \nabla\bfv^{T}\right)
     \end{equation}
     alongside the equilibrium relation for $\bfj$,
     \begin{equation}
@@ -25,21 +29,21 @@
     \end{align*}
     where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light.
 
-    To non-dimensionalize the above system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. The remaining scales, $\overline{t}$, $\overline{\rho_{C}}$, $\overline{\bfj}$, $\overline{p}$, $\overline{\bfE}$, and $\overline{\bfsigma}$ are defined as:  \BA{(Don't like much of the phrasing or the format here. I feel the equations are a little hard to read.)}
+    To non-dimensionalize the above system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. The remaining scales, $\overline{t}$, $\overline{\rho_{C}}$, $\overline{\bfj}$, $\overline{p}$, $\overline{\bfE}$, and $\overline{\bftau}$ are defined as:  \BA{(Don't like much of the phrasing or the format here. I feel the equations are a little hard to read.)}
     \begin{itemize}
         \item  $\overline{t}  :=  \frac{\overline{\rho_{M}}\overline{\bfx}}{\overline{\bfp}}$, such that we are working on \emph{convective} timescales.
         \item  $\overline{\bfj}  :=  \frac{\overline{\bfB}}{\mu_{0}\overline{\bfx}}$, as $\bfj$ is brought to the scale of $\nabla\wedge\bfB$.
         \item  $\overline{\rho_{C}}  :=  \frac{\overline{\rho_{M}}\overline{\bfB}}{\mu_{0}\overline{\bfx}\overline{\bfp}}  \left(=  \frac{\overline{\bfj}\overline{t}}{\overline{\bfx}}\right)$, as charge is induced by divergence in the current.
         \item  $\overline{p}  :=  \frac{\overline{\bfp}^{2}}{\overline{\rho_{M}}}$, such that kinetic and internal energy are on the same scale.
         \item  $\overline{\bfE}  :=  \frac{\overline{\bfB}\overline{\bfp}}{\overline{\rho_{M}}}  \left(=  \frac{\overline{\bfB}\overline{\bfx}}{\overline{t}}\right)$, as the curl in electric field is brought to balance the change in the magnetic field.
-        \item  $\overline{\bfsigma}  :=  \frac{\overline{\bfp}}{\overline{\rho_{M}}\overline{\bfx}}$, from its definition.
+        \item  $\overline{\bftau}  :=  \frac{\overline{\bfp}}{\overline{\rho_{M}}\overline{\bfx}}$, from its definition.
     \end{itemize}
     Defining the dimensionless constants in Figure \ref{fig:dimensionless quantities}, this takes the non-dimensionalized form:
     {\small \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \nabla p + \frac{2}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB) + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bfsigma]  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  \nabla p + \frac{2}{\beta}(\rho_{C}\bfE + \bfj\wedge\bfB) + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bftau]  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bftau:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]
     \end{align}}
     alongside the equilibrium relation for $\bfj$,
     \begin{equation}\label{eqn:current identity}
@@ -52,7 +56,7 @@
         \rmM^{2}\nabla\cdot\bfE  &=  \rho_{C},  &
         \nabla\cdot\bfB  &=  0
     \end{align*}
-    The equation for $\bfsigma$, equation (\ref{eqn:strain equation}), remains unchanged.
+    The equation for $\bftau$, equation (\ref{eqn:strain equation}), remains unchanged.
     
     \begin{figure}[!h]
         \begin{tabular}{ c c c c }
@@ -74,8 +78,8 @@
     {\small \begin{align}
         \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \label{eqn:mass conservation} 
          \\
-        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bfsigma]  \label{eqn:momentum conservation}  \\
-        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bfsigma:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]  \label{eqn:energy conservation}
+        \partial_{t}\bfp + \nabla\cdot\left[\frac{1}{\rho_{M}}\bfp^{\otimes 2}\right]  &=  - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{M}\bftau]  \label{eqn:momentum conservation}  \\
+        \partial_{t}p + \nabla\cdot\left[\frac{p}{\rho_{M}}\bfp\right]  &=  - p\nabla\cdot\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{1}{\rmRef}\rho_{M}\bftau:\nabla\left[\frac{1}{\rho_{M}}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho_{M}\nabla\left[\frac{p}{\rho_{M}}\right]\right]  \label{eqn:energy conservation}
     \end{align}}
     coupled with Maxwell's equations:
     \begin{align}
