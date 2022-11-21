@@ -96,7 +96,7 @@
         \partial_{t}\bfp + \nabla\cdot\left[\bfp^{\otimes 2}\right]  &=  - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp  \label{eqn:incompressible momentum conservation}
     \end{align}
     alongside the equilibrium relation for $\bfj$,
-    \begin{equation}\label{eqn:current identity}
+    \begin{equation}\label{eqn:incompressible current identity}
         \bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB
     \end{equation}
     with the remaining equations unchanged. As such, one can seek to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the notation in \cite{LHF22} differs slightly to that used here. The model there is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{M}$, the two are functionally equivalent after non-dimensionalization. The compressible system here must be written in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation, (\ref{eqn:mass conservation}), is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
@@ -112,7 +112,7 @@
     \input{2 - fluid component/0 - preliminaries and notation/main.tex}
     \input{2 - fluid component/1 - preserved structures/main.tex}
     \input{2 - fluid component/2 - analysis/main.tex}
-    \input{2 - fluid component/3 - numerics/1 - discretization/main.tex}
+    \input{2 - fluid component/3 - numerics/main.tex}
 
     
     \section*{Summary}

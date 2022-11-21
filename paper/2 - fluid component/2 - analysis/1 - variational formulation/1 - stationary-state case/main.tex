@@ -3,52 +3,82 @@
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
-        Mass conservation  &  $0  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
+        Mass conservation  &  $0  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\bbP$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \nabla\cdot\left[\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
+         =  - \nabla\cdot\left[\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfp$  &  (\ref{eqn:momentum conservation})  &  $\bbU$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfp\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:incompressible current identity})  &  $\bbJ$  \\
         \hline
-        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calE$  \\
-        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calB$  \\
-        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\calB$  \\
+        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\bbE$  \\
+        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\bbB$  \\
+        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\bbB$  \\
     \end{tabular}\end{center}
-    We then have the variational formulation: \BA{(Clear up and clarify the notation a little here, even if this way is informative and convenient.)}
+    This takes the variational formulation: \BA{(Clear up and clarify the notation a little here, even if this way is informative and convenient.)}
     \begin{align}
-        \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
+        \forall q \in \bbP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
         \begin{split}
-            \forall \bfq \in \calU,  0  &=  \left.\left(\left\langle\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfOmega}  \\
+            \forall \bfq \in \bbU,  0  &=  \left.\left(\left\langle\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\nabla\bfp, \nabla\bfq\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle(\bfp\cdot\bfn)\bfp, \bfq\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfp, \bfq\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
-        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfp\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
-        \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} - \langle\bfB\wedge\bfn, \bfF\rangle_{\bfGamma}  \\
-        \forall \bfC \in \calB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
+        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfp\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
+        \forall \bfF \in \bbE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
+        \forall \bfC \in \bbB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
     \end{align}
+    4 equations in this model are linear: conservation of mass, \ref{eqn:mass conservation}, and the 3 EM laws, (\ref{eqn:Ampère's law}-\ref{eqn:Gauss's law}). Ensuring these properties hold \emph{strongly} (i.e. pointwise) is known to lead to more physically accurate and representative numerical results. \BA{[Ref, ...]} \BA{(Definitely want more than just this to talk about the motivation, etc. Would be nice to mention e.g. GEMPIC and over evidence that exact enforcement of these conditions is a good idea.)} As is done in \cite{LFM22}, this weak formulation allows one to ensure all but Ampère's law hold strongly provided certain subspace conditions hold on the function spaces, by considering certain test functions: \BA{(Where \emph{precisely} in \cite{LFM22}?)}
+    \begin{center}\begin{tabular}{ c | c | c }
+        Equation  &  Test function  &  Subspace condition  \\
+        \hline\hline
+        $0  =  \nabla\cdot\bfp$  &  $\nabla\cdot\bfp  \in  \bbP$  &  $\nabla\cdot\bbU  \leqslant  \bbP$  \\
+        $0  =  \nabla\wedge\bfE$  &  $\nabla\wedge\bfE  \in  \bbB$  &  $\nabla\wedge\bbE  \leqslant  \bbB$  \\
+        $0  =  \nabla\cdot\bfB$  &  $\bfB  \in  \bbB$  &
+    \end{tabular}\end{center}
+    Note the proof of pointwise $0  =  \nabla\cdot\bfB$ here relies on that of pointwise $0  =  \nabla\wedge\bfE$. Restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where $\bbU$, $\bbP$ and $\bbE$, $\bbB$ form subcomplexes of $H\Lambda^{\bullet}(\bfOmega)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (Hcurl) at (0,   0)   {$\bfH(\bfcurl)$};
+        \node (Hdiv1) at (3.5, 0)   {$\bfH(\rmdiv)$};
+        \node (E)     at (0,   - 2) {$\bbE$};
+        \node (B)     at (3.5, - 2) {$\bbB$};
 
-    In this compressible case, we use the same test spaces for the corresponding equations, with the addition of the \emph{new} energy equation, which we test against the \emph{new} function space, $\calD$: \BA{(Need to compress this table slightly, it's massively overflowing!)}
+        \draw[->] (Hcurl) -- (Hdiv1) node[above, midway] {$\bfcurl$};
+        \draw[->] (E)     -- (B)     node[above, midway] {$\bfcurl$};
+        \draw[->] (Hcurl) -- (E)     node[left,  midway] {$\pi_{\rmE}$};
+        \draw[->] (Hdiv1) -- (B)     node[left,  midway] {$\pi_{\rmB}$};
+        
+        \node (Hdiv2) at (7,    0)   {$\bfH(\rmdiv)$};
+        \node (L2)    at (10.5, 0)   {$L^{2}$};
+        \node (U)     at (7,    - 2) {$\bbU$};
+        \node (P)     at (10.5, - 2) {$\bbP$};
+
+        \draw[->] (Hdiv2) -- (L2) node[above, midway] {$\rmdiv$};
+        \draw[->] (U)     -- (P)  node[above, midway] {$\rmdiv$};
+        \draw[->] (Hdiv2) -- (U)  node[left,  midway] {$\pi_{\rmU}$};
+        \draw[->] (L2)    -- (P)  node[left,  midway] {$\pi_{\rmP}$};
+    \end{tikzpicture}\end{center}
+
+    In the \emph{compressible} case, the same test spaces for the corresponding equations are used, with the addition of the \emph{new} energy equation, which is naturally tested against the \emph{new} function space, $\bbD$:
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
         $\vdots$  &  $\vdots$  &  $\vdots$  &  $\vdots$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \nabla\cdot\left[\frac{1}{\rho}\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
-        Energy conservation  &  $0  =  - \nabla\cdot\left[\frac{p}{\rho}\bfp\right] - p\nabla\cdot\left[\frac{1}{\rho}\bfp\right] + \frac{1}{\rmRef}\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right] + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho\nabla\left[\frac{p}{\rho}\right]\right]$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
+         =  - \nabla\cdot\left[\frac{1}{\rho}\bfp^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\bbU$  \\
+        Energy conservation  &  $0  =  - \nabla\cdot\left[\frac{p}{\rho}\bfp\right] - p\nabla\cdot\left[\frac{1}{\rho}\bfp\right] + \cdots$  &  (\ref{eqn:energy conservation})  &  $\bbD$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \frac{1}{\rho}\bfp\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \frac{1}{\rho}\bfp\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\bbJ$  \\
         \hline
         $\vdots$  &  $\vdots$  &  $\vdots$  &  $\vdots$  \\
     \end{tabular}\end{center}
     giving the corresponding \emph{compressible} variational formulation equations:
     \begin{align}
         \begin{split}
-            \forall \bfq \in \calU,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau\cdot\bfn, \bfq\rangle\right)\right|_{\bfGamma}
+            \forall \bfq \in \bbU,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau\cdot\bfn, \bfq\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \begin{split}
-            \forall \sigma \in \calD,  0  &=  \left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma}
+            \forall \sigma \in \bbD,  0  &=  \left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
-        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
+        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}
     \end{align}
-    
+    Having left each of the linear systems unchanged, there is no reason to modify the subcomplex conditions from the incompressible case.
