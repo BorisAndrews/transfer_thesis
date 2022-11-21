@@ -43,23 +43,23 @@
     \end{tabular}\end{center}
     Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbD$, $\bbU$), $\bbP$ and ($\bbE$, $\bbB$), ($*$, $\bbC$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL2) at (0,   0)   {$\bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\partial_{t} + \rmdiv)$};
-        \node (EB)  at (0,   - 3) {$\bbE\oplus\bbB$};
-        \node (*C)  at (5.5, - 3) {$*\oplus\bbC$};
+        \node (EB)   at (0,   - 3) {$\bbE\oplus\bbB$};
+        \node (*C)   at (5.5, - 3) {$*\oplus\bbC$};
 
-        \draw[->] (HL2) -- (HL3a) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
-        \draw[->] (EB)  -- (*C)  node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
-        \draw[->] (HL2) -- (EB)  node[left,  midway] {$\pi_{\rmE\rmB}$};
-        \draw[->] (HL3a) -- (*C)  node[left,  midway] {$\pi_{*\rmC}$};
+        \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \draw[->] (EB)   -- (*C)   node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \draw[->] (HL2)  -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
+        \draw[->] (HL3a) -- (*C)   node[left,  midway] {$\pi_{*\rmC}$};
         
-        \node (HL3b) at (9,   0)   {$\bfH(\partial_{t} + \rmdiv)$};
-        \node (HL4) at (12.5, 0)   {$L^{2}$};
+        \node (HL3b) at (9,   0)  {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL4) at (12.5, 0)  {$L^{2}$};
         \node (DU)  at (9,   - 3) {$\bbD\oplus\bbU$};
         \node (P)  at (12.5, - 3) {$\bbP$};
 
         \draw[->] (HL3b) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
-        \draw[->] (DU)  -- (P)  node[above, midway] {$\partial_{t} + \rmdiv$};
+        \draw[->] (DU)   -- (P)   node[above, midway] {$\partial_{t} + \rmdiv$};
         \draw[->] (HL3b) -- (DU)  node[left,  midway] {$\pi_{\rmD\rmU}$};
-        \draw[->] (HL4) -- (P)  node[left,  midway] {$\pi_{\rmP}$};
+        \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
