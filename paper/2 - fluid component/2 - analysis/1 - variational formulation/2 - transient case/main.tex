@@ -63,3 +63,23 @@
         \draw[->] (HL3b) -- (DU)  node[left,  midway] {$\pi_{\rmD\rmU}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
+    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (HL2)      at (0,      0)     {$\bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \node (HL3)      at (5.5,    0)     {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (Hcurl-L2) at (- 0.75, - 4.5) {$\bfH(\bfcurl)\otimes L^{2}$};
+        \node (Hdiv-H1)  at (0.75,   - 3)   {$\bfH(\rmdiv)\otimes H^{1}$};
+
+        \node[ellipse, draw, dashed, rotate = 45] at (0, - 3.75) {};
+
+        \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+    \end{tikzpicture}\end{center}
+            
+    \BA{TO ADD:
+    \begin{itemize}
+        \item  Proofs of energy/helicity/Gauss's law conservation (Modify weak formulations accordingly)
+        \item  Commutative diagram for tensor product complexes
+        \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
+        \item  Continuity of helicity
+        \item  Talk about 2.5D case
+    \end{itemize}}
