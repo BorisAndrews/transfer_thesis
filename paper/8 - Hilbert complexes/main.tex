@@ -126,7 +126,7 @@
                 \bfH(\rmdiv + \partial_{t})  &:=  \left\{\begin{pmatrix} \bfu \\ v \end{pmatrix} \in \left(L^{1}_{\rm loc}\right)^{3 + 1} : \nabla\cdot\bfu + \partial_{t}v \in L^{2}\right\}  \\
                 \bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \left(L^{1}_{\rm loc}\right)^{3 + 3} : \begin{pmatrix} \nabla\wedge\bfu + \partial_{t}\bfv \\ - \nabla\cdot\bfv \end{pmatrix} \in \left(L^{2}\right)^{3 + 1}\right\}  \\
                 \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \left(L^{1}_{\rm loc}\right)^{1 + 3} : \begin{pmatrix} \nabla u + \partial_{t}\bfv \\ - \nabla\wedge\bfv \end{pmatrix} \in \left(L^{2}\right)^{3 + 3}\right\}  \\
-                H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \begin{pmatrix} \partial_{t}u \\ - \nabla u \end{pmatrix} \in \left(L^{2}\right)^{1 + 3}\right\}
+                H^{1}  &:=  \left\{v \in L^{1}_{\rm loc} : \begin{pmatrix} \partial_{t}v \\ - \nabla v \end{pmatrix} \in \left(L^{2}\right)^{1 + 3}\right\}
             \end{align}
             Define the exact complex of vector proxies for $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
@@ -150,7 +150,7 @@
                 \bfH_{0}(\rmdiv + \partial_{t})  &:=  \left\{\begin{pmatrix} \bfu \\ v \end{pmatrix} \in \bfH(\rmdiv + \partial_{t}) : \bfu\cdot\bfn|_{\bfGamma\otimes[0, T]}, v|_{\bfOmega\otimes\{0, T\}} = 0\right\}  \\
                 \bfH_{0}\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \begin{matrix} \bfu\wedge\bfn|_{\bfGamma\otimes[0, T]}, \bfv|_{\bfOmega\otimes\{0, T\}} = \bfzero \\ \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]} = 0 \end{matrix}\right\}  \\
                 \bfH_{0}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right) : \begin{matrix} u\bfn|_{\bfGamma\otimes[0, T]}, \bfv|_{\bfOmega\otimes\{0, T\}} = \bfzero \\ \bfv\wedge\bfn|_{\bfGamma\otimes[0, T]} = \bfzero \end{matrix}\right\}  \\
-                H^{1}_{0}  &:=  \left\{u \in H^{1} : \begin{matrix} u = 0|_{\bfOmega\otimes\{0, T\}} \\ u = 0|_{\bfGamma\otimes[0, T]} \end{matrix}\right\}
+                H^{1}_{0}  &:=  \left\{v \in H^{1} : \begin{matrix} v = 0|_{\bfOmega\otimes\{0, T\}} \\ v = 0|_{\bfGamma\otimes[0, T]} \end{matrix}\right\}
             \end{align}
             Define the exact complex of vector proxies for $H_{0}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
@@ -174,7 +174,7 @@
                 \bfH_{\bfgamma\bfomega}(\rmdiv + \partial_{t})  &:=  \left\{\begin{pmatrix} \bfu \\ v \end{pmatrix} \in \bfH(\rmdiv + \partial_{t}) : \bfu\cdot\bfn|_{\bfgamma}, v|_{\bfomega} = 0\right\}  \\
                 \bfH_{\bfgamma\bfomega}\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \begin{matrix} \bfu\wedge\bfn|_{\bfgamma}, \bfv|_{\bfomega} = \bfzero \\ \bfv\cdot\bfn|_{\bfgamma} = 0 \end{matrix}\right\}  \\
                 \bfH_{\bfgamma\bfomega}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right) : \begin{matrix} u\bfn|_{\bfgamma}, \bfv|_{\bfomega} = \bfzero \\ \bfv\wedge\bfn|_{\bfgamma} = \bfzero \end{matrix}\right\}  \\
-                H^{1}_{\bfgamma\bfomega}  &:=  \left\{u \in H^{1} : \begin{matrix} u = 0|_{\bfomega} \\ u = 0|_{\bfgamma} \end{matrix}\right\}
+                H^{1}_{\bfgamma\bfomega}  &:=  \left\{v \in H^{1} : \begin{matrix} v = 0|_{\bfomega} \\ v = 0|_{\bfgamma} \end{matrix}\right\}
             \end{align}
             Define the complex of vector proxies for $H_{\pm}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, exact if and only if $\bfgamma\cup\bfomega  \neq  \emptyset, (\bfGamma\otimes[0, T])\cup(\bfOmega\otimes\{0, T\})$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
@@ -199,7 +199,7 @@
                     H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H_{+}\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \bfOmega\otimes\{T\}}\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
                     H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H_{-}\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \bfOmega\otimes\{0\}}\Lambda^{\bullet}(\bfOmega\otimes[0, T])
                 \end{align}
-                where the subcomplex property is \emph{proper}.
+                where the subcomplex inclusion is \emph{proper}.
             \end{lemma}
 
             \begin{corollary}\label{cor:tensor product complex inclusion}
@@ -207,6 +207,7 @@
                     H\Lambda^{\bullet}(\bfOmega)\otimes H\Lambda^{\bullet}([0, T])  &<  H\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
                     H_{0}\Lambda^{\bullet}(\bfOmega)\otimes H_{0}\Lambda^{\bullet}([0, T])  &<  H_{0}\Lambda^{\bullet}(\bfOmega\otimes[0, T])
                 \end{align}
+                where the subcomplex inclusion is \emph{proper}.
             \end{corollary}
             \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
     
