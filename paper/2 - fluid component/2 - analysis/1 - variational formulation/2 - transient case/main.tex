@@ -41,15 +41,15 @@
         $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \bbP$  &  $\partial_{t}\bbD + \nabla\cdot\bbU  \leqslant  \bbP$  \\
         $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \bbC$  &  $\partial_{t}\bbB + \nabla\wedge\bbE  \leqslant  \bbC$
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbD$, $\bbU$), $\bbP$ and ($\bbE$, $\bbB$), ($*$, $\bbC$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbD$, $\bbU$), $\bbP$ and ($\bbE$, $\bbB$), ($\bbC$, $*$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\partial_{t} + \rmdiv)$};
         \node (EB)   at (0,   - 3) {$\bbE\oplus\bbB$};
-        \node (*C)   at (5.5, - 3) {$*\oplus\bbC$};
+        \node (*C)   at (5.5, - 3) {$\bbC\oplus*$};
 
-        \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
-        \draw[->] (EB)   -- (*C)   node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+        \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \draw[->] (EB)   -- (*C)   node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \draw[->] (HL2)  -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
         \draw[->] (HL3a) -- (*C)   node[left,  midway] {$\pi_{*\rmC}$};
         
@@ -65,20 +65,75 @@
     \end{tikzpicture}\end{center}
     By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL2)      at (0,      0)     {$\bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
-        \node (HL3)      at (5.5,    0)     {$\bfH(\partial_{t} + \rmdiv)$};
-        \node (Hcurl-L2) at (- 0.75, - 4.5) {$\bfH(\bfcurl)\otimes L^{2}$};
-        \node (Hdiv-H1)  at (0.75,   - 3)   {$\bfH(\rmdiv)\otimes H^{1}$};
+        \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \node (HL3) at (6.5, 0) {$\bfH(\partial_{t} + \rmdiv)$};
+        
+        \node (Hcurl-L2) at (- 0.85, - 4.5) {$\bfH(\bfcurl)\otimes L^{2}$};
+        \node (Hdiv-H1)  at (0.85,   - 3)   {$\bfH(\rmdiv)\otimes H^{1}$};
+        \node (Hdiv-L2)  at (5.65,   - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
+        \node (L2-H1)    at (7.35,   - 3)   {$*$};
 
-        \node[ellipse, draw, dashed, rotate = 45] at (0, - 3.75) {};
+        \node (E) at (- 0.85, - 8.25) {$\bbE$};
+        \node (B) at (0.85,   - 6.75) {$\bbB$};
+        \node (C) at (5.65,   - 8.25) {$\bbC$};
 
-        \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
+
+
+        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        
+        \draw[->] (HL2) -- (0,   - 2);
+        \draw[->] (HL3) -- (6.5, - 2);
+        
+        \draw[->] (Hdiv-H1)  -- (Hdiv-L2) node[above, pos = 0.55] {$\partial_{t}$};
+        \draw[->] (Hcurl-L2) -- (Hdiv-L2) node[above, pos = 0.65] {$\bfcurl$};
+        
+        \draw[->] (Hcurl-L2) -- (E) node[left, pos = 0.65] {$\pi_{\rmE}$};
+        \draw[->] (Hdiv-H1)  -- (B) node[left, pos = 0.8]  {$\pi_{\rmB}$};
+        \draw[->] (Hdiv-L2)  -- (C) node[left, pos = 0.65]  {$\pi_{\rmC}$};
+        
+        \draw[->] (B) -- (C) node[above, midway] {$\partial_{t}$};
+        \draw[->] (E) -- (C) node[above, midway] {$\bfcurl$};
+    \end{tikzpicture}\end{center}
+    
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (HL3) at (0,   0) {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL4) at (6.5, 0) {$L^{2}$};
+        
+        \node (Hdiv-L2) at (- 0.85, - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
+        \node (L2-H1)   at (0.85,   - 3)   {$L^{2}\otimes H^{1}$};
+        \node (L2-L2)   at (5.65,   - 4.5) {$L^{2}\otimes L^{2}$};
+
+        \node (U) at (- 0.85, - 8.25) {$\bbU$};
+        \node (D) at (0.85,   - 6.75) {$\bbD$};
+        \node (P) at (5.65,   - 8.25) {$\bbP$};
+
+
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
+
+
+        \draw[->] (HL3) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
+        
+        \draw[->] (HL3) -- (0,   - 2);
+        \draw[->] (HL4) -- (6.5, - 2);
+        
+        \draw[->] (L2-H1)   -- (L2-L2) node[above, pos = 0.55] {$\partial_{t}$};
+        \draw[->] (Hdiv-L2) -- (L2-L2) node[above, pos = 0.65] {$\rmdiv$};
+        
+        \draw[->] (Hdiv-L2) -- (U) node[left, pos = 0.65] {$\pi_{\rmU}$};
+        \draw[->] (L2-H1)   -- (D) node[left, pos = 0.8]  {$\pi_{\rmD}$};
+        \draw[->] (L2-L2)   -- (P) node[left, pos = 0.65] {$\pi_{\rmP}$};
+        
+        \draw[->] (D) -- (P) node[above, midway] {$\partial_{t}$};
+        \draw[->] (U) -- (P) node[above, midway] {$\rmdiv$};
     \end{tikzpicture}\end{center}
             
     \BA{TO ADD:
     \begin{itemize}
         \item  Proofs of energy/helicity/Gauss's law conservation (Modify weak formulations accordingly)
-        \item  Commutative diagram for tensor product complexes
         \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
         \item  Continuity of helicity
         \item  Talk about 2.5D case
