@@ -1,7 +1,7 @@
-\chapter{Definition of Hilbert Complexes}\label{sec:Hilbert complex definitions}
+\chapter{Hilbert Complexes}\label{sec:Hilbert complexes}
     Define the following Hilbert spaces and exact complexes:
     
-    \section*{1D in Time}
+    \section{1D in Time}
          On $[0, T]$:
         
         \subsection*{$H\Lambda^{\bullet}([0, T])$}
@@ -48,16 +48,8 @@
     
                 \draw[->] (H1) -- (L2) node[above, midway] {$\partial_{t}$};
             \end{tikzpicture}\end{center}
-            
-            \BA{TO ADD:
-            \begin{itemize}
-                \item  Proofs of energy/helicity/Gauss's law conservation (Modify weak formulations accordingly)
-                \item  Commutative diagram/references for tensor product complexes
-                \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
-    `               \item  Continuity of helicity
-            \end{itemize}}
         
-    \section*{3D in Space}
+    \section{3D in Space}
         On $\bfOmega$:
 
         \subsection*{$H\Lambda^{\bullet}(\bfOmega)$}
@@ -103,14 +95,14 @@
                 \draw[->, draw = black!50] (L2) -- (R);
             \end{tikzpicture}\end{center}
             
-        \subsection*{$H_{0}\Lambda^{\bullet}(\bfOmega)$}
-            For $\emptyset  \subset  \bfgamma  \subset  \bfGamma$, define the Hilbert spaces:
+        \subsection*{$H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)$}
+            For $\bfgamma  \subseteq  \bfGamma$, define the Hilbert spaces:
             \begin{align}
                 \bfH_{\bfgamma}(\rmdiv)   &:=  \left\{\bfu \in \bfH(\rmdiv) : \bfu\cdot\bfn = 0|_{\bfgamma}\right\}  \\
                 \bfH_{\bfgamma}(\bfcurl)  &:=  \left\{\bfu \in \bfH(\bfcurl) : \bfu\wedge\bfn = \bfzero|_{\bfgamma}\right\}  \\
                 H^{1}_{\bfgamma}          &:=  \left\{u \in H^{1} : u = 0|_{\bfgamma}\right\}
             \end{align}
-            Define the exact complex of vector proxies for $H_{0}\Lambda^{\bullet}(\bfOmega)$: \BA{([Ref])}
+            Define the complex of vector proxies for $H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)$, exact if and only if $\bfgamma  \neq  \emptyset, \bfGamma$: \BA{([Ref])}
             \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
                 \node (H1)    at (0,    0) {$H^{1}_{\bfgamma}$};
                 \node (Hcurl) at (3.5,  0) {$\bfH_{\bfgamma}(\bfcurl)$};
@@ -122,7 +114,7 @@
                 \draw[->] (Hdiv)  -- (L2)    node[above, midway] {$\rmdiv$};
             \end{tikzpicture}\end{center}
         
-    \section*{(3+1)D in Space and Time}
+    \section{(3+1)D in Space and Time}
         \BA{Talk about tensor product subcomplexes.}
         
         On $\bfOmega\otimes[0, T]$:
@@ -136,7 +128,7 @@
                 \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \left(L^{1}_{\rm loc}\right)^{1 + 3} : \begin{pmatrix} \nabla u + \partial_{t}\bfv \\ - \nabla\wedge\bfv \end{pmatrix} \in \left(L^{2}\right)^{3 + 3}\right\}  \\
                 H^{1}  &:=  \left\{u \in L^{1}_{\rm loc} : \begin{pmatrix} \partial_{t}u \\ - \nabla u \end{pmatrix} \in \left(L^{2}\right)^{1 + 3}\right\}
             \end{align}
-            Define the exact complex of vector proxies for $H\Lambda^{\bullet}(\bfOmega)$: \BA{([Ref])}
+            Define the exact complex of vector proxies for $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
                 \node (R)   at (- 1.5, 0) {\color{black!50} $\bbR$};
                 \node (HL0) at (0,     0) {$H^{1}$};
@@ -153,42 +145,43 @@
             \end{tikzpicture}\end{center}}
 
         \subsection*{$H_{0}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$}
-            Define the Hilbert spaces: \BA{(Think some of the BCs might be slightly wrong here...)}
+            Define the Hilbert spaces:
             \begin{align}
-                L^{2}_{0}  &:=  \left\{u \in L^{2} : \int_{\bfOmega\otimes[0, T]}u = 0\right\}  \\
                 \bfH_{0}(\partial_{t} + \rmdiv)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH(\partial_{t} + \rmdiv) : \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]}, u|_{\bfOmega\otimes\{0, T\}} = 0\right\}  \\
-                \bfH_{0}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right) : \begin{matrix} \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]} = 0 \\ \bfu\wedge\bfn|_{\bfOmega\otimes\{0, T\}}, \bfv|_{\bfGamma\otimes[0, T]} = \bfzero \end{matrix}\right\}  \\
+                \bfH_{0}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right) : \begin{matrix} \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]} = 0 \\ \bfu\wedge\bfn|_{\bfGamma\otimes[0, T]}, \bfv|_{\bfOmega\otimes\{0, T\}} = \bfzero \end{matrix}\right\}  \\
                 \bfH_{0}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right) : \begin{matrix} u\bfn|_{\bfGamma\otimes[0, T]}, \bfv|_{\bfOmega\otimes\{0, T\}} = \bfzero \\ \bfv\wedge\bfn|_{\bfGamma\otimes[0, T]} = \bfzero \end{matrix}\right\}  \\
                 H^{1}_{0}  &:=  \left\{u \in H^{1} : \begin{matrix} u = 0|_{\bfOmega\otimes\{0, T\}} \\ u = 0|_{\bfGamma\otimes[0, T]} \end{matrix}\right\}
             \end{align}
-            Define the exact complex of vector proxies for $H_{0}\Lambda^{\bullet}(\bfOmega)$: \BA{([Ref])}
+            Define the exact complex of vector proxies for $H_{0}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
                 \node (HL0) at (0,    0) {$H^{1}_{0}$};
                 \node (HL1) at (3,    0) {$\bfH_{0}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$};
                 \node (HL2) at (7.5,  0) {$\bfH_{0}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
                 \node (HL3) at (11.5, 0) {$\bfH_{0}(\partial_{t} + \rmdiv)$};
                 \node (HL4) at (14,   0) {$L^{2}_{0}$};
+                \node (R)   at (15.5, 0) {\color{black!50} $\bbR$};
     
                 \draw[->] (HL0) -- (HL1) node[above, midway] {$\left(\begin{matrix} \partial_{t} \\ - \bfgrad \end{matrix}\right)$};
                 \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$};
                 \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
                 \draw[->] (HL3) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
+                \draw[->, draw = black!50] (HL4) -- (R);
             \end{tikzpicture}\end{center}}
 
-        \subsection*{$H_{\pm}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$}
-            For $\tau_{\pm}$ defined $\tau_{+}  :=  T$, $\tau_{-}  :=  0$, define the Hilbert spaces:
+        \subsection*{$H_{\bfgamma\bfomega}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$}
+            For $\bfgamma  \subseteq  \bfGamma\otimes[0, T]$, $\bfomega  \subseteq  \bfOmega\otimes\{0, T\}$, define the Hilbert spaces:
             \begin{align}
-                \bfH_{\pm}(\partial_{t} + \rmdiv)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH(\partial_{t} + \rmdiv) : \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]}, u|_{\bfOmega\otimes\{\tau_{\pm}\}} = 0\right\}  \\
-                \bfH_{\pm}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right) : \begin{matrix} \bfv\cdot\bfn|_{\bfGamma\otimes[0, T]} = 0 \\ \bfu\wedge\bfn|_{\bfOmega\otimes\{\tau_{\pm}\}}, \bfv|_{\bfGamma\otimes[0, T]} = \bfzero \end{matrix}\right\}  \\
-                \bfH_{\pm}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right) : \begin{matrix} u\bfn|_{\bfGamma\otimes[0, T]}, \bfv|_{\bfOmega\otimes\{\tau_{\pm}\}} = \bfzero \\ \bfv\wedge\bfn|_{\bfGamma\otimes[0, T]} = \bfzero \end{matrix}\right\}  \\
-                H^{1}_{\pm}  &:=  \left\{u \in H^{1} : \begin{matrix} u = 0|_{\bfOmega\otimes\{\tau_{\pm}\}} \\ u = 0|_{\bfGamma\otimes[0, T]} \end{matrix}\right\}
+                \bfH_{\bfgamma\bfomega}(\partial_{t} + \rmdiv)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH(\partial_{t} + \rmdiv) : \bfv\cdot\bfn|_{\bfgamma}, u|_{\bfomega} = 0\right\}  \\
+                \bfH_{\bfgamma\bfomega}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)  &:=  \left\{\begin{pmatrix} \bfu \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right) : \begin{matrix} \bfv\cdot\bfn|_{\bfgamma} = 0 \\ \bfu\wedge\bfn|_{\bfgamma}, \bfv|_{\bfomega} = \bfzero \end{matrix}\right\}  \\
+                \bfH_{\bfgamma\bfomega}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)  &:=  \left\{\begin{pmatrix} u \\ \bfv \end{pmatrix} \in \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right) : \begin{matrix} u\bfn|_{\bfgamma}, \bfv|_{\bfomega} = \bfzero \\ \bfv\wedge\bfn|_{\bfgamma} = \bfzero \end{matrix}\right\}  \\
+                H^{1}_{\bfgamma\bfomega}  &:=  \left\{u \in H^{1} : \begin{matrix} u = 0|_{\bfomega} \\ u = 0|_{\bfgamma} \end{matrix}\right\}
             \end{align}
-            Define the exact complex of vector proxies for $H_{\pm}\Lambda^{\bullet}(\bfOmega)$: \BA{([Ref])}
+            Define the complex of vector proxies for $H_{\pm}\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, exact if and only if $\bfgamma\cup\bfomega  \neq  \emptyset, (\bfGamma\otimes[0, T])\cup(\bfOmega\otimes\{0, T\})$: \BA{([Ref])}
             {\scriptsize \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-                \node (HL0) at (0,    0) {$H^{1}_{\pm}$};
-                \node (HL1) at (3,    0) {$\bfH_{\pm}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$};
-                \node (HL2) at (7.5,  0) {$\bfH_{\pm}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
-                \node (HL3) at (11.5, 0) {$\bfH_{\pm}(\partial_{t} + \rmdiv)$};
+                \node (HL0) at (0,    0) {$H^{1}_{\bfgamma\bfomega}$};
+                \node (HL1) at (3,    0) {$\bfH_{\bfgamma\bfomega}\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$};
+                \node (HL2) at (7.5,  0) {$\bfH_{\bfgamma\bfomega}\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
+                \node (HL3) at (11.5, 0) {$\bfH_{\bfgamma\bfomega}(\partial_{t} + \rmdiv)$};
                 \node (HL4) at (14,   0) {$L^{2}$};
     
                 \draw[->] (HL0) -- (HL1) node[above, midway] {$\left(\begin{matrix} \partial_{t} \\ - \bfgrad \end{matrix}\right)$};
@@ -196,4 +189,24 @@
                 \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} * - \rmdiv \\ \bfcurl + \partial_{t} \end{matrix}\right)$};
                 \draw[->] (HL3) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
             \end{tikzpicture}\end{center}}
+        
+            \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+            \begin{lemma}
+                For $\bfgamma  \subseteq  \bfGamma$, with tensor product complexes as defined in \cite{ABB15} (and ignoring the presence of $\bbR$ in the sequence when included for exactness):
+                \begin{align}
+                    H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \emptyset}\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
+                    H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H_{0}\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \bfOmega\otimes\{0, T\}}\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
+                    H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H_{+}\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \bfOmega\otimes\{T\}}\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
+                    H_{\bfgamma}\Lambda^{\bullet}(\bfOmega)\otimes H_{-}\Lambda^{\bullet}([0, T])  &<  H_{\bfgamma\otimes[0, T], \bfOmega\otimes\{0\}}\Lambda^{\bullet}(\bfOmega\otimes[0, T])
+                \end{align}
+                where the subcomplex property is \emph{proper}.
+            \end{lemma}
+
+            \begin{corollary}
+                \begin{align}
+                    H\Lambda^{\bullet}(\bfOmega)\otimes H\Lambda^{\bullet}([0, T])  &<  H\Lambda^{\bullet}(\bfOmega\otimes[0, T])  \\
+                    H_{0}\Lambda^{\bullet}(\bfOmega)\otimes H_{0}\Lambda^{\bullet}([0, T])  &<  H_{0}\Lambda^{\bullet}(\bfOmega\otimes[0, T])
+                \end{align}
+            \end{corollary}
+            \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
     
