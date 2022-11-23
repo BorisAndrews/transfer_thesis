@@ -2,16 +2,25 @@
     \BA{Introduction.}
     
     Consider first those quantities that are conserved by the transient system. The ability of the discretization to represent the system's physical behavior can be improved by ensuring that those properties that are conserved in the continuous case are \emph{also} conserved in the discretization. \BA{[Ref, ...]}
-    
+
+    Define first the helicity, $\calH(\bff)$, of a vector field $\bff : \bfOmega \rightarrow \bbR^{3}$,
+    \begin{equation}
+        \calH(\bff)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)
+    \end{equation}
     \cite{LHF22} considers conservation of the following 3 quantities in the incompressible case: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
     \begin{center}\begin{tabular}{ c | r l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
         Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$  \\
-        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \nabla\wedge\bfp)$
+        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \bfomega)$
     \end{tabular}\end{center}
-    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$. \BA{(What do these represent \emph{physically}? Diagrams!)} Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
+    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as
+    \begin{equation}
+        \thus \nabla\wedge\bfp
+    \end{equation}
+    
+    Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
     \begin{align}
         \begin{split}
             \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfp\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfp^{T}\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
@@ -24,8 +33,8 @@
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH(\bfB) + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH(\bfomega)\right]
         \end{split}
     \end{align}
-    noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$, where we define the vorticity $\bfomega  :=  \nabla\wedge\bfp$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
-    \begin{align}
+    noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
+    \begin{align}\label{eqn:canonical boundary conditions}
         \bfzero  =  \bfp,  &&
         0  =  \bfB\cdot\bfn,  &&
         \bfzero  =  \bfE\wedge\bfn \text{ or } \bfB\wedge\bfn,  &&
@@ -35,6 +44,42 @@
     \begin{equation}
         \frac{d\rmE}{dt}, \frac{d\rmH_{\rmM}}{dt}, \frac{d\rmH_{\rmH}}{dt}  =  0
     \end{equation}
+    
+    \line
+    
+    \begin{lemma}[Continuity of helicity]\label{lem:continuity of helicity}
+        For any non-empty $\bfgamma  \subseteq  \bfGamma$, there exists a Poincaré constant $C(\bfgamma)$ such that $\forall  \bff  \in  \bfH_{\bfgamma}(\bfcurl)$ (as defined in Appendix \ref{cha:Hilbert complexes}),
+        \begin{equation}
+            |\calH(\bff)|  \leq  C(\bfgamma)\|\bff\|_{\bfOmega}^{2}
+        \end{equation}
+    \end{lemma}
+    \begin{proof}
+        Letting $C(\bfgamma)$ be the (generalized) Poincaré constant associated with $\bfH_{\bfgamma}(\bfcurl)$, such that $\forall \bff \in \bfH_{\bfgamma}(\bfcurl), \|\bff\|_{\bfOmega}  \leq  C(\bfgamma)\|\nabla\wedge\bff\|_{\bfOmega}$,
+        \begin{align}
+            |\calH(\bff)|  &=  |\langle\bff, \nabla\wedge\bff\rangle_{\bfOmega}|  \\
+            &\leq  \|\bff\|_{\bfOmega}\|\nabla\wedge\bff\|_{\bfOmega}  &&\impliedby  \text{Cauchy–Schwarz inequality in } L^{2}  \\
+            &\leq  C(\bfgamma)\|\nabla\wedge\bff\|_{\bfOmega}  &&\impliedby  \text{(Generalized) Poincaré inequality in } \bfH_{\bfgamma}(\bfcurl)
+        \end{align}
+    \end{proof}
+    
+    \begin{corollary}
+        When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfp\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{LHF22} giving:
+        \begin{align}
+            |\rmH_{\rmM}|  &\leq  C(\bfgamma)\|\bfB\|_{\bfOmega}^{2}  \\
+            |\rmH_{\rmH}|  &\leq  C(\bfgamma)\left\|\frac{2}{\beta\rmRH}\bfB + \bfomega\right\|_{\bfOmega}^{2}
+        \end{align}
+        This in turn gives the lower bound on the energy, $\rmE  \geq  \frac{C(\bfgamma)}{\beta}|\rmH_{\rmM}|$.
+    \end{corollary}
+
+    \begin{corollary}
+        When the boundary conditions in (\ref{eqn:canonical boundary conditions}) hold, and $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma}$,
+        \begin{equation}
+            \left|\frac{d\rmH_{\rmM}}{dt}\right|  &\leq  \frac{2C(\bfgamma)}{\rmRem}\|\bfj\|^{2}
+        \end{equation}
+        indicating large changes in the magnetic helicity, $\rmH_{\rmM}$, are associated with large currents, $\bfj$.
+    \end{corollary}
+    
+    \line
 
     \BA{\cite{LHF22} showed that certain discretizations preserve these properties.}
 
@@ -43,13 +88,13 @@
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2\rho}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
+        Magne\tic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
     \end{tabular}\end{center}
-    \BA{(Not sure about the hybrid helicity, $\rmH_{\rmH}$. I can't get anything to work...)} The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
+    \BA{(Not sure about the hybrid helicity, $\rmH_{\rmH}$. I can't get anything to work... Turn this into a remark (with further work/appendix).)} The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
     \begin{equation}
         \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2\rho}\|\bfp\|^{2}\bfI + \frac{p}{\rho}\bfI - \frac{1}{\rmRef}\bftau\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\left[\frac{p}{\rho}\right]\right]\cdot\bfn
     \end{equation}
-    In the ideal limit therefore, for $\rmRef, \rmRem, \rmPe  =  \infty$,
+    In the ideal limit therefore, for $\rmRef, \rmRem, \rmPe  =  \infty$, \BA{(The result's stronger than this for the energy of course!)}
     \begin{equation}
         \frac{d\rmE}{dt}, \frac{d\rmH_{\rmM}}{dt}  =  0
     \end{equation}

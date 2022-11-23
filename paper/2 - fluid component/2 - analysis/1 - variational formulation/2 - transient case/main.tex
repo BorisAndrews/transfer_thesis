@@ -41,10 +41,10 @@
         $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \bbP$  &  $\partial_{t}\bbD + \nabla\cdot\bbU  \leqslant  \bbP$  \\
         $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \bbC$  &  $\partial_{t}\bbB + \nabla\wedge\bbE  \leqslant  \bbC$
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbD$, $\bbU$), $\bbP$ and ($\bbE$, $\bbB$), ($\bbC$, $*$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbU$, $\bbD$), $\bbP$ and ($\bbE$, $\bbB$), ($\bbC$, $*$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        \node (HL3a) at (5.5, 0)   {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL3a) at (5.5, 0)   {$\bfH(\rmdiv + \partial_{t})$};
         \node (EB)   at (0,   - 3) {$\bbE\oplus\bbB$};
         \node (*C)   at (5.5, - 3) {$\bbC\oplus*$};
 
@@ -53,20 +53,20 @@
         \draw[->] (HL2)  -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
         \draw[->] (HL3a) -- (*C)   node[left,  midway] {$\pi_{*\rmC}$};
         
-        \node (HL3b) at (9,   0)  {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL3b) at (9,   0)  {$\bfH(\rmdiv + \partial_{t})$};
         \node (HL4) at (12.5, 0)  {$L^{2}$};
-        \node (DU)  at (9,   - 3) {$\bbD\oplus\bbU$};
+        \node (UD)  at (9,   - 3) {$\bbU\oplus\bbD$};
         \node (P)  at (12.5, - 3) {$\bbP$};
 
-        \draw[->] (HL3b) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
-        \draw[->] (DU)   -- (P)   node[above, midway] {$\partial_{t} + \rmdiv$};
-        \draw[->] (HL3b) -- (DU)  node[left,  midway] {$\pi_{\rmD\rmU}$};
+        \draw[->] (HL3b) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
+        \draw[->] (UD)   -- (P)   node[above, midway] {$\rmdiv + \partial_{t}$};
+        \draw[->] (HL3b) -- (UD)  node[left,  midway] {$\pi_{\rmU\rmD}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
     By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        \node (HL3) at (6.5, 0) {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL3) at (6.5, 0) {$\bfH(\rmdiv + \partial_{t})$};
         
         \node (Hcurl-L2) at (- 0.85, - 4.5) {$\bfH(\bfcurl)\otimes L^{2}$};
         \node (Hdiv-H1)  at (0.85,   - 3)   {$\bfH(\rmdiv)\otimes H^{1}$};
@@ -99,7 +99,7 @@
     \end{tikzpicture}\end{center}
     
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL3) at (0,   0) {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL3) at (0,   0) {$\bfH(\rmdiv + \partial_{t})$};
         \node (HL4) at (6.5, 0) {$L^{2}$};
         
         \node (Hdiv-L2) at (- 0.85, - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
@@ -115,7 +115,7 @@
         \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
 
 
-        \draw[->] (HL3) -- (HL4) node[above, midway] {$\partial_{t} + \rmdiv$};
+        \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
         
         \draw[->] (HL3) -- (0,   - 2);
         \draw[->] (HL4) -- (6.5, - 2);
@@ -137,4 +137,9 @@
         \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
         \item  Continuity of helicity
         \item  Talk about 2.5D case
+        \item  Upgrade tensor product complex commutative diagrams
+        \item  Add further work environment for referencing to the further work chapter
+        \item  Give exposition on constructing timesteppers from FE schemes in space and time (Appendix?)
+        \item  Change horizontal lines to ```backslash'line'' objects
+        \item  Make a remark about not being to find a compreesible analogue to the hybrid helicity (not the biggest crisis...)
     \end{itemize}}
