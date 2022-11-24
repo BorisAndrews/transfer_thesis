@@ -3,9 +3,9 @@
 
     Consider now the transient case, with the inclusion of the time derivatives, and discarding Gauss's law, (\ref{eqn:Gauss's law}).
     
-    To derive a transient scheme, the system can be interpreted through the lens of function spaces in time, i.e. on the domain $\bfOmega\otimes[0, T]$ for some final time, $T$. The intention here is \emph{not} to create a finite element problem that needs solving over \emph{all of $\bfOmega\otimes[0, T]$ simultaneously}, but, after discretization in time, to derive the corresponding timestepper that need solving only on $\bfOmega$ at each timestep, as is traditionally the case with a timestepping scheme. This approach allows one to more easily ensure the construction of a scheme that preserves as much structure as possible, by applying the finite element method over all of $\bfOmega\otimes[0, T]$, without the numerical difficulty of solving a 4D problem.
+    To derive a transient scheme, the system can be interpreted through the lens of function spaces in time, i.e. on the domain $\bfOmega\otimes T^{k}$ over some timestep $T^{k}$, with the intention of constructing a timestepper. The intention here is \emph{not} to create a finite element problem that needs solving over \emph{all of $\bfOmega\otimes T^{k}$ simultaneously}, but, after discretization in time, to derive the corresponding timestepper that need solving only on $\bfOmega$ at each timestep, as is traditionally the case with a timestepping scheme. This approach allows one to more easily ensure the construction of a scheme that preserves as much structure as possible, by applying the finite element method over all of $\bfOmega\otimes T^{k}$, without the numerical difficulty of solving a 4D problem.
 
-    We cast into weak form therefore, using test functions in the following test function spaces, via the $L^{2}$ inner product on $\bfOmega\otimes[0, T]$, where the test function spaces $\bbF$, $\bbC$ are new spaces, distinct from $\bbP$, $\cdots$, $\bbB$:
+    We cast into weak form therefore, using test functions in the following test function spaces, via the $L^{2}$ inner product on $\bfOmega\otimes T^{k}$, where the test function spaces $\bbF$, $\bbC$ are new spaces, distinct from $\bbP$, $\cdots$, $\bbB$:
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
@@ -20,19 +20,19 @@
     \end{tabular}\end{center}
     This takes the variational formulation:
     \begin{align}
-        \forall q \in \bbP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes[0, T]}  \\
+        \forall q \in \bbP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
         \begin{split}
-            \forall \bfq \in \bbU,  0  &=  \left.\left(- \langle\partial_{t}\bfp, \bfq\rangle + \left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega\otimes[0, T]}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau\cdot\bfn, \bfq\rangle\right)\right|_{\bfGamma\otimes[0, T]}
+            \forall \bfq \in \bbU,  0  &=  \left.\left(- \langle\partial_{t}\bfp, \bfq\rangle + \left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau\cdot\bfn, \bfq\rangle\right)\right|_{\bfGamma\otimes T^{k}}
         \end{split}  \\
         \begin{split}
             \forall \sigma \in \bbD,  0  &=  \left(- \langle\partial_{t}p, \sigma\rangle + \left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega\otimes[0, T]}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma\otimes[0, T]}
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma\otimes T^{k}}
         \end{split}  \\
-        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes[0, T]}  \\
-        \forall \bfF \in \bbF,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
-        \forall \bfC \in \bbC,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle + \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes[0, T]}
+        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+        \forall \bfF \in \bbF,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma\otimes T^{k}}  \\
+        \forall \bfC \in \bbC,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle + \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}
     \end{align}
     Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
     \begin{center}\begin{tabular}{ c | c | c }
@@ -41,7 +41,7 @@
         $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \bbP$  &  $\partial_{t}\bbD + \nabla\cdot\bbU  \leqslant  \bbP$  \\
         $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \bbC$  &  $\partial_{t}\bbB + \nabla\wedge\bbE  \leqslant  \bbC$
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbU$, $\bbD$), $\bbP$ and ($\bbE$, $\bbB$), ($\bbC$, $*$) form subcomplexes of $H\Lambda^{\bullet}(\bfOmega\otimes[0, T])$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    Similarly restricting to Hilbert spaces then, it is therefore natural to consider weak formulations where ($\bbU$, $\bbD$), $\bbP$ and ($\bbE$, $\bbB$), ($\bbC$, $*$) form subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\rmdiv + \partial_{t})$};
@@ -141,5 +141,5 @@
         \item  Add further work environment for referencing to the further work chapter
         \item  Give exposition on constructing timesteppers from FE schemes in space and time (Appendix?)
         \item  Change horizontal lines to ```backslash'line'' objects
-        \item  Make a remark about not being to find a compreesible analogue to the hybrid helicity (not the biggest crisis...)
+        \item  See if I can get a bound on the change in magnetic helicity, $\rmH_{\rmM}$, that looks something like $\int_{t^{k}}^{t^{k + 1}}\int_{\bfOmega}\|\bfj\|^{2} + \text{ ``something''}$
     \end{itemize}}
