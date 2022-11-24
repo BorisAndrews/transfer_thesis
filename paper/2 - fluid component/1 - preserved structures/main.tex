@@ -88,9 +88,12 @@
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2\rho}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
-        Magne\tic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
     \end{tabular}\end{center}
-    \BA{(Not sure about the hybrid helicity, $\rmH_{\rmH}$. I can't get anything to work... Turn this into a remark (with further work/appendix).)} The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
+    \begin{remark}
+        I can't find an compressible analogue for the hybrid helicity, $\rmH_{\rmH}$, due to the presence of the momentum, $\bfp$, terms. I can't find any way to make the momentum and density terms cancel in a way they do for the energy, and have no reason to expect them to do so.
+    \end{remark}
+    The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
     \begin{equation}
         \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2\rho}\|\bfp\|^{2}\bfI + \frac{p}{\rho}\bfI - \frac{1}{\rmRef}\bftau\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\left[\frac{p}{\rho}\right]\right]\cdot\bfn
     \end{equation}
