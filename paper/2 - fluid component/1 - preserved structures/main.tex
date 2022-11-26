@@ -7,35 +7,32 @@
     \begin{equation}
         \calH(\bff)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)
     \end{equation}
-    \cite{LHF22} considers conservation of the following 3 quantities in the incompressible case: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
+    \cite{LHF22} considers conservation of the following 3 quantities in the incompressible system: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
     \begin{center}\begin{tabular}{ c | r l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
-        Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
+        Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
         Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$  \\
-        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfp)\cdot(b\bfB + \bfomega)$
+        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfu)\cdot(b\bfB + \bfomega)$
     \end{tabular}\end{center}
-    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as
-    \begin{equation}
-        \thus \nabla\wedge\bfp
-    \end{equation}
+    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as $\nabla\wedge\bfu$.
     
     Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
     \begin{align}
         \begin{split}
-            \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfp\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfp^{T}\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left.\left(\frac{1}{\rmRef}\|\nabla\bfp\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)\right|_{\bfOmega}
+            \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfu\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfu^{T}\right)\bfu + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left.\left(\frac{1}{\rmRef}\|\nabla\bfu\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)\right|_{\bfOmega}
         \end{split}  \\
         \frac{d\rmH_{\rmM}}{dt}  &=  \oint_{\bfGamma}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn - \frac{2}{\rmRem}\calH(\bfB)  \\
         \begin{split}
-            \frac{d\rmH_{\rmH}}{dt}  &=  \oint_{\bfGamma}\left[ab\bfA\wedge(\bfE - \nabla\varphi) + (a + b)\left(\bfp\wedge\bfE - p\bfB - \frac{1}{2}\|\bfp\|^{2}\bfB\right)\right.  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ a\bfA\wedge\bfp + \left(\partial_{t}\bfp\wedge\bfp - \|\bfp\|^{2}\bfomega - 2p\bfomega + \frac{1}{\rmRef}\bfB\wedge\bfomega\right)\right]\cdot\bfn  \\
+            \frac{d\rmH_{\rmH}}{dt}  &=  \oint_{\bfGamma}\left[ab\bfA\wedge(\bfE - \nabla\varphi) + (a + b)\left(\bfu\wedge\bfE - p\bfB - \frac{1}{2}\|\bfu\|^{2}\bfB\right)\right.  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ a\bfA\wedge\bfu + \left(\partial_{t}\bfu\wedge\bfu - \|\bfu\|^{2}\bfomega - 2p\bfomega + \frac{1}{\rmRef}\bfB\wedge\bfomega\right)\right]\cdot\bfn  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH(\bfB) + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH(\bfomega)\right]
         \end{split}
     \end{align}
     noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
-    \begin{align}\label{eqn:canonical boundary conditions}
-        \bfzero  =  \bfp,  &&
+    \begin{align}\label{eqn:incompressible canonical boundary conditions}
+        \bfzero  =  \bfu,  &&
         0  =  \bfB\cdot\bfn,  &&
         \bfzero  =  \bfE\wedge\bfn \text{ or } \bfB\wedge\bfn,  &&
         \bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn \text{ or } \bfA\wedge\bfn
@@ -44,6 +41,45 @@
     \begin{equation}
         \frac{d\rmE}{dt}, \frac{d\rmH_{\rmM}}{dt}, \frac{d\rmH_{\rmH}}{dt}  =  0
     \end{equation}
+
+    Certain discretizations that preserve these properties are derived in \cite{LHF22}.
+
+    For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy and variable density, and magnetic helicity, $\rmH_{\rmM}$, with definition unchanged:
+    \begin{center}\begin{tabular}{ c | r l }
+        Properties  &  Symbol  &  Definition  \\
+        \hline\hline
+        Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
+    \end{tabular}\end{center}
+    \begin{remark}
+        I can't find an compressible analogue for the hybrid helicity, $\rmH_{\rmH}$, due to the presence of the momentum, $\bfp$, terms. I can't find any way to make the momentum and density terms cancel in a way they do for the energy, and have no reason to expect them to do so.
+    \end{remark}
+    The time derivative for the energy, $\rmE$, then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
+    \begin{equation}
+        \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfp\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\rho\bftau\right)\bfu + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn
+    \end{equation}
+    with the time derivative for the magnetic helicity, $\rmH_{\rmM}$, unchanged.
+    
+    Similarly, for boundary conditions on $\bfGamma$,
+    \begin{align}\label{eqn:compressible canonical boundary conditions}
+        \bfzero  =  \bfp,  &&
+        \bfzero  =  \bfE\wedge\bfn \text{ or } \bfB\wedge\bfn,  &&
+        \bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn \text{ or } \bfA\wedge\bfn
+    \end{align}
+    in the ideal magnetic limit, $\rmRem  =  \infty$, \BA{(The result's stronger than this for the energy of course!)}
+    \begin{equation}
+        \frac{d\rmH_{\rmM}}{dt}  =  0
+    \end{equation}
+    and further, when both:
+    \begin{itemize}
+        \item  The ideal kinetic limit, $\rmRef  =  \infty$, holds, or $\bftau\cdot\bfn  =  \bfzero|_{\bfGamma}$.
+        \item  The ideal thermal limit, $\rmPe  =  \infty$, holds, or $\nabla\theta\cdot\bfn  =  0|_{\bfGamma}$.
+    \end{itemize}
+    \begin{equation}
+        \frac{d\rmE}{dt}  =  0
+    \end{equation}
+
+    As detailed in the introduction, one can also interpret Gauss's law, (\ref{eqn:Gauss's law}), $\nabla\cdot\bfB  =  0$, discounted from the system at $t  >  0$ in the transient model, as a conserved property of the system, as it is enforced by Faraday's law, (\ref{eqn:Faraday's law}).
     
     \line
     
@@ -63,7 +99,7 @@
     \end{proof}
     
     \begin{corollary}
-        When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfp\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{LHF22} giving:
+        When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, in the incompressible case when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfu\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{LHF22} giving:
         \begin{align}
             |\rmH_{\rmM}|  &\leq  C(\bfgamma)\|\bfB\|_{\bfOmega}^{2}  \\
             |\rmH_{\rmH}|  &\leq  C(\bfgamma)\left\|\frac{2}{\beta\rmRH}\bfB + \bfomega\right\|_{\bfOmega}^{2}
@@ -72,35 +108,12 @@
     \end{corollary}
 
     \begin{corollary}
-        When the boundary conditions in (\ref{eqn:canonical boundary conditions}) hold, and $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma}$,
+        When $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, and either the boundary condition $\bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn$ or $\bfzero  =  \bfA\wedge\bfn$ holds on all of $\bfGamma$, and $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma}$, Lemma \ref{lem:continuity of helicity} can be applied to the time derivative of the magnetic helicity, $\rmH_{\rmM}$, giving
         \begin{equation}
-            \left|\frac{d\rmH_{\rmM}}{dt}\right|  &\leq  \frac{2C(\bfgamma)}{\rmRem}\|\bfj\|^{2}
+            \left|\frac{d\rmH_{\rmM}}{dt}\right|  \leq  \frac{2C(\bfgamma)}{\rmRem}\|\bfj\|^{2}
         \end{equation}
-        indicating large changes in the magnetic helicity, $\rmH_{\rmM}$, are associated with large currents, $\bfj$.
+        indicating large changes in the magnetic helicity are associated with large currents, $\bfj$.
     \end{corollary}
     
     \line
-
-    \BA{\cite{LHF22} showed that certain discretizations preserve these properties.}
-
-    For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy, and magnetic helicity, $\rmH_{\rmM}$, with definition unchanged
-    \begin{center}\begin{tabular}{ c | r l }
-        Properties  &  Symbol  &  Definition  \\
-        \hline\hline
-        Energy  &  $\rmE$  &  $\frac{1}{2\rho}\|\bfp\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
-    \end{tabular}\end{center}
-    \begin{remark}
-        I can't find an compressible analogue for the hybrid helicity, $\rmH_{\rmH}$, due to the presence of the momentum, $\bfp$, terms. I can't find any way to make the momentum and density terms cancel in a way they do for the energy, and have no reason to expect them to do so.
-    \end{remark}
-    The time derivative for the energy then includes boundary contributions \emph{only}, \BA{(Proof in appendix?)}
-    \begin{equation}
-        \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2\rho}\|\bfp\|^{2}\bfI + \frac{p}{\rho}\bfI - \frac{1}{\rmRef}\bftau\right)\bfp + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\left[\frac{p}{\rho}\right]\right]\cdot\bfn
-    \end{equation}
-    In the ideal limit therefore, for $\rmRef, \rmRem, \rmPe  =  \infty$, \BA{(The result's stronger than this for the energy of course!)}
-    \begin{equation}
-        \frac{d\rmE}{dt}, \frac{d\rmH_{\rmM}}{dt}  =  0
-    \end{equation}
-
-    As detailed in the introduction, one can also interpret Gauss's law, (\ref{eqn:Gauss's law}), $\nabla\cdot\bfB  =  0$, discounted from the system at $t  >  0$ in the transient model, as a conserved property of the system, as it is enforced by Faraday's law, (\ref{eqn:Faraday's law}).
     
