@@ -10,11 +10,11 @@
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
         Mass conservation  &  $- \partial_{t}\rho  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\bbP$  \\
-        Momentum conservation  &  $\partial_{t}\bfp 
+        Momentum conservation  &  $\rho\partial_{t}\bfu 
          =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\bbM$  \\
         Energy conservation  &  $\partial_{t}p  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\bbD$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\bbJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\bbJ$  \\
         \hline
         Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\bbU$  \\
         Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\bbtheta$  \\
@@ -30,7 +30,7 @@
     \begin{align}
         \forall q \in \bbP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
         \begin{split}
-            \forall \bfq \in \bbM,  0  &=  \left.\left(\langle\partial_{t}\bfp, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+            \forall \bfq \in \bbM,  0  &=  \left.\left(- \langle\rho\partial_{t}\bfu, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
         \end{split}  \\
         \begin{split}
@@ -47,7 +47,7 @@
 
     \line
 
-    Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
+    \BA{(What conformity does this require?)} Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
@@ -76,7 +76,7 @@
         \draw[->] (HL3b) -- (MD)  node[left,  midway] {$\pi_{\rmM\rmD}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
-    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
+    \BA{(By this structure, we can use exactness on the subcomplex to show the existence of the EM potentials $(\varphi, \bfA)$ as functions in a subspace $(\bbphi, \bbA)  \leqslant  \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$. Same technique would give the existence of some compressible streamfunction in $\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$?)} By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3) at (6.5, 0) {$\bfH(\rmdiv + \partial_{t})$};
@@ -105,7 +105,7 @@
         
         \draw[->] (Hcurl-L2) -- (E) node[left, pos = 0.65] {$\pi_{\rmE}$};
         \draw[->] (Hdiv-H1)  -- (B) node[left, pos = 0.8]  {$\pi_{\rmB}$};
-        \draw[->] (Hdiv-L2)  -- (C) node[left, pos = 0.65]  {$\pi_{\rmC}$};
+        \draw[->] (Hdiv-L2)  -- (C) node[left, pos = 0.65] {$\pi_{\rmC}$};
         
         \draw[->] (B) -- (C) node[above, midway] {$\partial_{t}$};
         \draw[->] (E) -- (C) node[above, midway] {$\bfcurl$};
@@ -143,16 +143,115 @@
         \draw[->] (D) -- (P) node[above, midway] {$\partial_{t}$};
         \draw[->] (M) -- (P) node[above, midway] {$\rmdiv$};
     \end{tikzpicture}\end{center}
-            
+
+    \line
+
+    Assuming the above subspace criteria hold, the results below follow for the weak formulation, preserving some of the structure of the strong formulation:
+    
+    \begin{theorem}[Gauss's Law in the Weak Formulation]
+        Provided Gauss's law, $\nabla\cdot\bfB  =  0$, holds strongly at $t = t^{k}$, it holds strongly at all $t$, i.e.
+        \begin{equation}
+            \nabla\cdot\bfB  =  0
+        \end{equation}
+    \end{theorem}
+    \begin{proof}
+        Akin to how taking the divergence of Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$, ensures the conservation of Gauss's law in the strong formulation, the strong satisfaction of Faraday's law similarly ensures the strong satisfaction of Gauss's law in the weak formulation.
+    \end{proof}
+
+    \begin{theorem}[Energy Conservation in the Weak Formulation]
+        Defining
+        \begin{equation}
+            \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
+        \end{equation}
+        provided $\bbU  \leqslant  \bbM$, $\bbE 
+         \leqslant  \bbF$, and $1  \in  \bbD$,
+        \begin{equation}
+            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+        \end{equation}
+    \end{theorem}
+    \begin{proof}
+        \begin{align}
+            \begin{split}
+                \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  &=  \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \int_{\bfOmega\otimes\left\{t^{k}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
+            \end{split}  \\
+            &=  \int_{T^{k}}\partial_{t}\left[\int_{\bfOmega}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right)\right] + \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)  \\
+            \begin{split}
+                &=  \int_{\bfOmega\otimes T^{k}}\left(\left(\frac{1}{2}\partial_{t}\rho\|\bfu\|^{2} + \rho\bfu\cdot\partial_{t}\bfu\right) + \frac{2}{\beta}\bfB\cdot\partial_{t}\bfB\right)  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)
+            \end{split}
+        \end{align}
+        By the strong satisfaction of mass conservation and Faraday's law, $\partial_{t}\rho$, $\partial_{t}\bfB$ can immediately be substituted for $- \nabla\cdot\bfp$, $- \nabla\wedge\bfE$ respectively.
+        
+        For the other two terms, one can exploit the weak formulation. For $\int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu$, with $\bfu  \in  \bbU  \leqslant  \bbM$,
+        \begin{align}
+            \int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu  &=  \langle\rho\partial_{t}\bfu, \bfu\rangle_{\bfOmega\otimes T^{k}}  \\
+            \begin{split}
+                &=  \left.\left(- \langle\bfp\cdot\nabla\bfu, \bfu\rangle + \langle p, \nabla\cdot\bfu\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfu\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfu\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfu\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfu\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
+            \end{split}  \\
+            \begin{split}
+                &=  \int_{\bfOmega\otimes T^{k}}\left(- (\bfu\otimes\bfp):\nabla\bfu + p\nabla\cdot\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu - \frac{1}{\rmRef}\rho\bftau:\nabla_{s}\bfu\right)  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu\right)\cdot\bfn
+            \end{split}
+        \end{align}
+        For $\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p$, with $1  \in  \bbD$,
+        \begin{align}
+            \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p  &=  \langle p, 1\rangle_{\bfOmega\otimes\partial T^{k}}  \\
+            \begin{split}
+                &=  \left.\left(- \langle p\nabla\cdot\bfu, 1\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, 1\rangle + \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, 1\right\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\left(- \langle p\bfu\cdot\bfn, 1\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, 1\rangle\right)\right|_{\bfGamma\otimes T^{k}}
+            \end{split}  \\
+            \begin{split}
+                &=  \int_{\bfOmega\otimes T^{k}}\left(- p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \end{split}
+        \end{align}
+
+        Discarding immediately canceling terms, this evaluates as
+        \begin{multline}
+            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + \left(- (\bfu\otimes\bfp):\nabla\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu\right)\right.  \\
+            + \left.\frac{2}{\beta\rmRem}\|\bfj\|^{2} - \frac{2}{\beta}\bfB\cdot\nabla\wedge\bfE\tall\right)  \\
+            + \oint_{\bfGamma\otimes T^{k}}\left(- 2p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+        \end{multline}
+        
+        Similar to the case in the strong formulation,
+        \begin{equation}
+            \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + - (\bfu\otimes\bfp):\nabla\bfu\right)  =  - \frac{1}{2}\oint_{\bfGamma\otimes T^{k}}\|\bfu\|^{2}\bfp\cdot\bfn
+        \end{equation}
+        
+        For the remaining EM integrals over $\bfOmega\otimes T^{k}$, with $\bfE  \in  \bbE  \leqslant  \bbF$, from the weak formulation of Ampère's law,
+        \begin{equation}
+            \int_{\bfOmega\otimes T^{k}}\bfB\cdot(\nabla\wedge\bfE)  =  \int_{\bfOmega\otimes T^{k}}\bfj\cdot\bfE - \oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
+        \end{equation}
+        From the weak formulation of the current identity then, since $\bfj  \in  \bbJ$
+        \begin{align}
+            \int_{\bfOmega\otimes T^{k}}\bfE\cdot\bfj  &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj + \rmRH(\bfj\wedge\bfB)\cdot\bfj\right)  \\
+            &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj\right)
+        \end{align}
+        Collecting these terms therefore,
+        \begin{equation}
+            \frac{2}{\beta}\int_{\bfOmega\otimes T^{k}}\left((\bfj\wedge\bfB)\cdot\bfu + \frac{1}{\rmRem}\|\bfj\|^{2} - \bfB\cdot\nabla\wedge\bfE\tall\right)  =  \frac{2}{\beta}\oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
+        \end{equation}
+
+        Thus,
+        \begin{equation}
+            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+        \end{equation}
+    \end{proof}
+
+    \line
+    
     \BA{TO ADD:
     \begin{itemize}
-        \item  Proofs of energy/helicity/Gauss's law conservation (Modify weak formulations accordingly)
+        \item  Proof of helicity conservation (Modify weak formulations accordingly)
         \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
-        \item  Continuity of helicity
         \item  Talk about 2.5D case
         \item  Upgrade tensor product complex commutative diagrams
         \item  Add further work environment for referencing to the further work chapter
         \item  Give exposition on constructing timesteppers from FE schemes in space and time (Appendix?)
         \item  Change horizontal lines to ```backslash'line'' objects
         \item  See if I can get a bound on the change in magnetic helicity, $\rmH_{\rmM}$, that looks something like $\int_{t^{k}}^{t^{k + 1}}\int_{\bfOmega}\|\bfj\|^{2} + \text{ ``something''}$
+        \item  Add compressible transient weak formulation \emph{B} (with the hard-to-compute division integrals)
+        \item  Write up exposition on constructing timesteppers from FEs in time (using example of dissipative discretisations of the heat equation- resultant $\frac{1}{3}$-$\frac{2}{3}$–weighted Runge–Kutta scheme must've been done in the literature some time before... what if the test space is discontinuous in time, what discretization am I getting there?)
     \end{itemize}}
