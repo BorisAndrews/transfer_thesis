@@ -47,14 +47,14 @@
 
     \line
 
-    \BA{(What conformity does this require?)} Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
+    \BA{(What conformity does this require? What do I mean by $\langle-, -\rangle_{\bfOmega\otimes\partial T^{k}}$?)} Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
         $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \bbP$  &  $\partial_{t}\bbD + \nabla\cdot\bbM  \leqslant  \bbP$  \\
         $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \bbC$  &  $\partial_{t}\bbB + \nabla\wedge\bbE  \leqslant  \bbC$
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $(\bbM, \bbD)$, $\bbP$ and $(\bbE, \bbB)$, $(\bbC, *)$ form subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\bbM\oplus\bbD \xrightarrow{\rmdiv + \partial_{t}} \bbP$ and $\bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\rmdiv + \partial_{t})$};
@@ -76,7 +76,39 @@
         \draw[->] (HL3b) -- (MD)  node[left,  midway] {$\pi_{\rmM\rmD}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
-    \BA{(By this structure, we can use exactness on the subcomplex to show the existence of the EM potentials $(\varphi, \bfA)$ as functions in a subspace $(\bbphi, \bbA)  \leqslant  \bfH\left(\begin{matrix} \bfgrad + \partial_{t} \\ * - \bfcurl \end{matrix}\right)$. Same technique would give the existence of some compressible streamfunction in $\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$?)} By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
+    Further supposing $\bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus*$ forms part of a longer $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$-subcomplex component $\bbphi\oplus\bbA \xrightarrow{\cdots} \bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus*$ \BA{(To what extent is existence of such a $(\bbphi, \bbA)$ guaranteed?)},
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (HL1)  at (0,  0) {$\bfH\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+        \node (HL2)  at (6,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \node (HL3)  at (12, 0) {$\bfH(\rmdiv + \partial_{t})$};
+        
+        \node (phiA) at (0,  - 3) {$\bbphi\oplus\bbA$};
+        \node (EB)   at (6,  - 3) {$\bbE\oplus\bbB$};
+        \node (*C)   at (12, - 3) {$\bbC\oplus*$};
+        
+
+        \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        
+        \draw[->] (HL1) -- (phiA) node[left,  midway] {$\pi_{\varphi\rmA}$};
+        \draw[->] (HL2) -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
+        \draw[->] (HL3) -- (*C)   node[left,  midway] {$\pi_{\rmC*}$};
+        
+        \draw[->] (phiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+        \draw[->] (EB)   -- (*C) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+    \end{tikzpicture}\end{center}
+    by the exactness property,
+    \begin{equation}
+        \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \bbE\oplus\bbB \rightarrow \bbC\oplus*\right]  \leqslant  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \bbphi\oplus\bbA \rightarrow \bbE\oplus\bbB\right]
+    \end{equation}
+    such that, since $(\bfE, \bfB)  \in  \bbE\oplus\bbB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi$, $\bfA$ such that:
+    \begin{align}
+        \bfE  &=  - \nabla\varphi - \partial_{t}\bfA  \\
+        \bfB  &=  \nabla\wedge\bfA
+    \end{align}
+    \BA{(Same technique would give the existence of some compressible streamfunction in $\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$?)}
+    
+    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3) at (6.5, 0) {$\bfH(\rmdiv + \partial_{t})$};
@@ -157,9 +189,9 @@
     \begin{proof}
         Akin to how taking the divergence of Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$, ensures the conservation of Gauss's law in the strong formulation, the strong satisfaction of Faraday's law similarly ensures the strong satisfaction of Gauss's law in the weak formulation.
     \end{proof}
-
+    
     \begin{theorem}[Energy Conservation in the Weak Formulation]
-        Defining
+        Defining the energy,
         \begin{equation}
             \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
         \end{equation}
@@ -170,88 +202,46 @@
         \end{equation}
     \end{theorem}
     \begin{proof}
-        \begin{align}
-            \begin{split}
-                \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  &=  \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \int_{\bfOmega\otimes\left\{t^{k}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
-            \end{split}  \\
-            &=  \int_{T^{k}}\partial_{t}\left[\int_{\bfOmega}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right)\right] + \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)  \\
-            \begin{split}
-                &=  \int_{\bfOmega\otimes T^{k}}\left(\left(\frac{1}{2}\partial_{t}\rho\|\bfu\|^{2} + \rho\bfu\cdot\partial_{t}\bfu\right) + \frac{2}{\beta}\bfB\cdot\partial_{t}\bfB\right)  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)
-            \end{split}
-        \end{align}
-        By the strong satisfaction of mass conservation and Faraday's law, $\partial_{t}\rho$, $\partial_{t}\bfB$ can immediately be substituted for $- \nabla\cdot\bfp$, $- \nabla\wedge\bfE$ respectively.
-        
-        For the other two terms, one can exploit the weak formulation. For $\int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu$, with $\bfu  \in  \bbU  \leqslant  \bbM$,
-        \begin{align}
-            \int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu  &=  \langle\rho\partial_{t}\bfu, \bfu\rangle_{\bfOmega\otimes T^{k}}  \\
-            \begin{split}
-                &=  \left.\left(- \langle\bfp\cdot\nabla\bfu, \bfu\rangle + \langle p, \nabla\cdot\bfu\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfu\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfu\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfu\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfu\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
-            \end{split}  \\
-            \begin{split}
-                &=  \int_{\bfOmega\otimes T^{k}}\left(- (\bfu\otimes\bfp):\nabla\bfu + p\nabla\cdot\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu - \frac{1}{\rmRef}\rho\bftau:\nabla_{s}\bfu\right)  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu\right)\cdot\bfn
-            \end{split}
-        \end{align}
-        For $\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p$, with $1  \in  \bbD$,
-        \begin{align}
-            \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p  &=  \langle p, 1\rangle_{\bfOmega\otimes\partial T^{k}}  \\
-            \begin{split}
-                &=  \left.\left(- \langle p\nabla\cdot\bfu, 1\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, 1\rangle + \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, 1\right\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\left(- \langle p\bfu\cdot\bfn, 1\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, 1\rangle\right)\right|_{\bfGamma\otimes T^{k}}
-            \end{split}  \\
-            \begin{split}
-                &=  \int_{\bfOmega\otimes T^{k}}\left(- p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
-            \end{split}
-        \end{align}
-
-        Discarding immediately canceling terms, this evaluates as
-        \begin{multline}
-            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + \left(- (\bfu\otimes\bfp):\nabla\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu\right)\right.  \\
-            + \left.\frac{2}{\beta\rmRem}\|\bfj\|^{2} - \frac{2}{\beta}\bfB\cdot\nabla\wedge\bfE\tall\right)  \\
-            + \oint_{\bfGamma\otimes T^{k}}\left(- 2p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
-        \end{multline}
-        
-        Similar to the case in the strong formulation,
-        \begin{equation}
-            \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + - (\bfu\otimes\bfp):\nabla\bfu\right)  =  - \frac{1}{2}\oint_{\bfGamma\otimes T^{k}}\|\bfu\|^{2}\bfp\cdot\bfn
-        \end{equation}
-        
-        For the remaining EM integrals over $\bfOmega\otimes T^{k}$, with $\bfE  \in  \bbE  \leqslant  \bbF$, from the weak formulation of Ampère's law,
-        \begin{equation}
-            \int_{\bfOmega\otimes T^{k}}\bfB\cdot(\nabla\wedge\bfE)  =  \int_{\bfOmega\otimes T^{k}}\bfj\cdot\bfE - \oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
-        \end{equation}
-        From the weak formulation of the current identity then, since $\bfj  \in  \bbJ$
-        \begin{align}
-            \int_{\bfOmega\otimes T^{k}}\bfE\cdot\bfj  &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj + \rmRH(\bfj\wedge\bfB)\cdot\bfj\right)  \\
-            &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj\right)
-        \end{align}
-        Collecting these terms therefore,
-        \begin{equation}
-            \frac{2}{\beta}\int_{\bfOmega\otimes T^{k}}\left((\bfj\wedge\bfB)\cdot\bfu + \frac{1}{\rmRem}\|\bfj\|^{2} - \bfB\cdot\nabla\wedge\bfE\tall\right)  =  \frac{2}{\beta}\oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
-        \end{equation}
-
-        Thus,
-        \begin{equation}
-            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
-        \end{equation}
+        See Appendix \ref{cha:weak conservation proofs}.
     \end{proof}
+
+    \begin{theorem}[Helicity Conservation in the Weak Formulation]
+        Defining the magnetic helicity,
+        \begin{equation}
+            \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
+        \end{equation}
+        provided $\bbB  \leqslant  \bbJ$ and $\bbB  \leqslant  \bbF$,
+        \begin{align}
+            \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
+            \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
+        \end{align}
+    \end{theorem}
+    \begin{proof}
+        See Appendix \ref{cha:weak conservation proofs}.
+    \end{proof}
+
+    \begin{corollary}
+        When $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma\otimes T^{k}}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, and either the boundary condition $\bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn$ or $\bfzero  =  \bfA\wedge\bfn$ holds on all of $\bfGamma\otimes T^{k}$, by Lemma \ref{lem:continuity of helicity},
+        \begin{equation}
+            \left|\rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)\right|  \leq  \frac{2C(\bfgamma)\left(t^{k + 1} - t^{k}\right)}{\rmRem}\|\bfj\|^{2}
+        \end{equation}
+    \end{corollary}
 
     \line
     
     \BA{TO ADD:
     \begin{itemize}
-        \item  Proof of helicity conservation (Modify weak formulations accordingly)
-        \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations
+        \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations (Talk about how to modify the weak formulation for non-conforming discretization so as not to lose my structure-preserving properties (Exact mass conservation + Faraday's law/Energy conservation + helicity dissipation + bounded change in helicity))
         \item  Talk about 2.5D case
         \item  Upgrade tensor product complex commutative diagrams
         \item  Add further work environment for referencing to the further work chapter
-        \item  Give exposition on constructing timesteppers from FE schemes in space and time (Appendix?)
         \item  Change horizontal lines to ```backslash'line'' objects
-        \item  See if I can get a bound on the change in magnetic helicity, $\rmH_{\rmM}$, that looks something like $\int_{t^{k}}^{t^{k + 1}}\int_{\bfOmega}\|\bfj\|^{2} + \text{ ``something''}$
         \item  Add compressible transient weak formulation \emph{B} (with the hard-to-compute division integrals)
         \item  Write up exposition on constructing timesteppers from FEs in time (using example of dissipative discretisations of the heat equation- resultant $\frac{1}{3}$-$\frac{2}{3}$–weighted Runge–Kutta scheme must've been done in the literature some time before... what if the test space is discontinuous in time, what discretization am I getting there?)
+        \item  So I'm pretty convinced the subspace criteria required for energy conservation/helicity dissipation prohibit the FE-in-time formulation from giving rise to a timestepper, since e.g. we require the test space for momentum conservation to be equal to the momentum solution space, and not of lower continuity in time, as is usually the case for constructing timesteppers from FEs in time, and I can't find a way round this. I reckon, the solution is to split transient schemes into 2 separate formulations:
+        \begin{itemize}
+            \item  One like I have already, with energy conservation/helicity dissipation, for periodic problems- lots of interesting maths here on the topic of e.g. robust kernel-capturing multigrid subspaces for problems in space and time.  
+            \item  One that \emph{doesn't} have exact energy conservation/helicity dissipation, but has something quantifiably close, that can actually be used as a timestepper.
+        \end{itemize}
+        \item  How do the energy conservation/helicity dissipation results change when I introduce the coupled system with the particles? Could give rise to a grounds from which to construct the particle pusher, for structure preservation.
     \end{itemize}}
