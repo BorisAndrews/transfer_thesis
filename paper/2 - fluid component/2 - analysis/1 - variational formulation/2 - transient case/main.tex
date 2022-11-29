@@ -46,12 +46,12 @@
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\partial_{t} + \rmdiv)$};
         \node (EB)   at (0,   - 3) {$\bbE\oplus\bbB$};
-        \node (*C)   at (5.5, - 3) {$\bbC\oplus*$};
+        \node (C*)   at (5.5, - 3) {$\bbC\oplus*$};
 
         \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        \draw[->] (EB)   -- (*C)   node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \draw[->] (EB)   -- (C*)   node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \draw[->] (HL2)  -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
-        \draw[->] (HL3a) -- (*C)   node[left,  midway] {$\pi_{*\rmC}$};
+        \draw[->] (HL3a) -- (C*)   node[left,  midway] {$\pi_{*\rmC}$};
         
         \node (HL3b) at (9,   0)  {$\bfH(\partial_{t} + \rmdiv)$};
         \node (HL4) at (12.5, 0)  {$L^{2}$};
@@ -63,36 +63,48 @@
         \draw[->] (HL3b) -- (DU)  node[left,  midway] {$\pi_{\rmD\rmU}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
-    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
+    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via tensor products of subcomplexes of $H\Lambda^{\bullet}(\Omega)$, $H\Lambda^{\bullet}([0, T])$:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        \node (HL3) at (6.5, 0) {$\bfH(\partial_{t} + \rmdiv)$};
+        \node (HL2) at (0, 0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \node (HL3) at (8, 0) {$\bfH(\partial_{t} + \rmdiv)$};
         
-        \node (Hcurl-L2) at (- 0.85, - 4.5) {$\bfH(\bfcurl)\otimes L^{2}$};
-        \node (Hdiv-H1)  at (0.85,   - 3)   {$\bfH(\rmdiv)\otimes H^{1}$};
-        \node (Hdiv-L2)  at (5.65,   - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
-        \node (L2-H1)    at (7.35,   - 3)   {$*$};
+        \node (Hcurl-L2) at (3.15,  - 4.85) {$\bfH(\bfcurl)\otimes L^{2}$};
+        \node (Hdiv-H1)  at (4.85,  - 3.15) {$\bfH(\rmdiv)\otimes H^{1}$};
+        \node (Hdiv-L2)  at (11.15, - 4.85) {$\bfH(\rmdiv)\otimes L^{2}$};
+        \node (L2-H1)    at (12.85, - 3.15) {$*$};
 
-        \node (E) at (- 0.85, - 8.25) {$\bbE$};
-        \node (B) at (0.85,   - 6.75) {$\bbB$};
-        \node (C) at (5.65,   - 8.25) {$\bbC$};
+        \node (EB) at (0, - 8) {$\bbE\oplus\bbB$};
+        \node (C*) at (8, - 8) {$\bbC\oplus*$};
+
+        \node (E) at (3.15,  - 12.85) {$\bbE$};
+        \node (B) at (4.85,  - 11.15) {$\bbB$};
+        \node (C) at (11.15, - 12.85) {$\bbC$};
+        \node (*) at (12.85, - 11.15) {$*$};
 
 
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (4,  - 4) {};
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (12, - 4) {};
+
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (4,  - 12) {};
+        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (12, - 12) {};
 
 
         \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         
-        \draw[->] (HL2) -- (0,   - 2);
-        \draw[->] (HL3) -- (6.5, - 2);
+        \draw[->] (HL2) -- (EB) node[left,  midway] {$\pi_{\rmE\rmB}$};
+        \draw[->] (HL3) -- (C*) node[left,  midway] {$\pi_{*\rmC}$};
+
+        \draw[->] (HL2) -- (4,  - 2);
+        \draw[->] (HL3) -- (12, - 2);
         
-        \draw[->] (Hdiv-H1)  -- (Hdiv-L2) node[above, pos = 0.55] {$\partial_{t}$};
-        \draw[->] (Hcurl-L2) -- (Hdiv-L2) node[above, pos = 0.65] {$\bfcurl$};
+        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+
+        \draw[->] (Hdiv-H1)  -- (Hdiv-L2) node[above, midway] {$\partial_{t}$};
+        \draw[->] (Hcurl-L2) -- (Hdiv-L2) node[above, midway] {$\bfcurl$};
         
-        \draw[->] (Hcurl-L2) -- (E) node[left, pos = 0.65] {$\pi_{\rmE}$};
-        \draw[->] (Hdiv-H1)  -- (B) node[left, pos = 0.8]  {$\pi_{\rmB}$};
-        \draw[->] (Hdiv-L2)  -- (C) node[left, pos = 0.65]  {$\pi_{\rmC}$};
+        \draw[->] (Hcurl-L2) -- (E) node[left, midway] {$\pi_{\rmE}$};
+        \draw[->] (Hdiv-H1)  -- (B) node[left, midway]  {$\pi_{\rmB}$};
+        \draw[->] (Hdiv-L2)  -- (C) node[left, midway] {$\pi_{\rmC}$};
         
         \draw[->] (B) -- (C) node[above, midway] {$\partial_{t}$};
         \draw[->] (E) -- (C) node[above, midway] {$\bfcurl$};
