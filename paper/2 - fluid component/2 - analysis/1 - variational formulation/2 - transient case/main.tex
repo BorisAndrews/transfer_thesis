@@ -82,33 +82,60 @@
         \node (HL2)  at (6,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3)  at (12, 0) {$\bfH(\rmdiv + \partial_{t})$};
         
-        \node (phiA) at (0,  - 3) {$\Phi\oplus\calA$};
+        \node (PhiA) at (0,  - 3) {$\Phi\oplus\calA$};
         \node (EB)   at (6,  - 3) {$\calE\oplus\calB$};
-        \node (*C)   at (12, - 3) {$\calC\oplus*$};
+        \node (C*)   at (12, - 3) {$\calC\oplus*$};
         
 
         \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
         \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         
-        \draw[->] (HL1) -- (phiA) node[left,  midway] {$\pi_{\varphi\rmA}$};
+        \draw[->] (HL1) -- (PhiA) node[left,  midway] {$\pi_{\Phi\rmA}$};
         \draw[->] (HL2) -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
-        \draw[->] (HL3) -- (*C)   node[left,  midway] {$\pi_{\rmC*}$};
+        \draw[->] (HL3) -- (C*)   node[left,  midway] {$\pi_{\rmC*}$};
         
-        \draw[->] (phiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
-        \draw[->] (EB)   -- (*C) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \draw[->] (PhiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+        \draw[->] (EB)   -- (C*) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
     \end{tikzpicture}\end{center}
-    by the exactness property,
+    provided exactness holds,
     \begin{equation}
         \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \calE\oplus\calB \rightarrow \calC\oplus*\right]  =  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \Phi\oplus\calA \rightarrow \calE\oplus\calB\right]
     \end{equation}
-    such that, since $(\bfE, \bfB)  \in  \calE\oplus\calB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi$, $\bfA$ such that:
+    such that, since $(\bfE, \bfB)  \in  \calE\oplus\calB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi  \in  \phi$, $\bfA  \in  \calS$ such that:
     \begin{align}
         \bfE  &=  - \nabla\varphi - \partial_{t}\bfA  \\
         \bfB  &=  \nabla\wedge\bfA
     \end{align}
-    \BA{(Same technique would give the existence of some compressible streamfunction in $\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$?)}
+    
+    Similarly, supposing $\calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ forms part of a longer $H\Lambda^{\bullet}(\bfOmega\otimes T^{k})$-subcomplex component $\Psi\oplus\calX  \xrightarrow{\cdots}  \calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ \BA{(To what extent is existence of such a $(\Psi, \calX)$ guaranteed?)},
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (HL2)  at (0,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \node (HL3)  at (6, 0) {$\bfH(\rmdiv + \partial_{t})$};
+        \node (HL4)  at (12, 0) {$L^{2}$};
+        
+        \node (PsiChi) at (0,  - 3) {$\Psi\oplus\calX$};
+        \node (MD)     at (6,  - 3) {$\calM\oplus\calD$};
+        \node (P)      at (12, - 3) {$\calP$};
+        
+
+        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
+        
+        \draw[->] (HL2) -- (PsiChi) node[left,  midway] {$\pi_{\Psi\rmX}$};
+        \draw[->] (HL3) -- (MD)     node[left,  midway] {$\pi_{\rmM\rmD}$};
+        \draw[->] (HL4) -- (P)      node[left,  midway] {$\pi_{\rmP}$};
+        
+        \draw[->] (PsiChi) -- (MD) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+        \draw[->] (MD)     -- (P)  node[above, midway] {$\rmdiv + \partial_{t}$};
+    \end{tikzpicture}\end{center}
+    where, provided exactness holds, there exist (generalized, compressible) streamfunctions $\bfpsi  \in  \Psi$, $\bfchi  \in  \calX$ such that
+    \begin{align}
+        \bfp  &=  \nabla\wedge\bfpsi + \partial_{t}\bfchi  \\
+        \rho  &=  - \nabla\cdot\bfchi
+    \end{align}
     
     By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction. (Figures \ref{fig:tensor product EM subcomplexes}–\ref{fig:tensor product momentum subcomplexes})
+    
     \begin{figure}
         \centering
         {\footnotesize \begin{tikzpicture}[align = center, node distance = 4cm, auto]
@@ -126,12 +153,12 @@
                 \node (Hdiv-L2)  at (12 - 0.85, - 3 - 0.85) {$\bfH(\rmdiv)\otimes L^{2}$};
                 \node (L2-H1)    at (12 + 0.85, - 3 + 0.85) {$*$};
 
-            \node (phiA) at (- 1, - 8) {$\Phi\oplus\calA$};
+            \node (PhiA) at (- 1, - 8) {$\Phi\oplus\calA$};
             \node (EB)   at (4,   - 8) {$\calE\oplus\calB$};
             \node (C*)   at (9,   - 8) {$\calC\oplus*$};
 
             \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
-                \node (phi) at (1 - 0.85,  - 11 - 0.85) {$\Phi$};
+                \node (Phi) at (1 - 0.85,  - 11 - 0.85) {$\Phi$};
                 \node (A)   at (1 + 0.85,  - 11 + 0.85) {$\calA$};
             \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
                 \node (E)   at (6 - 0.85,  - 11 - 0.85) {$\calE$};
@@ -148,13 +175,13 @@
             \draw[->] (HL2) -- (7  - 0.75, - 3 + 1.25);
             \draw[->] (HL3) -- (12 - 0.75, - 3 + 1.25);
 
-            \draw[->] (HL1) -- (phiA) node[left, pos = 0.75] {$\pi_{\phi\rmA}$};
+            \draw[->] (HL1) -- (PhiA) node[left, pos = 0.75] {$\pi_{\phi\rmA}$};
             \draw[->, color = white] (HL2) -- coordinate[pos = 0.1](HL2a)  coordinate[pos = 0.55](HL2b) (EB);
                 \draw[-]                   (HL2)  -- (HL2a);
                 \draw[-, color = black!30] (HL2a) -- (HL2b);
                 \draw[->]                  (HL2b) -- (EB) node[left, pos = 0.444444] {$\pi_{\rmE\rmB}$};
             \draw[->, color = white] (HL3) -- coordinate[pos = 0.25](HL3a) coordinate[pos = 0.55](HL3b) (C*);
-                \draw[-]                   (HL3) -- (HL3a);
+                \draw[-]                   (HL3)  -- (HL3a);
                 \draw[-, color = black!30] (HL3a) -- (HL3b);
                 \draw[->]                  (HL3b) -- (C*) node[left, pos = 0.444444] {$\pi_{\rmC*}$};
             
@@ -164,10 +191,10 @@
             \draw[->] (Hdiv-H1)  -- (Hdiv-L2)  node[above, pos = 0.55] {$\partial_{t}$};
             \draw[->] (Hcurl-L2) -- (Hdiv-L2)  node[above, pos = 0.65] {$\bfcurl$};
 
-            \draw[->, color = white] (H1-L2)    -- coordinate[pos = 0.3](phia) coordinate[pos = 0.9](phib) (phi);
-                \draw[-]                   (H1-L2)    -- (phia) node[left, pos = 0.666666] {$\pi_{\phi}$};
-                \draw[-, color = black!30] (phia)     -- (phib);
-                \draw[->]                  (phib)     -- (phi);
+            \draw[->, color = white] (H1-L2)    -- coordinate[pos = 0.3](Phia) coordinate[pos = 0.9](Phib) (Phi);
+                \draw[-]                   (H1-L2)    -- (Phia) node[left, pos = 0.666666] {$\pi_{\phi}$};
+                \draw[-, color = black!30] (Phia)     -- (Phib);
+                \draw[->]                  (Phib)     -- (Phi);
             \draw[->, color = white] (Hcurl-H1) -- coordinate[pos = 0.5](Aa)   coordinate[pos = 0.8](Ab)   (A);
                 \draw[-]                   (Hcurl-H1) -- (Aa)   node[left, pos = 0.85]     {$\pi_{\rmA}$};
                 \draw[-, color = black!30] (Aa)       -- (Ab);
@@ -185,16 +212,16 @@
                 \draw[-, color = black!30] (Ca)       -- (Cb);
                 \draw[->]                  (Cb)       -- (C);
             
-            \draw[->] (phiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+            \draw[->] (PhiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
             \draw[->] (EB)   -- (C*) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             
-            \draw[->] (phiA) -- (1  - 0.65, - 11 + 1.15);
+            \draw[->] (PhiA) -- (1  - 0.65, - 11 + 1.15);
             \draw[->] (EB)   -- (6  - 0.65, - 11 + 1.15);
             \draw[->] (C*)   -- (11 - 0.65, - 11 + 1.15);
             
             \draw[->] (A)   -- (B) node[above, midway] {$\bfcurl$};
             \draw[->] (A)   -- (E) node[above, midway] {$\partial_{t}$};
-            \draw[->] (phi) -- (E) node[above, midway] {$\bfgrad$};
+            \draw[->] (Phi) -- (E) node[above, midway] {$\bfgrad$};
             \draw[->] (B)   -- (C) node[above, midway] {$\partial_{t}$};
             \draw[->] (E)   -- (C) node[above, midway] {$\bfcurl$};
         \end{tikzpicture}}
@@ -204,38 +231,91 @@
     
     \begin{figure}
         \centering
-        \begin{tikzpicture}[align = center, node distance = 4cm, auto]
-            \node (HL3) at (0,   0) {$\bfH(\rmdiv + \partial_{t})$};
-            \node (HL4) at (6.5, 0) {$L^{2}$};
+        {\footnotesize \begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (HL2) at (0,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+            \node (HL3) at (5,  0) {$\bfH(\rmdiv + \partial_{t})$};
+            \node (HL4) at (10, 0) {$L^{2}$};
             
-            \node (Hdiv-L2) at (- 0.85, - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
-            \node (L2-H1)   at (0.85,   - 3)   {$L^{2}\otimes H^{1}$};
-            \node (L2-L2)   at (5.65,   - 4.5) {$L^{2}\otimes L^{2}$};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
+                \node (Hcurl-L2) at (2 - 0.85,  - 3 - 0.85) {$\bfH(\bfcurl)\otimes L^{2}$};
+                \node (Hdiv-H1)  at (2 + 0.85,  - 3 + 0.85) {$\bfH(\rmdiv)\otimes H^{1}$};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
+                \node (Hdiv-L2)  at (7 - 0.85,  - 3 - 0.85) {$\bfH(\rmdiv)\otimes L^{2}$};
+                \node (L2-H1)    at (7 + 0.85,  - 3 + 0.85) {$L^{2}\otimes H^{1}$};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
+                \node (L2-L2)    at (12 - 0.85, - 3 - 0.85) {$L^{2}\otimes L^{2}$};
 
-            \node (M) at (- 0.85, - 8.25) {$\calM$};
-            \node (D) at (0.85,   - 6.75) {$\calD$};
-            \node (P) at (5.65,   - 8.25) {$\calP$};
+            \node (PsiChi) at (- 1, - 8) {$\Psi\oplus\calX$};
+            \node (MD)     at (4,   - 8) {$\calM\oplus\calD$};
+            \node (P*)     at (9,   - 8) {$\calP$};
+
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
+                \node (Psi) at (1 - 0.85,  - 11 - 0.85) {$\Psi$};
+                \node (Chi) at (1 + 0.85,  - 11 + 0.85) {$\calX$};
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
+                \node (M)   at (6 - 0.85,  - 11 - 0.85) {$\calM$};
+                \node (D)   at (6 + 0.85,  - 11 + 0.85) {$\calD$};
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
+                \node (P)   at (11 - 0.85, - 11 - 0.85) {$\calP$};
 
 
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
-
-
+            \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
             
-            \draw[->] (HL3) -- (0,   - 2);
-            \draw[->] (HL4) -- (6.5, - 2);
+            \draw[->] (HL2) -- (2  - 0.75, - 3 + 1.25);
+            \draw[->] (HL3) -- (7  - 0.75, - 3 + 1.25);
+            \draw[->] (HL4) -- (12 - 0.75, - 3 + 1.25);
+
+            \draw[->] (HL2) -- (PsiChi) node[left, pos = 0.75] {$\pi_{\Psi\rmX}$};
+            \draw[->, color = white] (HL3) -- coordinate[pos = 0.15](HL3a) coordinate[pos = 0.55](HL3b) (MD);
+                \draw[-]                   (HL3)  -- (HL3a);
+                \draw[-, color = black!30] (HL3a) -- (HL3b);
+                \draw[->]                  (HL3b) -- (MD) node[left, pos = 0.444444] {$\pi_{\rmM\rmD}$};
+            \draw[->, color = white] (HL4) -- coordinate[pos = 0.25](HL4a) coordinate[pos = 0.55](HL4b) (P*);
+                \draw[-]                   (HL4)  -- (HL4a);
+                \draw[-, color = black!30] (HL4a) -- (HL4b);
+                \draw[->]                  (HL4b) -- (P*) node[left, pos = 0.444444] {$\pi_{\rmP}$};
             
-            \draw[->] (L2-H1)   -- (L2-L2) node[above, pos = 0.55] {$\partial_{t}$};
-            \draw[->] (Hdiv-L2) -- (L2-L2) node[above, pos = 0.65] {$\rmdiv$};
+            \draw[->] (Hdiv-H1)  -- (L2-H1)   node[above, pos = 0.35]  {$\rmdiv$};
+            \draw[->] (Hdiv-H1)  -- (Hdiv-L2) node[above, pos = 0.55] {$\partial_{t}$};
+            \draw[->] (Hcurl-L2) -- (Hdiv-L2) node[above, pos = 0.65]  {$\bfcurl$};
+            \draw[->] (L2-H1)    -- (L2-L2)   node[above, pos = 0.55] {$\partial_{t}$};
+            \draw[->] (Hdiv-L2)  -- (L2-L2)   node[above, pos = 0.65] {$\rmdiv$};
+
+            \draw[->, color = white] (Hcurl-L2) -- coordinate[pos = 0.3](Psia) coordinate[pos = 0.9](Psib) (Psi);
+                \draw[-]                   (Hcurl-L2) -- (Psia) node[left, pos = 0.666666] {$\pi_{\Psi}$};
+                \draw[-, color = black!30] (Psia)     -- (Psib);
+                \draw[->]                  (Psib)     -- (Psi);
+            \draw[->, color = white] (Hdiv-H1)  -- coordinate[pos = 0.5](Chia) coordinate[pos = 0.8](Chib) (Chi);
+                \draw[-]                   (Hdiv-H1)  -- (Chia)   node[left, pos = 0.85]     {$\pi_{\rmX}$};
+                \draw[-, color = black!30] (Chia)     -- (Chib);
+                \draw[->]                  (Chib)     -- (Chi);
+            \draw[->, color = white] (Hdiv-L2)  -- coordinate[pos = 0.4](Ma)   coordinate[pos = 0.9](Mb)   (M);
+                \draw[-]                   (Hdiv-L2)  -- (Ma)   node[left, pos = 0.5]      {$\pi_{\rmM}$};
+                \draw[-, color = black!30] (Ma)       -- (Mb);
+                \draw[->]                  (Mb)       -- (M);
+            \draw[->, color = white] (L2-H1)    -- coordinate[pos = 0.6](Da)   coordinate[pos = 0.8](Db)   (D);
+                \draw[-]                   (L2-H1)    -- (Da)   node[left, pos = 0.7]      {$\pi_{\rmD}$};
+                \draw[-, color = black!30] (Da)       -- (Db);
+                \draw[->]                  (Db)       -- (D);
+            \draw[->, color = white] (L2-L2)    -- coordinate[pos = 0.7](Pa)   coordinate[pos = 0.9](Pb)   (P);
+                \draw[-]                   (L2-L2)    -- (Pa)   node[left, pos = 0.285714] {$\pi_{\rmP}$};
+                \draw[-, color = black!30] (Pa)       -- (Pb);
+                \draw[->]                  (Pb)       -- (P);
             
-            \draw[->] (Hdiv-L2) -- (M) node[left, pos = 0.65] {$\pi_{\rmM}$};
-            \draw[->] (L2-H1)   -- (D) node[left, pos = 0.8]  {$\pi_{\rmD}$};
-            \draw[->] (L2-L2)   -- (P) node[left, pos = 0.65] {$\pi_{\rmP}$};
+            \draw[->] (PsiChi) -- (MD) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+            \draw[->] (MD)     -- (P*) node[above, midway] {$\rmdiv + \partial_{t}$};
             
-            \draw[->] (D) -- (P) node[above, midway] {$\partial_{t}$};
-            \draw[->] (M) -- (P) node[above, midway] {$\rmdiv$};
-        \end{tikzpicture}
+            \draw[->] (PsiChi) -- (1  - 0.65, - 11 + 1.15);
+            \draw[->] (MD)     -- (6  - 0.65, - 11 + 1.15);
+            \draw[->] (P*)     -- (11 - 0.65, - 11 + 1.15);
+            
+            \draw[->] (Chi) -- (D) node[above, midway] {$\rmdiv$};
+            \draw[->] (Chi) -- (M) node[above, midway] {$\partial_{t}$};
+            \draw[->] (Psi) -- (M) node[above, midway] {$\bfcurl$};
+            \draw[->] (D)   -- (P) node[above, midway] {$\partial_{t}$};
+            \draw[->] (M)   -- (P) node[above, midway] {$\rmdiv$};
+        \end{tikzpicture}}
         \caption{\BA{...}}
         \label{fig:tensor product momentum subcomplexes}
     \end{figure}
