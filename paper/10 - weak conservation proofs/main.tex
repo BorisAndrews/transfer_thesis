@@ -98,8 +98,8 @@
         \begin{proof}
             \begin{align}
                 \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}\bfA\cdot\bfB - \int_{\bfOmega\otimes\left\{t^{k}\right\}}\bfA\cdot\bfB  \\
-                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}\partial_{t}(\bfA\cdot\bfB)  \\
-                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}(\partial_{t}\bfA\cdot\bfB + \bfA\cdot\partial_{t}\bfB)  \\
+                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}\partial_{t}[\bfA\cdot\bfB]  \\
+                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}[\partial_{t}\bfA\cdot\bfB + \bfA\cdot\partial_{t}\bfB]  \\
                 &=  2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfA\cdot\partial_{t}\bfB + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge\partial_{t}\bfA]\cdot\bfn
             \end{align}
             By the exact solution of Faraday's law, $\partial_{t}\bfB$ can be substituted for $- \nabla\wedge\bfE$; by the definition of the EM potentials, $\partial_{t}\bfA$ can be substituted for $- \bfE - \nabla\varphi$.
