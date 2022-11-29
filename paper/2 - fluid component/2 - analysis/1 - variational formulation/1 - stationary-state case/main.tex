@@ -3,15 +3,15 @@
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
-        Mass conservation  &  $0  =  \nabla\cdot\bfu$  &  (\ref{eqn:mass conservation})  &  $\bbP$  \\
+        Mass conservation  &  $0  =  \nabla\cdot\bfu$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \bfu\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu$  &  (\ref{eqn:momentum conservation})  &  $\bbU$  \\
+         =  - \bfu\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu$  &  (\ref{eqn:momentum conservation})  &  $\calU$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:incompressible current identity})  &  $\bbJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:incompressible current identity})  &  $\calJ$  \\
         \hline
-        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:incompressible Ampère's law})  &  $\bbE$  \\
-        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:incompressible Faraday's law})  &  $\bbB$  \\
-        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:incompressible Gauss's law})  &  $\nabla\cdot\bbB$  \\
+        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:incompressible Ampère's law})  &  $\calE$  \\
+        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:incompressible Faraday's law})  &  $\calB$  \\
+        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:incompressible Gauss's law})  &  $\nabla\cdot\calB$  \\
     \end{tabular}\end{center}
     This takes the variational formulation: \BA{(Clear up and clarify the notation a little here, even if this way is informative and convenient.)}
 
@@ -20,14 +20,14 @@
     \paragraph*{Incompressible Stationary-State Weak Formulation:}
     
     \begin{align}
-        \forall q \in \bbP,  0  &=  \langle\nabla\cdot\bfu, q\rangle_{\bfOmega}  \\
+        \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfu, q\rangle_{\bfOmega}  \\
         \begin{split}
-            \forall \bfq \in \bbU,  0  &=  \left.\left(- \left\langle\bfu\cdot\nabla\bfu, \bfv\right\rangle + \langle p, \nabla\cdot\bfv\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfv\rangle - \frac{1}{\rmRef}\langle\nabla\bfu, \nabla\bfv\rangle\right)\right|_{\bfOmega}  \\
+            \forall \bfq \in \calU,  0  &=  \left.\left(- \left\langle\bfu\cdot\nabla\bfu, \bfv\right\rangle + \langle p, \nabla\cdot\bfv\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfv\rangle - \frac{1}{\rmRef}\langle\nabla\bfu, \nabla\bfv\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfv\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\bfn\cdot\nabla\bfu, \bfv\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
-        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
-        \forall \bfF \in \bbE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
-        \forall \bfC \in \bbB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
+        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
+        \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
+        \forall \bfC \in \calB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
     \end{align}
     
     \line
@@ -36,16 +36,16 @@
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
-        $0  =  \nabla\cdot\bfp$  &  $\nabla\cdot\bfp  \in  \bbP$  &  $\nabla\cdot\bbU  \leqslant  \bbP$  \\
-        $0  =  \nabla\wedge\bfE$  &  $\nabla\wedge\bfE  \in  \bbB$  &  $\nabla\wedge\bbE  \leqslant  \bbB$  \\
-        $0  =  \nabla\cdot\bfB$  &  $\bfB  \in  \bbB$  &
+        $0  =  \nabla\cdot\bfp$  &  $\nabla\cdot\bfp  \in  \calP$  &  $\nabla\cdot\calU  \leqslant  \calP$  \\
+        $0  =  \nabla\wedge\bfE$  &  $\nabla\wedge\bfE  \in  \calB$  &  $\nabla\wedge\calE  \leqslant  \calB$  \\
+        $0  =  \nabla\cdot\bfB$  &  $\bfB  \in  \calB$  &
     \end{tabular}\end{center}
-    (Note the proof of pointwise $0  =  \nabla\cdot\bfB$ here relies on that of pointwise $0  =  \nabla\wedge\bfE$ before it.) Restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\bbU \xrightarrow{\rmdiv} \bbP$ and $\bbE \xrightarrow{\bfcurl} \bbB$ form components of subcomplexes of $H\Lambda^{\bullet}(\bfOmega)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    (Note the proof of pointwise $0  =  \nabla\cdot\bfB$ here relies on that of pointwise $0  =  \nabla\wedge\bfE$ before it.) Restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calU \xrightarrow{\rmdiv} \calP$ and $\calE \xrightarrow{\bfcurl} \calB$ form components of subcomplexes of $H\Lambda^{\bullet}(\bfOmega)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (Hcurl) at (0,   0)   {$\bfH(\bfcurl)$};
         \node (Hdiv1) at (3.5, 0)   {$\bfH(\rmdiv)$};
-        \node (E)     at (0,   - 2) {$\bbE$};
-        \node (B)     at (3.5, - 2) {$\bbB$};
+        \node (E)     at (0,   - 2) {$\calE$};
+        \node (B)     at (3.5, - 2) {$\calB$};
 
         \draw[->] (Hcurl) -- (Hdiv1) node[above, midway] {$\bfcurl$};
         \draw[->] (E)     -- (B)     node[above, midway] {$\bfcurl$};
@@ -54,8 +54,8 @@
         
         \node (Hdiv2) at (7,    0)   {$\bfH(\rmdiv)$};
         \node (L2)    at (10.5, 0)   {$L^{2}$};
-        \node (U)     at (7,    - 2) {$\bbU$};
-        \node (P)     at (10.5, - 2) {$\bbP$};
+        \node (U)     at (7,    - 2) {$\calU$};
+        \node (P)     at (10.5, - 2) {$\calP$};
 
         \draw[->] (Hdiv2) -- (L2) node[above, midway] {$\rmdiv$};
         \draw[->] (U)     -- (P)  node[above, midway] {$\rmdiv$};
@@ -63,23 +63,23 @@
         \draw[->] (L2)    -- (P)  node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
 
-    In the \emph{compressible} case, similar test spaces for the corresponding equations are used, with the addition of the \emph{new} energy equation, which is naturally tested against the \emph{new} function space, $\bbD$:
+    In the \emph{compressible} case, similar test spaces for the corresponding equations are used, with the addition of the \emph{new} energy equation, which is naturally tested against the \emph{new} function space, $\calD$:
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
-        Mass conservation  &  $0  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\bbP$  \\
+        Mass conservation  &  $0  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
         Momentum conservation  &  $\bfzero 
-         =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\bbM$  \\
-        Energy conservation  &  $0  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\bbD$  \\
+         =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\calM$  \\
+        Energy conservation  &  $0  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\bbJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
         \hline
-        Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\bbU$  \\
-        Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\bbtheta$  \\
+        Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\calU$  \\
+        Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\Theta$  \\
         \hline
-        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\bbE$  \\
-        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\bbB$  \\
-        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\bbB$  \\
+        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calE$  \\
+        Faraday's law  &  $\bfzero  =  \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calB$  \\
+        Gauss's law  &  $\bfzero  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\nabla\cdot\calB$  \\
     \end{tabular}\end{center}
     with the corresponding \emph{compressible} variational formulation equations:
     
@@ -87,44 +87,44 @@
     
     \paragraph*{Compressible Stationary-State Weak Formulation A}
     \begin{align}
-        \forall q \in \bbP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
+        \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
         \begin{split}
-            \forall \bfq \in \bbM,  0  &=  \left.\left(- \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
+            \forall \bfq \in \calM,  0  &=  \left.\left(- \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \begin{split}
-            \forall \sigma \in \bbD,  0  &=  \left(\langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
+            \forall \sigma \in \calD,  0  &=  \left(\langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\langle\rho\nabla\theta, \nabla\sigma\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p\bfu\cdot\bfn, \sigma\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, \sigma\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
-        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
-        \forall \bfv \in \bbU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega}  \\
-        \forall \eta \in \bbtheta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega}  \\
-        \forall \bfF \in \bbE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
-        \forall \bfC \in \bbB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
+        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
+        \forall \bfv \in \calU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega}  \\
+        \forall \eta \in \Theta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega}  \\
+        \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
+        \forall \bfC \in \calB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
     \end{align}
         
     \line
 
-    $\bfu  \left(=  \frac{1}{\rho}\bfp\right)$, $\theta  \left(=  \frac{p}{\rho}\right)$ (i.e. the spaces $\bbU$, $\bbtheta$) can be eliminated from this formulation, at the cost of the introduction of inner products that include divisions, making exact integral evaluation less realistic.:
+    $\bfu  \left(=  \frac{1}{\rho}\bfp\right)$, $\theta  \left(=  \frac{p}{\rho}\right)$ (i.e. the spaces $\calU$, $\Theta$) can be eliminated from this formulation, at the cost of the introduction of inner products that include divisions, making exact integral evaluation less realistic.:
 
     \line
     
     \paragraph*{Compressible Stationary-State Weak Formulation B}
     \begin{align}
-        \forall q \in \bbP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
+        \forall q \in \calP,  0  &=  \langle\nabla\cdot\bfp, q\rangle_{\bfOmega}  \\
         \begin{split}
-            \forall \bfq \in \bbM,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
+            \forall \bfq \in \calM,  0  &=  \left.\left(\left\langle\frac{1}{\rho}\bfp^{\otimes 2}, \nabla\bfq\right\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq)\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{1}{\rho}(\bfp\cdot\bfn)\bfp, \bfq\right\rangle - \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
         \begin{split}
-            \forall \sigma \in \bbD,  0  &=  \left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
+            \forall \sigma \in \calD,  0  &=  \left(\left\langle\frac{p}{\rho}\bfp, \nabla\sigma\right\rangle - \left\langle p\nabla\cdot\left[\frac{1}{\rho}{\bfp}, \sigma\right]\right\rangle + \frac{1}{\rmRef}\left\langle\rho\bftau:\nabla\left[\frac{1}{\rho}\bfp\right], \sigma\right\rangle\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right], \nabla\sigma\right\rangle\right)\right|_{\bfOmega}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \left\langle\frac{p}{\rho}\bfp\cdot\bfn, \sigma\right\rangle + \frac{1}{\rmPe}\left\langle\rho\nabla\left[\frac{p}{\rho}\right]\cdot\bfn, \sigma\right\rangle\right)\right|_{\bfGamma}
         \end{split}  \\
-        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
-        \forall \bfF \in \bbE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
-        \forall \bfC \in \bbB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
+        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \left\langle\frac{1}{\rho}\bfp\wedge\bfB, \bfk\right\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega}  \\
+        \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma}  \\
+        \forall \bfC \in \calB,  0  &=  \left.\left(\langle\nabla\wedge\bfE, \bfC\rangle + \langle\nabla\cdot\bfB, \nabla\cdot\bfC\rangle\tall\right)\right|_{\bfOmega}
     \end{align}    
     
     \line

@@ -5,8 +5,8 @@
             \begin{equation}
                 \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
             \end{equation}
-            provided $\bbU  \leqslant  \bbM$, $\bbE 
-             \leqslant  \bbF$, and $1  \in  \bbD$,
+            provided $\calU  \leqslant  \calM$, $\calE 
+             \leqslant  \calF$, and $1  \in  \calD$,
             \begin{equation}
                 \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
             \end{equation}
@@ -25,7 +25,7 @@
             \end{align}
             By the strong satisfaction of mass conservation and Faraday's law, $\partial_{t}\rho$, $\partial_{t}\bfB$ can immediately be substituted for $- \nabla\cdot\bfp$, $- \nabla\wedge\bfE$ respectively.
             
-            For the other two terms, one can exploit the weak formulation. For $\int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu$, with $\bfu  \in  \bbU  \leqslant  \bbM$,
+            For the other two terms, one can exploit the weak formulation. For $\int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu$, with $\bfu  \in  \calU  \leqslant  \calM$,
             \begin{align}
                 \int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu  &=  \langle\rho\partial_{t}\bfu, \bfu\rangle_{\bfOmega\otimes T^{k}}  \\
                 \begin{split}
@@ -37,7 +37,7 @@
                     &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu\right)\cdot\bfn
                 \end{split}
             \end{align}
-            For $\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p$, with $1  \in  \bbD$,
+            For $\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p$, with $1  \in  \calD$,
             \begin{align}
                 \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p  &=  \langle p, 1\rangle_{\bfOmega\otimes\partial T^{k}}  \\
                 \begin{split}
@@ -62,11 +62,11 @@
                 \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + - (\bfu\otimes\bfp):\nabla\bfu\right)  =  - \frac{1}{2}\oint_{\bfGamma\otimes T^{k}}\|\bfu\|^{2}\bfp\cdot\bfn
             \end{equation}
             
-            For the remaining EM integrals over $\bfOmega\otimes T^{k}$, with $\bfE  \in  \bbE  \leqslant  \bbF$, from the weak formulation of Ampère's law,
+            For the remaining EM integrals over $\bfOmega\otimes T^{k}$, with $\bfE  \in  \calE  \leqslant  \calF$, from the weak formulation of Ampère's law,
             \begin{equation}
                 \int_{\bfOmega\otimes T^{k}}\bfB\cdot(\nabla\wedge\bfE)  =  \int_{\bfOmega\otimes T^{k}}\bfj\cdot\bfE - \oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
             \end{equation}
-            From the weak formulation of the current identity then, since $\bfj  \in  \bbJ$
+            From the weak formulation of the current identity then, since $\bfj  \in  \calJ$
             \begin{align}
                 \int_{\bfOmega\otimes T^{k}}\bfE\cdot\bfj  &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj + \rmRH(\bfj\wedge\bfB)\cdot\bfj\right)  \\
                 &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj\right)
@@ -89,7 +89,7 @@
             \begin{equation}
                 \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
             \end{equation}
-            provided $\bbB  \leqslant  \bbJ$ and $\bbB  \leqslant  \bbF$,
+            provided $\calB  \leqslant  \calJ$ and $\calB  \leqslant  \calF$,
             \begin{align}
                 \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
                 \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
@@ -107,12 +107,12 @@
                 \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfA\cdot(\nabla\wedge\bfE) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[(\bfE + \nabla\varphi)\wedge\bfA]\cdot\bfn  \\
                 &=  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfE\cdot\bfB + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn
             \end{align}
-            With $\bfB  \in  \bbB  \leqslant  \bbJ$, from the weak formulation of the current identity,
+            With $\bfB  \in  \calB  \leqslant  \calJ$, from the weak formulation of the current identity,
             \begin{multline}
                 \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  =  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\left(\frac{1}{\rmRem}\bfj\cdot\bfB - (\bfu\wedge\bfB)\cdot\bfB + \rmRH(\bfj\wedge\bfB)\cdot\bfB\right)  \\
                 + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn
             \end{multline}
-            Finally, with $\bfB  \in  \bbB  \leqslant  \bbF$,
+            Finally, with $\bfB  \in  \calB  \leqslant  \calF$,
             \begin{align}
                 \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
                 \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)

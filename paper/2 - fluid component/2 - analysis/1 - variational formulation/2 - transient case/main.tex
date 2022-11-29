@@ -5,22 +5,22 @@
     
     \BA{(Need some references for this paragraphs. Should trace the paper trail back from Giacomo's report.)} To derive transient schemes and timesteppers, the system can be interpreted through the lens of function/finite element spaces and weak formulations in both space \emph{and} time, i.e. on the domain $\bfOmega\otimes T^{k}$ over some timestep $T^{k}$, with the intention of constructing a timestepper from the resultant discretization. This is often done through the use of function/finite elements spaces that are tensor product spaces of one in space, $\bfOmega$, and time, $T^{k}$, giving timesteppers that often align with well-studied implicit Runge–Kutta methods. Approaching through the lens of finite elements in time facilitates the construction of structure-preserving discretizations directly from the weak formulation, using specially chosen test spaces. With the order in time of the system often being odd, these test spaces often differ from the solution spaces, such that the finite-element-in-time scheme is a Petrov–Galerkin method. For a further exposition and worked example of this technique in the case of dissipative schemes for the heat equation, see Appendix \ref{cha:constructing timesteppers}. A recent generic numerical implementation for timesteppers derived from finite elements in time, {\tt Fetsome}, building on the implicit Runge–Kutta method package {\tt Irksome} for the finite-element software {\tt Firedrake} is presented in the report \cite{La22}.
 
-    Casting into weak form, consider test functions in the following test function spaces on $\bfOmega\otimes T^{k}$, similarly via the $L^{2}$ inner product, where the test function spaces $\bbF$, $\bbC$ are new spaces, distinct from $\bbP$, $\cdots$, $\bbB$:
+    Casting into weak form, consider test functions in the following test function spaces on $\bfOmega\otimes T^{k}$, similarly via the $L^{2}$ inner product, where the test function spaces $\calF$, $\calC$ are new spaces, distinct from $\calP$, $\cdots$, $\calB$:
     \begin{center}\begin{tabular}{ r l c | c }
         \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
         \hline\hline
-        Mass conservation  &  $- \partial_{t}\rho  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\bbP$  \\
+        Mass conservation  &  $- \partial_{t}\rho  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
         Momentum conservation  &  $\rho\partial_{t}\bfu 
-         =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\bbM$  \\
-        Energy conservation  &  $\partial_{t}p  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\bbD$  \\
+         =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\calM$  \\
+        Energy conservation  &  $\partial_{t}p  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
         \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\bbJ$  \\
+        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
         \hline
-        Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\bbU$  \\
-        Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\bbtheta$  \\
+        Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\calU$  \\
+        Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\Theta$  \\
         \hline
-        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\bbF$  \\
-        Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\bbC$  \\
+        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calF$  \\
+        Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calC$  \\
     \end{tabular}\end{center}
     \BA{(What I might end up doing is doing an initial solve using different test spaces that don't necessarily conserve $\rmE$/$\rmH_{\rmM}$, then doing multigrid-in-time cycles using these conservational test spaces.)} This takes the variational formulation:
     
@@ -28,21 +28,21 @@
 
     \paragraph*{Compressible Transient Weak Formulation A}
     \begin{align}
-        \forall q \in \bbP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
+        \forall q \in \calP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
         \begin{split}
-            \forall \bfq \in \bbM,  0  &=  \left.\left(- \langle\rho\partial_{t}\bfu, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+            \forall \bfq \in \calM,  0  &=  \left.\left(- \langle\rho\partial_{t}\bfu, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
         \end{split}  \\
         \begin{split}
-            \forall \sigma \in \bbD,  0  &=  \left(\langle p, \partial_{t}\sigma\rangle + \langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
+            \forall \sigma \in \calD,  0  &=  \left(\langle p, \partial_{t}\sigma\rangle + \langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\langle\rho\nabla\theta, \nabla\sigma\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \langle p, \sigma\rangle_{\bfOmega\otimes\partial T^{k}} + \left.\left(- \langle p\bfu\cdot\bfn, \sigma\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, \sigma\rangle\right)\right|_{\bfGamma\otimes T^{k}}
         \end{split}  \\
-        \forall \bfk \in \bbJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \bfv \in \bbU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \eta \in \bbtheta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \bfF \in \bbF,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma\otimes T^{k}}  \\
-        \forall \bfC \in \bbC,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle - \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}
+        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+        \forall \bfv \in \calU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
+        \forall \eta \in \Theta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
+        \forall \bfF \in \calF,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma\otimes T^{k}}  \\
+        \forall \bfC \in \calC,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle - \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}
     \end{align}
 
     \line
@@ -51,40 +51,40 @@
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
-        $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \bbP$  &  $\partial_{t}\bbD + \nabla\cdot\bbM  \leqslant  \bbP$  \\
-        $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \bbC$  &  $\partial_{t}\bbB + \nabla\wedge\bbE  \leqslant  \bbC$
+        $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \calP$  &  $\partial_{t}\calD + \nabla\cdot\calM  \leqslant  \calP$  \\
+        $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \calC$  &  $\partial_{t}\calB + \nabla\wedge\calE  \leqslant  \calC$
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\bbM\oplus\bbD \xrightarrow{\rmdiv + \partial_{t}} \bbP$ and $\bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calM\oplus\calD \xrightarrow{\rmdiv + \partial_{t}} \calP$ and $\calE\oplus\calB \xrightarrow{\cdots} \calC\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\rmdiv + \partial_{t})$};
-        \node (EB)   at (0,   - 3) {$\bbE\oplus\bbB$};
-        \node (C*)   at (5.5, - 3) {$\bbC\oplus*$};
+        \node (EB)   at (0,   - 3) {$\calE\oplus\calB$};
+        \node (C*)   at (5.5, - 3) {$\calC\oplus*$};
 
         \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \draw[->] (EB)   -- (C*)   node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \draw[->] (HL2)  -- (EB)   node[left,  midway] {$\pi_{\rmE\rmB}$};
-        \draw[->] (HL3a) -- (C*)   node[left,  midway] {$\pi_{*\rmC}$};
+        \draw[->] (HL3a) -- (C*)   node[left,  midway] {$\pi_{\rmC*}$};
         
         \node (HL3b) at (9,   0)  {$\bfH(\rmdiv + \partial_{t})$};
         \node (HL4) at (12.5, 0)  {$L^{2}$};
-        \node (MD)  at (9,   - 3) {$\bbM\oplus\bbD$};
-        \node (P)  at (12.5, - 3) {$\bbP$};
+        \node (MD)  at (9,   - 3) {$\calM\oplus\calD$};
+        \node (P)  at (12.5, - 3) {$\calP$};
 
         \draw[->] (HL3b) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
         \draw[->] (MD)   -- (P)   node[above, midway] {$\rmdiv + \partial_{t}$};
         \draw[->] (HL3b) -- (MD)  node[left,  midway] {$\pi_{\rmM\rmD}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
-    Further supposing $\bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus*$ forms part of a longer $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$-subcomplex component $\bbphi\oplus\bbA \xrightarrow{\cdots} \bbE\oplus\bbB \xrightarrow{\cdots} \bbC\oplus*$ \BA{(To what extent is existence of such a $(\bbphi, \bbA)$ guaranteed?)},
+    Further supposing $\calE\oplus\calB \xrightarrow{\cdots} \calC\oplus*$ forms part of a longer $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$-subcomplex component $\Phi\oplus\calA \xrightarrow{\cdots} \calE\oplus\calB \xrightarrow{\cdots} \calC\oplus*$ \BA{(To what extent is existence of such a $(\Phi, \calA)$ guaranteed?)},
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL1)  at (0,  0) {$\bfH\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
         \node (HL2)  at (6,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3)  at (12, 0) {$\bfH(\rmdiv + \partial_{t})$};
         
-        \node (phiA) at (0,  - 3) {$\bbphi\oplus\bbA$};
-        \node (EB)   at (6,  - 3) {$\bbE\oplus\bbB$};
-        \node (*C)   at (12, - 3) {$\bbC\oplus*$};
+        \node (phiA) at (0,  - 3) {$\Phi\oplus\calA$};
+        \node (EB)   at (6,  - 3) {$\calE\oplus\calB$};
+        \node (*C)   at (12, - 3) {$\calC\oplus*$};
         
 
         \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
@@ -99,94 +99,146 @@
     \end{tikzpicture}\end{center}
     by the exactness property,
     \begin{equation}
-        \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \bbE\oplus\bbB \rightarrow \bbC\oplus*\right]  \leqslant  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \bbphi\oplus\bbA \rightarrow \bbE\oplus\bbB\right]
+        \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \calE\oplus\calB \rightarrow \calC\oplus*\right]  =  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \Phi\oplus\calA \rightarrow \calE\oplus\calB\right]
     \end{equation}
-    such that, since $(\bfE, \bfB)  \in  \bbE\oplus\bbB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi$, $\bfA$ such that:
+    such that, since $(\bfE, \bfB)  \in  \calE\oplus\calB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi$, $\bfA$ such that:
     \begin{align}
         \bfE  &=  - \nabla\varphi - \partial_{t}\bfA  \\
         \bfB  &=  \nabla\wedge\bfA
     \end{align}
     \BA{(Same technique would give the existence of some compressible streamfunction in $\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$?)}
     
-    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction:
-    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL2) at (0,   0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        \node (HL3) at (6.5, 0) {$\bfH(\rmdiv + \partial_{t})$};
-        
-        \node (Hcurl-L2) at (3.15,  - 4.85) {$\bfH(\bfcurl)\otimes L^{2}$};
-        \node (Hdiv-H1)  at (4.85,  - 3.15) {$\bfH(\rmdiv)\otimes H^{1}$};
-        \node (Hdiv-L2)  at (11.15, - 4.85) {$\bfH(\rmdiv)\otimes L^{2}$};
-        \node (L2-H1)    at (12.85, - 3.15) {$*$};
+    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction. (Figures \ref{fig:tensor product EM subcomplexes}–\ref{fig:tensor product momentum subcomplexes})
+    \begin{figure}
+        \centering
+        {\footnotesize \begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (HL1) at (0,  0) {$\bfH\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+            \node (HL2) at (5,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+            \node (HL3) at (10, 0) {$\bfH(\rmdiv + \partial_{t})$};
+            
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
+                \node (H1-L2)    at (2 - 0.85,  - 3 - 0.85) {$H^{1}\otimes L^{2}$};
+                \node (Hcurl-H1) at (2 + 0.85,  - 3 + 0.85) {$\bfH(\bfcurl)\otimes H^{1}$};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
+                \node (Hcurl-L2) at (7 - 0.85,  - 3 - 0.85) {$\bfH(\bfcurl)\otimes L^{2}$};
+                \node (Hdiv-H1)  at (7 + 0.85,  - 3 + 0.85) {$\bfH(\rmdiv)\otimes H^{1}$};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
+                \node (Hdiv-L2)  at (12 - 0.85, - 3 - 0.85) {$\bfH(\rmdiv)\otimes L^{2}$};
+                \node (L2-H1)    at (12 + 0.85, - 3 + 0.85) {$*$};
 
-        \node (EB) at (0, - 8) {$\bbE\oplus\bbB$};
-        \node (C*) at (8, - 8) {$\bbC\oplus*$};
+            \node (phiA) at (- 1, - 8) {$\Phi\oplus\calA$};
+            \node (EB)   at (4,   - 8) {$\calE\oplus\calB$};
+            \node (C*)   at (9,   - 8) {$\calC\oplus*$};
 
-        \node (E) at (3.15,  - 12.85) {$\bbE$};
-        \node (B) at (4.85,  - 11.15) {$\bbB$};
-        \node (C) at (11.15, - 12.85) {$\bbC$};
-        \node (*) at (12.85, - 11.15) {$*$};
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
+                \node (phi) at (1 - 0.85,  - 11 - 0.85) {$\Phi$};
+                \node (A)   at (1 + 0.85,  - 11 + 0.85) {$\calA$};
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
+                \node (E)   at (6 - 0.85,  - 11 - 0.85) {$\calE$};
+                \node (B)   at (6 + 0.85,  - 11 + 0.85) {$\calB$};
+            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
+                \node (C)   at (11 - 0.85, - 11 - 0.85) {$\calC$};
+                \node (*)   at (11 + 0.85, - 11 + 0.85) {$*$};
 
 
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (4,  - 4) {};
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (12, - 4) {};
+            \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+            \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+            
+            \draw[->] (HL1) -- (2  - 0.75, - 3 + 1.25);
+            \draw[->] (HL2) -- (7  - 0.75, - 3 + 1.25);
+            \draw[->] (HL3) -- (12 - 0.75, - 3 + 1.25);
 
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (4,  - 12) {};
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (12, - 12) {};
+            \draw[->] (HL1) -- (phiA) node[left, pos = 0.75] {$\pi_{\phi\rmA}$};
+            \draw[->, color = white] (HL2) -- coordinate[pos = 0.1](HL2a)  coordinate[pos = 0.55](HL2b) (EB);
+                \draw[-]                   (HL2)  -- (HL2a);
+                \draw[-, color = black!30] (HL2a) -- (HL2b);
+                \draw[->]                  (HL2b) -- (EB) node[left, pos = 0.444444] {$\pi_{\rmE\rmB}$};
+            \draw[->, color = white] (HL3) -- coordinate[pos = 0.25](HL3a) coordinate[pos = 0.55](HL3b) (C*);
+                \draw[-]                   (HL3) -- (HL3a);
+                \draw[-, color = black!30] (HL3a) -- (HL3b);
+                \draw[->]                  (HL3b) -- (C*) node[left, pos = 0.444444] {$\pi_{\rmC*}$};
+            
+            \draw[->] (Hcurl-H1) -- (Hdiv-H1)  node[above, pos = 0.4]  {$\bfcurl$};
+            \draw[->] (Hcurl-H1) -- (Hcurl-L2) node[above, pos = 0.55] {$\partial_{t}$};
+            \draw[->] (H1-L2)    -- (Hcurl-L2) node[above, pos = 0.7]  {$\bfgrad$};
+            \draw[->] (Hdiv-H1)  -- (Hdiv-L2)  node[above, pos = 0.55] {$\partial_{t}$};
+            \draw[->] (Hcurl-L2) -- (Hdiv-L2)  node[above, pos = 0.65] {$\bfcurl$};
 
-
-        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-        
-        \draw[->] (HL2) -- (EB) node[left,  midway] {$\pi_{\rmE\rmB}$};
-        \draw[->] (HL3) -- (C*) node[left,  midway] {$\pi_{*\rmC}$};
-
-        \draw[->] (HL2) -- (4,  - 2);
-        \draw[->] (HL3) -- (12, - 2);
-        
-        \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
-
-        \draw[->] (Hdiv-H1)  -- (Hdiv-L2) node[above, midway] {$\partial_{t}$};
-        \draw[->] (Hcurl-L2) -- (Hdiv-L2) node[above, midway] {$\bfcurl$};
-        
-        \draw[->] (Hcurl-L2) -- (E) node[left, pos = 0.65] {$\pi_{\rmE}$};
-        \draw[->] (Hdiv-H1)  -- (B) node[left, pos = 0.8]  {$\pi_{\rmB}$};
-        \draw[->] (Hdiv-L2)  -- (C) node[left, pos = 0.65] {$\pi_{\rmC}$};
-        
-        \draw[->] (B) -- (C) node[above, midway] {$\partial_{t}$};
-        \draw[->] (E) -- (C) node[above, midway] {$\bfcurl$};
-    \end{tikzpicture}\end{center}
+            \draw[->, color = white] (H1-L2)    -- coordinate[pos = 0.3](phia) coordinate[pos = 0.9](phib) (phi);
+                \draw[-]                   (H1-L2)    -- (phia) node[left, pos = 0.666666] {$\pi_{\phi}$};
+                \draw[-, color = black!30] (phia)     -- (phib);
+                \draw[->]                  (phib)     -- (phi);
+            \draw[->, color = white] (Hcurl-H1) -- coordinate[pos = 0.5](Aa)   coordinate[pos = 0.8](Ab)   (A);
+                \draw[-]                   (Hcurl-H1) -- (Aa)   node[left, pos = 0.85]     {$\pi_{\rmA}$};
+                \draw[-, color = black!30] (Aa)       -- (Ab);
+                \draw[->]                  (Ab)       -- (A);
+            \draw[->, color = white] (Hcurl-L2) -- coordinate[pos = 0.3](Ea)   coordinate[pos = 0.9](Eb)   (E);
+                \draw[-]                   (Hcurl-L2) -- (Ea)   node[left, pos = 0.666666] {$\pi_{\rmE}$};
+                \draw[-, color = black!30] (Ea)       -- (Eb);
+                \draw[->]                  (Eb)       -- (E);
+            \draw[->, color = white] (Hdiv-H1)  -- coordinate[pos = 0.5](Ba)   coordinate[pos = 0.8](Bb)   (B);
+                \draw[-]                   (Hdiv-H1)  -- (Ba)   node[left, pos = 0.85]     {$\pi_{\rmB}$};
+                \draw[-, color = black!30] (Ba)       -- (Bb);
+                \draw[->]                  (Bb)       -- (B);
+            \draw[->, color = white] (Hdiv-L2)  -- coordinate[pos = 0.7](Ca)   coordinate[pos = 0.9](Cb)   (C);
+                \draw[-]                   (Hdiv-L2)  -- (Ca)   node[left, pos = 0.285714] {$\pi_{\rmC}$};
+                \draw[-, color = black!30] (Ca)       -- (Cb);
+                \draw[->]                  (Cb)       -- (C);
+            
+            \draw[->] (phiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
+            \draw[->] (EB)   -- (C*) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
+            
+            \draw[->] (phiA) -- (1  - 0.65, - 11 + 1.15);
+            \draw[->] (EB)   -- (6  - 0.65, - 11 + 1.15);
+            \draw[->] (C*)   -- (11 - 0.65, - 11 + 1.15);
+            
+            \draw[->] (A)   -- (B) node[above, midway] {$\bfcurl$};
+            \draw[->] (A)   -- (E) node[above, midway] {$\partial_{t}$};
+            \draw[->] (phi) -- (E) node[above, midway] {$\bfgrad$};
+            \draw[->] (B)   -- (C) node[above, midway] {$\partial_{t}$};
+            \draw[->] (E)   -- (C) node[above, midway] {$\bfcurl$};
+        \end{tikzpicture}}
+        \caption{\BA{...}}
+        \label{fig:tensor product EM subcomplexes}
+    \end{figure}
     
-    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (HL3) at (0,   0) {$\bfH(\rmdiv + \partial_{t})$};
-        \node (HL4) at (6.5, 0) {$L^{2}$};
-        
-        \node (Hdiv-L2) at (- 0.85, - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
-        \node (L2-H1)   at (0.85,   - 3)   {$L^{2}\otimes H^{1}$};
-        \node (L2-L2)   at (5.65,   - 4.5) {$L^{2}\otimes L^{2}$};
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (HL3) at (0,   0) {$\bfH(\rmdiv + \partial_{t})$};
+            \node (HL4) at (6.5, 0) {$L^{2}$};
+            
+            \node (Hdiv-L2) at (- 0.85, - 4.5) {$\bfH(\rmdiv)\otimes L^{2}$};
+            \node (L2-H1)   at (0.85,   - 3)   {$L^{2}\otimes H^{1}$};
+            \node (L2-L2)   at (5.65,   - 4.5) {$L^{2}\otimes L^{2}$};
 
-        \node (M) at (- 0.85, - 8.25) {$\bbM$};
-        \node (D) at (0.85,   - 6.75) {$\bbD$};
-        \node (P) at (5.65,   - 8.25) {$\bbP$};
-
-
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
-        \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
+            \node (M) at (- 0.85, - 8.25) {$\calM$};
+            \node (D) at (0.85,   - 6.75) {$\calD$};
+            \node (P) at (5.65,   - 8.25) {$\calP$};
 
 
-        \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
-        
-        \draw[->] (HL3) -- (0,   - 2);
-        \draw[->] (HL4) -- (6.5, - 2);
-        
-        \draw[->] (L2-H1)   -- (L2-L2) node[above, pos = 0.55] {$\partial_{t}$};
-        \draw[->] (Hdiv-L2) -- (L2-L2) node[above, pos = 0.65] {$\rmdiv$};
-        
-        \draw[->] (Hdiv-L2) -- (M) node[left, pos = 0.65] {$\pi_{\rmM}$};
-        \draw[->] (L2-H1)   -- (D) node[left, pos = 0.8]  {$\pi_{\rmD}$};
-        \draw[->] (L2-L2)   -- (P) node[left, pos = 0.65] {$\pi_{\rmP}$};
-        
-        \draw[->] (D) -- (P) node[above, midway] {$\partial_{t}$};
-        \draw[->] (M) -- (P) node[above, midway] {$\rmdiv$};
-    \end{tikzpicture}\end{center}
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (0,   - 3.75) {};
+            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 3cm, rotate = 20] at (6.5, - 3.75) {};
+
+
+            \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
+            
+            \draw[->] (HL3) -- (0,   - 2);
+            \draw[->] (HL4) -- (6.5, - 2);
+            
+            \draw[->] (L2-H1)   -- (L2-L2) node[above, pos = 0.55] {$\partial_{t}$};
+            \draw[->] (Hdiv-L2) -- (L2-L2) node[above, pos = 0.65] {$\rmdiv$};
+            
+            \draw[->] (Hdiv-L2) -- (M) node[left, pos = 0.65] {$\pi_{\rmM}$};
+            \draw[->] (L2-H1)   -- (D) node[left, pos = 0.8]  {$\pi_{\rmD}$};
+            \draw[->] (L2-L2)   -- (P) node[left, pos = 0.65] {$\pi_{\rmP}$};
+            
+            \draw[->] (D) -- (P) node[above, midway] {$\partial_{t}$};
+            \draw[->] (M) -- (P) node[above, midway] {$\rmdiv$};
+        \end{tikzpicture}
+        \caption{\BA{...}}
+        \label{fig:tensor product momentum subcomplexes}
+    \end{figure}
 
     \line
 
@@ -207,8 +259,8 @@
         \begin{equation}
             \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
         \end{equation}
-        provided $\bbU  \leqslant  \bbM$, $\bbE 
-         \leqslant  \bbF$, and $1  \in  \bbD$,
+        provided $\calU  \leqslant  \calM$, $\calE 
+         \leqslant  \calF$, and $1  \in  \calD$,
         \begin{equation}
             \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
         \end{equation}
@@ -222,7 +274,7 @@
         \begin{equation}
             \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
         \end{equation}
-        provided $\bbB  \leqslant  \bbJ$ and $\bbB  \leqslant  \bbF$,
+        provided $\calB  \leqslant  \calJ$ and $\calB  \leqslant  \calF$,
         \begin{align}
             \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
             \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
