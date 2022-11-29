@@ -1,0 +1,120 @@
+\chapter{Proofs of Conservation Law in the Weak Formulation}\label{cha:weak conservation proofs}
+    \section*{Energy Conservation}
+        \begin{theorem*}[Energy Conservation in the Weak Formulation]
+            Defining the energy,
+            \begin{equation}
+                \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
+            \end{equation}
+            provided $\bbU  \leqslant  \bbM$, $\bbE 
+             \leqslant  \bbF$, and $1  \in  \bbD$,
+            \begin{equation}
+                \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \end{equation}
+        \end{theorem*}
+        \begin{proof}
+            \begin{align}
+                \begin{split}
+                    \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  &=  \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \int_{\bfOmega\otimes\left\{t^{k}\right\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
+                \end{split}  \\
+                &=  \int_{T^{k}}\partial_{t}\left[\int_{\bfOmega}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right)\right] + \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)  \\
+                \begin{split}
+                    &=  \int_{\bfOmega\otimes T^{k}}\left(\left(\frac{1}{2}\partial_{t}\rho\|\bfu\|^{2} + \rho\bfu\cdot\partial_{t}\bfu\right) + \frac{2}{\beta}\bfB\cdot\partial_{t}\bfB\right)  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left(\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p\right)
+                \end{split}
+            \end{align}
+            By the strong satisfaction of mass conservation and Faraday's law, $\partial_{t}\rho$, $\partial_{t}\bfB$ can immediately be substituted for $- \nabla\cdot\bfp$, $- \nabla\wedge\bfE$ respectively.
+            
+            For the other two terms, one can exploit the weak formulation. For $\int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu$, with $\bfu  \in  \bbU  \leqslant  \bbM$,
+            \begin{align}
+                \int_{\bfOmega\otimes T^{k}}\rho\bfu\cdot\partial_{t}\bfu  &=  \langle\rho\partial_{t}\bfu, \bfu\rangle_{\bfOmega\otimes T^{k}}  \\
+                \begin{split}
+                    &=  \left.\left(- \langle\bfp\cdot\nabla\bfu, \bfu\rangle + \langle p, \nabla\cdot\bfu\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfu\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfu\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfu\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfu\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
+                \end{split}  \\
+                \begin{split}
+                    &=  \int_{\bfOmega\otimes T^{k}}\left(- (\bfu\otimes\bfp):\nabla\bfu + p\nabla\cdot\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu - \frac{1}{\rmRef}\rho\bftau:\nabla_{s}\bfu\right)  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu\right)\cdot\bfn
+                \end{split}
+            \end{align}
+            For $\int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p$, with $1  \in  \bbD$,
+            \begin{align}
+                \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}p - \int_{\bfOmega\otimes\left\{t^{k}\right\}}p  &=  \langle p, 1\rangle_{\bfOmega\otimes\partial T^{k}}  \\
+                \begin{split}
+                    &=  \left.\left(- \langle p\nabla\cdot\bfu, 1\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, 1\rangle + \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, 1\right\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\left(- \langle p\bfu\cdot\bfn, 1\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, 1\rangle\right)\right|_{\bfGamma\otimes T^{k}}
+                \end{split}  \\
+                \begin{split}
+                    &=  \int_{\bfOmega\otimes T^{k}}\left(- p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \oint_{\bfGamma\otimes T^{k}}\left(- p\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+                \end{split}
+            \end{align}
+    
+            Discarding immediately canceling terms, this evaluates as
+            \begin{multline}
+                \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + \left(- (\bfu\otimes\bfp):\nabla\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu\right)\right.  \\
+                + \left.\frac{2}{\beta\rmRem}\|\bfj\|^{2} - \frac{2}{\beta}\bfB\cdot\nabla\wedge\bfE\tall\right)  \\
+                + \oint_{\bfGamma\otimes T^{k}}\left(- 2p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \end{multline}
+            
+            Similar to the case in the strong formulation,
+            \begin{equation}
+                \int_{\bfOmega\otimes T^{k}}\left( - \frac{1}{2}\|\bfu\|^{2}\nabla\cdot\bfp + - (\bfu\otimes\bfp):\nabla\bfu\right)  =  - \frac{1}{2}\oint_{\bfGamma\otimes T^{k}}\|\bfu\|^{2}\bfp\cdot\bfn
+            \end{equation}
+            
+            For the remaining EM integrals over $\bfOmega\otimes T^{k}$, with $\bfE  \in  \bbE  \leqslant  \bbF$, from the weak formulation of Ampère's law,
+            \begin{equation}
+                \int_{\bfOmega\otimes T^{k}}\bfB\cdot(\nabla\wedge\bfE)  =  \int_{\bfOmega\otimes T^{k}}\bfj\cdot\bfE - \oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
+            \end{equation}
+            From the weak formulation of the current identity then, since $\bfj  \in  \bbJ$
+            \begin{align}
+                \int_{\bfOmega\otimes T^{k}}\bfE\cdot\bfj  &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj + \rmRH(\bfj\wedge\bfB)\cdot\bfj\right)  \\
+                &=  \int_{\bfOmega\otimes T^{k}}\left(\frac{1}{\rmRem}\|\bfj\|^{2} - (\bfu\wedge\bfB)\cdot\bfj\right)
+            \end{align}
+            Collecting these terms therefore,
+            \begin{equation}
+                \int_{\bfOmega\otimes T^{k}}\left((\bfj\wedge\bfB)\cdot\bfu + \frac{1}{\rmRem}\|\bfj\|^{2} - \bfB\cdot\nabla\wedge\bfE\tall\right)  =  \oint_{\bfGamma\otimes T^{k}}(\bfB\wedge\bfE)\cdot\bfn
+            \end{equation}
+    
+            Thus,
+            \begin{equation}
+                \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \end{equation}
+        \end{proof}
+    
+
+    \section*{Helicity Conservation}
+        \begin{theorem*}[Helicity Conservation in the Weak Formulation]
+            Defining the magnetic helicity,
+            \begin{equation}
+                \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
+            \end{equation}
+            provided $\bbB  \leqslant  \bbJ$ and $\bbB  \leqslant  \bbF$,
+            \begin{align}
+                \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
+                \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
+            \end{align}
+        \end{theorem*}
+        \begin{proof}
+            \begin{align}
+                \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  \int_{\bfOmega\otimes\left\{t^{k + 1}\right\}}\bfA\cdot\bfB - \int_{\bfOmega\otimes\left\{t^{k}\right\}}\bfA\cdot\bfB  \\
+                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}\partial_{t}(\bfA\cdot\bfB)  \\
+                &=  \int_{\bfOmega\otimes\left\{T^{k}\right\}}(\partial_{t}\bfA\cdot\bfB + \bfA\cdot\partial_{t}\bfB)  \\
+                &=  2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfA\cdot\partial_{t}\bfB + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge\partial_{t}\bfA]\cdot\bfn
+            \end{align}
+            By the exact solution of Faraday's law, $\partial_{t}\bfB$ can be substituted for $- \nabla\wedge\bfE$; by the definition of the EM potentials, $\partial_{t}\bfA$ can be substituted for $- \bfE - \nabla\varphi$.
+            \begin{align}
+                \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfA\cdot(\nabla\wedge\bfE) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[(\bfE + \nabla\varphi)\wedge\bfA]\cdot\bfn  \\
+                &=  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfE\cdot\bfB + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn
+            \end{align}
+            With $\bfB  \in  \bbB  \leqslant  \bbJ$, from the weak formulation of the current identity,
+            \begin{multline}
+                \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  =  - 2\int_{\bfOmega\otimes\left\{T^{k}\right\}}\left(\frac{1}{\rmRem}\bfj\cdot\bfB - (\bfu\wedge\bfB)\cdot\bfB + \rmRH(\bfj\wedge\bfB)\cdot\bfB\right)  \\
+                + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn
+            \end{multline}
+            Finally, with $\bfB  \in  \bbB  \leqslant  \bbF$,
+            \begin{align}
+                \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
+                \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
+            \end{align}
+        \end{proof}
