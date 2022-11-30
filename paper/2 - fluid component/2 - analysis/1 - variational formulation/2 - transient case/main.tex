@@ -136,20 +136,20 @@
     
     By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction. (Figures \ref{fig:tensor product EM subcomplexes}–\ref{fig:tensor product momentum subcomplexes})
     
-    \begin{figure}
+    \begin{figure}[!h]
         \centering
         {\footnotesize \begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node (HL1) at (0,  0) {$\bfH\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
             \node (HL2) at (5,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             \node (HL3) at (10, 0) {$\bfH(\rmdiv + \partial_{t})$};
             
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
                 \node (H1-L2)    at (2 - 0.85,  - 3 - 0.85) {$H^{1}\otimes L^{2}$};
                 \node (Hcurl-H1) at (2 + 0.85,  - 3 + 0.85) {$\bfH(\bfcurl)\otimes H^{1}$};
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
                 \node (Hcurl-L2) at (7 - 0.85,  - 3 - 0.85) {$\bfH(\bfcurl)\otimes L^{2}$};
                 \node (Hdiv-H1)  at (7 + 0.85,  - 3 + 0.85) {$\bfH(\rmdiv)\otimes H^{1}$};
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
                 \node (Hdiv-L2)  at (12 - 0.85, - 3 - 0.85) {$\bfH(\rmdiv)\otimes L^{2}$};
                 \node (L2-H1)    at (12 + 0.85, - 3 + 0.85) {$*$};
 
@@ -157,13 +157,13 @@
             \node (EB)   at (4,   - 8) {$\calE\oplus\calB$};
             \node (C*)   at (9,   - 8) {$\calC\oplus*$};
 
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
                 \node (Phi) at (1 - 0.85,  - 11 - 0.85) {$\Phi$};
                 \node (A)   at (1 + 0.85,  - 11 + 0.85) {$\calA$};
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
                 \node (E)   at (6 - 0.85,  - 11 - 0.85) {$\calE$};
                 \node (B)   at (6 + 0.85,  - 11 + 0.85) {$\calB$};
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
                 \node (C)   at (11 - 0.85, - 11 - 0.85) {$\calC$};
                 \node (*)   at (11 + 0.85, - 11 + 0.85) {$*$};
 
@@ -171,9 +171,9 @@
             \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
             \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             
-            \draw[->] (HL1) -- (2  - 0.75, - 3 + 1.25);
-            \draw[->] (HL2) -- (7  - 0.75, - 3 + 1.25);
-            \draw[->] (HL3) -- (12 - 0.75, - 3 + 1.25);
+            \draw[->, dashed] (HL1) -- (2  - 0.85, - 3 + 1.15);
+            \draw[->, dashed] (HL2) -- (7  - 0.85, - 3 + 1.15);
+            \draw[->, dashed] (HL3) -- (12 - 0.85, - 3 + 1.15);
 
             \draw[->] (HL1) -- (PhiA) node[left, pos = 0.75] {$\pi_{\phi\rmA}$};
             \draw[->, color = white] (HL2) -- coordinate[pos = 0.1](HL2a)  coordinate[pos = 0.55](HL2b) (EB);
@@ -215,56 +215,56 @@
             \draw[->] (PhiA) -- (EB) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
             \draw[->] (EB)   -- (C*) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             
-            \draw[->] (PhiA) -- (1  - 0.65, - 11 + 1.15);
-            \draw[->] (EB)   -- (6  - 0.65, - 11 + 1.15);
-            \draw[->] (C*)   -- (11 - 0.65, - 11 + 1.15);
+            \draw[->, dashed] (PhiA) -- (1  - 0.8, - 11 + 1);
+            \draw[->, dashed] (EB)   -- (6  - 0.8, - 11 + 1);
+            \draw[->, dashed] (C*)   -- (11 - 0.8, - 11 + 1);
             
-            \draw[->] (A)   -- (B) node[above, midway] {$\bfcurl$};
-            \draw[->] (A)   -- (E) node[above, midway] {$\partial_{t}$};
-            \draw[->] (Phi) -- (E) node[above, midway] {$\bfgrad$};
-            \draw[->] (B)   -- (C) node[above, midway] {$\partial_{t}$};
-            \draw[->] (E)   -- (C) node[above, midway] {$\bfcurl$};
+            \draw[->] (A)   -- (B) node[above, pos = 0.4] {$\bfcurl$};
+            \draw[->] (A)   -- (E) node[above, midway]    {$\partial_{t}$};
+            \draw[->] (Phi) -- (E) node[above, pos = 0.6] {$\bfgrad$};
+            \draw[->] (B)   -- (C) node[above, midway]    {$\partial_{t}$};
+            \draw[->] (E)   -- (C) node[above, pos = 0.6] {$\bfcurl$};
         \end{tikzpicture}}
-        \caption{\BA{...}}
+        \caption{Construction of EM subcomplexes via tensor products. \BA{(Perhaps a little explanation on what this means...)}}
         \label{fig:tensor product EM subcomplexes}
     \end{figure}
     
-    \begin{figure}
+    \begin{figure}[!h]
         \centering
         {\footnotesize \begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node (HL2) at (0,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             \node (HL3) at (5,  0) {$\bfH(\rmdiv + \partial_{t})$};
             \node (HL4) at (10, 0) {$L^{2}$};
             
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (2,  - 3) {};
                 \node (Hcurl-L2) at (2 - 0.85,  - 3 - 0.85) {$\bfH(\bfcurl)\otimes L^{2}$};
                 \node (Hdiv-H1)  at (2 + 0.85,  - 3 + 0.85) {$\bfH(\rmdiv)\otimes H^{1}$};
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (7,  - 3) {};
                 \node (Hdiv-L2)  at (7 - 0.85,  - 3 - 0.85) {$\bfH(\rmdiv)\otimes L^{2}$};
                 \node (L2-H1)    at (7 + 0.85,  - 3 + 0.85) {$L^{2}\otimes H^{1}$};
-            \node[ellipse, draw, dashed, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 5cm, minimum height = 2.5cm, rotate = 30] at (12, - 3) {};
                 \node (L2-L2)    at (12 - 0.85, - 3 - 0.85) {$L^{2}\otimes L^{2}$};
 
             \node (PsiChi) at (- 1, - 8) {$\Psi\oplus\calX$};
             \node (MD)     at (4,   - 8) {$\calM\oplus\calD$};
             \node (P*)     at (9,   - 8) {$\calP$};
 
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
                 \node (Psi) at (1 - 0.85,  - 11 - 0.85) {$\Psi$};
                 \node (Chi) at (1 + 0.85,  - 11 + 0.85) {$\calX$};
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (6,  - 11) {};
                 \node (M)   at (6 - 0.85,  - 11 - 0.85) {$\calM$};
                 \node (D)   at (6 + 0.85,  - 11 + 0.85) {$\calD$};
-            \node[ellipse, draw, dashed, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
+            \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
                 \node (P)   at (11 - 0.85, - 11 - 0.85) {$\calP$};
 
 
             \draw[->] (HL2) -- (HL3) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             \draw[->] (HL3) -- (HL4) node[above, midway] {$\rmdiv + \partial_{t}$};
             
-            \draw[->] (HL2) -- (2  - 0.75, - 3 + 1.25);
-            \draw[->] (HL3) -- (7  - 0.75, - 3 + 1.25);
-            \draw[->] (HL4) -- (12 - 0.75, - 3 + 1.25);
+            \draw[->, dashed] (HL2) -- (2  - 0.85, - 3 + 1.15);
+            \draw[->, dashed] (HL3) -- (7  - 0.85, - 3 + 1.15);
+            \draw[->, dashed] (HL4) -- (12 - 0.85, - 3 + 1.15);
 
             \draw[->] (HL2) -- (PsiChi) node[left, pos = 0.75] {$\pi_{\Psi\rmX}$};
             \draw[->, color = white] (HL3) -- coordinate[pos = 0.15](HL3a) coordinate[pos = 0.55](HL3b) (MD);
@@ -306,17 +306,17 @@
             \draw[->] (PsiChi) -- (MD) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
             \draw[->] (MD)     -- (P*) node[above, midway] {$\rmdiv + \partial_{t}$};
             
-            \draw[->] (PsiChi) -- (1  - 0.65, - 11 + 1.15);
-            \draw[->] (MD)     -- (6  - 0.65, - 11 + 1.15);
-            \draw[->] (P*)     -- (11 - 0.65, - 11 + 1.15);
+            \draw[->, dashed] (PsiChi) -- (1  - 0.8, - 11 + 1);
+            \draw[->, dashed] (MD)     -- (6  - 0.8, - 11 + 1);
+            \draw[->, dashed] (P*)     -- (11 - 0.8, - 11 + 1);
             
-            \draw[->] (Chi) -- (D) node[above, midway] {$\rmdiv$};
-            \draw[->] (Chi) -- (M) node[above, midway] {$\partial_{t}$};
-            \draw[->] (Psi) -- (M) node[above, midway] {$\bfcurl$};
-            \draw[->] (D)   -- (P) node[above, midway] {$\partial_{t}$};
-            \draw[->] (M)   -- (P) node[above, midway] {$\rmdiv$};
+            \draw[->] (Chi) -- (D) node[above, pos = 0.4] {$\rmdiv$};
+            \draw[->] (Chi) -- (M) node[above, midway]    {$\partial_{t}$};
+            \draw[->] (Psi) -- (M) node[above, pos = 0.6] {$\bfcurl$};
+            \draw[->] (D)   -- (P) node[above, midway]    {$\partial_{t}$};
+            \draw[->] (M)   -- (P) node[above, pos = 0.6] {$\rmdiv$};
         \end{tikzpicture}}
-        \caption{\BA{...}}
+        \caption{Construction of momentum subcomplexes via tensor products. \BA{(Perhaps a little explanation on what this means...)}}
         \label{fig:tensor product momentum subcomplexes}
     \end{figure}
 
@@ -377,7 +377,6 @@
     \begin{itemize}
         \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations (Talk about how to modify the weak formulation for non-conforming discretization so as not to lose my structure-preserving properties (Exact mass conservation + Faraday's law/Energy conservation + helicity dissipation + bounded change in helicity))
         \item  Talk about 2.5D case
-        \item  Upgrade tensor product complex commutative diagrams
         \item  Add further work environment for referencing to the further work chapter
         \item  Change horizontal lines to ```backslash'line'' objects
         \item  Add compressible transient weak formulation \emph{B} (with the hard-to-compute division integrals)
@@ -388,4 +387,6 @@
             \item  One that \emph{doesn't} have exact energy conservation/helicity dissipation, but has something quantifiably close, that can actually be used as a timestepper.
         \end{itemize}
         \item  How do the energy conservation/helicity dissipation results change when I introduce the coupled system with the particles? Could give rise to a grounds from which to construct the particle pusher, for structure preservation.
+        \item  Add {\tt subequations} environments
+        \item  Improve cross-referencing of equations
     \end{itemize}}
