@@ -27,7 +27,7 @@
   title      = {Low Temperature Plasma Technology: Methods and Applications},
   isbn       = {978-1-4665-0990-0},
   shorttitle = {Low Temperature Plasma Technology},
-  abstract   = {Written by a team of pioneering scientists from around the world, Low Temperature Plasma Technology: Methods and Applications brings together recent technological advances and research in the rapidly growing field of low temperature plasmas.  The book provides a comprehensive overview of related phenomena such as plasma bullets, plasma penetration into biofilms, discharge-mode transition of atmospheric pressure plasmas, and self-organization of microdischarges. It describes relevant technology and diagnostics, including nanosecond pulsed discharge, cavity ringdown spectroscopy, and laser-induced fluorescence measurement, and explores the increasing research on atmospheric pressure nonequilibrium plasma jets. The authors also discuss how low temperature plasmas are used in the synthesis of nanomaterials, environmental applications, the treatment of biomaterials, and plasma medicine. This book provides a balanced and thorough treatment of the core principles, novel technology and diagnostics, and state-of-the-art applications of low temperature plasmas. It is accessible to scientists and graduate students in low-pressure plasma physics, nanotechnology, plasma medicine, and materials science. The book is also suitable as an advanced reference for senior undergraduate students.},
+  abstract   = {Written by a team of pioneering scientists from around the world, Low Temperature Plasma Technology: Methods and Applications brings together recent technological advances and research in the rapidly growing field of low temperature plasmas. The book provides a comprehensive overview of related phenomena such as plasma bullets, plasma penetration into biofilms, discharge-mode transition of atmospheric pressure plasmas, and self-organization of microdischarges. It describes relevant technology and diagnostics, including nanosecond pulsed discharge, cavity ringdown spectroscopy, and laser-induced fluorescence measurement, and explores the increasing research on atmospheric pressure nonequilibrium plasma jets. The authors also discuss how low temperature plasmas are used in the synthesis of nanomaterials, environmental applications, the treatment of biomaterials, and plasma medicine. This book provides a balanced and thorough treatment of the core principles, novel technology and diagnostics, and state-of-the-art applications of low temperature plasmas. It is accessible to scientists and graduate students in low-pressure plasma physics, nanotechnology, plasma medicine, and materials science. The book is also suitable as an advanced reference for senior undergraduate students.},
   language   = {en},
   publisher  = {CRC Press},
   author     = {Chu, P. K. and Lu, X.},
@@ -35,12 +35,18 @@
   year       = {2013}
 }
 
-@misc{La22,
-  author       = {La Scala, G.},
-  title        = {Variational Time-Steppers that are Finite Element in Time for Firedrake and Irksome},
-  howpublished = {MEng Project Report},
-  month        = jun,
-  year         = {2022}
+@techreport{La22,
+  type        = {MEng Project Report},
+  title       = {Variational Time-Steppers that are Finite Element in Time for Firedrake and Irksome},
+  url         = {https://www.imperial.ac.uk/media/imperial-college/faculty-of-engineering/computing/public/2122-ug-projects/2122-individual-projects/Variational-Time-Steppers-that-are-Finite-Element-in-Time-for-Firedrake-and-Irksome.pdf},
+  abstract    = {Partial differential equations (PDEs) model an immense variety of physical phenomena of theoretical and practical interest, although they often do not present closed-form solutions. Firedrake is a high-performance, automated code generation software tool to approximate the solution to PDEs using the finite element method (FEM). Time-dependent PDEs are commonly solved numerically by applying the FEM only in the spatial-domain, reducing the problem to a number of time-dependent ordinary differential equations solved by time-stepping methods like Runge–Kutta. This report presents Fetsome, an extension to Firedrake and the Irksome time-stepping library which discretises the time domain through finite elements like in the spatial domain, providing a new software implementation for the mathematical formulation of finite element in time (FET). Fetsome supports continuous Petrov–Galerkin and discontinuous Galerkin time elements, which decouple the problem defined on the global timemesh to obtain local FET time-stepping. Code verification is performed through convergence testing for classical linear and nonlinear time dependent PDEs such as the heat, transport and Burgers' equations. By analysing the stability properties of solutions to the inviscid Burgers' equation, the efficacy of the implementation in combining with more complex spatial discretisations and flux functions is highlighted.},
+  language    = {en},
+  urldate     = {2022-12-06},
+  institution = {Imperial College London},
+  author      = {La Scala, G.},
+  month       = jun,
+  year        = {2022},
+  pages       = {63}
 }
 
 @article{LFM22,
@@ -65,7 +71,7 @@
   title    = {Structure-Preserving and Helicity-Conserving Finite Element Approximations and Preconditioning for the Hall MHD Equations},
   doi      = {10.48550/ARXIV.2202.11586},
   abstract = {We develop structure-preserving finite element methods for the incompressible, resistive Hall magnetohydrodynamics (MHD) equations. These equations incorporate the Hall current term in Ohm's law and provide a more appropriate description of fully ionized plasmas than the standard MHD equations on length scales close to or smaller than the ion skin depth. We introduce a stationary discrete variational formulation of Hall MHD that enforces the magnetic Gauss's law exactly (up to solver tolerances) and prove the well-posedness and convergence of a Picard linearization. For the transient problem, we present time discretizations that preserve the energy and magnetic and hybrid helicity precisely in the ideal limit for two types of boundary conditions. Additionally, we present an augmented Lagrangian preconditioning technique for both the stationary and transient cases. We confirm our findings with several numerical experiments.},
-  urldate  = {2022-05-03},
+  urldate  = {2022-12-06},
   journal  = {arXiv:2202.11586 [physics]},
   author   = {Laakmann, F. and Hu, K. and Farrell, P. E.},
   month    = feb,
@@ -95,4 +101,14 @@
   author     = {Piel, A.},
   month      = sep,
   year       = {2017}
+}
+
+@misc{Wes00,
+  title    = {The Science of JET},
+  url      = {https://www.euro-fusion.org/fileadmin/user_upload/Archive/wp-content/uploads/2012/01/the-science-of-jet-2000.pdf},
+  language = {en},
+  urldate  = {2022-12-06},
+  author   = {Wesson, J.},
+  month    = {mar},
+  year     = {2000}
 }
