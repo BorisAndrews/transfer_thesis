@@ -1,9 +1,9 @@
 \subsection*{Kinetic Models}
-    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+    \line
     \begin{definition}[Kinetic model]
         Here, ``kinetic'' models refer to those wherein the distribution of particles positions and velocities is modelled through a single distribution function, as a function of both position and velocity.
     \end{definition}
-    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+    \line
     For each phase, $s$, we define the distribution functions $(f_{s}(\bfx, \bfv; t))_{s}$
     \begin{equation}
         f_{s}(\bfx, \bfv; t)  :=  \sum_{i}\delta^{3}(\bfx - \bfx_{si})\delta^{3}(\bfv - \bfv_{si})
@@ -22,7 +22,7 @@
         \bbE\left\{\int_{\bfx; t}\bfB(\bfx, t)\cdot\bfphi(\bfx, t)\right\}  =  \int_{\bfx; t}\widetilde{\bfB}(\bfx, t)\cdot\bfphi(\bfx, t)
     \end{align}
     We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $\left(\widetilde{f_{s}}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{fig:kinetic model construction workflow} to each equation.
-    \begin{figure}[!h]
+    \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[align = center, auto]
             \node (1) at (0, 0) {Cast into variational form: $f_{s}  \mapsto  \int_{\bfx, \bfv; t}f_{s}\phi$};

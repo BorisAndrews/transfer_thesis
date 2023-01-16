@@ -1,0 +1,56 @@
+% Parameters
+p = 10;
+n = 3;
+varphi       = @(x, i) sqrt((2*i - 1)/2)*x.^(i - 1);
+phi          = @(x, i) sqrt((2*i - 1)*(2*i + 1)*(2*i + 3)/16)*(1 - x.^2).*x.^(i - 1);
+phi_prime    = @(x, i) sqrt((2*i - 1)*(2*i + 1)*(2*i + 3)/16)*((i - 1) - (i + 1)*x.^2).*x.^(i - 2);
+
+
+% Matrix 1
+A = zeros(p, p - 1);
+b = zeros(p, 1);
+for i = 1:p
+    for j = 1:(p - 1)
+        A(i, j) = integral(@(x) varphi(x, i).*phi_prime(x, j), - 1, 1);
+    end
+    b(i) = integral(@(x) sqrt(3)/4*varphi(x, i), - 1, 1);
+end
+Mat = zeros(n*p, n*p + 1);
+for i = 1:n
+    Mat((i - 1)*p + (1:p), (i - 1)*p + (1:(p + 1))) = [b, A, - b];
+end
+
+
+% Matrix 2
+A = zeros(p, p - 1);
+b = zeros(p, 1);
+for i = 1:p
+    for j = 1:(p - 1)
+        A(i, j) = integral(@(x) varphi(x, i).*phi(x, j), - 1, 1);
+    end
+    b(i) = integral(@(x) sqrt(3)/4*(1 + x).*varphi(x, i), - 1, 1);
+end
+Mat = zeros(n*p, n*p + 1);
+for i = 1:n
+    Mat((i - 1)*p + (1:p), (i - 1)*p + (1:(p + 1))) = [b, A, - b];
+end
+
+hold on
+imagesc(log(abs(Mat)), ...
+    [ ...
+        min(min(abs(log(abs([A, b])) + 10))) - 10, ...
+        max(max(log(abs([A, b])))) ...
+    ])
+colorbar
+for i = 1:n
+    plot((i - 1)*p + 1.5 + [0, 0], 0.5 + [0, n*p], "w")
+    plot(i*p       + 0.5 + [0, 0], 0.5 + [0, n*p], "--w")
+end
+for i = 1:(n - 1)
+    plot(0.5 + [0, n*p + 1], i*p + [0.5, 0.5], "w")
+end
+
+axis equal
+axis off
+xlim([0.5, n*p + 1.5])
+hold off
