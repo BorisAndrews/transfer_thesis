@@ -1,2 +1,7 @@
 \chapter{Constructing Timesteppers from Finite Elements in Time}\label{cha:constructing timesteppers}
     \BA{Introduction.}
+
+    Traditional approaches for discretizing time-dependent PDEs, $\partial_{t}u  =  \calF(u)$, through the FE method cast the PDE into a weak form by testing against test functions, $v$, on the spatial domain $\bfOmega$, as ``$\langle\partial_{t}u, v\rangle$''  $=  \langle\calF(u), v\rangle$, where the choice of interpretation of the time derivative term ``$\langle\partial_{t}u, v\rangle$'', typically through a generic Runge–Kutta (RK) method, characterises the timestepper for the scheme. Within {\texttt Firedrake}, the {\texttt Irksome} package \BA{[Ref]} offers support for many such implicit RK timesteppers.
+
+    An alternative approach—FEs in time—interprets the PDE on the domain $\bfOmega\otimes T$, where $T$ represents a time interval, potentially the timestep $\left[t^{k}, t^{k + 1}\right]$ or the whole time interval. One then tests against test functions, $v$, on the whole domain $\bfOmega\otimes T$, as $\langle\partial_{t}u, v\rangle  =  \langle\calF(u), v\rangle$. The original ambiguity in interpretation of the time derivative term, ``$\langle\partial_{t}u, v\rangle$'', when picking the RK scheme is transferred to the choice of behaviour/continuity/order of the finite element discretizations in the time domain. \BA{(Crucially: Test functions need not be the same as trial functions. C.f. Petrov–Galerkin.)} \BA{9Often tensor products.)}
+    
