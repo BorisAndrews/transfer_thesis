@@ -107,7 +107,7 @@
             \label{fig:timestepper matrices}
         \end{figure}
 
-        With strongly imposed initial conditions on $\bbU^{h}$, the first column of this matrix is eliminated, leaving a lower-block-triangular matrix of size-$p$ blocks, as indicated by the dashed lines in (\ref{eqn:timestepper matrices}). Applying block forward substituting to solve this block triangular problem is perfectly analogous to using a traditional timestepper.
+        With strongly-imposed initial conditions on $\bbU^{h}$, the first column of this matrix is eliminated, leaving a lower-block-triangular matrix of size-$p$ blocks, as indicated by the dashed lines in (\ref{eqn:timestepper matrices}). Applying block forward substitution to solve this block triangular problem is perfectly analogous to using a traditional timestepper.
 
         Denoting, $\bfu_{l}  :=  (u_{kl})_{k}$, on the $n$-th timestep, the resultant linear problem takes the form:
         \begin{equation}
@@ -119,14 +119,20 @@
         \end{multline}
         which can be solved iteratively for each $\bfu_{(n + 1)q}$ at each new timestep.
 
-        In the case of $q = 1$—the lowest-order method—with time intervals of length $\delta t$, this takes the form:
+        In the case of $q = 1$—the lowest-order method—with time intervals of length $\delta t$, this takes the form
         \begin{equation}
-            \left[\bfM + \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n + 1}  =  \left[\bfM - \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n}
+            \left[\bfM + \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n + 1}  =  \left[\bfM - \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n},
         \end{equation}
-        which, by rearranging, can be seen to be equivalent to the traditional implicit midpoint method:
+        which, by rearranging, can be seen to be equivalent to the traditional implicit midpoint method,
         \begin{equation}
-            \bfM\left[\frac{1}{\delta t}(\bfu_{n + 1} - \bfu_{n})\right]  =  \kappa\bfK\left[\frac{1}{2}(\bfu_{n + 1} + \bfu_{n})\right]
+            \bfM\left[\frac{1}{\delta t}(\bfu_{n + 1} - \bfu_{n})\right]  =  - \kappa\bfK\left[\frac{1}{2}(\bfu_{n + 1} + \bfu_{n})\right],
         \end{equation}
+        or, in weak formulation,
+        \begin{equation}
+            \left\langle v^{h}_{n + 1}, \frac{1}{\delta t}\left(u^{h}_{n + 1} - u^{h}_{n}\right)\right\rangle_{\bfOmega^{h}}  =  - \left\langle\nabla v^{h}_{n + 1}, \frac{1}{2}\nabla\left(u^{h}_{n + 1} + u^{h}_{n}\right)\right\rangle_{\bfOmega^{h}}.
+        \end{equation}
+
+        \BA{Would be nice to restructure this example to generally talk more in the weak formulations than with all these mass/stiffness matrices that aren't necessarily relevant to understanding how FEs in time give rise to timesteppers.}
     \end{example}
     \line
 
