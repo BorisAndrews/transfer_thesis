@@ -36,7 +36,7 @@
         \begin{equation}\label{eqn:FEs in time weak form}
             \left\langle\partial_{t}u^{h}, v^{h}\right\rangle_{\bfOmega^{h}\otimes T^{h}}  =  - \kappa\left\langle\nabla u^{h}, \nabla v^{h}\right\rangle_{\bfOmega^{h}\otimes T^{h}}
         \end{equation}
-        Let $\bfOmega^{h}$ be a mesh of simplicies on $\bfOmega$, and $T^{h}$ be a mesh of intervals on $T$. Using an order-$p$ ``CG'' method (in space), with an order-$q$ timestepper, define:
+        Let $\bfOmega^{h}$ be a mesh of simplicies on $\bfOmega$, and $T^{h}$ be a mesh of equal intervals on $T$. Using an order-$p$ ``CG'' method (in space), with an order-$q$ timestepper, define:
         \begin{align}
             \bbU^{h}  :=  \bbP_{p}\left(\bfOmega^{h}\right)\otimes\bbP_{q}\left(T^{h}\right),  &&
             \bbV^{h}  :=  \bbP_{p}\left(\bfOmega^{h}\right)\otimes\bbDP_{q - 1}\left(T^{h}\right)
@@ -66,11 +66,16 @@
         \end{equation}
         Indexing vectors first in the time indices $j$ and $l$, this simplifies to
         \begin{equation}
-            \bfv^{T}[(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j, l}\otimes(\langle\psi_{i}, \psi_{k}\rangle_{\bfOmega^{h}})_{i, k} + \kappa(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j, l}\otimes(\langle\nabla\psi_{i}, \nabla\psi_{k}\rangle_{\bfOmega^{h}})_{i, k}]\bfu  =  0
+            \bfv^{T}\left[(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j}^{l}\otimes\bfM + \kappa(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j}^{l}\otimes\bfK\right]\bfu  =  0
         \end{equation}
-        where $\otimes$ denotes the matrix Kronecker product.
+        where $\bfM$ and $\bfK$ respectively denote the mass and stiffness matrices:
+        \begin{align}
+            \bfM  :=  (\langle\psi_{i}, \psi_{k}\rangle_{\bfOmega^{h}})_{i}^{k},  &
+            \bfK  :=  (\langle\nabla\psi_{i}, \nabla\psi_{k}\rangle_{\bfOmega^{h}})_{i}^{k},
+        \end{align}
+        $\otimes$ denotes the matrix Kronecker product.
         
-        Regarding the sparsity of this matrix, with appropriate ordering of the bases $(\phi_{i})_{i}$, $(\varphi_{i})_{i}$, the matrices $(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j, l}$, $(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j, l}$ take the general form
+        Regarding the sparsity of this matrix, with appropriate ordering of the bases $(\phi_{i})_{i}$, $(\varphi_{i})_{i}$, the matrices $(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j}^{l}$, $(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j}^{l}$ take the general form
         \begin{equation}\label{eqn:timestepper matrices}
             \left(\begin{array}{ c : c c : c c : c c }
                 \pm\bfb  &  \bfA    &  \bfb     &  0       &  0        &  \cdots   &  0        \\
@@ -84,23 +89,44 @@
                 0        &  0       &  0        &  0       &  0        &  \vdots   &  \bfb     \\
             \end{array}\right)
         \end{equation}
-        for $\bfA  \in  \bbR^{q\times (q - 1)}$, $\bfb  \in  \bbR^{q}$. (See Figure \ref{fig:timestepper matrices}) \BA{(Capitalization on ``Figure''?)}
+        for some $\bfA  \in  \bbR^{q\times (q - 1)}$, $\bfb  \in  \bbR^{q}$ in either case, dependent on the choice of bases. (See Figure \ref{fig:timestepper matrices}) \BA{(Capitalization on ``Figure''?)}
 
         \begin{figure}[!ht]
             \centering
             \begin{subfigure}{0.5\textwidth}
                 \centering
                 \includegraphics[width = 0.9\textwidth]{9 - finite elements in time/images/matrix 1.png}
-                \caption{$(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j, l}$}
+                \caption{$(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j}^{l}$}
             \end{subfigure}%
             \begin{subfigure}{0.5\textwidth}
                 \centering
                 \includegraphics[width = 0.9\textwidth]{9 - finite elements in time/images/matrix 2.png}
-                \caption{$(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j, l}$}
+                \caption{$(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j}^{l}$}
             \end{subfigure}
-            \caption{Sparsity plots for the two ``timestepping matrices'' when $q = 10$ on 3 (equal) intervals, under simple normalised polynomial bases. \\ Color indicates $\log(|*|)$ for the matrix entries. Black lines indicate block structure from (\ref{eqn:timestepper matrices}), while solid black lines indicate lower-triangular structure after elimination of first column with strong initial condition imposition.}
+            \caption{Sparsity plots for the two timestepping matrices when $q = 10$ on 3 (equal) intervals, under simple normalised polynomial bases. \\ Color indicates $\log(|*|)$ for the matrix entries. Black lines indicate block structure from (\ref{eqn:timestepper matrices}), while solid black lines highlight the lower-block-triangular structure after elimination of first column.}
             \label{fig:timestepper matrices}
         \end{figure}
+
+        With strongly imposed initial conditions on $\bbU^{h}$, the first column of this matrix is eliminated, leaving a lower-block-triangular matrix of size-$p$ blocks, as indicated by the dashed lines in (\ref{eqn:timestepper matrices}). Applying block forward substituting to solve this block triangular problem is perfectly analogous to using a traditional timestepper.
+
+        Denoting, $\bfu_{l}  :=  (u_{kl})_{k}$, on the $n$-th timestep, the resultant linear problem takes the form:
+        \begin{equation}
+            \left[(\langle\varphi_{nq + j}, \partial_{t}\phi_{nq + l}\rangle_{T^{h}})_{j = 1, \cdots, q}^{l = 0, \cdots, q}\otimes\bfM + \kappa(\langle\varphi_{nq + j}, \phi_{nq + l}\rangle_{T^{h}})_{j = 1, \cdots, q}^{l = 0, \cdots, q}\otimes\bfK\right](\bfu_{nq + l})_{l = 0, \cdots, q}  =  \bfzero
+        \end{equation}
+        \begin{multline}
+            \left[(\langle\varphi_{nq + j}, \partial_{t}\phi_{nq + l}\rangle_{T^{h}})_{j = 1, \cdots, q}^{l = 1, \cdots, q}\otimes\bfM + \kappa(\langle\varphi_{nq + j}, \phi_{nq + l}\rangle_{T^{h}})_{j = 1, \cdots, q}^{l = 1, \cdots, q}\otimes\bfK\right](\bfu_{nq + l})_{l = 1, \cdots, q}  \\
+            =  - [(\langle\varphi_{nq + j}, \partial_{t}\phi_{nq}\rangle_{T^{h}})_{j = 1, \cdots, q}\otimes\bfM + \kappa(\langle\varphi_{nq + j}, \phi_{nq}\rangle_{T^{h}})_{j = 1, \cdots, q}\otimes\bfK]\bfu_{nq}
+        \end{multline}
+        which can be solved iteratively for each $\bfu_{(n + 1)q}$ at each new timestep.
+
+        In the case of $q = 1$—the lowest-order method—with time intervals of length $\delta t$, this takes the form:
+        \begin{equation}
+            \left[\bfM + \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n + 1}  =  \left[\bfM - \kappa\frac{\delta t}{2}\bfK\right]\bfu_{n}
+        \end{equation}
+        which, by rearranging, can be seen to be equivalent to the traditional implicit midpoint method:
+        \begin{equation}
+            \bfM\left[\frac{1}{\delta t}(\bfu_{n + 1} - \bfu_{n})\right]  =  \kappa\bfK\left[\frac{1}{2}(\bfu_{n + 1} + \bfu_{n})\right]
+        \end{equation}
     \end{example}
     \line
 
