@@ -71,16 +71,36 @@
         where $\otimes$ denotes the matrix Kronecker product.
         
         Regarding the sparsity of this matrix, with appropriate ordering of the bases $(\phi_{i})_{i}$, $(\varphi_{i})_{i}$, the matrices $(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j, l}$, $(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j, l}$ take the general form
-        \begin{equation}
-          \begin{pmatrix}
-            \pm\bfb  &  \bfA    &  \bfb     &  0       &  0        &  \cdots   &  0        \\
-            0        &  0       &  \pm\bfb  &  \bfA    &  \bfb     &  \cdots   &  0        \\
-            0        &  0       &  0        &  0       &  \pm\bfb  &  \cdots   &  0        \\
-            \vdots   &  \vdots  &  \vdots   &  \vdots  &  \vdots   &  \ddots   &  \vdots   \\
-            0        &  0       &  0        &  0       &  0        &  \vdots   &  \bfb     \\
-            \end{pmatrix}
+        \begin{equation}\label{eqn:timestepper matrices}
+            \left(\begin{array}{ c : c c : c c : c c }
+                \pm\bfb  &  \bfA    &  \bfb     &  0       &  0        &  \cdots   &  0        \\
+                \hdashline
+                0        &  0       &  \pm\bfb  &  \bfA    &  \bfb     &  \cdots   &  0        \\
+                \hdashline
+                0        &  0       &  0        &  0       &  \pm\bfb  &  \cdots   &  0        \\
+                \hdashline
+                \vdots   &  \vdots  &  \vdots   &  \vdots  &  \vdots   &  \ddots   &  \vdots   \\
+                \hdashline
+                0        &  0       &  0        &  0       &  0        &  \vdots   &  \bfb     \\
+            \end{array}\right)
         \end{equation}
-        for $\bfA  \in  \bbR^{(q - 1)\times q}$, $\bfb  \in  \bbR^{q - 1}$.
+        for $\bfA  \in  \bbR^{q\times (q - 1)}$, $\bfb  \in  \bbR^{q}$. (See Figure \ref{fig:timestepper matrices}) \BA{(Capitalization on ``Figure''?)}
+
+        \begin{figure}[!ht]
+            \centering
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \includegraphics[width = 0.9\textwidth]{paper/9 - finite elements in time/images/matrix 1.png}
+                \caption{$(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j, l}$}
+            \end{subfigure}%
+            \begin{subfigure}{0.5\textwidth}
+                \centering
+                \includegraphics[width = 0.9\textwidth]{paper/9 - finite elements in time/images/matrix 2.png}
+                \caption{$(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j, l}$}
+            \end{subfigure}
+            \caption{Sparsity plots for the two ``timestepping matrices'' when $q = 10$ on 3 (equal) intervals, under simple normalised polynomial bases. \\ Color indicates $\log(|*|)$ for the matrix entries. White lines indicate block structure from (\ref{eqn:timestepper matrices}), while solid white lines indicate lower-triangular structure after elimination of first column with strong initial condition imposition.}
+            \label{fig:timestepper matrices}
+        \end{figure}
     \end{example}
     \line
 
