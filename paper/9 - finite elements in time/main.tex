@@ -70,10 +70,10 @@
         \end{equation}
         where $\bfM$ and $\bfK$ respectively denote the mass and stiffness matrices:
         \begin{align}
-            \bfM  :=  (\langle\psi_{i}, \psi_{k}\rangle_{\bfOmega^{h}})_{i}^{k},  &
+            \bfM  :=  (\langle\psi_{i}, \psi_{k}\rangle_{\bfOmega^{h}})_{i}^{k},  &&
             \bfK  :=  (\langle\nabla\psi_{i}, \nabla\psi_{k}\rangle_{\bfOmega^{h}})_{i}^{k},
         \end{align}
-        $\otimes$ denotes the matrix Kronecker product.
+        and $\otimes$ denotes the matrix Kronecker product.
         
         Regarding the sparsity of this matrix, with appropriate ordering of the bases $(\phi_{i})_{i}$, $(\varphi_{i})_{i}$, the matrices $(\langle\varphi_{j}, \partial_{t}\phi_{l}\rangle_{T^{h}})_{j}^{l}$, $(\langle\varphi_{j}, \phi_{l}\rangle_{T^{h}})_{j}^{l}$ take the general form
         \begin{equation}\label{eqn:timestepper matrices}
