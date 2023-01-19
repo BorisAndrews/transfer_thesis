@@ -4,72 +4,121 @@
     \begin{definition}[Fluid model]
         Here, ``fluid'' models refer to those wherein the system is reduced from one in \emph{both} position and velocity space (and time) to one in \emph{just} position space (and time) through some kind of approximation to the distribution function.
     \end{definition}
-    
+
     \line
     
-    Recall the Boltzmann equation (\ref{eqn:Boltzmann equation})
+    Recall the Boltzmann equation (\ref{eqn:Boltzmann equation}):
     \begin{equation*}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}(\nabla_{\bfv}\cdot\bfC_{ss'})
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}.
     \end{equation*}
     To look at the dominant terms in this equation, one can non-dimensionalize. Denote the scale of a variable, $*$, with an overbar, $\overline{*}$. Suppose the following scales are given by the problem specification:
     \begin{align}
-        \left(\overline{n}_{s}\right)_{s},        &&
-        \overline{\bfx},                          &&
-        \overline{\bfv},                          &&
-        \overline{\bfB},                          &&
-        \left(\overline{\bfC}_{ss'}\right)_{ss'}
+        \left(\overline{n}_{s}\right)_{s},         &&
+        \overline{\bfx},                           &&
+        \overline{\bfv},                           &&
+        \overline{\bfB},
     \end{align}
     where $n_{s}$ denote the particle density of species $s$,
     \begin{equation}
-        n_{s}  :=  \int_{\bfv}f_{s}
+        n_{s}  :=  \int_{\bfv}f_{s}.
     \end{equation}
     The remaining variable scales are given by:
     \begin{itemize}
-        \item  $\overline{t}      =  \overline{\bfx}/\overline{\bfv}$, working on convective timescales.
-        \item  $\overline{\bfE}   =  \overline{\bfv}\overline{\bfB}$, balancing the electric and magnetic Lorentz forces. \BA{(Why would this be the case?)}
-        \item  $\overline{f}_{s}  =  \overline{n}_{s}/\overline{\bfv}^{3}$, by the definition of $n_{s}$.
+        \item  $\overline{t}           :=  \overline{\bfx}/\overline{\bfv}$, working on convective timescales.
+        \item  $\overline{\bfE}        :=  \overline{\bfv}\overline{\bfB}$, balancing the electric and magnetic Lorentz forces. \BA{(Why would this be the case?)}
+        \item  $\overline{f}_{s}       :=  \overline{n}_{s}/\overline{\bfv}^{3}$, by the definition of $n_{s}$.
+        \item  $\overline{\bfC}_{ss'}  :=  \max_{s}\{\overline{n}_{s}\}\overline{\bfB}/\max_{s'}\{q_{s'}\}\overline{\bfv}^{2}$, giving dominant balance of electromagnetic and collisional forces from phase $s'$ in phase $s$. \BA{(Justification.)}
     \end{itemize}
     
     The Boltzmann equation (\ref{eqn:Boltzmann equation}) then takes the non-dimensionalized form
-    \begin{equation}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \left\{\frac{q_{s}}{m_{s}}\cdot\frac{\overline{\bfx}\overline{\bfB}}{\overline{\bfv}}\right\}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \sum_{s'}\left\{\frac{q_{s}q_{s'}}{m_{s}}\cdot\frac{\overline{\bfC}_{ss'}\overline{\bfx}\overline{\bfv}}{\overline{n_{s}}}\right\}(\nabla_{\bfv}\cdot\bfC_{ss'})
-    \end{equation}
+    \begin{multline}\label{eqn:non-dim Boltzmann general}
+        \left[\frac{m_{s}}{q_{s}}\cdot\frac{\overline{\bfv}}{\overline{\bfx}\overline{\bfB}}\right](\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv]) + \nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  \\
+        =  \left[\frac{\max_{s}\{\overline{n}_{s}\}}{\overline{n}_{s}}\right]\sum_{s'}\left[\frac{q_{s'}}{\max_{s'}\{q_{s'}\}}\right](\nabla_{\bfv}\cdot\bfC_{ss'}).
+    \end{multline}
     
-    Regarding the scale of these terms, consider the conditions during a JET reactor pulse, for a predominant (positive) deuterium \BA{(Should I be including tritium here?)} ion and (negative) electron phase, with physical parameters for the JET reactor as listed in Chapters 2 and 4 of \cite{Wes00}:
+    Regarding the scale of these terms, consider the conditions during a typical JET reactor pulse, for a predominant (positive) deuterium \BA{(Should I be including tritium here?)} ion (indexed via $*_{+}$) and (negative) electron (indexed via $*_{-}$) phase, with physical parameters for the JET reactor as listed in Chapters 2 and 4 of \cite{Wes00}:
     \begin{itemize}
-        \item  $\overline{n}_{\pm}        \approx  10^{19}\rmm^{- 3}$
-        \item  $\overline{\bfx}           \approx  2.5\rmm$, twice the minor radius of $1.25\rmm$
-        \item  $\overline{\bfv}           \approx  7.9\times 10^{5}\rmm\rms^{- 1}$, the thermal velocity $\sqrt{\rmk_{\rmB}T/\rmm_{+}}$ for the (mass/energy-dominant) ion phase at operational temperature $1.5\times 10^{8}\rmK$, in the middle of the range $1$–$2\times 10^{8}\rmK$
-        \item  $\overline{\bfB}           \approx  3.5\rmT$
-        \item  $\overline{\bfC}_{\pm\pm}  \approx  1.1\times 10^{25}\rms^{3}\rmT^{2}{\rm kg}^{- 1}\rmm^{- 5}$, from the approximation $\overline{\bfC}_{\pm\pm}  \approx  \overline{n}_{\pm}^{5/3}/\varepsilon_{0}\overline{\bfv}^{3}$ \BA{(Justification)}
+        \item  $\overline{n}_{\pm}  \approx  10^{19}\rmm^{- 3}$.
+        \item  $\overline{\bfx}     \approx  2.5\rmm$, twice the minor radius of $1.25\rmm$.
+        \item  $\overline{\bfv}     \approx  7.9\times 10^{5}\rmm\rms^{- 1}$, the thermal velocity $\sqrt{\rmk_{\rmB}T/\rmm_{+}}$ for the (mass/energy-dominant) ion phase at operational temperature $1.5\times 10^{8}\rmK$, in the middle of the range $1$–$2\times 10^{8}\rmK$.
+        \item  $\overline{\bfB}     \approx  3.5\rmT$.
     \end{itemize}
     The remaining scales then evaluate as:
+    \begin{align*}
+        \overline{t}           &\approx  3.2\times 10^{- 6}\rms,              &
+        \overline{\bfE}        &\approx  2.8\times 10^{6}\rmT\rmm\rms^{- 1},  \\
+        \overline{f}_{\pm}     &\approx  2.1\times 10^{1}\rms^{3}\rmm^{- 6},  &
+        \overline{\bfC}_{\pm_{1}\pm_{2}}  &\approx  3.5\times 10^{- 12}\rms^{3}\rmT^{2}\rmk\rmg^{- 1}\rmm^{- 1}.
+    \end{align*}
+    Thus, (\ref{eqn:non-dim Boltzmann general}) for each phase takes the non-dimensionalized form:
     \begin{align}
-        \overline{t}      \approx  3.2\times 10^{- 6}\rms,              &&
-        \overline{\bfE}   \approx  2.8\times 10^{6}\rmT\rmm\rms^{- 1},  &&
-        \overline{f_{s}}  \approx  2.1\times 10^{1}\rms^{3}\rmm^{- 6}.
+        1.9\ldots\times 10^{- 3}(\partial_{t}f_{+} + \nabla_{\bfx}\cdot[f_{+}\bfv]) + \nabla_{\bfv}\cdot[f_{+}(\bfE + \bfv\wedge\bfB)]  &=  \nabla_{\bfv}\cdot[\bfC_{++} + \bfC_{+-}],  \label{eqn:non-dim Boltzmann +}  \\
+        5.2\ldots\times 10^{- 7}(\partial_{t}f_{-} + \nabla_{\bfx}\cdot[f_{-}\bfv]) - \nabla_{\bfv}\cdot[f_{-}(\bfE + \bfv\wedge\bfB)]  &=  \nabla_{\bfv}\cdot[\bfC_{-+} + \bfC_{--}].  \label{eqn:non-dim Boltzmann -}
     \end{align}
+    These equations are dominated by the forcing terms, $\nabla_{\bfv}\cdot[f_{\pm}\left(\bfE + \bfv\wedge\bfB\right)]$, and the collisional terms $\nabla_{\bfv}\cdot\bfC_{\pm_{1}\pm_{2}}$.
+
+    \BA{(Think I should be including a separate force for ion-ion/electron-electron repulsion...)}
     
-    \BA{(Think I should be including a separate force for ion-ion/electron-electron repulsion...)} 
-    
-    The dimensionless constants $\left(q_{s}/m_{s}\cdot\overline{\bfx}\overline{\bfB}/\overline{\bfv}\right)_{s}$ therefore evaluate for each phase as:
-    \begin{align}
-        \frac{q_{+}\overline{\bfx}\overline{\bfB}}{m_{+}\overline{\bfv}}  &\approx  5.3\times 10^{2},   \\
-        \frac{q_{-}\overline{\bfx}\overline{\bfB}}{m_{-}\overline{\bfv}}  &\approx  (-) 2.0\times 10^{6}
-    \end{align}
-    while the constants $\left(q_{s}q_{s'}/m_{s}\cdot\overline{\bfC}_{ss'}\overline{\bfx}\overline{\bfv}/\overline{n_{s}}\right)_{ss'}$ evaluate as:
-    \begin{align}
-        \frac{q_{+}q_{+}}{m_{+}}\cdot\frac{\overline{\bfC}_{++}\overline{\bfx}\overline{\bfv}}{\overline{n_{+}}}  \approx  \frac{q_{+}q_{-}}{m_{+}}\cdot\frac{\overline{\bfC}_{+-}\overline{\bfx}\overline{\bfv}}{\overline{n_{+}}}  &\approx  1.6\times 10^{1}  \\
-        \frac{q_{-}q_{+}}{m_{-}}\cdot\frac{\overline{\bfC}_{-+}\overline{\bfx}\overline{\bfv}}{\overline{n_{-}}}  \approx  \frac{q_{-}q_{-}}{m_{-}}\cdot\frac{\overline{\bfC}_{--}\overline{\bfx}\overline{\bfv}}{\overline{n_{-}}}  &\approx   6.0\times 10^{4}
-    \end{align}
-    
-    On the convective parameter scales of many plasmas, \BA{(What \emph{are} these parameter scales? Dimensional analysis!)} it is the case that these equations are dominated by those components of the collisional terms which are only affected by $(f_{s'}|_{\bfx})_{s'}$ \BA{(Really don't like the phrasing there...)}, $\bfC_{s}^{(0)}$, and the forcing terms, $\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}\left(\bfE + \bfv\wedge\bfB\right)]$. Fluid models will often seek to exploit this fact to say that the system has a set of leading-order solutions, $\left(f_{s}^{(0)}\right)_{s}$, satisfying the leading-order PDEs
-    \begin{equation}\label{eqn:Maxwellian equation}
-        \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]  =  \nabla_{\bfv}\cdot\left[\bfC_{s}^{(0)}\left(\left(f_{s'}^{(0)}|_{\bfx}\right)_{s'}\right)\right]
+    \line
+
+    Fluid models extend this by assuming that the dominant collisional effects are local in space and time. \BA{(On what scales?)} When viewed as functionals on $(f_{\pm_{1}}, f_{\pm_{2}})$, it is assumed that $(\bfC_{\pm_{1}\pm_{2}})_{\pm_{1}\pm_{2}}$ are dominated by the local contributions of $(f_{\pm_{1}}, f_{\pm_{2}})$ at each $\bfx$ and $t$; \BA{(Not sure about this phrasing...)} that is to say that, up to leading order,
+    \begin{equation}
+        \bfC_{\pm_{1}\pm_{2}}[f_{\pm}, f_{\pm}](\bfx, \bfv; t)  \sim  \bfC_{\pm_{1}\pm_{2}}^{(0)}[f_{\pm}|_{\bfx; t}, f_{\pm}|_{\bfx; t}](\bfv)
     \end{equation}
+    for some $(\bfC_{\pm_{1}\pm_{2}}^{(0)})_{\pm_{1}\pm_{2}}$. The leading-order components of the Boltzmann equations (\ref{eqn:non-dim Boltzmann +}–\ref{eqn:non-dim Boltzmann -}) therefore take the forms:
+    \begin{align}
+        \pm \nabla_{\bfv}\cdot[f_{\pm}(\bfE + \bfv\wedge\bfB)]  &\sim  \nabla_{\bfv}\cdot\left[\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right]  \\
+        0  &\sim  \nabla_{\bfv}\cdot\left[\left(\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right) \mp f_{\pm}(\bfE + \bfv\wedge\bfB)\right]  \label{eqn:leading-order Boltzmann}
+    \end{align}
+    The subtitution of $(\bfC_{\pm_{1}\pm_{2}})_{\pm_{1}\pm_{2}}  \mapsto  (\bfC_{\pm_{1}\pm_{2}}^{(0)})_{\pm_{1}\pm_{2}}$ ensures these systems are 0$^{\text{th}}$-order in $\bfx$, implying that for any given $\bfx$, (\ref{eqn:leading-order Boltzmann}) is a system of PDEs in $(f_{\pm}|_{\bfx})_{\pm}$ that is dependent on $\bfv$ \emph{only}.
+
+    \line
+
+    \begin{lemma}
+        Defining
+        \begin{equation}
+            \alpha_{\pm}  =  q_{\pm}\mu_{0}\cdot\frac{\overline{\bfx}\overline{\bfv}\overline{n}_{\pm}}{\overline{\bfB}},
+        \end{equation}
+        whereby for the scales assumed from \cite{Wes00},
+        \begin{equation}
+            \alpha_{\pm}  \approx  8.0\times 10^{- 44},
+        \end{equation}
+        provided the following moment conditions hold:
+        \begin{align}
+            0  &\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right],  \label{eqn:leading-order + conservation}  \\
+            0  &\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right],  \label{eqn:leading-order - conservation}  \\
+            \begin{split}
+                0  &\sim  \int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right]\right)\bfv,
+            \end{split}  \label{eqn:leading-order momentum conservation}  \\
+            \begin{split}
+                0  &\sim  \int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right) - f_{\pm}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right) + f_{\pm}(\bfE + \bfv\wedge\bfB)\right]\right)\frac{1}{2}\|\bfv\|^{2},
+            \end{split}  \label{eqn:leading-order energy conservation}
+        \end{align}
+        the leading-order Boltzmann system (\ref{eqn:leading-order Boltzmann}) has a 4-dimensional manifold of solutions. \BA{(Why...?)}
+    \end{lemma}
+
+    \line
+
+    Assume $(f_{\pm})_{\pm} \rightarrow 0$ sufficiently fast as $\|\bfv\| \rightarrow \infty$, and define:
+    \begin{align}
+        \rho_{C}
+    \end{align}
+    (\ref{eqn:leading-order + conservation}–\ref{eqn:leading-order - conservation}) are immediate and exact. For (\ref{eqn:leading-order momentum conservation}),
+    \begin{align}
+        \begin{split}
+            &\int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right]\right)\bfv
+        \end{split}  \\
+        &\;\;\;\;\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)} + \bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) - (f_{+} - f_{-})(\bfE + \bfv\wedge\bfB)\right]\bfv  \\
+        &\;\;\;\;\sim  \int_{\bfv}(f_{+} - f_{-})(\bfE + \bfv\wedge\bfB)  \\
+        &\;\;\;\;\rho_{C}(\bfE + \bfv\wedge\bfB)
+    \end{align}
+
     Since, however, the leading-order collision operators $\left(\bfC_{s}^{(0)}\right)_{s}$ conserve both momentum and energy, i.e.
     \begin{align*}
-        \bfzero  &=  \sum_{s}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{s}^{(0)}\right)m_{s}\bfv  &  0  &=  \sum_{s}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{s}^{(0)}\right)\frac{1}{2}m_{s}\|\bfv\|^{2}  \\
+        \bfzero  &=  \sum_{s, s'}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{ss'}^{(0)}\right)m_{s}\bfv  &  0  &=  \sum_{s}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{ss'}^{(0)}\right)\frac{1}{2}m_{s}\|\bfv\|^{2}  \\
         &=  - \sum_{s}\int_{\bfv}\bfC_{s}^{(0)}m_{s}  &  &=  - \sum_{s}\int_{\bfv}\bfC_{s}^{(0)}\cdot m_{s}\bfv
     \end{align*}
     \BA{(I only accounted for \emph{kinetic} energy here, I didn't include the \emph{magnetic potential} energy- not sure if I need to? Would be a nice opportunity to define $\bfA$ if I do.)} equation (\ref{eqn:Maxwellian equation}) is not (necessarily) well-posed, as taking moments for momentum and energy,
