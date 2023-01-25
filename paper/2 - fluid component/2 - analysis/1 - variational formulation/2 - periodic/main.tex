@@ -1,65 +1,78 @@
-\subsubsection*{Transient Case}
+\subsubsection*{Periodic Case}
     \BA{Introduction.}
 
-    Consider now the transient case, with the inclusion of the time derivatives, and discarding Gauss's law, (\ref{eqn:Gauss's law}).
+    \BA{If I'm going to talk about periodic problems, I need to add my ideas about how we incorporate the solve for the frequency in a separate chapter.}
+
+    Consider now the time-periodic case, on a domain $\bfOmega\otimes T$ for some interval $T$, with the inclusion of the time derivatives.
     
-    \BA{(Need some references for this paragraphs. Should trace the paper trail back from Giacomo's report.)} To derive transient schemes and timesteppers, the system can be interpreted through the lens of function/finite element spaces and weak formulations in both space \emph{and} time, i.e. on the domain $\bfOmega\otimes T^{k}$ over some timestep $T^{k}$, with the intention of constructing a timestepper from the resultant discretization. This is often done through the use of function/finite elements spaces that are tensor product spaces of one in space, $\bfOmega$, and time, $T^{k}$, giving timesteppers that often align with well-studied implicit Runge–Kutta methods. Approaching through the lens of finite elements in time facilitates the construction of structure-preserving discretizations directly from the weak formulation, using specially chosen test spaces. With the order in time of the system often being odd, these test spaces often differ from the solution spaces, such that the finite-element-in-time scheme is a Petrov–Galerkin method. For a further exposition and worked example of this technique in the case of dissipative schemes for the heat equation, see Appendix \ref{cha:finite elements in time}. A recent generic numerical implementation for timesteppers derived from finite elements in time, {\tt Fetsome}, building on the implicit Runge–Kutta method package {\tt Irksome} for the finite-element software {\tt Firedrake} is presented in the report \cite{La22}.
+    \BA{(Need some references for this paragraph. Should trace the paper trail back a little further from Giacomo's report.)} To derive weak formulations for the periodic problem, the system can be interpreted through the lens of function/finite element spaces and weak formulations in both space \emph{and} time. This can be done through the use of function/finite elements spaces that are tensor product spaces of one in space, $\bfOmega$, and time, $T$. Approaching through the lens of function/finite element spaces in time, has many benefits, notably here including facilitating the construction of structure-preserving discretizations directly from the weak formulation, using specially chosen test spaces. For a further discussion on this topic, see Appendix \ref{cha:finite elements in time}. \BA{(Need to mention somewhere about how Firedrake doesn't support 4D+ simulations, and how we combat that.)}
 
-    Casting into weak form, consider test functions in the following test function spaces on $\bfOmega\otimes T^{k}$, similarly via the $L^{2}$ inner product, where the test function spaces $\calF$, $\calC$ are new spaces, distinct from $\calP$, $\cdots$, $\calB$:
-    \begin{center}\begin{tabular}{ r l c | c }
-        \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
-        \hline\hline
-        Mass conservation  &  $- \partial_{t}\rho  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
-        Momentum conservation  &  $\rho\partial_{t}\bfu 
-         =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\calM$  \\
-        Energy conservation  &  $\partial_{t}p  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
-        \hline
-        Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
-        \hline
-        Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\calU$  \\
-        Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\Theta$  \\
-        \hline
-        Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calF$  \\
-        Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\calC$  \\
-    \end{tabular}\end{center}
-    \BA{(What I might end up doing is doing an initial solve using different test spaces that don't necessarily conserve $\rmE$/$\rmH_{\rmM}$, then doing multigrid-in-time cycles using these conservational test spaces.)} This takes the variational formulation:
+    Casting into weak form therefore, trial and test spaces are considered to be supported on $\bfOmega\otimes T$. Proceeding directly to the compressible case, consider test functions for each equation in the test spaces as listed in Figure \ref{fig:periodic test spaces}, similarly via the $L^{2}(\bfOmega\otimes T)$ inner product. This takes the variational formulation in Figure \ref{fig:periodic weak form}.
     
-    \line
+    \begin{figure}
+        \centering
+        \begin{tabular}{ r l c | c }
+            \multicolumn{2}{c}{Equation}  &  Index  &  Test space  \\
+            \hline\hline
+            Mass conservation  &  $- \partial_{t}\rho  =  \nabla\cdot\bfp$  &  (\ref{eqn:mass conservation})  &  $\calP$  \\
+            Momentum conservation  &  $\rho\partial_{t}\bfu 
+             =  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \cdots$  &  (\ref{eqn:momentum conservation})  &  $\calM$  \\
+            Energy conservation  &  $\partial_{t}p  =  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \cdots$  &  (\ref{eqn:energy conservation})  &  $\calD$  \\
+            \hline
+            Current identity  &  $\bfzero  =  \frac{1}{\rmRem}\bfj - (\bfE + \bfu\wedge\bfB) + \rmRH\bfj\wedge\bfB$  &  (\ref{eqn:current identity})  &  $\calJ$  \\
+            \hline
+            Momentum identity  &  $\bfzero  =  \bfp - \rho\bfu$  &  (\ref{eqn:velocity identity})  &  $\calU$  \\
+            Temperature identity  &  $0  =  p - \rho\theta$  &  (\ref{eqn:temperature identity})  &  $\Theta$  \\
+            \hline
+            Ampère's law  &  $\bfzero  =  \nabla\wedge\bfB - \bfj$  &  (\ref{eqn:Ampère's law})  &  $\calE$  \\
+            Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\alpha\partial_{t}\calB$  \\
+            Gauss's law  &  $0  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\beta\nabla\cdot\calB$  \\
+        \end{tabular}
+        \caption{Test spaces for the (compressible) periodic variation formulation \BA{(I introduce ``$\alpha$'' here, but I used $\alpha$ as notation for a small thing in Subsection \ref{cha:fluid models})}}
+        \label{fig:periodic test spaces}
+    \end{figure}
 
-    \paragraph*{Compressible Transient Weak Formulation A}
-    \begin{align}
-        \forall q \in \calP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \begin{split}
-            \forall \bfq \in \calM,  0  &=  \left.\left(- \langle\rho\partial_{t}\bfu, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T^{k}}
-        \end{split}  \\
-        \begin{split}
-            \forall \sigma \in \calD,  0  &=  \left(\langle p, \partial_{t}\sigma\rangle + \langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\langle\rho\nabla\theta, \nabla\sigma\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \langle p, \sigma\rangle_{\bfOmega\otimes\partial T^{k}} + \left.\left(- \langle p\bfu\cdot\bfn, \sigma\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, \sigma\rangle\right)\right|_{\bfGamma\otimes T^{k}}
-        \end{split}  \\
-        \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \bfv \in \calU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \eta \in \Theta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}  \\
-        \forall \bfF \in \calF,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma\otimes T^{k}}  \\
-        \forall \bfC \in \calC,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle - \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes T^{k}}
-    \end{align}
+    \begin{figure}
+        \line
+        \begin{align}
+            \forall q \in \calP,  0  &=  \left.\left(\langle\partial_{t}\rho, q\rangle + \langle\nabla\cdot\bfp, q\rangle\tall\right)\right|_{\bfOmega\otimes T}  \\
+            \begin{split}
+                \forall \bfq \in \calM,  0  &=  \left.\left(- \langle\rho\partial_{t}\bfu, \bfq\rangle - \langle\bfp\cdot\nabla\bfu, \bfq\rangle + \langle p, \nabla\cdot\bfq\rangle + \frac{2}{\beta}\langle\bfj\wedge\bfB, \bfq\rangle - \frac{1}{\rmRef}\langle\rho\bftau, \nabla_{s}\bfq\rangle\right)\right|_{\bfOmega\otimes T}  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left.\left(- \langle p, \bfq\cdot\bfn\rangle + \frac{1}{\rmRef}\langle\rho\bftau, \sym(\bfq\otimes\bfn)\rangle\right)\right|_{\bfGamma\otimes T}
+            \end{split}  \\
+            \begin{split}
+                \forall \sigma \in \calD,  0  &=  \left(\langle p, \partial_{t}\sigma\rangle + \langle p\bfu, \nabla\sigma\rangle - \langle p\nabla\cdot\bfu, \sigma\rangle + \frac{1}{\rmRef}\langle\rho\bftau:\nabla_{\rms}\bfu, \sigma\rangle\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.\left.+ \frac{2}{\beta\rmRem}\left\langle\|\bfj\|^{2}, \sigma\right\rangle - \frac{1}{\rmPe}\langle\rho\nabla\theta, \nabla\sigma\rangle\right)\right|_{\bfOmega\otimes T}  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \langle p, \sigma\rangle_{\bfOmega\otimes\partial T} + \left.\left(- \langle p\bfu\cdot\bfn, \sigma\rangle + \frac{1}{\rmPe}\langle\rho\nabla\theta\cdot\bfn, \sigma\rangle\right)\right|_{\bfGamma\otimes T}
+            \end{split}  \\
+            \forall \bfk \in \calJ,  0  &=  \left.\left(\frac{1}{\rmRem}\langle\bfj, \bfk\rangle - \langle\bfE, \bfk\rangle - \langle\bfu\wedge\bfB, \bfk\rangle + \rmRH\langle\bfj\wedge\bfB, \bfk\rangle\right)\right|_{\bfOmega\otimes T}  \\
+            \forall \bfv \in \calU,  0  &=  \left.\left(\langle\bfp, \bfv\rangle - \langle\rho\bfu, \bfv\rangle\tall\right)\right|_{\bfOmega\otimes T}  \\
+            \forall \eta \in \Theta,  0  &=  \left.\left(\langle p, \eta\rangle - \langle\rho\theta, \eta\rangle\tall\right)\right|_{\bfOmega\otimes T}  \\
+            \forall \bfF \in \calE,  0  &=  \left.\left(\langle\bfB, \nabla\wedge\bfF\rangle - \langle\bfj, \bfF\rangle\tall\right)\right|_{\bfOmega\otimes T} + \langle\bfB, \bfF\wedge\bfn\rangle_{\bfGamma\otimes T}  \\
+            \forall \bfC \in \partial_{t}\calB,  0  &=  \left.\left(\langle\partial_{t}\bfB, \bfC\rangle - \langle\nabla\wedge\bfE, \bfC\rangle\tall\right)\right|_{\bfOmega\otimes T}
+        \end{align}
+        \line
+        \caption{(Compressible) periodic weak formulation}
+        \label{fig:periodic weak form}
+    \end{figure}
 
-    \line
-
-    \BA{(What conformity does this require? What do I mean by $\langle-, -\rangle_{\bfOmega\otimes\partial T^{k}}$?)} Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}) and Faraday's law (\ref{eqn:Faraday's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
+    \BA{(What conformity does this require?)} Similarly to the stationary-state case, one can seek to enforce mass conservation (\ref{eqn:mass conservation}), Faraday's law (\ref{eqn:Faraday's law}) and Gauss's law (\ref{eqn:Gauss's law}) \emph{strongly} by considering certain test functions, and deriving conditions on the function spaces from there:
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
         $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \calP$  &  $\partial_{t}\calD + \nabla\cdot\calM  \leqslant  \calP$  \\
-        $0  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \calC$  &  $\partial_{t}\calB + \nabla\wedge\calE  \leqslant  \calC$
+        $\bfzero  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \partial_{t}\calB$  &  $\nabla\wedge\calE  \leqslant  \partial_{t}\calB$  \\
+        $0  =  \nabla\cdot\bfB$  &  ...  &  ...
     \end{tabular}\end{center}
-    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calM\oplus\calD \xrightarrow{\rmdiv + \partial_{t}} \calP$ and $\calE\oplus\calB \xrightarrow{\cdots} \calC\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+
+    \BA{IMPORTANT NOTE: Recently split this up into 2 distinct sections on periodic solutions and timesteppers. Since then I've had real trouble getting both Faraday's law and Gauss's law enforced in the periodic problem, due to the hole nature of the redundancy/gauge invariance in Maxwell's equations. The rest is copied over from how this section previously looked but is now largely wrong. If I can't get this to work soon, I'll just leave it as a remark and move on.}
+    
+    Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calM\oplus\calD \xrightarrow{\rmdiv + \partial_{t}} \calP$ and $\calE\oplus\calB \xrightarrow{\cdots} \partial_{t}\calB\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,   0)   {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3a) at (5.5, 0)   {$\bfH(\rmdiv + \partial_{t})$};
         \node (EB)   at (0,   - 3) {$\calE\oplus\calB$};
-        \node (C*)   at (5.5, - 3) {$\calC\oplus*$};
+        \node (C*)   at (5.5, - 3) {$\partial_{t}\calB\oplus*$};
 
         \draw[->] (HL2)  -- (HL3a) node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \draw[->] (EB)   -- (C*)   node[above, midway] {$\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
@@ -76,7 +89,7 @@
         \draw[->] (HL3b) -- (MD)  node[left,  midway] {$\pi_{\rmM\rmD}$};
         \draw[->] (HL4)  -- (P)   node[left,  midway] {$\pi_{\rmP}$};
     \end{tikzpicture}\end{center}
-    Further supposing $\calE\oplus\calB \xrightarrow{\cdots} \calC\oplus*$ forms part of a longer $H\Lambda^{\bullet}\left(\bfOmega\otimes T^{k}\right)$-subcomplex component $\Phi\oplus\calA \xrightarrow{\cdots} \calE\oplus\calB \xrightarrow{\cdots} \calC\oplus*$ \BA{(To what extent is existence of such a $(\Phi, \calA)$ guaranteed?)},
+    Further supposing $\calE\oplus\calB \xrightarrow{\cdots} \partial_{t}\calB\oplus*$ forms part of a longer $H\Lambda^{\bullet}\left(\bfOmega\otimes T\right)$-subcomplex component $\Phi\oplus\calA \xrightarrow{\cdots} \calE\oplus\calB \xrightarrow{\cdots} \partial_{t}\calB\oplus*$ \BA{(To what extent is existence of such a $(\Phi, \calA)$ guaranteed?)},
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL1)  at (0,  0) {$\bfH\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
         \node (HL2)  at (6,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
@@ -84,7 +97,7 @@
         
         \node (PhiA) at (0,  - 3) {$\Phi\oplus\calA$};
         \node (EB)   at (6,  - 3) {$\calE\oplus\calB$};
-        \node (C*)   at (12, - 3) {$\calC\oplus*$};
+        \node (C*)   at (12, - 3) {$\partial_{t}\calB\oplus*$};
         
 
         \draw[->] (HL1) -- (HL2) node[above, midway] {$\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right)$};
@@ -99,7 +112,7 @@
     \end{tikzpicture}\end{center}
     provided exactness holds,
     \begin{equation}
-        \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \calE\oplus\calB \rightarrow \calC\oplus*\right]  =  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \Phi\oplus\calA \rightarrow \calE\oplus\calB\right]
+        \ker\left[\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right) : \calE\oplus\calB \rightarrow \partial_{t}\calB\oplus*\right]  =  \im\left[\left(\begin{matrix} - \bfgrad - \partial_{t} \\ * + \bfcurl \end{matrix}\right) : \Phi\oplus\calA \rightarrow \calE\oplus\calB\right]
     \end{equation}
     such that, since $(\bfE, \bfB)  \in  \calE\oplus\calB$ lies in this kernel, it lies too in this image, and there exist EM potentials $\varphi  \in  \phi$, $\bfA  \in  \calS$ such that:
     \begin{align}
@@ -107,7 +120,7 @@
         \bfB  &=  \nabla\wedge\bfA
     \end{align}
     
-    Similarly, supposing $\calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ forms part of a longer $H\Lambda^{\bullet}(\bfOmega\otimes T^{k})$-subcomplex component $\Psi\oplus\calX  \xrightarrow{\cdots}  \calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ \BA{(To what extent is existence of such a $(\Psi, \calX)$ guaranteed?)},
+    Similarly, supposing $\calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ forms part of a longer $H\Lambda^{\bullet}(\bfOmega\otimes T)$-subcomplex component $\Psi\oplus\calX  \xrightarrow{\cdots}  \calM\oplus\calD  \xrightarrow{\rmdiv + \partial_{t}}  \calP$ \BA{(To what extent is existence of such a $(\Psi, \calX)$ guaranteed?)},
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (HL2)  at (0,  0) {$\bfH\left(\begin{matrix} \bfcurl + \partial_{t} \\ * - \rmdiv \end{matrix}\right)$};
         \node (HL3)  at (6, 0) {$\bfH(\rmdiv + \partial_{t})$};
@@ -155,7 +168,7 @@
 
             \node (PhiA) at (- 1, - 8) {$\Phi\oplus\calA$};
             \node (EB)   at (4,   - 8) {$\calE\oplus\calB$};
-            \node (C*)   at (9,   - 8) {$\calC\oplus*$};
+            \node (C*)   at (9,   - 8) {$\partial_{t}\calB\oplus*$};
 
             \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (1,  - 11) {};
                 \node (Phi) at (1 - 0.85,  - 11 - 0.85) {$\Phi$};
@@ -164,7 +177,7 @@
                 \node (E)   at (6 - 0.85,  - 11 - 0.85) {$\calE$};
                 \node (B)   at (6 + 0.85,  - 11 + 0.85) {$\calB$};
             \node[ellipse, draw, thick, dotted, minimum width = 4cm, minimum height = 2cm, rotate = 30] at (11, - 11) {};
-                \node (C)   at (11 - 0.85, - 11 - 0.85) {$\calC$};
+                \node (C)   at (11 - 0.85, - 11 - 0.85) {$\partial_{t}\calB$};
                 \node (*)   at (11 + 0.85, - 11 + 0.85) {$*$};
 
 
@@ -325,7 +338,7 @@
     Assuming the above subspace criteria hold, the results below follow for the weak formulation, preserving some of the structure of the strong formulation:
     
     \begin{theorem}[Gauss's Law in the Weak Formulation]
-        Provided Gauss's law, $\nabla\cdot\bfB  =  0$, holds strongly at $t = t^{k}$, it holds strongly at all $t$, i.e.
+        Provided Gauss's law, $\nabla\cdot\bfB  =  0$, holds strongly at $t = T$, it holds strongly at all $t$, i.e.
         \begin{equation}
             \nabla\cdot\bfB  =  0
         \end{equation}
@@ -340,9 +353,9 @@
             \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
         \end{equation}
         provided $\calU  \leqslant  \calM$, $\calE 
-         \leqslant  \calF$, and $1  \in  \calD$,
+         \leqslant  \calE$, and $1  \in  \calD$,
         \begin{equation}
-            \rmE\left(t^{k + 1}\right) - \rmE\left(t^{k}\right)  =  \oint_{\bfGamma\otimes T^{k}}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \rmE\left(t^{k + 1}\right) - \rmE\left(T\right)  =  \oint_{\bfGamma\otimes T}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
         \end{equation}
     \end{theorem}
     \begin{proof}
@@ -354,10 +367,10 @@
         \begin{equation}
             \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
         \end{equation}
-        provided $\calB  \leqslant  \calJ$ and $\calB  \leqslant  \calF$,
+        provided $\calB  \leqslant  \calJ$ and $\calB  \leqslant  \calE$,
         \begin{align}
-            \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T^{k}\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
-            \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
+            \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(T\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
+            \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
         \end{align}
     \end{theorem}
     \begin{proof}
@@ -365,9 +378,9 @@
     \end{proof}
 
     \begin{corollary}
-        When $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma\otimes T^{k}}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, and either the boundary condition $\bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn$ or $\bfzero  =  \bfA\wedge\bfn$ holds on all of $\bfGamma\otimes T^{k}$, by Lemma \ref{lem:continuity of helicity},
+        When $\bfB\wedge\bfn  =  \bfzero|_{\bfgamma\otimes T}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, and either the boundary condition $\bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn$ or $\bfzero  =  \bfA\wedge\bfn$ holds on all of $\bfGamma\otimes T$, by Lemma \ref{lem:continuity of helicity},
         \begin{equation}
-            \left|\rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(t^{k}\right)\right|  \leq  \frac{2C(\bfgamma)\left(t^{k + 1} - t^{k}\right)}{\rmRem}\|\bfj\|^{2}
+            \left|\rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(T\right)\right|  \leq  \frac{2C(\bfgamma)\left(t^{k + 1} - T\right)}{\rmRem}\|\bfj\|^{2}
         \end{equation}
     \end{corollary}
 

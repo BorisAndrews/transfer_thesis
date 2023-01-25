@@ -1,6 +1,77 @@
 \chapter{Proofs of Conservation Law in the Weak Formulation}\label{cha:weak conservation proofs}
-    \section*{Energy Conservation}
-        \begin{theorem*}[Energy Conservation in the Weak Formulation]
+    \section*{Stationary-state case}
+        \begin{theorem*}[Energy Balance in the Stationary-State Weak Formulation]
+            Provided $\calU  \leqslant  \calM$ and $1  \in  \calD$, influx and outflux \BA{(Don't like that phrasing...)} of energy on the boundary, $\bfGamma$, are in exact balance, i.e.
+            \begin{equation}
+                0  =  \oint_{\bfGamma}\left[- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn
+            \end{equation}
+        \end{theorem*}
+        \begin{proof}
+            With the given subspace criteria, consider identities from the following test functions:
+            \begin{align}
+                \begin{split}
+                    \bfu  \in  \calM  &\implies
+                    0  =  \int_{\bfOmega}\left[- (\bfu\otimes\bfp):\nabla\bfu + p\nabla\cdot\bfu + \frac{2}{\beta}(\bfj\wedge\bfB)\cdot\bfu - \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu\right]  \\
+                    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \oint_{\bfGamma}\left[- p\bfu + \frac{1}{\rmRef}\rho\bftau\cdot\bfu\right]\cdot\bfn
+                \end{split}  \\
+                1  \in  \calD  &\implies
+                0  =  \int_{\bfOmega}\left[- p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right] + \oint_{\bfGamma}\left[- p\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn  \\
+                - \frac{2}{\beta}\bfj  \in  \calJ  &\implies
+                0  =  \frac{2}{\beta}\int_{\bfOmega}\left[- \frac{1}{\rmRem}\|\bfj\|^{2} + \bfE\cdot\bfj + (\bfu\wedge\bfB)\cdot\bfj - \rmRH(\bfj\wedge\bfB)\cdot\bfj\right]  \\
+                \frac{2}{\beta}\bfE  \in  \calE  &\implies
+                0  =  \frac{2}{\beta}\int_{\bfOmega}\left[\bfB\cdot(\nabla\wedge\bfE) - \bfj\cdot\bfE\right] + \oint_{\bfGamma}(\bfB\wedge\bfE)\cdot\bfn
+            \end{align}
+            Taking the sum of these 4 identities,
+            \begin{multline}
+                0  =  \int_{\bfOmega}\left[- (\bfu\otimes\bfp):\nabla\bfu - \frac{2\rmRH}{\beta}(\bfj\wedge\bfB)\cdot\bfj + \frac{2}{\beta}\bfB\cdot(\nabla\wedge\bfE)\right]  \\
+                \oint_{\bfGamma}\left[- 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn
+            \end{multline}
+            For each remaining integral on $\bfOmega$:
+            \begin{itemize}
+                \item  By integration by parts, $\int_{\bfOmega}(\bfu\otimes\bfp):\nabla\bfu  =  - \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\nabla\cdot\bfp + \frac{1}{2}\oint_{\bfGamma}\|\bfu\|^{2}\bfp\cdot\bfn$. By strong incompressibility, $\|\bfu\|^{2}\nabla\cdot\bfp  =  0$.
+                \item  By orthogonality, $(\bfj\wedge\bfB)\cdot\bfj  =  0$.
+                \item  By the strong solution of Faraday's law, $\bfB\cdot(\nabla\wedge\bfE)  =  0$.
+            \end{itemize}
+            Thus,
+            \begin{equation}
+                0  =  \oint_{\bfGamma}\left[- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn
+            \end{equation}
+        \end{proof}
+        
+        \begin{theorem*}[Helicity Balance in the Stationary-State Weak Formulation]
+            Provided $\calB  \leqslant  \calJ$, and there exists a magnetic potential $\bfA$ such that $\bfB  =  \nabla\wedge\bfA$, influx and dissipation \BA{(Don't like that phrasing...)} of magnetic helicity are in exact balance, i.e.
+            \begin{equation}
+                0  =  \frac{2}{\rmRem}\int_{\bfOmega}\bfB\cdot\bfj + 2\oint_{\bfGamma}(\bfE\wedge\bfA)\cdot\bfn
+            \end{equation}
+        \end{theorem*}
+        \begin{proof}
+            With $2\bfB  \in  (\calB  \leqslant)  \calJ$,
+            \begin{align}
+                0  =  2\int_{\bfOmega}\left[\frac{1}{\rmRem}\bfj\cdot\bfB - \bfE\cdot\bfB - (\bfu\wedge\bfB)\cdot\bfB + \rmRH(\bfj\wedge\bfB)\cdot\bfB\right]
+            \end{align}
+            The last two of these terms immediately vanish due to orthogonality.
+            
+            For $\int_{\bfOmega}\bfE\cdot\bfB$, writing $\bfB  =  \nabla\wedge\bfA$,
+            \begin{align}
+                \int_{\bfOmega}\bfE\cdot\bfB  &=  \int_{\bfOmega}\bfE\cdot(\nabla\wedge\bfA)  \\
+                &=  \int_{\bfOmega}(\nabla\wedge\bfE)\cdot\bfA + \oint_{\bfGamma}(\bfA\wedge\bfE)\cdot\bfn  \\
+                &=  \oint_{\bfGamma}(\bfA\wedge\bfE)\cdot\bfn
+            \end{align}
+            where the last identity holds due to exact satisfaction of Faraday's law, $\nabla\wedge\bfE  =  \bfzero$.
+
+            $(\bfu\wedge\bfB)\cdot\bfB$ and $\rmR_{\rmH}(\bfj\wedge\bfB)\cdot\bfB$, similarly vanish by orthogonality. 
+            
+            Thus,
+            \begin{equation}
+                0  =  \frac{2}{\rmRem}\int_{\bfOmega}\bfB\cdot\bfj + 2\oint_{\bfGamma}(\bfE\wedge\bfA)\cdot\bfn
+            \end{equation}
+        \end{proof}
+        
+    
+    \section*{Periodic case}
+        \BA{Again, I've moved this from what was \emph{previously} what I originally had as the timestepper, but I now realise is more valid for the periodic problem. THe phrasing etc. needs to be modified, but the proof is very similar ().}
+        
+        \begin{theorem*}[Energy Conservation in the Periodic Weak Formulation]
             Defining the energy,
             \begin{equation}
                 \rmE(t)  :=  \int_{\bfOmega\otimes\{t\}}\left(\frac{1}{2}\rho\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2} + p\right)
@@ -82,9 +153,7 @@
             \end{equation}
         \end{proof}
     
-
-    \section*{Helicity Conservation}
-        \begin{theorem*}[Helicity Conservation in the Weak Formulation]
+        \begin{theorem*}[Helicity Conservation in the Periodic Weak Formulation]
             Defining the magnetic helicity,
             \begin{equation}
                 \rmH_{\rmM}(t)  :=  \int_{\bfOmega\otimes\{t\}}\bfA\cdot\bfB  \left(=  \calH(\bfA|_{t})\tall\right)
@@ -118,3 +187,6 @@
                 \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T^{k}}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T^{k}\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
             \end{align}
         \end{proof}
+
+        
+    \section*{Timestepping Case}

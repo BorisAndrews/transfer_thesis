@@ -1,39 +1,46 @@
 \chapter{Fluid Component}
     \BA{Introduction.}
 
-    \BA{(This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.)} Without the $(\delta f_{s})_{s}$ corrections, the fluid component of the system takes the following form, up to leading order: \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)}
-    \begin{align}
-        \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0  \\
-        \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0  \\
-        \rho_{M}\partial_{t}\bfu + \bfp\cdot\nabla\bfu  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bftau]  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  - p\nabla\cdot\bfu + \nu\rho_{M}\bftau:\nabla_{\rms}\bfu + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \frac{\kappa k_{B}}{m_{+}}\nabla\cdot[\rho_{M}\nabla\theta]
-    \end{align}
-    \BA{(Clarify what I mean by $*^{\otimes 2}$. I also need to move this note now I've moved the $*^{\otimes 2}$ haha.)} \BA{(Also the $\partial_{t}p$ terms should have, like, a $\frac{3}{2}$ term, or something to that effect, before it, but that's something I'll sort when I derive the exact discretization. It doesn't change tthe analysis.)} alongside the equilibrium relation for $\bfj$,
-    \begin{equation}
-        \bfzero  =  \frac{\mu_{+-}}{q_{+}q_{-}}\bfj - (\bfE + \bfu\wedge\bfB) + \BA{\rm const.}\bfj\wedge\bfB
-    \end{equation}
-    where $\bfp$, $\bfu$ and $p$, $\rho_{M}$ are related by
-    \begin{align}
-        \bfp  =  \rho_{M}\bfu,  &&
-        m_{+}p  =  k_{B}\rho_{M}\theta
-    \end{align}
-    coupled with Maxwell's equations:
-    \begin{align*}
-        \partial_{t}\bfE  &=  c^{2}\nabla\wedge\bfB - \frac{1}{\varepsilon_{0}}\bfj,  &
-        \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \\
-        \nabla\cdot\bfE  &=  \frac{1}{\varepsilon_{0}}\rho_{C},  &
-        \nabla\cdot\bfB  &=  0
-    \end{align*}
-    where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light. \BA{(Move the definition for $c$ to earlier when I define Maxwell's equations.)} For conciseness, $\bftau(\bfu)$ denotes the (deviatoric) strain
+    \BA{(This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.)} Without the $(\delta f_{s})_{s}$ corrections, the fluid component of the system takes the form in Figure \ref{fig:dim compressible strong form}, up to leading order, comprising:
+    \begin{itemize}
+        \item  The fluid equations (\ref{eqn:dim compressible mass conservation}–\ref{eqn:dim compressible energy conservation})
+        \item  The current, $\bfj$, equilibrium relation (\ref{eqn:dim compressible current identity})
+        \item  Velocity, $\bfu$, and temperature, $\theta$, identities (\ref{eqn:dim compressible velocity identity}–\ref{eqn:dim compressible temperature identity})
+        \item  Maxwell's equations (\ref{eqn:dim compressible Faraday's law}–\ref{eqn:dim compressible Gauss's law})
+    \end{itemize}
+    where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light, and for conciseness, $\bftau[\bfu]$ denotes the (deviatoric) strain,
     \begin{equation}\label{eqn:strain equation}
-        \bftau(\bfu)  :=  2\nabla_{\rms}\bfu - \frac{2}{3}(\nabla\cdot\bfu)\bfI
+        \bftau[\bfu]  :=  2\nabla_{\rms}\bfu - \frac{2}{3}(\nabla\cdot\bfu)\bfI,
     \end{equation}
     and $\nabla_{\rms}$ denotes the symmetric gradient,
     \begin{equation}
-        \nabla_{\rms}\bfv  :=  \frac{1}{2}\left(\nabla\bfv + \nabla\bfv^{T}\right)
+        \nabla_{\rms}\bfv  :=  \frac{1}{2}\left(\nabla\bfv + \nabla\bfv^{T}\right),
     \end{equation}
 
-    To non-dimensionalize the above system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. $\overline{\bfu}$, $\overline{\theta}$, $\overline{\bftau}$ are naturally given from their definitions as:
+    \begin{figure}
+        \centering
+        \line
+        \begin{align}
+            \partial_{t}\rho_{M} + \nabla\cdot\bfp  &=  0,  \label{eqn:dim compressible mass conservation}  \\
+            \partial_{t}\rho_{C} + \nabla\cdot\bfj  &=  0,  \\
+            \rho_{M}\partial_{t}\bfu + \bfp\cdot\nabla\bfu  &=  - \nabla p + (\rho_{C}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{M}\bftau],  \\
+            \partial_{t}p + \nabla\cdot[p\bfu]  &=  - p\nabla\cdot\bfu + \nu\rho_{M}\bftau:\nabla_{\rms}\bfu + \frac{\mu_{+-}}{q_{+}q_{-}}\|\bfj\|^{2} + \frac{\kappa k_{B}}{m_{+}}\nabla\cdot[\rho_{M}\nabla\theta],  \label{eqn:dim compressible energy conservation}  \\
+            \bfzero  &=  \frac{\mu_{+-}}{q_{+}q_{-}}\bfj - (\bfE + \bfu\wedge\bfB) + \BA{\rm const.}\bfj\wedge\bfB,  \label{eqn:dim compressible current identity}  \\
+            \bfp  &=  \rho_{M}\bfu,  \label{eqn:dim compressible velocity identity}  \\
+            m_{+}p  &=  k_{B}\rho_{M}\theta,  \label{eqn:dim compressible temperature identity}  \\
+            \partial_{t}\bfE  &=  c^{2}\nabla\wedge\bfB - \frac{1}{\varepsilon_{0}}\bfj,  \label{eqn:dim compressible Faraday's law}  \\
+            \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \\
+            \nabla\cdot\bfE  &=  \frac{1}{\varepsilon_{0}}\rho_{C},  \\
+            \nabla\cdot\bfB  &=  0  \label{eqn:dim compressible Gauss's law}
+        \end{align}
+        \line
+        \caption{(Dimensional) compressible strong formulation}
+        \label{fig:dim compressible strong form}
+    \end{figure}
+    
+    \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)} \BA{(Clarify what I mean by $*^{\otimes 2}$. I also need to move this note now I've moved the $*^{\otimes 2}$ haha.)} \BA{(Also the $\partial_{t}p$ terms should have, like, a $\frac{3}{2}$ term, or something to that effect, before it, but that's something I'll sort when I derive the exact discretization. It doesn't change the analysis.)} \BA{(Move the definition for $c$ to earlier when I define Maxwell's equations.)}
+
+    To non-dimensionalize this system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. $\overline{\bfu}$, $\overline{\theta}$, $\overline{\bftau}$ are naturally given from their definitions as:
     \begin{align}
         \overline{\bfu}  =  \frac{\overline{\bfp}}{\overline{\rho_{M}}},  &&
         \overline{\theta}  =  \frac{m_{+}}{k_{B}}\cdot{\overline{\theta}\overline{\rho_{M}}},  &&
@@ -71,7 +78,7 @@
         \nabla\cdot\bfB  &=  0
     \end{align*}
     
-    \begin{figure}[!ht]
+    \begin{figure}
         \begin{tabular}{ c c c c }
             Name  &  Symbol  &  Value  &  Ratio  \\
             \hline\hline
@@ -88,24 +95,25 @@
     \end{figure}
 
     On non-relativistic scale where $\rmM  \ll  1$, the quasi-neutral hypothesis is derived $\rho_{C}  \sim  0$. This is assumed frm here. This gives the following, final, quasi-neutral compressible Hall MHD system, where, with $\rho_{C}$ eliminated, $\rho_{M}$ is denoted as simply $\rho$:
-    
-    \line
 
-    \paragraph*{Compressible Strong Formulation}
-    
-    \begin{align}
-        \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:mass conservation}  \\
-        \partial_{t}\bfp  &=  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:momentum conservation}  \\
-        \partial_{t}p  &=  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:energy conservation}  \\
-        \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:current identity}  \\
-        \bfzero  &=  \bfp - \rho\bfu  \label{eqn:velocity identity}  \\
-        0  &=  p - \rho\theta  \label{eqn:temperature identity}  \\
-        \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:Ampère's law}  \\
-        \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
-        0  &=  \nabla\cdot\bfB  \label{eqn:Gauss's law}
-    \end{align}
-
-    \line
+    \begin{figure}[!ht]
+        \centering
+        \line
+        \begin{align}
+            \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:mass conservation}  \\
+            \partial_{t}\bfp  &=  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:momentum conservation}  \\
+            \partial_{t}p  &=  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:energy conservation}  \\
+            \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:current identity}  \\
+            \bfzero  &=  \bfp - \rho\bfu  \label{eqn:velocity identity}  \\
+            0  &=  p - \rho\theta  \label{eqn:temperature identity}  \\
+            \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:Ampère's law}  \\
+            \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
+            0  &=  \nabla\cdot\bfB  \label{eqn:Gauss's law}
+        \end{align}
+        \line
+        \caption{Non-dimensionalized compressible strong formulation}
+        \label{fig:non-dim compressible strong form}
+    \end{figure}
 
     Two notes on this system:
     \begin{itemize}
@@ -114,22 +122,23 @@
         \item  In the ideal limit $\rmRef, \rmRem  =  \infty$, the viscous and Ohmic heating terms, $\frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu$ and $\frac{2}{\beta\rmRem}\|\bfj\|^{2}$ are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more rich structure for the analysis and discretization. 
     \end{itemize}
 
-    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor for kinetic effects, through the inclusion of the energy equation, (\ref{eqn:energy conservation}), with the notation differing slightly in places. The system there can be written in the form:
-    
-    \line
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor for kinetic effects, through the inclusion of the energy equation, (\ref{eqn:energy conservation}), with the notation differing slightly in places. (See Figure \ref{fig:incompressible strong form})
 
-    \paragraph*{Incompressible Strong Formulation}
-    
-    \begin{align}
-        0  &=  \nabla\cdot\bfu  \label{eqn:incompressible mass conservation}  \\
-        \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu  \label{eqn:incompressible momentum conservation}  \\
-        \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:incompressible current identity}  \\
-        \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:incompressible Ampère's law}  \\
-        \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:incompressible Faraday's law}  \\
-        0  &=  \nabla\cdot\bfB  \label{eqn:incompressible Gauss's law}
-    \end{align}
-
-    \line
+    \begin{figure}
+        \centering
+        \line
+        \begin{align}
+            0  &=  \nabla\cdot\bfu  \label{eqn:incompressible mass conservation}  \\
+            \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu  \label{eqn:incompressible momentum conservation}  \\
+            \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:incompressible current identity}  \\
+            \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:incompressible Ampère's law}  \\
+            \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:incompressible Faraday's law}  \\
+            0  &=  \nabla\cdot\bfB  \label{eqn:incompressible Gauss's law}
+        \end{align}
+        \line
+        \caption{(Non-dimensionalized) incompressible strong formulation}
+        \label{fig:incompressible strong form}
+    \end{figure}
 
     One can seek therefore to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the model in \cite{LHF22} is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{M}$, the two are functionally equivalent after non-dimensionalization. We choose to write the compressible system here in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation, (\ref{eqn:mass conservation}), is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
     
