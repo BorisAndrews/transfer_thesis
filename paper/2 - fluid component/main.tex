@@ -94,7 +94,7 @@
         \label{fig:dimensionless quantities}
     \end{figure}
 
-    On non-relativistic scale where $\rmM  \ll  1$, the quasi-neutral hypothesis is derived $\rho_{C}  \sim  0$. This is assumed frm here. This gives the following, final, quasi-neutral compressible Hall MHD system, where, with $\rho_{C}$ eliminated, $\rho_{M}$ is denoted as simply $\rho$:
+    On non-relativistic scales where $\rmM  \ll  1$, the quasi-neutrality hypothesis, $\rho_{C}  \sim  0$, is derived. This is assumed henceforth, giving the final quasi-neutral compressible Hall MHD system in Figure \ref{fig:non-dim compressible strong form}, where, with $\rho_{C}$ eliminated, $\rho_{M}$ is denoted as simply $\rho$:
 
     \begin{figure}[!ht]
         \centering
@@ -102,13 +102,13 @@
         \begin{align}
             \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:mass conservation}  \\
             \partial_{t}\bfp  &=  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:momentum conservation}  \\
-            \partial_{t}p  &=  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:energy conservation}  \\
-            \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:current identity}  \\
-            \bfzero  &=  \bfp - \rho\bfu  \label{eqn:velocity identity}  \\
-            0  &=  p - \rho\theta  \label{eqn:temperature identity}  \\
-            \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:Ampère's law}  \\
+            \partial_{t}p     &=  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:energy conservation}  \\
+            \bfzero           &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:current identity}  \\
+            \bfzero           &=  \bfp - \rho\bfu  \label{eqn:velocity identity}  \\
+            0                 &=  p - \rho\theta  \label{eqn:temperature identity}  \\
+            \bfzero           &=  \bfj - \nabla\wedge\bfB  \label{eqn:Ampère's law}  \\
             \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
-            0  &=  \nabla\cdot\bfB  \label{eqn:Gauss's law}
+            0                 &=  \nabla\cdot\bfB  \label{eqn:Gauss's law}
         \end{align}
         \line
         \caption{Non-dimensionalized compressible strong formulation}
@@ -117,12 +117,12 @@
 
     Two notes on this system:
     \begin{itemize}
-        \item  For transient models, Gauss's law, (\ref{eqn:Gauss's law}), need only be enforced on the initial conditions at time $t  =  0$, as it is enforced for $t  >  0$ by Faraday's law, (\ref{eqn:Faraday's law}).
+        \item  For transient models, Gauss's law (\ref{eqn:Gauss's law}) need only be enforced on the initial conditions at time $t  =  0$, as it is enforced for $t  >  0$ by Faraday's law (\ref{eqn:Faraday's law}).
 
         \item  In the ideal limit $\rmRef, \rmRem  =  \infty$, the viscous and Ohmic heating terms, $\frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu$ and $\frac{2}{\beta\rmRem}\|\bfj\|^{2}$ are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more rich structure for the analysis and discretization. 
     \end{itemize}
 
-    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor for kinetic effects, through the inclusion of the energy equation, (\ref{eqn:energy conservation}), with the notation differing slightly in places. (See Figure \ref{fig:incompressible strong form})
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}), with the notation differing slightly in places. (See Figure \ref{fig:incompressible strong form})
 
     \begin{figure}
         \centering
@@ -140,7 +140,7 @@
         \label{fig:incompressible strong form}
     \end{figure}
 
-    One can seek therefore to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the model in \cite{LHF22} is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{M}$, the two are functionally equivalent after non-dimensionalization. We choose to write the compressible system here in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation, (\ref{eqn:mass conservation}), is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
+    One can seek therefore to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the model in \cite{LHF22} is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{M}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{M}$, the two are functionally equivalent after non-dimensionalization. We choose to write the compressible system here in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation (\ref{eqn:mass conservation}) is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
     
     \BA{Note to self, for collision frequency $\nu_{\rm Coll}$,
     \begin{equation}

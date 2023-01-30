@@ -1,0 +1,7 @@
+\subsection*{Classical Timestepping Techniques}
+    \BA{Introduction.}
+
+    Traditional approaches for discretizing time-dependent PDEs, $\partial_{t}u  =  \calF(u)$, through the FE method cast the PDE into a weak form by testing against test functions, $v$, on the $d$-dimensional, polygonal, spatial domain $\bfOmega$, as ``$\langle\partial_{t}u, v\rangle$''  $=  \langle\calF(u), v\rangle$, where the choice of interpretation of the time derivative term ``$\langle\partial_{t}u, v\rangle$'', typically through a generic Runge–Kutta (RK) method, characterises the timestepper for the scheme. For traditional FE software designed for solving FE problems in space only, these techniques can be implemented through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
+
+    \BA{Classical techniques using classical timesteppers (dissipative discretizations/symplectic integrators etc.).}
+    

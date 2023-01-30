@@ -1,7 +1,7 @@
 \section{Conserved/Dissipated Quantities}
     \BA{Introduction.}
     
-    Consider those quantities that are conserved by the transient system. The ability of the discretization to represent the system's physical behavior can be improved by ensuring that those properties that are conserved in the continuous case are \emph{also} conserved in the discretization. \BA{[Ref, ...]}
+    Consider those quantities that are conserved/dissipated by the transient system. The ability of a discretization to represent the system's physical behavior can be improved by ensuring that those properties that are conserved in the continuous case are \emph{also} conserved in the discretization. \BA{[Ref, ...]}
 
     Define first the helicity, $\calH(\bff)$, of a vector field $\bff : \bfOmega \rightarrow \bbR^{3}$,
     \begin{equation}
@@ -15,7 +15,7 @@
         Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$  \\
         Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfu)\cdot(b\bfB + \bfomega)$
     \end{tabular}\end{center}
-    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as $\nabla\wedge\bfu$.
+    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as $\bfomega  :=  \nabla\wedge\bfu$.
     
     Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
     \begin{align}
