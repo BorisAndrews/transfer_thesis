@@ -1,4 +1,4 @@
-\subsubsection*{Periodic Case}
+\subsection*{Periodic Case}
     \BA{Introduction.}
 
     \BA{If I'm going to talk about periodic problems, I need to add my ideas about how we incorporate the solve for the frequency in a separate chapter.}
@@ -60,12 +60,12 @@
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
-        $0  =  \partial_{t}\rho + \nabla\cdot\bfp$  &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \calP$  &  $\partial_{t}\calD + \nabla\cdot\calM  \leqslant  \calP$  \\
-        $\bfzero  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  $\partial_{t}\bfB + \nabla\wedge\bfE  \in  \partial_{t}\calB$  &  $\nabla\wedge\calE  \leqslant  \partial_{t}\calB$  \\
-        $0  =  \nabla\cdot\bfB$  &  ...  &  ...
+        $0  =  \partial_{t}\rho + \nabla\cdot\bfp$         &  $\partial_{t}\rho + \nabla\cdot\bfp  \in  \calP$  &  $\partial_{t}\calD + \nabla\cdot\calM  \leqslant  \calP$  \\
+        $\bfzero  =  \partial_{t}\bfB + \nabla\wedge\bfE$  &  ...                                               &  ...                                                       \\
+        $0  =  \nabla\cdot\bfB$                            &  ...                                               &  ...                                                       \\
     \end{tabular}\end{center}
 
-    \BA{IMPORTANT NOTE: Recently split this up into 2 distinct sections on periodic solutions and timesteppers. Since then I've had real trouble getting both Faraday's law and Gauss's law enforced in the periodic problem, due to the hole nature of the redundancy/gauge invariance in Maxwell's equations. The rest is copied over from how this section previously looked but is now largely wrong. If I can't get this to work soon, I'll just leave it as a remark and move on.}
+    \BA{IMPORTANT NOTE: Recently split this up into 2 distinct sections on periodic solutions and timesteppers. Since then I've had real trouble showing both Faraday's law and Gauss's are enforced in the periodic problem formulation, due to the whole nature of the redundancy/gauge invariance in Maxwell's equations. The rest is copied over from how this section previously looked but is now largely wrong. If I can't get this to work soon, I'll just leave it as a remark and move on.}
     
     Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calM\oplus\calD \xrightarrow{\rmdiv + \partial_{t}} \calP$ and $\calE\oplus\calB \xrightarrow{\cdots} \partial_{t}\calB\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T\right)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
