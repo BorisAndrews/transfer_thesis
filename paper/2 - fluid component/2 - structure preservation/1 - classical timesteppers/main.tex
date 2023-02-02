@@ -14,7 +14,7 @@
     for some chosen inner product $\langle*, *\rangle_{\bfOmega}$ on $\bfOmega$, where $\delta t^{n}  :=  t^{n} - t^{n - 1}$. The RK method then defines $\bfu^{n}  :=  \bfu^{n - 1} + \sum_{i}b_{i}\bfdelta\bfu^{n}_{i}$.
     
     \line
-    \begin{example}[Kuntzmann–Butcher]
+    \begin{example}[Gauss–Legendre]
         \BA{Bla.}
     \end{example} 
 
@@ -23,7 +23,28 @@
     \end{example}
     \line
     
-    For traditional finite-element (FE) software designed for solving FE problems in space only, these techniques can be performed through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
+    Since such methods reduce the problem to one in space only, traditional finite-element (FE) software are well-suited for their implementation, where the timestepping can be performed through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
+
+    Careful choice of Runge–Kutta method can give timesteppers that preserve the conservative/dissipative structures of the continuous strong form.
+
+    \line
+    
+    \begin{example}[Heat equation]
+        Gauss–Legendre methods are known to dissipate energy, $\rmE(t)  :=  \int_{\bfOmega}u^{2}$, in the heat equation (\ref{eqn:heat equation}) under Dirichlet/Neumann boundary conditions.
+        
+        At lowest order, $s  =  1$, the Crank–Nicolson/implicit midpoint rule has the exact dissipation:
+        \begin{equation}
+            \rmE^{n + 1} - \rmE^{n}  =  - \frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}(u^{n + 1} + u^{n})\right]\right\|^{2},
+        \end{equation}
+        resembling the continuous result (\ref{eqn:heat equation dissipation}).
+    \end{example}
+    
+    \begin{example}[Hamiltonian systems]
+        \BA{Symplectic operators.}
+    \end{example}
+    \line
+
+    \BA{Fabian uses such an approach to design structure-preserving timesteppers for incompressible Hall MHD.}
 
     \BA{Classical techniques using classical timesteppers (dissipative discretizations/symplectic integrators etc.).}
     
