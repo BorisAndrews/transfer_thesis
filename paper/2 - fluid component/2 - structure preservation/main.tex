@@ -1,4 +1,4 @@
-\section{Ensuring Structure Preservation in Weak Formulations}
+\section{Ensuring Structure Preservation in Variational/Weak Formulations}
     \BA{Introduction.}
 
     Consider a PDE (or potentially system of PDEs) in the general strong form
@@ -6,10 +6,11 @@
         \bfzero  =  \bfF\left[\bfu|_{\bfx; t}, \nabla\bfu|_{\bfx; t}, \nabla^{2}\bfu|_{\bfx; t}, \cdots; \partial_{t}\bfu|_{\bfx; t}\right](\bfx; t),
     \end{equation}
     which, alongside certain boundary conditions, is known to conserve/dissipate certain functionals $\rmE_{i}[\bfu|_{t}](t)$, such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE_{i}  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE_{i}  \leq  0$.
-
-    Other than the energies and helicities considered above for compressible Hall MHD system, other classical examples one might consider include:
     
-    \begin{example}
+    \line
+    
+    Other than the energies and helicities considered above for compressible Hall MHD system, other classical examples one might consider include:
+    \begin{example}[Heat equation]
         The heat equation,
         \begin{equation}
             \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
@@ -20,7 +21,7 @@
         \end{equation}
     \end{example}
     
-    \begin{example}
+    \begin{example}[Hamiltonian systems]
         Hamiltonian systems with Hamiltonian $\calH[p|_{t}, q|_{t}](t)$:
         \begin{align}
             \partial_{t}p  =  - \nabla_{q|_{t}}\calH,  &&
@@ -43,7 +44,7 @@
             \end{equation}
             \item  The Schrödinger equation,
             \begin{equation}
-                i\hbar\partial_{t}\Psi  =  \left[- \frac{\hbar^{2}}{2m}\Delta + V\right]\Psi
+                i\hbar\partial_{t}\Psi  =  \left[- \frac{\hbar^{2}}{2m}\Delta + V\right]\Psi,
             \end{equation}
             or, from $\Psi  =  q + ip$,
             \begin{align}
@@ -60,6 +61,19 @@
             \end{equation}
         \end{itemize}
     \end{example}
+    \line
+    
+    To apply the the finite-element method (FEM) to such a system, it must be cast into a variational/weak form.
+    
+    After discretizing via the Galerkin(/Petrov–Galerkin) method, the resulting discretization can be referred to as a ``timestepper'' if there exist timesteps $(0  <)  t^{1}  <  t^{2}  <  \cdots$ such that the following are equivalent for $m  <  n$:
+    \begin{itemize}
+        \item  The solution on the time interval $\left(0, t^{m}\right]$.
+        \item  The solution on the time interval $\left(0, t^{n}\right]$, restricted to $\left(0, t^{m}\right]$.
+    \end{itemize}
+    That is to say, the discretization can be solved iteratively on each timestep $t^{1}$, $t^{2}$, etc. Naturally, this is preferable to solving a time-coupled system simultaneously over the higher-dimension space-time domain.
+
+    \BA{Note on how important it is constructing timesteppers that preserve conservative/dissipative structure.}
+
 
 
     \input{2 - fluid component/2 - structure preservation/1 - classical timesteppers/main.tex}

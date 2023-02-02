@@ -1,7 +1,29 @@
 \subsection*{Classical Timestepping Techniques}
     \BA{Introduction.}
 
-    Traditional approaches for discretizing time-dependent PDEs, $\partial_{t}u  =  \calF(u)$, through the FE method cast the PDE into a weak form by testing against test functions, $v$, on the $d$-dimensional, polygonal, spatial domain $\bfOmega$, as ``$\langle\partial_{t}u, v\rangle$''  $=  \langle\calF(u), v\rangle$, where the choice of interpretation of the time derivative term ``$\langle\partial_{t}u, v\rangle$'', typically through a generic Runge–Kutta (RK) method, characterises the timestepper for the scheme. For traditional FE software designed for solving FE problems in space only, these techniques can be implemented through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
+    Traditional approaches for casting time-dependent PDEs into a weak form make use of a timestepping scheme, usually a Runge–Kutta (RK) method characterised—for an $s$-step method—by:
+    \begin{align}
+        \sfA  \in  \bbR^{s \times s},  &&
+        \bfb  \in  \bbR^{s},  &&
+        \bfc  \in  \bbR^{s}.
+    \end{align}
+    The weak form then defines function spaces $\bbU$, $\bbV$ on the spatial domain $\bfOmega$, seeking—for each timestep $*^{n}$, where $\bfu^{n}$ is a analogous to $\bfu|_{t^{n}}$—$\bfdelta\bfu^{n}_{1}, \cdots, \bfdelta\bfu^{n}_{s}  \in  \bbU$, such that $\forall  \bfv_{1}, \cdots, \bfv_{s}  \in  \bbV$,
+    \begin{equation}
+        0  =  \left\langle\bfv_{i}, \bfF\left[\left.\bfu^{n - 1} + \sum_{j}a_{ij}\bfdelta\bfu^{n}_{j}\right|_{*}, \cdots; \left.\frac{1}{\delta t^{n}}\bfdelta\bfu^{n}_{i}\right|_{*}\right]\left(*, t^{n - 1} + c_{i}\delta t^{n}\right)\right\rangle_{\bfOmega},
+    \end{equation}
+    for some chosen inner product $\langle*, *\rangle_{\bfOmega}$ on $\bfOmega$, where $\delta t^{n}  :=  t^{n} - t^{n - 1}$. The RK method then defines $\bfu^{n}  :=  \bfu^{n - 1} + \sum_{i}b_{i}\bfdelta\bfu^{n}_{i}$.
+    
+    \line
+    \begin{example}[Kuntzmann–Butcher]
+        Bla.
+    \end{example} 
+
+    \begin{example}[Radau IIA]
+        Bla.
+    \end{example}
+    \line
+    
+    For traditional finite-element (FE) software designed for solving FE problems in space only, these techniques can be performed through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
 
     \BA{Classical techniques using classical timesteppers (dissipative discretizations/symplectic integrators etc.).}
     
