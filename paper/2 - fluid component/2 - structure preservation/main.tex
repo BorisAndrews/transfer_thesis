@@ -1,15 +1,15 @@
 \section{Ensuring Structure Preservation in Variational/Weak Formulations}
     \BA{Introduction.}
 
-    Consider a PDE (or potentially system of PDEs) in the general strong form
-    \begin{equation}
+    Consider a time-dependent PDE (or system of PDEs) in the general strong form
+    \begin{equation}\label{eqn:general time-dependent PDE}
         \bfzero  =  \bfF\left[\bfu|_{\bfx; t}, \nabla\bfu|_{\bfx; t}, \nabla^{2}\bfu|_{\bfx; t}, \cdots; \partial_{t}\bfu|_{\bfx; t}\right](\bfx; t),
     \end{equation}
-    which, alongside certain boundary conditions, is known to conserve/dissipate certain functionals $\rmE_{i}[\bfu|_{t}](t)$, such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE_{i}  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE_{i}  \leq  0$.
+    alongside appropriate boundary conditions. The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu|_{t}](t)$ that are conserved/dissipated for time, i.e. such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE  \leq  0$.
     
     \line
     
-    Other than the energies and helicities considered above for compressible Hall MHD system, other classical examples one might consider include:
+    Other than the energies and helicities considered above for the Hall MHD system, other classical examples one might consider include:
     \begin{example}[Heat equation]
         The heat equation,
         \begin{equation}
@@ -71,8 +71,13 @@
         \item  The solution on the time interval $\left(0, t^{n}\right]$, restricted to $\left(0, t^{m}\right]$.
     \end{itemize}
     That is to say, the discretization can be solved iteratively on each timestep $t^{1}$, $t^{2}$, etc. Naturally, this is preferable to solving a time-coupled system simultaneously over the higher-dimension space-time domain.
-
-    \BA{Note on how important it is constructing timesteppers that preserve conservative/dissipative structure.}
+    
+    When constructing timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve these conservational/dissipative structures. That is to say that for $m  <  n$, with $\rmE^{n}  :=  \rmE[\bfu|_{t^{n}}]$, either $\rmE[\bfu|_{t^{n}}]  =  \rmE[\bfu|_{t^{m}}]$ or $\rmE[\bfu|_{t^{n}}]  \leq  \rmE[\bfu|_{t^{m}}]$, and potentially further with analogous, quantifiable differences in the dissipative case. There are many reasons one might seek to do this:
+    \begin{itemize}
+        \item  The physical origins for such quantities often imply informative qualitative results for the behavior of the system (such as the natural dissipation of energy in the heat equation). \BA{(Talk about the topological meaning of magnetic helicity in MHD. Particularly important for solar simulations apparently- Is that something to do with the high $\beta$?)}
+        \item  \BA{Often $L^{2}$-norm-like nature often imply nice quantitative bounds, e.g. from—again—the energy in the heat equation. Useful for proving existence/well-posedness/convergence.}
+        \item  \BA{More reasons! [Ref, ...]}
+    \end{itemize}
 
 
 
