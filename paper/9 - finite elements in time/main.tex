@@ -1,19 +1,4 @@
 \chapter{Finite Elements in Time}\label{cha:finite elements in time}
-    \BA{Introduction.}
-
-    Traditional approaches for discretizing time-dependent PDEs, $\partial_{t}u  =  \calF(u)$, through the FE method cast the PDE into a weak form by testing against test functions, $v$, on the $d$-dimensional, polygonal, spatial domain $\bfOmega$, as ``$\langle\partial_{t}u, v\rangle$''  $=  \langle\calF(u), v\rangle$, where the choice of interpretation of the time derivative term ``$\langle\partial_{t}u, v\rangle$'', typically through a generic Runge–Kutta (RK) method, characterises the timestepper for the scheme. For traditional FE software designed for solving FE problems in space only, these techniques can be implemented through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
-
-    An alternative approach—FEs in time—interprets the PDE on the domain $\bfOmega\otimes T$, where $T$ represents a time interval, potentially the timestep $\left[t^{k}, t^{k + 1}\right]$ or the whole interval to be considered. One then tests against test functions, $v$, defined equally over the whole domain $\bfOmega\otimes T$, as $\langle\partial_{t}u, v\rangle  =  \langle\calF(u), v\rangle$. The original ambiguity in interpretation of the time derivative term, ``$\langle\partial_{t}u, v\rangle$'', when picking the RK scheme is transferred to the choice of behavior, continuity, order etc. of the finite element discretizations in the time domain. A few key points on this formulation:
-    \begin{itemize}
-        \item  Such FE spaces can be constructed via the tensor product of FE spaces on $d$-dimensional $\bfOmega$ and 1-dimensional $T$, without needing to construct FE spaces on the entire $(d + 1)$-dimensional domain $\bfOmega\otimes T$.
-        \item  Akin to Petrov–Galerkin methods, the test function space need not be identical to the trial function space, and often won't be:- for PDEs that are 1$^{\text{st}}$-order in time, for example, a typical weak formulation will require high regularity in the trial space than the test space (see $\langle\partial_{t}u, v\rangle$) which will then typically be reflected in the choice of FE discretizations.
-        \item  When using a FE-in-time interpretation, the intention is typically \emph{not} to solve a highly computationally intense, $(n + 1)$-dimensional FE problem on all of $\bfOmega\otimes T$, but to extract a timestepper from the distretization that need only be solved on the $d$-dimensional spatial domain, $\bfOmega$, by exploiting block-triangularity in the stiffness \BA{(Is this the right terminology here?)} matrix. It is in fact often the case that the resultant timesteppers are identical to those that would be derived from a RK-scheme interpretation.
-    \end{itemize}
-
-    \BA{Should list some pros/cons from my reading group FET presentation.}
-
-    \BA{I say ``typically'' a \emph{lot} here...}
-
     \line
     
     \begin{example}
@@ -139,7 +124,5 @@
     \end{example}
 
     \line
-
-    \BA{Note about FDM bases?}
     
     \BA{Should go through and add correct punctuation to my equations.}
