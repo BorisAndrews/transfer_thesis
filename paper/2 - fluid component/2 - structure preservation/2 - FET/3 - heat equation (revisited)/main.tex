@@ -1,0 +1,14 @@
+\subsubsection{Example 1: The Heat Equation (Revisited)}
+    Consider a new coupled system, identical to the original heat equation (\ref{eqn:heat equation}) in the continuous case:
+    \begin{align}
+        \partial_{t}u  &=  \frac{1}{\rmPe}\Delta\widetilde{u}  \\
+                    0  &=  \widetilde{u} - u
+    \end{align}
+    This can be cast into a weak form as follows, wherein one seeks $u_{-}  \in  \calU_{-}$, $\widetilde{u}  \in  \widetilde{\calU}$ such that:
+    \begin{align}
+        &\forall  \widetilde{v}  \in  \widetilde{\calU},  &  \left\langle\widetilde{v}, \partial_{t}u\right\rangle_{\bfOmega\otimes T}  &=  - \frac{1}{\rmPe}\left\langle\nabla\widetilde{v}, \nabla\widetilde{u}\right\rangle_{\bfOmega\otimes T},  \\
+        &\forall  v  \in  \calV,  &  0  &=  \left\langle v, \widetilde{u} - u\right\rangle_{\bfOmega\otimes T}
+    \end{align}
+    where similarly for conciseness, $u$ is equal to $u_{-}$ with the addition of a lifting of an extension, $u_{0}$, of the ICs, $\widehat{u}_{0}$. Note, crucially there is no lifting of ICs on $u$.
+
+    \BA{Talk about BCs- on both $u$ \emph{and} $\widetilde{u}$!}

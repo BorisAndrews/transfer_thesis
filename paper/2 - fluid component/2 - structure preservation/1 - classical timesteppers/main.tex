@@ -1,4 +1,4 @@
-\subsection*{Classical Timestepping Techniques}
+\subsection{Classical Timestepping Techniques}
     Traditional approaches for casting time-dependent PDEs into a weak form employ a timestepping scheme, usually a Runge–Kutta (RK) method characterised. For an $s$-step method, the RK method is characterised by:
     \begin{align}
         \sfA  \in  \bbR^{s \times s},  &&
@@ -13,12 +13,12 @@
 
     \line
     \begin{definition}[Collocation methods]
-        Collocation methods are a class of RK methods defined from:
+        Collocation methods are a class of RK methods. For an $s$-step method, they arae defined from:
         \begin{itemize}
-            \item  A set of ``collocation points'' $(c_{i})_{i}$, defining $\bfc$.
-            \item  A basis $(\phi_{j})_{j}$ of (typically polynomials) functions for $\partial_{t}\bfu$, defined on a reference timestep $(0, 1]$ such that $\phi_{j}(c_{i})  =  \delta_{ij}$.
+            \item  A set of $s$ distinct ``collocation points'' $(c_{i})_{i}$, defining $\bfc$.
+            \item  An $s$-dimensional function space of functions for $\partial_{t}\bfu$, defined on a reference timestep $(0, 1]$:- typically polynomials, always containing the constant function $1$.
         \end{itemize}
-        $\sfA$, $\bfb$ are then defined from:
+        For a well-defined pair of collocation points and function space, there exists a basis of functions $(\phi_{j})_{j}$, such that $\phi_{j}(c_{i})  =  \delta_{ij}$. $\sfA$, $\bfb$ are then defined from $(\phi_{j})_{j}$ as:
         \begin{align}
             a_{ij}  :=  \int_{0}^{c_{i}}\phi_{j},  &&
             b_{j}   :=  \int_{0}^{1}\phi_{j}.
