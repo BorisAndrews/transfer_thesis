@@ -57,8 +57,8 @@
     \begin{example}[Heat equation]
         GL methods are known to dissipate energy, $\rmE(t)  :=  \int_{\bfOmega}u^{2}$, in the heat equation (\ref{eqn:heat equation}) under Dirichlet/Neumann boundary conditions. \BA{[Ref]}
         
-        At lowest order ($s  =  1$) the Crank–Nicolson method has the exact dissipation:
-        \begin{equation}
+        At lowest order ($s  =  1$) the Crank–Nicolson/implicit-midpoint method has the exact dissipation:
+        \begin{equation}\label{eqn:heat equation dissipation implicit midpoint}
             \rmE^{n + 1} - \rmE^{n}  =  - \frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}\left(u^{n + 1} + u^{n}\right)\right]\right\|^{2},
         \end{equation}
         resembling the continuous result (\ref{eqn:heat equation dissipation}).

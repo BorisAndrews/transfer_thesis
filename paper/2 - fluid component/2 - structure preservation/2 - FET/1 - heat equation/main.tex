@@ -93,5 +93,5 @@
         \begin{equation}
             \left\langle\widehat{v}_{n + 1}, \frac{1}{\delta t}\left(\widehat{u}_{n + 1} - \widehat{u}_{n}\right)\right\rangle_{\bfOmega}  =  - \frac{1}{\rmPe}\left\langle\nabla\widehat{v}_{n + 1}, \frac{1}{2}\nabla\left(\widehat{u}_{n + 1} + \widehat{u}_{n}\right)\right\rangle_{\bfOmega}.
         \end{equation}
-        For $s  >  1$—at higher order—the resultant timesteppers are equivalent to the higher-order GL methods, which are known to be exactly dissipative for the heat equation.
+        For $s  >  1$—at higher order—the resultant timesteppers are equivalent to the higher-order GL methods, which—as states earlier—are known to be exactly dissipative for the heat equation. Notably however, while the scheme may be dissipative, the difference in $\rmE$ is \emph{not} that which might be assumed from (\ref{eqn:heat equation dissipation}), $\frac{1}{\rmPe}\int_{\bfOmega\otimes\left(t^{n}, t^{n + 1}\right]}\|\nabla u\|^{2}$, but a seemingly related value, e.g. as stated in (\ref{eqn:heat equation dissipation implicit midpoint}), $\frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}\left(\widehat{u}^{n + 1} + \widehat{u}^{n}\right)\right]\right\|^{2}$ for $s = 1$.
     \end{example}

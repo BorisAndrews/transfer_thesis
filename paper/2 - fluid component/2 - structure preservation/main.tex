@@ -5,7 +5,7 @@
     \begin{equation}\label{eqn:general time-dependent PDE}
         \bfzero  =  \bfF\left[\bfu|_{\bfx; t}, \nabla\bfu|_{\bfx; t}, \nabla^{2}\bfu|_{\bfx; t}, \cdots; \partial_{t}\bfu|_{\bfx; t}\right](\bfx; t),
     \end{equation}
-    alongside appropriate boundary conditions. The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu|_{t}](t)$ that are conserved/dissipated for time, i.e. such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE  \leq  0$.
+    alongside appropriate boundary conditions (BCs). The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu|_{t}](t)$ that are conserved/dissipated for time, i.e. such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE  \leq  0$.
     
     \line
     
@@ -15,7 +15,7 @@
         \begin{equation}\label{eqn:heat equation}
             \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
         \end{equation}
-        under homogeneous Dirichlet or Neumann boundary conditions, where the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
+        under homogeneous Dirichlet or Neumann BCs, where the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
         \begin{equation}\label{eqn:heat equation dissipation}
             \frac{\rmd}{\rmd\rmt}\rmE  =  - \frac{1}{\rmPe}\|\nabla u\|^{2}.
         \end{equation}
@@ -78,7 +78,6 @@
         \item  \BA{Often $L^{2}$-norm-like nature often imply nice quantitative bounds, e.g. from—again—the energy in the heat equation. Useful for proving existence/well-posedness/convergence.}
         \item  \BA{More reasons! [Ref, ...]}
     \end{itemize}
-
 
 
     \input{2 - fluid component/2 - structure preservation/1 - classical timesteppers/main.tex}
