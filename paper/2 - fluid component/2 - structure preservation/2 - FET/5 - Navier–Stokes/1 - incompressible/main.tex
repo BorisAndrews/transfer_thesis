@@ -1,0 +1,94 @@
+\paragraph*{The Incompressible Case}
+    Consider the incompressible Navier–Stokes equations, in the classical strong form:
+    \begin{align}
+                       0  &=  \nabla\cdot\bfu,  \label{eqn:Navier–Stokes mass conservation}  \\
+        \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{1}{\rmRe}\Delta\bfu    \label{eqn:Navier–Stokes classical momentum conservation}
+    \end{align}
+    under homogeneous Dirichlet BCs in $\bfu$, $\bfzero  =  \bfu|_{\bfGamma}$, and ICs on $\bfu$.
+
+    By incompressibility, the momentum equation (\ref{eqn:Navier–Stokes classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherit the energy-dissipative structure,
+    \begin{equation}\label{eqn:Navier–Stokes skew-symmetric momentum conservation}
+        \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu],
+    \end{equation}
+    since:
+    \begin{align}
+        &\nabla\cdot\left[\bfu^{\otimes 2}\right]  &&=  (\text{\sout{ $\nabla\cdot\bfu$ }})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
+        &\nabla\cdot\left[\nabla^{\rmT}\bfu\right]  &&=  \nabla[\text{\sout{ $\nabla\cdot\bfu$ }}]  &&=  0
+    \end{align}
+    
+    These can be seen to dissipate (kinetic) energy, $\rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}$, by ``testing'' (in $L^{2}$) the mass conservation equation (\ref{eqn:Navier–Stokes mass conservation}) against $p$:
+    \begin{equation}\label{eqn:mass tested against p}
+        0  =  \int_{\bfOmega}p\nabla\cdot\bfu
+    \end{equation}
+    and the skew-symmetric form of the momentum equation (\ref{eqn:Navier–Stokes skew-symmetric momentum conservation}) against $\bfu$:
+    \begin{align}
+        \int_{\bfOmega}\bfu\cdot\partial_{t}\bfu  &=  \int_{\bfOmega}\bfu\cdot\left(- \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu]\right)  \\
+        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}\left(\text{\sout{ $\bfu^{\otimes 2}:\nabla_{\rms}\bfu$ }} - \text{\sout{ $\bfu^{\otimes 2}:\nabla_{\rms}\bfu$ }}\right) + p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:what skew-symmetry means}  \\
+        \partial_{t}\rmE  &=  \int_{\bfOmega}\left[p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:momentum tested against u}
+    \end{align}
+    This form of the momentum equation is referred to as ``skew-symmetric'' due to the cancellation of the 2 terms in (\ref{eqn:what skew-symmetry means}). Taking the difference of (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}),
+    \begin{equation}
+        \partial_{t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
+    \end{equation}
+
+    Consider now how one might cast this into a weak formulation in time that both:
+    \begin{itemize}
+        \item  Invokes a timestepper after discretization.
+        \item  Inherits this energy-dissipative property.
+    \end{itemize}
+    Suppose the weak form seeks:
+    \begin{align}
+           p  \in  \calP,  &&
+        \bfu  \in  \calU,
+    \end{align}
+    and seeks to test (in $L^{2}$):
+    \begin{align}
+                           \text{(\ref{eqn:Navier–Stokes mass conservation}) against }    q \in \calQ,  &&
+        \text{(\ref{eqn:Navier–Stokes skew-symmetric momentum conservation}) against } \bfv \in \calV.
+    \end{align}
+    For the results (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}) to hold, the following subspace criteria would be required:
+    \begin{align}
+        \calP  \leqslant  \calQ,  &&
+        \calU  \leqslant  \calV,
+    \end{align}
+    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretiszation, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
+    \begin{align}
+                       0  &=  \nabla\cdot\widetilde{\bfu},  \\
+        \partial_{t}\bfu  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{*}\otimes\widetilde{\bfu}\right] + \bfu^{*}\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\widetilde{\bfu}],  \\
+                 \bfzero  &=  \widetilde{\bfu} - \bfu,
+    \end{align}
+    under homogeneous Dirichlet BCs in $\bfu$ \emph{and} $\widetilde{\bfu}$, $\bfzero  =  \bfu  =  \widetilde{\bfu}|_{\bfGamma}$, and ICs on $\bfu$ \emph{only}. $\bfu^{*}$ can be taken as either $\bfu$ or $\widetilde{\bfu}$ without affecting energy conservation. In weak form, one seeks:
+    \begin{align}
+                       p  \in  \calP,  &&
+        \widetilde{\bfu}  \in  \widetilde{\calU},  &&
+                    \bfu  \in  \calU,
+    \end{align}
+    such that:
+    \begin{align}
+        &\forall  q  \in  \calQ,  &  0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
+        &\forall  \widetilde{\bfv}  \in  \widetilde{\calV},  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle  - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
+        &\forall  \bfv  \in  \calV,  &  \bfzero  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
+    \end{align}
+    where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T}$ are taken over $\bfOmega\otimes T$, and $\calA[-; -, -]$ is the trilinear convective operator, defined
+    \begin{align}
+        \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)  \\
+        =  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)
+    \end{align}
+    with the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right] 
+     =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
+
+    \begin{remark}
+        \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calA  \leq  0$, s.t. various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
+    \end{remark}
+
+    Presuming the following subspace criteria hold (likely with equality for well-posedness):
+    \begin{align}
+                    \calP  \leqslant  \calQ,  &&
+        \widetilde{\calU}  \leqslant  \widetilde{\calV},  &&
+        \partial_{t}\calU  \leqslant  \calV,
+    \end{align}
+    ...
+
+    \begin{remark}
+        \BA{Need not use the skew-symmetric form of the momentum equation if we want exact energy cons., if we have \emph{exact} incomp. Same \emph{not} true for the compressible case.}
+    \end{remark}
