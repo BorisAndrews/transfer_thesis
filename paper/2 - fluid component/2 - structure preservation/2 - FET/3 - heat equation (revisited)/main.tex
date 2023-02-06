@@ -23,10 +23,10 @@
     \end{align}
     Summing these:
     \begin{align}
-        \left(\langle\partial_{t}u, u\rangle_{\bfOmega\otimes T} - \text{\sout{ $\langle\partial_{t}u, \widetilde{u}\rangle_{\bfOmega\otimes T}$ }}\tall\right) + \text{\sout{ $\langle\widetilde{u}, \partial_{t}u\rangle_{\bfOmega\otimes T}$ }} 
-         &=  - \frac{1}{\rmPe}\langle\nabla\widetilde{u}, \nabla\widetilde{u}\rangle_{\bfOmega\otimes T}  \\
-         \partial_{t}\left[\frac{1}{2}\int_{\bfOmega\otimes T}u^{2}\right]  &=  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T}\left\|\nabla\widetilde{u}\right\|^{2}  \\
-         \rmE\left(t^{N}\right)  &\leq  \rmE(0)
+        \left(\langle\partial_{t}u, u\rangle_{\bfOmega\otimes T} - \mst{\langle\partial_{t}u, \widetilde{u}\rangle_{\bfOmega\otimes T}}\tall\right) + \mst{\langle\widetilde{u}, \partial_{t}u\rangle_{\bfOmega\otimes T}} 
+        &=  - \frac{1}{\rmPe}\langle\nabla\widetilde{u}, \nabla\widetilde{u}\rangle_{\bfOmega\otimes T}  \\
+        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega\otimes T}u^{2}\right]  &=  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T}\left\|\nabla\widetilde{u}\right\|^{2}  \\
+        \rmE\left(t^{N}\right)  &\leq  \rmE(0)
     \end{align}
     
     Since (\ref{eqn:heat equation auxiliary weak form 1}) is spatially homogeneous, if $\partial_{t}\calU$, $\widetilde{\calU}$ are tensor product spaces with $\partial_{t}\calU  =  \widetilde{\calU}  \left(=  \calV  =  \widetilde{\calV}\right)$, then (\ref{eqn:heat equation auxiliary weak form 1}) implies that
@@ -37,7 +37,7 @@
     \begin{align}
         &\forall  v  \in  \calV,  &  \langle v, \partial_{t}u\rangle_{\bfOmega\otimes T}  &=  - \frac{1}{\rmPe}\langle\nabla v, \nabla u\rangle_{\bfOmega\otimes T},
     \end{align}
-    decoupling the auxiliary equation. This is identical to the weak form that was initially considered for the heat equation. If $\bbU^{h}  <  \calU$ is taken to be CG-in-time, then $\bbV^{h}  =  \partial_{t}\bbU^{h}$ must be DG-in-time, giving the CG-DG-in-time discretization considered above. As such, deriving this original weak form indirectly via the auxiliary space $\widetilde{\calU}$, one can observe why both:
+    decoupling the auxiliary equation. This is identical to the weak form that was initially considered for the heat equation. If $\bbU^{\rmh}  <  \calU$ is taken to be CG-in-time, then $\bbV^{\rmh}  =  \partial_{t}\bbU^{\rmh}$ must be DG-in-time, giving the CG-DG-in-time discretization considered above. As such, deriving this original weak form indirectly via the auxiliary space $\widetilde{\calU}$, one can observe why both:
     \begin{itemize}
         \item  The GL timesteppers derived from a CG-DG discretization of the heat equation necessarily satisfy dissipativity.
         \item  The dissipation in $\rmE$ is \emph{not} equal to $\frac{1}{\rmPe}\int_{\bfOmega\otimes T}\|\nabla u\|^{2}$, as it is in fact equal to the similar $\frac{1}{\rmPe}\int_{\bfOmega\otimes T}\left\|\nabla\widetilde{u}\right\|^{2}$, the norm on the \emph{auxiliary} space.

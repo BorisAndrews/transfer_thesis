@@ -1,32 +1,36 @@
 \paragraph*{The Incompressible Case}
-    Consider the incompressible Navier–Stokes equations, in the classical strong form:
+    Consider the incompressible Navier–Stokes (NS) equations, in the classical strong form:
     \begin{align}
-                       0  &=  \nabla\cdot\bfu,  \label{eqn:Navier–Stokes mass conservation}  \\
-        \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{1}{\rmRe}\Delta\bfu    \label{eqn:Navier–Stokes classical momentum conservation}
+                       0  &=  \nabla\cdot\bfu,  \label{eqn:NS mass conservation}  \\
+        \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{1}{\rmRe}\Delta\bfu    \label{eqn:NS classical momentum conservation}
     \end{align}
     under homogeneous Dirichlet BCs in $\bfu$, $\bfzero  =  \bfu|_{\bfGamma}$, and ICs on $\bfu$.
 
-    By incompressibility, the momentum equation (\ref{eqn:Navier–Stokes classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherit the energy-dissipative structure,
-    \begin{equation}\label{eqn:Navier–Stokes skew-symmetric momentum conservation}
+    By incompressibility, the momentum equation (\ref{eqn:NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherit the energy-dissipative structure,
+    \begin{equation}\label{eqn:NS skew-symmetric momentum conservation}
         \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu],
     \end{equation}
     since:
     \begin{align}
-        &\nabla\cdot\left[\bfu^{\otimes 2}\right]  &&=  (\text{\sout{ $\nabla\cdot\bfu$ }})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
-        &\nabla\cdot\left[\nabla^{\rmT}\bfu\right]  &&=  \nabla[\text{\sout{ $\nabla\cdot\bfu$ }}]  &&=  0
+        &\nabla\cdot\left[\bfu^{\otimes 2}\right]  &&=  (\mst{\nabla\cdot\bfu})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
+        &\nabla\cdot\left[\nabla^{\rmT}\bfu\right]  &&=  \nabla[\mst{\nabla\cdot\bfu}]  &&=  0
     \end{align}
+
+    \begin{remark}
+        \BA{Need not use the skew-symmetric form of the momentum equation if we want exact energy cons., if we have \emph{exact} incomp. Same \emph{not} true for the compressible case.}
+    \end{remark}
     
-    These can be seen to dissipate (kinetic) energy, $\rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}$, by ``testing'' (in $L^{2}$) the mass conservation equation (\ref{eqn:Navier–Stokes mass conservation}) against $p$:
+    These can be seen to dissipate (kinetic) energy, $\rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}$, by ``testing'' (in $L^{2}$) the mass conservation equation (\ref{eqn:NS mass conservation}) against $p$:
     \begin{equation}\label{eqn:mass tested against p}
         0  =  \int_{\bfOmega}p\nabla\cdot\bfu
     \end{equation}
-    and the skew-symmetric form of the momentum equation (\ref{eqn:Navier–Stokes skew-symmetric momentum conservation}) against $\bfu$:
+    and the skew-symmetric form of the momentum equation (\ref{eqn:NS skew-symmetric momentum conservation}) against $\bfu$:
     \begin{align}
         \int_{\bfOmega}\bfu\cdot\partial_{t}\bfu  &=  \int_{\bfOmega}\bfu\cdot\left(- \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu]\right)  \\
-        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}\left(\text{\sout{ $\bfu^{\otimes 2}:\nabla_{\rms}\bfu$ }} - \text{\sout{ $\bfu^{\otimes 2}:\nabla_{\rms}\bfu$ }}\right) + p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:what skew-symmetry means}  \\
+        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}\left(\mst{\bfu^{\otimes 2}:\nabla_{\rms}\bfu} - \mst{\bfu^{\otimes 2}:\nabla_{\rms}\bfu}\right) + p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:what skew-symmetry means}  \\
         \partial_{t}\rmE  &=  \int_{\bfOmega}\left[p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:momentum tested against u}
     \end{align}
-    This form of the momentum equation is referred to as ``skew-symmetric'' due to the cancellation of the 2 terms in (\ref{eqn:what skew-symmetry means}). Taking the difference of (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}),
+    This form of the momentum equation is referred to as ``skew-symmetric'' due to the cancellation of the 2 terms in (\ref{eqn:what skew-symmetry means}). Summing (\ref{eqn:mass tested against p}) and (\ref{eqn:momentum tested against u}),
     \begin{equation}
         \partial_{t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
     \end{equation}
@@ -43,15 +47,15 @@
     \end{align}
     and seeks to test (in $L^{2}$):
     \begin{align}
-                           \text{(\ref{eqn:Navier–Stokes mass conservation}) against }    q \in \calQ,  &&
-        \text{(\ref{eqn:Navier–Stokes skew-symmetric momentum conservation}) against } \bfv \in \calV.
+                           \text{(\ref{eqn:NS mass conservation}) against }    q \in \calQ,  &&
+        \text{(\ref{eqn:NS skew-symmetric momentum conservation}) against } \bfv \in \calV.
     \end{align}
     For the results (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}) to hold, the following subspace criteria would be required:
     \begin{align}
         \calP  \leqslant  \calQ,  &&
         \calU  \leqslant  \calV,
     \end{align}
-    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretiszation, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
+    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretization, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
     \begin{align}
                        0  &=  \nabla\cdot\widetilde{\bfu},  \\
         \partial_{t}\bfu  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{*}\otimes\widetilde{\bfu}\right] + \bfu^{*}\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\widetilde{\bfu}],  \\
@@ -65,14 +69,14 @@
     \end{align}
     such that:
     \begin{align}
-        &\forall  q  \in  \calQ,  &  0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
-        &\forall  \widetilde{\bfv}  \in  \widetilde{\calV},  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle  - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
-        &\forall  \bfv  \in  \calV,  &  \bfzero  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
+        &\forall                 q  \in  \calQ,              &                                                            0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
+        &\forall  \widetilde{\bfv}  \in  \widetilde{\calV},  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
+        &\forall              \bfv  \in  \calV,              &                                                            0  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
     \end{align}
     where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T}$ are taken over $\bfOmega\otimes T$, and $\calA[-; -, -]$ is the trilinear convective operator, defined
     \begin{align}
-        \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)  \\
-        =  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)
+        \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
+        =  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)
     \end{align}
     with the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right] 
      =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
@@ -87,8 +91,40 @@
         \widetilde{\calU}  \leqslant  \widetilde{\calV},  &&
         \partial_{t}\calU  \leqslant  \calV,
     \end{align}
-    ...
+    then necessarily the following hold:
+    \begin{align}
+        &p                 \in  (\calP              \leqslant)  \calQ              &&\implies  &                                                              0  &=  \langle p, (\nabla\cdot\widetilde{\bfu})\rangle  \\
+        &                                                                          &&          &                                                              0  &=  \int_{\bfOmega\otimes T}p\left(\nabla\cdot\widetilde{\bfu}\right)  \\
+        &\widetilde{\bfu}  \in  (\widetilde{\calU}  \leqslant)  \widetilde{\calV}  &&\implies  &    \left\langle\widetilde{\bfu}, \partial_{t}\bfu\right\rangle  &=  \mst{\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right]} + \left\langle\nabla\cdot\widetilde{\bfu}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfu}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
+        &                                                                          &&          &  \int_{\bfOmega\otimes T}\widetilde{\bfu}\cdot\partial_{t}\bfu  &=  \int_{\bfOmega\otimes T}\left[\left(\nabla\cdot\widetilde{\bfu}\right)p - \frac{2}{\rmRe}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}\right]  \\
+        &\partial_{t}\bfu  \in  (\partial_{t}\calU  \leqslant)  \calV              &&\implies  &                                                              0  &=  \left\langle\partial_{t}\bfu, \widetilde{\bfu}\right\rangle - \left\langle\partial_{t}\bfu, \bfu\right\rangle  \\
+        &                                                                          &&          &                                                              0  &=  \int_{\bfOmega\otimes T}\left[\partial_{t}\bfu\cdot\widetilde{\bfu} - \partial_{t}\bfu\cdot\bfu\right]  \\
+    \end{align}
+    Summing these:
+    \begin{align}
+        \int_{\bfOmega\otimes T}\left[\left(\partial_{t}\bfu\cdot\bfu - \mst{\partial_{t}\bfu\cdot\widetilde{\bfu}}\right) + \mst{\widetilde{\bfu}\cdot\partial_{t}\bfu}\right]  &=  \int_{\bfOmega\otimes T}\left[- \mst{p\left(\nabla\cdot\widetilde{\bfu}\right)} + \left(\mst{\left(\nabla\cdot\widetilde{\bfu}\right)p} - \frac{2}{\rmRe}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}\right)\right]  \\
+        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega\otimes T}\|\bfu\|^{2}\right]  &=  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}  \label{eqn:weak NS dissipation}  \\
+        \rmE\left(t^{N}\right)  &\leq  \rmE(0)
+    \end{align}
 
-    \begin{remark}
-        \BA{Need not use the skew-symmetric form of the momentum equation if we want exact energy cons., if we have \emph{exact} incomp. Same \emph{not} true for the compressible case.}
-    \end{remark}
+    \begin{example}[CG-DG-in-time dissipative timestepper for incompressible NS]
+        Discretizing in time using an order-$s$ CG discretization for the time-continuous spaces ($\calU$) and an order-$(s - 1)$ DG discretization for the time-discontinuous spaces (everything else), consider the following trial and test spaces:
+        \begin{align}
+            \calU  &=  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{\rmh}\right),  \\
+            \widetilde{\calU}  =  \calV  =  \widetilde{\calV}  &=  \widehat{\calU}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{\rmh}\right),  \\
+            \calP  =  \calQ  &=  \widehat{\calP}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{\rmh}\right)
+        \end{align}
+        At lowest order ($s = 1$), after elimination of $\widetilde{\bfu}$ (akin to the CG-DG-in-time timestepper for the heat equation, with $\widetilde{\bfu}^{n}  =  \frac{1}{2}\left(\bfu^{n + 1} + \bfu^{n}\right)$) and taking $\bfu^{*} = \bfu$ (in the convective term, $\calA$) the resultant timestepper, solving for $\left(\widehat{\bfu}^{n}\right)^{n}$, $\left(\widehat{p}^{n}\right)^{n}$ takes the form:
+        \begin{align*}
+            &\forall  \widehat{q}^{n}     \in  \widehat{\calP},  &                                                                                                               0  &=  \left\langle \widehat{q}^{n}, \frac{1}{2}\left(\widehat{\bfu}^{n + 1} + \widehat{\bfu}^{n}\right)\right\rangle  \\
+            &\forall  \widehat{\bfv}^{n}  \in  \widehat{\calU},  &  \frac{1}{\delta t^{n}}\left\langle\widehat{\bfv}^{n}, \widehat{\bfu}^{n + 1} - \widehat{\bfu}^{n}\right\rangle  &=  \calA\left[\frac{1}{2}\left(\widehat{\bfu}^{n + 1} + \widehat{\bfu}^{n}\right); \widehat{\bfv}^{n}, \frac{1}{2}\left(\widehat{\bfu}^{n + 1} + \widehat{\bfu}^{n}\right)\right]  \\
+            &                                                    &                                                                                                                  &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  + \left\langle\nabla\cdot\widehat{\bfv}^{n}, \widehat{p}^{n}\right\rangle  \\
+            &                                                    &                                                                                                                  &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widehat{\bfv}^{n}, \nabla_{\rms}\left[\frac{1}{2}\left(\widehat{\bfu}^{n + 1} + \widehat{\bfu}^{n}\right)\right]\right\rangle
+        \end{align*}
+        where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega}$ are taken over $\bfOmega$, and $\calA[-; -, -]$ is the trilinear convective operator as defined in (\ref{eqn:convective operator definition}), resembling the implicit midpoint method.
+
+        From (\ref{eqn:weak NS dissipation}) when $T  =  [\delta t^{n}, \delta t^{n + 1}]$, this has the exact energy dissipation
+        \begin{equation}
+            \rmE\left(t^{n + 1}\right)  -  \rmE\left(t^{n}\right)  =  \delta t^{n}\int_{\bfOmega}\|\nabla_{rms}\left[\right]\|
+        \end{equation}
+    \end{example}
