@@ -123,8 +123,8 @@
         \end{align*}
         where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega}$ are taken over $\bfOmega$, and $\calA[-; -, -]$ is the trilinear convective operator as defined in (\ref{eqn:convective operator definition}), resembling the implicit midpoint method.
 
-        From (\ref{eqn:weak NS dissipation}) when $T  =  [\delta t^{n}, \delta t^{n + 1}]$, this has the exact energy dissipation
+        From (\ref{eqn:weak NS dissipation}) when $T  =  [t^{n}, t^{n + 1}]$, this has the exact energy dissipation:
         \begin{equation}
-            \rmE\left(t^{n + 1}\right)  -  \rmE\left(t^{n}\right)  =  \delta t^{n}\int_{\bfOmega}\|\nabla_{rms}\left[\right]\|
+            \rmE\left(t^{n + 1}\right)  -  \rmE\left(t^{n}\right)  =  \delta t^{n}\int_{\bfOmega}\left\|\nabla_{\rms}\left[\frac{1}{2}\left(\widehat{\bfu}^{n + 1} + \widehat{\bfu}^{n}\right)\right]\right\|^{2}
         \end{equation}
     \end{example}
