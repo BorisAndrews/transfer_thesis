@@ -27,7 +27,7 @@
     \end{equation}
     leading to a necessary contradiction if this condition is to hold after discretization. \contra
 
-    The problem ultimately derives from requiring a $d[\text{``trial space''}]  \leqslant  \text{``test space''}$ condition, for some operator $d$—in this case the identity map—where one intends to strongly enforce ICs on the given $d[\text{``trial space''}]$.
+    The problem ultimately derives from requiring a $d[\text{``trial space''}]  \leqslant  \text{``test space''}$ condition, for some operator $d$—in this case the identity map—where one intends to strongly enforce ICs on the given $d[\text{``trial space''}]$, through some lifting of the ICs.
 
     One can often avoid this by the introduction of an auxiliary function for ``problematic'' functions, denoted here as $\widetilde{*}$, where in the strong formulation $\widetilde{*}  =  *$, but in the weak formulation, $\widetilde{*}$ has a lower continuity in time, without the enforced ICs. The initial system can be tested against $\widetilde{*}$, and the auxiliary equation can be tested against $\widetilde{*}  =  *$.
 
@@ -37,5 +37,9 @@
 
     \BA{Clarify: Much of this not a problem for periodic problems without ICs.}
 
-    \BA{Note on what can (if anything) be done about \emph{in}-homogeneous BCs.}
+    \begin{remark}[Timesteppers with inhomogeneous BCs]
+        The same problem arises when one tries to use weak formulations in time to give structure-preserving timesteppers for problems with inhomogeneous BCs. It may be the case that a similar ``auxiliary space'' approach would work—potentially with a similar lower continuity space, potentially with the introduction of \emph{multiple} ``layers'' of auxiliary space—but I haven't quite got it to work yet.
+    \end{remark}
+
+    \BA{Need to add ``[-]'' things to my remarks, and also notes where I'm going to talk further about these things in the ``Further Work'' section.}
     
