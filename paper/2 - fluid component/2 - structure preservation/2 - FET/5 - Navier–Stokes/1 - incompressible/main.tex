@@ -50,12 +50,14 @@
                            \text{(\ref{eqn:NS mass conservation}) against }    q \in \calQ,  &&
         \text{(\ref{eqn:NS skew-symmetric momentum conservation}) against } \bfv \in \calV.
     \end{align}
-    For the results (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}) to hold, the following subspace criteria would be required:
+    For the results (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}) to hold, the following subspace criteria are required:
     \begin{align}
         \calP  \leqslant  \calQ,  &&
         \calU  \leqslant  \calV,
     \end{align}
-    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretization, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
+    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretization, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. \contra
+    
+    Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
     \begin{align}
                        0  &=  \nabla\cdot\widetilde{\bfu},  \\
         \partial_{t}\bfu  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{*}\otimes\widetilde{\bfu}\right] + \bfu^{*}\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\widetilde{\bfu}],  \\
