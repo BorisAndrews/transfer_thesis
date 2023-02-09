@@ -11,7 +11,42 @@
     \begin{equation*}
         \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}.
     \end{equation*}
-    To look at the dominant terms in this equation, one can non-dimensionalize. Denote the scale of a variable, $*$, with an overbar, $\overline{*}$. Suppose the following scales are given by the problem specification:
+
+    \begin{lemma}[Momentum conservation on $(\bfC_{ss'})_{ss'}$]
+        By the conservation of momentum over the entire domain,
+        \begin{equation}
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}\right]  =  \bfzero.
+        \end{equation}
+    \end{lemma}
+    \begin{proof}
+        By the conservation of momentum over the whole domain:
+        \begin{equation}
+            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}m_{s}\bfv\right]  =  \sum_{s}\int_{\bfx}\left[f_{s}q_{s}(\bfE + \bfv\wedge\bfB)\tall\right].
+        \end{equation}
+        Substituting the Boltzmann equation (\ref{eqn:Boltzmann equation}) for $(\partial_{t}f_{s})_{s}$, the given result follows.
+    \end{proof}
+
+    Let $\varphi$, $\bfA$, denote the electromagnetic potentials, defined such that:
+    \begin{align}
+        \bfE  =  - \nabla_{\bfx}\varphi - \partial_{t}\bfA,  &&
+        \bfB  =  \nabla_{\bfx}\wedge\bfA.
+    \end{align}
+    
+    \begin{lemma}[Energy conservation on $(\bfC_{ss'})_{ss'}$]
+        Further, assuming the Lorenz gauge,
+        \begin{equation}
+            0  =  \partial_{t}\varphi + c^{2}\nabla_{\bfx}\cdot\bfA
+        \end{equation}
+        by the conservation of energy over the entire domain,
+        \begin{equation}
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}\cdot\bfv\right]  \sim  \text{\BA{Something to be determined using leading-order expansions...}}
+        \end{equation}
+    \end{lemma}
+    \begin{proof}
+        \BA{Similar proof to momentum conservation, with leading-order approximations.}
+    \end{proof}
+    
+    Consider now the dominant terms in the Boltzmann equation (\ref{eqn:Boltzmann equation}) in a tokamak environment. Denote the scale of a variable, $*$, with an overbar, $\overline{*}$. Suppose the following scales are given by the problem specification:
     \begin{align}
         \left(\overline{n}_{s}\right)_{s},         &&
         \overline{\bfx},                           &&
@@ -22,7 +57,7 @@
     \begin{equation}
         n_{s}  :=  \int_{\bfv}f_{s}.
     \end{equation}
-    The remaining variable scales are given by:
+    The remaining variable scales are defined by:
     \begin{itemize}
         \item  $\overline{t}           :=  \overline{\bfx}/\overline{\bfv}$, working on convective timescales.
         \item  $\overline{\bfE}        :=  \overline{\bfv}\overline{\bfB}$, balancing the electric and magnetic Lorentz forces. \BA{(Why would this be the case?)}
@@ -30,6 +65,13 @@
         \item  $\overline{\bfC}_{ss'}  :=  \max_{s}\{\overline{n}_{s}\}\overline{\bfB}/\max_{s'}\{q_{s'}\}\overline{\bfv}^{2}$, giving dominant balance of electromagnetic and collisional forces from phase $s'$ in phase $s$. \BA{(Justification.)}
     \end{itemize}
     
+    Terms in the Boltzmann equation (\ref{eqn:Boltzmann equation}) then have the scales:
+    \begin{align}
+        \overline{\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv]}  &=  \frac{\overline{n}_{s}}{\overline{\bfx}\overline{\bfv}^{2}}  \\
+        \overline{\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]}  &=  \frac{q_{s}}{m_{s}}\cdot\frac{\overline{n}_{s}\overline{\bfB}}{\overline{\bfv}^{3}}  \\
+        \overline{\frac{q_{s}q_{s'}}{m_{s}}\nabla_{\bfv}\cdot\bfC_{ss'}}  &=  \frac{q_{s}q_{s'}}{m_{s}\max_{s}\{q_{s'}\}}\cdot\frac{\max_{s}\{\overline{n}_{s}\}\overline{\bfB}}{\overline{\bfv}^{3}}
+    \end{align}
+
     The Boltzmann equation (\ref{eqn:Boltzmann equation}) then takes the non-dimensionalized form
     \begin{multline}\label{eqn:non-dim Boltzmann general}
         \left[\frac{m_{s}}{q_{s}}\cdot\frac{\overline{\bfv}}{\overline{\bfx}\overline{\bfB}}\right](\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv]) + \nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  \\

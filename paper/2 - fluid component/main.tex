@@ -10,7 +10,7 @@
     \end{itemize}
     where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light, and for conciseness, $\bftau[\bfu]$ denotes the (deviatoric) strain,
     \begin{equation}\label{eqn:strain equation}
-        \bftau[\bfu]  :=  2\nabla_{\rms}\bfu - \frac{2}{3}(\nabla\cdot\bfu)\bfI,
+        \bftau[\bfu]  :=  2\left(\nabla_{\rms}\bfu - \frac{1}{3}(\nabla\cdot\bfu)\bfI\right),
     \end{equation}
     and $\nabla_{\rms}$ denotes the symmetric gradient,
     \begin{equation}
@@ -38,7 +38,7 @@
         \label{fig:dim compressible strong form}
     \end{figure}
     
-    \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)} \BA{(Clarify what I mean by $*^{\otimes 2}$. I also need to move this note now I've moved the $*^{\otimes 2}$ haha.)} \BA{(Also the $\partial_{t}p$ terms should have, like, a $\frac{3}{2}$ term, or something to that effect, before it, but that's something I'll sort when I derive the exact discretization. It doesn't change the analysis.)} \BA{(Move the definition for $c$ to earlier when I define Maxwell's equations.)}
+    \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein–Uhlenbeck process.)} \BA{(Also the $\partial_{t}p$ terms should have, like, a $\frac{3}{2}$ term, or something to that effect, before it, but that's something I'll sort when I derive the exact discretization. It doesn't change the analysis.)} \BA{(Move the definition for $c$ to earlier when I define Maxwell's equations.)}
 
     To non-dimensionalize this system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{M}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. $\overline{\bfu}$, $\overline{\theta}$, $\overline{\bftau}$ are naturally given from their definitions as:
     \begin{align}
