@@ -1,4 +1,4 @@
-\subsection*{Kinetic Models}
+\subsection{Kinetic Models}
     \line
 
     \begin{definition}[Kinetic model]
@@ -85,4 +85,30 @@
     Obviously this system is not closed, as it in turn is dependent on $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$; this is referred to as the ``\emph{closure problem}''. Different approximations to $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$ lead to different collisional forces and collision operators in the Boltzmann equation.
 
     From here, we shall drop the tildes $\widetilde{*}$ on $\widetilde{f}_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$, $\widetilde{\rho}_{\rmC}$, $\widetilde{\bfj}$, as we shall not be returning to the particle model.
+
+    \line
+    
+    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'})_{ss'}$]\label{lem:conservation on collision operators}
+        The following two identities hold on $(\bfC_{ss'})_{ss'}$:
+        \begin{align}
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}\right]           =  \bfzero,  &&
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}\cdot\bfv\right]  =  0.
+        \end{align}
+    \end{lemma}
+    \begin{proof}
+        By the conservation of momentum and energy over the whole domain:
+        \begin{align}
+            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}m_{s}\bfv\right]                     &=  \sum_{s}\int_{\bfx}\left[f_{s}q_{s}(\bfE + \bfv\wedge\bfB)\tall\right]  \\
+            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2}\right]  &=  \sum_{s}\int_{\bfx}\left[f_{s}q_{s}(\bfE + \bfv\wedge\bfB)\cdot\bfv\tall\right]
+        \end{align}
+        Substituting the Boltzmann equation (\ref{eqn:Boltzmann equation}) for $\partial_{t}f_{s}$, the given results follow.
+    \end{proof}
+    
+    \begin{remark}
+        By the same logic for the conservation of mass,
+        \begin{equation}
+            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}m_{s}\right]  =  0,
+        \end{equation}
+        however this result holds necessarily for all $(\bfC_{ss'})_{ss'}$.
+    \end{remark}
     

@@ -1,0 +1,22 @@
+\subsubsection*{The Collision Operators: Locality and Models}
+    Fluid models consider scales wherein the dominant collisional effects are local in space and time. \BA{(On what scales?)} When viewed as functionals on $(f_{s}, f_{s'})$, it is assumed that $(\bfC_{ss'})_{ss'}$ are dominated by the local contributions of $(f_{s}, f_{s'})$ at each $\bfx$ and $t$; \BA{(Not sure about this phrasing...)} that is to say that, up to leading order,
+    \begin{equation}
+        \bfC_{ss'}[f_{s}, f_{s'}](\bfx, \bfv; t)  \sim  \bfC_{ss'}^{(0)}[f_{s}|_{\bfx; t}, f_{s'}|_{\bfx; t}](\bfv)
+    \end{equation}
+    for some $(\bfC_{ss'}^{(0)})_{ss'}$. This extends the results of Lemma \ref{lem:conservation on collision operators}:
+
+    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]
+        The following two identities hold on $(\bfC_{ss'}^{(0)})_{ss'}$:
+        \begin{align}
+            \sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}           \sim  \bfzero,  &&
+            \sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv  \sim  0.
+        \end{align}
+    \end{lemma}
+    \begin{proof}
+        By Lemma \ref{lem:conservation on collision operators}:
+        \begin{align}
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\right]           \sim  \bfzero,  &&
+            \int_{\bfx}\left[\sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv\right]  \sim  0.
+        \end{align}
+        Since $(\bfC_{ss'}^{(0)})_{ss'}$ are local in space, the only way for this integral identity necessarily to hold is if it holds pointwise in space, for each $\bfx$.
+    \end{proof}

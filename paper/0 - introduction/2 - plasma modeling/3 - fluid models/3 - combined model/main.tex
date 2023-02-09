@@ -1,0 +1,135 @@
+\subsubsection*{Thermalisation and the Combined Fluid Model}
+
+    \begin{lemma}
+        Defining
+        \begin{equation}
+            \alpha_{\pm}  =  q_{\pm}\mu_{0}\cdot\frac{\overline{\bfx}\overline{\bfv}\overline{n}_{\pm}}{\overline{\bfB}},
+        \end{equation}
+        whereby for the scales assumed from \cite{Wes00},
+        \begin{equation}
+            \alpha_{\pm}  \approx  8.0\times 10^{- 6},
+        \end{equation}
+        provided the following moment conditions hold:
+        \begin{align}
+            0  &\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right],  \label{eqn:leading-order + conservation}  \\
+            0  &\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right],  \label{eqn:leading-order - conservation}  \\
+            \begin{split}
+                0  &\sim  \int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right]\right)\bfv,
+            \end{split}  \label{eqn:leading-order momentum conservation}  \\
+            \begin{split}
+                0  &\sim  \int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right) - f_{\pm}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{\pm+}^{(0)} + \bfC_{\pm-}^{(0)}\right) + f_{\pm}(\bfE + \bfv\wedge\bfB)\right]\right)\frac{1}{2}\|\bfv\|^{2},
+            \end{split}  \label{eqn:leading-order energy conservation}
+        \end{align}
+        the leading-order Boltzmann system (\ref{eqn:leading-order Boltzmann}) has a 4-dimensional manifold of solutions. \BA{(Why...?)}
+    \end{lemma}
+
+    \line
+
+    Assume $(f_{\pm})_{\pm} \rightarrow 0$ sufficiently fast as $\|\bfv\| \rightarrow \infty$, and define:
+    \begin{align}
+        \rho_{C}
+    \end{align}
+    (\ref{eqn:leading-order + conservation}–\ref{eqn:leading-order - conservation}) are immediate and exact. For (\ref{eqn:leading-order momentum conservation}),
+    \begin{align}
+        \begin{split}
+            &\int_{\bfv}\left(\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)}\right) - f_{+}(\bfE + \bfv\wedge\bfB)\right]\right.  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \left.\nabla_{\bfv}\cdot\left[\left(\bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) + f_{-}(\bfE + \bfv\wedge\bfB)\right]\right)\bfv
+        \end{split}  \\
+        &\;\;\;\;\sim  \int_{\bfv}\nabla_{\bfv}\cdot\left[\left(\bfC_{++}^{(0)} + \bfC_{+-}^{(0)} + \bfC_{-+}^{(0)} + \bfC_{--}^{(0)}\right) - (f_{+} - f_{-})(\bfE + \bfv\wedge\bfB)\right]\bfv  \\
+        &\;\;\;\;\sim  \int_{\bfv}(f_{+} - f_{-})(\bfE + \bfv\wedge\bfB)  \\
+        &\;\;\;\;\rho_{C}(\bfE + \bfv\wedge\bfB)
+    \end{align}
+
+    Since, however, the leading-order collision operators $\left(\bfC_{s}^{(0)}\right)_{s}$ conserve both momentum and energy, i.e.
+    \begin{align*}
+        \bfzero  &=  \sum_{s, s'}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{ss'}^{(0)}\right)m_{s}\bfv  &  0  &=  \sum_{s}\int_{\bfv}\left(\nabla_{\bfv}\cdot\bfC_{ss'}^{(0)}\right)\frac{1}{2}m_{s}\|\bfv\|^{2}  \\
+        &=  - \sum_{s}\int_{\bfv}\bfC_{s}^{(0)}m_{s}  &  &=  - \sum_{s}\int_{\bfv}\bfC_{s}^{(0)}\cdot m_{s}\bfv
+    \end{align*}
+    \BA{(I only accounted for \emph{kinetic} energy here, I didn't include the \emph{magnetic potential} energy- not sure if I need to? Would be a nice opportunity to define $\bfA$ if I do.)} equation (\ref{eqn:Maxwellian equation}) is not (necessarily) well-posed, as taking moments for momentum and energy,
+    \begin{align*}
+        \bfzero  &=  \sum_{s}\int_{\bfv}\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]m_{s}\bfv  &  0  &=  \sum_{s}\int_{\bfv}\frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\right]\frac{1}{2}m_{s}\|\bfv\|^{2}  \\
+        &=  - \sum_{s}\int_{\bfv}f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)q_{s}  &  &=  - \sum_{s}\int_{\bfv}f_{s}^{(0)}(\bfE + \bfv\wedge\bfB)\cdot q_{s}\bfv  \\
+        &=  - \rho_{C}\bfE - \bfj\wedge\bfB  &  &=  - \bfj\cdot\bfE
+    \end{align*}
+    representing the bulk forces and heating on each of the phases, where the charge and current density, $\rho_{C}$ and $\bfj$ respectively, are defined:
+    \begin{align}
+        \rho_{C}  :=  \sum_{s}\int_{\bfv}f_{s}q_{s},  &&
+        \bfj      :=  \sum_{s}\int_{\bfv}f_{s}q_{s}\bfv
+    \end{align}
+    functions of $\bfx$, $t$ only.
+    
+    This can be resolved by adding the terms:
+    \begin{align}
+        \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{Ms}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right],  &&
+        \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]
+    \end{align}
+    to equation (\ref{eqn:Maxwellian equation}).
+    
+    Define also the mass and momentum density, $\rho_{M}$ and $\bfp$ respectively:
+    \begin{align}
+        \rho_{C}  :=  \sum_{s}\int_{\bfv}f_{s}m_{s},  &&
+        \bfp      :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv
+    \end{align}
+    and velocity density, $\bfu$,
+    \begin{equation}
+        \bfu  :=  \frac{1}{\rho_{M}}\bfp
+    \end{equation}
+    all functions of $\bfx$, $t$ \emph{only}.
+    
+    Rewriting the Boltzmann equation in the form
+    {\small \begin{multline}
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right] + \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  \\
+        + \nabla_{\bfv}\cdot\left[f_{s}\frac{q_{s}}{m_{s}}(\bfE + \bfv\wedge\bfB)\right] - \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right]  \\
+        - \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  =  \nabla_{\bfv}\cdot[\bfC_{s}((f_{s'})_{s'})]
+    \end{multline}}
+    the leading-order system
+    \begin{multline}
+        \nabla_{\bfv}\cdot\left[f_{s}\frac{q_{s}}{m_{s}}(\bfE + \bfv\wedge\bfB)\right] - \nabla_{\bfv}\cdot\left[f_{s}\frac{1}{\rho_{M}}(\rho_{C}\bfE + \bfj\wedge\bfB)\right]  \\
+        - \Delta_{\bfv}\left[f_{s}\frac{1}{\rho_{M}}\left(\bfE\cdot\left(\frac{\rho_{C}}{\rho_{M}}\bfp - \bfj\right) + \bfB\cdot(\bfp\wedge\bfj)\right)\right]  =  \nabla_{\bfv}\cdot\left[\bfC_{s}^{(0)}((f_{s'}|_{\bfx})_{s'})\right]
+    \end{multline}
+    \emph{does} admit solutions, which can be written as a function of just the functions in $\bfx$, t conserved by the collision operator, the density for each phase, total momentum and total energy:
+    \begin{align}
+        \rho_{Ms}  :=  \int_{\bfv}f_{s}m_{s},  &&
+        \bfp  :=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv,  &&
+        E  :=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2}
+    \end{align}
+    Assuming $f_{s}  \sim  f_{s}^{(0)}$ (i.e. that the plasma has ``thermalised'') and taking the above moments of the Boltzmann equation, we retrieve a system in $(\rho_{Ms})_{s}$, $\bfp$, $E$ only. This techniques allows the reduction of the system from one in the 6 (or 7) dimensions of a full kinetic model, to a fluid mode in just 3 (or 4).
+
+    \line
+    
+    The leading-order components of the Boltzmann equations (\ref{eqn:non-dim Boltzmann +}–\ref{eqn:non-dim Boltzmann -}) therefore take the forms:
+    \begin{align}
+        s \nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  &\sim  \nabla_{\bfv}\cdot\left[\bfC_{s+}^{(0)} + \bfC_{s-}^{(0)}\right]  \\
+        0  &\sim  \nabla_{\bfv}\cdot\left[\left(\bfC_{s+}^{(0)} + \bfC_{s-}^{(0)}\right) \mp f_{s}(\bfE + \bfv\wedge\bfB)\right]  \label{eqn:leading-order Boltzmann}
+    \end{align}
+    The substitution of $(\bfC_{ss'})_{ss'}  \mapsto  (\bfC_{ss'}^{(0)})_{ss'}$ ensures these systems are 0$^{\text{th}}$-order in $\bfx$, implying that for any given $\bfx$, (\ref{eqn:leading-order Boltzmann}) is a system of PDEs in $(f_{s}|_{\bfx})_{s}$ that is dependent on $\bfv$ \emph{only}.
+    
+    The problem however with applying this technique directly to tokamak plasmas fundamentally lies in the assumption of collision-dominant dynamics. \BA{(Some estimates on the scale of these terms in the plasma/edge plasma- some nice parameter scale estimates/values in that gyrokinetics manuscript- Multiscale Gyrokinetics for Rotating Tokamak Plasmas: Fluctuations, Transport and Energy Flows.)} Many highly influential so-called ``kinetic'' effects are not captured by these MHD fluid models, including: \BA{([Ref, Ref, Ref, …])}
+    \begin{itemize}
+        \item  Most plasma waves
+        \item  Most plasma/kinetic instabilities
+        \item  Landau damping/Bump-on-tail instabilities
+        \item  Leakage
+        \item  Kinetic structures (Beams/Double layers)
+        \item  Anisotropic pressures
+    \end{itemize}
+    Techniques for the numerical solution of the MHD equations have been very well developed over recent years however \BA{([Ref, Ref, Ref, Ref, Ref, …])}. The question therefore lies in how these more efficient techniques, can be reapplied to the more accurate kinetic models, when the two are so qualitatively different.
+
+    \BA{...whereby through some approximation to the 2-particle distribution functions, the collision terms, $(\bfC_{ss'})_{ss'}$, are written in terms of the 1-particle distribution functions, $(f_{s})_{s}$.}
+    
+    \BA{(Check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.)}
+
+    \BA{Would like to consider an expansion of the collision operator of the form
+    \begin{multline}
+        \bfC_{s}  =  \left[f_{s}\rho_{s'}(\bfmu_{ss'}(\bfu_{s'} - \bfv) + \nabla_{\bfx}\cdot[\bftau_{ss'}({\bf sym}(\nabla_{\bfx}\bfu_{s}))] + \cdots)\right]  \\
+        + \nabla_{\bfv}\cdot\left[f_{s}\rho_{s'}(\bfD_{ss'}(\bfu_{s'} - \bfv) + \cdots)\right] + \cdots
+    \end{multline}}
+    
+    \BA{I have some inconsistency in notation here with the rest of the paper in how I donate integrals. I should make this consistent, by denoting $\int_{\bfx}  \mapsto  \int_{\bfOmega}$ and, say, $\int_{\bfv}  \mapsto  \int_{\bfXi}$.}
+    
+    \BA{Change my $\rho_{M}$'s and $\rho_{C}$'s to $\rho_{\rmM}$'s and $\rho_{\rmC}$'s.}
+    
+    \BA{Not mentioned at all here that I'm discounting relativistic effects, and looking at the velocity scales that'd be quite a poignant remark.}
+    
