@@ -14,7 +14,17 @@
     
     
     \begin{abstract}
-        \BA{Abstract.}
+        Recent works by Laakmann, Farrell, and others \cite{LFM22, LHF22} have been successful in developing parameter-robust preconditioners and structure-preserving timesteppers for finite-element discretizations of the incompressible Hall MHD equations. In this thesis, we discuss the shortcomings of these models, especially when applied to the modelling of tokamak-like environments, and propose some options for filling these gaps.
+        
+        We consider a finite-element-in-time (FET) approach to discretizing the MHD models, and deriving MHD FE timesteppers. This alternative lens is very effective in the development of structure-preserving timesteppers, with a reduced number of auxiliary fields, scalability to timesteppers of arbitrary order, and a more transparent mathematical foundation.
+
+        We think about whether the FET technique enables us to apply the modified compressibility constraint analogously and whether separate discretizations are necessary to reflect the various dynamics caused by the compressibility. We also look into how these compressible models might be added to the FET approach for building structure-preserving timesteppers.
+
+        The models so far have been solely for incompressible MHD models, relying heavily on the incompressibility constraint, $\nabla\cdot\bfu  =  0$. Tokamak plasma dynamics however are necessarily severely compressible. We consider how the FET approach might enable us to use the modified compressibility constraint, $\nabla\cdot\rho + \nabla\cdot\bfp  =  0$, in an analogous manner, and how distinct discretizations are required to capture the different dynamics induced by the compressibility. We also look into how the FET approach for the construction of structure-preserving timesteppers can be extended to these compressible models.
+
+        A major drawback of all fluid models is their near inability to capture kinetic effects, which are pivotal in tokamak plasma dynamics. We consider a $\delta f$-like model, wherein the background compressible MHD equations are discretized using the FET techniques of above, and the correction is discretized using a pseudo-particle PiC model, with comparitvely low noise when compared to a classical full PiC model due to the background fluid model. The two discretizations are fully coupled, to give an efficient discretization to the full kinetic model. We consider the computational difficulties (parallelisations/scalability/etc.) of implementing such a coupled model, and the software possibilities.
+        
+        Different classes of approximations to the collision operator are considered, inferring different particle pushers containing Monte-Carlo-like stochastic components to capture the collisional effects. These include Brownian motion, Lévy flights, and more general classes of SDEs. We apply the gyrokinetic expansion to these different SDEs to create SDEs for the gyro-averaged variables. The stochastic collisional model—only attainable through the MHD/low-noise PiC coupling—has the benefit of fully decoupling the particle pushers for each individual pseudo-particle from the others.
     \end{abstract}
     
     
