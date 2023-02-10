@@ -1,11 +1,14 @@
-\subsubsection*{The Collision Operators: Locality and Models}
+\subsubsection*{Assumption 1: Leading-Order Locality of the Collision Operators}
     Fluid models consider scales wherein the dominant collisional effects are local in space and time. \BA{(On what scales?)} When viewed as functionals on $(f_{s}, f_{s'})$, it is assumed that $(\bfC_{ss'})_{ss'}$ are dominated by the local contributions of $(f_{s}, f_{s'})$ at each $\bfx$ and $t$; \BA{(Not sure about this phrasing...)} that is to say that, up to leading order,
-    \begin{equation}
+    \begin{equation}\label{eqn:local collision operator}
         \bfC_{ss'}[f_{s}, f_{s'}](\bfx, \bfv; t)  \sim  \bfC_{ss'}^{(0)}[f_{s}|_{\bfx; t}, f_{s'}|_{\bfx; t}](\bfv)
     \end{equation}
-    for some $(\bfC_{ss'}^{(0)})_{ss'}$. This extends the results of Lemma \ref{lem:conservation on collision operators}:
+    for some $(\bfC_{ss'}^{(0)})_{ss'}$. Define $\bfC_{ss'}  = 
+     \bfC_{ss'}^{(0)} + \bfdelta\bfC_{ss'}$, such that $(\bfdelta\bfC_{ss'})_{ss'}$ capture the non-local, viscous collisional effects.
+    
+    This extends the results of Lemma \ref{lem:conservation on collision operators}:
 
-    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]
+    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]\label{lem:conservation on local collision operators}
         The following two identities hold on $(\bfC_{ss'}^{(0)})_{ss'}$:
         \begin{align}
             \sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}           \sim  \bfzero,  &&

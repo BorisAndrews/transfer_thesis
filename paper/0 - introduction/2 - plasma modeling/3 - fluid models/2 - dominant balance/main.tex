@@ -1,4 +1,4 @@
-\subsubsection*{Scale Analysis and Forcing/Collision Dominance}
+\subsubsection*{Assumption 2: Forcing vs. Collisions Dominant Balance}
     Consider now the dominant terms in the Boltzmann equation (\ref{eqn:Boltzmann equation}) in a tokamak environment. Denote the scale of a variable, $*$, with an overbar, $\overline{*}$. Suppose the following scales are given by the problem specification:
     \begin{align}
         \left(\overline{n}_{s}\right)_{s},         &&
@@ -33,7 +33,7 @@
         \item  $\overline{\bfx}     \approx  2.5\rmm$, twice the minor radius of $1.25\rmm$.
         \item  $\overline{\bfv}     \approx  7.9\ldots\times 10^{5}\rmm\rms^{- 1}$, the thermal velocity $\sqrt{\rmk_{\rmB}T/\rmm_{+}}$ for the (mass/energy-dominant) ion phase at operational temperature $1.5\times 10^{8}\rmK$, in the middle of the range $1$–$2\times 10^{8}\rmK$.
         \item  $\overline{\bfB}     \approx  3.5\rmT$.
-    \end{itemize}
+    \end{itemize}    
     The remaining scales then evaluate as:
     \begin{align*}
         \overline{t}           &\approx  3.2\times 10^{- 6}\rms              &
@@ -41,7 +41,12 @@
         \overline{f}_{\pm}     &\approx  2.1\times 10^{1}\rms^{3}\rmm^{- 6}  &
         \overline{\bfC}_{\pm_{1}\pm_{2}}  &\approx  3.5\times 10^{- 12}\rms^{3}\rmT^{2}\rmk\rmg^{- 1}\rmm^{- 1}
     \end{align*}
-    Thus, the scales (\ref{eqn:convective scale}–\ref{eqn:collisional scale}) for each phase then evaluate, in $s^{2}\rmm^{- 6}$, as:
+    
+    \begin{remark}[Justification for the non-relativistic model]
+        Up until now, a non-relativistic model has been assumed. Observing that $\overline{\bfv}  \ll  c$, we see that this is in general a fair assumption, although relativistic effects are known to have some effects on tokamak plasma dynamics due to their impact on the very-high energy tails of the distribution functions.
+    \end{remark}
+    
+    The scales (\ref{eqn:convective scale}–\ref{eqn:collisional scale}) for each phase thus evaluate, in $s^{2}\rmm^{- 6}$, as:
     \begin{align}
         \overline{\partial_{t}f_{\pm} + \nabla_{\bfx}\cdot[f_{\pm}\bfv]}  &\approx  6.5\ldots\times 10^{6}  \\
         \overline{\frac{q_{+}}{m_{+}}\nabla_{\bfv}\cdot[f_{+}(\bfE + \bfv\wedge\bfB)]}  =  \overline{\frac{q_{+}q_{\pm}}{m_{+}}\nabla_{\bfv}\cdot\bfC_{+\pm}}  &\approx  3.4\ldots\times 10^{9}  \\
@@ -51,8 +56,8 @@
 
     \BA{(Think I should be including a separate force for ion-ion/electron-electron repulsion...)}
 
-    The dominant components of the Boltzmann equations in either phase therefore state:
-    \begin{align}
+    Assuming it holds true therefore that the forcing and collisional terms achieve the dominant balance, the Boltzmann equations take the leading-order forms:
+    \begin{align}\label{eqn:leading-order Boltzmann equation}
         \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  &\sim  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}  \\
         \nabla_{\bfv}\cdot\left[f_{s}(\bfE + \bfv\wedge\bfB) - \sum_{s'}q_{s'}\bfC_{ss'}\right]  &\sim  0
     \end{align}

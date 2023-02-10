@@ -1,5 +1,21 @@
 \chapter{Low-Noise PIC Models}
     \BA{Introduction.}
+    
+    Techniques for the numerical solution of the MHD equations have been very well developed over recent years however \BA{([Ref, Ref, Ref, Ref, Ref, …])}. The question therefore lies in how these more efficient techniques, can be reapplied to the more accurate kinetic models, when the two are so qualitatively different.
+
+    \BA{...whereby through some approximation to the 2-particle distribution functions, the collision terms, $(\bfC_{ss'})_{ss'}$, are written in terms of the 1-particle distribution functions, $(f_{s})_{s}$.}
+    
+    \BA{(Check out \href{https://upload.wikimedia.org/wikipedia/commons/a/a9/A_Comparison_Chart_For_Modeling_Plasma2.png}{this} diagram off Wikipedia, or again the content under ``Mathematical Descriptions'' \href{https://en.wikipedia.org/wiki/Plasma_(physics)}{here}.)}
+
+    \BA{Would like to consider an expansion of the collision operator of the form
+    \begin{multline}
+        \bfC_{s}  =  \left[f_{s}\rho_{s'}(\bfmu_{ss'}(\bfu_{s'} - \bfv) + \nabla_{\bfx}\cdot[\bftau_{ss'}({\bf sym}(\nabla_{\bfx}\bfu_{s}))] + \cdots)\right]  \\
+        + \nabla_{\bfv}\cdot\left[f_{s}\rho_{s'}(\bfD_{ss'}(\bfu_{s'} - \bfv) + \cdots)\right] + \cdots
+    \end{multline}}
+    
+    \BA{I have some inconsistency in notation here with the rest of the paper in how I donate integrals. I should make this consistent, by denoting $\int_{\bfx}  \mapsto  \int_{\bfOmega}$ and, say, $\int_{\bfv}  \mapsto  \int_{\bfXi}$.}
+    
+    \BA{Change my $\rho_{M}$'s and $\rho_{C}$'s to $\rho_{\rmM}$'s and $\rho_{\rmC}$'s.}
 
 
     \input{1 - low-noise PIC models/1 - background and motivation/main.tex}
