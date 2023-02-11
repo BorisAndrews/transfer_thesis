@@ -1,9 +1,47 @@
 \section{Modeling: Theory and Simulation}
-    \BA{Introduction.}
+    When modeling fluids, there exist 3 classes of models (in so far as will be considered in this thesis):
+    \begin{enumerate}
+        \item  Particle models (See Definition \ref{def:particle model})
+        \item  Kinetic models (See Definition \ref{def:kinetic model})
+        \item  Fluid models (See Definition \ref{def:fluid model})
+    \end{enumerate}
+    When constructing a model, one starts from the full particle model, making assumptions on that model to reduce it to a kinetic model, and making further assumptions to reduce it to a fluid model. When progressing along this route, while the models become simpler in dimension, easing their analysis and numerical simulation, further and greater assumptions are required. One therefore finds a trade-off between the simplicity and approachability of the model, and its efficacy for the fluid being modeled.
+    
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node at (0, 0) {Particle \\ model};
+        \node at (4, 0) {Kinetic  \\ model};
+        \node at (8, 0) {Fluid    \\ model};
 
-    At its heart, a plasma is a fluid, albeit a multiphase, electrically-charged one. Constructing a plasma model therefore follows the same workflow as that of constructing a model for a typical single phase, non-electrically-charged fluid. Many of the assumptions that we would traditionally make when deriving traditional fluid model such as the Navier–Stokes equations (such as in particular the dominance of collisions in the Boltzmann equation \BA{[Ref]}) fail in the case of (tokamak) plasmas however. It makes sense therefore to return to the fundamentals, and construct our model from the ground up.
+        \draw[dashed] (2, 1) -- (2, - 1);
+        \draw[dashed] (6, 1) -- (6, - 1);
+        
+        \draw[left color = white, right color = green!30!white]
+            (- 2, 1) -- (10, 1) -- (10, 0.5) -- (12, 1.5) -- (10, 2.5) -- (10, 2) -- (- 2, 2);
+        \node at (4, 1.5) {\bf Simplicity};
+        
+        \draw[left color = white, right color = red!30!white]
+            (- 2, - 1) -- (10, - 1) -- (10, - 0.5) -- (12, - 1.5) -- (10, - 2.5) -- (10, - 2) -- (- 2, - 2);
+        \node at (4, - 1.5) {\bf Assumptions};
+    \end{tikzpicture}\end{center}
 
-    \BA{Diagram of flow from particle to kinetic to fluid models, illustrating assumptions made at each step.}
+    For classical single phase, electrically-neutral fluids under typical real-world conditions, these assumptions are almost wholly valid, leading to the Navier–Stokes (NS) equations.
+    
+    When the same steps are applied for a quasineutral plasma, one derives the magnetohydrodynamic (MHD) equations. \BA{(Small MHD literature review- ask Patrick and Wayne.)}
+    
+    Under typical tokamak-like conditions however, the steps required to go from the kinetic model to the fluid model do not hold nearly as well. Full fluid models like the MHD equations fail to capture highly influential ``kinetic effects'', which are necessarily present only in the full kinetic model, which are highly influential in tokamak plasma dynamics. These include:
+    \begin{itemize}
+        \item  Most plasma waves \BA{[Ref]}
+        \item  Most plasma/kinetic instabilities \BA{[Ref]}
+        \item  Landau damping/Bump-on-tail instabilities \BA{[Ref]}
+        \item  Leakage \BA{[Ref]}
+        \item  Kinetic structures (Beams/Double layers) \BA{[Ref]}
+        \item  Anisotropic pressures \BA{[Ref]}
+    \end{itemize}
+    Conversely, the full kinetic equation is 6-dimensional in position/velocity phase-space, and so its direct simulation is, in most situations, computationally intractable.
+
+    For practical purposes therefore, one requires some form of trade-off between a fully fluid and fully kinetic model. One common such technique is the gyrokinetic model \cite{Howes_et_al_2006, Parra_Barnes_Peters_2011, Abel_et_al_2013} which has been seen to be effective in modelling many kinds of plasma turbulence \cite{McKee_et_al_2001} but can exhibit non-physical behavior over long time periods \BA{[Ref]} among other physical weaknesses \BA{[Ref]}. \BA{Other examples of such models? Ask Wayne.}
+    
+    In this thesis, we shall consider a coupled $\delta f$ low-noise correction method. (See Chapter \ref{cha:delta f correction}) To derive this model, we recap the derivation of the classical MHD model, and overivew where it fails for highly kinetic tokamak plasmas.
 
     
     \input{0 - introduction/2 - plasma modeling/1 - particle models/main.tex}

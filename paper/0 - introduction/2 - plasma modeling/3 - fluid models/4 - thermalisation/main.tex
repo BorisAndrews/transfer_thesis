@@ -19,6 +19,10 @@
     
     A necessary assumption in the derivation of a fluid model is that the distribution function is \emph{fully} thermalised, in so far as $f_{s}  =  f_{s}^{(0)}$ \emph{exactly}, for each $s$. One can then derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation}).
 
+    \begin{remark}[Flaws in the full thermalisation assumption]
+        The assumption that the distribution functions $(f_{s})_{s}$ are \emph{fully} thermalised, with $f_{s}  =  f_{s}^{(0)}$, is fundamentally flawed. Perturbations from the thermalised equilibrium distributions $(f_{s}^{(0)})_{s}$ are known to have an effect on the dynamics of the problem, as the MHD models presented here can \emph{not} be derived on the assumption of \emph{leading-order} thermalisation $f_{s}  \sim  f_{s}^{(0)}$ alone. \BA{[Ref]} This is a flaw that pervades practically \emph{all} fluid models in kinetic theory.
+    \end{remark}
+
     Let $\rho_{\rmM}$ denote the mass density,
     \begin{equation}
         \rho_{\rmM}  :=  \int_{\bfv}[f_{+}m_{+} + f_{-}m_{-}]  \left(\sim  \int_{\bfv}f_{+}m_{+}\right),
@@ -44,20 +48,4 @@
         \frac{3}{2}\partial_{t}p + \left(\frac{3}{2}\nabla\cdot[p\bfu] + p\nabla\cdot\bfu\right) - ((\bfj - \rho_{\rmC}\bfu)\cdot\bfE - \bfu\cdot(\bfj\wedge\bfB))  \sim  - \sum_{s, s'}q_{s}q_{s'}\int_{\bfv}\bfdelta\bfC_{ss'}\cdot\left(\bfv - \bfu\right),
     \end{equation}
     where $\nabla  =  \nabla_{\bfx}$ is henceforth assumed to be the derivative over $\bfx$, with $\bfv$ eliminated from the model.
-
-    \line
-
-    Pure fluid models exhibit key underlying flaws, particularly in regards to tokamak plasma dynamics, that are not present in the step from the full particle model to the kinetic model:
-    \begin{itemize}
-        \item  The high temperatures and short length scale in tokamak-like plasma environments imply the factors by which the forces and collisions are dominant in the Boltzmann equation, particularly for the ion phase at around $10^{- 3}$, are—while less than 1—comparitively large. (Compare with the equivalent factor of around $10^{- 11}$ for the hydrogen phase in the full solar corona.) This leading-order assumption discards many so-called ``kinetic effects'', which are known to be highly influential in tokamak plasma due to the large size of this $10^{- 3}$ dominance factor. These include:
-        \begin{itemize}
-            \item  Most plasma waves \BA{[Ref]}
-            \item  Most plasma/kinetic instabilities \BA{[Ref]}
-            \item  Landau damping/Bump-on-tail instabilities \BA{[Ref]}
-            \item  Leakage \BA{[Ref]}
-            \item  Kinetic structures (Beams/Double layers) \BA{[Ref]}
-            \item  Anisotropic pressures \BA{[Ref]}
-        \end{itemize}
-        \item  The assumption that the distribution functions $(f_{s})_{s}$ are \emph{fully} thermalised, with $f_{s}  =  f_{s}^{(0)}$, is fundamentally flawed. Perturbations from the thermalised equilibrium distributions $(f_{s}^{(0)})_{s}$ are known to have an effect on the dynamics of the problem, as the MHD models presented here can \emph{not} be derived on the assumption of \emph{leading-order} thermalisation $f_{s}  \sim  f_{s}^{(0)}$ alone. This is a flaw that pervades practically \emph{all} fluid models in kinetic theory.
-    \end{itemize}
     
