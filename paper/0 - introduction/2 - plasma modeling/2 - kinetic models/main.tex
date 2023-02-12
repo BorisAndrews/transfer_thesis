@@ -1,4 +1,6 @@
 \subsection{Kinetic Models}
+    \BA{Little introduction.}
+
     \line
 
     \begin{definition}[Kinetic model]\label{def:kinetic model}
@@ -24,7 +26,7 @@
         \bbE\left\{\int_{\bfx; t}\bfE(\bfx, t)\cdot\bfphi(\bfx, t)\right\}  =  \int_{\bfx; t}\widetilde{\bfE}(\bfx, t)\cdot\bfphi(\bfx, t)  \\ 
         \bbE\left\{\int_{\bfx; t}\bfB(\bfx, t)\cdot\bfphi(\bfx, t)\right\}  =  \int_{\bfx; t}\widetilde{\bfB}(\bfx, t)\cdot\bfphi(\bfx, t)
     \end{align}
-    We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $\left(\widetilde{f}_{s}\right)_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{fig:kinetic model construction workflow} to each equation.
+    We seek to cast the exact equations in $(f_{s})_{s}$, $\bfE$, $\bfB$ into ones in the distribution parameters $(\widetilde{f}_{s})_{s}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$. To do so, once can apply the workflow as outline in Figure \ref{fig:kinetic model construction workflow} to each equation.
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[align = center, auto]
@@ -59,7 +61,7 @@
         \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\widetilde{\rho}_{\rmC}.
     \end{align*}
     
-    The evolution equations for $\left(f_{s}{\color{white} \widetilde{f}_{s}}\!\!\!\!\!\right)_{s}$ or $\left(\widetilde{f}_{s}\right)_{s}$ are not so simple however, due to their non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'', \BA{[Ref]}
+    The evolution equations for $(f_{s})_{s}$ or $(\widetilde{f}_{s})_{s}$ are not so simple however, due to their non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'', \BA{[Ref]}
     \begin{equation}\label{eqn:Boltzmann equation}
         \partial_{t}\widetilde{f}_{s} + \nabla_{\bfx}\cdot\left[\widetilde{f}_{s}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f}_{s}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =   \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}
     \end{equation}

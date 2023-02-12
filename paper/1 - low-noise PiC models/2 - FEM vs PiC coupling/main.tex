@@ -1,0 +1,27 @@
+\section{FEM vs. PiC Coupling}
+    \BA{Introduction.}
+
+    \BA{Proposition: FEM on fluid background + PiC on kinetic correction.}
+
+    \BA{Why FEM for fluid background?
+    \begin{itemize}
+        \item  FEM techniques for MHD very well-developed! Fabian's stuff can be used (plus I have stuff to add of course).
+    \end{itemize}}
+
+    \BA{Why PiC for correction?
+    \begin{itemize}
+        \item  Only need to model where the plasma is far from thermalisation.
+        \item  Good choice of collision operators leaves a parabolic PDE which can be simulated using Monte Carlo-like pseudo-particle SDEs that pop into and vanish from existence as time progresses, which are (unlike traditional PiC methods that \emph{don't} use the thermalised background) entirely decoupled. (Give example of such operators - e.g. Bhatnagar–Gross–Krook (BGK) \cite{Bhatnagar_Gross_Krook_1954}/Lénard–Bernstein (should ask the Kinetic Theory lecturer for a reference here) - but wait till the kinetic component chapter before fully classifying them.) This has 2 benefits:
+        \begin{itemize}
+            \item  Workload goes from $\calO[n^{2}]$ to $\calO[n]$:- diagram of star-like network showing coupling of fluids with each particle individually instead of all particles together.
+            \item  Can use gyroaveraging with far less concern. Very easy to gyroaverage an SDE in fact.
+        \end{itemize}
+    \end{itemize}}
+
+    \BA{Why do the both work together?
+    \begin{itemize}
+        \item  Weak formulations from FEM/FET provide work really nice with testing against the delta-function (weak) approximations to the correction provided by PiC. Give example of resultant equations when testing against a compactly-supported smooth test function.
+    \end{itemize}}
+
+    \BA{So, idea is: compressible Hall MHD model with forcing/heating provided by particles + gyroaveraged stochastic particles that appear when kinetic effects are prominent with motion guided by the MHD model. Could do a new diagram, or make this is more clearly annotated on my star-like coupling diagram.}
+    

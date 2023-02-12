@@ -1,4 +1,4 @@
-\subsubsection*{Assumption 4: Full Thermalisation}
+\subsubsection*{Assumption 4: Full thermalization}
     By the conservation of:
     \begin{itemize}
         \item  Mass $\implies$ $S$ parameters for $S$ phases
@@ -11,16 +11,16 @@
         \text{Total momentum, }  \bfp(\bfx; t)  &:=  \sum_{s}\int_{\bfv}f_{s}m_{s}\bfv  \\
         \text{Total energy, }  E(\bfx; t)  &:=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}m_{s}\|\bfv\|^{2}
     \end{align}
-    We can then write, for each $s$,
+    For each $s$, one can then write
     \begin{equation}
         f_{s}(\bfx, \bfv; t)  \sim  f_{s}^{(0)}[(\rho_{s})_{s}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t).
     \end{equation}
-    This limit is referred to as thermalisation.
+    This limit is referred to as thermalization.
     
-    A necessary assumption in the derivation of a fluid model is that the distribution function is \emph{fully} thermalised, in so far as $f_{s}  =  f_{s}^{(0)}$ \emph{exactly}, for each $s$. One can then derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation}).
+    A necessary assumption in the derivation of a fluid model is that the distribution function is \emph{fully} thermalized, in so far as $f_{s}  =  f_{s}^{(0)}$ \emph{exactly}, for each $s$. One can then derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation}).
 
-    \begin{remark}[Flaws in the full thermalisation assumption]
-        The assumption that the distribution functions $(f_{s})_{s}$ are \emph{fully} thermalised, with $f_{s}  =  f_{s}^{(0)}$, is fundamentally flawed. Perturbations from the thermalised equilibrium distributions $(f_{s}^{(0)})_{s}$ are known to have an effect on the dynamics of the problem, as the MHD models presented here can \emph{not} be derived on the assumption of \emph{leading-order} thermalisation $f_{s}  \sim  f_{s}^{(0)}$ alone. \BA{[Ref]} This is a flaw that pervades practically \emph{all} fluid models in kinetic theory.
+    \begin{remark}[Flaws in the full thermalization assumption]
+        The assumption that the distribution functions $(f_{s})_{s}$ are \emph{fully} thermalized, with $f_{s}  =  f_{s}^{(0)}$, is fundamentally flawed. Perturbations from the thermalized equilibrium distributions $(f_{s}^{(0)})_{s}$ are known to have an effect on the dynamics of the problem, as the MHD models presented here can \emph{not} be derived on the assumption of \emph{leading-order} thermalization $f_{s}  \sim  f_{s}^{(0)}$ alone. \BA{[Ref]} This is a flaw that pervades practically \emph{all} fluid models in kinetic theory.
     \end{remark}
 
     Let $\rho_{\rmM}$ denote the mass density,
@@ -31,12 +31,17 @@
     \begin{equation}
         \bfu  :=  \frac{1}{\rho_{M}}\bfp.
     \end{equation}
-    Returning to the ion/electron model with the mass-dominant ion phase, assuming local collisions $(\bfC_{ss'}^{(0)})_{ss'}$ and the resultant asymptotic distributions $(f_{s}^{(0)})_{s}$ are isotropic such that the 2$^{\text{nd}}$ and 3$^{\text{rd}}$ moments can be written in the forms:
-    \begin{align}
-        \sum_{s}\int_{\bfv}f_{s}^{(0)}m_{s}\bfv^{\otimes 2}  &\sim  \rho_{\rmM}\bfu^{\otimes 2} + p\sfI  \\
-        \sum_{s}\int_{\bfv}f_{s}^{(0)}m_{s}\bfv^{\otimes 3}  &\sim  \rho_{\rmM}\bfu^{\otimes 3} + p(\bfu\otimes\sfI + \cdots + \sfI\otimes\bfu)
-    \end{align}
-    for a pressure $p$, the following \emph{fluid model} is derived:
+    Returning to the ion/electron model with the mass-dominant ion phase, assume:
+    \begin{itemize}
+        \item  Local collisions $(\bfC_{ss'}^{(0)})_{ss'}$ and the resultant asymptotic distributions $(f_{s}^{(0)})_{s}$ are isotropic, such that the 2$^{\text{nd}}$ and 3$^{\text{rd}}$ moments can be written in the forms:
+        \begin{align}
+            \sum_{s}\int_{\bfv}f_{s}^{(0)}m_{s}\bfv^{\otimes 2}  &\sim  \rho_{\rmM}\bfu^{\otimes 2} + p\sfI  \\
+            \sum_{s}\int_{\bfv}f_{s}^{(0)}m_{s}\bfv^{\otimes 3}  &\sim  \rho_{\rmM}\bfu^{\otimes 3} + p(\bfu\otimes\sfI + \cdots + \sfI\otimes\bfu)
+        \end{align}
+        for a pressure $p$. \BA{(Is this a safe assumption? I've seen bimaxwellian background distributions being used that might imply not so much, but surely the collisions are still isotropic, no?)}
+        \item  Each $f_{s}  =  o\left[\|\bfv\|^{- 5}\right]$ uniformly in $\bfv$ as $\|\bfv\|  \rightarrow  \infty$, such that integration by parts can be applied.
+    \end{itemize}
+    the following \emph{fluid model} is derived:
     \begin{align}
         \partial_{t}\rho_{\rmM} + \nabla\cdot\bfp  &=  0  \\
         \partial_{t}\rho_{\rmC} + \nabla\cdot\bfj  &=  0  \\
