@@ -13,18 +13,18 @@
         Here, ``fluid'' model refers to a reduced kinetic model, where a collection of functions of position (and time) only are modeled.
     \end{definition}
     
-    These typically define certain properties of the kinetic model density function, $f$, at each position, $\bfx$, to in some way capture the physics of the full kinetic model. The Navier–Stokes equations, for example, can be found from the assumption that collisions between particles dominate the behavior of each particle, such that at each position, $\bfx$, the kinetic model density function, $f|_{\bfx}$, converges to a high entropy state (often a scaled normal distribution: a Maxwellian) characterized by 3 conserved variables:
+    These typically define certain properties of the kinetic model density function, $f$, at each position, $\bfx$, to in some way capture the physics of the full kinetic model. The Navier--Stokes equations, for example, can be found from the assumption that collisions between particles dominate the behavior of each particle, such that at each position, $\bfx$, the kinetic model density function, $f|_{\bfx}$, converges to a high entropy state (often a scaled normal distribution: a Maxwellian) characterized by 3 conserved variables:
     \begin{itemize}
         \item  Mass (per unit volume, i.e. density)
         \item  Momentum (per unit volume)
         \item  Energy (per unit volume, i.e. temperature after conservation of mass of momentum)
     \end{itemize}
-    When collisions between particles do \emph{not} dominate the particle behavior—as is the case in the very low-density, high-temperature \BA{(Does this increase or decrease the size of the Coulomb collision term?)} tokamak plasmas—the assumptions that give rise to these fluid approximations often break down, implying that, without modification, these models fail to capture so-called ``kinetic effects'' \BA{(Such as?)}.
+    When collisions between particles do \emph{not} dominate the particle behavior---as is the case in the very low-density, high-temperature \BA{(Does this increase or decrease the size of the Coulomb collision term?)} tokamak plasmas---the assumptions that give rise to these fluid approximations often break down, implying that, without modification, these models fail to capture so-called ``kinetic effects'' \BA{(Such as?)}.
     
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[align = center, node distance = 4cm, auto]
-            \node[1] (11) at (0, 0) {{\bf Fluid} Single-Phase Model (Navier–Stokes)};
+            \node[1] (11) at (0, 0) {{\bf Fluid} Single-Phase Model (Navier--Stokes)};
             \node[2] (12) at (0.5, -1.75) {{\bf Kinetic} Single-Phase Model};
             \node[2] (21) at (5.5, 0) {{\bf Fluid} Multi-phase Model};
             \node[3] (22) at (6, -1.75) {{\bf Kinetic} Multi-phase model};

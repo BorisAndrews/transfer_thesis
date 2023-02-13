@@ -1,52 +1,52 @@
 \chapter{Derivation of the Boltzmann Equation}\label{cha:Boltzmann equation derivation}
-    From equations (\ref{eqn:particle motion}–\ref{eqn:particle forcing}), we see $(f_{s})_{s}$ satisfy the PDEs
+    From equations (\ref{eqn:particle motion}--\ref{eqn:particle forcing}), we see $(f_{s})_{s}$ satisfy the PDEs
     \begin{equation}\label{eqn:exact Boltzmann equation}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]  =  0
+        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]  =  0
     \end{equation}
     where $\widehat{\bfE}(\bfx; t)$, $\widehat{\bfB}(\bfx; t)$ represent the EM fields produced by particles \emph{not} at position $\bfx$ at time $t$, defined as:
     \begin{align}
-        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
-        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)
+        \widehat{\bfE}(\bfx; t)  &:=  \sum_{s'}\rmq_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widehat{\bfB}(\bfx; t)  &:=  \sum_{s'}\rmq_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)
     \end{align}
 
     Applying the workflow from Figure \ref{fig:kinetic model construction workflow} to (\ref{eqn:exact Boltzmann equation}), $\forall \phi(\bfx, \bfv; t)$,
     {\small \begin{align}
-        \int_{\bfx, \bfv; t}\left(\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\right)\phi  &=  0  \\
-        - \int_{\bfx, \bfv; t}f_{s}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
-        - \int_{\bfx, \bfv; t}f_{s}\left(\cdots + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')(\bfk_{\bfE} + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
-        - \bbE\left\{\int_{\bfx, \bfv; t}f_{s}[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi] + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s}f_{s'}[\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB}]\cdot\nabla_{\bfv}\phi\right\}  &=  0  \\
+        \int_{\bfx, \bfv; t}\left(\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[f_{s}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\right]\right)\phi  &=  0  \\
+        - \int_{\bfx, \bfv; t}f_{s}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{\rmq_{s}}{\rmm_{s}}\left(\widehat{\bfE} + \bfv\wedge\widehat{\bfB}\right)\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
+        - \int_{\bfx, \bfv; t}f_{s}\left(\cdots + \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s'}(\bfx', \bfv'; t')(\bfk_{\bfE} + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0  \\
+        - \bbE\left\{\int_{\bfx, \bfv; t}f_{s}[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi] + \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}f_{s}f_{s'}[\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB}]\cdot\nabla_{\bfv}\phi\right\}  &=  0  \\
         \begin{split}
             - \left(\int_{\bfx, \bfv; t}\widetilde{f_{s}}[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi]\right.  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;&\;  \\
-            \left.  + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')](\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0
+            \left.  + \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')](\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right)  &=  0
         \end{split}  \\
         \begin{split}
-            - \left(\int_{\bfx, \bfv; t}\widetilde{f_{s}}\left[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right]\right.  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;&\;  \\
-            \left.  + \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}f_{s'}} - \widetilde{f_{s}}\widetilde{f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi(\bfx, \bfv; t)\right)  &=  0
+            - \left(\int_{\bfx, \bfv; t}\widetilde{f_{s}}\left[\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi\right]\right.  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;&\;  \\
+            \left.  + \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}f_{s'}} - \widetilde{f_{s}}\widetilde{f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi(\bfx, \bfv; t)\right)  &=  0
         \end{split}
     \end{align}}
     Noting the explicit identities for $\widetilde{\bfE}$, $\widetilde{\bfB}$:
     \begin{align}
-        \widetilde{\bfE}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
-        \widetilde{\bfB}(\bfx; t)  &:=  \sum_{s'}q_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)
+        \widetilde{\bfE}(\bfx; t)  &:=  \sum_{s'}\rmq_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t)  \\
+        \widetilde{\bfB}(\bfx; t)  &:=  \sum_{s'}\rmq_{s'}\int_{\bfx', \bfv'; t'}\widetilde{f_{s'}}(\bfx', \bfv'; t')\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)
     \end{align}
     this takes the form
     \begin{align}
         \begin{split}
-            &- \int_{\bfx, \bfv; t}\widetilde{f_{s}}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{q_{s}}{m_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\cdot\nabla_{\bfv}\phi\right)  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;=  - \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}\widetilde{f_{s'}} - \widetilde{f_{s}f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi(\bfx, \bfv; t)
+            &- \int_{\bfx, \bfv; t}\widetilde{f_{s}}\left(\partial_{t}\phi + \bfv\cdot\nabla_{\bfx}\phi + \frac{\rmq_{s}}{\rmm_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\cdot\nabla_{\bfv}\phi\right)  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;=  - \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}\widetilde{f_{s'}} - \widetilde{f_{s}f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\cdot\nabla_{\bfv}\phi(\bfx, \bfv; t)
         \end{split}  \\
         \begin{split}
-          &\int_{\bfx, \bfv; t}\left(\partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]\right)\phi  \\
-          &\;\;\;\;\;\;\;\;\;\;\;\;=  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}\nabla_{\bfv}\cdot\left[\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}\widetilde{f_{s'}} - \widetilde{f_{s}f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\right]\phi(\bfx, \bfv; t)
+          &\int_{\bfx, \bfv; t}\left(\partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]\right)\phi  \\
+          &\;\;\;\;\;\;\;\;\;\;\;\;=  \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}\nabla_{\bfv}\cdot\left[\int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}\widetilde{f_{s'}} - \widetilde{f_{s}f_{s'}}\right)(\bfk_{\bfE}  + \bfv\wedge\bfk_{\bfB})\right]\phi(\bfx, \bfv; t)
         \end{split}
     \end{align}
     Applying the definition of the collision operator from equation \ref{eqn:collision operator},
     \begin{equation}
-        \int_{\bfx, \bfv; t}\left(\partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]\right)\phi  =  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}\int_{\bfx, \bfv; t}(\nabla_{\bfv}\cdot\bfC_{ss'})\phi
+        \int_{\bfx, \bfv; t}\left(\partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]\right)\phi  =  \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\int_{\bfx, \bfv; t}(\nabla_{\bfv}\cdot\bfC_{ss'})\phi
     \end{equation}
     In strong form therefore,
     \begin{equation}
-        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{q_{s}}{m_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =  \frac{q_{s}}{m_{s}}\sum_{s'}q_{s'}(\nabla_{\bfv}\cdot\bfC_{ss'})
+        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =  \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}(\nabla_{\bfv}\cdot\bfC_{ss'})
     \end{equation}
 
     

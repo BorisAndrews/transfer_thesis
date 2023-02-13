@@ -1,0 +1,73 @@
+\subsection{Classical Timestepping Techniques}
+    Traditional approaches for casting time-dependent PDEs into a weak form employ a timestepping scheme, usually a Runge--Kutta (RK) method characterized. For an $s$-step method, the RK method is characterized by:
+    \begin{align}
+        \sfA  \in  \bbR^{s \times s},  &&
+        \bfb  \in  \bbR^{s},  &&
+        \bfc  \in  \bbR^{s}.
+    \end{align}
+    The weak form then defines function spaces $\bbU$, $\bbV$ on the spatial domain $\bfOmega$, seeking---for each timestep $*^{n}$, where $\bfu^{n}$ is a analogous to $\bfu|_{t^{n}}$---$\bfdelta\bfu^{n}_{1}, \cdots, \bfdelta\bfu^{n}_{s}  \in  \bbU$, such that $\forall  \bfv_{1}, \cdots, \bfv_{s}  \in  \bbV$,
+    \begin{equation}
+        0  =  \left\langle\bfv_{i}, \bfF\left[\left.\bfu^{n - 1} + \sum_{j}a_{ij}\bfdelta\bfu^{n}_{j}\right|_{*}, \cdots; \left.\frac{1}{\delta t^{n}}\bfdelta\bfu^{n}_{i}\right|_{*}\right]\left(*, t^{n - 1} + c_{i}\delta t^{n}\right)\right\rangle_{\bfOmega},
+    \end{equation}
+    for some chosen inner product $\langle*, *\rangle_{\bfOmega}$ on $\bfOmega$, where $\delta t^{n}  :=  t^{n} - t^{n - 1}$. The RK method then defines $\bfu^{n}  :=  \bfu^{n - 1} + \sum_{j}b_{j}\bfdelta\bfu^{n}_{j}$.
+
+    \line
+    \begin{definition}[Collocation methods]
+        Collocation methods are a class of RK methods. For an $s$-step method, they arae defined from:
+        \begin{itemize}
+            \item  A set of $s$ distinct ``collocation points'' $(c_{i})_{i}$, defining $\bfc$.
+            \item  An $s$-dimensional function space of functions for $\partial_{t}\bfu$, defined on a reference timestep $(0, 1]$:- typically polynomials, always containing the constant function $1$.
+        \end{itemize}
+        For a well-defined pair of collocation points and function space, there exists a basis of functions $(\phi_{j})_{j}$, such that $\phi_{j}(c_{i})  =  \delta_{ij}$. $\sfA$, $\bfb$ are then defined from $(\phi_{j})_{j}$ as:
+        \begin{align}
+            a_{ij}  :=  \int_{0}^{c_{i}}\phi_{j},  &&
+            b_{j}   :=  \int_{0}^{1}\phi_{j}.
+        \end{align}
+    \end{definition}
+    
+    \begin{example}[Gauss--Legendre (GL) methods]
+        GL methods use:
+        \begin{itemize}
+            \item  $(c_{i})_{i}$ GL points, roots of the Legendre polynomial $P_{s}$.
+            \item  ${\rm Span}[(\phi_{j})_{j}]  =  \calP_{s - 1}$.
+        \end{itemize}
+        They are A-stable with order $2s$. \BA{[Ref]}
+
+        The lowest-order ($s  =  1$) GL method is the Crank--Nicolson/implicit-midpoint method.
+    \end{example}
+
+    \begin{example}[Radau-IIA methods]
+        Radau-IIA methods use:
+        \begin{itemize}
+            \item  $(c_{i})_{i}$ roots of $\left(\frac{\rmd}{\rmd\rmt}\right)^{s - 1}\left[t^{s - 1}(t - 1)^{s}\right]$.
+            \item  ${\rm Span}[(\phi_{j})_{j}]  =  \calP_{s - 1}$.
+        \end{itemize}
+        They are A-stable with order $2s - 1$. \BA{[Ref]}
+
+        The lowest-order ($s  =  1$) Radau-IIA method is the implicit-Euler method.
+    \end{example}
+    \line
+    
+    Since such methods reduce the problem to one in space only, traditional finite-element (FE) software are well-suited for their implementation, where the timestepping can be performed through manually-implemented loops on each timestep, or through specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake} \BA{[Ref]}.
+
+    Careful choice of RK method can give timesteppers that preserve the conservative/dissipative structures of the continuous strong form.
+
+    \line
+    
+    \begin{example}[Heat equation]
+        GL methods are known to dissipate energy, $\rmE(t)  :=  \int_{\bfOmega}u^{2}$, in the heat equation (\ref{eqn:heat equation}) under Dirichlet/Neumann boundary conditions. \BA{[Ref]}
+        
+        At lowest order ($s  =  1$) the Crank--Nicolson/implicit-midpoint method has the exact dissipation:
+        \begin{equation}\label{eqn:heat equation dissipation implicit midpoint}
+            \rmE^{n + 1} - \rmE^{n}  =  - \frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}\left(u^{n + 1} + u^{n}\right)\right]\right\|^{2},
+        \end{equation}
+        resembling the continuous result (\ref{eqn:heat equation dissipation}).
+    \end{example}
+    
+    \begin{example}[Hamiltonian systems]
+        Timesteppers that preserve the Hamiltonian in Hamiltonian systems are referred to as ``symplectic''. The study and creation of symplectic timesteppers/integrators are the subjects of a wide-ranging, indepdendent field of study. \BA{[Ref]}
+    \end{example}
+    \line
+
+    \BA{Fabian uses such an approach to design structure-preserving timesteppers for incompressible Hall MHD.}
+    

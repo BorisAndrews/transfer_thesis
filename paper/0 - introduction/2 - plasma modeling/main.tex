@@ -24,7 +24,7 @@
         \node at (4, - 1.5) {\bf Assumptions};
     \end{tikzpicture}\end{center}
 
-    For classical single phase, electrically-neutral fluids under typical real-world conditions, these assumptions are almost wholly valid, leading to the Navier–Stokes (NS) equations.
+    For classical single phase, electrically-neutral fluids under typical real-world conditions, these assumptions are almost wholly valid, leading to the Navier--Stokes (NS) equations.
     
     When the same steps are applied for a quasineutral plasma, one derives the magnetohydrodynamic (MHD) equations. \BA{(Small MHD literature review- ask Patrick and Wayne.)}
     
@@ -39,9 +39,9 @@
     \end{itemize}
     Conversely, the full kinetic equation is 6-dimensional in position/velocity phase-space, and so its direct simulation is, in most situations, computationally intractable.
 
-    For practical purposes therefore, one requires some form of trade-off between a fully fluid and fully kinetic model. One common such technique is gyro-averaging, in the gyrokinetic model \cite{Howes_et_al_2006, Parra_Barnes_Peters_2011, Abel_et_al_2013} which has been seen to be effective in modelling many kinds of plasma turbulence \cite{McKee_et_al_2001} but can exhibit non-physical behavior over long time periods \BA{[Ref]} among other physical weaknesses \BA{[Ref]}. Some gyroaveraging shall be considered when appropriate for psuedo-particle modeling in Chapter \ref{cha:kinetic component}. \BA{Other examples of such models? Ask Wayne.}
+    For practical purposes therefore, one requires some form of trade-off between a fully fluid and fully kinetic model. One common such technique is gyro-averaging, in the gyrokinetic model \cite{Howes_et_al_2006, Parra_Barnes_Peters_2011, Abel_et_al_2013} which has been seen to be effective in modeling many kinds of plasma turbulence \cite{McKee_et_al_2001} but can exhibit non-physical behavior over long time periods \BA{[Ref]} among other physical weaknesses \BA{[Ref]}. Some gyroaveraging shall be considered when appropriate for psuedo-particle modeling in Chapter \ref{cha:kinetic component}. \BA{Other examples of such models? Ask Wayne.}
     
-    In this thesis, we shall consider a coupled $\delta f$ low-noise correction method. (See Chapter \ref{cha:delta f correction}) To obtain this model, a derivation of the classical MHD model is presented in the following, with an analysis of the reasons for which it fails for highly kinetic tokamak plasmas.
+    In this thesis, we shall consider a coupled $\delta\! f$ low-noise correction method. (See Chapter \ref{cha:delta f correction}) To obtain this model, a derivation of the classical MHD model is presented in the following, with an analysis of the reasons for which it fails for highly kinetic tokamak plasmas.
 
     
     \input{0 - introduction/2 - plasma modeling/1 - particle models/main.tex}

@@ -2,7 +2,7 @@
     \BA{NEPTUNE interested in high-order methods- why?:
     \begin{itemize}
         \item  Better approximation properties (provided sufficient regularity- N.B. \emph{Not} necessarily the case with funky BCs in a tokamak, but \emph{should} be fine in my case if I pick a nice model with nice BCs on a nice domain).
-        \item  Better numerical approximation properties. (Recall that diagram from the NEPTUNE workshop with the travelling bump).
+        \item  Better numerical approximation properties. (Recall that diagram from the NEPTUNE workshop with the traveling bump).
         \item  Better suited to modern computer architectures. (Ask Pablo for more clarification here.)
     \end{itemize}
     Why not?:
@@ -34,7 +34,7 @@
 
     \BA{What about if we construct each basis function iteratively instead? Twice the max polynomial degree, but can all be computed in advance and just read from a database, and much more intuitive if we start playing with messy non-linear PDEs.}
 
-    \BA{If we want to apply FDM to \emph{Navier–}Stokes, then we would want the following to be as infrequently non-zero as possible:
+    \BA{If we want to apply FDM to \emph{Navier--}Stokes, then we would want the following to be as infrequently non-zero as possible:
     \begin{align*}
         \langle\phi_{i}, \phi_{j}, \phi_{k}\rangle  &&
         \langle\phi_{i}', \phi_{j}, \phi_{k}\rangle  &&
@@ -46,5 +46,5 @@
     \end{equation*}
     Unfortunately, this isn't as simple as the sparsity for the linear case. I'm not sure when different combinations of these can be enforced. If, say, we were going through the bases and adding the lowest-order polynomial for each basis function that can give nice sparsity, then we fail on $\phi_{2}$. Presuming $\phi_{1}  =  {\rm const}(1 - x^{2})^{2{\rm const}}$, we have $\phi_{1}  \geq  0$, thus making the condition $\langle\phi_{2}, \phi_{2}, \phi_{1}\rangle  =  0$ impossible.  \\
     This might not be a problem if we try and define all $(\phi_{i})$ concurrently, but I'm really not sure how many $0$ values you'd be able to reach if that was the plan. You could just generally try to minimise the number of $0$ entries in the the $\sfA  :=  (\langle\phi_{i}, \phi_{j}, \phi_{k}\rangle)$, $\sfB  := 
- (\langle\phi_{i}', \phi_{j}, \phi_{k}\rangle)$, $\sfC  :=  (\langle\phi_{i}'', \phi_{j}', \phi_{k}\rangle)$ tensors by — say — minimising $\|\sfA\|_{r}$, $\|\sfB\|_{r}$, $\|\sfC\|_{r}$ and taking $r \rightarrow  0$. There's also the question though of what the best sparsity pattern for these tensors would be to make each Krylov iterate as computationally efficient as possible, which, if we can't achieve optimal sparsity, might be something else specific.}
+ (\langle\phi_{i}', \phi_{j}, \phi_{k}\rangle)$, $\sfC  :=  (\langle\phi_{i}'', \phi_{j}', \phi_{k}\rangle)$ tensors by---say---minimising $\|\sfA\|_{r}$, $\|\sfB\|_{r}$, $\|\sfC\|_{r}$ and taking $r \rightarrow  0$. There's also the question though of what the best sparsity pattern for these tensors would be to make each Krylov iterate as computationally efficient as possible, which, if we can't achieve optimal sparsity, might be something else specific.}
     

@@ -1,0 +1,17 @@
+\section{Variational/Weak Reformulation}
+    \BA{Introduction.}
+
+    Suppose each of the following functions lies in the following function space:\footnote{$\bftau$ is not included here, as it is included only as a notational shortcut, not as a variable to solve for in and of itself.} \BA{(Very tough to pick good notation here... Would be nice if there were some convention.)}
+    \begin{center}\begin{tabular}{ c || c : c c : c c | c | c c }
+        Function  &  $\rho$  &  $\bfp$  &  $\bfu$  &  $p$  &  $\theta$ 
+         &  $\bfj$  &  $\bfE$  &  $\bfB$  \\
+        \hline
+        Function space  &  $\calD$  &  $\calM$  &  $\calU$  &  $\calP$  &  $\Theta$  &  $\calJ$  &  $\calE$  &  $\calB$  \\
+    \end{tabular}\end{center}
+    
+    To apply the finite element method, one must first cast the model (\ref{eqn:current identity}--\ref{eqn:Gauss's law}) into a chosen variational/weak form, by asserting that its inner product, in this case under the $L^{2}$ norm, is equal to $0$ upon integration by all function in some chosen function space, in this case ones derived from $\calD$, $\cdots$, $\calB$.
+
+
+    \input{3 - fluid component/3 - weak reformulations/1 - stationary-state/main.tex}
+    \input{3 - fluid component/3 - weak reformulations/2 - periodic/main.tex}
+    \input{3 - fluid component/3 - weak reformulations/3 - timestepper/main.tex}

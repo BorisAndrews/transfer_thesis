@@ -1,0 +1,84 @@
+\section{Ensuring Structure Preservation in Variational/Weak Formulations}
+    \BA{Introduction.}
+
+    Consider a time-dependent PDE (or system of PDEs) in the general strong form
+    \begin{equation}\label{eqn:general time-dependent PDE}
+        \bfzero  =  \bfF\left[\bfu|_{\bfx; t}, \nabla\bfu|_{\bfx; t}, \nabla^{2}\bfu|_{\bfx; t}, \cdots; \partial_{t}\bfu|_{\bfx; t}\right](\bfx; t),
+    \end{equation}
+    alongside appropriate boundary conditions (BCs). The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu|_{t}](t)$ that are conserved/dissipated for time, i.e. such that $\forall  t$ either $\frac{\rmd}{\rmd\rmt}\rmE  =  0$ or $\frac{\rmd}{\rmd\rmt}\rmE  \leq  0$.
+    
+    \line
+    
+    Other than the energies and helicities considered above for the Hall MHD system, other classical examples one might consider include:
+    \begin{example}[Heat equation]
+        The heat equation,
+        \begin{equation}\label{eqn:heat equation}
+            \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
+        \end{equation}
+        under homogeneous Dirichlet or Neumann BCs, where the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
+        \begin{equation}\label{eqn:heat equation dissipation}
+            \frac{\rmd}{\rmd\rmt}\rmE  =  - \frac{1}{\rmPe}\|\nabla u\|^{2}.
+        \end{equation}
+    \end{example}
+    
+    \begin{example}[Hamiltonian systems]
+        Hamiltonian systems with Hamiltonian $\calH[p|_{t}, q|_{t}](t)$:
+        \begin{align}
+            \partial_{t}p  =  - \nabla_{q|_{t}}\calH,  &&
+            \partial_{t}q  =  + \nabla_{p|_{t}}\calH,
+        \end{align}
+        for $L^{2}$ functional derivatives $\nabla_{p|_{t}}$, $\nabla_{q|_{t}}$, on $\bbR^{d}$, which exactly conserve the Hamiltonian,
+        \begin{equation}
+            \frac{\rmd}{\rmd\rmt}\calH  =  0,
+        \end{equation}
+        such as:
+        \begin{itemize}
+            \item  The wave equation,
+            \begin{align}
+                \partial_{t}v  =  c^{2}\Delta u,  &&
+                \partial_{t}u  =  v,
+            \end{align}
+            from the Hamiltonian
+            \begin{equation}
+                \calH(t)  :=  c^{2}\|\nabla u\|_{\bfOmega}^{2} + \|v\|_{\bfOmega}^{2}.
+            \end{equation}
+            \item  The Schrödinger equation,
+            \begin{equation}
+                i\hbar\partial_{t}\Psi  =  \left[- \frac{\hbar^{2}}{2m}\Delta + V\right]\Psi,
+            \end{equation}
+            or, from $\Psi  =  q + ip$,
+            \begin{align}
+                \partial_{t}p  =  - \frac{1}{\hbar}\left[- \frac{\hbar^{2}}{2m}\Delta + V\right]q,  &&
+                \partial_{t}q  =  + \frac{1}{\hbar}\left[- \frac{\hbar^{2}}{2m}\Delta + V\right]p,
+            \end{align}
+            from the Hamiltonian
+            \begin{equation}
+                \calH(t)  :=  \frac{1}{\hbar}\int_{\bfOmega}\left[\frac{\hbar^{2}}{2m}\left(\|\nabla p\|^{2} + \|\nabla q\|^{2}\right) + V\left(p^{2} + q^{2}\right)\right],
+            \end{equation}
+            or
+            \begin{equation}
+                \calH(t)  :=  \frac{1}{\hbar}\int_{\bfOmega}\left[\frac{\hbar^{2}}{2m}\|\nabla\Psi\|^{2} + V|\Psi|^{2}\right].
+            \end{equation}
+        \end{itemize}
+    \end{example}
+    \line
+    
+    To apply the the finite-element method (FEM) to such a system, it must be cast into a variational/weak form.
+    
+    After discretizing via the Galerkin(/Petrov--Galerkin) method, the resulting discretization can be referred to as a ``timestepper'' if there exist timesteps $(0  <)  t^{1}  <  t^{2}  <  \cdots$ such that the following are equivalent for $m  <  n$:
+    \begin{itemize}
+        \item  The solution on the time interval $\left(0, t^{m}\right]$.
+        \item  The solution on the time interval $\left(0, t^{n}\right]$, restricted to $\left(0, t^{m}\right]$.
+    \end{itemize}
+    That is to say, the discretization can be solved iteratively on each timestep $t^{1}$, $t^{2}$, etc. Naturally, this is preferable to solving a time-coupled system simultaneously over the higher-dimension space-time domain.
+    
+    When constructing timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve these conservational/dissipative structures. That is to say that for $m  <  n$, with $\rmE^{n}  :=  \rmE[\bfu|_{t^{n}}]$, either $\rmE[\bfu|_{t^{n}}]  =  \rmE[\bfu|_{t^{m}}]$ or $\rmE[\bfu|_{t^{n}}]  \leq  \rmE[\bfu|_{t^{m}}]$, and potentially further with analogous, quantifiable differences in the dissipative case. There are many reasons one might seek to do this:
+    \begin{itemize}
+        \item  The physical origins for such quantities often imply informative qualitative results for the behavior of the system (such as the natural dissipation of energy in the heat equation). \BA{(Talk about the topological meaning of magnetic helicity in MHD. Particularly important for solar simulations apparently- Is that something to do with the high $\beta$?)}
+        \item  \BA{Often $L^{2}$-norm-like nature often imply nice quantitative bounds, e.g. from---again---the energy in the heat equation. Useful for proving existence/well-posedness/convergence.}
+        \item  \BA{More reasons! [Ref, ...]}
+    \end{itemize}
+
+
+    \input{3 - fluid component/2 - structure preservation/1 - classical timesteppers/main.tex}
+    \input{3 - fluid component/2 - structure preservation/2 - FET/main.tex}
