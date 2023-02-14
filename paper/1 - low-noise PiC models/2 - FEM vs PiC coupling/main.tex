@@ -1,41 +1,20 @@
 \section{FEM vs. PiC Coupling}
-    $\delta\! f$ models induce both a fluid and a kinetic model that require numerical solution. Each of these two components then offers a choice of possible numerical techniques.
+    $\delta\! f$ models induce both a fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}) and a kinetic component (\ref{eqn:linearized Boltzmann equation}) that require numerical solution. Each of these two components then offers a choice of possible numerical techniques.
 
     \BA{Proposition: FEM on fluid background + PiC on kinetic correction.}
     
     \line
-    
-    \subsubsection*{Fluid Component}
 
-    Classical techniques for the numerical solution of fluid models include:
-    \begin{itemize}
-        \item  Finite element methods (FEM)
-        \item  Finite difference methods (FDM)
-        \item  Finite volume methods (FVM)
-    \end{itemize}
-    In recent years, great advancements have been made on the analysis and application of FEM for MHD, including the development of provably well-posed and necessarily structure-preserving discretizations and parameter-robust preconditioners. \cite{Hu_Xu_2015, Hu_Ma_Yu_2017, Hu_Lee_Xu_2021, Green_et_al_2022, LFM22, LHF22} Much of this work has evolved from the development of the finite element exterior calculus (FEEC) by Arnold et al, with its extensive applications in electromagnetic and hydrodynamic models. \cite{Arnold_Falk_Winther_2006, Arnold_Falk_Winther_2009, Arnold_2018} It is in part for this reason that this thesis shall consider a FEM model for the model's MHD component. \BA{(Here's where I need my FEM for MHD literature review! Need to dig up a bunch of my references, chase the paper trail back.) [Ref, Ref, ...]}
-
-    This is much work yet to be done however in adapting these techniques to the $\delta\! f$ model in question. Much of the work to date in this area has been heavily focused on incompressible MHD models, with much of the theory and techniques leaning on the incompressibility condition, $\nabla_{\bfx}\cdot\bfu  =  0$. Those deriving from highly-kinetic tokamak plasmas however are necessarily \emph{compressible}---a model with \emph{very} different dynamical behavior---meaning there still remains a great deal of work to be done in re-adapting these ideas to the case of compressible flow. Notably also, there remains the question of what it means for an MHD model to preserve certain structures when it is coupled with a kinetic correction.
-
-    \subsubsection*{Kinetic Component}
-
-    \BA{Why PiC for correction?
-    \begin{itemize}
-        \item  Only need to model where the plasma is far from thermalisation.
-        \item  Good choice of collision operators leaves a parabolic PDE which can be simulated using Monte Carlo-like pseudo-particle SDEs that pop into and vanish from existence as time progresses, which are (unlike traditional PiC methods that \emph{don't} use the thermalized background) entirely decoupled. (Give example of such operators - e.g. Bhatnagar--Gross--Krook (BGK) \cite{Bhatnagar_Gross_Krook_1954}/Lénard--Bernstein (should ask the Kinetic Theory lecturer for a reference here) - but wait till the kinetic component chapter before fully classifying them.) This has 2 benefits:
-        \begin{itemize}
-            \item  Workload goes from $\calO[n^{2}]$ to $\calO[n]$:- diagram of star-like network showing coupling of fluids with each particle individually instead of all particles together.
-            \item  Can use gyroaveraging with far less concern. Very easy to gyroaverage an SDE in fact.
-        \end{itemize}
-        \item  On the other hand, stochastic models throw a spanner in the works of necessary exact structure preservation.
-    \end{itemize}}
+    \input{1 - low-noise PiC models/2 - FEM vs PiC coupling/1 - FEM/main.tex}
+    \input{1 - low-noise PiC models/2 - FEM vs PiC coupling/2 - PiC/main.tex}
 
     \line
 
-    \BA{Why do the both work together?
+    \BA{Why do the two work together?
     \begin{itemize}
         \item  Weak formulations from FEM/FET provide work really nice with testing against the delta-function (weak) approximations to the correction provided by PiC. Give example of resultant equations when testing against a compactly-supported smooth test function. (Talk here about testing against stochastic processes- eek.)
         \item  FET gives meaning to the time derivatives in the fluid parameters, so we can have a much nicer closed form for the inhomogeneous RHS in the kinetic equation.
+        \item  On the other hand, stochastic models throw a spanner in the works of necessary exact structure preservation.
     \end{itemize}}
 
     \BA{So, idea is: compressible Hall MHD model with forcing/heating provided by particles + gyroaveraged stochastic particles that appear when kinetic effects are prominent with motion guided by the MHD model. Could do a new diagram, or make this is more clearly annotated on my star-like coupling diagram.}
