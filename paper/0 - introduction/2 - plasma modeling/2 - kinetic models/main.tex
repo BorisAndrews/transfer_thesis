@@ -9,11 +9,11 @@
     
     \line
 
-    For each phase, $s$, we define the distribution functions $(f_{s}(\bfx, \bfv; t))_{s}$
-    \begin{equation}
-        f_{s}(\bfx, \bfv; t)  :=  \sum_{i}\delta^{3}(\bfx - \bfx_{si})\delta^{3}(\bfv - \bfv_{si})
+    For each phase, $s$, define the distribution functions $(f_{s}(\bfx, \bfv; t))_{s}$ in the weak sense as
+    \begin{equation}\label{eqn:distribution function definition}
+        f_{s}(\bfx, \bfv; t)  :=  \sum_{i}\delta^{3}[\bfx - \bfx_{si}(t)]\delta^{3}[\bfv - \bfv_{si}(t)],
     \end{equation}
-    While working with such $(f_{s})_{s}$ could \emph{in theory} be used to model all the particles exactly and simultaneously, variations in $\bfx$ of each $f_{s}$ occur on the length scale of the distances between particles, i.e. on the order of $10^{- 6}\rmm$ in a tokamak plasma. We would therefore need a mesh resolution on a similar (if not finer) length scale to capture the physical nature of each $f_{s}$. Again: computationally infeasible.
+    where $\delta^{3}$ denotes the 3-dimensional (3D) $\delta$ function. While working with such $(f_{s})_{s}$ could \emph{in theory} be used to model all the particles exactly and simultaneously, variations in $\bfx$ of each $f_{s}$ occur on the length scale of the distances between particles, i.e. on the order of $10^{- 6}\rmm$ in a tokamak plasma. We would therefore need a mesh resolution on a similar (if not finer) length scale to capture the physical nature of each $f_{s}$. Again: computationally infeasible.
 
     For non-atomic scale simulations, such as those within a tokamak, the \emph{precise} position of each particle is generally irrelevant to the general fluid behavior when not working on the atomic scale. The key idea of kinetic theory is to model this distribution function as a \emph{random} distribution, as one might do in Bayesian statistics to model a parameter that is known to be of fixed value as a random variable when full information on it remains unknown. Due to the scale of the number of particles for tokamak-scale simulations, the impact this assumption has on the efficacy of the model is negligible. One defines the 1-particle distribution functions, denoted here as $\left(\widetilde{f}_{s}(\bfx, \bfv; t)\right)_{s}$, such that $\forall \phi(\bfx, \bfv; t)$,
     \begin{equation}
@@ -44,12 +44,12 @@
     \end{figure}
 
     Since this is entirely linear, Maxwell's equations---themselves linear---carry over identically:
-    \begin{align*}
+    \begin{align}
         \partial_{t}\widetilde{\bfE}  &=  \rmc^{2}\nabla\wedge\widetilde{\bfB} - \frac{1}{\varepsilon_{0}}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f}_{s}\bfv,  &
-        \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE},  \\
+        \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE},  \label{eqn:Maxwell's equations transient}  \\
         \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f}_{s},  &
-        \nabla\cdot\widetilde{\bfB}  &=  0.
-    \end{align*}
+        \nabla\cdot\widetilde{\bfB}  &=  0.  \label{eqn:Maxwell's equations steady-state}
+    \end{align}
     where:
     \begin{itemize}
         \item  $\rmc$ is the speed of light (in a vaccum), $\rmc  \approx  2.997\ldots\times 10^{8}\rmm\rms^{- 1}$.

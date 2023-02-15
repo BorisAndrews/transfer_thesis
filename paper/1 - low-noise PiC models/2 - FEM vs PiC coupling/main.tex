@@ -1,7 +1,5 @@
-\section{FEM vs. PiC Coupling}
-    $\delta\! f$ models induce both a fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}) and a kinetic component (\ref{eqn:linearized Boltzmann equation}) that require numerical solution. Each of these two components then offers a choice of possible numerical techniques.
-
-    \BA{Proposition: FEM on fluid background + PiC on kinetic correction.}
+\section{FEM vs. PiC Coupling}\label{cha:FEM vs. PiC}
+    $\delta\!f$ models induce both a fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a kinetic component (\ref{eqn:linearized Boltzmann equation}) that require numerical solution. Each of these two components then offers a choice of possible numerical techniques.
     
     \line
 
@@ -10,12 +8,34 @@
 
     \line
 
-    \BA{Why do the two work together?
+    In addition to the individual motivations for a FEM model for the fluid component (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a pseudo-particle method for the kinetic component (\ref{eqn:linearized Boltzmann equation}) the two techniques have notable advantages when used together for the full $\delta\!f$ model:
     \begin{itemize}
-        \item  Weak formulations from FEM/FET provide work really nice with testing against the delta-function (weak) approximations to the correction provided by PiC. Give example of resultant equations when testing against a compactly-supported smooth test function. (Talk here about testing against stochastic processes- eek.)
-        \item  FET gives meaning to the time derivatives in the fluid parameters, so we can have a much nicer closed form for the inhomogeneous RHS in the kinetic equation.
-        \item  On the other hand, stochastic models throw a spanner in the works of necessary exact structure preservation.
-    \end{itemize}}
+        \item  {\bf Weak formulations and pseudo-particle distribution functions:} When using a pseudo-particle method for the $\delta\!f_{\pm}$, suppose the pseudo-particles are indexed via $*_{\pm}^{(i)}$, with position, $\bfX_{\pm}^{(i)}(t)$, velocity, $\bfV_{\pm}^{(i)}(t)$, evolving according to a coupled system of SDEs. In a classical physical sense, once can interpret this as assuming the weak approximations
+        \begin{equation}
+            f_{\pm}(\bfx, \bfv; t)  \approx  \sum_{i}\delta^{3}\left[\bfx - \bfX_{\pm}^{(i)}(t)\right]\delta^{3}\left[\bfv - \bfV_{\pm}^{(i)}(t)\right],
+        \end{equation}
+        where $\delta^{3}$ again denotes the 3D $\delta$ function---similar to (\ref{eqn:distribution function definition}) when originally deriving the kinetic model from the particle one---and $w_{\pm}^{(i)}$ denotes the weighting in $\delta\!f_{\pm}$ of the particle indexed by $*_{\pm}^{(i)}$. As such, when incorporating this pseudo-particle approximation to the $\delta\!f_{\pm}$ corrections in the fluid model, those equations featuring $\delta\!f_{\pm}$ consequently feature $\delta$ functions in space. For example for the charge conservation equation (\ref{eqn:PiC-coupled charge conservation}),
+        \begin{equation}\label{eqn:PiC-coupled charge conservation with pseudo-particles}
+            \partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj^{(0)}  \approx  - \nabla_{\bfx}\cdot\left[\sum_{i}\delta^{3}\left[\bfx - \bfX_{+}^{(i)}\right]\rme\bfV_{+}^{(i)} - \sum_{i}\delta^{3}\left[\bfx - \bfX_{-}^{(i)}\right]\rme\bfV_{-}^{(i)}\right]
+        \end{equation}        
+        This is apparently problematic, as these $\delta$ functions exist only in a weak sense, as distributions in the dual space $\left(C^{\infty}_{\rmc}\right)^{*}$.
+        
+        FEM models however derive from weak formulations of the corresponding PDEs, with the result that the weak nature of the definition of the $\delta$ functions is not so much a problem. ``Testing'' (in $L^{2}$) against some test function $\phi(\bfx)$ in some chosen test space defined over the spatial domain, the example (\ref{eqn:PiC-coupled charge conservation with pseudo-particles}) can take the weak form,
+        \begin{equation}
+            \int_{\bfx}\phi\partial_{t}\rho_{\rmC} + \int_{\bfx}\phi\nabla_{\bfx}\cdot\bfj^{(0)} \\
+            \approx  \sum_{i}\nabla_{\bfx}\phi\left(\bfX_{+}^{(i)}\right)\cdot\rme\bfV_{+}^{(i)} - \sum_{i}\nabla_{\bfx}\phi\left(\bfX_{-}^{(i)}\right)\cdot\rme\bfV_{-}^{(i)}.
+        \end{equation}
+        The other fluid equations in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) featuring $\delta\!f_{\pm}$ follow in a similar suit.
 
-    \BA{So, idea is: compressible Hall MHD model with forcing/heating provided by particles + gyroaveraged stochastic particles that appear when kinetic effects are prominent with motion guided by the MHD model. Could do a new diagram, or make this is more clearly annotated on my star-like coupling diagram.}
+        This can be taken further when using finite elements in time (FET)---discussed further in Subsection \ref{cha:FET}---when testing (in $L^{2}$) against test functions $\varphi(\bfx; t)$ in test spaces defined over the whole space-\emph{time} domain, as
+        \begin{multline}
+            \int_{\bfx; t}\phi\partial_{t}\rho_{\rmC} + \int_{\bfx; t}\phi\nabla_{\bfx}\cdot\bfj^{(0)} \\
+            \approx  \int_{t}\left[\sum_{i}\nabla_{\bfx}\phi\left(\bfX_{+}^{(i)}(t)\right)\cdot\rme\bfV_{+}^{(i)}(t) - \sum_{i}\nabla_{\bfx}\phi\left(\bfX_{-}^{(i)}(t)\right)\cdot\rme\bfV_{-}^{(i)}(t)\right].
+        \end{multline}
+        Since $\bfX_{\pm}^{(i)}(t)$ and $\bfV_{\pm}^{(i)}(t)$ are complex stochastic processes, further care must be taken regarding the continuity of the test spaces to ensure these RHS particle terms are well-defined.
+
+        \item  {\bf FET for quantifiable time derivatives:} It was noted in Section \ref{cha:delta f models} that the RHS of the kinetic equations in the $\delta\!f_{\pm}$ corrections (\ref{eqn:linearized Boltzmann equation}) features terms corresponding to time derivatives of the fluid parameters, $\partial_{t}\rho_{\rmM}$, $\partial_{t}\rho_{\rmC}$, $\partial_{t}\bfp$, $\partial_{t}E$, that we would like not to have to substitute for their given values from the fluid equations (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}).
+        
+        Using a FET approach for the fluid equations means these time derivatives are exactly quantified at all positions in the space-time domain, avoiding this problem. 
+    \end{itemize}
     

@@ -1,7 +1,7 @@
-\section{$\delta\! f$ Models}
-    \BA{Introduction.}
+\section{$\delta\!f$ Models}\label{cha:delta f models}
+    This section shall introduce a class of models for the Boltzmann equations (\ref{eqn:Boltzmann equation}) called ``$\delta\!f$ models'', designed to tackle the problems posed by fluid models as discussed in Section \ref{cha:plasma modeling}. The motivation for and benefits provided by this approach shall be discussed in detail in the following section: Section \ref{cha:FEM vs. PiC}.
 
-    Take from here the the assumptions of:
+    Take from here the assumptions of:
     \begin{itemize}
         \item  Leading-order locality of $(\bfC_{ss'})_{ss'}$ (\ref{eqn:local collision operator}),
         \begin{equation}
@@ -16,10 +16,10 @@
 
     \line
 
-    \begin{definition}[$\delta\! f$ models]
-        ``$\delta\! f$ models'' write the distribution functions $(f_{s})_{s}$ for each $s$ in the form
+    \begin{definition}[$\delta\!f$ models]\label{def:delta f models}
+        ``$\delta\!f$ models'' write the distribution functions $(f_{s})_{s}$ for each $s$ in the form
         \begin{equation}
-            f_{s}(\bfx, \bfv; t)  =  f_{s}^{(0)}[(\rho_{s})_{s}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \delta\! f_{s}(\bfx, \bfv; t),
+            f_{s}(\bfx, \bfv; t)  =  f_{s}^{(0)}[(\rho_{s})_{s}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \delta\!f_{s}(\bfx, \bfv; t),
         \end{equation}
         where $\left(f_{s}^{(0)}\right)_{s}$ are those thermalized distributions solving the local thermal equilibrium condition for each $s$ (\ref{eqn:local leading-order Boltzmann equation}),
         \begin{multline}\label{eqn:thermal equilibrium identity}
@@ -36,10 +36,10 @@
                         \sum_{s}&\int_{\bfv}f_{s}^{(0)}\rmm_{s}\bfv                     &  &=  &  \sum_{s}&\int_{\bfv}f_{s}\rmm_{s}\bfv                     &  &=  &  \bfp  \\
                         \sum_{s}&\int_{\bfv}f_{s}^{(0)}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  \sum_{s}&\int_{\bfv}f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  E  \label{eqn:background energy moment}
         \end{align}
-        Substituting these $f_{s}  \mapsto  f_{s}^{(0)} + \delta\! f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) one can derive a:
+        Substituting these $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
         \begin{itemize}
-            \item  Fluid (MHD) model in $(\rho_{s})_{s}$, $\bfp$, $E$, by taking moments, similar to what was done under the classical \emph{exact} thermalization assumption $f_{s}  =  f_{s}^{(0)}$ in Subsection \ref{cha:fluid models}.
-            \item  Kinetic model in $(\delta\! f_{s})_{s}$ that is conservative and (inhomogeneously) linear up to leading order, retrieved directly from the Boltzmann equations.
+            \item  Fluid (MHD) model in $(\rho_{s})_{s}$, $\bfp$, $E$, by taking moments of the Boltzmann equations, similar to what was done under the classical \emph{exact} thermalization assumption $f_{s}  =  f_{s}^{(0)}$ in Subsection \ref{cha:fluid models}, and $\bfE$, $\bfB$ through direct evaluation in Maxwell's equations.
+            \item  Kinetic model in $(\delta\!f_{s})_{s}$ that is conservative and (inhomogeneously) linear up to leading order, retrieved directly from the Boltzmann equations.
         \end{itemize}
     \end{definition}
 
@@ -47,24 +47,23 @@
     \begin{equation}
         \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\bfE + \bfv\wedge\bfB) - \sum_{s'}\rmq_{s'}\bfC_{ss'}^{(0)}\left[f_{s}^{(0)}, f_{s'}^{(0)}\right]\right]  \sim  0,
     \end{equation}
-    with the addition of forcing/heating-like terms on the right hand side (RHS), uniform in $s$, that are comparitively negligible due to quasineutrality, such that the relevant moments are 0 and the identities necessarily admit the $(S + 4)$-dimensional manifold of solutions.
+    with the addition of forcing/heating-like terms on the right-hand side (RHS), uniform in $s$, that are comparatively negligible due to quasineutrality, such that the relevant moments are 0 and the identities necessarily admit the $(S + 4)$-dimensional manifold of solutions.
 
-    $\delta\! f$ models offer a way to recover an approachable fluid model from the Boltzmann equations \emph{without} the unreliable exact thermalization assumption $f_{s}  =  f_{s}^{(0)}$ or other techniques, at the expense of the introduction of the $(\delta\! f_{s})_{s}$ ``corrections'' which must also be modeled.
+    $\delta\!f$ models offer a way to recover an approachable fluid model from the Boltzmann equations \emph{without} the unreliable exact thermalization assumption $f_{s}  =  f_{s}^{(0)}$ or other techniques, at the expense of the introduction of the $(\delta\!f_{s})_{s}$ ``corrections'' which must also be modeled.
 
     \line
 
-    \begin{lemma}[Moments on $(\delta\! f_{s})_{s}$]
-        \begin{align}
-            \forall s,          \int_{\bfv}\delta\! f_{s}\rmm_{s}                          =  0,  &&
-                        \sum_{s}\int_{\bfv}\delta\! f_{s}\rmm_{s}\bfv                      =  \bfzero,  &&
-                        \sum_{s}\int_{\bfv}\delta\! f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}   =  0.
-        \end{align}
+    \begin{lemma}[Conservation of moments on $(\delta\!f_{s})_{s}$]
+        Provided the $(\delta\!f_{s})_{s}$ corrections evolve \emph{exactly} according to the Boltzmann equations (\ref{eqn:Boltzmann equation}), and the fluid parameters evolve \emph{exactly} according to the fluid equations derived by taking moments of the Boltzmann equations (\ref{eqn:Boltzmann equation}), then $\forall t$, the following 0 moments on the $(\delta\!f_{s})_{s}$ corrections are conserved.
     \end{lemma}
     \begin{proof}
-        These are immediate from the moments (\ref{eqn:background mass moment}--\ref{eqn:background energy moment}) with $f_{s}  =  f_{s}^{(0)} + \delta\! f_{s}$.
+        Taking the relevant moments of the Boltzmann equations (\ref{eqn:Boltzmann equation}), the fluid equations...
     \end{proof}
+    Thus, under exact solution, the kinetic equations on $(\delta\!f_{s})_{s}$ are consistent with the 0 moments on $(\delta\!f_{s})_{s}$ derived from the moments on $(f_{s}^{(0)})_{s}$ (\ref{eqn:background mass moment}--\ref{eqn:background energy moment}) with the definition of $(\delta\!f_{s})_{s}$, $\delta\!f_{s}  =  f_{s} - f_{s}^{(0)}$.
 
-    This condition is crucial for deriving the fluid model from the Boltzmann equations, as the time derivative in $(\delta\! f_{s})_{s}$ necessarily vanish after taking the relevant moments.
+    \BA{Check the coupled kinetic equation conserves moments.}
+
+    This condition is crucial for deriving the fluid model from the Boltzmann equations, as the time derivative in $(\delta\!f_{s})_{s}$ necessarily vanish after taking the relevant moments.
 
     \line
     
@@ -76,79 +75,79 @@
 
     \shortline
 
-    Substituting $f_{s}  \mapsto  f_{s}^{(0)} + \delta\! f_{s}$ into the Boltzmann equations, one derives the following leading-order fluid equations in $\rho_{\pm}$, $\bfp$, $E$:
+    Substituting $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}), one derives the following leading-order fluid equations in $\rho_{\pm}$, $\bfp$, $E$:
     \begin{equation}\label{eqn:PiC-coupled mass conservation}
-        \partial_{t}\rho_{\pm} + \nabla_{\bfx}\cdot\left[\int_{\bfv}f_{\pm}^{(0)}\rmm_{\pm}\bfv\right]  =  - \nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\! f_{\pm}\rmm_{\pm}\bfv\right]
+        \partial_{t}\rho_{\pm} + \nabla_{\bfx}\cdot\left[\int_{\bfv}f_{\pm}^{(0)}\rmm_{\pm}\bfv\right]  =  - \nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\!f_{\pm}\rmm_{\pm}\bfv\right]
     \end{equation}
     \vspace{-20pt}
     \begin{multline}
         \partial_{t}\bfp + \left(\nabla_{\bfx}\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] + \nabla_{\bfx}p\right) - \left(\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) \\
         + \int_{\bfv}(\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--})\!\left[f_{\pm}^{(0)}, f_{\pm}^{(0)}\right]\rme^{2}  \\
-        \sim  - \nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\! f_{+}\rmm_{+}(\bfv - \bfu)^{\otimes 2}\right] + \int_{\bfv}(\delta\! f_{+} - \delta\! f_{-})\rme\bfv\wedge\bfB
+        \sim  - \nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\!f_{+}\rmm_{+}(\bfv - \bfu)^{\otimes 2}\right] + \int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv\wedge\bfB
     \end{multline}
     \vspace{-25pt}
     \begin{multline}
         \partial_{t}E + \nabla_{\bfx}\cdot\left[\frac{1}{2}\rho_{\rmM}\|\bfu\|^{2}\bfu + \frac{5}{2}p\bfu\right] - \bfj^{(0)}\cdot\bfE  \\
         + \int_{\bfv}(\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--})\!\left[f_{\pm}^{(0)}, f_{\pm}^{(0)}\right]\cdot\rme^{2}\bfv  \\
-        \sim  - \frac{1}{2}\nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\! f_{+}\rmm_{+}\|\bfv\|^{2}\bfv\right] + \int_{\bfv}(\delta\! f_{+} - \delta\! f_{-})\rme\bfv\cdot\bfE
+        \sim  - \frac{1}{2}\nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\!f_{+}\rmm_{+}\|\bfv\|^{2}\bfv\right] + \int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv\cdot\bfE
     \end{multline}
     Again, the mass equations can be reframed in terms of the mass, $\rho_{\rmM}$, and charge, $\rho_{\rmC}$, densities in closed form as:
     \begin{align}
-        \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  =  0,  &&
-        \partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj^{(0)}  =  - \nabla_{\bfx}\cdot\left[\int_{\bfv}(\delta\! f_{+} - \delta\! f_{-})\rme\bfv\right],
+              \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  &=  0,  \\
+        \partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj^{(0)}  &=  - \nabla_{\bfx}\cdot\left[\int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv\right]  \label{eqn:PiC-coupled charge conservation}
     \end{align}
     and the energy equation in terms of the pressure, $p$, as
     \begin{multline}\label{eqn:PiC-coupled pressure conservation}
         \frac{3}{2}\partial_{t}p + \left(\nabla_{\bfx}\cdot\left[\frac{3}{2}p\bfu\right] + p\nabla_{\bfx}\cdot\bfu\right) - \left(\bfj^{(0)} - \rho_{\rmC}\bfu\right)\cdot(\bfE + \bfu\wedge\bfB)  \\
         + \int_{\bfv}(\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--})\!\left[f_{\pm}^{(0)}, f_{\pm}^{(0)}\right]\cdot\rme^{2}(\bfv - \bfu)  \\
-        \sim  - \frac{1}{2}\nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\! f_{+}\rmm_{+}\|\bfv - \bfu\|^{2}(\bfv - \bfu)\right] - \int_{\bfv}\delta\! f_{+}\rmm_{+}(\bfv - \bfu)^{\otimes 2}:\nabla_{\bfx}\bfu  \\
-        + \int_{\bfv}(\delta\! f_{+} - \delta\! f_{-})\rme\bfv\cdot(\bfE + \bfu\wedge\bfB).
+        \sim  - \frac{1}{2}\nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\!f_{+}\rmm_{+}\|\bfv - \bfu\|^{2}(\bfv - \bfu)\right] - \int_{\bfv}\delta\!f_{+}\rmm_{+}(\bfv - \bfu)^{\otimes 2}:\nabla_{\bfx}\bfu  \\
+        + \int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv\cdot(\bfE + \bfu\wedge\bfB).
     \end{multline}
     
-    These equations resemble those of the classical MHD model (\ref{eqn:phase mass conservation introduction}--\ref{eqn:energy conservation introduction}), with the addition of terms dependents on the $\delta\! f_{\pm}$ corrections. These can be interpreted as fictitious forcing/heating terms in the classical MHD equations.
+    These equations resemble those of the classical MHD model (\ref{eqn:phase mass conservation introduction}--\ref{eqn:energy conservation introduction}), with the addition of terms dependents on the $\delta\!f_{\pm}$ corrections. These can be interpreted as fictitious forcing/heating terms in the classical MHD equations.
+
+    The last set of fluid equations come directly from Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}):
+    \begin{align}
+        \partial_{t}\bfE - \rmc^{2}\nabla\wedge\bfB + \frac{1}{\varepsilon_{0}}\bfj^{(0)}  &=  - \frac{1}{\varepsilon_{0}}\int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv,  &
+                                                      \partial_{t}\bfB + \nabla\wedge\bfE  &=  0,  \\
+                                                            \nabla\cdot\bfE - \rho_{\rmC}  &=  0,  &
+                                                                          \nabla\cdot\bfB  &=  0.  \label{eqn:PiC-coupled Maxwell's equations steady-state}
+    \end{align}
 
     \shortline
 
-    For the corresponding kinetic component, one derives the following leading-order kinetic equations in $\delta\! f_{\pm}$:
+    For the corresponding kinetic component, one derives the following leading-order kinetic equations in $\delta\!f_{\pm}$:
     \begin{multline}\label{eqn:linearized Boltzmann equation}
-        \partial_{t}\delta\! f_{\pm} + \nabla_{\bfx}\cdot[\delta\! f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\! f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
-        \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\left[\partial\bfC_{\pm+}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{+}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\! f_{\pm}, \delta\! f_{+}\right)\right] - \partial\bfC_{\pm-}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\! f_{\pm}, \delta\! f_{-}\right)\right]\right]  \\
+        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
+        \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\left[\partial\bfC_{\pm+}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{+}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, \delta\!f_{+}\right)\right] - \partial\bfC_{\pm-}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, \delta\!f_{-}\right)\right]\right]  \\
         \sim  - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \partial_{t}[(\rho_{\pm}, \bfp, p)]] - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\pm}, \bfp, p)]]  \\
         - \frac{\rho_{\rmC}}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\bfE + \frac{1}{\rho_{\rmC}}\bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\frac{1}{\rho_{\rmC}}\bfj^{(0)} - \bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]
     \end{multline}
-    Here, for a functional $\calL[f]$, $\partial\calL[f; \delta\! f]$ denotes its $L^{2}$ functional derivative:
+    Here, for a functional $\calL[f]$, $\partial\calL[f; \delta\!f]$ denotes its $L^{2}$ functional derivative:
     \begin{equation}
-        \partial\calL[f; \delta\! f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\! f] - \calL[f])\right\}
+        \partial\calL[f; \delta\!f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\!f] - \calL[f])\right\}
     \end{equation}
     
-    Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\pm}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\! f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
+    Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\pm}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
     
-    Similar to how the original kinetic Boltzmann equation can be derived from a particle model, this kinetic equation can be viewed as one that might derive from a stochastic particle model with an additional artificial process term by which particles with certain positions and velocities and being generated/eliminated at certain rates dependent on $\rho_{\pm}$, $\bfp$, $p$, derived from the inhomogeneous RHS. Substituting $\partial_{t}[(\rho_{\pm}, \bfp, p)]$ for their values evaluated from the fluid equations \emph{would} leave the RHS dependent only on the \emph{spatial} derivatives of $\rho_{\pm}$, $\bfp$, $p$---superficially more suitable for simulation---however this would leave a far more involved RHS, featuring also further $\delta\! f_{\pm}$ terms, and thus potentially losing the linearity in $\delta\! f_{\pm}$. \BA{(Is this true? Would you ever \emph{lose} the nonlinearity?)}
+    Similar to how the original kinetic Boltzmann equation can be derived from a particle model, this kinetic equation can be viewed as one that might derive from a stochastic particle model with an additional artificial process term by which particles with certain positions and velocities and being generated/eliminated at certain rates dependent on $\rho_{\pm}$, $\bfp$, $p$, derived from the inhomogeneous RHS. Substituting $\partial_{t}[(\rho_{\pm}, \bfp, p)]$ for their values evaluated from the fluid equations \emph{would} leave the RHS dependent only on the \emph{spatial} derivatives of $\rho_{\pm}$, $\bfp$, $p$---superficially more suitable for simulation---however this would leave a far more involved RHS, featuring also further linear $\delta\!f_{\pm}$ terms.
 
     \line
 
-    Crucially, the system here between the fluid component in $\rho_{\pm}$, $\bfp$, $p$ and kinetic component in the $\delta\! f_{\pm}$ corrections is coupled. (See Figure \ref{fig:delta f coupling}) The fluid component influences the kinetic equations through the introduction of a particle generation/elimination--like inhomogeneous RHS, and the kinetic component influences the fluid equations through the introduction of artificial forcing/heating--like terms. Some $\delta\! f$ models reduce this by ignoring the effects of the kinetic component on the fluid component, and solving a set of MHD equations for the thermalized background, and observing how the corrections evolve ``on top of it'' \BA{[Ref, Ref, ...]} however these models naturally lose validity over time, as the kinetic effects can not effect the dynamics of the thermalized background, as is known to be so prominently the case in tokamak plasmas.
+    Crucially, the system here between the fluid component in $\rho_{\pm}$, $\bfp$, $p$ and kinetic component in the $\delta\!f_{\pm}$ corrections is coupled. (See Figure \ref{fig:delta f coupling}) The fluid component influences the kinetic equations through the introduction of a particle generation/elimination--like inhomogeneous RHS, and the kinetic component influences the fluid equations through the introduction of artificial forcing/heating--like terms. Some $\delta\!f$ models reduce this by ignoring the effects of the kinetic component on the fluid component, and solving a set of MHD equations for the thermalized background, and observing how the corrections evolve ``on top of it'' \BA{[Ref, Ref, ...]} however these models naturally lose validity over time, as the kinetic effects can not affect the dynamics of the thermalized background, as is known to be so prominently the case in tokamak plasmas.
 
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node (1) at (0,  0) {\bf Fluid    \\  \bf component:  \\  $\rho_{\pm}$, $\bfp$, $p$, $\bfE$, $\bfB$};
-            \node (2) at (12, 0) {\bf Kinetic  \\  \bf component:  \\  $\delta\! f_{\pm}$};
+            \node (2) at (12, 0) {\bf Kinetic  \\  \bf component:  \\  $\delta\!f_{\pm}$};
             
             \draw[->] (1.5, 0.15) to [out = 5, in = 175] (10.5, 0.15);
             \node at (6, 0.75) {\emph{Fictitious particle generation/elimination}};
             \draw[->] (10.5, - 0.15) to [out = 185, in = -5] (1.5, - 0.15);
             \node at (6, - 0.75) {\emph{Fictitious forcing/heating}};
         \end{tikzpicture}
-        \caption{Illustration of the coupling between the fluid and kinetic components of a fully coupled $\delta\! f$ model.}
+        \caption{Illustration of the coupling between the fluid and kinetic components of a fully coupled $\delta\!f$ model.}
         \label{fig:delta f coupling}
     \end{figure}
-
-    \BA{Need to include Maxwell's equations here too!}
-
-    \BA{Check the coupled kinetic equation conserves moments.}
-
-    \BA{Have only just here defined what a $\delta\! f$ method is- currently it just looks like I've taken a nasty kinetic equation, and ended up with a nasty kinetic equation. Clarify that the ``why'' will be in the next section.}
-
-    \BA{Need a note on the symmetry of the collision operators early, and what that implies for those moment lemmas.}
     
