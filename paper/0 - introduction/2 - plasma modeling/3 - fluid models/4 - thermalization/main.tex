@@ -15,12 +15,10 @@
     \begin{equation}
         f_{s}(\bfx, \bfv; t)  \sim  f_{s}^{(0)}[(\rho_{s})_{s}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t).
     \end{equation}
-    This limit is referred to as thermalization.
-    
-    A necessary assumption in the derivation of a fluid model is that the distribution function is \emph{exactly} thermalized, in so far as $f_{s}  =  f_{s}^{(0)}$ \emph{exactly}, for each $s$. One can then derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation}).
+    This limit is referred to as thermalization. One can further this by the assumption of \emph{exact} thermalization, $f_{s}  =  f_{s}^{(0)}$ for each $s$, to derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation}). This derives the corresponding fluid model.
 
-    \begin{remark}[Flaws in the exact thermalization assumption]
-        The assumption that the distribution functions $(f_{s})_{s}$ are \emph{exactly} thermalized, with $f_{s}  =  f_{s}^{(0)}$, is fundamentally flawed. Perturbations from the thermalized equilibrium distributions $(f_{s}^{(0)})_{s}$ are known to have an effect on the dynamics of the problem, as the MHD models presented here can \emph{not} be derived on the assumption of \emph{leading-order} thermalization $f_{s}  \sim  f_{s}^{(0)}$ alone. \BA{[Ref]} This is a flaw that pervades practically \emph{all} fluid models in kinetic theory.
+    \begin{remark}
+        There exist other interpretations by which a fluid model can be derived that do \emph{not} rely so much on the exact thermalization assumption $f_{s}  =  f_{s}^{(0)}$ \BA{[Ref, Ref, Ref, ...]} however the fluid models will be derived from this assumption here, as the derivation is more concise, and leads better on the kinds of models that will be considered in Chapter \ref{cha:delta f corrections}. 
     \end{remark}
 
     Let $\rho_{\rmM}$ denote the mass density,

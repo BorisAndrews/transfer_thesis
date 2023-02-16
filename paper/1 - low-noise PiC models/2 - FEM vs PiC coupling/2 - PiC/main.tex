@@ -1,7 +1,7 @@
 \subsection*{Kinetic Component (\ref{eqn:linearized Boltzmann equation})}
     The kinetic component comprises an inhomogeneously linear, conservative PDE in position space, $\bfx$, and velocity space, $\bfv$. Classical techniques for the numerical solution of conservative PDEs include:
     \begin{itemize}
-        \item  Monte Carlo--like Lagrangian pseudo-particle techniques\footnote{To be able to derive a pseudo-particle model from such a kinetic equation, certain conditions must be satisfied by the collision operator. This will be discussed further in Section \ref{cha:collision operators}.}
+        \item  Monte Carlo--like Lagrangian pseudo-particle techniques\footnote{To be able to derive a pseudo-particle model from such a kinetic equation, certain conditions must be satisfied by the collision operator. This will be discussed further in Subsection \ref{cha:collision operators}.}
         \item  Classical Eulerian techniques (FEM/FDM/etc.)
     \end{itemize}
     For these equations, the former particle-in-cell (PiC) approach has many benefits over classical PDE techniques: \BA{(Michael Barnes disagrees, so I'd be interested to hear his reasoning.)}
@@ -11,7 +11,7 @@
         This both:
         \begin{itemize}
             \item  Reduces the number of component-to-coupling information couplings from $\calO[n^{2}]$, in a classical direct PiC method, to $\calO[n]$, where $n$ is the number of particles in the pseudo-particle layer.
-            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for gyrokinetic turbulence effects. For a further discussion see Section \ref{cha:gyroaveraging}.
+            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for gyrokinetic turbulence effects. For a further discussion see Section \ref{cha:particle motion}.
         \end{itemize}
 
         
@@ -89,7 +89,7 @@
             c       >    0,       &&
             \mu     \in  \bbR.
         \end{align*}
-        For $\alpha  =  2$, this corresponds to the Lénard--Bernstein collision operator. \BA{(Should ask Paul Dellar for a reference here.)} This is the Fokker Planck--type PDE satisfied by the probability density function (PDF) of a skew-free 1D Lévy flight \cite{Chechkin_et_al_2008} with:
+        This is the Fokker Planck--type PDE satisfied by the probability density function (PDF) of a skew-free 1D Lévy flight \cite{Chechkin_et_al_2008} with:
         \begin{align*}
             \text{Stability parameter: } \alpha,  &&
             \text{scale parameter: } c,           &&
@@ -137,7 +137,7 @@
             \item  For $\alpha  <  2$, the moments $\bbE\left[|V(\tau)|^{\theta}\right]$ exist \emph{only} for $\theta  <  \alpha$.
         \end{itemize}
 
-        These collision operators will be discussed further in Section \ref{cha:collision operators}.
+        These collision operators will be discussed further in Subsection \ref{cha:collision operators}.
         
         \item  {\bf Regions of high and low thermalization:} Pseudo-particle methods need only model the function where it is non-zero. Similarly, for functions that exhibit certain regions of comparatively large and small values, pseudo-particle methods can inherently focus more computational processing power to those regions of larger value, and less to those regions of smaller value.
         

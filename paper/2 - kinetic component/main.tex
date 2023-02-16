@@ -1,15 +1,29 @@
-\chapter{Kinetic Component}\ref{cha:kinetic component}
-    Recall, the kinetic component of the $\delta\!f$ model refers to the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}),
-    
-    \line
-    
-    \BA{Introduction.}
+\chapter{Kinetic Component}\label{cha:kinetic component}
+    Recall the kinetic component of the $\delta\!f$ model, the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}):
+    \begin{multline}\label{eqn:linearized Boltzmann equation simplified}
+        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
+        \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\left[\partial\bfC_{\pm+}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{+}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, \delta\!f_{+}\right)\right]\right.  \\
+        \left.- \partial\bfC_{\pm-}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, \delta\!f_{-}\right)\right]\right]  =  \calF,
+    \end{multline}
+    where $\calF$ denotes the inhomogeneous RHS,
+    \begin{multline}
+        \calF[\rho_{\pm}, \bfp, p](\bfx, \bfv; t)  \\
+        :=  - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \partial_{t}[(\rho_{\pm}, \bfp, p)]] - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\pm}, \bfp, p)]]  \\
+        - \frac{\rho_{\rmC}}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\bfE + \frac{1}{\rho_{\rmC}}\bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\frac{1}{\rho_{\rmC}}\bfj^{(0)} - \bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right],
+    \end{multline}
+    and asymptotic equalities, $\sim$, has been substituted for equality, $=$, for sake of presentation.
+
+    For the numerical solution of (\ref{eqn:linearized Boltzmann equation simplified}) a Monte Carlo pseudo-particle approximation is proposed, whereby as the simulation progresses in time, particles with (crucially) positive \emph{or} negative weights:
+    \begin{enumerate}
+        \item  Are generated/eliminated stochastically with initial positions, $\bfx$, and velocities, $\bfv$, according to the RHS of (\ref{eqn:linearized Boltzmann equation simplified}), $\calF$.
+        \item  Move through the simulation domain according to SDEs determined by the LHS of (\ref{eqn:linearized Boltzmann equation simplified}).
+    \end{enumerate}
+    We discuss each of these 2 phases of the simulation algorithm in turn:
 
 
-    \input{2 - kinetic component/1 - analysis/main.tex}
-    \input{2 - kinetic component/2 - numerics/main.tex}
-    \input{2 - kinetic component/3 - collision operators/main.tex}
-    \input{2 - kinetic component/4 - gyroaveraging/main.tex}
+    \input{2 - kinetic component/1 - particle generation/main.tex}
+    \input{2 - kinetic component/2 - particle motion/main.tex}
+
 
 
     \section*{Summary}

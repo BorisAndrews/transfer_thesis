@@ -88,18 +88,20 @@
             \item  {\bf Claim:} If the 0 moment conditions on $(\delta\!f_{s})_{s}$ hold at time $t  =  0$, then they hold $\forall t$.
             
             \begin{remark}[Incompleteness of proof of Conjecture \ref{con:delta f correction moments}]
-                I'm aware the above claim is insufficient to prove the result of the theorem. Take for example the classical counterexample from ODE theory, for $y(x)$,
-                \begin{equation}\label{eqn:Lipschitz discontinuity counter-example}
-                    y'  =  \sqrt[3]{y}.
-                \end{equation}
-                Here, $(y = 0)  \implies  (y'  =  0)$, however ill-posedness derived from the Lipschitz discontinuity of $\sqrt{*}$ mean (\ref{eqn:Lipschitz discontinuity counter-example}) admits a whole class of solutions with the IC $y(0) = 0$ that are non-zero at later t,
+                I'm aware the above claim is insufficient to prove the result of the theorem. Take for example the classical ODE counterexample from Chapter 6 of \cite{Robinson_2004}, for $x(t)  \geq  0$,
                 \begin{equation}
-                    y  =  \left\{\begin{matrix}
-                        0,                                      &  x \leq x_{0}  \\ 
-                        \sqrt{\frac{2}{3}}^{3}(x - x_{0})^{2},  &  x \geq x_{0}
+                    x'  =  \sqrt{x}.
+                \end{equation}
+                Here, $(x = 0)  \implies  (x'  =  0)$, however ill-posedness derived from the Lipschitz discontinuity of $\sqrt{*}$ means the ODE admits a whole class of solutions with the IC $x(0) = 0$ that are non-zero at later t,
+                \begin{equation}
+                    x  =  \left\{\begin{matrix}
+                        0,                           &  x \leq x_{0}  \\ 
+                        \frac{1}{4}(x - x_{0})^{2},  &  x \geq x_{0}
                     \end{matrix}\right.,
                 \end{equation}
-                for some $x_{0}  \geq  0$. This implies to me that either some Lipschitz regularity result on the $\delta\!f$ model, or simply a rephrasing of the problem, would be sufficient to prove this conjecture, however I haven't managed to get either to work yet. (See Chapter \ref{cha:research plan})
+                for some $x_{0}  \geq  0$.
+                
+                This implies to me that either some Lipschitz regularity result on the $\delta\!f$ model, or simply a rephrasing of the problem, would be sufficient to prove this conjecture, however I haven't managed to get either to work yet. (See Chapter \ref{cha:research plan})
             \end{remark}
         \end{enumerate}
     \end{proof}
@@ -171,6 +173,8 @@
     
     Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\pm}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
     
+    \BA{Necessarily in making this model linear, I have to discard the higher order term in the asymptotic expansions of $(\bfC_{ss'}^{(0)})_{ss'}$, which makes me concerned. I've made a lot of approximations, which I've just swallowed into the $\sim$, and I'd like to be more careful about stating to what order these equations hold true.}
+
     Similar to how the original kinetic Boltzmann equation can be derived from a particle model, this kinetic equation can be viewed as one that might derive from a stochastic particle model with an additional artificial process term by which particles with certain positions and velocities and being generated/eliminated at certain rates dependent on $\rho_{\pm}$, $\bfp$, $p$, derived from the inhomogeneous RHS. Substituting $\partial_{t}[(\rho_{\pm}, \bfp, p)]$ for their values evaluated from the fluid equations \emph{would} leave the RHS dependent only on the \emph{spatial} derivatives of $\rho_{\pm}$, $\bfp$, $p$---superficially more suitable for simulation---however this would leave a far more involved RHS, featuring also further linear $\delta\!f_{\pm}$ terms.
 
     \line
