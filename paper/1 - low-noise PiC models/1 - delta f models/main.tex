@@ -32,9 +32,15 @@
         \end{equation}
         with moments:
         \begin{align}
-            \forall s,          &\int_{\bfv}f_{s}^{(0)}\rmm_{s}                         &  &=  &          &\int_{\bfv}f_{s}\rmm_{s}                         &  &=  &  \rho_{s}  \label{eqn:background mass moment}  \\
+            \forall s,          &\int_{\bfv}f_{s}^{(0)}\rmm_{s}                         &  &=  &          &\int_{\bfv}f_{s}\rmm_{s}                         &  &=  &  \rho_{s}  \\
                         \sum_{s}&\int_{\bfv}f_{s}^{(0)}\rmm_{s}\bfv                     &  &=  &  \sum_{s}&\int_{\bfv}f_{s}\rmm_{s}\bfv                     &  &=  &  \bfp  \\
-                        \sum_{s}&\int_{\bfv}f_{s}^{(0)}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  \sum_{s}&\int_{\bfv}f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  E  \label{eqn:background energy moment}
+                        \sum_{s}&\int_{\bfv}f_{s}^{(0)}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  \sum_{s}&\int_{\bfv}f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  E
+        \end{align}
+        or equivalently:
+        \begin{align}
+            \forall s,          &\int_{\bfv}\delta\!f_{s}\rmm_{s}                         &  &=  &  0    \label{eqn:correction mass moment}  \\
+                        \sum_{s}&\int_{\bfv}\delta\!f_{s}\rmm_{s}\bfv                     &  &=  &  0  \\
+                        \sum_{s}&\int_{\bfv}\delta\!f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  0  \label{eqn:correction energy moment}
         \end{align}
         Substituting these $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
         \begin{itemize}
@@ -53,17 +59,33 @@
 
     \line
 
-    \begin{lemma}[Conservation of moments on $(\delta\!f_{s})_{s}$]
-        Provided the $(\delta\!f_{s})_{s}$ corrections evolve \emph{exactly} according to the Boltzmann equations (\ref{eqn:Boltzmann equation}), and the fluid parameters evolve \emph{exactly} according to the fluid equations derived by taking moments of the Boltzmann equations (\ref{eqn:Boltzmann equation}), then $\forall t$, the following 0 moments on the $(\delta\!f_{s})_{s}$ corrections are conserved.
-    \end{lemma}
+    This following result is crucial for deriving the fluid model from the Boltzmann equations, as the time derivative in $(\delta\!f_{s})_{s}$ must vanish after taking the relevant moments:
+
+    \begin{theorem}[Conservation of moments on $(\delta\!f_{s})_{s}$]
+        Provided the equations from both the fluid and kinetic model (as derived according to the definition of the $\delta\! f$ model) hold exactly $\forall$ times $t$, then if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold for $t  =  0$, then they necessarily hold $\forall t$.
+    \end{theorem}
     \begin{proof}
-        Taking the relevant moments of the Boltzmann equations (\ref{eqn:Boltzmann equation}), the fluid equations...
+        \begin{enumerate}
+            \item  We show first that if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at a given time $t$, then their derivatives are equally 0 at time $t$ too.
+            
+            The two fluid/kinetic equations holding exactly can be interpreted respectively as stating:
+            \begin{itemize}
+                \item  {\bf Fluid equations:} Assuming the moments from (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $(\delta\!f_{s})_{s}$ corrections and their time derivatives are both 0 at a given time $t$, then the equivalent moments of the Boltzmann equations are 0 at time $t$.
+
+                By linearity the converse is immediate. Assuming the moments from (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $(\delta\!f_{s})_{s}$ corrections are 0 at a given time $t$ and the equivalent moments of the Boltzmann equations are 0 at time $t$, then the time derivatives on the moments are 0 at time $t$ too.
+                
+                \item  {\bf Kinetic equations:} The Boltzmann equation holds exactly.
+            \end{itemize}
+            Combined therefore, the result holds.
+            \item  We show first that if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at time $t  =  0$, then they hold for all times $t$.
+            
+            \begin{remark}
+                \BA{I want to say this holds from the above statement, but I wouldn't be so naïve; I've done rudimentary uniqueness claims in ODEs of course. Some level of Lipschitz regularity needs to be assumed on the system for this to hold, the exact conditions of which I need to investigate further. Something for the further work section I think!}
+            \end{remark}
+        \end{enumerate}
     \end{proof}
-    Thus, under exact solution, the kinetic equations on $(\delta\!f_{s})_{s}$ are consistent with the 0 moments on $(\delta\!f_{s})_{s}$ derived from the moments on $(f_{s}^{(0)})_{s}$ (\ref{eqn:background mass moment}--\ref{eqn:background energy moment}) with the definition of $(\delta\!f_{s})_{s}$, $\delta\!f_{s}  =  f_{s} - f_{s}^{(0)}$.
 
-    \BA{Check the coupled kinetic equation conserves moments.}
-
-    This condition is crucial for deriving the fluid model from the Boltzmann equations, as the time derivative in $(\delta\!f_{s})_{s}$ necessarily vanish after taking the relevant moments.
+    \BA{Why is this lemma important when talking about numerical models too? Primarily important as it means the definition is well-posed!}
 
     \line
     
