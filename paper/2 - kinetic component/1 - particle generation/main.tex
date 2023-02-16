@@ -1,3 +1,12 @@
 \section{Pseudo-Particle Generation/Elimination}
-    \BA{Bhatnagar--Gross--Krook (BGK) operators. \cite{Bhatnagar_Gross_Krook_1954}}
+    The PiC algorithm here depends on modeling pseudo-particles only when needed, i.e. only when kinetic effects are large and the distibution functions, $f_{\pm}$, are far from thermalization, $f_{\pm}^{(0)}$. This requires pseudo-particles---in a numerical sense, objects from a class of pseudo-particles---to be:
+    \begin{itemize}
+        \item  Generated when required, i.e. constructed as computational objects.
+        \item  Eliminated when not required, i.e. destructed as computational objects.
+    \end{itemize}
+    The latter, pseudo-particle elimination, shall be discussed here first.
+    
+    
+    \input{paper/2 - kinetic component/1 - particle generation/1 - elimination/main.tex}
+    \input{paper/2 - kinetic component/1 - particle generation/2 - generation/main.tex}
     

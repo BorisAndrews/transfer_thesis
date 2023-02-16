@@ -1,0 +1,21 @@
+\subsection*{Elimination}
+    \begin{definition}[Bhatnagar--Gross--Krook (BGK) collision operator]
+        In \cite{Bhatnagar_Gross_Krook_1954} Bhatnagar, Gross and Krook propose a linearized approximation to the collision operator. In the notation used in this thesis, this states, for each phase $s$,
+        \begin{equation}
+            \frac{{\rmq_{s}}^{2}}{\rmm_{s}}\nabla_{\bfv}\cdot\bfC_{ss}^{(0)}  =  \nu_{s}\left(f_{s}^{(0)} - f_{s}\right),
+        \end{equation}
+        for a (potentially) phase-dependent decay parameter, $\nu_{s}$.
+    \end{definition}
+    This can naturally be written in the $\delta\!f$ model in the form
+    \begin{equation}
+        \frac{{\rmq_{s}}^{2}}{\rmm_{s}}\nabla_{\bfv}\cdot\bfC_{ss}^{(0)}  =  - \nu_{s}\delta\!f_{s}.
+     \end{equation}
+    Introducing a BGK-like component to the intra-phase (local) collision operators, $\bfC_{\pm\pm}^{(0)}$, therefore modifies the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}) via the introduction of similar $- \nu_{\pm}\delta\!f_{\pm}$ terms on the RHS:
+    \begin{equation}
+        \partial_{t}\delta\!f_{\pm} + \cdots  =  \calF - \nu_{\pm}\delta\!f_{\pm}
+    \end{equation}
+
+    \BA{How does such a term manifest in the pseudo-particle model?}
+
+    \BA{A particle model---in the physical sense of Section \ref{cha:particle models}---where particles cease to exist after periods of time sampled from an exponential distribution ${\rm Exp}[\nu_{s}]$---essentially with half-life ${\nu_{s}}^{- 1}$---would result in the introduction of a RHS term in the Boltzmann equation (\ref{eqn:Boltzmann equation}) for phase $s$ of the form $- \nu_{s}f_{s}$.}
+    
