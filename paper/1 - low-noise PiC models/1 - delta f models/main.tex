@@ -59,33 +59,52 @@
 
     \line
 
-    This following result is crucial for deriving the fluid model from the Boltzmann equations, as the time derivative in $(\delta\!f_{s})_{s}$ must vanish after taking the relevant moments:
+    In its current formulation, the $\delta\!f$ model as described is not \emph{necessarily} well-posed. The 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections are required $\forall t$ to derive the fluid model, \emph{however} a distinct kinetic equation is derived for $(\delta\!f_{s})_{s}$ that does not \emph{explicitly} conserve these moment results.
 
-    \begin{theorem}[Conservation of moments on $(\delta\!f_{s})_{s}$]
-        Provided the equations from both the fluid and kinetic model (as derived according to the definition of the $\delta\! f$ model) hold exactly $\forall$ times $t$, then if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold for $t  =  0$, then they necessarily hold $\forall t$.
-    \end{theorem}
+    \begin{remark}[Difficulties in proving moment conservation on on $(\delta\!f_{s})_{s}$]
+        It is natural to believe the derived kinetic model \emph{should} conserve these 0 moments, and indeed in practice one does find this to be the case. \emph{Proving} analytically this is the case however has proven more difficult than I'd anticipated. 
+    \end{remark}
+
+    \begin{conjecture}[Conservation of moments on $(\delta\!f_{s})_{s}$]\label{con:delta f correction moments}
+        Provided the equations from both the fluid and kinetic model (as derived according to the definition of the $\delta\! f$ model) admit a unique solution (under appropriate ICs/BCs) then if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold for $t  =  0$, then they necessarily hold $\forall t$.
+    \end{conjecture}
     \begin{proof}
+        The following proof is incomplete.
+        
+        We show the result holds in 2 steps:
         \begin{enumerate}
-            \item  We show first that if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at a given time $t$, then their derivatives are equally 0 at time $t$ too.
+            \item  {\bf Claim:} If the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at a given time $t$, then their derivatives are equally 0 at time $t$ too.
             
-            The two fluid/kinetic equations holding exactly can be interpreted respectively as stating:
+            {\bf Proof:} The fluid/kinetic equations can be interpreted respectively as stating:
             \begin{itemize}
-                \item  {\bf Fluid equations:} Assuming the moments from (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $(\delta\!f_{s})_{s}$ corrections and their time derivatives are both 0 at a given time $t$, then the equivalent moments of the Boltzmann equations are 0 at time $t$.
+                \item  \emph{Fluid equations:} Assuming the relevant moments on $(\delta\!f_{s})_{s}$ and their time derivatives are both 0 at a given time $t$, then the equivalent moments of the Boltzmann equations are 0 at time $t$.
 
-                By linearity the converse is immediate. Assuming the moments from (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $(\delta\!f_{s})_{s}$ corrections are 0 at a given time $t$ and the equivalent moments of the Boltzmann equations are 0 at time $t$, then the time derivatives on the moments are 0 at time $t$ too.
+                By the linearity of $\partial_{t}f_{s}$ in the Boltzmann equations (\ref{eqn:Boltzmann equation}) the converse holds; assuming the relevant moments on $(\delta\!f_{s})_{s}$ are 0 at a given time $t$ and the equivalent moments of the Boltzmann equations are 0 at time $t$, then the time derivatives on the moments on $(\delta\!f_{s})_{s}$ are 0 at time $t$ also.
                 
-                \item  {\bf Kinetic equations:} The Boltzmann equation holds exactly.
+                \item  \emph{Kinetic equations:} The Boltzmann equation holds exactly.
             \end{itemize}
-            Combined therefore, the result holds.
-            \item  We show first that if the 0 moment conditions on the $(\delta\!f_{s})_{s}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at time $t  =  0$, then they hold for all times $t$.
+            Combined therefore, the claim holds.
+
+            \item  {\bf Claim:} If the 0 moment conditions on $(\delta\!f_{s})_{s}$ hold at time $t  =  0$, then they hold $\forall t$.
             
-            \begin{remark}
-                \BA{I want to say this holds from the above statement, but I wouldn't be so naïve; I've done rudimentary uniqueness claims in ODEs of course. Some level of Lipschitz regularity needs to be assumed on the system for this to hold, the exact conditions of which I need to investigate further. Something for the further work section I think!}
+            \begin{remark}[Incompleteness of proof of Conjecture \ref{con:delta f correction moments}]
+                I'm aware the above claim is insufficient to prove the result of the theorem. Take for example the classical counterexample from ODE theory, for $y(x)$,
+                \begin{equation}\label{eqn:Lipschitz discontinuity counter-example}
+                    y'  =  \sqrt[3]{y}.
+                \end{equation}
+                Here, $(y = 0)  \implies  (y'  =  0)$, however ill-posedness derived from the Lipschitz discontinuity of $\sqrt{*}$ mean (\ref{eqn:Lipschitz discontinuity counter-example}) admits a whole class of solutions with the IC $y(0) = 0$ that are non-zero at later t,
+                \begin{equation}
+                    y  =  \left\{\begin{matrix}
+                        0,                                      &  x \leq x_{0}  \\ 
+                        \sqrt{\frac{2}{3}}^{3}(x - x_{0})^{2},  &  x \geq x_{0}
+                    \end{matrix}\right.,
+                \end{equation}
+                for some $x_{0}  \geq  0$. This implies to me that either some Lipschitz regularity result on the $\delta\!f$ model, or simply a rephrasing of the problem, would be sufficient to prove this conjecture, however I haven't managed to get either to work yet. (See Chapter \ref{cha:research plan})
             \end{remark}
         \end{enumerate}
     \end{proof}
 
-    \BA{Why is this lemma important when talking about numerical models too? Primarily important as it means the definition is well-posed!}
+    This result is important with regard to numerical discretization since, as noted above, one derives the fluid model under the assumption that the 0 moment conditions (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $(\delta\!f_{s})_{s}$ corrections hold $\forall t$. Naturally this fails for $t > 0$ in a numerical model. In a pseudo-particle model for example, these 0 moment conditions will never hold true. Conjecture \ref{con:delta f correction moments} however would imply this error is solely due to the numerical approximation, and not down to any fault in the model, and that the fluid equations still hold a theoretical validity even if the moments of $(\delta\!f_{s})_{s}$ have numerically diverged. \BA{(Would be nice to run some tests later after creation of the PiC model, showing that the moments are roughly conserved, in some weak sense.)}
 
     \line
     
