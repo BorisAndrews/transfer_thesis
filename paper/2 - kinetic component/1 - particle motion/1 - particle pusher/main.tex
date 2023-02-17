@@ -1,0 +1,29 @@
+\subsection*{Derivation of the Stochastic Particle Pusher}
+    We derive first the SDEs that a pseudo-particle in a Monte Carlo model of (\ref{eqn:linearized Boltzmann equation simplified}) would have to satisfy.
+
+    Consider a pseudo-particle in either the ion ($+$) or electron ($-$) phase, with position, $\bfX  =  \bfX_{0}$, and velocity, $\bfV  =  \bfV_{0}$, at time $t  =  0$. this has the associated $\delta$-function IC on $\delta\!f_{\pm}$,\footnote{Clearly such a value for $\delta\!f_{\pm}$ could never exist in the true $\delta\!f$ model, due to it not satisfying the moment conditions (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}). This is purely for sake of argument in deriving the pseudo-particle model.}
+    \begin{equation}
+        \delta\!f_{\pm}  =  \delta^{3}[\bfx - \bfX_{0}]\delta^{3}[\bfv - \bfV_{0}]|_{t = 0}.
+    \end{equation}
+    Consider the LHS component of (\ref{eqn:linearized Boltzmann equation simplified}),
+    \begin{equation}\label{eqn:homogeneous linearized Boltzmann equation simplified}
+        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}  =  0.
+    \end{equation}
+    By construction, this PDE is one in $\delta\!f_{\pm}$ \emph{only}, with $\delta\!f_{\mp}$ extracted solely to the RHS (which shall be discounted until discussion of the particle generation algorithm in Section \ref{cha:particle generation}). By the conservation structure of (\ref{eqn:homogeneous linearized Boltzmann equation simplified}), at time $t = \delta t (> 0)$, the solution to (\ref{eqn:homogeneous linearized Boltzmann equation simplified}) under this IC will necessarily satisfy
+    \begin{equation}
+        \left.\int_{\bfx, \bfv}\delta\!f_{\pm}\right|_{t = \delta t}  \left(=  \left.\int_{\bfx, \bfv}\delta\!f_{\pm}\right|_{t = 0}\right)  =  1.
+    \end{equation}
+    Provided further that $\forall \bfx, \bfv$,
+    \begin{equation}\label{eqn:PDF non-negativity condition}
+        \delta\!f_{\pm}|_{t = \delta t}  \geq  0,
+    \end{equation}
+    $\delta\!f_{\pm}|_{t = \delta t}$ can be interpreted as a probability distribution. The pseudo-particle model could theoretically update the position and velocity of this particle at time $t  =  \delta t$ according to a random position and velocity as sampled from $\delta\!f_{\pm}|_{t = \delta t}  \geq  0$. Under a collection of such pseudo-particles, as the quantity goes to $\infty$, one can expect the behavior of these stochastic pseudo-particles to weakly converge in expectation to the solution of the PDE. Ensuring (\ref{eqn:PDF non-negativity condition}) holds will be discussed further in the following subsection.
+
+    Obviously this is no real use yet, as this still requires the solution of a full time-dependent, kinetic PDE, something we are using this Monte Carlo method to avoid. This can be solved by turning this particle pusher to a SDEs in $\bfX$, $\bfV$, by taking the limit as $\delta t  \rightarrow  0_{+}$, at which point the problem of particle pusher construction simply becomes one of the numerical solution of this SDE.
+    
+    Taking $\delta t  \rightarrow  0_{+}$ therefore, the dominant regions of $\delta\!f_{\pm}|_{t = \delta t}$ become more localised around $\bfx  =  \bfX_{0}$, $\bfv  =  \bfV_{0}$. The PDE can then be modeled in such as limit, assuming sufficient regularity \BA{(What regularity? Some \emph{bold} claims here!)}, as approximately uniform in $\bfx$, $\bfv$ and naturally $t$, taking the values it would take around $\bfX_{0}$, $\bfV_{0}$ and $0$; that is to say, as $\delta t  \rightarrow  0_{+}$,
+    \begin{equation}
+        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfV_{0}] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE|_{\bfX_{0}; 0} + \bfV_{0}\wedge\bfB|_{\bfX_{0}; 0})] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}|_{\bfX_{0}, \bfV_{0}; 0}[\delta\!f_{\pm}]  \sim  0.
+    \end{equation}
+    This can be solved by Fourier analysis, as...
+    

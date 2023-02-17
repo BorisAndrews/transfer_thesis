@@ -1,7 +1,6 @@
 \subsection{Fluid Models}\label{cha:fluid models}
     \BA{Little introduction.}
 
-
     \line
 
     \begin{definition}[Fluid model]\label{def:fluid model}
@@ -14,6 +13,12 @@
     \begin{equation*}
         \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}.
     \end{equation*}
+    
+    Using some approximations to the \emph{2}-particle distribution functions, $(f_{ss'})_{ss'}$, as functions of the \emph{1}-particle distribution functions, $(f_{s}, f_{s'})_{ss'}$, suppose from here the collision operators, $(\bfC_{ss'})_{ss'}$, are written as functions of the 1-particle distribution functions,
+    \begin{equation}
+        \bfC_{ss'}[f_{s}, f_{s'}](\bfx, \bfv; t).
+    \end{equation}
+    This quantifies the collision operator model, bringing a solution to the closure problem. Most often, these 2-particle distribution function approximations are defined implicitly through the collision operator approximation.
 
 
     \input{0 - introduction/2 - plasma modeling/3 - fluid models/1 - local collisions/main.tex}
