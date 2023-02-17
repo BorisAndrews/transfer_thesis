@@ -19,11 +19,33 @@
     \end{equation}
     $\delta\!f_{\pm}|_{t = \delta t}$ can be interpreted as a probability distribution. The pseudo-particle model could theoretically update the position and velocity of this particle at time $t  =  \delta t$ according to a random position and velocity as sampled from $\delta\!f_{\pm}|_{t = \delta t}  \geq  0$. Under a collection of such pseudo-particles, as the quantity goes to $\infty$, one can expect the behavior of these stochastic pseudo-particles to weakly converge in expectation to the solution of the PDE. Ensuring (\ref{eqn:PDF non-negativity condition}) holds will be discussed further in the following subsection.
 
-    Obviously this is no real use yet, as this still requires the solution of a full time-dependent, kinetic PDE, something we are using this Monte Carlo method to avoid. This can be solved by turning this particle pusher to a SDEs in $\bfX$, $\bfV$, by taking the limit as $\delta t  \rightarrow  0_{+}$, at which point the problem of particle pusher construction simply becomes one of the numerical solution of this SDE.
+    This is no real use yet however, as the solution of a full time-dependent, kinetic PDE is still required, something we are using this Monte Carlo method to avoid having to do. This can be solved by turning this particle pusher to a SDEs in $\bfX$, $\bfV$, by taking the limit as $\delta t  \rightarrow  0_{+}$, at which point the problem of particle pusher construction simply becomes one of the numerical solution of this SDE.
     
     Taking $\delta t  \rightarrow  0_{+}$ therefore, the dominant regions of $\delta\!f_{\pm}|_{t = \delta t}$ become more localised around $\bfx  =  \bfX_{0}$, $\bfv  =  \bfV_{0}$. The PDE can then be modeled in such as limit, assuming sufficient regularity \BA{(What regularity? Some \emph{bold} claims here!)}, as approximately uniform in $\bfx$, $\bfv$ and naturally $t$, taking the values it would take around $\bfX_{0}$, $\bfV_{0}$ and $0$; that is to say, as $\delta t  \rightarrow  0_{+}$,
     \begin{equation}
-        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfV_{0}] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE|_{\bfX_{0}; 0} + \bfV_{0}\wedge\bfB|_{\bfX_{0}; 0})] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}|_{\bfX_{0}, \bfV_{0}; 0}[\delta\!f_{\pm}]  \sim  0.
+        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfV_{0}] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE_{0} + \bfV_{0}\wedge\bfB_{0})] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}|_{\bfX_{0}, \bfV_{0}; 0}[\delta\!f_{\pm}]  \sim  0,
     \end{equation}
-    This can be solved by Fourier analysis, as...
-    
+    where:
+    \begin{align}
+        \bfE_{0}  :=  \bfE|_{\bfX_{0}; 0},  &&
+        \bfB_{0}  :=  \bfB|_{\bfX_{0}; 0}.
+    \end{align}
+    This can be solved till $t  =  \delta t$ by Fourier analysis in $\bfv  \mapsto  \bfomega$, denoted $\widehat{*}$, as
+    \begin{equation}
+        \delta\!f_{\pm}|_{\delta t}  =  \frac{1}{\sqrt{2\pi}^{3}}\delta^{3}[\bfx - (\bfX_{0} + \delta t\bfV_{0})]\widehat{\exp\left[\delta t\left(\mp\frac{\rme}{\rmm_{\pm}}i\bfomega\cdot(\bfE_{0} + \bfV_{0}\wedge\bfB_{0}) + \frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right)\right]}.
+    \end{equation}
+    Thus, presuming this $\delta\!f_{\pm}|_{\delta t}  \geq  0$, taking a random sample from this distribution, $\bfX$, $\bfV$ are given at $\delta t$ as:
+    \begin{align}
+        \bfX(\delta t)  &=  \bfX_{0} + \delta t\bfV_{0}  \\
+        \bfV(\delta t)  &=  \bfV_{0} \pm \delta t\frac{\rme}{\rmm_{\pm}}(\bfE_{0} + \bfV_{0}\wedge\bfB_{0}) + \delta\bfL_{\pm}\left(\delta t\right)
+    \end{align}
+    where $\delta\bfL_{\pm}(\delta t)$ is a random variable with characteristic function
+    \begin{equation}
+        \exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right],
+    \end{equation}
+    analogous to the impulse received by the particle from intra- and inter-phase collisions. This corresponds to an SDE system of the form:
+    \begin{align}
+        \rmd\bfX  &=  \bfV\rmd t  \\
+        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \rmd\bfL_{\pm}
+    \end{align}
+    where...
