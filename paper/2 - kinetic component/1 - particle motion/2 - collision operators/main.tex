@@ -1,3 +1,54 @@
 \subsection*{Valid Collision Operators Models}
+    As noted in the previous subsection, for this stochastic particle pusher model to be valid, it is required that the non-negativity condition (\ref{eqn:PDF non-negativity condition}) holds. Ultimately, from (\ref{eqn:Levy process characteristic function}) this requires that $\forall \bfx, \bfv, t$ and $\forall \delta t$ sufficiently small,
+    \begin{equation}\label{eqn:linearized collision operator non-negativity}
+        \widehat{\exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right]}  \geq  0.
+    \end{equation}
+    This invokes a validity condition on $\widehat{\calC}_{\pm\pm}$. Recalling the definition of $\widehat{\calC}_{\pm\pm}$ in terms of $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ (\ref{eqn:linearized collision operator}) this in turn invokes a validity condition on the (local) collision operator models, $\bfC_{\pm_{1}\pm_{2}}^{(0)}$.
+    
+    We consider in this subsection examples of such collision operator models that admit a pseudo-particle model for the $\delta\!f_{\pm}$ corrections.
+    
+    \shortline
+
+    Recall, $\bfC_{\pm_{1}\pm_{2}}$ quantifies the collisional effects of the phase indexed by $\pm_{2}$ on the phase indexed by $\pm_{1}$. These collisional effects can be divided into 2 types:
+    \begin{itemize}
+        \item  {\bf Drag effects:} The most natural first component in the collision operator to include is a drag-like force. This can be approximated as
+        \begin{equation}
+            \bfC_{\pm_{1}\pm_{2}}^{(0)}  =  \pm_{1}\pm_{2}\mu_{\pm_{1}\pm_{2}}f_{\pm_{1}}(\bfv - \bfu_{\pm_{2}}) + \cdots,
+        \end{equation}
+        where $\mu_{\pm_{1}\pm_{2}}$ are drag coefficients which shall be presumed constant \BA{(In reality they should probably scale with $\rho_{\pm_{2}}$)}, and $\bfu_{\pm}$ is the mean velocity in the $\pm$ phase,
+        \begin{equation}
+            \bfu_{\pm}  :=  \frac{1}{\rho_{\pm}}\int_{\bfv}f_{\pm}\rmm_{\pm}\bfv.
+        \end{equation}
+
+        These momenta can be written in the form of the conserved moments $\rho_{\rmM}$, $\rho_{\rmC}$ and $\bfp$, alongside $\bfj$, as
+        \begin{equation}
+            \bfu_{\pm}  =  \frac{1}{\rmq_{\mp}\rho_{\rmM} - \rmm_{\mp}\rho_{\rmC}}(q_{\mp}\bfp - \rmm_{\mp}\bfj).
+        \end{equation}
+        Up to leading-order with mass dominance in the ion (+) phase and $\bfj  \sim  \bfj^{(0)}$:
+        \begin{align}
+            \bfu_{+}  &\sim  \frac{1}{\rho_{\rmM}}\bfp,  \\
+            \bfu_{-}  &\sim  \frac{1}{\rme\rho_{\rmM} - \rmm_{+}\rho_{\rmC}}\left(\rme\bfp - \rmm_{+}\bfj^{(0)}\right)
+        \end{align}
+
+        Since $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$ and $\bfj^{(0)}$ are independent of $\delta\!f_{\pm}$, so too are $\bfu_{\pm}$ up to leading order. The linearized collision operators $\widehat{\calC}_{\pm\pm}$ would then take the form:
+        \begin{align}
+            \calC_{\pm\pm}  &\sim  \mu_{\pm\pm}(\bfv - \bfu_{\pm}) + \mu_{\pm\mp}(\bfv - \bfu_{\mp})  \\
+                            &\sim  (\mu_{\pm\pm} + \mu_{\pm\mp})\bfv - (\mu_{\pm\pm}\bfu_{\pm} + \mu_{\pm\mp}\bfu_{\mp})
+        \end{align}
+        These linearized collision operators satisfy the non-negativity condition (\ref{eqn:linearized collision operator non-negativity}) with
+        \begin{equation}
+            \widehat{\exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right]}  \propto  \delta^{3}\left[\bfv + \delta t\frac{\rme^{2}}{\rmm_{\pm}}(\mu_{\pm\pm}\bfu_{\pm} + \mu_{\pm\mp}\bfu_{\mp})\right]
+        \end{equation}
+
+        \item {\bf Collisional effects:}
+    \end{itemize}
+
+    \BA{What do these coefficients need to satisfy to give the 0 moment conditions on }
+
+    \begin{example}[Lénard--Bernstein operators (Should ask Paul Dellar for a reference here.)]
+    \end{example}
+
+    \shortline
+
     \BA{Lénard--Bernstein operator. (Should ask Paul Dellar for a reference here.)}
     
