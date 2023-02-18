@@ -1,54 +1,66 @@
 \subsection*{Valid Collision Operators Models}
-    As noted in the previous subsection, for this stochastic particle pusher model to be valid, it is required that the non-negativity condition (\ref{eqn:PDF non-negativity condition}) holds. Ultimately, from (\ref{eqn:Levy process characteristic function}) this requires that $\forall \bfx, \bfv, t$ and $\forall \delta t$ sufficiently small,
-    \begin{equation}\label{eqn:linearized collision operator non-negativity}
-        \widehat{\exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right]}  \geq  0.
+    For a model for the (local) collision operators $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ to be valid for use in the pseudo-particle model, it must satisfy 2 sets of validity conditions:
+    \begin{enumerate}
+        \item  The first set of validity conditions on $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ are the momentum and energy conservation conditions from Corollary \ref{cor:phase-restricted conservation on local collision operators}. Again, the asymptotic equalities, $sim$, shall be dropped for equalities, $=$.
+
+        \item  The second set of validity conditions on $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ are the non-negativity conditions: $\forall \bfx, \bfv, t$ and $\forall \delta t$ sufficiently small,
+        \begin{equation}\label{eqn:linearized collision operator non-negativity}
+            \widehat{\exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm}\right]}  \geq  0.
+        \end{equation}
+        Since $\widehat{\calC}_{\pm}$ are functions of $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ (\ref{eqn:linearized collision operator}) this is in fact a condition on $\bfC_{\pm_{1}\pm_{2}}^{(0)}$. This is a simplification of the PDF non-negativity condition (\ref{eqn:PDF non-negativity condition}) as noted in the previous subsection, simplified from the final form (\ref{eqn:Levy process characteristic function}).
+    \end{enumerate}
+    
+    We consider in this subsection examples of such collision operator models that satisfy both of these conditions.
+
+    \line
+
+    \begin{definition}[Lénard--Bernstein operators \BA{(Should ask Paul Dellar for a reference here.)}]
+        In the notation of this thesis, Lénard--Bernstein collision operator models $\bfC_{ss'}^{\rm LB}$ are those composed of a drift and a diffusion term,
+        \begin{equation}\label{eqn:Lénard--Bernstein operator}
+            \bfC_{ss'}^{\rm LB}  =  \nu_{ss'}\frac{\rho_{s'}}{\rmm_{s'}}f_{s}(\bfv - \bfu_{s'}) + \nabla_{\bfv}\left[\nu_{ss'}\frac{\rho_{s'}}{\rmm_{s'}}D_{ss'}f_{s}\right],
+        \end{equation}
+        for drift and diffusion constants $\nu_{ss'}$, $D_{ss'}$ respectively, potentially functions of the fluid parameters, where $(\bfu_{s})_{s}$ are the phase-specific velocities,
+        \begin{equation}
+            \bfu_{s}  :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\rmm_{s}\bfv.
+        \end{equation}
+    \end{definition}
+
+    For these to satisfy the first validity condition (Corollary \ref{cor:phase-restricted conservation on local collision operators}) one requires $\forall s, s'$:
+    \begin{align}
+        \nu_{ss'}          =  \nu_{s's},  &&
+        D_{ss'} + D_{s's}  =  3(\theta_{s} + \theta_{s'}) + \|\bfu_{s} - \bfu_{s'}\|^{2},
+    \end{align}
+    where similarly $(\theta_{s})_{s}$ are the phase-specific temperatures,
+    \begin{equation}
+        \theta_{s}  :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\frac{1}{3}\rmm_{s}\|\bfv\|^{2}.
     \end{equation}
-    This invokes a validity condition on $\widehat{\calC}_{\pm\pm}$. Recalling the definition of $\widehat{\calC}_{\pm\pm}$ in terms of $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ (\ref{eqn:linearized collision operator}) this in turn invokes a validity condition on the (local) collision operator models, $\bfC_{\pm_{1}\pm_{2}}^{(0)}$.
     
-    We consider in this subsection examples of such collision operator models that admit a pseudo-particle model for the $\delta\!f_{\pm}$ corrections.
+    Consider then $\calC_{\pm}^{\rm LB}$ in the 2-phase ion--electron $\delta\!f$ model, mapping $(\nu_{+-} = \nu_{-+})  \mapsto  (- \nu_{+-} = - \nu_{-+})$ to match physical intuition. Note first that in the $\delta\!f$ model, these identities can be written up to leading order in terms of the \emph{thermalized} phase-specific velocity and temperature, $(\bfu_{s})_{s}  \mapsto  (\bfu_{s}^{(0)})_{s}$ and $(\theta_{s})_{s}  \mapsto  (\theta_{s}^{(0)})_{s}$, defined akin to the thermalized current density (\ref{eqn:thermalized current density}) with $(f_{s})_{s}  \mapsto  (f_{s}^{(0)})_{s}$ as:
+    \begin{align}
+        \bfu_{s}    :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\rmm_{s}\bfv,  &&
+        \theta_{s}  :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\frac{1}{3}\rmm_{s}\|\bfv\|^{2}.
+    \end{align}
+    The only terms in the Lénard--Bernstein operators (\ref{eqn:Lénard--Bernstein operator}) that are \emph{not} determined by the fluid moments $(\rho_{s})_{s}$, $\bfp$, $p$ up to leading order are then the distribution functions $(f_{s})_{s}$. Thus, when taking the derivatives $\partial\bfC_{\pm_{1}\pm_{2}}^{\rm LB}$ in (\ref{eqn:linearized collision operator}) against $\delta\!f$ corrections with 0 such moments, $\calC_{\pm}^{\rm LB}$ evaluate up to leading-order as simply
+    \begin{equation}
+        \partial\bfC_{\pm_{1}\pm_{2}}^{\rm LB}  \sim  \pm_{1}\pm_{2}\left(\nu_{\pm_{1}\pm_{2}}\frac{\rho_{\pm_{2}}}{\rmm_{\pm_{2}}}\delta\!f_{\pm_{1}}\left(\bfv - \bfu_{\pm_{2}}^{(0)}\right) + \nabla_{\bfv}\left[\nu_{\pm_{1}\pm_{2}}\frac{\rho_{\pm_{2}}}{\rmm_{\pm_{2}}}D_{\pm_{1}\pm_{2}}\delta\!f_{\pm_{1}}\right]\right).
+    \end{equation}
+    $\calC_{\pm}^{\rm LB}$ then evaluate as $\calC_{\pm}^{\rm LB}  =  \partial\bfC_{\pm\pm}^{\rm LB} - \partial\bfC_{\pm\mp}^{\rm LB}$.
     
-    \shortline
+    Presuming $\nu_{\pm_{1}\pm_{2}}$ and $D_{\pm_{1}\pm_{2}}$ are all positive, these satisfy the second set of validity conditions, the non-negativity conditions (\ref{eqn:linearized collision operator non-negativity}). The LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified}) taking a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917} pseudo-particles under the Lénard--Bernstein collision operators moving according to the SDE system up to leading order:
+    \begin{align}
+        \rmd\bfX  &=  \bfV\rmd t  \\
+        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \mu_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW
+    \end{align}
+    where:
+    \begin{align}
+        \mu_{\pm}     &:=  \frac{\rme^{2}}{\rmm_{\pm}}\left(\nu_{\pm\pm}\frac{\rho_{\pm}}{\rmm_{\pm}} + \nu_{\pm\mp}\frac{\rho_{\mp}}{\rmm_{\mp}}\right)  \\
+        \frac{1}{2}\sigma_{\pm}^{2}  &:=  \frac{\rme^{2}}{\rmm_{\pm}}\left(\nu_{\pm\pm}\frac{\rho_{\pm}}{\rmm_{\pm}}D_{\pm\pm} + \nu_{\pm\mp}\frac{\rho_{\mp}}{\rmm_{\mp}}D_{\pm\mp}\right)
+    \end{align}
+    and $\bfW$ is a standard Wiener process, independent for each pseudo-particle.
 
-    Recall, $\bfC_{\pm_{1}\pm_{2}}$ quantifies the collisional effects of the phase indexed by $\pm_{2}$ on the phase indexed by $\pm_{1}$. These collisional effects can be divided into 2 types:
-    \begin{itemize}
-        \item  {\bf Drag effects:} The most natural first component in the collision operator to include is a drag-like force. This can be approximated as
-        \begin{equation}
-            \bfC_{\pm_{1}\pm_{2}}^{(0)}  =  \pm_{1}\pm_{2}\mu_{\pm_{1}\pm_{2}}f_{\pm_{1}}(\bfv - \bfu_{\pm_{2}}) + \cdots,
-        \end{equation}
-        where $\mu_{\pm_{1}\pm_{2}}$ are drag coefficients which shall be presumed constant \BA{(In reality they should probably scale with $\rho_{\pm_{2}}$)}, and $\bfu_{\pm}$ is the mean velocity in the $\pm$ phase,
-        \begin{equation}
-            \bfu_{\pm}  :=  \frac{1}{\rho_{\pm}}\int_{\bfv}f_{\pm}\rmm_{\pm}\bfv.
-        \end{equation}
+    \begin{remark}[Non-local collision operators]
+        I'd love to talk now about non-local collision operators including fractional derivatives as discussed in Section \ref{cha:FEM vs. PiC}, but I just can't get them to work with the energy conservation conditions from Corollary \ref{cor:phase-restricted conservation on local collision operators}. I've got reason to expect them not to do so either, as Lévy flights and Lévy stable distributions with stability parameter $< 2$ have unbounded second moments, which naturally correspond to energy. It's a shame, as I think the high-amplitude jumps would give a much greater physical behavior as discussed earlier, however reconciling that with the energy balance conditions is just a problem for another time I guess!
 
-        These momenta can be written in the form of the conserved moments $\rho_{\rmM}$, $\rho_{\rmC}$ and $\bfp$, alongside $\bfj$, as
-        \begin{equation}
-            \bfu_{\pm}  =  \frac{1}{\rmq_{\mp}\rho_{\rmM} - \rmm_{\mp}\rho_{\rmC}}(q_{\mp}\bfp - \rmm_{\mp}\bfj).
-        \end{equation}
-        Up to leading-order with mass dominance in the ion (+) phase and $\bfj  \sim  \bfj^{(0)}$:
-        \begin{align}
-            \bfu_{+}  &\sim  \frac{1}{\rho_{\rmM}}\bfp,  \\
-            \bfu_{-}  &\sim  \frac{1}{\rme\rho_{\rmM} - \rmm_{+}\rho_{\rmC}}\left(\rme\bfp - \rmm_{+}\bfj^{(0)}\right)
-        \end{align}
-
-        Since $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$ and $\bfj^{(0)}$ are independent of $\delta\!f_{\pm}$, so too are $\bfu_{\pm}$ up to leading order. The linearized collision operators $\widehat{\calC}_{\pm\pm}$ would then take the form:
-        \begin{align}
-            \calC_{\pm\pm}  &\sim  \mu_{\pm\pm}(\bfv - \bfu_{\pm}) + \mu_{\pm\mp}(\bfv - \bfu_{\mp})  \\
-                            &\sim  (\mu_{\pm\pm} + \mu_{\pm\mp})\bfv - (\mu_{\pm\pm}\bfu_{\pm} + \mu_{\pm\mp}\bfu_{\mp})
-        \end{align}
-        These linearized collision operators satisfy the non-negativity condition (\ref{eqn:linearized collision operator non-negativity}) with
-        \begin{equation}
-            \widehat{\exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right]}  \propto  \delta^{3}\left[\bfv + \delta t\frac{\rme^{2}}{\rmm_{\pm}}(\mu_{\pm\pm}\bfu_{\pm} + \mu_{\pm\mp}\bfu_{\mp})\right]
-        \end{equation}
-
-        \item {\bf Collisional effects:}
-    \end{itemize}
-
-    \BA{What do these coefficients need to satisfy to give the 0 moment conditions on }
-
-    \begin{example}[Lénard--Bernstein operators (Should ask Paul Dellar for a reference here.)]
-    \end{example}
-
-    \shortline
-
-    \BA{Lénard--Bernstein operator. (Should ask Paul Dellar for a reference here.)}
+        For the rest of this thesis, I'll just assume the Lénard--Bernstein collision operator model, and leave the consideration of further collision operator models for another time.
+    \end{remark}
     
