@@ -1,12 +1,74 @@
 \subsection*{Gyroaveraged Particle Pusher}
-    We consider now a gyrokinetic expansion for the stochastic particle motion/pusher.
+    We consider now a gyrokinetic expansion for the stochastic particle motion/pusher, beginning first with an overview of classical gyrokinetic theory. For a further exposition and discussion, see \cite{Woods_2006, Freidberg_2008, Chen_2015}.
+
+    Classical gyrokinetic theory considers particles moving according to the system of ODEs from the classical particle model (\ref{eqn:particle motion}--\ref{eqn:particle forcing}):
+    \begin{align}
+        \rmd\bfx  &=  \bfv\rmd t,  \label{eqn:particle motion simplified}  \\
+        \rmd\bfv  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfv\wedge\bfB)\rmd t  \label{eqn:particle forcing simplified}
+    \end{align}
+    Identical to the dominant balance in the Boltzmann equations (\ref{eqn:Boltzmann equation}) under the tokamak-like scales in Subsection \ref{cha:fluid models}:
+    \begin{itemize}
+        \item  (\ref{eqn:particle motion simplified}) is in exact dominant balance.
+        \item  (\ref{eqn:particle forcing simplified}) is dominated by the EM term, $\pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfv\wedge\bfB)\rmd t$, by a factor on the order of approximately $7.5\ldots\times 10^{2}$ in the ion ($+$) phase, and the stronger factor of approximately $1.4\ldots\times 10^{6}$ in the electron ($-$) phase. \BA{(Again, need to check these numbers.)}
+    \end{itemize}
+
+    \begin{definition}[Cyclotron frequency]
+        The ``cyclotron frequency'' $\Omega_{\pm}$ in the ion ($+$) or electron ($+$) phase is defined: 
+        \begin{equation}
+            \Omega_{\pm}  =  \frac{\rme}{\rmm_{\pm}}\overline{\bfB}
+        \end{equation}
+    \end{definition}
+    
+    These equations take a multiscale form between the (comparitively high) convective timescales $\overline{\bfx}/\overline{\bfv}$ and (comparitively low) cyclotron timescales $1/\Omega_{\pm}$. A multiscale analysis \cite{Kevorkin_Cole_2012} can therefore be performed to gain a quantitative description of the particle dynamics on the convective timescales, without having to solve over the smaller cyclotron timescales.
+
+    Define the following parameters for a particle/pseudo-particle, chosen such that they change largely on convective timescales:
+    
+    \begin{definition}[Gyrocenter, energy, and magnetic moment]
+        These are defined as follows:
+        \begin{itemize}
+            \item  Gyrocenter:
+            \begin{equation}
+                \bfx_{\rmg}[\bfx, \bfv; \bfB](t)  :=  \bfx - \delta\bfx_{\rmg}
+            \end{equation}
+            \item  Energy:
+            \begin{equation}
+                E[\bfv](t)  :=  \frac{\rmm_{\pm}}{2}\|\bfv\|^{2}
+            \end{equation}
+            \item  Magnetic moment:
+            \begin{equation}
+                \mu[\bfv; \bfB](t)  :=  \frac{\rmm_{\pm}}{2}\cdot\frac{\|\bfb\wedge\bfv\|^{2}}{B}
+            \end{equation}
+        \end{itemize}
+        where
+        \begin{align}
+            \delta\bfx_{\rmg}[\bfx, \bfv; \bfB](t)  &:=  \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B^{2}}\bfv\wedge\bfB  \\
+                                              \bfb  &:=  \frac{1}{B}\bfB  \\
+                                                 B  &:=  \|\bfB\|
+        \end{align}
+    \end{definition}
+    
+    The multiscale analysis can be simplified by considering the corresponding system in $\bfx_{\rmg}$, $E$, $\mu$ which each change on largely convective timescales:
+    \begin{align}
+           \rmd\bfx_{\rmg}  &=  v_{\parallel}\bfb\rmd t + \frac{1}{B^{2}}(\bfE\wedge\bfB)\rmd t \pm \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\bfv\wedge\rmd\bfb  \\
+                    \rmd E  &=  \pm\rme\bfv\cdot\bfE\rmd t  \\
+                   \rmd\mu  &=  \cdots
+    \end{align}
+
+    \begin{remark}[Further work in deriving magnetic moment SDE]
+        There should of course be a third evolution equation for the magnetic moment, which I know is close to 0. I can't get the maths to work out though from this direction, which is basically essential for what follows when I look at gyroaveraging in the presence of the stochastic collision operator--induced term.
+
+        This is something for further work.
+    \end{remark}
+    
+    ``Gyroaveraging'' can be interpreted as taking the average value of these RHSs over all possible $\bfx$, $\bfv$ with gyrocenter $\bfx_{\rmg}$, energy $E$, and magnetic moment $\mu$.
     
     \BA{Brief overview of classical gyrokinetic theory: Gyrokinetic expansions for classical particle motion/pushers well studied since bla bla bla [Ref, Ref, Ref, ...]. Have a deterministic particle ODE- listed below. High-frequency oscillation motivates multiscale expansion. Energy and moments bla bla bla. Drifts bla bla bla. Such an asymptotic expansion can be done to arbitrary accuracy, giving a complete model for the particle motion to arbitrary accuracy in a pre-determined EM field. Problem however lies in the fact that EM field is \emph{not} pre-determined- particles themselves generate EM fields, and particles themselves move. Thus, particle-on-particle effects occur which are harder to model in the gyrokinetic expansion---analogous to the the nonlinear component of the collision operator---causing a problem for the physical accuracy of full gyrokinetic PiC models for the whole plasma. This is referred to as gyrokinetic turbulence. [Ref, Ref, Ref, ...]}
 
-    \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ don't need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocentres etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
+    \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ don't need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocenters etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
     
     \BA{Particle motion diagrams.}
 
     \BA{Stochastic effects play a similar role to gyrokinetic turbulence.}
 
+    \BA{Remark on what it means to test against a gyroaveraged particle.}
     
