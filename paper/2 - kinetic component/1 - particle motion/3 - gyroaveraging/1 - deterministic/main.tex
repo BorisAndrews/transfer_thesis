@@ -1,0 +1,108 @@
+\subsubsection*{Deterministic (Classical) Gyrokinetic Theory}
+    We begin first with an overview of classical gyrokinetic theory. For a further exposition and discussion, see \cite{Woods_2006, Freidberg_2008, Chen_2015}.
+
+    Classical gyrokinetic theory considers particles moving according to the system of Vlasov equation--like ODEs:
+    \begin{align}
+        \frac{\rmd\bfx}{\rmd t}  &=  \bfv,  \label{eqn:particle motion simplified}  \\
+        \frac{\rmd\bfv}{\rmd t}  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfv\wedge\bfB)  \label{eqn:particle forcing simplified}
+    \end{align}
+    These equations are \emph{similar} to (\ref{eqn:particle motion}--\ref{eqn:particle forcing}) from the classical particle model, expect with a background EM field that is, for now, presumed independent of the particles.
+    
+    Identical to the dominant balance in the Boltzmann equations (\ref{eqn:Boltzmann equation}) under the tokamak-like scales in Subsection \ref{cha:fluid models}:
+    \begin{itemize}
+        \item  (\ref{eqn:particle motion simplified}) is in exact dominant balance.
+        \item  (\ref{eqn:particle forcing simplified}) is dominated by the EM term, $\pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfv\wedge\bfB)$, by a factor on the order of approximately $7.5\ldots\times 10^{2}$ in the ion ($+$) phase, and the stronger factor of approximately $1.4\ldots\times 10^{6}$ in the electron ($-$) phase. \BA{(Again, need to check these numbers.)}
+    \end{itemize}
+
+    \begin{definition}[Cyclotron frequency]
+        The ``cyclotron frequency'' $\Omega_{\pm}$ in the ion ($+$) or electron ($+$) phase is defined: 
+        \begin{equation}
+            \Omega_{\pm}  =  \frac{\rme}{\rmm_{\pm}}\overline{\bfB}
+        \end{equation}
+    \end{definition}
+    
+    These equations take a multiscale form between the (comparitively high) convective timescales $\overline{\bfx}/\overline{\bfv}$ and (comparitively low) cyclotron timescales $1/\Omega_{\pm}$. A multiscale analysis \cite{Kevorkin_Cole_2012} can therefore be performed to gain a quantitative description of the particle dynamics on the convective timescales, in particular for the electron ($-$) phase, without having to solve over the smaller cyclotron timescales.
+
+    \line
+
+    \paragraph*{Notation}
+    
+    For magnetic field strength $B  :=  \|\bfB\|$, denote first the total, $v$, parallel, $v_{\parallel}$, and perpendicular, $v_{\perp}$, particle speeds:
+    \begin{align}
+                    v  :=  \|\bfv\|,   &&
+        v_{\parallel}  :=  \frac{1}{B}\bfB\cdot\bfv,  &&
+            v_{\perp}  :=  \frac{1}{B}\|\bfB\wedge\bfv\|.
+    \end{align}
+    Define then the parallel, $\bfb_{\parallel}$, and perpendicular, $\bfb_{\perp}$, magnetic field directions:
+    \begin{align}
+        \bfb_{\parallel}  :=  \frac{1}{B}\bfB,  &&
+            \bfb_{\perp}  :=  - \frac{1}{B^{2}}\left(\frac{1}{v_{\perp}}\bfv\wedge\bfB\right)\wedge\bfB,
+    \end{align}
+    such that the velocity, $\bfv$, can be decomposed as $\bfv  =  v_{\parallel}\bfb_{\parallel} + v_{\perp}\bfb_{\perp}$. This decomposition splits $\bfv$ into 3 terms that change largely on largely convective timescales, $v_{\parallel}$, $v_{\perp}$, $\bfb_{\parallel}$, and 1 that oscillates largely on cyclotron timescales, $\bfb_{\perp}$, with $\bfb_{\parallel}\cdot\bfb_{\perp}  =  0$.
+
+    Define then the following parameters for a particle/pseudo-particle, chosen also such that they change largely on convective timescales:
+
+    \begin{definition}[Gyrocenter, energy, and magnetic moment]
+        These are defined as follows:
+        \begin{itemize}
+            \item  Gyrocenter:
+            \begin{equation}
+                \bfx_{\rmg}[\bfx, \bfv; \bfB](t)  :=  \bfx - \delta\bfx_{\rmg},
+            \end{equation}
+            where
+            \begin{equation}
+                \delta\bfx_{\rmg}[\bfx, \bfv; \bfB](t)  :=  \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B^{2}}\bfv\wedge\bfB.
+            \end{equation}
+            \item  Energy:
+            \begin{equation}
+                E[\bfv](t)  :=  \frac{\rmm_{\pm}}{2}v^{2}.
+            \end{equation}
+            \item  Magnetic moment:
+            \begin{equation}
+                \mu[\bfv; \bfB](t)  :=  \frac{\rmm_{\pm}}{2}\cdot\frac{v_{\perp}^{2}}{B}.
+            \end{equation}
+        \end{itemize}
+    \end{definition}
+    
+    \line
+
+    The multiscale analysis can be simplified by considering the corresponding system in $\bfx_{\rmg}$, $E$, $\mu$ which each changing on largely convective timescales:
+    \begin{align}
+        \frac{\rmd\bfx_{\rmg}}{\rmd t}  &=  v_{\parallel}\bfb_{\parallel} + \frac{1}{B^{2}}\bfE\wedge\bfB \pm \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\bfv\wedge\rmd\bfb_{\parallel}  \label{eqn:gyrocenter equation}  \\
+                 \frac{\rmd E}{\rmd t}  &=  \pm\rme\bfv\cdot\bfE  \\
+        \begin{split}
+                \frac{\rmd\mu}{\rmd t}  &=  - \frac{\rmm_{\pm}}{2B^{2}}\left(v_{\parallel}\nabla\bfB:\left(v_{\parallel}v_{\perp}\left(\bfb_{\parallel}^{\otimes 2} + 2\bfb_{\perp}^{\otimes 2}\right) + \left(2v_{\parallel}^{2}\bfb_{\perp}\otimes\bfb_{\parallel} + v_{\perp}^{2}\bfb_{\parallel}\otimes\bfb_{\perp}\right)\right)\right.  \\
+                             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.v_{\perp}\left((v_{\perp}\bfb_{\parallel} + 2v_{\parallel}\bfb_{\perp})\cdot\nabla\wedge\bfE \mp 2\frac{\rme}{\rmm_{\pm}}B\bfb_{\perp}\cdot\bfE\right)\right)  \label{eqn:magnetic moment equation}
+        \end{split}
+    \end{align}
+    
+    ``Gyroaveraging'' can be interpreted as taking the average of these RHS's over one cycle around the gyrocenter, over an interval of duration $2\pi/\Omega_{\pm}$. This eliminates any cyclotron frequency oscillations, such as those in $\bfb_{\perp}$. These equations then state, up to leading order through gyroaveraging:
+    \begin{align}
+      \frac{\rmd\bfx_{\rmg}}{\rmd t}  &\sim  \frac{v_{\parallel}}{B}\bfB + \frac{1}{B^{2}}\bfE\wedge\bfB \pm \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\bfv\wedge\rmd\bfb_{\parallel}  \label{eqn:gyroaveraged gyrocenter equation}  \\
+               \frac{\rmd E}{\rmd t}  &\sim  \pm\rme\frac{v_{\parallel}}{B}\bfE\cdot\bfB  \\
+              \frac{\rmd\mu}{\rmd t}  &\sim  - \frac{\rmm_{\pm}}{2}\cdot\frac{v_{\perp}}{B^{3}}(\nabla\wedge\bfE)\cdot\bfB  \label{eqn:gyroaveraged magnetic moment equation}
+    \end{align}
+    where $\bfE$, $\bfB$ are evaluated at the gyrocenter, $\bfx_{\rmg}$. \BA{(Need to fix that $\rmd\bfb_{\parallel}$ term.)} Terms following $v_{\parallel}/B\cdot\bfB$ in the gyrocenter evolution equation (\ref{eqn:gyrocenter equation}) are referred to as gyrocenter drifts. \cite{Woods_2006, Freidberg_2008, Chen_2015} This can be made into a closed system in $\bfx_{\rmg}$, $E$, $\mu$ by:
+    \begin{itemize}
+        \item  Defining $v_{\parallel}$ as
+        \begin{equation}
+            v_{\parallel}  =  \pm \sqrt{\frac{2}{\rmm_{\pm}}(E - B\mu)},
+        \end{equation}
+        with the sign of the square root switching whenever $E  =  B\mu$ as gyrocenters oscillate along the magnetic field lines. \cite{Freidberg_2008}
+        \item  Defining $v_{\perp}$ as
+        \begin{equation}
+            v_{\perp}  =  \sqrt{\frac{2}{\rmm_{\pm}}B\mu}.
+        \end{equation}
+    \end{itemize}
+
+    \line
+
+    The gyrokinetic expansion presented here is up to leading order. Such an expansion can be extended to arbitrary order however to an accurate picture of the particle dynamics up to arbitrary accuracy.
+
+    The problem with the classical gyrokinetic expansion stems from the false assumption---as noted above---that these background EM fields are independent of those EM fields generated by the particles. Thus, prominent particle-on-particle, collisional effects are not present in the gyrokinetic model as presented above. This is analogous to discarding the nonlinear collision operators, as in the Vlasov equations. A fundamental limit is therefore posed on the potential accuracy of these gyrokinetic models for a full PiC simulation.
+
+    Restricting particle models to the $\delta\!f_{\pm}$ corrections in the $\delta\!f$ model begins to circumvent this issue, with the introduction of the stochastic operators from the linearized collision operators.
+        
+    \BA{Particle motion diagrams.}
+
+    \BA{Remark on what it means to test against a gyroaveraged particle.}

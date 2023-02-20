@@ -1,0 +1,32 @@
+\subsubsection*{Stochastic Gyrokinetic Theory}
+    As detailed subsection \ref{cha:particle pusher} the linearized collision operators introduce stochastic terms into equations of motion for the particle pusher:
+    \begin{align}
+        \rmd\bfX  =  \bfV\rmd t,  &&
+        \rmd\bfV  =  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \rmd\bfL_{\pm}.
+    \end{align}
+    With the nonlinear collision operator no longer present and pseudo-particle dynamics fully decoupled ``via'' the fluid layer, one need no longer worry about those particle-on-particle effects that are missing from the classical gyrokinetic model. These effects are instead captured in the stochastic motion from the linearized collision operator. One must therefore modify the classical, deterministic gyrokinetic model equations (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) to a new stochastic form.
+
+    Consider from here the Lénard--Bernstein collision operator model from subsection \ref{cha:collision operators}, wherein the stochastic terms $\rmd\bfL_{\pm}$ take the form $\rmd\bfL_{\pm}  =  \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW$.
+    
+    Decomposing $\bfu$, $\bfW$ into components parallel and perpendicular to the magnetic field, write:
+    \begin{align}
+        \bfu  =  u_{\parallel}\bfb_{\parallel} + u_{\perp}\bfb_{\perp} + u_{\parallel\perp}\bfb_{\parallel\perp},  &&
+        \rmd\bfW  =  \rmd W_{\parallel}\bfb_{\parallel} + \rmd W_{\perp}\bfb_{\perp} + \rmd W_{\parallel\perp}\bfb_{\parallel\perp},
+    \end{align}
+    where $\bfb_{\parallel\perp}  :=  \bfb_{\parallel}\wedge\bfb_{\perp}$, and $W_{\parallel}$, $W_{\perp}$, $W_{\parallel\perp}$ are independent Wiener processes. By Itô's lemma \cite{Le-Gall_2016} the classical gyrokinetic equations \emph{before} gyroaveraging (\ref{eqn:gyrocenter equation}--\ref{eqn:magnetic moment equation}) then take the classical deterministic forms as above, with the addition of the following collision operator--induced terms:
+    \begin{align}
+        \rmd\bfx_{\rmg}  &=  \left\{\cdots\tall\right\}\rmd t \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}(\lambda_{\pm}(\bfu\wedge\bfb_{\parallel} + V_{\perp}\bfb_{\parallel\perp})\rmd t + \sigma_{\pm}(\rmd W_{\parallel\perp}\bfb_{\perp} - \rmd W_{\perp}\bfb_{\parallel\perp}))   \\
+                 \rmd E  &=  \left\{\cdots\tall\right\}\rmd t + \lambda_{\pm}(m_{\pm}(u_{\parallel}V_{\parallel} + u_{\perp}V_{\perp}) - 2E)\rmd t + \frac{3\rmm_{\pm}}{2}\sigma_{\pm}^{2}\rmd t + \rmm_{\pm}\bfV\cdot\rmd\bfW  \\
+                \rmd\mu  &=  \left\{\cdots\tall\right\}\rmd t \pm \rme\frac{V_{\perp}}{B}(\mu_{\pm}(u_{\perp} - V_{\perp})\rmd t + \sigma_{\pm}\rmd W_{\perp})
+    \end{align}
+    Again, after gyroaveraging, this SDE system modifies the gyrokinetic equations \emph{after} gyroaveraging (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) then similarly take the classical deterministic forms as above, with the addition of the following collision operator--induced terms
+    \begin{align}
+        \rmd\bfx_{\rmg}  &=  \left\{\cdots\tall\right\}\rmd t \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\left(\frac{\lambda_{\pm}}{B}\bfu\wedge\bfB\rmd t + \sigma_{\pm}\left(\sfI - \frac{1}{B^{2}}\bfB^{\otimes 2}\right)\rmd\widetilde{\bfW}\right)   \\
+                 \rmd E  &=  \left\{\cdots\tall\right\}\rmd t + \lambda_{\pm}(m_{\pm}u_{\parallel}V_{\parallel} - 2E)\rmd t + \frac{3\rmm_{\pm}}{2}\sigma_{\pm}^{2}\rmd t + \rmm_{\pm}(V_{\parallel}\rmd W_{\parallel} + V_{\perp}\rmd W_{\perp})  \\
+                \rmd\mu  &=  \left\{\cdots\tall\right\}\rmd t \pm \rme\left(- \frac{2}{\rmm_{\pm}}\lambda_{\pm}\mu\rmd t + \frac{\sigma_{\pm}V_{\perp}}{B}dW_{\perp}\right)
+    \end{align}
+    where similarly $\bfu$, $\lambda_{\pm}$, $\sigma_{\pm}$ are evaluated at the gyrocenter, $\bfx_{\rmg}$, and $\widetilde{\bfW}$ is a distinct Wiener process, independent of $\bfW$. \BA{(Proof of independence? Definitions of $V_{\parallel}$, $V_{\perp}$?)}
+
+    \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ don't need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocenters etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
+        
+    \BA{Particle motion diagrams.}

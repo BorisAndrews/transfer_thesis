@@ -1,4 +1,4 @@
-\subsection*{Valid Collision Operators Models}
+\subsection{Valid Collision Operators Models}\label{cha:collision operators}
     For a model for the (local) collision operators $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ to be valid for use in the pseudo-particle model, it must satisfy 2 sets of validity conditions:
     \begin{enumerate}
         \item  The first set of validity conditions on $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ are the momentum and energy conservation conditions from Corollary \ref{cor:phase-restricted conservation on local collision operators}. Again, the asymptotic equalities, $sim$, shall be dropped for equalities, $=$.
@@ -46,14 +46,14 @@
     \end{equation}
     $\calC_{\pm}^{\rm LB}$ then evaluate as $\calC_{\pm}^{\rm LB}  =  \partial\bfC_{\pm\pm}^{\rm LB} - \partial\bfC_{\pm\mp}^{\rm LB}$.
     
-    Presuming $\nu_{\pm_{1}\pm_{2}}$ and $D_{\pm_{1}\pm_{2}}$ are all positive, these satisfy the second set of validity conditions, the non-negativity conditions (\ref{eqn:linearized collision operator non-negativity}). The LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified}) taking a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917} pseudo-particles under the Lénard--Bernstein collision operators moving according to the SDE system up to leading order:
+    Presuming $\nu_{\pm_{1}\pm_{2}}$ and $D_{\pm_{1}\pm_{2}}$ are all positive, these satisfy the second set of validity conditions, the non-negativity conditions (\ref{eqn:linearized collision operator non-negativity}). With the LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified}) taking a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917}, pseudo-particles under the Lénard--Bernstein collision operators move up to leading order according to the Ornstein--Uhlenbeck-like \cite{Gardiner_1985, Karatzas_Shreve_1991, Gard_1998} SDE system:
     \begin{align}
         \rmd\bfX  &=  \bfV\rmd t  \\
-        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \mu_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW
+        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW
     \end{align}
     where:
     \begin{align}
-        \mu_{\pm}     &:=  \frac{\rme^{2}}{\rmm_{\pm}}\left(\nu_{\pm\pm}\frac{\rho_{\pm}}{\rmm_{\pm}} + \nu_{\pm\mp}\frac{\rho_{\mp}}{\rmm_{\mp}}\right)  \\
+        \lambda_{\pm}                &:=  \frac{\rme^{2}}{\rmm_{\pm}}\left(\nu_{\pm\pm}\frac{\rho_{\pm}}{\rmm_{\pm}} + \nu_{\pm\mp}\frac{\rho_{\mp}}{\rmm_{\mp}}\right)  \\
         \frac{1}{2}\sigma_{\pm}^{2}  &:=  \frac{\rme^{2}}{\rmm_{\pm}}\left(\nu_{\pm\pm}\frac{\rho_{\pm}}{\rmm_{\pm}}D_{\pm\pm} + \nu_{\pm\mp}\frac{\rho_{\mp}}{\rmm_{\mp}}D_{\pm\mp}\right)
     \end{align}
     and $\bfW$ is a standard Wiener process, independent for each pseudo-particle.

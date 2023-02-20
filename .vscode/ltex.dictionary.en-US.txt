@@ -13,3 +13,12 @@ discretizations
 non-determinstic
 inhomogeneously
 ill-posedness
+gyrocenter
+Gyroaveraging
+gyrokinetic
+Gyrokinetic
+gyrocenters
+collisional
+gyroaveraged
+Itô
+Vlasov
