@@ -22,10 +22,15 @@
     Again, after gyroaveraging, this SDE system modifies the gyrokinetic equations \emph{after} gyroaveraging (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) then similarly take the classical deterministic forms as above, with the addition of the following collision operator--induced terms
     \begin{align}
         \rmd\bfx_{\rmg}  &=  \left\{\cdots\tall\right\}\rmd t \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\left(\frac{\lambda_{\pm}}{B}\bfu\wedge\bfB\rmd t + \sigma_{\pm}\left(\sfI - \frac{1}{B^{2}}\bfB^{\otimes 2}\right)\rmd\widetilde{\bfW}\right)   \\
-                 \rmd E  &=  \left\{\cdots\tall\right\}\rmd t + \lambda_{\pm}(m_{\pm}u_{\parallel}V_{\parallel} - 2E)\rmd t + \frac{3\rmm_{\pm}}{2}\sigma_{\pm}^{2}\rmd t + \rmm_{\pm}(V_{\parallel}\rmd W_{\parallel} + V_{\perp}\rmd W_{\perp})  \\
-                \rmd\mu  &=  \left\{\cdots\tall\right\}\rmd t \pm \rme\left(- \frac{2}{\rmm_{\pm}}\lambda_{\pm}\mu\rmd t + \frac{\sigma_{\pm}V_{\perp}}{B}dW_{\perp}\right)
+                 \rmd E  &=  \left\{\cdots\tall\right\}\rmd t + \left(\lambda_{\pm}(m_{\pm}u_{\parallel}V_{\parallel} - 2E) + \frac{3\rmm_{\pm}}{2}\sigma_{\pm}^{2}\right)\rmd t + \rmm_{\pm}(V_{\parallel}\rmd W_{\parallel} + V_{\perp}\rmd W_{\perp})  \\
+                \rmd\mu  &=  \left\{\cdots\tall\right\}\rmd t - 2\lambda_{\pm}\mu\rmd t + \rmm_{\pm}\frac{\sigma_{\pm}V_{\perp}}{B}dW_{\perp}
     \end{align}
-    where similarly $\bfu$, $\lambda_{\pm}$, $\sigma_{\pm}$ are evaluated at the gyrocenter, $\bfx_{\rmg}$, and $\widetilde{\bfW}$ is a distinct Wiener process, independent of $\bfW$. \BA{(Proof of independence? Definitions of $V_{\parallel}$, $V_{\perp}$?)}
+    where similarly:
+    \begin{itemize}
+        \item  $\bfu$, $\lambda_{\pm}$, $\sigma_{\pm}$ are evaluated at the gyrocenter, $\bfx_{\rmg}$
+        \item  $V_{\parallel}$, $V_{\perp}$ are defined analogously to $v_{\parallel}$, $v_{\perp}$
+    \end{itemize}
+    and $\widetilde{\bfW}$ is a distinct Wiener process, independent of $\bfW$. \BA{(Proof of independence?)}
 
     \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ don't need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocenters etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
         
