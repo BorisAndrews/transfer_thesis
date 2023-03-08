@@ -1,0 +1,33 @@
+delta_t = 0.01*2*pi;
+omega = 1;
+duration = 3*2*pi;
+
+timesteps = round(duration/delta_t);
+Xs = zeros(2, timesteps + 1);
+Xs(:, 1) = [0, 1]';
+rot = [
+    [0,   1];
+    [- 1, 0];
+    ];
+for timestep = 1:timesteps
+    %Xs(:, timestep + 1) = (eye(2) + delta_t*omega*rot)*Xs(:, timestep);  %Explicit Euler
+    %Xs(:, timestep + 1) = (eye(2) - delta_t*omega*rot)\Xs(:, timestep);  %Implicit Euler
+    Xs(:, timestep + 1) = (eye(2) - 1/2*delta_t*omega*rot)\(eye(2) + 1/2*delta_t*omega*rot)*Xs(:, timestep);  %Implicit midpoint
+end
+Ts = linspace(0, 2*pi, 10001);
+Xs_end = Xs(:, timesteps + 1);
+
+clf
+hold on
+plot(cos(Ts),                       sin(Ts),                       'b--', 'LineWidth', 2)
+plot(Xs(1, :),                      Xs(2, :),                      'k',   'LineWidth', 2)
+plot(0,                             1,                             'ko',  'LineWidth', 3, 'MarkerSize', 10)
+plot(Xs_end(1) + [- 0.1, 0, - 0.1], Xs_end(2) + [- 0.05, 0, 0.05], 'k',   'LineWidth', 2)
+hold off
+
+axis equal
+axis off
+xlim([- 2, 2])
+ylim([- 2, 2])
+
+
