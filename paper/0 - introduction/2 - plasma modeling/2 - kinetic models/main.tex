@@ -1,6 +1,4 @@
 \subsection{Kinetic Models}
-    \BA{Little introduction.}
-
     \line
 
     \begin{definition}[Kinetic model]\label{def:kinetic model}
@@ -43,17 +41,19 @@
         \label{fig:kinetic model construction workflow}
     \end{figure}
 
-    Since this is entirely linear, Maxwell's equations---themselves linear---carry over identically:
+    \shortline
+
+    \paragraph*{Maxwell's Equations} Since this process is entirely linear, Maxwell's equations---themselves linear---carry over identically:
     \begin{align}
-        \partial_{t}\widetilde{\bfE}  &=  \rmc^{2}\nabla\wedge\widetilde{\bfB} - \frac{1}{\varepsilon_{0}}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f_{s}}\bfv,  &
-        \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE},  \label{eqn:Maxwell's equations transient}  \\
-        \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f_{s}},  &
-        \nabla\cdot\widetilde{\bfB}  &=  0.  \label{eqn:Maxwell's equations steady-state}
+        \frac{1}{\rmc^{2}}\partial_{t}\widetilde{\bfE}  &=  \nabla\wedge\widetilde{\bfB} - \mu_{0}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f_{s}}\bfv,  &
+        \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE},  \\
+        \frac{1}{\rmc^{2}}\nabla\cdot\widetilde{\bfE}  &=  \mu_{0}\sum_{s}\rmq_{s}\int_{\bfv}\widetilde{f_{s}},  &
+        \nabla\cdot\widetilde{\bfB}  &=  0.
     \end{align}
     where:
     \begin{itemize}
-        \item  $\rmc$ is the speed of light (in a vaccum), $\rmc  \approx  2.997\ldots\times 10^{8}\rmm\rms^{- 1}$.
-        \item  $\varepsilon_{0}$ is the permittivity of free space, $\varepsilon_{0}  \approx  8.854\ldots\times 10^{- 12}{\rm kg}\rmT^{- 2}\rmm^{- 3}$.
+        \item  $\rmc$ is the speed of light (in a vacuum), $\rmc  \approx  2.997\ldots\times 10^{8}\rmm\rms^{- 1}$.
+        \item  $\mu_{0}$ is the vacuum permeability, $\mu{0}  \approx  1.257\ldots\times 10^{- 6}\rmT^{2}\rms^{2}\rmm^{1}{\rm kg}^{- 1}$.
     \end{itemize}
     \BA{I should probably initially define Maxwell's equations in the previous particle models subsection, instead of first here.}
 
@@ -62,20 +62,22 @@
         \widetilde{\rho}_{\rmC}  :=  \int_{\bfv}\widetilde{f_{s}}\rmq_{s},  &&
                \widetilde{\bfj}  :=  \int_{\bfv}\widetilde{f_{s}}\rmq_{s}\bfv,
     \end{align}
-    the inhomogeneous equations can be written in the compact forms:
-    \begin{align*}
-        \partial_{t}\widetilde{\bfE}  &=  \rmc^{2}\nabla\wedge\widetilde{\bfB} - \frac{1}{\varepsilon_{0}}\widetilde{\bfj},  \\
-        \nabla\cdot\widetilde{\bfE}  &=  \frac{1}{\varepsilon_{0}}\widetilde{\rho}_{\rmC}.
-    \end{align*}
+    these can be written in the compact forms:
+    \begin{align}
+        \frac{1}{\rmc^{2}}\partial_{t}\widetilde{\bfE}  &=  \nabla\wedge\widetilde{\bfB} - \mu_{0}\widetilde{\bfj},  &
+        \partial_{t}\widetilde{\bfB}  &=  - \nabla\wedge\widetilde{\bfE},  \label{eqn:Maxwell's equations transient}  \\
+        \frac{1}{\rmc^{2}}\nabla\cdot\widetilde{\bfE}  &=  \mu_{0}\widetilde{\rho}_{\rmC},  &
+        \nabla\cdot\widetilde{\bfB}  &=  0.  \label{eqn:Maxwell's equations steady-state}
+    \end{align}
     
-    The evolution equations for $(f_{s})_{s}$ or $(\widetilde{f_{s}})_{s}$ are not so simple however, due to their non-linearity. When applying this technique we derive the ``\emph{Boltzmann equation}'', \BA{[Ref]}
+    \paragraph*{Boltzmann Equations} The evolution equations for $(f_{s})_{s}$ or $(\widetilde{f_{s}})_{s}$ are not as simple, due to their non-linearity. When applying this technique one derives the ``\emph{Boltzmann equations}'', \BA{[Ref]}
     \begin{equation}\label{eqn:Boltzmann equation}
-        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =   \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}
+        \partial_{t}\widetilde{f_{s}} + \nabla_{\bfx}\cdot\left[\widetilde{f_{s}}\bfv\right] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot\left[\widetilde{f_{s}}\left(\widetilde{\bfE} + \bfv\wedge\widetilde{\bfB}\right)\right]  =   \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\nabla_{\bfv}\cdot\bfC_{ss'},
     \end{equation}
     where the collision terms $(\bfC_{ss'})_{ss'}$ are terms characterising the Coulomb collisions, defined as
     \begin{multline}\label{eqn:collision operator}
         \bfC_{ss'}\left[\widetilde{f_{s}}, \widetilde{f_{s'}}; \widetilde{f_{s}f_{s'}}\right](\bfx, \bfv; t)  :=  \int_{\bfx' \neq \bfx, \bfv'; t'}\left(\widetilde{f_{s}}(\bfx, \bfv; t)\widetilde{f_{s'}}(\bfx', \bfv'; t') - \widetilde{f_{s}f_{s'}}[(\bfx, \bfv; t), (\bfx', \bfv'; t')]\right)  \\
-        [\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t) + \bfv\wedge\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)]
+        [\bfk_{\bfE}(\bfx' - \bfx, \bfv'; t' - t) + \bfv\wedge\bfk_{\bfB}(\bfx' - \bfx, \bfv'; t' - t)],
     \end{multline}
     where in turn:
     \begin{itemize}
@@ -93,7 +95,9 @@
 
     Obviously this system is not closed, as it in turn is dependent on $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$; this is referred to as the ``\emph{closure problem}''. Different approximations to $\left(\widetilde{f_{s_{1}}f_{s_{2}}}\right)_{s_{1}s_{2}}$ lead to different collisional forces and collision operators in the Boltzmann equation.
 
-    From here, we shall drop the tildes $\widetilde{*}$ on $\widetilde{f_{s}}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$, $\widetilde{\rho}_{\rmC}$, $\widetilde{\bfj}$, as we shall not be returning to the particle model.
+    \shortline
+
+    From here, we shall drop the tildes $\widetilde{*}$ on $\widetilde{f_{s}}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$, $\widetilde{\rho}_{\rmC}$, $\widetilde{\bfj}$, as we shall not be returning to the particle model. Together this system can be refered to as the Boltzmann--Maxwell system.
 
     \line
     
@@ -122,4 +126,9 @@
         \end{equation}
         however this result holds necessarily for all $(\bfC_{ss'})_{ss'}$.
     \end{remark}
+
+    \line
+
+
+    \input{0 - introduction/2 - plasma modeling/2 - kinetic models/1 - non-dimensionalization/main.tex}
     

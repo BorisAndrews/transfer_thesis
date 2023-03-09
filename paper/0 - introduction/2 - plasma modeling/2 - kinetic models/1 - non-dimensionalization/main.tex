@@ -1,0 +1,82 @@
+\subsubsection{Non-Dimensionalization}
+    Consider now a non-dimensionalization of Maxwell's equation (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) and the Boltzmann equations (\ref{eqn:Boltzmann equation}).
+    
+    By the problem specification, the physical constants:
+    \begin{align}
+        (\rmq_{s})_{s},  &&
+        (\rmm_{s})_{s},
+    \end{align}
+    are given by the parameters in the constituent phases. Further denoting an estimate for the general scale of a variable, $*$, with an overbar, $\overline{*}$, the following quantities are given too by the problem specification within the tokamak:
+    \begin{align}
+        \overline{t},                       &&
+        \overline{\bfx},                    &&
+        \overline{\bfv},                    &&
+        \left(\overline{n}_{s}\right)_{s},  &&
+        \overline{\bfB},
+    \end{align}
+    where $n_{s}$ denote the particle density of phase $s$, $n_{s}  :=  \int_{\bfv}f_{s}$. From this definition,
+    \begin{equation}
+        \overline{f}_{s}  :=  \frac{\overline{n}_{s}}{\overline{\bfv}^{3}}.
+    \end{equation}
+    Define also:
+    \begin{itemize}
+        \item  The cyclotron frequency in phase $s$,
+        \begin{equation}
+            \Omega_{s}  :=  \frac{\rmq_{s}}{\rmm_{s}}\cdot\overline{\bfB}.
+        \end{equation}
+        \item  The (effective) mean free for particles in phase $s$, between particles in phase $s'$
+        \begin{equation}
+            \lambda_{ss'}  :=  \frac{\rmm_{s}}{\rmq_{s}\rmq_{s'}}\cdot\frac{\overline{n}_{s}}{\overline{\bfv}\overline{\bfC}_{ss'}}.
+        \end{equation}
+    \end{itemize}
+
+    These invoke the dimensionless quantities in Figure \ref{fig:kinetic dimensionless quantities}.
+
+    \begin{figure}
+        \centering
+        \begin{tabular}{ c c c c }
+            Name  &  Symbol  &  Value  &  Ratio  \\
+            \hline\hline
+            (Light) Mach number  &  $\rmM$  &  $\overline{\bfv}/\rmc$  &  (Particle : Light) speed  \\
+            Strouhal number  &  $\rmSt$  &  $\overline{\bfx}/\overline{t}\overline{\bfv}$  &  (Reference : Kinetic) frequency  \\
+            Cyclotron number(s)  &  $\rmCy_{s}$  &  $\Omega_{s}\overline{t}$  &  (Cyclotron : Reference) frequency  \\
+            Knudsen number(s)  &  $\rmKn_{ss'}$  &  $\overline{\bfx}/\lambda_{ss'}$  &  (Reference : Mean free path) length
+        \end{tabular}
+        \caption{Dimensionless quantities in the Boltzmann--Maxwell system.}
+        \label{fig:kinetic dimensionless quantities}
+    \end{figure} 
+
+    \shortline
+
+    \paragraph*{Maxwell's equation (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state})} We suppose $\overline{\bfB}$ \emph{is} given by the problem specification while $\overline{\bfE}$ is \emph{not}, as the driving electromagnetic field within a tokamak is typically a magnetic field only, with the electric field induced internally through Maxwell's equations. As the magnetic field, $\bfB$, varies during a simulation, the electric field must change to balance this varying magnetic field in Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$, such that the electric field scale, $\overline{\bfE}$, is given as
+    \begin{equation}
+        \overline{\bfE}  =  \rmSt\overline{\bfv}\overline{\bfB}.
+    \end{equation}
+    As such, up to variation in $\rmSt$, the electric and magnetic Lorentz forces are comparable in magnitude.
+
+    Similarly, according to Ampère's law, $\frac{1}{\rmc^{2}}\partial_{t}\bfE  =  \nabla\wedge\bfB - \mu_{0}\bfj$, the curl in the applied magnetic field, $\nabla\wedge\bfB$, must be balanced by the induced current density, $\bfj$. Thus the current density scale, $\overline{\bfj}$, is given as
+    \begin{equation}
+        \overline{\bfj}  =  \frac{1}{\mu_{0}}\cdot\frac{\overline{\bfB}}{\overline{\bfx}}.
+    \end{equation}
+
+    Finally, according to Gauss's law, $\frac{1}{\rmc^{2}}\nabla\cdot\bfE  =  \mu_{0}\rho_{\rmC}$, the divergence in the induced electric field, $\nabla\cdot\bfE$, must be balanced by the induced charge density, $\rho_{\rmC}$. Thus the current density scale, $\overline{\rho}_{\rmC}$, is given as
+    \begin{equation}
+        \overline{\rho}_{\rmC}  =  \rmSt\rmM^{2}\cdot\frac{1}{\mu_{0}}\cdot\frac{\overline{\bfB}}{\overline{\bfx}\overline{\bfv}}.
+    \end{equation}
+    
+    One can thus non-dimensionalize Maxwell's equations as:
+    \begin{align}
+        \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj,  &
+        \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \\
+        \nabla\cdot\bfE  &=  \rho_{\rmC},  &
+        \nabla\cdot\bfB  &=  0.
+    \end{align}
+
+    \paragraph*{Boltzmann equations (\ref{eqn:Boltzmann equation})} One can non-dimensionalize the Boltzmann equations (about the kinetic $\nabla_{\bfx}\cdot[f_{s}\bfv]$ terms) as
+    \begin{equation}
+        \rmSt\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \rmSt\rmCy_{s}\nabla_{\bfv}\cdot[f_{s}(\rmSt\bfE + \bfv\wedge\bfB)]  =   \sum_{s'}\rmKn_{ss'}\nabla_{\bfv}\cdot\bfC_{ss'}.
+    \end{equation}
+    
+    \shortline
+
+    From here, the non-dimensionalized system shall be assumed.
