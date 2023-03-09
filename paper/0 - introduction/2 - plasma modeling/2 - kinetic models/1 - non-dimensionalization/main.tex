@@ -10,7 +10,6 @@
     \begin{align}
         \overline{t},                       &&
         \overline{\bfx},                    &&
-        \overline{\bfv},                    &&
         \left(\overline{n}_{s}\right)_{s},  &&
         \overline{\bfB},
     \end{align}
@@ -18,6 +17,9 @@
     \begin{equation}
         \overline{f}_{s}  :=  \frac{\overline{n}_{s}}{\overline{\bfv}^{3}}.
     \end{equation}
+
+    $\overline{\bfv}$ will scale to achieve dominant balance in the Boltzmann equations (\ref{eqn:Boltzmann equation}), however this shall be discussed in Subsection \ref{cha:fluid models}. For now, it shall be assumed known.
+
     Define also:
     \begin{itemize}
         \item  The cyclotron frequency in phase $s$,
@@ -29,7 +31,6 @@
             \lambda_{ss'}  :=  \frac{\rmm_{s}}{\rmq_{s}\rmq_{s'}}\cdot\frac{\overline{n}_{s}}{\overline{\bfv}\overline{\bfC}_{ss'}}.
         \end{equation}
     \end{itemize}
-
     These invoke the dimensionless quantities in Figure \ref{fig:kinetic dimensionless quantities}.
 
     \begin{figure}
@@ -39,7 +40,7 @@
             \hline\hline
             (Light) Mach number  &  $\rmM$  &  $\overline{\bfv}/\rmc$  &  (Particle : Light) speed  \\
             Strouhal number  &  $\rmSt$  &  $\overline{\bfx}/\overline{t}\overline{\bfv}$  &  (Reference : Kinetic) frequency  \\
-            Cyclotron number(s)  &  $\rmCy_{s}$  &  $\Omega_{s}\overline{t}$  &  (Cyclotron : Reference) frequency  \\
+            Cyclotron number(s)  &  $\rmCy\!_{s}$  &  $\Omega_{s}\overline{t}$  &  (Cyclotron : Reference) frequency  \\
             Knudsen number(s)  &  $\rmKn_{ss'}$  &  $\overline{\bfx}/\lambda_{ss'}$  &  (Reference : Mean free path) length
         \end{tabular}
         \caption{Dimensionless quantities in the Boltzmann--Maxwell system.}
@@ -67,16 +68,28 @@
     One can thus non-dimensionalize Maxwell's equations as:
     \begin{align}
         \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj,  &
-        \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \\
+        \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \label{eqn:Maxwell's equations transient non-dimensionalized}  \\
         \nabla\cdot\bfE  &=  \rho_{\rmC},  &
-        \nabla\cdot\bfB  &=  0.
+        \nabla\cdot\bfB  &=  0.  \label{eqn:Maxwell's equations steady-state non-dimensionalized}
     \end{align}
 
-    \paragraph*{Boltzmann equations (\ref{eqn:Boltzmann equation})} One can non-dimensionalize the Boltzmann equations (about the kinetic $\nabla_{\bfx}\cdot[f_{s}\bfv]$ terms) as
-    \begin{equation}
-        \rmSt\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \rmSt\rmCy_{s}\nabla_{\bfv}\cdot[f_{s}(\rmSt\bfE + \bfv\wedge\bfB)]  =   \sum_{s'}\rmKn_{ss'}\nabla_{\bfv}\cdot\bfC_{ss'}.
+    \paragraph*{Boltzmann equations (\ref{eqn:Boltzmann equation})} One can non-dimensionalize the Boltzmann equations (about the convective $\nabla_{\bfx}\cdot[f_{s}\bfv]$ terms) as
+    \begin{equation}\label{eqn:Boltzmann equation non-dimensionalized}
+        \rmSt\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \rmSt\rmCy\!_{s}\nabla_{\bfv}\cdot[f_{s}(\rmSt\bfE + \bfv\wedge\bfB)]  =   \sum_{s'}\rmKn_{ss'}\nabla_{\bfv}\cdot\bfC_{ss'}.
     \end{equation}
     
     \shortline
 
     From here, the non-dimensionalized system shall be assumed.
+    
+    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'})_{ss'}$]\label{lem:conservation on collision operators}
+        The following two identities hold on $(\bfC_{ss'})_{ss'}$:
+        \begin{align}
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}\right]           =  \bfzero,  &&
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}\cdot\bfv\right]  =  0.
+        \end{align}
+    \end{lemma}
+    \begin{proof}
+        These results are immediate from conservation of momentum and energy over the whole domain.
+    \end{proof}
+    

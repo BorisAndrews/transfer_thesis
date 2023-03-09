@@ -1,5 +1,5 @@
 \section{$\delta\!f$ Models}\label{cha:delta f models}
-    This section shall introduce a class of models for the Boltzmann equations (\ref{eqn:Boltzmann equation}) called ``$\delta\!f$ models'', designed to tackle the problems posed by fluid models as discussed in Section \ref{cha:plasma modeling}. The motivation for and benefits provided by this approach shall be discussed in detail in the following section: Section \ref{cha:FEM vs. PiC}.
+    This section shall introduce a class of models for the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}) called ``$\delta\!f$ models'', designed to tackle the problems posed by fluid models as discussed in Section \ref{cha:plasma modeling}. The motivation for and benefits provided by this approach shall be discussed in detail in the following section: Section \ref{cha:FEM vs. PiC}.
 
     Take from here the assumptions of:
     \begin{itemize}
@@ -42,7 +42,7 @@
                         \sum_{s}&\int_{\bfv}\delta\!f_{s}\rmm_{s}\bfv                     &  &=  &  0  \\
                         \sum_{s}&\int_{\bfv}\delta\!f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}  &  &=  &  0  \label{eqn:correction energy moment}
         \end{align}
-        Substituting these $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
+        Substituting these $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient non-dimensionalized}--\ref{eqn:Maxwell's equations steady-state non-dimensionalized}) one can derive a:
         \begin{itemize}
             \item  Fluid (MHD) model in $(\rho_{s})_{s}$, $\bfp$, $E$, by taking moments of the Boltzmann equations, similar to what was done under the classical \emph{exact} thermalization assumption $f_{s}  =  f_{s}^{(0)}$ in Subsection \ref{cha:fluid models}, and $\bfE$, $\bfB$ through direct evaluation in Maxwell's equations.
             \item  Kinetic model in $(\delta\!f_{s})_{s}$ that is conservative and (inhomogeneously) linear up to leading order, retrieved directly from the Boltzmann equations.
@@ -79,7 +79,7 @@
             \begin{itemize}
                 \item  \emph{Fluid equations:} Assuming the relevant moments on $(\delta\!f_{s})_{s}$ and their time derivatives are both 0 at a given time $t$, then the equivalent moments of the Boltzmann equations are 0 at time $t$.
 
-                By the linearity of $\partial_{t}f_{s}$ in the Boltzmann equations (\ref{eqn:Boltzmann equation}) the converse holds; assuming the relevant moments on $(\delta\!f_{s})_{s}$ are 0 at a given time $t$ and the equivalent moments of the Boltzmann equations are 0 at time $t$, then the time derivatives on the moments on $(\delta\!f_{s})_{s}$ are 0 at time $t$ also.
+                By the linearity of $\partial_{t}f_{s}$ in the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}) the converse holds; assuming the relevant moments on $(\delta\!f_{s})_{s}$ are 0 at a given time $t$ and the equivalent moments of the Boltzmann equations are 0 at time $t$, then the time derivatives on the moments on $(\delta\!f_{s})_{s}$ are 0 at time $t$ also.
                 
                 \item  \emph{Kinetic equations:} The Boltzmann equation holds exactly.
             \end{itemize}
@@ -118,7 +118,7 @@
 
     \shortline
 
-    Substituting $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}), one derives the following leading-order fluid equations in $\rho_{\pm}$, $\bfp$, $E$:
+    Substituting $f_{s}  \mapsto  f_{s}^{(0)} + \delta\!f_{s}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}), one derives the following leading-order fluid equations in $\rho_{\pm}$, $\bfp$, $E$:
     \begin{equation}\label{eqn:PiC-coupled mass conservation}
         \partial_{t}\rho_{\pm} + \nabla_{\bfx}\cdot\left[\int_{\bfv}f_{\pm}^{(0)}\rmm_{\pm}\bfv\right]  =  - \nabla_{\bfx}\cdot\left[\int_{\bfv}\delta\!f_{\pm}\rmm_{\pm}\bfv\right]
     \end{equation}
@@ -149,7 +149,7 @@
     
     These equations resemble those of the classical MHD model (\ref{eqn:phase mass conservation introduction}--\ref{eqn:energy conservation introduction}), with the addition of terms dependents on the $\delta\!f_{\pm}$ corrections. These can be interpreted as fictitious forcing/heating terms in the classical MHD equations.
 
-    The last set of fluid equations come directly from Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}):
+    The last set of fluid equations come directly from Maxwell's equations (\ref{eqn:Maxwell's equations transient non-dimensionalized}--\ref{eqn:Maxwell's equations steady-state non-dimensionalized}):
     \begin{align}
         \partial_{t}\bfE - \rmc^{2}\nabla\wedge\bfB + \frac{1}{\varepsilon_{0}}\bfj^{(0)}  &=  - \frac{1}{\varepsilon_{0}}\int_{\bfv}(\delta\!f_{+} - \delta\!f_{-})\rme\bfv,  &
                                                       \partial_{t}\bfB + \nabla\wedge\bfE  &=  0,  \\
@@ -171,7 +171,7 @@
         \partial\calL[f; \delta\!f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\!f] - \calL[f])\right\}
     \end{equation}
     
-    Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\pm}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
+    Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\pm}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
     
     \BA{Necessarily in making this model linear, I have to discard the higher order term in the asymptotic expansions of $(\bfC_{ss'}^{(0)})_{ss'}$, which makes me concerned. I've made a lot of approximations, which I've just swallowed into the $\sim$, and I'd like to be more careful about stating to what order these equations hold true.}
 

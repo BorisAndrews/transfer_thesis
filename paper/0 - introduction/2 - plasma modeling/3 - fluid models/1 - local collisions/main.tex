@@ -1,25 +1,38 @@
 \subsubsection*{Assumption 1: Leading-Order Locality of the Collision Operators}
-    Fluid models consider scales wherein the dominant collisional effects are local in space and time. \BA{(On what scales?)} When viewed as functionals on $(f_{s}, f_{s'})$, it is assumed that $(\bfC_{ss'})_{ss'}$ are dominated by the local contributions of $(f_{s}, f_{s'})$ at each $\bfx$ and $t$; \BA{(Not sure about this phrasing...)} that is to say that, up to leading order,
+    Fluid models consider scales wherein the dominant collisional effects are local in space and time. It is assumed that $(\bfC_{ss'})_{ss'}$ are dominated by the local contributions of $(f_{s}, f_{s'})$ at each $\bfx$ and $t$; that is to say that, up to leading order,
     \begin{equation}\label{eqn:local collision operator}
         \bfC_{ss'}[f_{s}, f_{s'}](\bfx, \bfv; t)  \sim  \bfC_{ss'}^{(0)}[f_{s}|_{\bfx; t}, f_{s'}|_{\bfx; t}](\bfx, \bfv; t)
     \end{equation}
-    for some $(\bfC_{ss'}^{(0)})_{ss'}$. Define $\bfC_{ss'}  = 
-     \bfC_{ss'}^{(0)} + \bfdelta\bfC_{ss'}$, such that $(\bfdelta\bfC_{ss'})_{ss'}$ capture the non-local, viscous collisional effects.
+    for some $(\bfC_{ss'}^{(0)})_{ss'}$. Defining the dimensionless quantities
+    \begin{equation}
+        {\rmRef}_{ss'}  =  \frac{1}{\rmKn_{ss'}\overline{\left(\bfC_{ss'} - \bfC_{ss'}^{(0)}\right)}},
+    \end{equation}
+    one equivalently requires that $\rmKn_{ss'}{\rmRef}_{ss'}  \gg  1$, $\forall s, s'$. This motivates the definition of $\rmRef$ in Figure \ref{fig:fluid dimensionless quantities}.
+
+    Defining
+    \begin{equation}
+        \bfdelta\bfC_{ss'}  :=  \rmKn_{ss'}{\rmRef}_{ss'}\left(\bfC_{ss'} - \bfC_{ss'}^{(0)}\right),
+    \end{equation}
+    $(\bfdelta\bfC_{ss'})_{ss'}$ are dimensionless terms that each capture the non-local, viscous collisional effects.
     
     This extends the results of Lemma \ref{lem:conservation on collision operators}:
 
     \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]\label{lem:conservation on local collision operators}
         The following two identities hold on $(\bfC_{ss'}^{(0)})_{ss'}$:
         \begin{align}
-            \sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}           \sim  \bfzero,  &&
-            \sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv  \sim  0.
+            \sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}           =  \calO[\epsilon],  &&
+            \sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv  =  \calO[\epsilon].
         \end{align}
+        where
+        \begin{equation}
+            \epsilon  :=  \max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}
+        \end{equation}
     \end{lemma}
     \begin{proof}
         By Lemma \ref{lem:conservation on collision operators}:
         \begin{align}
-            \int_{\bfx}\left[\sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\right]           \sim  \bfzero,  &&
-            \int_{\bfx}\left[\sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv\right]  \sim  0.
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\right]           =  \calO[\epsilon],  &&
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv\right]  =  \calO[\epsilon].
         \end{align}
         Since $(\bfC_{ss'}^{(0)})_{ss'}$ are local in space, the only way for this integral identity necessarily to hold is if it holds pointwise in space, for each $\bfx$.
     \end{proof}
@@ -29,14 +42,14 @@
         \begin{itemize}
             \item  $\forall s$, the following two identities hold on $\bfC_{ss}^{(0)}$:
             \begin{align}
-                \int_{\bfv}\bfC_{ss}^{(0)}           \sim  \bfzero,  &&
-                \int_{\bfv}\bfC_{ss}^{(0)}\cdot\bfv  \sim  0.
+                \int_{\bfv}\bfC_{ss}^{(0)}           =  \calO\left[\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss}{\rmRef}_{ss}}\right],  &&
+                \int_{\bfv}\bfC_{ss}^{(0)}\cdot\bfv  =  \calO\left[\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss}{\rmRef}_{ss}}\right].
             \end{align}
             \item  $\forall s, s'$, the following two identities hold on $\bfC_{ss'}^{(0)}$ and $\bfC_{s's}^{(0)}$:
-            \begin{align}
-                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]           \sim  \bfzero,  &&
-                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]\cdot\bfv  \sim  0.
-            \end{align}
+            \begin{multline}
+                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]           =  \calO\left[\max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}\right],  \\
+                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]\cdot\bfv  =  \calO\left[\max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}\right].
+            \end{multline}
         \end{itemize}
     \end{corollary}
     \begin{proof}

@@ -53,7 +53,7 @@
     where:
     \begin{itemize}
         \item  $\rmc$ is the speed of light (in a vacuum), $\rmc  \approx  2.997\ldots\times 10^{8}\rmm\rms^{- 1}$.
-        \item  $\mu_{0}$ is the vacuum permeability, $\mu{0}  \approx  1.257\ldots\times 10^{- 6}\rmT^{2}\rms^{2}\rmm^{1}{\rm kg}^{- 1}$.
+        \item  $\mu_{0}$ is the vacuum permeability, $\mu_{0}  \approx  1.257\ldots\times 10^{- 6}\rmT^{2}\rms^{2}\rmm^{1}{\rm kg}^{- 1}$.
     \end{itemize}
     \BA{I should probably initially define Maxwell's equations in the previous particle models subsection, instead of first here.}
 
@@ -98,36 +98,6 @@
     \shortline
 
     From here, we shall drop the tildes $\widetilde{*}$ on $\widetilde{f_{s}}$, $\widetilde{\bfE}$, $\widetilde{\bfB}$, $\widetilde{\rho}_{\rmC}$, $\widetilde{\bfj}$, as we shall not be returning to the particle model. Together this system can be refered to as the Boltzmann--Maxwell system.
-
-    \line
-    
-    \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'})_{ss'}$]\label{lem:conservation on collision operators}
-        The following two identities hold on $(\bfC_{ss'})_{ss'}$:
-        \begin{align}
-            \int_{\bfx}\left[\sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}\right]           =  \bfzero,  &&
-            \int_{\bfx}\left[\sum_{s, s'}\rmq_{s}\rmq_{s'}\int_{\bfv}\bfC_{ss'}\cdot\bfv\right]  =  0.
-        \end{align}
-    \end{lemma}
-    \begin{proof}
-        By the conservation of momentum and energy over the whole domain:
-        \begin{align}
-            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}\rmm_{s}\bfv\right]                     &=  \sum_{s}\int_{\bfx}\left[f_{s}\rmq_{s}(\bfE + \bfv\wedge\bfB)\tall\right]  \\
-            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}\right]  &=  \sum_{s}\int_{\bfx}\left[f_{s}\rmq_{s}(\bfE + \bfv\wedge\bfB)\cdot\bfv\tall\right]
-        \end{align}
-        Substituting the Boltzmann equation (\ref{eqn:Boltzmann equation}) for $\partial_{t}f_{s}$, the given results follow.
-
-        \BA{Does this need some appropriate decay condition on $(f_{s})_{s}$ so that I can apply integration by parts that I've forgotten to mention? In fact, the same is true later for the collision operators $(\bfC_{ss'})_{ss'}$ when I'm deriving the fluid model too, I should go through and check what decay conditions need mentioning.}
-    \end{proof}
-    
-    \begin{remark}
-        By the same logic for the conservation of mass,
-        \begin{equation}
-            \partial_{t}\left[\sum_{s}\int_{\bfx, \bfv}f_{s}\rmm_{s}\right]  =  0,
-        \end{equation}
-        however this result holds necessarily for all $(\bfC_{ss'})_{ss'}$.
-    \end{remark}
-
-    \line
 
 
     \input{0 - introduction/2 - plasma modeling/2 - kinetic models/1 - non-dimensionalization/main.tex}

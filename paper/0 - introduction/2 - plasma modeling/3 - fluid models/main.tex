@@ -7,16 +7,29 @@
 
     \line
     
-    Recall the non-dimensionalized Boltzmann equation (\ref{eqn:Boltzmann equation}):
+    Recall the non-dimensionalized Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}):
     \begin{equation*}
-        \partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \frac{\rmq_{s}}{\rmm_{s}}\nabla_{\bfv}\cdot[f_{s}(\bfE + \bfv\wedge\bfB)]  =  \frac{\rmq_{s}}{\rmm_{s}}\sum_{s'}\rmq_{s'}\nabla_{\bfv}\cdot\bfC_{ss'}.
+        \rmSt\partial_{t}f_{s} + \nabla_{\bfx}\cdot[f_{s}\bfv] + \rmSt\rmCy\!_{s}\nabla_{\bfv}\cdot[f_{s}(\rmSt\bfE + \bfv\wedge\bfB)]  =   \sum_{s'}\rmKn_{ss'}\nabla_{\bfv}\cdot\bfC_{ss'}
     \end{equation*}
     
-    Using some approximations to the \emph{2}-particle distribution functions, $(f_{ss'})_{ss'}$, as functions of the \emph{1}-particle distribution functions, $(f_{s}, f_{s'})_{ss'}$, suppose from here the collision operators, $(\bfC_{ss'})_{ss'}$, are written as functions of the 1-particle distribution functions,
+    Using some approximations to the \emph{2}-particle distribution functions, $(f_{ss'})_{ss'}$, as functions of the \emph{1}-particle distribution functions, $(f_{s}, f_{s'})_{ss'}$, suppose from here that the collision operators, $(\bfC_{ss'})_{ss'}$, are written as functions of the 1-particle distribution functions only, as
     \begin{equation}
         \bfC_{ss'}[f_{s}, f_{s'}](\bfx, \bfv; t).
     \end{equation}
     This quantifies the collision operator model, bringing a solution to the closure problem. Most often, these 2-particle distribution function approximations are defined implicitly through the collision operator approximation.
+
+    To transfer from the fully kinetic model---the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized})---to a fluid model, one must make certain assumption. Various dimension quantities will be invoked, as defined in Figure \ref{fig:fluid dimensionless quantities}.
+
+    \begin{figure}
+        \centering
+        \begin{tabular}{ c c c c }
+            Name  &  Symbol  &  Value  &  Ratio  \\
+            \hline\hline
+            Fluid Reynolds number  &  $\rmRef$  &  \BA{$...$}  &  (Intertial : Viscous) forces  \\
+        \end{tabular}
+        \caption{Dimensionless quantities in the MHD system.}
+        \label{fig:fluid dimensionless quantities}
+    \end{figure} 
 
 
     \input{0 - introduction/2 - plasma modeling/3 - fluid models/1 - local collisions/main.tex}
