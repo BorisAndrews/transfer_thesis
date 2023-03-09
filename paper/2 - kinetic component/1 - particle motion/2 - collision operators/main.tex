@@ -48,8 +48,8 @@
     
     Presuming $\nu_{\pm_{1}\pm_{2}}$ and $D_{\pm_{1}\pm_{2}}$ are all positive, these satisfy the second set of validity conditions, the non-negativity conditions (\ref{eqn:linearized collision operator non-negativity}). With the LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified}) taking a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917}, pseudo-particles under the Lénard--Bernstein collision operators move up to leading order according to the Ornstein--Uhlenbeck-like \cite{Gardiner_1985, Karatzas_Shreve_1991, Gard_1998} SDE system:
     \begin{align}
-        \rmd\bfX  &=  \bfV\rmd t  \\
-        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW
+        \rmd\bfX  &=  \bfV\rmd t  \label{eqn:particle motion SDE}  \\
+        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW  \label{eqn:particle forcing SDE}
     \end{align}
     where:
     \begin{align}
@@ -59,7 +59,7 @@
     and $\bfW$ is a standard Wiener process, independent for each pseudo-particle.
 
     \begin{remark}[Non-local collision operators]
-        I'd love to talk now about non-local collision operators including fractional derivatives as discussed in Section \ref{cha:FEM vs. PiC}, but I just can't get them to work with the energy conservation conditions from Corollary \ref{cor:phase-restricted conservation on local collision operators}. I've got reason to expect them not to do so either, as Lévy flights and Lévy stable distributions with stability parameter $< 2$ have unbounded second moments, which naturally correspond to energy. It's a shame, as I think the high-amplitude jumps would give a much greater physical behavior as discussed earlier, however reconciling that with the energy balance conditions is just a problem for another time I guess!
+        I'd love to talk now about non-local collision operators including fractional derivatives as discussed in Section \ref{cha:FEM vs. PiC}, but I just can't get them to work with the energy conservation conditions from Corollary \ref{cor:phase-restricted conservation on local collision operators}. I've got reason to expect them not to do so either, as Lévy flights and Lévy stable distributions with stability parameter $< 2$ have unbounded second moments, which naturally correspond to energy. It's a shame, as I think the high-amplitude jumps would give a much greater physical behavior as discussed earlier, however reconciling that with the energy balance conditions is just a problem for another time I guess! I think this just requires a sit pack and a rethink really.
 
         For the rest of this thesis, I'll just assume the Lénard--Bernstein collision operator model, and leave the consideration of further collision operator models for another time.
     \end{remark}
