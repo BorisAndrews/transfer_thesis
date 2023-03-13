@@ -20,36 +20,49 @@
     \begin{lemma}[Momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]\label{lem:conservation on local collision operators}
         The following two identities hold on $(\bfC_{ss'}^{(0)})_{ss'}$:
         \begin{align}
-            \sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}           =  \calO[\epsilon],  &&
-            \sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv  =  \calO[\epsilon].
+            \sum_{s, s'}\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s}\{\rmm_{s}\overline{n}_{s}\}}\int_{\bfv}\bfC_{ss'}^{(0)}  =  \calO[\epsilon],  &&
+            \sum_{s, s'}\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s}\{\rmm_{s}\overline{n}_{s}\}}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv  =  \calO[\epsilon],
         \end{align}
         where
         \begin{equation}
-            \epsilon  :=  \max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}
+            \epsilon  :=  \max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{{\rmRef}_{ss'}}\right\}/\max_{s}\{\rmm_{s}\overline{n}_{s}\}
         \end{equation}
     \end{lemma}
     \begin{proof}
         By Lemma \ref{lem:conservation on collision operators}:
-        \begin{align}
-            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\right]           =  \calO[\epsilon],  &&
-            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\rmm_{s}\overline{n}_{s}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv\right]  =  \calO[\epsilon].
-        \end{align}
+        \begin{multline}
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s}\{\rmm_{s}\overline{n}_{s}\}}\int_{\bfv}\bfC_{ss'}^{(0)}\right]  =  \calO[\epsilon],  \\
+            \int_{\bfx}\left[\sum_{s, s'}\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s}\{\rmm_{s}\overline{n}_{s}\}}\int_{\bfv}\bfC_{ss'}^{(0)}\cdot\bfv\right]  =  \calO[\epsilon].
+        \end{multline}
         Since $(\bfC_{ss'}^{(0)})_{ss'}$ are local in space, the only way for this integral identity necessarily to hold is if it holds pointwise in space, for each $\bfx$.
     \end{proof}
+
+    Accordingly, define $\rmRef$: (See Figure \ref{fig:fluid dimensionless quantities})
+    \begin{equation}
+        \rmRef  :=  \frac{1}{\epsilon}  =  \max_{s}\{\rmm_{s}\overline{n}_{s}\}/\max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{{\rmRef}_{ss'}}\right\}
+    \end{equation}
 
     \begin{corollary}[Phase-restricted momentum and energy conservation on $(\bfC_{ss'}^{(0)})_{ss'}$]\label{cor:phase-restricted conservation on local collision operators}
         As corollaries to Lemma \ref{lem:conservation on local collision operators}:
         \begin{itemize}
             \item  $\forall s$, the following two identities hold on $\bfC_{ss}^{(0)}$:
             \begin{align}
-                \int_{\bfv}\bfC_{ss}^{(0)}           =  \calO\left[\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss}{\rmRef}_{ss}}\right],  &&
-                \int_{\bfv}\bfC_{ss}^{(0)}\cdot\bfv  =  \calO\left[\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss}{\rmRef}_{ss}}\right].
+                \int_{\bfv}\rmKn_{ss}\bfC_{ss}^{(0)}  =  \calO[\epsilon_{s}],  &&
+                \int_{\bfv}\rmKn_{ss}\bfC_{ss}^{(0)}\cdot\bfv  =  \calO[\epsilon_{s}],
             \end{align}
+            where
+            \begin{equation}
+                \epsilon_{s}  :=  \frac{1}{{\rmRef}_{ss}}
+            \end{equation}
             \item  $\forall s, s'$, the following two identities hold on $\bfC_{ss'}^{(0)}$ and $\bfC_{s's}^{(0)}$:
             \begin{multline}
-                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]           =  \calO\left[\max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}\right],  \\
-                \int_{\bfv}\left[\bfC_{ss'}^{(0)} + \bfC_{s's}^{(0)}\right]\cdot\bfv  =  \calO\left[\max_{s, s'}\left\{\frac{\rmm_{s}\overline{n}_{s}}{\rmKn_{ss'}{\rmRef}_{ss'}}\right\}\right].
+                \int_{\bfv}\left[\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s_{1} \in \{s, s'\}}\{\rmm_{s_{1}}\overline{n}_{s_{1}}\}}\bfC_{ss'}^{(0)} + \rmKn_{s's}\frac{\rmm_{s'}\overline{n}_{s'}}{\max_{s_{1} \in \{s, s'\}}\{\rmm_{s_{1}}\overline{n}_{s_{1}}\}}\bfC_{s's}^{(0)}\right]  =  \calO[\epsilon_{ss'}],  \\
+                \int_{\bfv}\left[\rmKn_{ss'}\frac{\rmm_{s}\overline{n}_{s}}{\max_{s_{1} \in \{s, s'\}}\{\rmm_{s_{1}}\overline{n}_{s_{1}}\}}\bfC_{ss'}^{(0)} + \rmKn_{s's}\frac{\rmm_{s'}\overline{n}_{s'}}{\max_{s_{1} \in \{s, s'\}}\{\rmm_{s_{1}}\overline{n}_{s_{1}}\}}\bfC_{s's}^{(0)}\right]\cdot\bfv  =  \calO[\epsilon_{ss'}],
             \end{multline}
+            where
+            \begin{equation}
+                \epsilon_{ss'}  :=  \max_{s_{1}, s_{2} \in \{s, s'\}}\left\{\frac{\rmm_{s_{1}}\overline{n}_{s_{1}}}{{\rmRef}_{s_{1}s_{2}}}\right\}/\max_{s_{1} \in \{s, s'\}}\{\rmm_{s_{1}}\overline{n}_{s_{1}}\}
+            \end{equation}
         \end{itemize}
     \end{corollary}
     \begin{proof}

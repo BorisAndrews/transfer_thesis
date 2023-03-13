@@ -1,68 +1,48 @@
-\subsubsection*{Assumption 4: Exact Thermalization}
-    By the conservation of:
-    \begin{itemize}
-        \item  Mass $\implies$ $S$ parameters for $S$ phases
-        \item  Momentum $\implies$ $3$ parameters from $3$ dimensions
-        \item  Energy $\implies$ $1$ parameter
-    \end{itemize}
-    the solution to (\ref{eqn:local leading-order Boltzmann equation}) at each $\bfx$ and $t$ lies on a $(S + 4)$-dimensional manifold; that is to say that, in the limit, the solution for $(f_{s})_{s}$ can be written solely as a function of the:
-    \begin{align}
-        \text{Mass in each phase, }  \rho_{s}(\bfx; t)  &:=  \int_{\bfv}f_{s}\rmm_{s}  \\
-        \text{Total momentum, }          \bfp(\bfx; t)  &:=  \sum_{s}\int_{\bfv}f_{s}\rmm_{s}\bfv  \\
-        \text{Total energy, }               E(\bfx; t)  &:=  \sum_{s}\int_{\bfv}f_{s}\frac{1}{2}\rmm_{s}\|\bfv\|^{2}
-    \end{align}
-    For each $s$, one can then write
+\subsubsection*{Assumption 3: Exact Thermalization}
+    One can further the thermalization result (\ref{eqn:thermalization}) by the assumption of \emph{exact} thermalization:
     \begin{equation}
-        f_{s}(\bfx, \bfv; t)  \sim  f_{s}^{(0)}[(\rho_{s})_{s}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t).
+      f_{\pm}  =  f_{\pm}^{(0)}
     \end{equation}
-    This limit is referred to as thermalization. One can further this by the assumption of \emph{exact} thermalization, $f_{s}  =  f_{s}^{(0)}$ for each $s$, to derive evolution equations for $(\rho_{s})_{s}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}). This derives the corresponding fluid model.
+    One can then derive evolution equations for $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $\rmE$ by taking the corresponding moments of the original Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized}). This derives the corresponding fluid model.
 
     \begin{remark}
-        There exist other interpretations by which a fluid model can be derived that do \emph{not} rely so much on the exact thermalization assumption $f_{s}  =  f_{s}^{(0)}$ \BA{[Ref, Ref, Ref, ...]} however the fluid models will be derived from this assumption here, as the derivation is more concise, and leads better on the kinds of models that will be considered in Chapter \ref{cha:delta f corrections}. 
+        Naturally, this assumption will (almost surely) never hold true.
+        
+        There exist other interpretations by which a fluid model can be derived that do \emph{not} rely so much on the exact thermalization assumption $f_{s}  =  f_{s}^{(0)}$ \BA{[Ref, Ref, Ref, ...]} however the fluid models here will be derived from this assumption, as the derivation is more concise, and better illustrates the motivation behind the kinds of models that will be considered in Chapter \ref{cha:delta f corrections}. 
     \end{remark}
 
-    Let $\rho_{\rmM}$ denote the mass density,
-    \begin{equation}
-        \rho_{\rmM}  :=  \int_{\bfv}[f_{+}\rmm_{+} + f_{-}\rmm_{-}]  \left(\sim  \int_{\bfv}f_{+}\rmm_{+}\right),
-    \end{equation}
-    and $\bfu$ denote the mass-averaged flow velocity,
+    Let $\bfu$ denote the mass-averaged flow velocity,
     \begin{equation}
         \bfu  :=  \frac{1}{\rho_{\rmM}}\bfp.
     \end{equation}
-    Returning to the ion/electron model with the mass-dominant ion phase, assume:
+    Assuming further that:
     \begin{itemize}
-        \item  Local collisions $(\bfC_{ss'}^{(0)})_{ss'}$ and the resultant asymptotic distributions $(f_{s}^{(0)})_{s}$ are isotropic, such that the 2$^{\text{nd}}$ and 3$^{\text{rd}}$ moments can be written in the forms:
+        \item  Local collisions $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ and the resultant asymptotic distributions $f_{\pm}^{(0)}$ are isotropic, such that the 2$^{\text{nd}}$ and 3$^{\text{rd}}$ moments can be written in the forms:
         \begin{align}
-            \sum_{s}\int_{\bfv}f_{s}^{(0)}\rmm_{s}\bfv^{\otimes 2}  &\sim  \rho_{\rmM}\bfu^{\otimes 2} + p\sfI  \label{eqn:isotropic 2nd moment}  \\
-            \sum_{s}\int_{\bfv}f_{s}^{(0)}\rmm_{s}\bfv^{\otimes 3}  &\sim  \rho_{\rmM}\bfu^{\otimes 3} + p(\bfu\otimes\sfI + \cdots + \sfI\otimes\bfu)  \label{eqn:isotropic 3rd moment}
+            \int_{\bfv}f_{s}^{(0)}\bfv^{\otimes 2}  &\sim  \rho_{\rmM}\bfu^{\otimes 2} + p\sfI  \label{eqn:isotropic 2nd moment}  \\
+            \int_{\bfv}f_{s}^{(0)}\bfv^{\otimes 3}  &\sim  \rho_{\rmM}\bfu^{\otimes 3} + p(\bfu\otimes\sfI + \cdots + \sfI\otimes\bfu)  \label{eqn:isotropic 3rd moment}
         \end{align}
         for a pressure $p$. \BA{(Is this a safe assumption? I've seen bimaxwellian background distributions being used that might imply not so much, but surely the collisions are still isotropic, no?)}
         \item  Each $f_{s}  =  o\left[\|\bfv\|^{- 5}\right]$ uniformly in $\bfv$ as $\|\bfv\|  \rightarrow  \infty$, such that integration by parts can be applied.
     \end{itemize}
     the following \emph{fluid model} is derived:
-    \begin{equation}
-        \partial_{t}\rho_{\pm} + \nabla_{\bfx}\cdot\left[\int_{\bfv}f_{\pm}m_{\pm}\bfv\right]  =  0  \label{eqn:phase mass conservation introduction}
-    \end{equation}
-    \vspace{-20pt}
-    \begin{multline}
-        \partial_{t}\bfp + \left(\nabla_{\bfx}\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] + \nabla_{\bfx}p\right) - \left(\rho_{\rmC}\bfE + \bfj\wedge\bfB\right)  \\
-        \sim  - \int_{\bfv}[\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--}]\rme^{2}
-    \end{multline}
+    \begin{align}
+        \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  &=  0,  \\
+        \rmM^{2}\partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj  &=  0,
+    \end{align}
     \vspace{-25pt}
     \begin{multline}
-        \partial_{t}E + \nabla_{\bfx}\cdot\left[\frac{1}{2}\rho_{\rmM}\|\bfu\|^{2}\bfu + \frac{5}{2}p\bfu\right] - \bfj\cdot\bfE  \\
-        \sim  - \int_{\bfv}(\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--})\cdot\rme^{2}\bfv
+        \partial_{t}\bfp + \left(\nabla_{\bfx}\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] + \nabla_{\bfx}p\right) - \frac{2}{\beta}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj\wedge\bfB\right)  \\
+        =  - \int_{\bfv}\left[\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \cdots + \frac{1}{{\rmRef}_{--}}\bfdelta\bfC_{--}\right] + \calO\left[\frac{\rmm_{-}}{\rmm_{-}}\right]
     \end{multline}
-    where $\rme$ is the charge of a proton/positive charge of an electron, $\rme  \approx  + 1.602\ldots\times 10^{- 19}\rmC$. The mass equations can be reframed in terms of the mass $\rho_{\rmM}$, and charge, $\rho_{\rmC}$, densities in closed form as:
-    \begin{align}
-        \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  =  0,  &&
-        \partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj  =  0,
-    \end{align}
-    and the energy equation in terms of the pressure, $p$, as
+    \vspace{-15pt}
     \begin{multline}
-        \frac{3}{2}\partial_{t}p + \left(\frac{3}{2}\nabla_{\bfx}\cdot[p\bfu] + p\nabla_{\bfx}\cdot\bfu\right) - (\bfj - \rho_{\rmC}\bfu)\cdot(\bfE + \bfu\wedge\bfB)  \\
-        \sim  - \int_{\bfv}(\bfdelta\bfC_{++} - \bfdelta\bfC_{+-} - \bfdelta\bfC_{-+} + \bfdelta\bfC_{--})\cdot\rme^{2}(\bfv - \bfu).  \label{eqn:energy conservation introduction}
+        \partial_{t}E + \nabla_{\bfx}\cdot\left[\frac{1}{2}\rho_{\rmM}\|\bfu\|^{2}\bfu + \frac{5}{2}p\bfu\right] - \frac{2}{\beta}\bfj\cdot\bfE  \\
+        =  - \int_{\bfv}\left[\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \cdots + \frac{1}{{\rmRef}_{--}}\bfdelta\bfC_{--}\right]\cdot\bfv + \calO\left[\frac{\rmm_{-}}{\rmm_{-}}\right]
     \end{multline}
-
-    \BA{I'm using the mass-dominance assumption for the ion phase everywhere here to neglect terms from the electron phase. The ion-to-electron mass ratio however is only on the order of about $10^{3}$. The whole premise for the $\delta\!f$ model is that $10^{3}$ is not that big, and that kinetic effects can not be ignore, so it's very bold of me to go and neglect the electron mass. It could very well be that electron-phase effects have comparatively less effect on plasma dynamics---I wouldn't know---but it's still worth discussing in the further work chapter. This will especially be highlighted if I make sure to make it clear in my $\sim$'s the scale of the terms which I am discarding.}
+    The energy equation can be reframed in terms of the pressure, $p$, as
+    \begin{multline}
+        \frac{3}{2}\partial_{t}p + \left(\frac{3}{2}\nabla_{\bfx}\cdot[p\bfu] + p\nabla_{\bfx}\cdot\bfu\right) - \frac{2}{\beta}\left(\bfj - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot(\bfE + \bfu\wedge\bfB)  \\
+        =  - \int_{\bfv}\left[\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \cdots + \frac{1}{{\rmRef}_{--}}\bfdelta\bfC_{--}\right]\cdot(\bfv - \bfu) + \calO\left[\frac{\rmm_{-}}{\rmm_{-}}\right].  \label{eqn:energy conservation introduction}
+    \end{multline}
     
