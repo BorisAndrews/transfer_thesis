@@ -9,5 +9,7 @@
     \section*{Summary}
         We discuss the meaning behind $\delta\!f$ models, and the motivation for using a coupled FEM/PiC numerical model for the simulation of the components.
         
-        There exists one notable problem posed by the combination of these numerical techniques. The FEM approach for the fluid component was chosen in part due to the advantages of FEM in producing exactly structure-preserving MHD discretizations. The non-determinstic approach for the kinetic component may threaten this property, however. This will be discussed further in Chapter \ref{cha:research plan}.
+        The problem of coupling the FEM and the PiC layer in this $\delta\!f$ model is naturally crucial to its efficacy, both in computational aspects, such as difficulties in parallelization between the Eulerian and Lagrangian interpretations, and in theoretical aspects, such as the creation of timesteppers for the PiC component that maintain the structure-preserving properties of the FEM timestepper. Neither of the two components exists in isolation.
+        
+        The remainder of this thesis will discuss the two components individually. Technical aspects of their coupling are left, for now, for further work. (See Chapter \ref{cha:research plan})
     

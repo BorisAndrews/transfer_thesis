@@ -5,151 +5,94 @@
 
     \BA{I have some inconsistency in notation here with the rest of the paper in how I donate integrals. I should make this consistent, by denoting $\int_{\bfx}  \mapsto  \int_{\bfOmega}$ and, say, $\int_{\bfv}  \mapsto  \int_{\bfXi}$.}
 
-    \BA{(This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.)} Without the $(\delta\!f_{s})_{s}$ corrections, the fluid component of the system takes the form in Figure \ref{fig:dim compressible strong form}, up to leading order, comprising:
-    \begin{itemize}
-        \item  The fluid equations (\ref{eqn:dim compressible mass conservation}--\ref{eqn:dim compressible energy conservation})
-        \item  The current, $\bfj$, equilibrium relation (\ref{eqn:dim compressible current identity})
-        \item  Velocity, $\bfu$, and temperature, $\theta$, identities (\ref{eqn:dim compressible velocity identity}--\ref{eqn:dim compressible temperature identity})
-        \item  Maxwell's equations (\ref{eqn:dim compressible Faraday's law}--\ref{eqn:dim compressible Gauss's law})
-    \end{itemize}
-    where $c \approx 2.98\times 10^{8}\rmm\rms^{- 1}$ denotes the speed of light, and for conciseness, $\bftau[\bfu]$ denotes the (deviatoric) strain,
+    \BA{This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.}
+
+    \BA{Just realised, I've got some $\nabla$'s earlier that should be $\nabla_{\bfx}$'s.}
+    
+    We consider now the fluid component of the $\delta\!f$ model (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
+    
+    To complete the system, make the following approximations for the spatially dissipative terms deriving from the collision operators:
+    \begin{align}
+        \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]                    &\approx  \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
+        \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]\cdot(\bfv - \bfu)  &\approx  \frac{2}{\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
+    \end{align}
+    where the Péclet number, $\rmPe$, is a dimensionless constant, and $\bftau[\bfu]$ denotes the (deviatoric) strain,
     \begin{equation}\label{eqn:strain equation}
-        \bftau[\bfu]  :=  2\left(\nabla_{\rms}\bfu - \frac{1}{3}(\nabla\cdot\bfu)\bfI\right),
+        \bftau[\bfu]  :=  \left(\nabla\bfu + \nabla\bfu^{\rmT}\right) - \frac{2}{3}(\nabla\cdot\bfu)\bfI,
     \end{equation}
-    and $\nabla_{\rms}$ denotes the symmetric gradient,
-    \begin{equation}
-        \nabla_{\rms}\bfv  :=  \frac{1}{2}\left(\nabla\bfv + \nabla\bfv^{T}\right),
-    \end{equation}
+    such that $\tr[\bftau[\bfu]]  =  0$. The assumption that the stress tensor here is predominantly trace-free is referred to as the Stokes hypothesis. \cite{Stokes_1845} Its validity is discussed in \cite{Vincenti_Kruger_1975}.
 
-    \begin{figure}
-        \centering
-        \line
-        \begin{align}
-            \partial_{t}\rho_{\rmM} + \nabla\cdot\bfp  &=  0,  \label{eqn:dim compressible mass conservation}  \\
-            \partial_{t}\rho_{\rmC} + \nabla\cdot\bfj  &=  0,  \\
-            \rho_{\rmM}\partial_{t}\bfu + \bfp\cdot\nabla\bfu  &=  - \nabla p + (\rho_{\rmC}\bfE + \bfj\wedge\bfB) + \nu\nabla\cdot[\rho_{\rmM}\bftau],  \\
-            \partial_{t}p + \nabla\cdot[p\bfu]  &=  - p\nabla\cdot\bfu + \nu\rho_{\rmM}\bftau:\nabla_{\rms}\bfu + \frac{\mu_{+-}}{\rmq_{+}\rmq_{-}}\|\bfj\|^{2} + \frac{\kappa k_{B}}{\rmm_{+}}\nabla\cdot[\rho_{\rmM}\nabla\theta],  \label{eqn:dim compressible energy conservation}  \\
-            \bfzero  &=  \frac{\mu_{+-}}{\rmq_{+}\rmq_{-}}\bfj - (\bfE + \bfu\wedge\bfB) + \BA{\rm const.}\bfj\wedge\bfB,  \label{eqn:dim compressible current identity}  \\
-            \bfp  &=  \rho_{\rmM}\bfu,  \label{eqn:dim compressible velocity identity}  \\
-            \rmm_{+}p  &=  k_{B}\rho_{\rmM}\theta,  \label{eqn:dim compressible temperature identity}  \\
-            \partial_{t}\bfE  &=  c^{2}\nabla\wedge\bfB - \frac{1}{\varepsilon_{0}}\bfj,  \label{eqn:dim compressible Faraday's law}  \\
-            \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \\
-            \nabla\cdot\bfE  &=  \frac{1}{\varepsilon_{0}}\rho_{\rmC},  \\
-            \nabla\cdot\bfB  &=  0  \label{eqn:dim compressible Gauss's law}
-        \end{align}
-        \line
-        \caption{(Dimensional) compressible strong formulation}
-        \label{fig:dim compressible strong form}
-    \end{figure}
+    Under the assumption of non-relativistic velocity scales, $\rmM  \ll  1$, the material fluid equations (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}) then take the forms:
+    \begin{align}
+         \partial_{t}\rho_{\rmM}  &=  - \nabla\cdot\bfp  \\
+                               0  &=  - \nabla\cdot\bfj  \\
+                \partial_{t}\bfp  &=  - \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
+        \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta}\bfj\cdot(\bfE + \bfu\wedge\bfB) + \frac{2}{\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
+    \end{align}
+    Due to the non-relativistic assumption, $\rho_{\rmC}$ is no longer present in these equation, i.e. the plasma is functionally \emph{``quasineutral''}.
+
+    These equations are coupled with Maxwell's equations (\ref{eqn:PiC-coupled Maxwell's equations transient}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) whereby under the same non-relativistic assumption, $\rmM  \ll  1$:
+    \begin{align}
+                 \bfzero  &=  \nabla\wedge\bfB - \bfj,  &
+        \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \\
+         \nabla\cdot\bfE  &=  \rho_{\rmC},  &
+         \nabla\cdot\bfB  &=  0.
+    \end{align}
     
-    \BA{(Also, too many $\mu$'s! And that's not to mention the $p$'s and $\bfp$'s! Might change the $\mu$'s in the drift terms to $\theta$s, akin to the drift terms in the Ornstein--Uhlenbeck process.)} \BA{(Also the $\partial_{t}p$ terms should have, like, a $\frac{3}{2}$ term, or something to that effect, before it, but that's something I'll sort when I derive the exact discretization. It doesn't change the analysis.)} \BA{(Move the definition for $c$ to earlier when I define Maxwell's equations.)}
-
-    To non-dimensionalize this system, denote the scale of a variable $*$ as $\overline{*}$. Assume that $\overline{\rho_{\rmM}}$, $\overline{\bfp}$, and $\overline{\bfB}$, are defined from the boundary conditions, and the scale of $\overline{\bfx}$ is defined by the domain. $\overline{\bfu}$, $\overline{\theta}$, $\overline{\bftau}$ are naturally given from their definitions as:
-    \begin{align}
-        \overline{\bfu}  =  \frac{\overline{\bfp}}{\overline{\rho_{\rmM}}},  &&
-        \overline{\theta}  =  \frac{\rmm_{+}}{k_{B}}\cdot{\overline{\theta}\overline{\rho_{\rmM}}},  &&
-        \overline{\bftau}  :=  \frac{\overline{\bfp}}{\overline{\rho_{\rmM}}\overline{\bfx}}
-    \end{align}
-    The remaining scales, $\overline{t}$, $\overline{\rho_{\rmC}}$, $\overline{\bfj}$, $\overline{p}$, $\overline{\bfE}$, and $\overline{\bftau}$ are defined as:  \BA{(Don't like much of the phrasing or the format here. I feel the equations are a little hard to read.)}
-    \begin{itemize}
-        \item  $\overline{t}  :=  \frac{\overline{\rho_{\rmM}}\overline{\bfx}}{\overline{\bfp}}$, working on \emph{convective} timescales.
-        \item  $\overline{\bfj}  :=  \frac{\overline{\bfB}}{\mu_{0}\overline{\bfx}}$, as $\bfj$ is brought to the scale of $\nabla\wedge\bfB$.
-        \item  $\overline{\rho_{\rmC}}  :=  \frac{1}{\mu_{0}}\cdot\frac{\overline{\rho_{\rmM}}\overline{\bfB}}{\overline{\bfx}\overline{\bfp}}  \left(=  \frac{\overline{\bfj}\overline{t}}{\overline{\bfx}}\right)$, as charge is induced by divergence in the current.
-        \item  $\overline{p}  :=  \frac{\overline{\bfp}^{2}}{\overline{\rho_{\rmM}}}$, such that kinetic and internal energy are on the same scale.
-        \item  $\overline{\bfE}  :=  \frac{\overline{\bfB}\overline{\bfp}}{\overline{\rho_{\rmM}}}  \left(=  \frac{\overline{\bfB}\overline{\bfx}}{\overline{t}}\right)$, as the curl in electric field is brought to balance the change in the magnetic field.
-    \end{itemize}
-    Defining the dimensionless constants in Figure \ref{fig:dimensionless quantities}, this takes the non-dimensionalized form:
-    \begin{align}
-        \partial_{t}\rho_{\rmM} + \nabla\cdot\bfp  &=  0  \\
-        \partial_{t}\rho_{\rmC} + \nabla\cdot\bfj  &=  0  \\
-        \partial_{t}\bfp + \bfp\cdot\nabla\bfu  &=  - \nabla p + \frac{2}{\beta}(\rho_{\rmC}\bfE + \bfj\wedge\bfB) + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau]  \\
-        \partial_{t}p + \nabla\cdot[p\bfu]  &=  - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho_{\rmM}\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
-    \end{align}
-    alongside the equilibrium relation for $\bfj$,
+    This system is completed by the thermal equilibrium identity (\ref{eqn:thermal equilibrium identity}), which can be interpreted here as an identity for $\bfj$. Again with the non-relativistic assumption, $\rmM  \ll  1$, we can assume the collision operators are such that this gives the identity:
     \begin{equation}
-        \bfzero  =  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB
+        \frac{1}{\rmRem}\rho_{\rmM}\bfj  =  \bfE + \bfu\wedge\bfB - \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
     \end{equation}
-    identities for $\bfu$, $\theta$,
+    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also.
+
+    This system can be reduced by solving for $\rho_{\rmC}$, $\bfj$, $\bfE$ as:
     \begin{align}
-        \bfp  =  \rho_{\rmM}\bfu,  &&
-        p  =  \rho_{\rmM}\theta
+        \rho_{\rmC}  &=  \nabla\cdot\bfE  \\
+               \bfj  &=  \nabla\wedge\bfB  \\
+               \bfE  &=  \frac{1}{\rmRem}\rho_{\rmM}\bfj - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
     \end{align}
-    and the non-dimensionalized forms of Maxwell's equations:
-    \begin{align*}
-        \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj,  &
-        \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \\
-        \rmM^{2}\nabla\cdot\bfE  &=  \rho_{\rmC},  &
-        \nabla\cdot\bfB  &=  0
-    \end{align*}
-    
-    \begin{figure}
-        \begin{tabular}{ c c c c }
-            Name  &  Symbol  &  Value  &  Ratio  \\
-            \hline\hline
-            Fluid Reynolds number  &  $\rmRef$  &  $\frac{1}{\nu}\cdot\frac{\overline{\bfx}\overline{\bfp}}{\overline{\rho_{\rmM}}}$  &  Momentum (advection : diffusion)  \\
-            Magnetic Reynolds number  &  $\rmRem$  &  $\frac{\rmq_{+}\rmq_{-}\mu_{0}}{\mu_{+-}}\cdot\frac{\overline{\bfx}\overline{\bfp}}{\overline{\rho_{\rmM}}}$  &  Magnetic (advection : diffusion)  \\
-            Péclet number  &  $\rmPe$  &  $\frac{1}{\kappa}\cdot\frac{\overline{\bfx}\overline{\bfp}}{\overline{\rho_{\rmM}}}$  &  Pressure (advection : diffusion)  \\
-            \hline
-            Plasma beta  &  $\beta$  &  $2\mu_{0}\cdot\frac{\overline{\bfp}^{2}}{\overline{\rho_{\rmM}}\overline{\bfB}^{2}}$  &  (Plasma : Magnetic) pressure  \\
-            Hall number  &  $\rmRH$  &  \BA{$\frac{\rmm_{+}}{\rmq_{+}\mu_{0}}\frac{\overline{\bfB}^{2}}{\overline{\rho_{\rmM}}\overline{\bfx}}$}  &  \BA{??}  \\
-            (Light) Mach number  &  $\rmM$  &  $\frac{1}{c}\cdot\frac{\overline{\bfp}}{\overline{\rho_{\rmM}}}$  &  (Plasma : Light) speed
-        \end{tabular}
-        \caption{Dimensionless quantities in the compressible Hall MHD system. \BA{(Need to re-derive and check the Hall number.)}}
-        \label{fig:dimensionless quantities}
-    \end{figure}
-
-    On non-relativistic scales where $\rmM  \ll  1$, the quasi-neutrality hypothesis, $\rho_{\rmC}  \sim  0$, is derived. This is assumed henceforth, giving the final quasi-neutral compressible Hall MHD system in Figure \ref{fig:non-dim compressible strong form}, where, with $\rho_{\rmC}$ eliminated, $\rho_{\rmM}$ is denoted as simply $\rho$:
-
-    \begin{figure}[!ht]
-        \centering
-        \line
-        \begin{align}
-            \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:mass conservation}  \\
-            \partial_{t}\bfp  &=  - \bfp\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:momentum conservation}  \\
-            \partial_{t}p     &=  - \nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu + \frac{2}{\beta\rmRem}\|\bfj\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:energy conservation}  \\
-            \bfzero           &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:current identity}  \\
-            \bfzero           &=  \bfp - \rho\bfu  \label{eqn:velocity identity}  \\
-            0                 &=  p - \rho\theta  \label{eqn:temperature identity}  \\
-            \bfzero           &=  \bfj - \nabla\wedge\bfB  \label{eqn:Ampère's law}  \\
-            \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:Faraday's law}  \\
-            0                 &=  \nabla\cdot\bfB  \label{eqn:Gauss's law}
-        \end{align}
-        \line
-        \caption{Non-dimensionalized compressible strong formulation}
-        \label{fig:non-dim compressible strong form}
-    \end{figure}
-
-    Two notes on this system:
-    \begin{itemize}
-        \item  For transient models, Gauss's law (\ref{eqn:Gauss's law}) need only be enforced on the initial conditions at time $t  =  0$, as it is enforced for $t  >  0$ by Faraday's law (\ref{eqn:Faraday's law}).
-
-        \item  In the ideal limit $\rmRef, \rmRem  =  \infty$, the viscous and Ohmic heating terms, $\frac{1}{\rmRef}\rho\bftau:\nabla_{\rms}\bfu$ and $\frac{2}{\beta\rmRem}\|\bfj\|^{2}$ are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more rich structure for the analysis and discretization. 
-    \end{itemize}
-
-    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}), with the notation differing slightly in places. (See Figure \ref{fig:incompressible strong form})
+    to give the final system in Figure \ref{fig:compressible strong form}.
 
     \begin{figure}
         \centering
         \line
         \begin{align}
-            0  &=  \nabla\cdot\bfu  \label{eqn:incompressible mass conservation}  \\
-            \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu  \label{eqn:incompressible momentum conservation}  \\
-            \bfzero  &=  \frac{1}{\rmRem}\bfj - \left(\bfE + \bfu\wedge\bfB\right) + \rmRH\bfj\wedge\bfB  \label{eqn:incompressible current identity}  \\
-            \bfzero  &=  \bfj - \nabla\wedge\bfB  \label{eqn:incompressible Ampère's law}  \\
-            \partial_{t}\bfB  &=  - \nabla\wedge\bfE  \label{eqn:incompressible Faraday's law}  \\
-            0  &=  \nabla\cdot\bfB  \label{eqn:incompressible Gauss's law}
+            \partial_{t}\rho_{\rmM}  &=  - \nabla\cdot\bfp  \\
+            \partial_{t}\bfp  &=  -  \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}(\nabla\wedge\bfB)\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
+            \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]  \label{eqn:energy conservation}  \\
+            \partial_{t}\bfB  &=  - \nabla\wedge\left[\frac{1}{\rmRem}\rho_{\rmM}\nabla\wedge\bfB - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}(\nabla\wedge\bfB)\wedge\bfB\right]
         \end{align}
+        \shortline
+        \begin{equation}
+            0  =  \nabla\cdot\bfB|_{t = 0}
+        \end{equation}
         \line
-        \caption{(Non-dimensionalized) incompressible strong formulation}
+        \caption{Compressible strong formulation}
+        \label{fig:compressible strong form}
+    \end{figure}
+
+    In the ideal limit $\rmRef, \rmRem  =  \infty$, the viscous and Ohmic heating terms, $\frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}$ and $\frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2}$ respectively, are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more accurate and rich structure for the analysis and discretization.
+
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{LHF22}, incorporating compressibility, a necessary factor in some form for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}). (See Figure \ref{fig:incompressible strong form}) This work therefore offers a good starting point therefore for the analysis, discretization and preconditioning of the compressible system.
+
+    \begin{figure}
+        \centering
+        \line
+        \begin{align}
+            0  &=  - \nabla\cdot\bfu  \\
+            \partial_{t}\bfu  &=  -  \nabla\cdot\left[\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}(\nabla\wedge\bfB)\wedge\bfB + \frac{1}{\rmRef}\Delta\bfu  \\
+            \partial_{t}\bfB  &=  - \nabla\wedge\left[\frac{1}{\rmRem}\nabla\wedge\bfB - \bfu\wedge\bfB + \rmRH(\nabla\wedge\bfB)\wedge\bfB\right]
+        \end{align}
+        \shortline
+        \begin{equation}
+            0  =  \nabla\cdot\bfB|_{t = 0}
+        \end{equation}
+        \line
+        \caption{Incompressible strong formulation}
         \label{fig:incompressible strong form}
     \end{figure}
 
-    One can seek therefore to analyse, discretize and precondition this system through similar techniques.\footnote{Note, the model in \cite{LHF22} is written in terms of the velocity, $\bfu  :=  \frac{1}{\rho_{\rmM}}\bfp$, instead of the momentum, $\bfp$, since by constant density, $\rho_{\rmM}$, the two are functionally equivalent after non-dimensionalization. We choose to write the compressible system here in terms of ``conservation quantities'' through the momentum, $\bfp$, to ensure the mass conservation equation (\ref{eqn:mass conservation}) is linear, such that we can ensure it holds \emph{exactly} in the numerical discretization. \\ The system there is also written in terms of a coupling constant, $\rmS  :=  \frac{2}{\beta}$. We choose the dimensionless parameter, $\beta$, to align more with the pre-existing physics literature. \BA{([Ref])}}
-    
-    \BA{Note to self, for collision frequency $\nu_{\rm Coll}$,
-    \begin{equation}
-        \rmm_{+}\rmm_{-}\nu_{\rm Coll}  =  \mu_{+-}\rho_{\rmM}
-    \end{equation}}
+    Since $\rho_{\rmC}$ is eliminated from the system, we shall henceforth write $\rho_{\rmM}$ as simply $\rho$.
 
     
     \input{3 - fluid component/0 - preliminaries and notation/main.tex}

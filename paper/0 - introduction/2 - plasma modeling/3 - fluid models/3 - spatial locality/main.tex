@@ -6,6 +6,10 @@
         \text{Total momentum, }        \bfp(\bfx; t)  &:=  \int_{\bfv}\left[f_{+} + f_{-}\frac{\rmm_{-}}{\rmm_{-}}\right]\bfv  \\
         \text{Total energy, }             E(\bfx; t)  &:=  \int_{\bfv}\left[f_{+} + f_{-}\frac{\rmm_{-}}{\rmm_{-}}\right]\frac{1}{2}\|\bfv\|^{2}
     \end{align}
+    with $\beta$ defined: (See Figure \ref{fig:fluid dimensionless quantities})
+    \begin{equation}
+        \beta  :=  2\mu_{0}\rmm_{+}\cdot\frac{\overline{n}_{+}\overline{\bfv}^{2}}{\overline{\bfB}^{2}}
+    \end{equation}
     With $\rmm_{-} \ll \rmm_{+}$, one can write:
     \begin{align}
       \rho_{\rmM}(\bfx; t)  &=  \int_{\bfv}f_{+} + \calO\left[\frac{\rmm_{-}}{\rmm_{-}}\right]  \\
@@ -15,23 +19,19 @@
     
     Combining the assumptions (\ref{eqn:local collision operator}) and (\ref{eqn:leading-order Boltzmann equation}), the dominant component of the Boltzmann equations take the form
     \begin{equation}
-        \nabla_{\bfv}\cdot\left[\rmCy\!_{\pm}f_{\pm}(\bfE + \bfv\wedge\bfB) - \rmKn_{\pm\pm}\bfC_{\pm\pm}^{(0)} - \rmKn_{\pm\mp}\bfC_{\pm\mp}^{(0)}\right]  =  \calO\left[1, \frac{1}{\rmRef}\right]
+        \nabla_{\bfv}\cdot\left[\rmCy\!_{\pm}f_{\pm}(\bfE + \bfv\wedge\bfB) - \rmKn_{\pm\pm}\bfC_{\pm\pm}^{(0)} - \rmKn_{\pm\mp}\bfC_{\pm\mp}^{(0)}\right]  =  \calO[1]
     \end{equation}
     This leading-order PDE is crucially 0th-order in $\bfx$ and $t$, and can, in theory, be solved pointwise in $\bfx$ and $t$. For this system to be well-posed, it is necessary that the moments corresponding to mass, momentum and energy---as in Lemma \ref{lem:conservation on collision operators}---are 0. This can be guaranteed by the introduction of the following bulk forcing and heating/dissipation terms to the right-hand side (RHS) of each equation:
     \begin{multline}\label{eqn:local leading-order Boltzmann equation}
         \nabla_{\bfv}\cdot\left[\rmCy\!_{\pm}f_{\pm}(\bfE + \bfv\wedge\bfB) - \rmKn_{\pm\pm}\bfC_{\pm\pm}^{(0)} - \rmKn_{\pm\mp}\bfC_{\pm\mp}^{(0)}\right]  \\
-        =  \frac{2}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{s}^{(0)}(\rho_{\rmC}\bfE + \bfj\wedge\bfB) - \nabla_{\bfv}\left[f_{s}^{(0)}(\bfj - \rho_{\rmC}\bfu)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]  \\
-        + \calO\left[1, \frac{1}{\rmRef}\right],
+        =  \frac{2}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\bfj - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]  \\
+        + \calO[1],
     \end{multline}
-    with $\beta$ defined: (See Figure \ref{fig:fluid dimensionless quantities})
-    \begin{equation}
-        \beta  :=  2\mu_{0}\rmm_{+}\cdot\frac{\overline{n}_{+}\overline{\bfv}^{2}}{\overline{\bfB}^{2}}
-    \end{equation}
     Since, by definition, $\overline{\bfj}  \ngtr  \rmq_{\pm}\overline{\bfv}$, $\frac{2}{\beta}  \ngtr  |\rmCy_{\pm}|$, such that these new RHS term are no greater than the already existing left-hand side (LHS) terms.  Under the given typical tokamak operational conditions from \cite{Wes00} as above, $\beta$ takes a value of $\beta  \approx 4.249\ldots\times 10^{- 3}$, such that, as predicted, $\frac{2}{\beta}  \ngtr  |\rmCy_{\pm}|$.
     
     This leading-order PDE is crucially 0th-order in $\bfx$ and $t$, and can be solved pointwise in $\bfx$ and $t$. One can then write the solution to the system (\ref{eqn:local leading-order Boltzmann equation}) as
     \begin{equation}\label{eqn:thermalization}
-        f_{\pm}(\bfx, \bfv; t)  =  f_{\pm}^{(0)}[\rho_{\rmM}|_{\bfx; t}, \rho_{\rmC}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \calO\left[\frac{1}{\rmCy_{+}}\right].
+        f_{\pm}(\bfx, \bfv; t)  =  f_{\pm}^{(0)}[\rho_{\rmM}|_{\bfx; t}, \rho_{\rmC}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \calO\left[\frac{1}{\rmCy_{+}}, \frac{1}{\rmCy_{+}\rmRef}\right].
     \end{equation}
     This limit is referred to as \emph{``thermalization''}. This motivates the creation of the fluid model.
 
