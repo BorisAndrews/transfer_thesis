@@ -25,4 +25,109 @@
 
     \begin{remark}
         For a detailed introduction to plasmas and their modeling, and the great difficulties these pose in tokamak-like environments, see \cite{addendum_I}. I have chosen to omit this in this document for brevity.
+        
+        This thesis shall make use only of the definitions and identities that follow.
     \end{remark}
+
+    \shortline
+
+    \begin{enumerate}
+        \item  A mass-dominant positive deuterium ion and negative electric phase only, indexed via $\pm$ (or $*_{\pm}$), in (approximate) balance in particle density to give quasineutrality.
+
+        \item  The dimensionless constants, with approximate values calculated according the JET operational values given in \cite{Wes00}:
+        \begin{itemize}
+            \item  Cyclotron numbers, $\rmCy_{\pm}$:
+            \begin{align}
+                \rmCy\!_{+}  \approx  5.327\ldots\times 10^{2},  &&
+                \rmCy\!_{-}  \approx  - 1.957\ldots\times 10^{6}
+            \end{align}
+            
+            \item  Light Mach number, $\rmM$:
+            \begin{equation}
+                \rmM  \approx  2.625\ldots\times 10^{- 3}
+            \end{equation}
+            
+            \item  Plasma beta, $\beta$:
+            \begin{equation}
+                \beta  \approx  4.249\ldots 10^{- 3}
+            \end{equation}
+
+            \item  Knudsen numbers, $\rmKn_{\pm_{1}\pm_{2}}$, satisfying the dominant balance relations:
+            \begin{equation}
+                \max\{\rmKn_{\pm+},  \rmKn_{\pm-}\}  =  |\rmCy_{\pm}|
+            \end{equation}
+            
+            \item  Fluid Reynolds numbers, ${\rmRef}_{\pm_{1}\pm_{2}}$
+        \end{itemize}
+
+        \item  The non-dimensionalized terms: 
+        \begin{itemize}
+            \item  Position and velocity vectors, $\bfx, \bfv  \in  \bbR^{3}$ respectively
+            
+            \item  Time, $t  \in  \bbR$
+            
+            \item  Electric and magnetic fields, $\bfE(\bfx; t), \bfB(\bfx; t)  \in  \bbR^{3}$ respectively
+            
+            \item  Phase-specific (smoothed) particle distribution functions, $f_{\pm}(\bfx, \bfv; t)  \in  \bbR$
+            
+            \item  Collision operators, $\bfC_{\pm_{1}\pm_{2}}[f_{\pm_{1}}, f_{\pm_{2}}](\bfx, \bfv; t)  \in  \bbR^{3}$, decomposing into dominant local and non-dominant non-local operators, $\bfC_{\pm_{1}\pm_{2}}^{(0)}[f_{\pm_{1}}|_{\bfx, \bfv; t}, f_{\pm_{2}}|_{\bfx, \bfv; t}](\bfx, \bfv; t),$ \\ $\bfdelta\bfC_{\pm_{1}\pm_{2}}[f_{\pm_{1}}, f_{\pm_{2}}](\bfx, \bfv; t)  \in  \bbR^{3}$ respectively, as
+            \begin{equation}
+                \bfC_{\pm_{1}\pm_{2}}  =  \bfC_{\pm_{1}\pm_{2}}^{(0)} + \frac{1}{\rmKn_{\pm_{1}\pm_{2}}{\rmRef}_{\pm_{1}\pm_{2}}}\bfdelta\bfC_{\pm_{1}\pm_{2}}
+            \end{equation}
+
+            \item  (Leading-order) plasma mass and momentum density, $\rho_{\rmM}(\bfx; t)  \in  \bbR$ and $\bfp(\bfx; t)  \in  \bbR^{3}$ respectively, defined:
+            \begin{align}
+                \rho_{\rmM}  :=  \int_{\bfv}f_{+},  &&
+                       \bfp  :=  \int_{\bfv}f_{+}\bfv
+            \end{align}
+
+            \item  (Leading-order) plasma pressure, $p(\bfx; t)  \in  \bbR$, defined:
+            \begin{equation}
+                p  :=  \frac{1}{3}\left(\int_{\bfv}f_{+}\|\bfv\|^{2} - \frac{1}{\rho_{\rmM}}\|\bfp\|^{2}\right)
+            \end{equation}
+
+            \item  Plasma charge and current density, $\rho_{\rmC}(\bfx; t)  \in  \bbR$ and $\bfj(\bfx; t)  \in  \bbR^{3}$ respectively, defined:
+            \begin{align}
+                \rho_{\rmC}  :=  \frac{\beta\rmCy_{+}}{2\rmM^{2}}\int_{\bfv}[f_{+} - f_{-}],  &&
+                       \bfj  :=  \frac{\beta\rmCy_{+}}{2}\int_{\bfv}[f_{+} - f_{-}]\bfv
+            \end{align}
+
+            \item  Plasma velocity and temperature, $\bfu(\bfx; t)  \in  \bbR^{3}$ and $\theta(\bfx; t)  \in  \bbR$ respectively, defined:
+            \begin{align}
+                  \bfu  :=  \frac{1}{\rho_{\rmM}}\bfp,  &&
+                \theta  :=  \frac{1}{\rho_{\rmM}}p
+            \end{align}
+        \end{itemize}
+
+        \item  The non-dimensionalized (convective timescale) equations:
+        \begin{itemize}
+            \item  The Boltzmann equations:
+            \begin{equation}\label{eqn:Boltzmann equation non-dimensionalized}
+                \partial_{t}f_{\pm} + \nabla_{\bfx}\cdot[f_{\pm}\bfv] + \rmCy\!_{\pm}\nabla_{\bfv}\cdot[f_{\pm}(\bfE + \bfv\wedge\bfB)]  =  \rmKn_{\pm\pm}\nabla_{\bfv}\cdot\bfC_{\pm\pm} + \rmKn_{\pm\mp}\nabla_{\bfv}\cdot\bfC_{\pm\mp}
+            \end{equation}
+
+            \item  The (leading-order) material conservation equations, in the exact thermalization limit:
+            \begin{align}
+                \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  &=  0,  \label{eqn:mass conservation introduction}  \\
+                \rmM^{2}\partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj  &=  0,
+            \end{align}
+            \vspace{-25pt}
+            \begin{multline}
+                \partial_{t}\bfp + \left(\nabla_{\bfx}\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] + \nabla_{\bfx}p\right) - \frac{2}{\beta}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj\wedge\bfB\right)  \\
+                =  - \int_{\bfv}\left[\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \cdots + \frac{1}{{\rmRef}_{--}}\bfdelta\bfC_{--}\right]
+            \end{multline}
+            \vspace{-15pt}
+            \begin{multline}
+                \frac{3}{2}\partial_{t}p + \left(\frac{3}{2}\nabla_{\bfx}\cdot[p\bfu] + p\nabla_{\bfx}\cdot\bfu\right) - \frac{2}{\beta}\left(\bfj - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot(\bfE + \bfu\wedge\bfB)  \\
+                =  - \int_{\bfv}\left[\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \cdots + \frac{1}{{\rmRef}_{--}}\bfdelta\bfC_{--}\right]\cdot(\bfv - \bfu)  \label{eqn:energy conservation introduction}
+            \end{multline}
+
+            \item  Maxwell's equations:
+            \begin{align}
+                \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj,  &
+                \partial_{t}\bfB  &=  - \nabla\wedge\bfE,  \label{eqn:Maxwell's equations transient non-dimensionalized}  \\
+                \nabla\cdot\bfE  &=  \rho_{\rmC},  &
+                \nabla\cdot\bfB  &=  0.  \label{eqn:Maxwell's equations steady-state non-dimensionalized}
+            \end{align}
+        \end{itemize}
+    \end{enumerate}
