@@ -1,3 +1,83 @@
+@article{Chen_Chacón_Barnes_2011,
+  title    = {An Energy- and Charge-Conserving, Implicit, Electrostatic Particle-in-Cell Algorithm},
+  journal  = {Journal of Computational Physics},
+  volume   = {230},
+  number   = {18},
+  pages    = {7018-7036},
+  year     = {2011},
+  issn     = {0021-9991},
+  doi      = {https://doi.org/10.1016/j.jcp.2011.05.031},
+  author   = {G. Chen and L. Chacón and D.C. Barnes},
+  abstract = {This paper discusses a novel fully implicit formulation for a one-dimensional electrostatic particle-in-cell (PIC) plasma simulation approach. Unlike earlier implicit electrostatic PIC approaches (which are based on a linearized Vlasov–Poisson formulation), ours is based on a nonlinearly converged Vlasov–Ampére (VA) model. By iterating particles and fields to a tight nonlinear convergence tolerance, the approach features superior stability and accuracy properties, avoiding most of the accuracy pitfalls in earlier implicit PIC implementations. In particular, the formulation is stable against temporal (Courant–Friedrichs–Lewy) and spatial (aliasing) instabilities. It is charge- and energy-conserving to numerical round-off for arbitrary implicit time steps (unlike the earlier “energy-conserving” explicit PIC formulation, which only conserves energy in the limit of arbitrarily small time steps). While momentum is not exactly conserved, errors are kept small by an adaptive particle sub-stepping orbit integrator, which is instrumental to prevent particle tunneling (a deleterious effect for long-term accuracy). The VA model is orbit-averaged along particle orbits to enforce an energy conservation theorem with particle sub-stepping. As a result, very large time steps, constrained only by the dynamical time scale of interest, are possible without accuracy loss. Algorithmically, the approach features a Jacobian-free Newton–Krylov solver. A main development in this study is the nonlinear elimination of the new-time particle variables (positions and velocities). Such nonlinear elimination, which we term particle enslavement, results in a nonlinear formulation with memory requirements comparable to those of a fluid computation, and affords us substantial freedom in regards to the particle orbit integrator. Numerical examples are presented that demonstrate the advertised properties of the scheme. In particular, long-time ion acoustic wave simulations show that numerical accuracy does not degrade even with very large implicit time steps, and that significant CPU gains are possible.}
+}
+
+@article{Chacón_Chen_Barnes_2013,
+  title    = {A Charge- and Energy-Conserving Implicit, Electrostatic Particle-in-Cell Algorithm on Mapped Computational Meshes},
+  journal  = {Journal of Computational Physics},
+  volume   = {233},
+  pages    = {1-9},
+  year     = {2013},
+  issn     = {0021-9991},
+  doi      = {https://doi.org/10.1016/j.jcp.2012.07.042},
+  author   = {Chacón, L. and Chen, G. and Barnes, D. C.},
+  abstract = {We describe the extension of the recent charge- and energy-conserving one-dimensional electrostatic particle-in-cell algorithm in Ref. [G. Chen, L. Chacón, D.C. Barnes, An energy- and charge-conserving, implicit electrostatic particle-in-cell algorithm, Journal of Computational Physics 230 (2011) 7018–7036] to mapped (body-fitted) computational meshes. The approach maintains exact charge and energy conservation properties. Key to the algorithm is a hybrid push, where particle positions are updated in logical space, while velocities are updated in physical space. The effectiveness of the approach is demonstrated with a challenging numerical test case, the ion acoustic shock wave. The generalization of the approach to multiple dimensions is outlined.}
+}
+
+@article{Chen_Chacón_2014,
+  title    = {An Energy- and Charge-Conserving, Nonlinearly Implicit, Electromagnetic 1D-3V Vlasov–Darwin Particle-in-Cell Algorithm},
+  journal  = {Computer Physics Communications},
+  volume   = {185},
+  number   = {10},
+  pages    = {2391-2402},
+  year     = {2014},
+  issn     = {0010-4655},
+  doi      = {https://doi.org/10.1016/j.cpc.2014.05.010},
+  author   = {Chen, G. and Chacón, L.},
+  abstract = {A recent proof-of-principle study proposes a nonlinear electrostatic implicit particle-in-cell (PIC) algorithm in one dimension (Chen et al., 2011). The algorithm employs a kinetically enslaved Jacobian-free Newton–Krylov (JFNK) method, and conserves energy and charge to numerical round-off. In this study, we generalize the method to electromagnetic simulations in 1D using the Darwin approximation to Maxwell’s equations, which avoids radiative noise issues by ordering out the light wave. An implicit, orbit-averaged, time–space-centered finite difference scheme is employed in both the 1D Darwin field equations (in potential form) and the 1D-3V particle orbit equations to produce a discrete system that remains exactly charge- and energy-conserving. Furthermore, enabled by the implicit Darwin equations, exact conservation of the canonical momentum per particle in any ignorable direction is enforced via a suitable scattering rule for the magnetic field. We have developed a simple preconditioner that targets electrostatic waves and skin currents, and allows us to employ time steps O(mi/mec/veT) larger than the explicit CFL. Several 1D numerical experiments demonstrate the accuracy, performance, and conservation properties of the algorithm. In particular, the scheme is shown to be second-order accurate, and CPU speedups of more than three orders of magnitude vs. an explicit Vlasov–Maxwell solver are demonstrated in the “cold” plasma regime (where kλD≪1).}
+}
+
+@article{Chen_Chacón_2015,
+  title    = {A Multi-Dimensional, Energy- and Charge-Conserving, Nonlinearly Implicit, Electromagnetic Vlasov–Darwin Particle-in-Cell Algorithm},
+  journal  = {Computer Physics Communications},
+  volume   = {197},
+  pages    = {73-87},
+  year     = {2015},
+  issn     = {0010-4655},
+  doi      = {https://doi.org/10.1016/j.cpc.2015.08.008},
+  author   = {Chen, G. and Chacón, L.},
+  abstract = {For decades, the Vlasov–Darwin model has been recognized to be attractive for particle-in-cell (PIC) kinetic plasma simulations in non-radiative electromagnetic regimes, to avoid radiative noise issues and gain computational efficiency. However, the Darwin model results in an elliptic set of field equations that renders conventional explicit time integration unconditionally unstable. Here, we explore a fully implicit PIC algorithm for the Vlasov–Darwin model in multiple dimensions, which overcomes many difficulties of traditional semi-implicit Darwin PIC algorithms. The finite-difference scheme for Darwin field equations and particle equations of motion is space–time-centered, employing particle sub-cycling and orbit-averaging. The algorithm conserves total energy, local charge, canonical-momentum in the ignorable direction, and preserves the Coulomb gauge exactly. An asymptotically well-posed fluid preconditioner allows efficient use of large cell sizes, which are determined by accuracy considerations, not stability, and can be orders of magnitude larger than required in a standard explicit electromagnetic PIC simulation. We demonstrate the accuracy and efficiency properties of the algorithm with various numerical experiments in 2D–3V.}
+}
+
+@pdfthesis{Holderied_2022,
+	author = {Holderied, F. E.},
+	title = {STRUPHY: A Structure-Preserving Hybrid MHD-Kinetic Code for the Interaction of Energetic Particles with Alfvén Waves in Magnetized Plasmas},
+	year = {2022},
+	school = {Technische Universität München},
+	pages = {135},
+	language = {en},
+	abstract = {On the road to fusion energy production, stable and reliable numerical simulations play a key role for the understanding of various physical phenomena in fusion plasmas. In this regard, this thesis presents the development, implementation and physical verification of the new simulation code STRUPHY, which is based on a hybrid fluid-kinetic model to describe energetic particle effects on low-frequency MHD waves and which makes use of recently developed, modern numerical tools.},
+}
+
+@misc{Li_et_al_2023,
+  doi = {10.48550/ARXIV.2301.10097},
+  author = {Li, Y. and Holderied, F. E. and Possanner, S. and Sonnendrücker, E.},
+  title = {Numerical Simulations for a Hybrid Model of Kinetic Ions and Mass-Less Fluid Electrons in Canonical Formulations},
+  publisher = {arXiv},
+  year = {2023},
+}
+
+@article{Holderied_Possanner_Wang_2021,
+  title    = {MHD--Kinetic Hybrid Code Based on Structure-Preserving Finite Elements with Particles-in-Cell},
+  journal  = {Journal of Computational Physics},
+  volume   = {433},
+  pages    = {110--143},
+  year     = {2021},
+  issn     = {0021-9991},
+  doi      = {10.1016/j.jcp.2021.110143},
+  author   = {Holderied, F. E. and Possanner, S. and Wang, X.},
+  abstract = {We present a STRUcture-Preserving HYbrid code - STRUPHY - for the simulation of magneto-hydrodynamic (MHD) waves interacting with a population of energetic particles far from thermal equilibrium (kinetic species). The implemented model features linear, ideal MHD equations in curved, three-dimensional space, coupled nonlinearly to the full-orbit Vlasov equations via a current coupling scheme. The algorithm is based on finite element exterior calculus (FEEC) for MHD and particle-in-cell (PIC) methods for the kinetic part; it provably conserves mass, energy, and the divergence-free magnetic field, irrespective of metric (= space curvature), mesh parameters and chosen order of the scheme. These properties enable reliable long-time simulations of energetic particle physics in complex geometries, covering the whole range of MHD waves. In STRUPHY, the finite element spaces are built from tensor products of univariate B-splines on the logical cuboid and can be made high-order by increasing the polynomial degree. Time-stepping is based on a skew-symmetric splitting with implicit sub-steps, mitigating CFL conditions from fast magneto-acoustic waves. High-order time splitting schemes can be used in this regard.}
+}
+
 @online{addendum_I,
   author = {Andrews, B.},
   title = {Addendum I: Plasmas and Tokamak Plasmas},
@@ -341,7 +421,7 @@
   pages    = {B1018--B1044}
 }
 
-@article{LHF22,
+@article{Laakmann_Hu_Farrell_2022,
   title    = {Structure-Preserving and Helicity-Conserving Finite Element Approximations and Preconditioning for the Hall MHD Equations},
   doi      = {10.48550/ARXIV.2202.11586},
   abstract = {We develop structure-preserving finite element methods for the incompressible, resistive Hall magnetohydrodynamics (MHD) equations. These equations incorporate the Hall current term in Ohm's law and provide a more appropriate description of fully ionized plasmas than the standard MHD equations on length scales close to or smaller than the ion skin depth. We introduce a stationary discrete variational formulation of Hall MHD that enforces the magnetic Gauss's law exactly (up to solver tolerances) and prove the well-posedness and convergence of a Picard linearization. For the transient problem, we present time discretizations that preserve the energy and magnetic and hybrid helicity precisely in the ideal limit for two types of boundary conditions. Additionally, we present an augmented Lagrangian preconditioning technique for both the stationary and transient cases. We confirm our findings with several numerical experiments.},

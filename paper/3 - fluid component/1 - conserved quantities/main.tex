@@ -7,7 +7,7 @@
     \begin{equation}
         \calH(\bff)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)
     \end{equation}
-    \cite{LHF22} considers conservation of the following 3 quantities in the incompressible system: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
+    \cite{Laakmann_Hu_Farrell_2022} considers conservation of the following 3 quantities in the incompressible system: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
     \begin{center}\begin{tabular}{ c | r l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
@@ -37,12 +37,12 @@
         \bfzero  =  \bfE\wedge\bfn \text{ or } \bfB\wedge\bfn,  &&
         \bfzero  =  (\bfE - \nabla\varphi)\wedge\bfn \text{ or } \bfA\wedge\bfn
     \end{align}
-    $\frac{d\rmE}{dt}  \leq  0$, and moreover, as shown in \cite{LHF22}, in the ideal limit for $\rmRef, \rmRem  =  \infty$,
+    $\frac{d\rmE}{dt}  \leq  0$, and moreover, as shown in \cite{Laakmann_Hu_Farrell_2022}, in the ideal limit for $\rmRef, \rmRem  =  \infty$,
     \begin{equation}
         \frac{d\rmE}{dt}, \frac{d\rmH_{\rmM}}{dt}, \frac{d\rmH_{\rmH}}{dt}  =  0
     \end{equation}
 
-    Certain discretizations that preserve these properties are derived in \cite{LHF22}.
+    Certain discretizations that preserve these properties are derived in \cite{Laakmann_Hu_Farrell_2022}.
 
     For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy and variable density, and magnetic helicity, $\rmH_{\rmM}$, with definition unchanged:
     \begin{center}\begin{tabular}{ c | r l }
@@ -99,7 +99,7 @@
     \end{proof}
     
     \begin{corollary}
-        When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, in the incompressible case when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfu\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{LHF22} giving:
+        When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, in the incompressible case when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfu\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{Laakmann_Hu_Farrell_2022} giving:
         \begin{align}
             |\rmH_{\rmM}|  &\leq  C(\bfgamma)\|\bfB\|_{\bfOmega}^{2}  \\
             |\rmH_{\rmH}|  &\leq  C(\bfgamma)\left\|\frac{2}{\beta\rmRH}\bfB + \bfomega\right\|_{\bfOmega}^{2}
