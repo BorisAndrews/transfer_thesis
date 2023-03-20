@@ -1,19 +1,18 @@
-\subsection*{Kinetic Component (\ref{eqn:linearized Boltzmann equation})}
+\subsection*{Kinetic Component (\ref{eqn:linearized Boltzmann equation}): PiC}
     The kinetic component comprises an inhomogeneously linear, conservative PDE in position space, $\bfx$, and velocity space, $\bfv$. Classical techniques for the numerical solution of conservative PDEs include:
     \begin{itemize}
-        \item  Monte Carlo--like Lagrangian pseudo-particle techniques\footnote{To be able to derive a pseudo-particle model from such a kinetic equation, certain conditions must be satisfied by the collision operator. This will be discussed further in Subsection \ref{cha:collision operators}.}
+        \item  Monte Carlo--like Lagrangian pseudo-particle/particle-in-cell (PiC) techniques
         \item  Classical Eulerian techniques (FEM/FDM/etc.)
     \end{itemize}
-    For these equations, the former particle-in-cell (PiC) approach has many benefits over classical PDE techniques:
+    For these equations, the former PiC approach has many benefits over classical PDE techniques:
     \begin{itemize}
-        \item  {\bf Particle decoupling from non-linearity:} Whereas in traditional PiC models, the pseudo-particles interact directly with one another through a distinct EM field---analogous to nonlinear collision operators in the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized})---pseudo-particle techniques for the linearized Boltzmann equations require no such coupling, due to the equations' linearity. Particles interact indirectly \emph{through} the fluid component. (See Figure \ref{fig:PiC decoupling})
+        \item  {\bf Particle decoupling from linearity:} Whereas in traditional PiC models, the pseudo-particles interact directly with one another through a distinct EM field---analogous to nonlinear collision operators in the Boltzmann equations (\ref{eqn:Boltzmann equation})---pseudo-particle techniques for the linearized Boltzmann equations require no such coupling, due to the equations' linearity. Particles interact indirectly, via the fluid component. (See Figure \ref{fig:PiC decoupling})
 
         This both:
         \begin{itemize}
             \item  Reduces the number of component-to-coupling information couplings from $\calO[n^{2}]$, in a classical direct PiC method, to $\calO[n]$, where $n$ is the number of particles in the pseudo-particle layer.
-            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for gyrokinetic turbulence effects. For a further discussion see Subsection \ref{cha:gyroaveraging}.
+            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for collisions. For a further discussion see Subsection \ref{cha:gyroaveraging}.
         \end{itemize}
-
         
         \begin{figure}[!ht]
             \centering
@@ -69,15 +68,15 @@
                 \end{tikzpicture}
                 \caption{Coupling when using a PiC model for the \\ correction in a $\delta\!f$ method.}
             \end{subfigure}
-            \caption{Illustration of the how the coupling between the model components (fluids/patricles) differs when using a PiC correction vs. a classical PiC model. \BA{(Would like an extension of this diagram when I talk about approaches for and difficulties in parallelization later too.)}}
+            \caption{Illustration of how the coupling between the model components (fluids/particles) differs when using a PiC correction vs. a classical PiC model. \BA{(Would like an extension of this diagram when I talk about approaches for and difficulties in parallelization later too.)}}
             \label{fig:PiC decoupling}
         \end{figure}
         
-        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions since. While classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist \BA{[Ref, Ref, ....]}, Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
+        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions since. While classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist---for FEM for example, see \cite{Fix_Strang_1969, Strang_Fix_2011, Babuška_1972}---Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
 
-        \item  {\bf Non-local collision operators:} THeoretically, hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics.
+        \item  {\bf Non-local collision operators:} Theoretically, hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics.
         
-        Non-local terms pose a huge problem for traditional Eulerian PDE techniques, which rely on the PDE's locality for the creation of sparse, parallelizable matrix solves. This is not a problem for particle models however, where the non-locality manifests simply as a stochastic process with occasional larger-amplitude jumps in the velocity.
+        Non-local terms pose a huge problem for traditional Eulerian PDE techniques, which rely on the PDE's locality for the creation of sparse, parallelizable matrix solves. This is not a problem for particle models however, where the non-locality can manifest simply as a stochastic process, with occasional larger-amplitude jumps in the velocity.
 
         By way of example, consider the following non-local, fractional PDE for a reduced (spatially-homogeneous, non-dimensionalized) kinetic model in $f(v; t)$, where $v  \in  \bbR$ is a 1-dimensional (1D) particle velocity--like parameter,
         \begin{equation}\label{eqn:reduced Boltzmann equation}
@@ -136,12 +135,10 @@
             \end{equation}
             \item  For $\alpha  <  2$, the moments $\bbE\left[|V(\tau)|^{\theta}\right]$ exist \emph{only} for $\theta  <  \alpha$.
         \end{itemize}
-
-        These collision operators will be discussed further in Subsection \ref{cha:collision operators}.
         
-        \item  {\bf Regions of high and low thermalization:} Pseudo-particle methods need only model the function where it is non-zero. Similarly, for functions that exhibit certain regions of comparatively large and small values, pseudo-particle methods can inherently focus more computational processing power to those regions of larger value, and less to those regions of smaller value.
+        \item  {\bf Regions of high and low thermalization:} Pseudo-particle methods need only model the function where it is largely non-zero. Similarly, for functions that exhibit certain regions of comparatively large and small values, pseudo-particle methods can inherently focus more computational processing power to those regions of larger value, and less to those regions of smaller value.
         
-        For plasmas, one might expect different regions where the plasma:
+        For plasmas, one might expect different regions where the plasma is:
         \begin{itemize}
             \item  Largely thermalized and kinetic effects are \emph{less} prominent, i.e. where $f_{\pm}$ are \emph{closer} to $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$ are correspondingly \emph{smaller} (e.g. in the plasma core).
             \item  Further from thermalization and kinetic effects are \emph{more} prominent, i.e. where $f_{\pm}$ are \emph{further} to $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$ are correspondingly \emph{larger} (e.g. close to a beam injection device, or near the reactor walls).

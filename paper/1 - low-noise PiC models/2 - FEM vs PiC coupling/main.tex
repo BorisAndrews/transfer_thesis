@@ -1,7 +1,5 @@
-\section{FEM vs. PiC Coupling}\label{cha:FEM vs. PiC}
-    \BA{Should change the title of this section to remove the ``vs.''.}
-
-    $\delta\!f$ models induce both a fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a kinetic component (\ref{eqn:linearized Boltzmann equation}) that require numerical solution. Each of these two components then offers a choice of possible numerical techniques.
+\section{Numerical Models}\label{cha:FEM vs. PiC}
+    $\delta\!f$ decompositions induce both a fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a kinetic component (\ref{eqn:linearized Boltzmann equation}) that require numerical simulation. When considered individually, each of these two layers offers a choice of possible discretization techniques.
     
     \line
 
@@ -10,13 +8,13 @@
 
     \line
 
-    In addition to the individual motivations for a FEM model for the fluid component (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a pseudo-particle method for the kinetic component (\ref{eqn:linearized Boltzmann equation}) the two techniques have notable advantages when used together for the full $\delta\!f$ model:
+    In addition to the individual motivations for a FEM model for the fluid component (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and a pseudo-particle method for the kinetic component (\ref{eqn:linearized Boltzmann equation}) the two techniques have notable advantages when used together for the full $\delta\!f$ decomposition:
     \begin{itemize}
         \item  {\bf Weak formulations and pseudo-particle distribution functions:} When using a pseudo-particle method for the $\delta\!f_{\pm}$, suppose the pseudo-particles are indexed via $*_{\pm}^{(i)}$, with position, $\bfX_{\pm}^{(i)}(t)$, velocity, $\bfV_{\pm}^{(i)}(t)$, evolving according to a coupled system of SDEs. In a classical physical sense, once can interpret this as assuming the weak approximations
         \begin{equation}\label{eqn:delta function approximation}
             f_{\pm}(\bfx, \bfv; t)  \approx  \sum_{i}w_{\pm}^{(i)}\delta^{3}\left[\bfx - \bfX_{\pm}^{(i)}(t)\right]\delta^{3}\left[\bfv - \bfV_{\pm}^{(i)}(t)\right],
         \end{equation}
-        where $\delta^{3}$ again denotes the 3D $\delta$ function---similar to (\ref{eqn:distribution function definition}) when originally deriving the kinetic model from the particle one---and $w_{\pm}^{(i)}$ denotes the weighting in $\delta\!f_{\pm}$ of the particle indexed by $*_{\pm}^{(i)}$. As such, when incorporating this pseudo-particle approximation to the $\delta\!f_{\pm}$ corrections in the fluid model, those equations featuring $\delta\!f_{\pm}$ consequently feature $\delta$ functions in space. By way of example, the charge conservation equation (\ref{eqn:PiC-coupled charge conservation}) can be written exactly as
+        where $\delta^{3}$ again denotes the 3D $\delta$ function, and $w_{\pm}^{(i)}$ denotes the (potentially either positive or negative) weighting in $\delta\!f_{\pm}$ of the particle indexed by $*_{\pm}^{(i)}$. As such, when incorporating this pseudo-particle approximation to the $\delta\!f_{\pm}$ corrections in the fluid model, those equations featuring $\delta\!f_{\pm}$ consequently feature $\delta$ functions in space. By way of example, the charge conservation equation (\ref{eqn:PiC-coupled charge conservation}) can be written exactly as
         \begin{equation}
             \rmM^{2}\partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj  =  - \frac{\beta}{2}\nabla_{\bfx}\cdot\left[\int_{\bfv}[\delta\!f_{+} - \delta\!f_{-}]\bfv\right]
         \end{equation}
@@ -39,10 +37,19 @@
             \int_{\bfx; t}\phi\partial_{t}\rho_{\rmC} + \int_{\bfx; t}\phi\nabla_{\bfx}\cdot\bfj \\
             \approx  \frac{\beta}{2}\int_{t}\left[\sum_{i}w_{+}^{(i)}\nabla_{\bfx}\phi\left(\bfX_{+}^{(i)}(t)\right)\cdot\bfV_{+}^{(i)}(t) - \sum_{i}w_{-}^{(i)}\nabla_{\bfx}\phi\left(\bfX_{-}^{(i)}(t)\right)\cdot\bfV_{-}^{(i)}(t)\right].
         \end{multline}
-        Since $\bfX_{\pm}^{(i)}(t)$ and $\bfV_{\pm}^{(i)}(t)$ are complex stochastic processes, further care must be taken regarding the continuity of the test spaces to ensure these RHS particle terms are well-defined.
+        Since $\bfX_{\pm}^{(i)}(t)$ and $\bfV_{\pm}^{(i)}(t)$ are complex stochastic processes, further care must be taken regarding the continuity of the test spaces to ensure these RHS particle terms are well-defined. \BA{(Said here that care must be taken, but haven't really taken that care yet.)}
 
-        \item  {\bf FET for quantifiable time derivatives:} It was noted in Section \ref{cha:delta f models} that the RHS of the kinetic equations in the $\delta\!f_{\pm}$ corrections (\ref{eqn:linearized Boltzmann equation}) features terms corresponding to time derivatives of the fluid parameters, $\partial_{t}\rho_{\rmM}$, $\partial_{t}\rho_{\rmC}$, $\partial_{t}\bfp$, $\partial_{t}E$, that we would like not to have to substitute for their given values from the fluid equations (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}).
+        \item  {\bf FET for quantifiable time derivatives:} It was noted in Section \ref{cha:delta f decompositions} that the RHS of the kinetic equations in the $\delta\!f_{\pm}$ corrections (\ref{eqn:linearized Boltzmann equation}) features terms corresponding to time derivatives of the fluid parameters, $\partial_{t}\rho_{\rmM}$, $\partial_{t}\rho_{\rmC}$, $\partial_{t}\bfp$, $\partial_{t}p$, that we would like not to have to substitute for their given values from the fluid equations (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}).
         
         Using a FET approach for the fluid equations means these time derivatives are exactly quantified at all positions in the space-time domain, avoiding this problem. 
     \end{itemize}
+
+    We refer to this FEM--PiC discretization of the fluid (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) and kinetic component (\ref{eqn:linearized Boltzmann equation}) of the $\delta\!f$ decomposed Boltzmann equations as a coupled, hybrid FEM--PiC model.
+
+    The recent \texttt{STRUPHY} code \cite{Holderied_Possanner_Wang_2021, Holderied_2022, Li_et_al_2023} implements a similar coupled, hybrid FEM--PiC model in a bespoke \texttt{Python} implementation, with:
+    \begin{itemize}
+      \item  A reduced linear, ideal MHD background model, discretized using similar SP FEM timesteppers as those developed by Hu et al. \cite{Hu_Xu_2015, Hu_Ma_Yu_2017, Hu_Lee_Xu_2021, Green_et_al_2022, LFM22, Laakmann_Hu_Farrell_2022} as above, on which we would like our timesteppers to be based.
+      \item  A collision-free Vlasov model for the correction.
+    \end{itemize}
+    The efficacy of \texttt{STRUPHY} provides motivation for the efficacy of the discretization presented here.
     

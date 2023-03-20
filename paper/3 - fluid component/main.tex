@@ -9,7 +9,7 @@
 
     \BA{Just realised, I've got some $\nabla$'s earlier that should be $\nabla_{\bfx}$'s.}
     
-    We consider now the fluid component of the $\delta\!f$ model (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
+    We consider now the fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
     
     To complete the system, make the following approximations for the spatially dissipative terms deriving from the collision operators:
     \begin{align}
@@ -59,7 +59,7 @@
         \begin{align}
             \partial_{t}\rho_{\rmM}  &=  - \nabla\cdot\bfp  \\
             \partial_{t}\bfp  &=  -  \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}(\nabla\wedge\bfB)\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
-            \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]  \label{eqn:energy conservation}  \\
+            \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]  \\
             \partial_{t}\bfB  &=  - \nabla\wedge\left[\frac{1}{\rmRem}\rho_{\rmM}\nabla\wedge\bfB - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}(\nabla\wedge\bfB)\wedge\bfB\right]
         \end{align}
         \shortline

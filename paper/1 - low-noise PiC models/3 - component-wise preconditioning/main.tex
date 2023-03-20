@@ -1,0 +1,43 @@
+\section{Component-Wise Preconditioning}
+    In the full, coupled, hybrid FEM--PiC model, after discretization and linearization, one will ultimately have to solve a linear system in the degrees of freedom (DoFs) for:
+    \begin{itemize}
+        \item  The Galerkin approximations of the functions in the fluid component: $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$; $\bfE$, $\bfB$
+        \item  The discretized positions and velocities for the pseudo-particles in the kinetic components: $(\bfX_{\pm}^{(i)})^{(i)}$, $(\bfV_{\pm}^{(i)})^{(i)}$
+    \end{itemize}
+    on each given timestep.
+
+    As noted in Section \ref{cha:FEM vs. PiC}, the hybrid FEM--PiC model has the benefit of ``decoupling'' the equations of motion for the pseudo-particles in the numerical model for the kinetic component. (See Figure \ref{fig:delta f coupling}) Due to this particle decoupling, with appropriate ordering on these DoFs, any matrix for this complete, coupled linear system can theoretically take the block form
+    \begin{equation}\label{eqn:FEM--PiC block structure}
+        \left(\begin{array}{ c : c c c c }
+            \bfA              &  \bfC_{\pm}^{(1)}  &  \bfC_{\pm}^{(2)}  &  \cdots  &  \bfC_{\pm}^{(I)}  \\
+            \hdashline
+            \bfD_{\pm}^{(1)}  &  \bfB_{\pm}^{(1)}  &  \bfzero           &  \cdots  &  \bfzero           \\
+            \bfD_{\pm}^{(2)}  &  \bfzero           &  \bfB_{\pm}^{(2)}  &  \cdots  &  \bfzero           \\
+            \vdots            &  \vdots            &  \vdots            &  \ddots  &  \vdots            \\
+            \bfD_{\pm}^{(I)}  &  \bfzero           &  \bfzero           &  \cdots  &  \bfB_{\pm}^{(I)}  \\
+        \end{array}\right)
+    \end{equation}
+    where:
+    \begin{itemize}
+        \item  $\bfA$ represents the timestepper for the standalone MHD system.
+        \item  $(\bfB_{\pm}^{(i)})^{(i)}$ represent the standalone particle pushers on the $i$-th pseudo-particle.
+        \item  $(\bfC_{\pm}^{(i)})^{(i)}$, $(\bfD_{\pm}^{(i)})^{(i)}$ represent the coupling between the $i$-th particle and the MHD system.
+    \end{itemize}
+    With the 2-by-2 block structure between the fluid and kinetic component (marked by the dashed lines in (\ref{eqn:FEM--PiC block structure})) one can begin to consider different block preconditioners. Such preconditioners, including block-LU, block-Jacobi, and Schur complement, typically rely on inverses (or approximate inverses) of the matrices on the diagonal:
+    \begin{align}
+        \bfA^{- 1},  &&
+        \left(\begin{array}{ c c c c }
+            \bfB_{\pm}^{(1)}  &  \bfzero           &  \cdots  &  \bfzero           \\
+            \bfzero           &  \bfB_{\pm}^{(2)}  &  \cdots  &  \bfzero           \\
+            \vdots            &  \vdots            &  \ddots  &  \vdots            \\
+            \bfzero           &  \bfzero           &  \cdots  &  \bfB_{\pm}^{(I)}  \\
+        \end{array}\right)^{- 1}  =  \left(\begin{array}{ c c c c }
+            \left(\bfB_{\pm}^{(1)}\right)^{- 1}  &  \bfzero                              &  \cdots  &  \bfzero                              \\
+            \bfzero                              &  \left(\bfB_{\pm}^{(2)}\right)^{- 1}  &  \cdots  &  \bfzero                              \\
+            \vdots                               &  \vdots                               &  \ddots  &  \vdots                               \\
+            \bfzero                              &  \bfzero                              &  \cdots  &  \left(\bfB_{\pm}^{(I)}\right)^{- 1}  \\
+        \end{array}\right)
+    \end{align}
+    These inverses correspond to the solution of the standalone MHD timesteppers and particle pushers.
+
+    While the distinct solution of the independent fluid and kinetic numerical models therefore will \emph{not} solve the whole coupled hybrid model, it does potentially pave the way for preconditioners for the hybrid model in the future.

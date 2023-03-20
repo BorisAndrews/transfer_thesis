@@ -1,0 +1,35 @@
+\section{Collision Operators Models}\label{cha:collision operators}
+    Since it is relevant in both the fluid and kinetic component of the $\delta\!f$ decomposition model, we consider now our choice of collision operator model.
+
+    \line
+
+    \begin{definition}[Lénard--Bernstein operators \BA{(Have asked Paul Dellar for a good reference here, now just waiting on his response.)}]
+        In the notation of this thesis, Lénard--Bernstein collision operator models $\bfC_{ss'}^{\rm LB}$ are those composed of a drift and a diffusion term,
+        \begin{equation}\label{eqn:Lénard--Bernstein operator}
+            \bfC_{\pm_{1}\pm_{2}}^{\rm LB}  =  \nu_{\pm_{1}\pm_{2}}\rho_{\pm_{2}}f_{\pm_{1}}(\bfv - \bfu_{\pm_{2}}) + \nabla_{\bfv}\left[\nu_{\pm_{1}\pm_{2}}\rho_{\pm_{2}}D_{\pm_{1}\pm_{2}}f_{\pm_{1}}\right],
+        \end{equation}
+        for drift and diffusion constants $\nu_{\pm_{1}\pm_{2}}$, $D_{\pm_{1}\pm_{2}}$ respectively, potentially functions of the fluid parameters, where $\rho_{\pm}$, $\bfu_{\pm}$ denote the phase-specific densities and velocities:
+        \begin{align}
+            \rho_{\pm}  :=                      \int_{\bfv}f_{\pm},  &&
+            \bfu_{\pm}  :=  \frac{1}{\rho_{\pm}}\int_{\bfv}f_{\pm}\bfv
+        \end{align}
+    \end{definition}
+
+    \line
+
+    For a model for the local collision operators $\bfC_{\pm_{1}\pm_{2}}^{(0)}$ to be valid, it must satisfy the constraints of Lemma \ref{lem:phase-restricted conservation on local collision operators}. For the Lénard--Bernstein operators, one requires:
+    \begin{align}
+             D_{\pm\pm}  =  \theta_{\pm},  &&
+        D_{+-} + D_{-+}  =  (\theta_{+} + \theta_{-}) + \frac{1}{3}\|\bfu_{+} - \bfu_{-}\|^{2}
+    \end{align}
+    where similarly $\theta_{\pm}$ are the phase-specific temperatures,
+    \begin{equation}
+        \theta_{\pm}  :=  \frac{1}{3\rho_{\pm}}\left(\int_{\bfv}f_{\pm}\|\bfv\|^{2} - \rho_{\pm}\|\bfu_{\pm}\|^{2}\right)
+    \end{equation}
+
+    \begin{remark}[Non-local collision operators]
+        I'd like to consider non-local collision operators including fractional derivatives as proposed in Section \ref{cha:FEM vs. PiC}, but it's tough getting them to satisfy the conditions Lemma \ref{lem:phase-restricted conservation on local collision operators}. I've got reason to expect them not to be able to do so either, as the Lévy flights and the Lévy stable distributions with stability parameter $< 2$ corresponding to those fractional collision operators have unbounded second moments, which naturally corresponds to the particle energy.
+
+        For the rest of this thesis, I'll be working with the Lénard--Bernstein collision operator model, and leave the consideration of further collision operator models for another time.
+    \end{remark}
+    

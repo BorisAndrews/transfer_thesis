@@ -35,7 +35,7 @@
         \theta_{s}  :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\frac{1}{3}\rmm_{s}\|\bfv\|^{2}.
     \end{equation}
     
-    Consider then $\calC_{\pm}^{\rm LB}$ in the 2-phase ion--electron $\delta\!f$ model, mapping $(\nu_{+-} = \nu_{-+})  \mapsto  (- \nu_{+-} = - \nu_{-+})$ to match physical intuition. Note first that in the $\delta\!f$ model, these identities can be written up to leading order in terms of the \emph{thermalized} phase-specific velocity and temperature, $(\bfu_{s})_{s}  \mapsto  (\bfu_{s}^{(0)})_{s}$ and $(\theta_{s})_{s}  \mapsto  (\theta_{s}^{(0)})_{s}$, defined akin to the thermalized current density (\ref{eqn:thermalized current density}) with $(f_{s})_{s}  \mapsto  (f_{s}^{(0)})_{s}$ as:
+    Consider then $\calC_{\pm}^{\rm LB}$ in the 2-phase ion--electron $\delta\!f$ decomposition, mapping $(\nu_{+-} = \nu_{-+})  \mapsto  (- \nu_{+-} = - \nu_{-+})$ to match physical intuition. Note first that in the $\delta\!f$ decomposition, these identities can be written up to leading order in terms of the \emph{thermalized} phase-specific velocity and temperature, $(\bfu_{s})_{s}  \mapsto  (\bfu_{s}^{(0)})_{s}$ and $(\theta_{s})_{s}  \mapsto  (\theta_{s}^{(0)})_{s}$, defined akin to the thermalized current density (\ref{eqn:thermalized current density}) with $(f_{s})_{s}  \mapsto  (f_{s}^{(0)})_{s}$ as:
     \begin{align}
         \bfu_{s}    :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\rmm_{s}\bfv,  &&
         \theta_{s}  :=  \frac{1}{\rho_{s}}\int_{\bfv}f_{s}\frac{1}{3}\rmm_{s}\|\bfv\|^{2}.
@@ -59,7 +59,7 @@
     and $\bfW$ is a standard Wiener process, independent for each pseudo-particle.
 
     \begin{remark}[Non-local collision operators]
-        I'd love to talk now about non-local collision operators including fractional derivatives as discussed in Section \ref{cha:FEM vs. PiC}, but I just can't get them to work with the energy conservation conditions from Lemma \ref{lem:phase-restricted conservation on local collision operators}. I've got reason to expect them not to do so either, as Lévy flights and Lévy stable distributions with stability parameter $< 2$ have unbounded second moments, which naturally correspond to energy. It's a shame, as I think the high-amplitude jumps would give a much greater physical behavior as discussed earlier, however reconciling that with the energy balance conditions is just a problem for another time I guess! I think this just requires a sit pack and a rethink really.
+        I'd like to talk now about non-local collision operators including fractional derivatives as discussed in Section \ref{cha:FEM vs. PiC}, but I just can't get them to work with the energy conservation conditions from Lemma \ref{lem:phase-restricted conservation on local collision operators}. I've got reason to expect them not to do so either, as Lévy flights and Lévy stable distributions with stability parameter $< 2$ have unbounded second moments, which naturally correspond to energy. It's a shame, as I think the high-amplitude jumps would give a much greater physical behavior as discussed earlier, however reconciling that with the energy balance conditions is just a problem for another time I guess! I think this just requires a sit pack and a rethink really.
 
         For the rest of this thesis, I'll just assume the Lénard--Bernstein collision operator model, and leave the consideration of further collision operator models for another time.
     \end{remark}
