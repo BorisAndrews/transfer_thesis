@@ -4,7 +4,7 @@
         \item  Monte Carlo--like Lagrangian pseudo-particle techniques\footnote{To be able to derive a pseudo-particle model from such a kinetic equation, certain conditions must be satisfied by the collision operator. This will be discussed further in Subsection \ref{cha:collision operators}.}
         \item  Classical Eulerian techniques (FEM/FDM/etc.)
     \end{itemize}
-    For these equations, the former particle-in-cell (PiC) approach has many benefits over classical PDE techniques: \BA{(Michael Barnes disagrees, so I'd be interested to hear his reasoning.)}
+    For these equations, the former particle-in-cell (PiC) approach has many benefits over classical PDE techniques:
     \begin{itemize}
         \item  {\bf Particle decoupling from non-linearity:} Whereas in traditional PiC models, the pseudo-particles interact directly with one another through a distinct EM field---analogous to nonlinear collision operators in the Boltzmann equations (\ref{eqn:Boltzmann equation non-dimensionalized})---pseudo-particle techniques for the linearized Boltzmann equations require no such coupling, due to the equations' linearity. Particles interact indirectly \emph{through} the fluid component. (See Figure \ref{fig:PiC decoupling})
 
@@ -73,9 +73,9 @@
             \label{fig:PiC decoupling}
         \end{figure}
         
-        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions since---while classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist \BA{[Ref, Ref, ....]}---Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
+        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions since. While classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist \BA{[Ref, Ref, ....]}, Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
 
-        \item  {\bf Non-local collision operators:} THeoretically, hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics. \BA{(Good place for a little literature review on non-local/fractional Laplacian collision operators.)}
+        \item  {\bf Non-local collision operators:} THeoretically, hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics.
         
         Non-local terms pose a huge problem for traditional Eulerian PDE techniques, which rely on the PDE's locality for the creation of sparse, parallelizable matrix solves. This is not a problem for particle models however, where the non-locality manifests simply as a stochastic process with occasional larger-amplitude jumps in the velocity.
 

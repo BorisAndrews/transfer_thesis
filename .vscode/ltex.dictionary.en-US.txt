@@ -9,7 +9,6 @@ PDEs
 pointwise
 quasineutrality
 discretizations
-discretizations
 non-determinstic
 inhomogeneously
 ill-posedness
@@ -22,3 +21,8 @@ collisional
 gyroaveraged
 Itô
 Vlasov
+STRUPHY
+timesteppers
+preconditioners
+Chacón
+Nicolson
