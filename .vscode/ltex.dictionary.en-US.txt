@@ -35,3 +35,8 @@ parallelizable
 timestepper
 timestep
 DoFs
+stellarators
+ITER
+Culham
+Centre
+CCFE
