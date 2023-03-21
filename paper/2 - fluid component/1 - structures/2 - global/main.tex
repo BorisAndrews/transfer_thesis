@@ -1,33 +1,35 @@
-\section{Conserved/Dissipated Quantities}
-    \BA{Introduction.}
-    
-    Consider those quantities that are conserved/dissipated by the transient system. The ability of a discretization to represent the system's physical behavior can be improved by ensuring that those properties that are conserved in the continuous case are \emph{also} conserved in the discretization. \BA{[Ref, ...]}
-
-    Define first the helicity, $\calH(\bff)$, of a vector field $\bff : \bfOmega \rightarrow \bbR^{3}$,
+\subsection*{Global Structures}
+    Define first the helicity, $\calH[\bff](t)$, of a vector field $\bff : \bfOmega\otimes\bbR \rightarrow \bbR^{3}$, \cite{Moffatt_1969, Brown_Canfield_Pevtsov_1999}
     \begin{equation}
-        \calH(\bff)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)
+        \calH[\bff](t)  :=  \int_{\bfOmega}\bff|_{t}\cdot(\nabla\wedge\bff|_{t}).
     \end{equation}
-    \cite{Laakmann_Hu_Farrell_2022} considers conservation of the following 3 quantities in the incompressible system: \BA{(Oops I've never defined $\bfA$! That should probably be in the introduction...)}
-    \begin{center}\begin{tabular}{ c | r l }
+
+    \cite{Laakmann_Hu_Farrell_2022} considers conservation of the following 3 quantities in the incompressible system: \BA{(What do these represent \emph{physically}? Diagrams!)}
+    \begin{center}\begin{tabular}{ c | r : l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$  \\
-        Hybrid helicity  &  $\rmH_{\rmH}$  &  $\int_{\bfOmega}(a\bfA + \bfu)\cdot(b\bfB + \bfomega)$
+        \hdashline
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$  \\
+        Hybrid helicity  &  $\rmH_{\rmH}$  &  $ab\calH[\bfA] + (a + b)\int_{\bfOmega}\bfB\cdot\bfu + \calH[\bfu]$
     \end{tabular}\end{center}
-    where $a$, $b$ satisfy the relation $a + b  =  \frac{4}{\beta\rmRH}$, \BA{(What do these represent \emph{physically}? Diagrams!)} and the vorticity, $\bfomega$, is defined as $\bfomega  :=  \nabla\wedge\bfu$.
+    where $a$, $b$ satisfy the relation $a + b  =  4/\beta\rmRH  (=  2\rmCy_{+})$, and $\bfA$ is a magnetic potential, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the de Rham complex on contractible $\bfOmega$, such a potential necessarily exists, since $\bfB  \in  \ker[\rmdiv]  =  \im[\bfcurl]$.
     
+    \begin{remark}
+        We call this $\bfA$ \emph{a} magnetic potential since multiple such magnetic potentials can exist, up to the addition of vector field in the kernel of $\rmdiv$. It doesn't matter here however which potential $\bfA$ is chosen, the conservation/dissipation results should still hold.
+    \end{remark}
+
     Taking the derivatives of these quantities over time (still in the incompressible system) gives \BA{(Proofs in appendix?)}
     \begin{align}
         \begin{split}
-            \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfu\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfu^{T}\right)\bfu + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
+            \frac{d\rmE}{dt}  &=  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfu\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\nabla\bfu^{\rmT}\right)\bfu + \frac{1}{\beta}\bfB\wedge\bfE\right]\cdot\bfn  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left.\left(\frac{1}{\rmRef}\|\nabla\bfu\|^{2} + \frac{2}{\beta\rmRem}\|\bfj\|^{2}\right)\right|_{\bfOmega}
         \end{split}  \\
-        \frac{d\rmH_{\rmM}}{dt}  &=  \oint_{\bfGamma}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn - \frac{2}{\rmRem}\calH(\bfB)  \\
+        \frac{d\rmH_{\rmM}}{dt}  &=  \oint_{\bfGamma}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn - \frac{2}{\rmRem}\calH[\bfB]  \\
         \begin{split}
             \frac{d\rmH_{\rmH}}{dt}  &=  \oint_{\bfGamma}\left[ab\bfA\wedge(\bfE - \nabla\varphi) + (a + b)\left(\bfu\wedge\bfE - p\bfB - \frac{1}{2}\|\bfu\|^{2}\bfB\right)\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ a\bfA\wedge\bfu + \left(\partial_{t}\bfu\wedge\bfu - \|\bfu\|^{2}\bfomega - 2p\bfomega + \frac{1}{\rmRef}\bfB\wedge\bfomega\right)\right]\cdot\bfn  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH(\bfB) + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH(\bfomega)\right]
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH[\bfB] + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH[\bfo]ega)\right]
         \end{split}
     \end{align}
     noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
@@ -49,7 +51,7 @@
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH(\bfA)$
+        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
     \begin{remark}
         I can't find an compressible analogue for the hybrid helicity, $\rmH_{\rmH}$, due to the presence of the momentum, $\bfp$, terms. I can't find any way to make the momentum and density terms cancel in a way they do for the energy, and have no reason to expect them to do so.
@@ -59,7 +61,7 @@
         \frac{d\rmE}{dt}  =  \oint_{\bfGamma}\left[- \left(\frac{1}{2}\|\bfp\|^{2}\bfI + p\bfI - \frac{1}{\rmRef}\rho\bftau\right)\bfu + \frac{1}{\beta}\bfB\wedge\bfE + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn
     \end{equation}
     with the time derivative for the magnetic helicity, $\rmH_{\rmM}$, unchanged.
-    
+
     Similarly, for boundary conditions on $\bfGamma$,
     \begin{align}\label{eqn:compressible canonical boundary conditions}
         \bfzero  =  \bfp,  &&
@@ -80,24 +82,24 @@
     \end{equation}
 
     As detailed in the introduction, one can also interpret Gauss's law, (\ref{eqn:Gauss's law}), $\nabla\cdot\bfB  =  0$, discounted from the system at $t  >  0$ in the transient model, as a conserved property of the system, as it is enforced by Faraday's law, (\ref{eqn:Faraday's law}).
-    
+
     \line
-    
+
     \begin{lemma}[Continuity of helicity]\label{lem:continuity of helicity}
         For any non-empty $\bfgamma  \subseteq  \bfGamma$, there exists a Poincaré constant $C(\bfgamma)$ such that $\forall  \bff  \in  \bfH_{\bfgamma}(\bfcurl)$ (as defined in Appendix \ref{cha:Hilbert complexes}),
         \begin{equation}
-            |\calH(\bff)|  \leq  C(\bfgamma)\|\bff\|_{\bfOmega}^{2}
+            |\calH[\bff]|  \leq  C(\bfgamma)\|\bff\|_{\bfOmega}^{2}
         \end{equation}
     \end{lemma}
     \begin{proof}
         Letting $C(\bfgamma)$ be the (generalized) Poincaré constant associated with $\bfH_{\bfgamma}(\bfcurl)$, such that $\forall \bff \in \bfH_{\bfgamma}(\bfcurl), \|\bff\|_{\bfOmega}  \leq  C(\bfgamma)\|\nabla\wedge\bff\|_{\bfOmega}$,
         \begin{align}
-            |\calH(\bff)|  &=  |\langle\bff, \nabla\wedge\bff\rangle_{\bfOmega}|  \\
+            |\calH[\bff]|  &=  |\langle\bff, \nabla\wedge\bff\rangle_{\bfOmega}|  \\
             &\leq  \|\bff\|_{\bfOmega}\|\nabla\wedge\bff\|_{\bfOmega}  &&\impliedby  \text{Cauchy--Schwarz inequality in } L^{2}  \\
             &\leq  C(\bfgamma)\|\nabla\wedge\bff\|_{\bfOmega}  &&\impliedby  \text{(Generalized) Poincaré inequality in } \bfH_{\bfgamma}(\bfcurl)
         \end{align}
     \end{proof}
-    
+
     \begin{corollary}
         When $\bfA\wedge\bfn  =  \bfzero|_{\bfgamma}$ for some non-empty $\bfgamma  \subseteq  \bfGamma$, Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, \BA{[Ref]} and, in the incompressible case when further $a  =  b  =  \frac{2}{\beta\rmRH}$ and $\bfu\wedge\bfn  =  \bfzero|_{\bfgamma}$, hybrid helicity, $\rmH_{\rmH}$, \cite{Laakmann_Hu_Farrell_2022} giving:
         \begin{align}
@@ -116,6 +118,5 @@
     \end{corollary}
 
     \BA{Would like to look at how these bounds change when one switches to a non-conforming scheme.}
-    
+
     \line
-    

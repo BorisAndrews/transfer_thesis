@@ -40,3 +40,10 @@ ITER
 Culham
 Centre
 CCFE
+Ohmic
+incompressibility
+homeomorphic
+Rham
+Knottedness
+Numerische
+Mathematik
