@@ -1,6 +1,4 @@
 \chapter{Fluid Component}
-    \BA{Introduction.}
-
     \BA{Have barely touched on preconditioning. I think I'll end up just leaving this as a remark/area for further work really. There are \emph{ideas} there, but I've really not had the chance to investigate them fully yet.}
 
     \BA{I have some inconsistency in notation here with the rest of the paper in how I donate integrals. I should make this consistent, by denoting $\int_{\bfx}  \mapsto  \int_{\bfOmega}$ and, say, $\int_{\bfv}  \mapsto  \int_{\bfXi}$.}
@@ -9,14 +7,18 @@
 
     \BA{Just realised, I've got some $\nabla$'s earlier that should be $\nabla_{\bfx}$'s.}
     
-    We consider now the fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
+    We consider now the standalone fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
     
     To complete the system, make the following approximations for the spatially dissipative terms deriving from the collision operators:
     \begin{align}
         \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]                    &\approx  \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
         \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]\cdot(\bfv - \bfu)  &\approx  \frac{2}{\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
     \end{align}
-    where the Péclet number, $\rmPe$, is a dimensionless constant, and $\bftau[\bfu]$ denotes the (deviatoric) strain,
+    where the Péclet number, $\rmPe$, is a dimensionless constant, $\theta$ denotes the temperature,
+    \begin{equation}
+        \theta  :=  \frac{p}{\rho_{\rmM}},
+    \end{equation}
+    and $\bftau[\bfu]$ denotes the (deviatoric) strain,
     \begin{equation}\label{eqn:strain equation}
         \bftau[\bfu]  :=  \left(\nabla\bfu + \nabla\bfu^{\rmT}\right) - \frac{2}{3}(\nabla\cdot\bfu)\bfI,
     \end{equation}
@@ -39,11 +41,11 @@
          \nabla\cdot\bfB  &=  0.
     \end{align}
     
-    This system is completed by the thermal equilibrium identity (\ref{eqn:thermal equilibrium identity}), which can be interpreted here as an identity for $\bfj$. Again with the non-relativistic assumption, $\rmM  \ll  1$, we can assume the collision operators are such that this gives the identity:
+    This system is completed by the thermal equilibrium identity (\ref{eqn:thermal equilibrium identity}), which can be interpreted here as an identity for $\bfj$. Assuming the Lénard--Bernstein collision operator model from Definition \ref{def:Lénard--Bernstein collision operators}, and taking again the non-relativistic assumption, $\rmM  \ll  1$, we derive the following identity:
     \begin{equation}
         \frac{1}{\rmRem}\rho_{\rmM}\bfj  =  \bfE + \bfu\wedge\bfB - \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
     \end{equation}
-    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also.
+    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also. \BA{(With definitions...)}
 
     This system can be reduced by solving for $\rho_{\rmC}$, $\bfj$, $\bfE$ as:
     \begin{align}
@@ -51,16 +53,19 @@
                \bfj  &=  \nabla\wedge\bfB  \\
                \bfE  &=  \frac{1}{\rmRem}\rho_{\rmM}\bfj - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
     \end{align}
-    to give the final system in Figure \ref{fig:compressible strong form}.
+    and eliminating $\bfp  =  \rho_{\rmM}\bfu$, $p  =  \rho_{\rmM}\theta$ to give the final compressible MHD system in Figure \ref{fig:compressible strong form}.
 
     \begin{figure}
         \centering
         \line
         \begin{align}
-            \partial_{t}\rho_{\rmM}  &=  - \nabla\cdot\bfp  \\
-            \partial_{t}\bfp  &=  -  \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}(\nabla\wedge\bfB)\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
-            \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]  \\
-            \partial_{t}\bfB  &=  - \nabla\wedge\left[\frac{1}{\rmRem}\rho_{\rmM}\nabla\wedge\bfB - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}(\nabla\wedge\bfB)\wedge\bfB\right]
+                           \partial_{t}\rho_{\rmM}          &=  - \nabla\cdot[\rho_{\rmM}\bfu]  \\
+                           \partial_{t}[\rho_{\rmM}\bfu]    &=  - \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla[\rho_{\rmM}\theta] + \frac{2}{\beta}(\nabla\wedge\bfB)\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
+            \begin{split}
+                \frac{3}{2}\partial_{t}[\rho_{\rmM}\theta]  &=  - \frac{3}{2}\nabla\cdot[\rho_{\rmM}\theta\bfu] - \rho_{\rmM}\theta\nabla\cdot\bfu + \frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}  \\
+                    &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+ \frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
+            \end{split}  \\
+                           \partial_{t}\bfB                 &=  - \nabla\wedge\left[\frac{1}{\rmRem}\rho_{\rmM}\nabla\wedge\bfB - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}(\nabla\wedge\bfB)\wedge\bfB\right]
         \end{align}
         \shortline
         \begin{equation}
