@@ -1,11 +1,5 @@
 \chapter{Fluid Component}
     \BA{Have barely touched on preconditioning. I think I'll end up just leaving this as a remark/area for further work really. There are \emph{ideas} there, but I've really not had the chance to investigate them fully yet.}
-
-    \BA{I have some inconsistency in notation here with the rest of the paper in how I donate integrals. I should make this consistent, by denoting $\int_{\bfx}  \mapsto  \int_{\bfOmega}$ and, say, $\int_{\bfv}  \mapsto  \int_{\bfXi}$.}
-
-    \BA{This is a little rough. I will give a full derivation of this model, but that'll be in the previous section. For now, I just want to have the system written down.}
-
-    \BA{Just realised, I've got some $\nabla$'s earlier that should be $\nabla_{\bfx}$'s.}
     
     We consider now the standalone fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specificed in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
     
@@ -45,15 +39,19 @@
     \begin{equation}
         \frac{1}{\rmRem}\rho_{\rmM}\bfj  =  \bfE + \bfu\wedge\bfB - \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
     \end{equation}
-    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also. \BA{(With definitions...)}
+    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also, defined:
+    \begin{align}
+        \rmRem  :=  \frac{2\rmKn_{+-}}{\beta\rmCy\!_{+}^{2}},  &&
+        \rmRH   :=  \frac{2}{\beta\rmCy\!_{+}}
+    \end{align}
 
     This system can be reduced by solving for $\rho_{\rmC}$, $\bfj$, $\bfE$ as:
     \begin{align}
-        \rho_{\rmC}  &=  \nabla\cdot\bfE  \\
-               \bfj  &=  \nabla\wedge\bfB  \\
-               \bfE  &=  \frac{1}{\rmRem}\rho_{\rmM}\bfj - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
+        \rho_{\rmC}  =  \nabla\cdot\bfE,  &&
+               \bfj  =  \nabla\wedge\bfB,  &&
+               \bfE  =  \frac{1}{\rmRem}\rho_{\rmM}\bfj - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB,
     \end{align}
-    and eliminating $\bfp  =  \rho_{\rmM}\bfu$, $p  =  \rho_{\rmM}\theta$ to give the final compressible MHD system in $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$ only as shown in Figure \ref{fig:compressible strong form}.
+    and eliminating $\bfp  =  \rho_{\rmM}\bfu$, $p  =  \rho_{\rmM}\theta$ to give the final compressible MHD system in $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$ only as shown in Figure \ref{fig:compressible strong form}. Gauss's law, $\nabla\cdot\bfB  =  0$ is enforced on the initial conditions (ICs) at $t  =  0$ only, and holds for later $t  >  0$ by Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$. (See Section \ref{cha:structures})
 
     \begin{figure}
         \centering
@@ -72,11 +70,11 @@
             0  =  \nabla\cdot\bfB|_{t = 0}
         \end{equation}
         \line
-        \caption{Compressible strong formulation}
+        \caption{Strong formulation of the compressible MHD system}
         \label{fig:compressible strong form}
     \end{figure}
 
-    In the ideal limit $\rmRef, \rmRem  =  \infty$, the viscous and Ohmic heating terms, $\frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}$ and $\frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2}$ respectively, are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more accurate and rich structure for the analysis and discretization.
+    In the ideal limit, as $\rmRef, \rmRem  \rightarrow  \infty$, the viscous and Ohmic heating terms, $\frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}$ and $\frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2}$ respectively, are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more accurate and rich structure for the analysis and discretization.
 
     This system resembles the \emph{incompressible} Hall MHD system presented in \cite{Laakmann_Hu_Farrell_2022}, incorporating compressibility, a necessary factor in some form for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}). (See Figure \ref{fig:incompressible strong form}) This work therefore offers a good starting point therefore for the analysis, discretization and preconditioning of the compressible system.
 
@@ -93,7 +91,7 @@
             0  =  \nabla\cdot\bfB|_{t = 0}
         \end{equation}
         \line
-        \caption{Incompressible strong formulation}
+        \caption{Strong formulation of the incompressible MHD system}
         \label{fig:incompressible strong form}
     \end{figure}
 
@@ -101,7 +99,7 @@
 
     
     \input{2 - fluid component/0 - preliminaries and notation/main.tex}
-    \input{2 - fluid component/1 - conserved quantities/main.tex}
+    \input{2 - fluid component/1 - structures/main.tex}
     \input{2 - fluid component/2 - structure preservation/main.tex}
     \input{2 - fluid component/3 - weak reformulations/main.tex}
     \input{2 - fluid component/4 - linearization and well-posedness/main.tex}

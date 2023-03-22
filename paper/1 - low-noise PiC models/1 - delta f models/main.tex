@@ -6,7 +6,7 @@
     \begin{definition}[$\delta\!f$ decompositions]\label{def:delta f models}
         ``$\delta\!f$'' decompositions write the distribution functions $f_{\pm}$ in the form
         \begin{equation}
-            f_{\pm}(\bfx, \bfv; t)  =  f_{\pm}^{(0)}[\rho_{\rmM}|_{\bfx; t}, \rho_{\rmC}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \frac{1}{\rmCy_{+}}\delta\!f_{\pm}(\bfx, \bfv; t),
+            f_{\pm}(\bfx, \bfv; t)  =  f_{\pm}^{(0)}[\rho_{\rmM}|_{\bfx; t}, \rho_{\rmC}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \frac{1}{\rmCy\!_{+}}\delta\!f_{\pm}(\bfx, \bfv; t),
         \end{equation}
         where $f_{\pm}^{(0)}$ are those thermalized distributions solving the local thermal equilibrium conditions,
         \begin{multline}\label{eqn:thermal equilibrium identity}
@@ -16,7 +16,7 @@
         with moments:
         \begin{align}
             &\int_{\bfv}f_{+}^{(0)}                             &  &=  &  &\int_{\bfv}f_{+}                         &  &=  &  &\rho_{\rmM}  \\
-            &\int_{\bfv}\left[f_{+}^{(0)} - f_{-}^{(0)}\right]  &  &=  &  &\int_{\bfv}[f_{+} - f_{-}]               &  &=  &  \frac{2\rmM^{2}}{\beta\rmCy_{+}}&\rho_{\rmC}  \\
+            &\int_{\bfv}\left[f_{+}^{(0)} - f_{-}^{(0)}\right]  &  &=  &  &\int_{\bfv}[f_{+} - f_{-}]               &  &=  &  \frac{2\rmM^{2}}{\beta\rmCy\!_{+}}&\rho_{\rmC}  \\
             &\int_{\bfv}f_{+}^{(0)}\bfv                         &  &=  &  &\int_{\bfv}f_{+}\bfv                     &  &=  &  &\bfp  \\
             &\int_{\bfv}f_{+}^{(0)}\frac{1}{2}\|\bfv\|^{2}      &  &=  &  &\int_{\bfv}f_{+}\frac{1}{2}\|\bfv\|^{2}  &  &=  &  \frac{1}{2\rho_{\rmM}}\|\bfp\|^{2} + \frac{3}{2}&p
         \end{align}
@@ -29,18 +29,18 @@
         \end{align}
         where $\bfj^{(0)}$ is the (non-dimensionalized) \emph{thermalized} current density,
         \begin{equation}\label{eqn:thermalized current density}
-            \bfj^{(0)}  :=  \frac{\beta\rmCy_{+}}{2}\int_{\bfv}\left[f_{+}^{(0)} - f_{-}^{(0)}\right]\bfv,
+            \bfj^{(0)}  :=  \frac{\beta\rmCy\!_{+}}{2}\int_{\bfv}\left[f_{+}^{(0)} - f_{-}^{(0)}\right]\bfv,
         \end{equation}
         such that the system is closed in $f_{\pm}^{(0)}$.
 
-        Substituting these $\delta\!f$ decompositions $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
+        Substituting these $\delta\!f$ decompositions $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy\!_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
         \begin{itemize}
             \item  Fluid (MHD) model in $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$, by taking moments of the Boltzmann equations, and $\bfE$, $\bfB$ through direct evaluation in Maxwell's equations.
             \item  Kinetic model in $\delta\!f_{\pm}$ that is (inhomogeneously) linear and conservative up to leading order, retrieved directly from the Boltzmann equations.
         \end{itemize}
     \end{definition}
     
-    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology here. To the author's knowledge, the idea of the $\delta\!f$ decomposition in the form first appeared in print in \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations, however the idea dates back
+    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology here. To the authors' knowledge, the idea of the $\delta\!f$ decomposition in the form first appeared in print in \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations, however the idea dates back
 
     $\delta\!f$ decompositions offer a way to recover an approachable and familiar fluid model from the Boltzmann equations \emph{without} the unreliable \emph{exact} thermalization assumption $f_{\pm}  =  f_{\pm}^{(0)}$, at the expense of the introduction of the new $\delta\!f_{\pm}$ corrections.
 
@@ -100,7 +100,7 @@
         \begin{equation}
             \partial\calL[f; \delta\!f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\!f] - \calL[f])\right\}
         \end{equation}
-        Substituting $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and taking moments, one derives the following leading-order fluid equations in $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $E$:
+        Substituting $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy\!_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and taking moments, one derives the following leading-order fluid equations in $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $E$:
         \begin{align}
             \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  &=  0,  \label{eqn:PiC-coupled mass conservation}  \\
             \rmM^{2}\partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj^{(0)}  &=  \calO\left[\frac{\beta}{2}\right]  \label{eqn:PiC-coupled charge conservation}
@@ -109,13 +109,13 @@
         \begin{multline}
             \partial_{t}\bfp + \left(\nabla_{\bfx}\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] + \nabla_{\bfx}p\right) - \frac{2}{\beta}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) \\
             - \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]  \\
-            =  \frac{1}{\rmCy_{+}}\int_{\bfv}\left(\rmKn_{++}\bfC_{++}^{(0)} + \rmKn_{+-}\bfC_{+-}^{(0)}\right)\!\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right] + \calO\left[\frac{1}{\rmCy_{+}}\right]
+            =  \frac{1}{\rmCy\!_{+}}\int_{\bfv}\left(\rmKn_{++}\bfC_{++}^{(0)} + \rmKn_{+-}\bfC_{+-}^{(0)}\right)\!\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right] + \calO\left[\frac{1}{\rmCy\!_{+}}\right]
         \end{multline}
         \vspace{-20pt}
         \begin{multline}\label{eqn:PiC-coupled pressure conservation}
             \frac{3}{2}\partial_{t}p + \left(\nabla_{\bfx}\cdot\left[\frac{3}{2}p\bfu\right] + p\nabla_{\bfx}\cdot\bfu\right) - \frac{2}{\beta}\left(\bfj^{(0)} - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot(\bfE + \bfu\wedge\bfB)  \\
             - \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]\cdot(\bfv - \bfu)  \\
-            =  \frac{1}{\rmCy_{+}}\int_{\bfv}\left(\rmKn_{++}\bfC_{++}^{(0)} + \rmKn_{+-}\bfC_{+-}^{(0)}\right)\!\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right]\cdot(\bfv - \bfu) + \calO\left[\frac{1}{\rmCy_{+}}\right].
+            =  \frac{1}{\rmCy\!_{+}}\int_{\bfv}\left(\rmKn_{++}\bfC_{++}^{(0)} + \rmKn_{+-}\bfC_{+-}^{(0)}\right)\!\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right]\cdot(\bfv - \bfu) + \calO\left[\frac{1}{\rmCy\!_{+}}\right].
         \end{multline}
         
         These equations resemble the material conservation equations of the classical MHD model (\ref{eqn:mass conservation}--\ref{eqn:energy conservation}), with the addition of terms dependent on the $\delta\!f_{\pm}$ corrections. These can be interpreted as fictitious forcing/heating terms in the classical MHD equations.
@@ -124,7 +124,7 @@
 
         The last set of fluid equations come directly from Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}):
         \begin{align}
-            \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj^{(0)} + \calO\left[\frac{1}{\rmCy_{+}}\right],  &
+            \rmM^{2}\partial_{t}\bfE  &=  \nabla\wedge\bfB - \bfj^{(0)} + \calO\left[\frac{1}{\rmCy\!_{+}}\right],  &
             \partial_{t}\bfB          &=  - \nabla\wedge\bfE,  \label{eqn:PiC-coupled Maxwell's equations transient}  \\
             \nabla\cdot\bfE           &=  \rho_{\rmC},  &
             \nabla\cdot\bfB           &=  0.  \label{eqn:PiC-coupled Maxwell's equations steady-state}
@@ -133,12 +133,12 @@
     \subsection*{Kinetic Component}
         For the corresponding kinetic component, one derives the following leading-order kinetic equations in $\delta\!f_{\pm}$:
         \begin{multline}\label{eqn:linearized Boltzmann equation}
-            \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] + \rmCy_{\pm}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
+            \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] + \rmCy\!_{\pm}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
             - \nabla_{\bfv}\cdot\left[\left(\rmKn_{\pm\pm}\bfC_{\pm\pm}^{(0)} + \rmKn_{\pm\mp}\bfC_{\pm\mp}^{(0)}\right)\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right]\right]  \\
-            =  - \rmCy_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
-            - \rmCy_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
-            + \frac{2\rmCy_{+}}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\bfj^{(0)} - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]  \\
-            + \calO\left[\frac{\rmCy_{\pm}}{\rmCy_{+}}, \frac{\rmCy_{+}}{\rmRef}\right]
+            =  - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
+            - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
+            + \frac{2\rmCy\!_{+}}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\bfj^{(0)} - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]  \\
+            + \calO\left[\frac{\rmCy\!_{\pm}}{\rmCy\!_{+}}, \frac{\rmCy\!_{+}}{\rmRef}\right]
         \end{multline}
         
         Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.

@@ -1,13 +1,19 @@
 \section*{Preliminaries and Notation}
     Since integrals, $\int_{\bfv}$, over the velocity, $\bfv$, have been eliminated from the system, integrals shall henceforth be assumed to be over space, $\bfx$, denoting the integral over $\bfx  \in  \bfS$ for some domain $\bfS  \subset  \bbR^{3}$ as $\int_{\bfS}$.
 
-    Let $\bfOmega  \subset  \bbR^{3}$ denote a \BA{(sufficiently smooth/compact etc.)} non-empty, simply-connected domain, with boundary $\bfGamma  :=  \partial\bfOmega$, and denote the outward-pointing normal on $\bfGamma$ as $\bfn$. Supported on $\bfOmega$, denote the $L^{2}$ inner product on a domain $\bfS$ (e.g. $\bfOmega$, $\bfGamma$) $\langle-, -\rangle_{\bfS}$ or $(\langle-, -\rangle)|_{\bfS}$,
+    Let $\bfOmega  \subset  \bbR^{3}$ denote a sufficiently smooth, compact, contractible domain, with boundary $\bfGamma  :=  \partial\bfOmega$. Denote the outward-pointing normal on $\bfGamma$ as $\bfn$.
+
+    \begin{remark}
+        Tokamak geometries, homeomorphic to a torus, and crucially \emph{not} contractible. I assume contractability here to simplify the analysis, i.e. to ensure the de Rham complex on $\bfOmega$ is exact, however I imagine with careful handling most, if not all, of the results here should carry over, albeit with slight modification, to non-contractible domains.
+    \end{remark}
+    
+    Denote the $L^{2}$ inner product on a domain $\bfS  \subset  \bbR^{3}$ (e.g. $\bfOmega$, $\bfGamma$) $\langle-, -\rangle_{\bfS}$ or $(\langle-, -\rangle)|_{\bfS}$,
     \begin{align}
-        \langle u, v\rangle_{\bfS}  :=  \int_{\bfS}uv,  &&
+        \langle u,    v   \rangle_{\bfS}  :=  \int_{\bfS}uv,  &&
         \text{or}  &&
         \langle \bfu, \bfv\rangle_{\bfS}  :=  \int_{\bfS}\bfu\cdot\bfv,  &&
         \text{or}  &&
-        \langle \bfu, \bfv\rangle_{\bfS}  :=  \int_{\bfS}\bfu:\bfv,  &&
+        \langle \sfU, \sfV\rangle_{\bfS}  :=  \int_{\bfS}\sfU:\sfV,  &&
         \text{etc.}
     \end{align}
     with associated $L^{2}$ norm on $\bfS$, $\|-\|_{\bfS}$ or $(\|-\|)|_{\bfS}$,
