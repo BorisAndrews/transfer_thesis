@@ -38,11 +38,11 @@
 
     Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
     \begin{equation}
-        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl, \bfH_{0}(\bfcurl)].
+        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
     \end{equation}
     
     \begin{remark}
-        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since multiple such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$: a potential gradient.
+        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
         
         It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
     \end{remark}
@@ -80,7 +80,7 @@
         \hline\hline
         Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
         \hdashline
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
+        Magnetic helicity \cite{Blackman_2015}  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
 
     \begin{remark}
@@ -127,9 +127,9 @@
     \begin{corollary}
         Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, giving
         \begin{equation}
-            |\rmH_{\rmM}|  \leq  C(\bfgamma)\|\bfB\|_{\bfOmega}^{2}
+            |\rmH_{\rmM}|  \leq  C_{\bfGamma}\|\bfB\|_{\bfOmega}^{2}
         \end{equation}
-        This in turn gives the lower bound on the energy, $\rmE  \geq  \frac{C(\bfgamma)}{\beta}|\rmH_{\rmM}|$.
+        This in turn gives the lower bound on the energy, $\rmE  \geq  \frac{C_{\bfGamma}}{\beta}|\rmH_{\rmM}|$.
     \end{corollary}
 
     \BA{Would like to look at how this bound changes when one switches to a non-conforming scheme.}
