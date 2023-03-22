@@ -1,11 +1,5 @@
 \section{Structures in the Compressible MHD System}\label{cha:structures}
-    Before constructing a finite-element discretization of the MHD system in Figure \ref{fig:compressible strong form}, consider first those local/global structures that are conserved/dissipated by the MHD system. We intend to construct finite-element timesteppers that preserves these structures:
-    \begin{itemize}
-        \item  ``Local'' structures here refer to those that exist pointwise in $\bfOmega$, i.e. those that are functions of $\bfOmega$, $t$.
-        \item  ``Global'' structures here refer to those that are defined via integrals over $\bfOmega$, i.e. those that are functions of $t$ only.
-    \end{itemize}
-
-    \BA{(Why do we care about this?)}
+    Before constructing a finite-element discretization of the MHD system in Figure \ref{fig:compressible strong form}, consider first those local/global quantities that are conserved/dissipated by the MHD system. We intend to construct finite-element timesteppers that preserves these structures.
 
 
     \input{2 - fluid component/1 - structures/1 - local/main.tex}

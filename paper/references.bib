@@ -280,6 +280,19 @@
   pages    = {265--273}
 }
 
+@article{FMW19,
+  title     = {An Augmented Lagrangian Preconditioner for the 3D Stationary Incompressible Navier--Stokes Equations at High Reynolds Number},
+  author    = {Farrell, P. E. and Mitchell, L. and Wechsung, F.},
+  publisher = {SIAM},
+  journal   = {SIAM journal on scientific computing.},
+  pages     = {A3073--A3096},
+  year      = {2019},
+  volume    = {41},
+  doi       = {10.1137/18M1219370},
+  abstract  = {In [M. Benzi and M. A. Olshanskii, SIAM J. Sci. Comput., 28 (2006), pp. 2095--2113] a preconditioner of augmented Lagrangian type was presented for the two-dimensional stationary incompressible Navier--Stokes equations that exhibits convergence almost independent of Reynolds number. The algorithm relies on a highly specialized multigrid method involving a custom prolongation operator and for robustness requires the use of piecewise constant finite elements for the pressure. However, the prolongation operator and velocity element used do not directly extend to three dimensions: the local solves necessary in the prolongation operator do not satisfy the inf-sup condition. In this work we generalize the preconditioner to three dimensions, proposing alternative finite elements for the velocity and prolongation operators for which the preconditioner works robustly. The solver is effective at high Reynolds number: on a three-dimensional lid-driven cavity problem with approximately one billion degrees of freedom, the average number of Krylov iterations per Newton step varies from 4.5 at Re = 10 to 3 at Re = 1000 and 5 at Re = 5000.}
+}
+
+
 @article{Fokker_1914,
   author  = {Fokker, A. D.},
   title   = {Die Mittlere Energie Rotierender Elektrischer Dipole im Strahlungsfeld},
@@ -290,7 +303,6 @@
   doi     = {10.1002/andp.19143480507},
   year    = {1914}
 }
-
 
 @book{Freidberg_2008,
   title     = {Plasma Physics and Fusion Energy},
