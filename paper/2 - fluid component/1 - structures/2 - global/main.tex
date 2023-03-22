@@ -32,7 +32,7 @@
             \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/2.png}
             \caption{$L = 2$}
         \end{subfigure}
-        \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. \BA{(How do these visually relate to helicities?)}}
+        \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. Vector fields with correspondingly varying helicities exhibit similar twisting structures.}
         \label{fig:linking numbers}
     \end{figure}
 
@@ -59,7 +59,7 @@
     \begin{equation}
         \rmH_{\rmH} = \calH\left[\bfA + \frac{2}{\beta\rmRH}\bfu\right].
     \end{equation}
-    It is referred to here as the hybrid \emph{helicity} here only by convention.} \BA{(What do these represent \emph{physically}? Diagrams!)}
+    It is referred to here as the hybrid \emph{helicity} here only by convention.}
     \begin{center}\begin{tabular}{ c | r : l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
@@ -74,24 +74,21 @@
     \end{equation}
     and $\bfomega$ is the vorticity $\bfomega  :=  \nabla\wedge\bfu$.
     
-    For the \emph{compressible} case, one can consider the energy, $\rmE$, redefined to incorporate the internal energy and variable density, and magnetic helicity, $\rmH_{\rmM}$, with definition unchanged:
+    For the \emph{compressible} case, one can introduce the total mass, $\rmM$, as a conserved quantity, and redefine the energy, $\rmE$, to incorporate the internal energy and variable density. The magnetic helicity, $\rmH_{\rmM}$, remains unchanged, while to the authors' knowledge the hybrid helicity, $\rmH_{\rmH}$, has no direct analogue in the compressible case:
     \begin{center}\begin{tabular}{ c | r : l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
+        Mass  &  $\rmM$  &  $\int_{\bfOmega}\rho$  \\
         Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
         \hdashline
         Magnetic helicity \cite{Blackman_2015}  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
+    These are the global structures considered by Gawlik and Gay--Balmaz in the barotropic case in \cite{Gawlik_Gay--Balmaz_2021}.
 
-    \begin{remark}
-        I can't find for the hybrid helicity, $\rmH_{\rmH}$, in the compressible case. There are claims that the hybrid helicity is conserved is ideal, barotropic MHD, but I can neither get the equations to work out, nor find a reliable source for these claims.
-        
-        Since on top of that, \cite{Laakmann_Hu_Farrell_2022} presents only finite-element timesteppers that preserve the conservation properties for \emph{either} $\rmH_{\rmM}$ \emph{or} $\rmH_{\rmM}$ and not both (leaving this for further work) and the magnetic helicity, $\rmH_{\rmM}$, is generally of more interest in the theory and literature, I've elected therefore only to consider $\rmH_{\rmM}$ for now. (See Chapter \ref{cha:research plan})
-    \end{remark}
-
-    Taking the derivatives of these quantities over time (in the compressible system) gives:
+    These quantities have the derivatives:
     \begin{align}
-        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\left[\frac{1}{\rmRef}\rho\bftau\cdot\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\rho\nabla\theta\cdot\bfn\right],  \\
+        \frac{\rmd}{\rmd t}\rmM         &=  0  \\
+        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\left[\frac{1}{\rmRef}\rho\bftau\cdot\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\rho\nabla\theta\cdot\bfn\right]  \\
         \frac{\rmd}{\rmd t}\rmH_{\rmM}  &=  - \frac{2}{\rmRem}\calH[\bfB]
     \end{align}
     Notably:
@@ -121,13 +118,13 @@
         \end{equation}
     \end{lemma}
     \begin{proof}
-        The proof relies on the Cauchy--Schwarz inequality in $L^{2}$ and the (generalized) Poincaré inequality in $\bfH_{\bfgamma}(\bfcurl)$. See Theorem 1.5 of \cite{Arnold_Khesin_2008}.
+        The proof relies on the Cauchy--Schwarz inequality in $L^{2}$ and the (generalized) Poincaré inequality in $\bfH_{\bfgamma}(\bfcurl)$. See Theorem 1.5 of \cite{Arnold_Khesin_2008}. \BA{(Note later that this holds in complex discretizations too.)}
     \end{proof}
 
     \begin{corollary}
         Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, giving
         \begin{equation}
-            |\rmH_{\rmM}|  \leq  C_{\bfGamma}\|\bfB\|_{\bfOmega}^{2}
+            |\rmH_{\rmM}|  \leq  C_{\bfGamma}\|\bfB\|_{\bfOmega}^{2}.
         \end{equation}
         This in turn gives the lower bound on the energy, $\rmE  \geq  \frac{C_{\bfGamma}}{\beta}|\rmH_{\rmM}|$.
     \end{corollary}
