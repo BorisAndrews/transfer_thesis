@@ -3,6 +3,38 @@
     \begin{equation}
         \calH[\bff](t)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)|_{t}
     \end{equation}
+    Helicity can be interpreted topologically as a continuous analogue to the linking number in knot theory, a topological invariant for pairs closed curves in $\bbR^{3}$. \cite{Berger_1999} (See Figure \ref{fig:linking numbers})
+
+    \begin{figure}[!ht]
+        \centering
+        \begin{subfigure}{0.1868\textwidth}
+            \centering
+            \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/-2.png}
+            \caption{$L = -2$}
+        \end{subfigure}%
+        \begin{subfigure}{0.1811\textwidth}
+            \centering
+            \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/-1.png}
+            \caption{$L = -1$}
+        \end{subfigure}%
+        \begin{subfigure}{0.2634\textwidth}
+            \centering
+            \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/0.png}
+            \caption{$L = 0$}
+        \end{subfigure}%
+        \begin{subfigure}{0.1815\textwidth}
+            \centering
+            \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/1.png}
+            \caption{$L = 1$}
+        \end{subfigure}%
+        \begin{subfigure}{0.1872\textwidth}
+            \centering
+            \includegraphics[width = 0.75\textwidth]{2 - fluid component/1 - structures/2 - global/images/2.png}
+            \caption{$L = 2$}
+        \end{subfigure}
+        \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. \BA{(How do these visually relate to helicities?)}}
+        \label{fig:linking numbers}
+    \end{figure}
 
     Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
     \begin{equation}
@@ -15,7 +47,7 @@
         It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
     \end{remark}
 
-    Assume henceforth the boundary conditions (BCs) on $\bfGamma$:\BA{(Note on alternative BCs?)}
+    Assume henceforth the boundary conditions (BCs) on $\bfGamma$: \BA{(Note on alternative BCs?)}
     \begin{align}\label{eqn:canonical boundary conditions}
         \bfzero  =  \bfu\cdot\bfn,   &&
         \bfzero  =  \bfB\cdot\bfn,   &&
@@ -59,8 +91,8 @@
 
     Taking the derivatives of these quantities over time (in the compressible system) gives:
     \begin{align}
-        \frac{d}{dt}\rmE         &=  \oint_{\bfGamma}\left[\frac{1}{\rmRef}\rho\bftau\cdot\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\rho\nabla\theta\cdot\bfn\right],  \\
-        \frac{d}{dt}\rmH_{\rmM}  &=  - \frac{2}{\rmRem}\calH[\bfB]
+        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\left[\frac{1}{\rmRef}\rho\bftau\cdot\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\rho\nabla\theta\cdot\bfn\right],  \\
+        \frac{\rmd}{\rmd t}\rmH_{\rmM}  &=  - \frac{2}{\rmRem}\calH[\bfB]
     \end{align}
     Notably:
     \begin{itemize}
@@ -71,12 +103,12 @@
         \end{itemize}
         then
         \begin{equation}
-            \frac{d\rmE}{dt}  =  0.
+            \frac{\rmd}{\rmd t}\rmE  =  0.
         \end{equation}
 
         \item  In the ideal magnetic limit, $\rmRem  \rightarrow  \infty$,
         \begin{equation}
-            \frac{d}{dt}\rmH_{\rmM}  =  0.
+            \frac{\rmd}{\rmd t}\rmH_{\rmM}  =  0.
         \end{equation}
       \end{itemize}
 
