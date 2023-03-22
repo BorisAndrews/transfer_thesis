@@ -1,7 +1,7 @@
 \subsection*{Global Structures}
-    Define first the helicity, $\calH[\bff](t)$, of a vector field $\bff : \bfOmega\otimes\bbR \rightarrow \bbR^{3}$, \cite{Moffatt_1969, Brown_Canfield_Pevtsov_1999}
+    Define first the helicity, $\calH[\bff](t)$, of a vector field $\bff : \bfOmega\otimes\bbR \rightarrow \bbR^{3}$: \cite{Moffatt_1969, Brown_Canfield_Pevtsov_1999}
     \begin{equation}
-        \calH[\bff](t)  :=  \int_{\bfOmega}\bff|_{t}\cdot(\nabla\wedge\bff|_{t}).
+        \calH[\bff](t)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)|_{t}
     \end{equation}
 
     \cite{Laakmann_Hu_Farrell_2022} considers conservation of the following 3 quantities in the incompressible system: \BA{(What do these represent \emph{physically}? Diagrams!)}
@@ -11,7 +11,7 @@
         Energy  &  $\rmE$  &  $\frac{1}{2}\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
         \hdashline
         Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$  \\
-        Hybrid helicity  &  $\rmH_{\rmH}$  &  $ab\calH[\bfA] + (a + b)\int_{\bfOmega}\bfB\cdot\bfu + \calH[\bfu]$
+        Hybrid helicity  &  $\rmH_{\rmH}$  &  $ab\calH[\bfA] + (a + b)\langle\bfB, \bfu\rangle_{\bfOmega} + \calH[\bfu]$
     \end{tabular}\end{center}
     where $a$, $b$ satisfy the relation $a + b  =  4/\beta\rmRH  (=  2\rmCy_{+})$, and $\bfA$ is a magnetic potential, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the de Rham complex on contractible $\bfOmega$, such a potential necessarily exists, since $\bfB  \in  \ker[\rmdiv]  =  \im[\bfcurl]$.
     
@@ -29,7 +29,7 @@
         \begin{split}
             \frac{d\rmH_{\rmH}}{dt}  &=  \oint_{\bfGamma}\left[ab\bfA\wedge(\bfE - \nabla\varphi) + (a + b)\left(\bfu\wedge\bfE - p\bfB - \frac{1}{2}\|\bfu\|^{2}\bfB\right)\right.  \\
             &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ a\bfA\wedge\bfu + \left(\partial_{t}\bfu\wedge\bfu - \|\bfu\|^{2}\bfomega - 2p\bfomega + \frac{1}{\rmRef}\bfB\wedge\bfomega\right)\right]\cdot\bfn  \\
-            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH[\bfB] + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH[\bfo]ega)\right]
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \left[\frac{2ab}{\rmRem}\calH[\bfB] + (a + b)\left(\frac{1}{\rmRem} + \frac{1}{\rmRef}\right)\langle\bfj, \bfomega\rangle_{\bfOmega} + \frac{2}{\rmRef}\calH[\bfomega]\right]
         \end{split}
     \end{align}
     noting $\partial_{t}\bfA  =  - \nabla\varphi - \bfE$. Thus, for boundary conditions on $\bfGamma$, \BA{(Hmmmmm, haven't defined $\varphi$ either...)}
