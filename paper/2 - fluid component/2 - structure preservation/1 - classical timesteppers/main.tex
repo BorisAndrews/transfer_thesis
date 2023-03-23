@@ -5,9 +5,9 @@
         \bfb  \in  \bbR^{s},  &&
         \bfc  \in  \bbR^{s}.
     \end{align}
-    Over the timestep $T^{n}$, suppose $\bfu|_{t^{n}} = \bfu^{n}$. In the general case, one considers the system of $s$ PDEs (or systems of PDEs) for each $i  \in  \{1, \cdot, s\}$ 
+    Over the timestep $T^{n}$, suppose $\bfu|_{t^{n}} = \bfu^{n}$. In the general case \ref{eqn:general time-dependent PDE} one considers the system of $s$ PDEs (or systems of PDEs) for each $i  \in  \{1, \cdots, s\}$ 
     \begin{equation}
-        \bfzero  =  \bfF\left[\bfu^{n - 1} + \sum_{j}a_{ij}\bfdelta\bfu^{n}_{j}, \nabla\bfu^{n - 1} + \sum_{j}a_{ij}\nabla\bfdelta\bfu^{n}_{j}, \cdots; \frac{1}{\delta t^{n}}\bfdelta\bfu^{n}_{i}\right]\left(*, t^{n - 1} + c_{i}\delta t^{n}\right),
+        \bfzero  =  \bfF\!\left[\bfu^{n - 1} + \sum_{j}a_{ij}\bfdelta\bfu^{n}_{j}, \nabla\bfu^{n - 1} + \sum_{j}a_{ij}\nabla\bfdelta\bfu^{n}_{j}, \cdots; \frac{1}{\delta t^{n}}\bfdelta\bfu^{n}_{i}\right]\!\left(*, t^{n - 1} + c_{i}\delta t^{n}\right),
     \end{equation}
     where one intends to solve for $\bfdelta\bfu^{n}_{1}(\bfx)$, $\cdots$, $\bfdelta\bfu^{n}_{1}(\bfx)$.
 
@@ -17,7 +17,7 @@
         Collocation methods are a class of RK methods. For an $s$-step method, they arae defined from:
         \begin{itemize}
             \item  A set of $s$ distinct ``collocation points'' $(c_{i})_{i}$, defining $\bfc$.
-            \item  An $s$-dimensional function space of functions for $\partial_{t}\bfu$, defined on a reference timestep $(0, 1]$:- typically polynomials, always containing the constant function $1$.
+            \item  An $s$-dimensional function space of functions for $\partial_{t}\bfu$, defined on a reference timestep $(0, 1]$, typically polynomials, always containing the constant function $1$.
         \end{itemize}
         For a well-defined pair of collocation points and function space, there exists a basis of functions $(\phi_{j})_{j}$, such that $\phi_{j}(c_{i})  =  \delta_{ij}$. $\sfA$, $\bfb$ are then defined from $(\phi_{j})_{j}$ as:
         \begin{align}
@@ -34,7 +34,7 @@
             \item  $(c_{i})_{i}$ GL points, roots of the Legendre polynomial $P_{s}$.
             \item  ${\rm Span}[(\phi_{j})_{j}]  =  \calP_{s - 1}$.
         \end{itemize}
-        They are symplectic and A-stable, with order $2s$. \BA{[Ref]}
+        They are symplectic \cite{Lasagni_1988, Sanz--Serna_1988} and A-stable, with order $2s$.
 
         The lowest-order ($s  =  1$) GL method is the Crank--Nicolson/implicit-midpoint method.
     \end{example}
@@ -45,7 +45,7 @@
             \item  $(c_{i})_{i}$ roots of $\left(\frac{\rmd}{\rmd\rmt}\right)^{s - 1}\left[t^{s - 1}(t - 1)^{s}\right]$.
             \item  ${\rm Span}[(\phi_{j})_{j}]  =  \calP_{s - 1}$.
         \end{itemize}
-        They are A-stable, with order $2s - 1$. \BA{[Ref]}
+        They are A-stable, with order $2s - 1$.
 
         The lowest-order ($s  =  1$) Radau-IIA method is the implicit-Euler method.
     \end{example}
@@ -61,7 +61,7 @@
     \line
     
     \begin{example}[Heat equation]
-        GL methods are known to dissipate energy, $\rmE(t)  :=  \int_{\bfOmega}u^{2}$, in the heat equation (\ref{eqn:heat equation}) under Dirichlet/Neumann boundary conditions. \BA{[Ref]}
+        GL methods are known to dissipate energy, $\rmE(t)  :=  \frac{1}{2}\int_{\bfOmega}u^{2}$, in the heat equation (\ref{eqn:heat equation}) under Dirichlet/Neumann boundary conditions.
         
         At lowest order ($s  =  1$) the Crank--Nicolson/implicit-midpoint method has the exact dissipation:
         \begin{equation}\label{eqn:heat equation dissipation implicit midpoint}
@@ -71,9 +71,10 @@
     \end{example}
     
     \begin{example}[Hamiltonian systems]
-        Timesteppers that preserve the Hamiltonian in Hamiltonian systems are referred to as ``symplectic''. The study and creation of symplectic timesteppers/integrators are the subjects of a wide-ranging, indepdendent field of study. \BA{[Ref]}
+        Symplectic timesteppers/integrators not only preserve the Hamiltonian in Hamiltonian systems, but further the general symplectic structure. The study and creation of symplectic timesteppers/integrators are the subjects of a wide-ranging, indepdendent field of study. See, for example, \cite{Hairer_Lubich_Wanner_2006}.
     \end{example}
+    
     \line
 
-    \BA{Fabian uses such an approach to design structure-preserving timesteppers for incompressible Hall MHD.}
+    Most modern finite-element(-in-space) SP timesteppers in MHD rely on bespoke RK methods, in particular the Crank--Nicolson method or slight modifications thereof. This is the approach for time discretization taken by Hu et al. to date. \cite{Hu_Lee_Xu_2021, Laakmann_Hu_Farrell_2022}
     

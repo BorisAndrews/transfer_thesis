@@ -28,22 +28,20 @@
         \begin{equation}\label{eqn:heat equation}
             \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
         \end{equation}
-        under homogeneous Dirichlet or Neumann BCs. Here, the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
+        under homogeneous Dirichlet or Neumann BCs. Here, the energy $\rmE(t)  :=  \frac{1}{2}\int_{\bfOmega}u^{2}$ is dissipated according to
         \begin{equation}\label{eqn:heat equation dissipation}
             \frac{\rmd}{\rmd t}\rmE  =  - \frac{1}{\rmPe}\|\nabla u\|^{2}  \leq  0.
         \end{equation}
     \end{example}
     
     \begin{example}[Hamiltonian systems]
-        Hamiltonian systems with Hamiltonian $\calH[p|_{t}, q|_{t}](t)$:
+        Hamiltonian systems with Hamiltonian $\calH[p, q](t)$:
         \begin{align}
-            \partial_{t}p  =  - \nabla_{q|_{t}}\calH,  &&
-            \partial_{t}q  =  + \nabla_{p|_{t}}\calH,
+            \partial_{t}p  =  - \nabla_{q}\calH,  &&
+            \partial_{t}q  =  + \nabla_{p}\calH,
         \end{align}
-        for $L^{2}$ functional derivatives $\nabla_{p|_{t}}$, $\nabla_{q|_{t}}$, on $\bbR^{d}$. These exactly conserve the Hamiltonian,
-        \begin{equation}
-            \frac{\rmd}{\rmd t}\calH  =  0,
-        \end{equation}
+        for $L^{2}$ functional derivatives $\nabla_{p}$, $\nabla_{q}$, on $\bbR^{d}$. These exactly conserve the Hamiltonian, with $\frac{\rmd}{\rmd t}\calH  =  0$.\footnote{They also }
+
         Examples include:
         \begin{itemize}
             \item  The wave equation,
