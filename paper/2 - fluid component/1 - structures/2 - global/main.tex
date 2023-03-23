@@ -37,11 +37,6 @@
         \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. Vector fields with correspondingly varying helicities exhibit similar twisting structures.}
         \label{fig:linking numbers}
     \end{figure}
-
-    Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
-    \begin{equation}
-        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
-    \end{equation}
     
     \begin{remark}
         We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
@@ -53,9 +48,13 @@
     \begin{align}\label{eqn:canonical boundary conditions}
         \bfzero  =  \bfu\cdot\bfn,   &&
         \bfzero  =  \bfB\cdot\bfn,   &&
-        \bfzero  =  \bfE\wedge\bfn,  &&
-        \bfzero  =  \bfA\wedge\bfn.
+        \bfzero  =  \bfE\wedge\bfn.
     \end{align}
+
+    Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$ with BCs $\bfzero  =  \bfA\wedge\bfn|_{\bfGamma}$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
+    \begin{equation}
+        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
+    \end{equation}
 
     \begin{remark}
         Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I'm choosing to consider these ones for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.

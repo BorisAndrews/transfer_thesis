@@ -1,16 +1,24 @@
-\section{Ensuring Structure Preservation in Weak/Variational Formulations}
+\section{Constructing Structure-Preserving (SP) Timesteppers}
     When constructing timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve these conservational/dissipative structures. There are many reasons one might seek to do this:
     \begin{itemize}
-        \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations, such as the topology of the magnetic poential characterised by the magnetic helicity as discussed above. Discretization that violate these structure can subsequently be exhibit correspondingly unphysical behavior.
+        \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations, such as the topology of the magnetic poential characterised by the magnetic helicity as discussed above. Discretizations that violate these structures can exhibit correspondingly unphysical behavior. This is especially relevant in long term simulations. 
+        
+        In the words of Hamming on the subject of symplectic integrators, a class of structure-preserving (SP) timestepper: \cite{Hamming_1986}
+        \begin{quotation}
+            \emph{``An algorithm which transforms properly with respect to a class of transformations is more basic than one that does not. In a sense the invariant algorithm attacks the problem and not the particular representation used.''}
+        \end{quotation}
+        
+        \BA{(Harmonic oscillator demonstration.)}
+
         \item  {\bf Quantiative motivations:} By way of example, the conservation of global quantities can often provide useful bounds on the outputs of the timesteppers, which can be useful in proving many results, such as well-posedness. The conservation of local quantities can alternatively help in providing parameter-robust bounds for convergence results, or allow the modification of the equations without fear of modification of the numerical results, such as in the use of augmented Lagrangians. \cite{FMW19, LFM22}
     \end{itemize}
     Whatever the motivation, it is logical to ensure the constructed timestepper preserved these structures.
 
-    Consider then, a general time-dependent PDE (or system of PDEs) in the generic strong form
+    Consider then a general time-dependent PDE (or system of PDEs) in the generic strong form
     \begin{equation}\label{eqn:general time-dependent PDE}
         \bfzero  =  \bfF\!\left[\bfu, \nabla\bfu, \nabla^{2}\bfu, \cdots; \partial_{t}\bfu\right]\!(\bfx; t),
     \end{equation}
-    alongside appropriate boundary conditions (BCs). The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu](t)$ that are conserved/dissipated over time, e.g. such that $\forall  t$ either $\frac{\rmd}{\rmd t}\rmE  =  0$, $\frac{\rmd}{\rmd t}\rmE  \leq  0$, or $\frac{\rmd}{\rmd t}\rmE  =  \calO[\epsilon]$ for some parameter $\epsilon \ll 1$.
+    where one intends to solve for $\bfu(\bfx; t)$, alongside appropriate initial (ICs) and boundary (BCs) conditions. The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu](t)$ that are conserved/dissipated over time, e.g. such that $\forall  t$ either $\frac{\rmd}{\rmd t}\rmE  =  0$, $\frac{\rmd}{\rmd t}\rmE  \leq  0$, or $\frac{\rmd}{\rmd t}\rmE  =  \calO[\epsilon]$ for some parameter $\epsilon \ll 1$.
     
     \line
     
@@ -20,7 +28,7 @@
         \begin{equation}\label{eqn:heat equation}
             \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
         \end{equation}
-        under homogeneous Dirichlet or Neumann BCs, where the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
+        under homogeneous Dirichlet or Neumann BCs. Here, the energy $\rmE(t)  :=  \int_{\bfOmega}u^{2}$ is dissipated according to
         \begin{equation}\label{eqn:heat equation dissipation}
             \frac{\rmd}{\rmd t}\rmE  =  - \frac{1}{\rmPe}\|\nabla u\|^{2}  \leq  0.
         \end{equation}
@@ -32,11 +40,11 @@
             \partial_{t}p  =  - \nabla_{q|_{t}}\calH,  &&
             \partial_{t}q  =  + \nabla_{p|_{t}}\calH,
         \end{align}
-        for $L^{2}$ functional derivatives $\nabla_{p|_{t}}$, $\nabla_{q|_{t}}$, on $\bbR^{d}$, which exactly conserve the Hamiltonian,
+        for $L^{2}$ functional derivatives $\nabla_{p|_{t}}$, $\nabla_{q|_{t}}$, on $\bbR^{d}$. These exactly conserve the Hamiltonian,
         \begin{equation}
             \frac{\rmd}{\rmd t}\calH  =  0,
         \end{equation}
-        such as:
+        Examples include:
         \begin{itemize}
             \item  The wave equation,
             \begin{align}
@@ -66,9 +74,15 @@
             \end{equation}
         \end{itemize}
     \end{example}
+
     \line
     
-    To apply the the finite-element method (FEM) to such a system, it must be cast into a weak/variational form.
+    We present here two possible approaches of tackling the time dependence of (\ref{eqn:general time-dependent PDE}) for constructing numerical timesteppers:
+    \begin{itemize}
+        \item  Traditional Runge--Kutta (RK) methods. (See Subsection \ref{cha:RK methods})
+        \item  A finite-element-in-time (FET) approach. (See Subsection \ref{cha:FET})
+    \end{itemize}
+    The merits of the latter with regard to the construction of structure-preserving (SP) timesteppers are discussed, when finite elements are employed for the discretization in space also.
 
 
     \input{2 - fluid component/2 - structure preservation/1 - classical timesteppers/main.tex}

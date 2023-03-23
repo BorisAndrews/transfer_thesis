@@ -1,3 +1,4 @@
+
 @article{ABB15,
   title   = {Finite Element Differential Forms on Curvilinear Cubic Meshes and Their Approximation Properties},
   volume  = {129},
@@ -140,7 +141,6 @@
   pages     = {59--91},
   year      = {2015},
   month     = may,
-  day       = {1},
   publisher = {Springer},
   doi       = {10.1007/s11214-014-0038-6}
 }
@@ -267,6 +267,21 @@
   pages    = {309--323}
 }
 
+@article{Farrell_Kirby_Marchena-Menéndez_2021,
+  title      = {Irksome: Automating Runge–Kutta Time-stepping for Finite Element Methods},
+  volume     = {47},
+  issn       = {0098-3500},
+  shorttitle = {Irksome},
+  doi        = {10.1145/3466168},
+  abstract   = {While implicit Runge–Kutta (RK) methods possess high order accuracy and important stability properties, implementation difficulties and the high expense of solving the coupled algebraic system at each time step are frequently cited as impediments. We present Irksome, a high-level library for manipulating UFL (Unified Form Language) expressions of semidiscrete variational forms to obtain UFL expressions for the coupled Runge–Kutta stage equations at each time step. Irksome works with the Firedrake package to enable the efficient solution of the resulting coupled algebraic systems. Numerical examples confirm the efficacy of the software and our solver techniques for various problems.},
+  number     = {4},
+  journal    = {ACM Transactions on Mathematical Software},
+  author     = {Farrell, P. E. and Kirby, R. C. and Marchena-Menéndez, J.},
+  month      = sep,
+  year       = {2021},
+  pages      = {30:1--30:26}
+}
+
 @article{Fix_Strang_1969,
   title    = {Fourier Analysis of the Finite Element Method in Ritz--Galerkin Theory},
   volume   = {48},
@@ -292,7 +307,6 @@
   abstract  = {In [M. Benzi and M. A. Olshanskii, SIAM J. Sci. Comput., 28 (2006), pp. 2095--2113] a preconditioner of augmented Lagrangian type was presented for the two-dimensional stationary incompressible Navier--Stokes equations that exhibits convergence almost independent of Reynolds number. The algorithm relies on a highly specialized multigrid method involving a custom prolongation operator and for robustness requires the use of piecewise constant finite elements for the pressure. However, the prolongation operator and velocity element used do not directly extend to three dimensions: the local solves necessary in the prolongation operator do not satisfy the inf-sup condition. In this work we generalize the preconditioner to three dimensions, proposing alternative finite elements for the velocity and prolongation operators for which the preconditioner works robustly. The solver is effective at high Reynolds number: on a three-dimensional lid-driven cavity problem with approximately one billion degrees of freedom, the average number of Krylov iterations per Newton step varies from 4.5 at Re = 10 to 3 at Re = 1000 and 5 at Re = 5000.}
 }
 
-
 @article{Fokker_1914,
   author  = {Fokker, A. D.},
   title   = {Die Mittlere Energie Rotierender Elektrischer Dipole im Strahlungsfeld},
@@ -303,6 +317,7 @@
   doi     = {10.1002/andp.19143480507},
   year    = {1914}
 }
+
 
 @book{Freidberg_2008,
   title     = {Plasma Physics and Fusion Energy},
@@ -379,6 +394,16 @@
   doi      = {10.1016/j.cpc.2022.108333},
   author   = {Green, D. and Hu, X. and Lore, J. and Mu, L. and Stowell, M. L.},
   abstract = {In this paper, we present an interior penalty discontinuous Galerkin finite element scheme for solving diffusion problems with strong anisotropy arising in magnetized plasmas for fusion applications. We demonstrate the accuracy produced by the high-order scheme and develop an efficient preconditioning technique to solve the corresponding linear system, which is robust to the mesh size and anisotropy of the problem. Several numerical tests are provided to validate the accuracy and efficiency of the proposed algorithm.}
+}
+
+@book{Hamming_1986,
+  title     = {Numerical Methods for Scientists and Engineers},
+  isbn      = {978-0-486-65241-2},
+  abstract  = {Numerical analysis is a subject of extreme interest to mathematicians and computer scientists, who will welcome this first inexpensive paperback edition of a groundbreaking classic text on the subject. In an introductory chapter on numerical methods and their relevance to computing, well-known mathematician Richard Hamming (\&quot;the Hamming code,\&quot; \&quot;the Hamming distance,\&quot; and \&quot;Hamming window,\&quot; etc.), suggests that the purpose of computing is insight, not merely numbers. In that connection he outlines five main ideas that aim at producing meaningful numbers that will be read and used, but will also lead to greater understanding of how the choice of a particular formula or algorithm influences not only the computing but our understanding of the results obtained. The five main ideas involve (1) insuring that in computing there is an intimate connection between the source of the problem and the usability of the answers (2) avoiding isolated formulas and algorithms in favor of a systematic study of alternate ways of doing the problem (3) avoidance of roundoff (4) overcoming the problem of truncation error (5) insuring the stability of a feedback system. In this second edition, Professor Hamming (Naval Postgraduate School, Monterey, California) extensively rearranged, rewrote and enlarged the material. Moreover, this book is unique in its emphasis on the frequency approach and its use in the solution of problems. Contents include: I. Fundamentals and Algorithms II. Polynomial Approximation- Classical Theory Ill. Fourier Approximation- Modern Theory IV. Exponential Approximation ... and more Highly regarded by experts in the field, this is a book with unlimited applications for undergraduate and graduate students of mathematics, science and engineering. Professionals and researchers will find it a valuable reference they will turn to again and again.},
+  language  = {en},
+  publisher = {Courier Corporation},
+  author    = {Hamming, R. W.},
+  year      = {1986}
 }
 
 @pdfthesis{Holderied_2022,
