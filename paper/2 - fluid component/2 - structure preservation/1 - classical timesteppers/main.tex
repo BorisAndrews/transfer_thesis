@@ -5,11 +5,14 @@
         \bfb  \in  \bbR^{s},  &&
         \bfc  \in  \bbR^{s}.
     \end{align}
-    Over the timestep $T^{n}$, suppose $\bfu|_{t^{n}} = \bfu^{n}$. In the general case \ref{eqn:general time-dependent PDE} one considers the system of $s$ PDEs (or systems of PDEs) for each $i  \in  \{1, \cdots, s\}$ 
+    Suppose this RK method is applied over the interval $T^{n}$. Let $\bfu^{n}  =  \bfu|_{t^{n}}$ denote the value taken by $\bfu$ at the start of the interval. In the general case \ref{eqn:general time-dependent PDE} one considers the system of $s$ PDEs (or systems of PDEs) for each $i  \in  \{1, \cdots, s\}$ 
     \begin{equation}
         \bfzero  =  \bfF\!\left[\bfu^{n - 1} + \sum_{j}a_{ij}\bfdelta\bfu^{n}_{j}, \nabla\bfu^{n - 1} + \sum_{j}a_{ij}\nabla\bfdelta\bfu^{n}_{j}, \cdots; \frac{1}{\delta t^{n}}\bfdelta\bfu^{n}_{i}\right]\!\left(*, t^{n - 1} + c_{i}\delta t^{n}\right),
     \end{equation}
-    where one intends to solve for $\bfdelta\bfu^{n}_{1}(\bfx)$, $\cdots$, $\bfdelta\bfu^{n}_{1}(\bfx)$.
+    where one intends to solve for $\bfdelta\bfu^{n}_{1}(\bfx)$, $\cdots$, $\bfdelta\bfu^{n}_{1}(\bfx)$. One then defined $\bfu^{n + 1}  =  \bfu|_{t^{n + 1}}$, the value taken by $\bfu$ at the \emph{end} of the interval as
+    \begin{equation}
+        \bfu^{n + 1}  =  \bfu^{n} + \sum_{j}b_{j}\bfdelta\bfu^{n}_{j}.
+    \end{equation}
 
     \line
     
