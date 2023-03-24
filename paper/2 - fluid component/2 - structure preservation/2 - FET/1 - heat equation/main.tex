@@ -89,9 +89,10 @@
     \end{equation}
     This is modified slightly from (\ref{eqn:heat equation weak form}) by the introduction of the new $\bbQ_{\partial_{t}\calU}$ projection operator. This can be cast into a variational formulation by the introduction of an \emph{``auxiliary''} variable $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. One seeks $u_{-}  \in  \calU_{-}$, $\widetilde{u}  \in  \partial_{t}\calU$, such that:
     \begin{align}
-        &\forall  v              \in  \partial_{t}\calU,  &              \langle v, \partial_{t}u\rangle_{\bfOmega\otimes T^{n}}  &=   - \frac{1}{\rmPe}\langle\nabla v, \nabla\widetilde{u}\rangle_{\bfOmega\otimes T^{n}}  \label{eqn:heat equation auxiliary variational form 1}  \\
-        &\forall  \widetilde{v}  \in  \partial_{t}\calU,  &  \langle \widetilde{v}, \widetilde{u}\rangle_{\bfOmega\otimes T^{n}}  &=   \langle\widetilde{v}, u\rangle_{\bfOmega\otimes T^{n}}  \label{eqn:heat equation auxiliary variational form 2}
+        &\forall              v  \in  \partial_{t}\calU,  &              \langle v, \partial_{t}u\rangle  &=   - \frac{1}{\rmPe}\langle\nabla v, \nabla\widetilde{u}\rangle  \label{eqn:heat equation auxiliary variational form 1}  \\
+        &\forall  \widetilde{v}  \in  \partial_{t}\calU,  &  0  &=  \langle \widetilde{v}, \widetilde{u}\rangle - \langle\widetilde{v}, u\rangle  \label{eqn:heat equation auxiliary variational form 2}
     \end{align}
+    where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T^{n}}$ are taken over the space-time domain, $\bfOmega\otimes T^{n}$.
     
     When $\calU$ is a tensor product space of one in space and time, as is the case in the above example, (linear) operators in space, such as $\Delta$, and time, such as $\bbQ_{\partial_{t}\calU}$ when $\calU$ is such a tensor product space, commute. Thus when $\calU$ is such a tensor product space, (\ref{eqn:heat equation auxiliary weak form}) and (\ref{eqn:heat equation weak form}) are equivalent.
 

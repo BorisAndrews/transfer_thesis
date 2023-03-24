@@ -1,4 +1,4 @@
-\subsubsection*{The Incompressible Case}
+\subsubsection*{Example 2: The \emph{Incompressible} Navier--Stokes Equations}
     Consider the \emph{incompressible} Navier--Stokes (NS) equations, in the classical strong form:
     \begin{align}
                        0  &=  \nabla\cdot\bfu,  \label{eqn:incompressible NS mass conservation}  \\
@@ -8,34 +8,56 @@
 
     By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherits the energy-dissipative structure,
     \begin{equation}\label{eqn:incompressible NS skew-symmetric momentum equation}
-        \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu],
+        \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bfu,
     \end{equation}
-    since:
+    where $\nabla_{\rms}$ again denotes the symmetric gradient, since:
     \begin{align}
-        &\nabla\cdot\left[\bfu^{\otimes 2}\right]  &&=  (\mst{\nabla\cdot\bfu})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
-        &\nabla\cdot\left[\nabla^{\rmT}\bfu\right]  &&=  \nabla[\mst{\nabla\cdot\bfu}]  &&=  0
+        &\nabla\cdot\left[\bfu^{\otimes 2}\right]   &&=  (\mst{\nabla\cdot\bfu})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
+        &\nabla\cdot\left[\nabla\bfu^{\rmT}\right]  &&=  \nabla[\mst{\nabla\cdot\bfu}]                      &&=  0
     \end{align}
 
     \begin{remark}
         \BA{If the weak form has exact incomp., then it doesn't matter how you write the convective term (classical/skew-symmetric etc.) since it shouldn't affect the solution. Only the skew-symmetric form gives energy-conserving timesteppers even without exact incomp. A similar result holds true for the \emph{compressible} case.}
+    \end{remark}
+
+    \begin{remark}
+        \BA{Alternative skew-symmetric convective operators exist.}
     \end{remark}
     
     The incompressible NS system can be seen to dissipate (kinetic) energy,
     \begin{equation}\label{eqn:incompressible NS energy definition}
         \rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2},
     \end{equation}
-    where $\nabla_{\rms}$ denotes the symmetric gradient,
-    \begin{equation}
-        \nabla_{\rms}\bfu  :=  \frac{1}{2}\left(\nabla\bfu + \nabla\bfu^{\rmT}\right),
-    \end{equation}
     with
     \begin{equation}
-        \frac{\rmd}{\rmd t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}.
+        \frac{\rmd}{\rmd t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
     \end{equation}
-    This form of the momentum equation is referred to as ``skew-symmetric'' due to the cancellation of the 2 terms in (\ref{eqn:what skew-symmetry means}). Summing (\ref{eqn:mass tested against p}) and (\ref{eqn:momentum tested against u}),
-    \begin{equation}
-        \partial_{t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
-    \end{equation}
+
+    We can again use the auxiliary function idea from the heat equation to convert (\ref{eqn:incompressible NS mass conservation}, \ref{eqn:incompressible NS skew-symmetric momentum equation}) into a weak form in space-time that invokes an energy-dissipative SP timestepper. Letting $\bfu$ similarly contain a lifting of the ICs, one can seek $\bfu_{-} \in \calU_{-}$, $p \in \calP$ such that: 
+    \begin{align}
+                                                                            0  &=  \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]],  \\
+        \begin{split}
+            (\partial_{t}\bfu  =)  \bbQ_{\partial_{t}\calU}[\partial_{t}\bfu]  &=  - \frac{1}{2}\bbQ_{\partial_{t}\calU}\left[\nabla\cdot\left[\bfu^{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \bfu^{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu]\right] - \bbQ_{\partial_{t}\calU}[\nabla p]  \\
+                                                                               &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+ \frac{2}{\rmRe}\bbQ_{\partial_{t}\calU}[\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]],
+        \end{split}
+    \end{align}
+    We write $\bfu^{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$. The SP property of the resultant timestepper is indepedent of this choice. In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
+    \begin{align}
+        &\forall                 q  \in  \calP,              &                                                0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
+        &\forall              \bfv  \in  \partial_{t}\calU,  &  \left\langle\bfv, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \bfv, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\bfv, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\bfv, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
+        &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &                                                0  &=  \left\langle\widetilde{\bfv}, \widetilde{\bfu}\right\rangle - \left\langle\widetilde{\bfv}, \bfu\right\rangle
+    \end{align}
+    where similarly all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T^{n}}$ are taken over the space-time domain, $\bfOmega\otimes T^{n}$, and $\calA[-; -, -]$ is the trilinear convective operator, defined
+    \begin{align}
+        \calA\left[\bfu^{*}; \bfv, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\bfv, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\bfv, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
+                                                             =  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\bfv\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\bfv\right)
+    \end{align}
+    with the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right] 
+     =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
+
+    \BA{Local incompressible SP.}
+
+    \BA{$\bbQ_{\partial_{t}\calU}[\bfu]$ can be computed offline in tensor product spaces.}
 
     Consider now how one might cast this into a weak formulation in time that both:
     \begin{itemize}
@@ -79,13 +101,6 @@
         &\forall  \widetilde{\bfv}  \in  \widetilde{\calV},  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
         &\forall              \bfv  \in  \calV,              &                                                            0  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
     \end{align}
-    where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T}$ are taken over $\bfOmega\otimes T$, and $\calA[-; -, -]$ is the trilinear convective operator, defined
-    \begin{align}
-        \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
-        =  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)
-    \end{align}
-    with the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right] 
-     =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
 
     \begin{remark}
         \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calA  \leq  0$, s.t. various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
