@@ -81,14 +81,14 @@
         Mass  &  $\rmM$  &  $\int_{\bfOmega}\rho$  \\
         Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
         \hdashline
-        Magnetic helicity  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
+        Magnetic helicity \cite{Blackman_2015}  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
-    These are the global structures considered by Gawlik and Gay--Balmaz in the barotropic case in \cite{Gawlik_Gay--Balmaz_2021}.
+    These are the global structures considered by Gawlik and Gay--Balmaz for a similar barotropic non-Hall case in \cite{Gawlik_Gay--Balmaz_2021}.
 
     These quantities have the derivatives:
     \begin{align}
         \frac{\rmd}{\rmd t}\rmM         &=  0  \\
-        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\left[\frac{1}{\rmRef}\rho\bftau\cdot\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\rho\nabla\theta\cdot\bfn\right]  \\
+        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\rho\left[\frac{1}{\rmRef}\bftau:\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\nabla\theta\cdot\bfn\right]  \\
         \frac{\rmd}{\rmd t}\rmH_{\rmM}  &=  - \frac{2}{\rmRem}\calH[\bfB]
     \end{align}
     Notably:
