@@ -1,12 +1,12 @@
-\paragraph*{The Incompressible Case}
+\subsubsection*{The Incompressible Case}
     Consider the \emph{incompressible} Navier--Stokes (NS) equations, in the classical strong form:
     \begin{align}
                        0  &=  \nabla\cdot\bfu,  \label{eqn:incompressible NS mass conservation}  \\
         \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{1}{\rmRe}\Delta\bfu,  \label{eqn:incompressible NS classical momentum conservation}
     \end{align}
-    under homogeneous Dirichlet BCs in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and ICs on $\bfu$.
+    under homogeneous Dirichlet BCs in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) with ICs on $\bfu$.
 
-    By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherit the energy-dissipative structure,
+    By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherits the energy-dissipative structure,
     \begin{equation}\label{eqn:incompressible NS skew-symmetric momentum equation}
         \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu],
     \end{equation}
@@ -24,16 +24,14 @@
     \begin{equation}\label{eqn:incompressible NS energy definition}
         \rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2},
     \end{equation}
-    by ``testing'' (in $L^{2}$) the mass conservation equation (\ref{eqn:incompressible NS mass conservation}) against $p$:
-    \begin{equation}\label{eqn:mass tested against p}
-        0  =  \int_{\bfOmega}p\nabla\cdot\bfu
+    where $\nabla_{\rms}$ denotes the symmetric gradient,
+    \begin{equation}
+        \nabla_{\rms}\bfu  :=  \frac{1}{2}\left(\nabla\bfu + \nabla\bfu^{\rmT}\right),
     \end{equation}
-    and the skew-symmetric form of the momentum equation (\ref{eqn:incompressible NS skew-symmetric momentum equation}) against $\bfu$:
-    \begin{align}
-        \int_{\bfOmega}\bfu\cdot\partial_{t}\bfu  &=  \int_{\bfOmega}\bfu\cdot\left(- \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\bfu]\right)  \\
-        \partial_{t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}\left(\mst{\bfu^{\otimes 2}:\nabla_{\rms}\bfu} - \mst{\bfu^{\otimes 2}:\nabla_{\rms}\bfu}\right) + p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:what skew-symmetry means}  \\
-        \partial_{t}\rmE  &=  \int_{\bfOmega}\left[p\nabla\cdot\bfu - \frac{2}{\rmRe}\|\nabla_{\rms}\bfu\|^{2}\right]  \label{eqn:momentum tested against u}
-    \end{align}
+    with
+    \begin{equation}
+        \frac{\rmd}{\rmd t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}.
+    \end{equation}
     This form of the momentum equation is referred to as ``skew-symmetric'' due to the cancellation of the 2 terms in (\ref{eqn:what skew-symmetry means}). Summing (\ref{eqn:mass tested against p}) and (\ref{eqn:momentum tested against u}),
     \begin{equation}
         \partial_{t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.

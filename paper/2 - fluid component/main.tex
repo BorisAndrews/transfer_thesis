@@ -14,7 +14,11 @@
     \end{equation}
     and $\bftau[\bfu]$ denotes the (deviatoric) strain,
     \begin{equation}\label{eqn:strain equation}
-        \bftau[\bfu]  :=  \left(\nabla\bfu + \nabla\bfu^{\rmT}\right) - \frac{2}{3}(\nabla\cdot\bfu)\bfI,
+        \bftau[\bfu]  :=  2\left(\nabla_{\rms}\bfu - \frac{1}{3}(\nabla\cdot\bfu)\sfI\right),
+    \end{equation}
+    where in turn $\nabla_{\rms}$ denotes the symmetric gradient,
+    \begin{equation}
+        \nabla_{\rms}\bfu  :=  \frac{1}{2}\left(\nabla\bfu + \nabla\bfu^{\rmT}\right),
     \end{equation}
     such that $\tr[\bftau[\bfu]]  =  0$. The assumption that the stress tensor here is predominantly trace-free is referred to as the Stokes hypothesis. \cite{Stokes_1845} Its validity is discussed in \cite{Vincenti_Kruger_1975}.
 
