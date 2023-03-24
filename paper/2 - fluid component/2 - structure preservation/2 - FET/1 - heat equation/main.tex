@@ -54,13 +54,13 @@
         \end{multline}
         The final condition $u|_{t = t^{n + 1}}$ is then given simply as $u|_{t = t^{n + 1}}  =  \widehat{u}_{s}$. This quantifies the CG-DG-in-time timestepper.
 
-        In the case of $s  =  1$---the lowest-order method---one seeks $\widehat{u}_{1}$, such that $\forall \widehat{v}_{1/2}$,
+        In the case of $s  =  1$---the lowest-order method---one seeks $\widehat{u}_{1}$, such that $\forall \widehat{v}_{1}$,
         \begin{equation}
-            \left\langle\widehat{v}_{1/2}, \widehat{u}_{1}\right\rangle_{\bfOmega} + \frac{\delta t^{n}}{2\rmPe}\left\langle\nabla\widehat{v}_{1/2}, \nabla\widehat{u}_{1}\right\rangle_{\bfOmega}  =  \left\langle\widehat{v}_{1/2}, \widehat{u}_{0}\right\rangle_{\bfOmega} - \frac{\delta t^{n}}{2\rmPe}\left\langle\nabla\widehat{v}_{1/2}, \nabla\widehat{u}_{0}\right\rangle_{\bfOmega}.
+            \left\langle\widehat{v}_{1}, \widehat{u}_{1}\right\rangle_{\bfOmega} + \frac{\delta t^{n}}{2\rmPe}\left\langle\nabla\widehat{v}_{1}, \nabla\widehat{u}_{1}\right\rangle_{\bfOmega}  =  \left\langle\widehat{v}_{1}, \widehat{u}_{0}\right\rangle_{\bfOmega} - \frac{\delta t^{n}}{2\rmPe}\left\langle\nabla\widehat{v}_{1}, \nabla\widehat{u}_{0}\right\rangle_{\bfOmega}.
         \end{equation}
         By rearranging, this can be seen to be equivalent to the traditional Crank--Nicolson method,
         \begin{equation}
-            \left\langle\widehat{v}_{1/2}, \frac{1}{\delta t}\left(\widehat{u}_{1} - \widehat{u}_{0}\right)\right\rangle_{\bfOmega}  =  - \frac{1}{\rmPe}\left\langle\nabla\widehat{v}_{1/2}, \nabla\left[\frac{1}{2}\left(\widehat{u}_{1} + \widehat{u}_{0}\right)\right]\right\rangle_{\bfOmega}.
+            \left\langle\widehat{v}_{1}, \frac{1}{\delta t}\left(\widehat{u}_{1} - \widehat{u}_{0}\right)\right\rangle_{\bfOmega}  =  - \frac{1}{\rmPe}\left\langle\nabla\widehat{v}_{1}, \nabla\left[\frac{1}{2}\left(\widehat{u}_{1} + \widehat{u}_{0}\right)\right]\right\rangle_{\bfOmega}.
         \end{equation}
         For $s  >  1$---at higher order---the resultant timesteppers are equivalent to the other higher-order GL methods, which as stated earlier are known to be exactly dissipative for the heat equation. Notably however, while the scheme may be dissipative, the difference in $\rmE$ is \emph{not} that which might be assumed from (\ref{eqn:heat equation dissipation}), $\frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}$, but a seemingly related value, e.g. as stated in (\ref{eqn:heat equation dissipation implicit midpoint}), $\frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}\left(\widehat{u}_{1} + \widehat{u}_{0}\right)\right]\right\|^{2}$ when $s = 1$.
     \end{example}
