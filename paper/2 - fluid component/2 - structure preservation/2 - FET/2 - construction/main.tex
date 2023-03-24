@@ -1,11 +1,11 @@
 \subsubsection{Constructing Structure-Preserving Timesteppers}
     It was observed above that the GL timesteppers derived from a CG-DG Petrov--Galerkin discretization of the heat equation preserved the dissipative properties of the continuous heat equation. Can this be made sense of through the lens of function spaces in time/FET?
 
-    One might initially observe the weak formulation in time (\ref{eqn:heat equation weak form}), wherein one seeks $u_{-}  \in  \calU_{-}$ such that $\forall  v  \in  \calV$,
+    One might initially observe the weak formulation in time (\ref{eqn:heat equation variational form}), wherein one seeks $u_{-}  \in  \calU_{-}$ such that $\forall  v  \in  \calV$,
     \begin{equation*}
         \langle v, \partial_{t}u\rangle_{\bfOmega\otimes T}  =   - \frac{1}{\rmPe}\langle\nabla v, \nabla u\rangle_{\bfOmega\otimes T}.
     \end{equation*}
-    One can observe that, from a naïve theoretical standpoint, were $\calU  \leqslant  \calV$, one would necessarily know $u  \in  \calV$. Substituting $v  \mapsto  u$ in (\ref{eqn:heat equation weak form}) gives:
+    One can observe that, from a naïve theoretical standpoint, were $\calU  \leqslant  \calV$, one would necessarily know $u  \in  \calV$. Substituting $v  \mapsto  u$ in (\ref{eqn:heat equation variational form}) gives:
     \begin{align}
         \langle u, \partial_{t}u\rangle_{\bfOmega\otimes T}  &=   - \frac{1}{\rmPe}\langle\nabla u, \nabla u\rangle_{\bfOmega\otimes T}  \label{eqn:heat equation dissipation proof 1}  \\
         \partial_{t}\left[\frac{1}{2}\int_{\bfOmega\otimes T}u^{2}\right]  &=   - \frac{1}{\rmPe}\int_{\bfOmega\otimes T}\|\nabla u\|^{2}  \\

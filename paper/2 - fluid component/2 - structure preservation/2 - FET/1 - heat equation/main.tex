@@ -9,11 +9,11 @@
             \item  Decompose $u$ with a lifting of the ICs, as $u  :=  u_{0} + u_{-}$. When $u$ is written from here, it can be taken formally as a convenient shorthand for $u_{0} + u_{-}$.
         \end{enumerate}
         In weak form, one then seeks $u_{-}  \in  \calU_{-}$ such that,
-        \begin{equation}
+        \begin{equation}\label{eqn:heat equation weak form}
             (\partial_{t}u  =)  \bbQ_{\partial_{t}\calU}[\partial_{t}u]  =  \frac{1}{\rmPe}\bbQ_{\partial_{t}\calU}[\Delta u].
         \end{equation}
         Casting into a variational formulation, one can seek $u_{-}  \in  \calU_{-}$ such that $\forall  v  \in  \partial_{t}\calU$,
-        \begin{equation}\label{eqn:heat equation weak form}
+        \begin{equation}\label{eqn:heat equation variational form}
             \langle v, \partial_{t}u\rangle_{\bfOmega\otimes T^{n}}  =   - \frac{1}{\rmPe}\langle\nabla v, \nabla u\rangle_{\bfOmega\otimes T^{n}},
         \end{equation}
         
@@ -25,7 +25,7 @@
         \begin{equation}
             \partial_{t}\bbU^{\rmh}  :=  \widehat{\calU}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right)  <  \partial_{t}\calU.
         \end{equation}
-        Mapping $\calU  \mapsto  \bbU^{\rmh}$ in (\ref{eqn:heat equation weak form}) invokes the Petrov--Galerkin projection. Denote bases for these FE spaces:
+        Mapping $\calU  \mapsto  \bbU^{\rmh}$ in (\ref{eqn:heat equation variational form}) invokes the Petrov--Galerkin projection. Denote bases for these FE spaces:
         \begin{align}
             (\phi_{j})_{j}     \text{ for }  \bbP^{s}\left(T^{n}\right),         &&
             (\varphi_{i})_{i}  \text{ for }  \bbDP^{s - 1}\left(T^{n}\right),
@@ -76,3 +76,46 @@
       \frac{\delta t^{n}}{\rmPe}\int_{\bfOmega}\left\|\nabla\left[\frac{1}{2}\left(u|_{t^{n + 1}} + u|_{t^{n}}\right)\right]\right\|^{2}  =  \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2} + \calO\left[\frac{\left(\delta t^{n}\right)^{2}}{\rmPe}\right].
     \end{equation}
     In fact, again with sufficient regularity on $u$, the energy dissipation from the $s$-step GL method is off from the true value, $1/\rmPe\cdot\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}$, by factor on the order of $\calO\left[\left(\delta t^{n}\right)^{s + 1}\!\!/\rmPe\right]$.
+    
+    \shortline
+
+    We can make sense of this through an auxiliary space reformulation, that will prove useful for the construction of SP timesteppers in the more complicated, non-linear systems yet to come.
+
+    \shortline
+
+    Let us first take a step back, and consider an alternative weak form of the heat equation, where one seeks $u_{-}  \in  \calU_{-}$ such that
+    \begin{equation}\label{eqn:heat equation auxiliary weak form}
+        (\partial_{t}u  =)  \bbQ_{\partial_{t}\calU}[\partial_{t}u]  =  \frac{1}{\rmPe}\bbQ_{\partial_{t}\calU}[\Delta\bbQ_{\partial_{t}\calU}[u]].
+    \end{equation}
+    This is modified slightly from (\ref{eqn:heat equation weak form}) by the introduction of the new $\bbQ_{\partial_{t}\calU}$ projection operator. This can be cast into a variational formulation by the introduction of an \emph{``auxiliary''} variable $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. One seeks $u_{-}  \in  \calU_{-}$, $\widetilde{u}  \in  \partial_{t}\calU$, such that:
+    \begin{align}
+        &\forall  v              \in  \partial_{t}\calU,  &              \langle v, \partial_{t}u\rangle_{\bfOmega\otimes T^{n}}  &=   - \frac{1}{\rmPe}\langle\nabla v, \nabla\widetilde{u}\rangle_{\bfOmega\otimes T^{n}}  \label{eqn:heat equation auxiliary variational form 1}  \\
+        &\forall  \widetilde{v}  \in  \partial_{t}\calU,  &  \langle \widetilde{v}, \widetilde{u}\rangle_{\bfOmega\otimes T^{n}}  &=   \langle\widetilde{v}, u\rangle_{\bfOmega\otimes T^{n}}  \label{eqn:heat equation auxiliary variational form 2}
+    \end{align}
+    
+    When $\calU$ is a tensor product space of one in space and time, as is the case in the above example, (linear) operators in space, such as $\Delta$, and time, such as $\bbQ_{\partial_{t}\calU}$ when $\calU$ is such a tensor product space, commute. Thus when $\calU$ is such a tensor product space, (\ref{eqn:heat equation auxiliary weak form}) and (\ref{eqn:heat equation weak form}) are equivalent.
+
+    One can use the weak form (\ref{eqn:heat equation auxiliary weak form}) directly to mimic the proof of energy dissipation in the continuous, strong formulation, to show this weak/variational formulations preserve the energy-dissipative structure of the continuous problem:
+    \begin{align}
+        \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
+        &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}u^{2}\right]  \\
+        &=  \int_{\bfOmega\otimes T^{n}}u\partial_{t}u  \\
+        &=  \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}u\bbQ_{\partial_{t}\calU}[\Delta\bbQ_{\partial_{t}\calU}[u]]  \\
+        &=  \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\bbQ_{\partial_{t}\calU}[u]\Delta\bbQ_{\partial_{t}\calU}[u]  \\
+        &=  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla\bbQ_{\partial_{t}\calU}[u]\|^{2}  \left(=  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla\widetilde{u}\|^{2}\right)  \leq  0
+    \end{align}
+    A similar proof follows from the equivalent variational formulation (\ref{eqn:heat equation auxiliary variational form 1}--\ref{eqn:heat equation auxiliary variational form 2}).
+
+    This approach both:
+    \begin{itemize}
+        \item  Proves the energy-dissipation SP property both for the GL/CG-DG-in-time timestepper as constructed above, and a wider class of timesteppers for arbitrary $\calU$. 
+        \item  Explains the discrepancy between the energy dissipation and $1/\rmPe\cdot\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}$, since the dissipation is exactly this (semi-)norm on the \emph{auxiliary} function, $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. For tensor product $\calU$, one can in fact write
+        \begin{equation}
+            \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  =  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2} + \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla(\id - \bbQ_{\partial_{t}\calU})[u]\|^{2},
+        \end{equation}
+        such that as the order in time increases and (informally) $\bbQ_{\partial_{t}\calU}  \rightarrow  \id$,
+        \begin{equation}
+            \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  \rightarrow  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}.
+        \end{equation}
+        One can thus approach the question of quantifying dissipation through the well-studied language of bounds on these projection operators.
+    \end{itemize}
