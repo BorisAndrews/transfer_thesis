@@ -46,7 +46,7 @@
         $0  =  \nabla\wedge\bfE$  &  $\nabla\wedge\bfE  \in  \calB$  &  $\nabla\wedge\calE  \leqslant  \calB$  \\
         $0  =  \nabla\cdot\bfB$  &  $\bfB  \in  \calB$  &
     \end{tabular}\end{center}
-    (Note the proof of pointwise $0  =  \nabla\cdot\bfB$ here relies on that of pointwise $0  =  \nabla\wedge\bfE$ before it.) Restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calU \xrightarrow{\rmdiv} \calP$ and $\calE \xrightarrow{\bfcurl} \calB$ form components of subcomplexes of $H\Lambda^{\bullet}(\bfOmega)$, with projection/interpolation maps $\pi_{*}$ such that the following diagrams commute:
+    (Note the proof of pointwise $0  =  \nabla\cdot\bfB$ here relies on that of pointwise $0  =  \nabla\wedge\bfE$ before it.) Restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calU \xrightarrow{\rmdiv} \calP$ and $\calE \xrightarrow{\bfcurl} \calB$ form components of subcomplexes of $H\Lambda^{\bullet}(\bfOmega)$, with projection/interpolation maps $\bbQ_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (Hcurl) at (0,   0)   {$\bfH(\bfcurl)$};
         \node (Hdiv1) at (3.5, 0)   {$\bfH(\rmdiv)$};
@@ -55,8 +55,8 @@
 
         \draw[->] (Hcurl) -- (Hdiv1) node[above, midway] {$\bfcurl$};
         \draw[->] (E)     -- (B)     node[above, midway] {$\bfcurl$};
-        \draw[->] (Hcurl) -- (E)     node[left,  midway] {$\pi_{\rmE}$};
-        \draw[->] (Hdiv1) -- (B)     node[left,  midway] {$\pi_{\rmB}$};
+        \draw[->] (Hcurl) -- (E)     node[left,  midway] {$\bbQ_{\rmE}$};
+        \draw[->] (Hdiv1) -- (B)     node[left,  midway] {$\bbQ_{\rmB}$};
         
         \node (Hdiv2) at (7,    0)   {$\bfH(\rmdiv)$};
         \node (L2)    at (10.5, 0)   {$L^{2}$};
@@ -65,8 +65,8 @@
 
         \draw[->] (Hdiv2) -- (L2) node[above, midway] {$\rmdiv$};
         \draw[->] (U)     -- (P)  node[above, midway] {$\rmdiv$};
-        \draw[->] (Hdiv2) -- (U)  node[left,  midway] {$\pi_{\rmU}$};
-        \draw[->] (L2)    -- (P)  node[left,  midway] {$\pi_{\rmP}$};
+        \draw[->] (Hdiv2) -- (U)  node[left,  midway] {$\bbQ_{\rmU}$};
+        \draw[->] (L2)    -- (P)  node[left,  midway] {$\bbQ_{\rmP}$};
     \end{tikzpicture}\end{center}
 
     In the \emph{compressible} case, similar test spaces for the corresponding equations can be used, with the addition of the \emph{new} energy equation, naturally tested against the \emph{new} function space, $\calD$. (See Figure \ref{fig:compressible stationary-state test spaces}) The corresponding \emph{compressible} weak formulation is given in Figure \ref{fig:compressible stationary-state weak form}.

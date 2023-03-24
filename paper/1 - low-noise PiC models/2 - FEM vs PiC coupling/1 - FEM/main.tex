@@ -1,9 +1,9 @@
 \subsection*{Fluid Component (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}): FEM}
     The fluid component comprises a nonlinear PDE in position space, $\bfx$, and time, $t$, only. Classical techniques for the numerical solution of such nonlinear PDEs include:
     \begin{itemize}
-        \item  Finite element methods (FEM)
-        \item  Finite difference methods (FDM)
-        \item  Finite volume methods (FVM)
+        \item  Finite-element methods (FEM)
+        \item  Finite-difference methods (FDM)
+        \item  Finite-volume methods (FVM)
         \item  Spectral methods
     \end{itemize}
     Great advancements have been made in recent years on the analysis and application of FEM discretizations for MHD models, including the development of provably well-posed and necessarily structure-preserving discretizations and parameter-robust preconditioners. \cite{Hu_Xu_2015, Hu_Ma_Xu_2017, Hu_Lee_Xu_2021, Green_et_al_2022, LFM22, Laakmann_Hu_Farrell_2022} Much of this work has evolved from the development of the finite element exterior calculus (FEEC) by Arnold et al., with its extensive applications in electromagnetic and hydrodynamic models. \cite{Arnold_Falk_Winther_2006, Arnold_Falk_Winther_2009, Arnold_2018}

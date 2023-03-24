@@ -1,9 +1,11 @@
 \subsection*{Global Structures}
-    Define first the helicity, $\calH[\bff](t)$, of a vector field $\bff : \bfOmega\otimes\bbR \rightarrow \bbR^{3}$: \cite{Moffatt_1969, Brown_Canfield_Pevtsov_1999}
+    \emph{``Global''} structures here refer to those that are defined via integrals over $\bfOmega$, i.e. those that are functions of $t$ only.
+
+    Define first the general \emph{``helicity''}, $\calH[\bff](t)$, of a vector field $\bff : \bfOmega\otimes\bbR \rightarrow \bbR^{3}$: \cite{Moffatt_1969, Brown_Canfield_Pevtsov_1999}
     \begin{equation}
         \calH[\bff](t)  :=  \int_{\bfOmega}\bff\cdot(\nabla\wedge\bff)|_{t}
     \end{equation}
-    Helicity can be interpreted topologically as a continuous analogue to the linking number in knot theory, a topological invariant for pairs closed curves in $\bbR^{3}$. \cite{Berger_1999} (See Figure \ref{fig:linking numbers})
+    Helicity can be interpreted topologically as a continuous analogue to the linking number in knot theory, a topological invariant for pairs of closed curves in $\bbR^{3}$. \cite{Berger_1999} (See Figure \ref{fig:linking numbers})
 
     \begin{figure}[!ht]
         \centering
@@ -35,25 +37,28 @@
         \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. Vector fields with correspondingly varying helicities exhibit similar twisting structures.}
         \label{fig:linking numbers}
     \end{figure}
-
-    Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
-    \begin{equation}
-        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl, \bfH_{0}(\bfcurl)].
-    \end{equation}
     
     \begin{remark}
-        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since multiple such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$: a potential gradient.
+        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
         
         It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
     \end{remark}
 
-    Assume henceforth the boundary conditions (BCs) on $\bfGamma$: \BA{(Note on alternative BCs?)}
+    Assume henceforth the homogeneous boundary conditions (BCs) on $\bfGamma$:
     \begin{align}\label{eqn:canonical boundary conditions}
         \bfzero  =  \bfu\cdot\bfn,   &&
         \bfzero  =  \bfB\cdot\bfn,   &&
-        \bfzero  =  \bfE\wedge\bfn,  &&
-        \bfzero  =  \bfA\wedge\bfn.
+        \bfzero  =  \bfE\wedge\bfn.
     \end{align}
+
+    Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$ with BCs $\bfzero  =  \bfA\wedge\bfn|_{\bfGamma}$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$ (See Appendix \ref{cha:Hilbert complexes}) such a potential necessarily exists, since
+    \begin{equation}
+        \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
+    \end{equation}
+
+    \begin{remark}
+        Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I'm choosing to consider these ones for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.
+    \end{remark}
 
     In the incompressible case, \cite{Laakmann_Hu_Farrell_2022} considers the conservation of the following 3 quantities in the incompressible system:\footnote{Note, the hybrid helicity, $\rmH_{\rmH}$, is \emph{not} (necessarily) the helicity of a vector field, except in the case of $a = b = \beta\rmRH/2 (= 1/\rmCy\!_{+})$, where
     \begin{equation}
@@ -79,7 +84,7 @@
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
         Mass  &  $\rmM$  &  $\int_{\bfOmega}\rho$  \\
-        Energy  &  $\rmE$  &  $\frac{1}{2}\rho\|\bfu\|_{\bfOmega}^{2} + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2} + \int_{\bfOmega}p$  \\
+        Energy  &  $\rmE$  &  $\int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \rho\theta\right] + \frac{1}{\beta}\|\bfB\|_{\bfOmega}^{2}$  \\
         \hdashline
         Magnetic helicity \cite{Blackman_2015}  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
@@ -121,12 +126,17 @@
         The proof relies on the Cauchy--Schwarz inequality in $L^{2}$ and the (generalized) Poincaré inequality in $\bfH_{\bfgamma}(\bfcurl)$. See Theorem 1.5 of \cite{Arnold_Khesin_2008}. \BA{(Note later that this holds in complex discretizations too.)}
     \end{proof}
 
+    The following corollary is noted also in \cite{Arnold_Khesin_2008}:
+
     \begin{corollary}
         Lemma \ref{lem:continuity of helicity} can be applied to the specific cases of the magnetic helicity, $\rmH_{\rmM}$, giving
         \begin{equation}
             |\rmH_{\rmM}|  \leq  C_{\bfGamma}\|\bfB\|_{\bfOmega}^{2}.
         \end{equation}
-        This in turn gives the lower bound on the energy, $\rmE  \geq  \frac{C_{\bfGamma}}{\beta}|\rmH_{\rmM}|$.
+        This in turn gives the lower bound on the energy,
+        \begin{equation}
+            \rmE  \geq  \frac{C_{\bfGamma}}{\beta}|\rmH_{\rmM}|.
+        \end{equation}
     \end{corollary}
 
     \BA{Would like to look at how this bound changes when one switches to a non-conforming scheme.}

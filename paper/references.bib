@@ -140,7 +140,6 @@
   pages     = {59--91},
   year      = {2015},
   month     = may,
-  day       = {1},
   publisher = {Springer},
   doi       = {10.1007/s11214-014-0038-6}
 }
@@ -267,6 +266,21 @@
   pages    = {309--323}
 }
 
+@article{Farrell_Kirby_Marchena-Menéndez_2021,
+  title      = {Irksome: Automating Runge–Kutta Time-stepping for Finite Element Methods},
+  volume     = {47},
+  issn       = {0098-3500},
+  shorttitle = {Irksome},
+  doi        = {10.1145/3466168},
+  abstract   = {While implicit Runge–Kutta (RK) methods possess high order accuracy and important stability properties, implementation difficulties and the high expense of solving the coupled algebraic system at each time step are frequently cited as impediments. We present Irksome, a high-level library for manipulating UFL (Unified Form Language) expressions of semidiscrete variational forms to obtain UFL expressions for the coupled Runge–Kutta stage equations at each time step. Irksome works with the Firedrake package to enable the efficient solution of the resulting coupled algebraic systems. Numerical examples confirm the efficacy of the software and our solver techniques for various problems.},
+  number     = {4},
+  journal    = {ACM Transactions on Mathematical Software},
+  author     = {Farrell, P. E. and Kirby, R. C. and Marchena-Menéndez, J.},
+  month      = sep,
+  year       = {2021},
+  pages      = {30:1--30:26}
+}
+
 @article{Fix_Strang_1969,
   title    = {Fourier Analysis of the Finite Element Method in Ritz--Galerkin Theory},
   volume   = {48},
@@ -280,6 +294,18 @@
   pages    = {265--273}
 }
 
+@article{FMW19,
+  title     = {An Augmented Lagrangian Preconditioner for the 3D Stationary Incompressible Navier--Stokes Equations at High Reynolds Number},
+  author    = {Farrell, P. E. and Mitchell, L. and Wechsung, F.},
+  publisher = {SIAM},
+  journal   = {SIAM journal on scientific computing.},
+  pages     = {A3073--A3096},
+  year      = {2019},
+  volume    = {41},
+  doi       = {10.1137/18M1219370},
+  abstract  = {In [M. Benzi and M. A. Olshanskii, SIAM J. Sci. Comput., 28 (2006), pp. 2095--2113] a preconditioner of augmented Lagrangian type was presented for the two-dimensional stationary incompressible Navier--Stokes equations that exhibits convergence almost independent of Reynolds number. The algorithm relies on a highly specialized multigrid method involving a custom prolongation operator and for robustness requires the use of piecewise constant finite elements for the pressure. However, the prolongation operator and velocity element used do not directly extend to three dimensions: the local solves necessary in the prolongation operator do not satisfy the inf-sup condition. In this work we generalize the preconditioner to three dimensions, proposing alternative finite elements for the velocity and prolongation operators for which the preconditioner works robustly. The solver is effective at high Reynolds number: on a three-dimensional lid-driven cavity problem with approximately one billion degrees of freedom, the average number of Krylov iterations per Newton step varies from 4.5 at Re = 10 to 3 at Re = 1000 and 5 at Re = 5000.}
+}
+
 @article{Fokker_1914,
   author  = {Fokker, A. D.},
   title   = {Die Mittlere Energie Rotierender Elektrischer Dipole im Strahlungsfeld},
@@ -290,7 +316,6 @@
   doi     = {10.1002/andp.19143480507},
   year    = {1914}
 }
-
 
 @book{Freidberg_2008,
   title     = {Plasma Physics and Fusion Energy},
@@ -312,6 +337,7 @@
   month      = jan,
   year       = {2002}
 }
+
 
 @book{Gard_1998,
   author    = {Gard, T. C.},
@@ -367,6 +393,28 @@
   doi      = {10.1016/j.cpc.2022.108333},
   author   = {Green, D. and Hu, X. and Lore, J. and Mu, L. and Stowell, M. L.},
   abstract = {In this paper, we present an interior penalty discontinuous Galerkin finite element scheme for solving diffusion problems with strong anisotropy arising in magnetized plasmas for fusion applications. We demonstrate the accuracy produced by the high-order scheme and develop an efficient preconditioning technique to solve the corresponding linear system, which is robust to the mesh size and anisotropy of the problem. Several numerical tests are provided to validate the accuracy and efficiency of the proposed algorithm.}
+}
+
+@book{Hairer_Lubich_Wanner_2006,
+  title      = {Geometric Numerical Integration: Structure-Preserving Algorithms for Ordinary Differential Equations},
+  isbn       = {978-3-540-30666-5},
+  shorttitle = {Geometric Numerical Integration},
+  abstract   = {Numerical methods that preserve properties of Hamiltonian systems, reversible systems, differential equations on manifolds and problems with highly oscillatory solutions are the subject of this book. A complete self-contained theory of symplectic and symmetric methods, which include Runge-Kutta, composition, splitting, multistep and various specially designed integrators, is presented and their construction and practical merits are discussed. The long-time behaviour of the numerical solutions is studied using a backward error analysis (modified equations) combined with KAM theory. The book is illustrated by many figures, it treats applications from physics and astronomy and contains many numerical experiments and comparisons of different approaches. The second edition is substantially revised and enlarged, with many improvements in the presentation and additions concerning in particular non-canonical Hamiltonian systems, highly oscillatory mechanical systems, and the dynamics of multistep methods.},
+  language   = {en},
+  publisher  = {Springer Science \& Business Media},
+  author     = {Hairer, E. and Lubich, C. and Wanner, G.},
+  month      = may,
+  year       = {2006}
+}
+
+@book{Hamming_1986,
+  title     = {Numerical Methods for Scientists and Engineers},
+  isbn      = {978-0-486-65241-2},
+  abstract  = {Numerical analysis is a subject of extreme interest to mathematicians and computer scientists, who will welcome this first inexpensive paperback edition of a groundbreaking classic text on the subject. In an introductory chapter on numerical methods and their relevance to computing, well-known mathematician Richard Hamming (\&quot;the Hamming code,\&quot; \&quot;the Hamming distance,\&quot; and \&quot;Hamming window,\&quot; etc.), suggests that the purpose of computing is insight, not merely numbers. In that connection he outlines five main ideas that aim at producing meaningful numbers that will be read and used, but will also lead to greater understanding of how the choice of a particular formula or algorithm influences not only the computing but our understanding of the results obtained. The five main ideas involve (1) insuring that in computing there is an intimate connection between the source of the problem and the usability of the answers (2) avoiding isolated formulas and algorithms in favor of a systematic study of alternate ways of doing the problem (3) avoidance of roundoff (4) overcoming the problem of truncation error (5) insuring the stability of a feedback system. In this second edition, Professor Hamming (Naval Postgraduate School, Monterey, California) extensively rearranged, rewrote and enlarged the material. Moreover, this book is unique in its emphasis on the frequency approach and its use in the solution of problems. Contents include: I. Fundamentals and Algorithms II. Polynomial Approximation- Classical Theory Ill. Fourier Approximation- Modern Theory IV. Exponential Approximation ... and more Highly regarded by experts in the field, this is a book with unlimited applications for undergraduate and graduate students of mathematics, science and engineering. Professionals and researchers will find it a valuable reference they will turn to again and again.},
+  language  = {en},
+  publisher = {Courier Corporation},
+  author    = {Hamming, R. W.},
+  year      = {1986}
 }
 
 @pdfthesis{Holderied_2022,
@@ -506,6 +554,22 @@
   month    = feb,
   year     = {2022},
   note     = {arXiv: 2202.11586}
+}
+
+@article{Lasagni_1988,
+  title    = {Canonical Runge--Kutta Methods},
+  volume   = {39},
+  issn     = {1420-9039},
+  doi      = {10.1007/BF00945133},
+  abstract = {In the present note we provide a complete characterization of all Runge--Kutta methods which generate a canonical transformation if applied to a Hamiltonian system of ordinary differential equations.},
+  language = {en},
+  number   = {6},
+  urldate  = {2023-03-23},
+  journal  = {Zeitschrift für angewandte Mathematik und Physik ZAMP},
+  author   = {Lasagni, F. M.},
+  month    = nov,
+  year     = {1988},
+  pages    = {952--953}
 }
 
 @book{Le-Gall_2016,
@@ -715,6 +779,15 @@
   pages   = {621--636},
   month   = jul,
   year    = {2016}
+}
+
+@article{Sanz--Serna_1988,
+  title   = {Runge--Kutta Schemes for Hamiltonian Systems},
+  volume  = {28},
+  journal = {BIT Numerical Mathematics},
+  author  = {Sanz-Serna, J. M.},
+  year    = {1988},
+  pages   = {877--883}
 }
 
 @book{Stokes_1845,
