@@ -5,24 +5,6 @@
         \partial_{t}\bfu  &=  - \bfu\cdot\nabla\bfu - \nabla p + \frac{1}{\rmRe}\Delta\bfu,  \label{eqn:incompressible NS classical momentum conservation}
     \end{align}
     under homogeneous Dirichlet BCs in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) with ICs on $\bfu$.
-
-    By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherits the energy-dissipative structure,
-    \begin{equation}\label{eqn:incompressible NS skew-symmetric momentum equation}
-        \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bfu,
-    \end{equation}
-    where $\nabla_{\rms}$ again denotes the symmetric gradient, since:
-    \begin{align}
-        &\nabla\cdot\left[\bfu^{\otimes 2}\right]   &&=  (\mst{\nabla\cdot\bfu})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
-        &\nabla\cdot\left[\nabla\bfu^{\rmT}\right]  &&=  \nabla[\mst{\nabla\cdot\bfu}]                      &&=  0
-    \end{align}
-
-    \begin{remark}
-        \BA{If the weak form has exact incomp., then it doesn't matter how you write the convective term (classical/skew-symmetric etc.) since it shouldn't affect the solution. Only the skew-symmetric form gives energy-conserving timesteppers even without exact incomp. A similar result holds true for the \emph{compressible} case.}
-    \end{remark}
-
-    \begin{remark}
-        \BA{Alternative skew-symmetric convective operators exist.}
-    \end{remark}
     
     The incompressible NS system can be seen to dissipate (kinetic) energy,
     \begin{equation}\label{eqn:incompressible NS energy definition}
@@ -33,15 +15,34 @@
         \frac{\rmd}{\rmd t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
     \end{equation}
 
+    By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherits the energy-dissipative structure,
+    \begin{equation}\label{eqn:incompressible NS skew-symmetric momentum equation}
+        \partial_{t}\bfu  =  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{\otimes 2}\right] + \bfu\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bfu,
+    \end{equation}
+    since:
+    \begin{align}
+        &\nabla\cdot\left[\bfu^{\otimes 2}\right]   &&=  (\mst{\nabla\cdot\bfu})\bfu + \bfu\cdot\nabla\bfu  &&=  \bfu\cdot\nabla\bfu  \\
+        &\nabla\cdot\left[\nabla\bfu^{\rmT}\right]  &&=  \nabla[\mst{\nabla\cdot\bfu}]                      &&=  0
+    \end{align}
+    where $\nabla_{\rms}$ again denotes the symmetric gradient.
+
+    \begin{remark}
+        Alternative skew-symmetric forms for the convective term, such as those incorporating the vorticity $\bfomega  :=  \nabla\wedge\bfu$, exist. While these too induce timestepper that preserve the energy-dissipative structure, we choose not to consider them further here.
+    \end{remark}
+
+    \begin{remark}
+        \BA{If the weak form has exact incomp., then it doesn't matter how you write the convective term (classical/skew-symmetric etc.) since it shouldn't affect the solution. Only the skew-symmetric form gives energy-conserving timesteppers even without exact incomp. A similar result holds true for the \emph{compressible} case.}
+    \end{remark}
+
     We can again use the auxiliary function idea from the heat equation to convert (\ref{eqn:incompressible NS mass conservation}, \ref{eqn:incompressible NS skew-symmetric momentum equation}) into a weak form in space-time that invokes an energy-dissipative SP timestepper. Letting $\bfu$ similarly contain a lifting of the ICs, one can seek $\bfu_{-} \in \calU_{-}$, $p \in \calP$ such that: 
     \begin{align}
-                                                                            0  &=  \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]],  \\
+                                                                            0  &=  \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]],  \label{eqn:incompressible NS weak form 1}  \\
         \begin{split}
             (\partial_{t}\bfu  =)  \bbQ_{\partial_{t}\calU}[\partial_{t}\bfu]  &=  - \frac{1}{2}\bbQ_{\partial_{t}\calU}\left[\nabla\cdot\left[\bfu^{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \bfu^{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu]\right] - \bbQ_{\partial_{t}\calU}[\nabla p]  \\
                                                                                &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+ \frac{2}{\rmRe}\bbQ_{\partial_{t}\calU}[\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]],
-        \end{split}
+        \end{split}  \label{eqn:incompressible NS weak form 2}
     \end{align}
-    We write $\bfu^{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$. The SP property of the resultant timestepper is indepedent of this choice. In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
+    We write $\bfu^{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$. The energy-dissipative SP property of the resultant timestepper is indepedent of this choice. In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
     \begin{align}
         &\forall                 q  \in  \calP,              &                                                            0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
         &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
@@ -52,89 +53,51 @@
         \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu^{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu^{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
                                                                          =  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu^{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)
     \end{align}
-    with the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right] 
-     =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
-
-    \BA{Local incompressible SP.}
-
-    \BA{$\bbQ_{\partial_{t}\calU}[\bfu]$ can be computed offline in tensor product spaces.}
-
-    Consider now how one might cast this into a weak formulation in time that both:
-    \begin{itemize}
-        \item  Invokes a timestepper after discretization.
-        \item  Inherits this energy-dissipative property.
-    \end{itemize}
-    Suppose the weak form seeks:
-    \begin{align}
-           p  \in  \calP,  &&
-        \bfu  \in  \calU,
-    \end{align}
-    and seeks to test (in $L^{2}$):
-    \begin{align}
-                           \text{(\ref{eqn:incompressible NS mass conservation}) against }    q \in \calQ,  &&
-        \text{(\ref{eqn:incompressible NS skew-symmetric momentum equation}) against } \bfv \in \calV.
-    \end{align}
-    For the results (\ref{eqn:mass tested against p}), (\ref{eqn:momentum tested against u}) to hold, the following subspace criteria are required:
-    \begin{align}
-        \calP  \leqslant  \calQ,  &&
-        \calU  \leqslant  \calV,
-    \end{align}
-    however, as established above, the latter condition $\calU  \leqslant  \calV$ can \emph{not} invoke a timestepper after discretization, as ICs are to be imposed on $\bfu  \in  \calU$, which is involved in a necessary subspace crietrion. \contra
-    
-    Again, as above, this can be combated by the introduction of an auxiliary function $\widetilde{\bfu}$, with $\widetilde{\bfu}  =  \bfu$ in the strong formulation. Consider the auxiliary strong form:
-    \begin{align}
-                       0  &=  \nabla\cdot\widetilde{\bfu},  \\
-        \partial_{t}\bfu  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfu^{*}\otimes\widetilde{\bfu}\right] + \bfu^{*}\cdot\nabla\bfu\right) - \nabla p + \frac{2}{\rmRe}\nabla\cdot[\nabla_{\rms}\widetilde{\bfu}],  \\
-                 \bfzero  &=  \widetilde{\bfu} - \bfu,
-    \end{align}
-    under homogeneous Dirichlet BCs in $\bfu$ \emph{and} $\widetilde{\bfu}$ ($\bfzero  =  \bfu  =  \widetilde{\bfu}|_{\bfGamma}$) and ICs on $\bfu$ \emph{only}. $\bfu^{*}$ can be taken as either $\bfu$ or $\widetilde{\bfu}$ without affecting energy conservation.
-    
-    In weak form, one seeks:
-    \begin{align}
-                       p  \in  \calP,  &&
-        \widetilde{\bfu}  \in  \widetilde{\calU},  &&
-                    \bfu  \in  \calU,
-    \end{align}
-    such that:
-    \begin{align}
-        &\forall                 q  \in  \calQ,              &                                                            0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
-        &\forall  \widetilde{\bfv}  \in  \widetilde{\calV},  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu^{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
-        &\forall              \bfv  \in  \calV,              &                                                            0  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
-    \end{align}
+    This has the crucial skew-symmetry property $\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right]  =  0$, $\forall \bfu^{*}, \widetilde{\bfu}$.
 
     \begin{remark}
         \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calA  \leq  0$, s.t. various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
     \end{remark}
 
-    \begin{theorem}[Energy dissipation for the auxiliary weak formulation of incompressible NS]
-        Presuming the following subspace criteria hold (likely with equality for well-posedness):
-        \begin{align}
-                        \calP  \leqslant  \calQ,  &&
-            \widetilde{\calU}  \leqslant  \widetilde{\calV},  &&
-            \partial_{t}\calU  \leqslant  \calV,
-        \end{align}
-        then $\rmE\left(t^{N}\right)  \leq  \rmE(0)$, with
-        \begin{equation}
-            \rmE\left(t^{N}\right) - \rmE(0)  =  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}
-        \end{equation}
-    \end{theorem}
-    \begin{proof}
-        From the given subspace criteria, the following results necessarily hold:
-        \begin{align}
-            p                 &\in  (\calP              \leqslant)  \calQ              &&\implies  &                                                              0  &=  \langle p, (\nabla\cdot\widetilde{\bfu})\rangle  \\
-            &                                                                          &&          &                                                              0  &=  \int_{\bfOmega\otimes T}p\left(\nabla\cdot\widetilde{\bfu}\right)  \\
-            \widetilde{\bfu}  &\in  (\widetilde{\calU}  \leqslant)  \widetilde{\calV}  &&\implies  &    \left\langle\widetilde{\bfu}, \partial_{t}\bfu\right\rangle  &=  \mst{\calA\left[\bfu^{*}; \widetilde{\bfu}, \widetilde{\bfu}\right]} + \left\langle\nabla\cdot\widetilde{\bfu}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfu}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
-            &                                                                          &&          &  \int_{\bfOmega\otimes T}\widetilde{\bfu}\cdot\partial_{t}\bfu  &=  \int_{\bfOmega\otimes T}\left[\left(\nabla\cdot\widetilde{\bfu}\right)p - \frac{2}{\rmRe}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}\right]  \\
-            \partial_{t}\bfu  &\in  (\partial_{t}\calU  \leqslant)  \calV              &&\implies  &                                                              0  &=  \left\langle\partial_{t}\bfu, \widetilde{\bfu}\right\rangle - \left\langle\partial_{t}\bfu, \bfu\right\rangle  \\
-            &                                                                          &&          &                                                              0  &=  \int_{\bfOmega\otimes T}\left[\partial_{t}\bfu\cdot\widetilde{\bfu} - \partial_{t}\bfu\cdot\bfu\right]  \\
-        \end{align}
-        Summing these:
-        \begin{align}
-            \int_{\bfOmega\otimes T}\left[\left(\partial_{t}\bfu\cdot\bfu - \mst{\partial_{t}\bfu\cdot\widetilde{\bfu}}\right) + \mst{\widetilde{\bfu}\cdot\partial_{t}\bfu}\right]  &=  \int_{\bfOmega\otimes T}\left[- \mst{p\left(\nabla\cdot\widetilde{\bfu}\right)} + \left(\mst{\left(\nabla\cdot\widetilde{\bfu}\right)p} - \frac{2}{\rmRe}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}\right)\right]  \\
-            \partial_{t}\left[\frac{1}{2}\int_{\bfOmega\otimes T}\|\bfu\|^{2}\right]  &=  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T}\left\|\nabla_{\rms}\widetilde{\bfu}\right\|^{2}  \label{eqn:weak NS dissipation}  \\
-            \rmE\left(t^{N}\right)  &\leq  \rmE(0)
-        \end{align}
-    \end{proof}
+    One can again use the weak form (\ref{eqn:incompressible NS weak form 1}--\ref{eqn:incompressible NS weak form 2}) directly to mimic the proof of energy dissipation:
+    \begin{align}
+        \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
+        &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  \\
+        &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\partial_{t}\bfu  \\
+        &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\left(- \frac{1}{2}\bbQ_{\partial_{t}\calU}\left[\nabla\cdot\left[\bfu^{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \right. \cdots + \frac{2}{\rmRe}\bbQ_{\partial_{t}\calU}[\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]]\right)  \\
+        &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\calA\left[\bfu^{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
+        &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]}p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
+        &=  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T^{n}}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}  \leq  0
+    \end{align}
+    Thus, the resultant timestepper preserves the energy-dissipative structure.
+
+    Similar to the classical stationary-state case, if the following diagram commutes,
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (Ut*) at (0, 0) {$(\partial_{t}\calU)^{*}$};
+        \node (P*)  at (3.5,   0) {$\calP^{*}$};
+        \draw[->] (Ut*) -- (P*) node[above, midway] {$\rmdiv$};
+
+        \node (Ut) at (0, - 2) {$\partial_{t}\calU$};
+        \node (P)  at (3.5,   - 2) {$\calP$};
+        \draw[->] (Ut) -- (P) node[above, midway] {$\rmdiv$};
+
+        \draw[->] (Ut*) -- (Ut) node[left, midway] {$\bbQ_{\partial_{t}\calU}$};
+        \draw[->] (P*)  -- (P)  node[left, midway] {$\bbQ_{\calP}$};
+    \end{tikzpicture}\end{center}
+    then (\ref{eqn:incompressible NS weak form 1}) directly gives pointwise incompressibility on the \emph{auxiliary} space, $\bbQ_{\partial_{t}\calU}[\bfu]$,
+    \begin{equation}
+        \nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]  =  0.
+    \end{equation}
+    
+    \begin{remark}
+        I believe that, when $\calU$ is a tensor product space and the incompressibility condition $\nabla\cdot\bfu  =  0|_{t = 0}$ holds exactly on the IC, the above result is sufficient to prove pointwise incompressible on $\bfu$ itself, $\nabla\cdot\bfu = 0$. Indeed this is true simply by dimensionality when the time component of such a space-time tensor product construction for $\calU$ is finite-dimensional, as is the case in after discretization. I believe it should hold in the continuous case, but I've yet to sort the technicalities of such a proof. Perhaps some new commutation property is required that is satisfied in the case of tensor product $\calU$?
+    \end{remark}
+
+    When using a tensor product space for $\calU$ in the heat equation, we noted that above that the auxiliary function to be computed, $\bbQ_{\partial_{t}\calU}[u]$, could be eliminated from the weak form (\ref{eqn:heat equation auxiliary weak form}). Due to the nonlinearity of the Navier--Stokes system, this is no longer possible here. An alternative possibility is however available. Since, for tensor product spaces, $\bbQ_{\partial_{t}\calU}$ acts on $\calU$ only in the time component, $\bbQ_{\partial_{t}\calU}[\bfu]$ can be computed offline $\forall \bfu (\in \calU)$. To illustrate this, consider the following CG-DG-in-time example discretization.
+    
+    \BA{Can $\partial_{t}\calU$ ever be a FE space if $\calU$ is not a tensor product space?}
+
+    \line
 
     \begin{example}[CG-DG-in-time dissipative timestepper for incompressible NS]
         Discretizing in time using an order-$s$ CG discretization for the time-continuous spaces ($\calU$) and an order-$(s - 1)$ DG discretization for the time-discontinuous spaces (everything else), consider the following trial and test spaces:

@@ -1,4 +1,4 @@
-\section*{Preliminaries and Notation}
+\section*{Preliminaries, Notation and Terminology}
     Since integrals, $\int_{\bfv}$, over the velocity, $\bfv$, have been eliminated from the system, integrals shall henceforth be assumed to be over space, $\bfx$, denoting the integral over $\bfx  \in  \bfS$ for some domain $\bfS  \subset  \bbR^{3}$ as $\int_{\bfS}$.
 
     Let $\bfOmega  \subset  \bbR^{3}$ denote a sufficiently smooth, compact, contractible domain, with boundary $\bfGamma  :=  \partial\bfOmega$, on which the MHD system is considered. Denote the outward-pointing normal on $\bfGamma$ as $\bfn$.
@@ -25,3 +25,20 @@
 
     Let $\bbQ_{\calF}$ denote the $L^{2}$ projection onto the space $\calF$.
     
+    In the analysis of a PDE, we use the terms ``weak'' and ``variatonal'' form to represent different interpretations of the same idea. Consider by way of example Poisson's equations,
+    \begin{equation}
+        \Delta u  =  f,
+    \end{equation}
+    with homogeneous Dirichlet/Neumann BCs, on the domain $\bfOmega$:
+    \begin{itemize}
+        \item  {\bf Variational form:} A typical $H^{1}$ variational form of Poisson's equation might seek $u \in \calU$, for some solution space $\calU \in H^{1}$, such that $\forall v \in \calU$,
+        \begin{equation}
+            - \langle\nabla u, \nabla v\rangle_{\bfOmega}  =  \langle v, f\rangle_{\bfOmega}.
+        \end{equation}
+        This is the the form that would employed in Galerkin projection and computation.
+        \item  {\bf Weak form:} This variational form can be equivalently written in terms of ($L^{2}$) projection operators, $\bbQ_{*}$, as
+        \begin{equation}
+            \bbQ_{\calU}[\Delta u]  =  \bbQ_{\calU}[f],
+        \end{equation}
+        where $\Delta u$ is interpreted as a distribution in $H^{- 1}  (\cong (H^{1}_{0})^{*})$. The solution of this is exactly equivalent to the variational form, however is often more clear to compare to the original strong form, and often easier to work with in the analysis.
+    \end{itemize}
