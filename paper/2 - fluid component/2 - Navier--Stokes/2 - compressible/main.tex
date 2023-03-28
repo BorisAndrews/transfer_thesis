@@ -45,22 +45,23 @@
     We use the auxiliary function concept to convert (\ref{eqn:compressible NS sqrt mass equation}--\ref{eqn:compressible NS sqrt energy equation}) into a weak form in space-time that invokes an energy-conservative SP timestepper. Letting $\sigma$, $\bfu$, $\theta$ each contain a lifting of the ICs, one can seek $\sigma_{-} \in \Sigma_{-}$, $\bfu_{-} \in \calU_{-}$, $\theta \in \Theta_{-}$ such that:
     \begin{align}
             \bbQ_{\partial_{t}\Sigma}\left[\partial_{t}\left[\sigma^{2}\right]\right]
-            &=  - \bbQ_{\partial_{t}\Sigma}[\nabla\cdot\left[\sigma_{*}^{2}\bfu_{*}\right]]  \\
+            &=  \bbQ_{\partial_{t}\Sigma}\left[- \nabla\cdot\left[\sigma_{*}^{2}\bfu_{*}\right]\tall\!\right]  \\
         \begin{split}
             \bbQ_{\partial_{t}\calU}[\sigma\partial_{t}[\sigma\bfu]]
             &=  \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\left(\nabla\cdot\left[\sigma_{*}^{2}\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \sigma_{*}^{2}\bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu]\right)\right.  \\
-            &\qquad\qquad\left.- \nabla\left[\sigma_{*}^{2}\theta_{*}\right]
+            &\qquad\qquad\qquad\qquad\qquad\qquad\left.- \nabla\left[\sigma_{*}^{2}\theta_{*}\right]
             + \frac{1}{\rmRe}\nabla\cdot\left[\sigma_{*}^{2}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\right]\right]
         \end{split}  \\
         \begin{split}
             \frac{3}{2}\bbQ_{\partial_{t}\Theta}\left[\partial_{t}\left[\sigma^{2}\theta\right]\right]
-            &=  \bbQ_{\partial_{t}\Theta}\left[- \frac{3}{2}\nabla\cdot\left[\sigma_{*}^{2}\theta_{*}\bfu_{*}\right]\right.  \\
-            &\qquad\qquad- \sigma_{*}^{2}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]
-            + \frac{1}{2\rmRe}\|\sigma_{*}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}  \\
-            &\qquad\qquad\qquad\qquad\left.+ \frac{1}{\rmPe}\nabla\cdot\left[\sigma_{*}^{2}\nabla\theta_{*}\right]\right]
+            &=  \bbQ_{\partial_{t}\Theta}\left[- \frac{3}{2}\nabla\cdot\left[\sigma_{*}^{2}\theta_{*}\bfu_{*}\right]
+            - \sigma_{*}^{2}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{2\rmRe}\|\sigma_{*}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}
+            + \frac{1}{\rmPe}\nabla\cdot\left[\sigma_{*}^{2}\nabla\theta_{*}\right]\right]
       \end{split}
     \end{align}
     where similary $\sigma_{*}$, $\bfu_{*}$, $\theta_{*}$ can be taken as either $\sigma_{*}$, $\bfu_{*}$, $\theta_{*}$ or the auxiliary projections $\bbQ_{\partial_{t}\Sigma}[\sigma_{*}]$, $\bbQ_{\partial_{t}\calU}[\bfu_{*}]$, $\bbQ_{\partial_{t}\Theta}[\theta_{*}]$, without affecting the resultant timesteppers SP properties.
+    
     Formulating the problem as a timestepper in $(\phi, \bfr, \theta)$ has the advantage of giving both a form of the:
     \begin{itemize}
         \item  Energy, $\rmE$, (\ref{eqn:compressible NS energy definition 2}) with a kinetic component $\frac{1}{2}\int_{\bfOmega}\|\bfr\|^{2}$ which bears more resemblance to that of the \emph{incompressible} case (\ref{eqn:incompressible NS energy definition}).
