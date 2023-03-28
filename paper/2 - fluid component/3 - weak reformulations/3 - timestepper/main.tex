@@ -1,6 +1,0 @@
-\subsection*{Timestepping Case}
-    \BA{Introduction.}
-    
-    Consider now the problem over a infinite time interval, i.e. on $\bfOmega\otimes\bbR_{+}$, through a timestepper.
-    
-    \BA{(Need some references for this paragraphs. Should trace the paper trail back a little further from Giacomo's report.)} For sake of analysis, restrict $\bbR_{+}$ to some interval $T$. This problem can again be approached through the lens of function/finite element spaces in time, only this time through careful choice of trial and test space to devise a formulation that, upon discretization, exhibits a block-triangular structure, inducing a timestepper. Analysis through the weak formulation in both space and time similarly helps the creation of weak formulations that exactly mimic the conservation properties in the strong form. Again, for a further discussion on this technique, see Appendix \BA{(Here's where I used to have a link to the FET appendix...)}. A numerical implementation for certain timesteppers derived from finite elements in time (FET), {\tt Fetsome}, building on the implicit Runge--Kutta method package {\tt Irksome} for the finite-element software {\tt Firedrake} is presented in the report \cite{La22}.

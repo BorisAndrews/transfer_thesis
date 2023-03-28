@@ -1,57 +1,66 @@
 \subsubsection*{The \emph{Compressible} Case}
     Consider now the \emph{compressible} NS equations, in the classical strong form:
     \begin{align}
-                \partial_{t}\rho  &=  - \nabla\cdot[\rho\bfu],  \label{eqn:compressible NS mass equation}  \\
-          \partial_{t}[\rho\bfu]  &=  - \nabla\cdot\left[\rho\bfu^{\otimes 2}\right] - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau],  \label{eqn:compressible NS momentum equation}  \\
-        \frac{3}{2}\partial_{t}[\rho\theta]  &=  - \frac{3}{2}\nabla\cdot[\rho\theta\bfu] - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta],  \label{eqn:compressible NS energy equation}
+                           \partial_{t}\rho  &=  - \nabla\cdot[\rho\bfu]  \label{eqn:compressible NS mass equation}  \\
+                     \partial_{t}[\rho\bfu]  &=  - \nabla\cdot\left[\rho\bfu^{\otimes 2}\right] - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
+        \frac{3}{2}\partial_{t}[\rho\theta]  &=  - \frac{3}{2}\nabla\cdot[\rho\theta\bfu] - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
     \end{align}
-    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), where as above, $\bftau$ is the deviatoric strain (\ref{eqn:strain equation}).
+    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$. $\bftau$ is the deviatoric strain as in (\ref{eqn:strain equation}).
+
+    The \emph{compressible} NS system can seen to \emph{conserve}:
+    \begin{itemize}
+        \item  Energy,
+        \begin{equation}\label{eqn:compressible NS energy definition}
+            \rmE[\rho, \bfu, p](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \frac{3}{2}\rho\theta\right],
+        \end{equation}
+        with
+        \begin{equation}
+            \frac{\rmd}{\rmd t}\rmE  =  0.
+        \end{equation}
+        \item  Mass,
+        \begin{equation}\label{eqn:compressible NS mass definition}
+            \rmM[\rho](t)  :=  \int_{\bfOmega}\rho,
+        \end{equation}
+        with
+        \begin{equation}
+            \frac{\rmd}{\rmd t}\rmM  =  0.
+        \end{equation}
+    \end{itemize}
 
     Again, it is advantageous for the construction of SP timesteppers to reframe the convective component of the momentum equation (\ref{eqn:compressible NS momentum equation}) in a skew-symmetric form. This can be done by writing the momentum equation in the unconvential derivative $\partial_{t}[\sqrt{\rho}\bfu]$, in place of $\partial_{t}\bfu$:
     \begin{equation}
-        \sqrt{\rho}\partial_{t}[\sqrt{\rho}\bfu]  =  - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla p + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
+        \sqrt{\rho}\partial_{t}[\sqrt{\rho}\bfu]  =  - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
     \end{equation}
-
-    Similarly, the \emph{compressible} NS system can seen to \emph{conserve} energy,
-    \begin{equation}\label{eqn:compressible NS energy definition 1}
-        \rmE[\rho, \bfu, p](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \frac{3}{2}p\right],
-    \end{equation}
-    by testing (in $L^{2}$):
-    \begin{itemize}
-        \item  The skew-symmetric form of the momentum equation (\ref{eqn:compressible NS skew-symmetric momentum equation}) against $\bfu$:
-        \begin{align}
-            \begin{split}
-                \int_{\bfOmega}\sqrt{\rho}\bfu\cdot\partial_{t}[\sqrt{\rho}\bfu]  &=  \int_{\bfOmega}\bfu\cdot\left(- \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right]\right. + \rho\bfu\cdot\nabla\bfu)  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.- \nabla p + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]\right)
-            \end{split}  \\
-            \begin{split}
-                \partial_{t}\left[\int_{\bfOmega}\frac{1}{2}\|\sqrt{\rho}\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}(\mst{\rho\bfu^{\otimes 2}:\nabla\bfu} - \mst{\rho\bfu^{\otimes 2}:\nabla\bfu})\right.  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ p\nabla\cdot\bfu - \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
-            \end{split}  \\
-            \partial_{t}\left[\int_{\bfOmega}\frac{1}{2}\rho\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[p\nabla\cdot\bfu - \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
-        \end{align}
-        \item  The energy equation (\ref{eqn:compressible NS energy equation}) simply against $1$:
-        \begin{align}
-            \int_{\bfOmega}\frac{3}{2}\partial_{t}p  &=  \int_{\bfOmega}\left[- \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]\right]  \\
-            \partial_{t}\left[\int_{\bfOmega}\frac{3}{2}p\right]  &=  \int_{\bfOmega}\left[- p\nabla\cdot\bfu + \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
-        \end{align}
-    \end{itemize}
-    Summing these gives simply $\partial_{t}\rmE  =  0$, implying energy is conserved exactly.
-
-    Inspired by the form of (\ref{eqn:compressible NS skew-symmetric momentum equation}), define (in the strong, continuous case):
+    To keep the system (\ref{eqn:compressible NS mass equation}, \ref{eqn:compressible NS skew-symmetric momentum equation}, \ref{eqn:compressible NS energy equation}) multiplicative, define $\sigma := \sqrt{\rho}$, such that it can be written in terms of $\sigma$, $\bfu$, $\theta$ (with ICs similarly defined on $\sigma$):
     \begin{align}
-        \bfr  :=  \sqrt{\rho}\bfu,  &&
-        \phi  :=  \sqrt{\rho}
+                         \partial_{t}\left[\sigma^{2}\right]  &=  - \nabla\cdot\left[\sigma^{2}\bfu\right]  \label{eqn:compressible NS sqrt mass equation}  \\
+                              \sigma\partial_{t}[\sigma\bfu]  &=  - \frac{1}{2}\left(\nabla\cdot\left[\sigma^{2}\bfu\otimes\bfu\right] + \sigma^{2}\bfu\cdot\nabla\bfu\right) - \nabla[\sigma^{2}\theta] + \frac{1}{\rmRe}\nabla\cdot\left[\sigma^{2}\bftau[\bfu]\right]  \\
+        \frac{3}{2}\partial_{t}\left[\sigma^{2}\theta\right]  &=  - \frac{3}{2}\nabla\cdot\left[\sigma^{2}\theta\bfu\right] - \sigma^{2}\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\|\sigma\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\sigma^{2}\nabla\theta\right]  \label{eqn:compressible NS sqrt energy equation}
     \end{align}
-    The energy, $\rmE$, (\ref{eqn:compressible NS energy definition 1}) can then be redefined as
-    \begin{equation}\label{eqn:compressible NS energy definition 2}
-        \rmE[\phi, \bfr, \theta](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\phi^{2}\theta\right].
-    \end{equation}
-    A weak formulation is sought that both:
-    \begin{itemize}
-        \item  Induces a timestepper in $(\phi, \bfr, \theta)$, such that the corresponding function spaces for $(\phi, \bfr, \theta)$ are continuous in time.
-        \item  Conserves the energy, $\rmE$, in the above form (\ref{eqn:compressible NS energy definition 2}).
-    \end{itemize}
+
+    \begin{remark}
+        \BA{Can re-introduce $\rho = \sigma^{2}$ as an auxiliary variable if it'd improve computational efficiency.}
+    \end{remark}
+
+    We use the auxiliary function concept to convert (\ref{eqn:compressible NS sqrt mass equation}--\ref{eqn:compressible NS sqrt energy equation}) into a weak form in space-time that invokes an energy-conservative SP timestepper. Letting $\sigma$, $\bfu$, $\theta$ each contain a lifting of the ICs, one can seek $\sigma_{-} \in \Sigma_{-}$, $\bfu_{-} \in \calU_{-}$, $\theta \in \Theta_{-}$ such that:
+    \begin{align}
+            \bbQ_{\partial_{t}\Sigma}\left[\partial_{t}\left[\sigma^{2}\right]\right]
+            &=  - \bbQ_{\partial_{t}\Sigma}[\nabla\cdot\left[\sigma_{*}^{2}\bfu_{*}\right]]  \\
+        \begin{split}
+            \bbQ_{\partial_{t}\calU}[\sigma\partial_{t}[\sigma\bfu]]
+            &=  \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\left(\nabla\cdot\left[\sigma_{*}^{2}\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \sigma_{*}^{2}\bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu]\right)\right.  \\
+            &\qquad\qquad\left.- \nabla\left[\sigma_{*}^{2}\theta_{*}\right]
+            + \frac{1}{\rmRe}\nabla\cdot\left[\sigma_{*}^{2}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\right]\right]
+        \end{split}  \\
+        \begin{split}
+            \frac{3}{2}\bbQ_{\partial_{t}\Theta}\left[\partial_{t}\left[\sigma^{2}\theta\right]\right]
+            &=  \bbQ_{\partial_{t}\Theta}\left[- \frac{3}{2}\nabla\cdot\left[\sigma_{*}^{2}\theta_{*}\bfu_{*}\right]\right.  \\
+            &\qquad\qquad- \sigma_{*}^{2}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]
+            + \frac{1}{2\rmRe}\|\sigma_{*}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}  \\
+            &\qquad\qquad\qquad\qquad\left.+ \frac{1}{\rmPe}\nabla\cdot\left[\sigma_{*}^{2}\nabla\theta_{*}\right]\right]
+      \end{split}
+    \end{align}
+    where similary $\sigma_{*}$, $\bfu_{*}$, $\theta_{*}$ can be taken as either $\sigma_{*}$, $\bfu_{*}$, $\theta_{*}$ or the auxiliary projections $\bbQ_{\partial_{t}\Sigma}[\sigma_{*}]$, $\bbQ_{\partial_{t}\calU}[\bfu_{*}]$, $\bbQ_{\partial_{t}\Theta}[\theta_{*}]$, without affecting the resultant timesteppers SP properties.
     Formulating the problem as a timestepper in $(\phi, \bfr, \theta)$ has the advantage of giving both a form of the:
     \begin{itemize}
         \item  Energy, $\rmE$, (\ref{eqn:compressible NS energy definition 2}) with a kinetic component $\frac{1}{2}\int_{\bfOmega}\|\bfr\|^{2}$ which bears more resemblance to that of the \emph{incompressible} case (\ref{eqn:incompressible NS energy definition}).
@@ -72,7 +81,8 @@
         \item  Homogeneous BCs that are Dirichlet in both $\bfr$ and $\bfu$ ($\bfzero  =  \bfr  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$).
         \item  (Potentially) inhomogeneous ICs on $\phi$, $\bfr$, $\theta$.
     \end{itemize}
-    Similar to the incompressible case, where $\bfr^{*}$ appears in the system it can be taken as either $\bfr$ or $\phi\bfu$ without affecting energy conservation.
+    Similar to the incompressible case, where $\bfr^{*}$ appears in the system it can be taken as 
+    either $\bfr$ or $\phi\bfu$ without affecting energy conservation.
 
     \begin{remark}
         This is very messy, especially with all the high-degree $\phi^{2}$ terms. This is the only way I could get it all down to just 4 variables, and in fact I'm not 100\% convinced that this formulation will be well-posed. I can make the formulation look much neater by introducing new auxiliary variables (for e.g. $p$ or $\theta$) but if I were to try and list all the possible ways I can write out such a system that would be pretty much this whole thesis, so I'm just presenting my most condensed formulation here. 
