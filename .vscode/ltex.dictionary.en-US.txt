@@ -50,3 +50,4 @@ Mathematik
 helicities
 Incompressibility
 preconditioner
+trilinear
