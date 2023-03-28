@@ -6,7 +6,7 @@
     To complete the system, make the following approximations for the spatially dissipative terms deriving from the collision operators:
     \begin{align}
         \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]                    &\approx  \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
-        \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]\cdot(\bfv - \bfu)  &\approx  \frac{2}{\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
+        \int_{\bfv}\left(\frac{1}{{\rmRef}_{++}}\bfdelta\bfC_{++} + \frac{1}{{\rmRef}_{+-}}\bfdelta\bfC_{+-}\right)\!\left[f_{+}^{(0)}, f_{-}^{(0)}\right]\cdot(\bfv - \bfu)  &\approx  \frac{1}{2\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
     \end{align}
     where the Péclet number, $\rmPe$, is a dimensionless constant, $\theta$ denotes the temperature,
     \begin{equation}
@@ -103,11 +103,12 @@
 
     
     \input{2 - fluid component/0 - preliminaries and notation/main.tex}
-    \input{2 - fluid component/1 - structures/main.tex}
-    \input{2 - fluid component/2 - structure preservation/main.tex}
-    \input{2 - fluid component/3 - weak reformulations/main.tex}
-    \input{2 - fluid component/4 - linearization and well-posedness/main.tex}
-    \input{2 - fluid component/5 - numerics/main.tex}
+    \input{2 - fluid component/1 - structure preservation/main.tex}
+    \input{2 - fluid component/2 - Navier--Stokes/main.tex}
+    \input{2 - fluid component/3 - MHD structures/main.tex}
+    \input{2 - fluid component/4 - MHD/main.tex}
+    \input{2 - fluid component/5 - linearization and well-posedness/main.tex}
+    \input{2 - fluid component/6 - numerics/main.tex}
 
     
     \section*{Summary}

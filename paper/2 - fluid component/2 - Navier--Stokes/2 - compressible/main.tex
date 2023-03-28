@@ -1,0 +1,134 @@
+\subsubsection*{The \emph{Compressible} Case}
+    Consider now the \emph{compressible} NS equations, in the classical strong form:
+    \begin{align}
+                \partial_{t}\rho  &=  - \nabla\cdot[\rho\bfu],  \label{eqn:compressible NS mass equation}  \\
+          \partial_{t}[\rho\bfu]  &=  - \nabla\cdot\left[\rho\bfu^{\otimes 2}\right] - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau],  \label{eqn:compressible NS momentum equation}  \\
+        \frac{3}{2}\partial_{t}[\rho\theta]  &=  - \frac{3}{2}\nabla\cdot[\rho\theta\bfu] - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta],  \label{eqn:compressible NS energy equation}
+    \end{align}
+    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), where as above, $\bftau$ is the deviatoric strain (\ref{eqn:strain equation}).
+
+    Again, it is advantageous for the construction of SP timesteppers to reframe the convective component of the momentum equation (\ref{eqn:compressible NS momentum equation}) in a skew-symmetric form. This can be done by writing the momentum equation in the unconvential derivative $\partial_{t}[\sqrt{\rho}\bfu]$, in place of $\partial_{t}\bfu$:
+    \begin{equation}
+        \sqrt{\rho}\partial_{t}[\sqrt{\rho}\bfu]  =  - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla p + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
+    \end{equation}
+
+    Similarly, the \emph{compressible} NS system can seen to \emph{conserve} energy,
+    \begin{equation}\label{eqn:compressible NS energy definition 1}
+        \rmE[\rho, \bfu, p](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \frac{3}{2}p\right],
+    \end{equation}
+    by testing (in $L^{2}$):
+    \begin{itemize}
+        \item  The skew-symmetric form of the momentum equation (\ref{eqn:compressible NS skew-symmetric momentum equation}) against $\bfu$:
+        \begin{align}
+            \begin{split}
+                \int_{\bfOmega}\sqrt{\rho}\bfu\cdot\partial_{t}[\sqrt{\rho}\bfu]  &=  \int_{\bfOmega}\bfu\cdot\left(- \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right]\right. + \rho\bfu\cdot\nabla\bfu)  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.- \nabla p + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]\right)
+            \end{split}  \\
+            \begin{split}
+                \partial_{t}\left[\int_{\bfOmega}\frac{1}{2}\|\sqrt{\rho}\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[\frac{1}{2}(\mst{\rho\bfu^{\otimes 2}:\nabla\bfu} - \mst{\rho\bfu^{\otimes 2}:\nabla\bfu})\right.  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left.+ p\nabla\cdot\bfu - \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
+            \end{split}  \\
+            \partial_{t}\left[\int_{\bfOmega}\frac{1}{2}\rho\|\bfu\|^{2}\right]  &=  \int_{\bfOmega}\left[p\nabla\cdot\bfu - \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
+        \end{align}
+        \item  The energy equation (\ref{eqn:compressible NS energy equation}) simply against $1$:
+        \begin{align}
+            \int_{\bfOmega}\frac{3}{2}\partial_{t}p  &=  \int_{\bfOmega}\left[- \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]\right]  \\
+            \partial_{t}\left[\int_{\bfOmega}\frac{3}{2}p\right]  &=  \int_{\bfOmega}\left[- p\nabla\cdot\bfu + \frac{1}{\rmRe}\rho\bftau[\bfu]:\nabla_{\rms}\bfu\right]
+        \end{align}
+    \end{itemize}
+    Summing these gives simply $\partial_{t}\rmE  =  0$, implying energy is conserved exactly.
+
+    Inspired by the form of (\ref{eqn:compressible NS skew-symmetric momentum equation}), define (in the strong, continuous case):
+    \begin{align}
+        \bfr  :=  \sqrt{\rho}\bfu,  &&
+        \phi  :=  \sqrt{\rho}
+    \end{align}
+    The energy, $\rmE$, (\ref{eqn:compressible NS energy definition 1}) can then be redefined as
+    \begin{equation}\label{eqn:compressible NS energy definition 2}
+        \rmE[\phi, \bfr, \theta](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\phi^{2}\theta\right].
+    \end{equation}
+    A weak formulation is sought that both:
+    \begin{itemize}
+        \item  Induces a timestepper in $(\phi, \bfr, \theta)$, such that the corresponding function spaces for $(\phi, \bfr, \theta)$ are continuous in time.
+        \item  Conserves the energy, $\rmE$, in the above form (\ref{eqn:compressible NS energy definition 2}).
+    \end{itemize}
+    Formulating the problem as a timestepper in $(\phi, \bfr, \theta)$ has the advantage of giving both a form of the:
+    \begin{itemize}
+        \item  Energy, $\rmE$, (\ref{eqn:compressible NS energy definition 2}) with a kinetic component $\frac{1}{2}\int_{\bfOmega}\|\bfr\|^{2}$ which bears more resemblance to that of the \emph{incompressible} case (\ref{eqn:incompressible NS energy definition}).
+        \item  Momentum equation (\ref{eqn:compressible NS skew-symmetric momentum equation}) which bears more resemblance to the skew-symmetric form of the \emph{incompressible} case (\ref{eqn:incompressible NS skew-symmetric momentum equation}).
+    \end{itemize}
+    
+    To create a timestepper-inducing weak formulation, an auxiliary ``velocity-like'' space must similarly be introduced. With it's pervasive presence in the system, $\bfu$ can be introduced as such an auxiliary variable, discontinuous-in-time, akin to $\widetilde{\bfu}$ in the incompressible case.
+    
+    Consider then the system in strong form:
+    \begin{align}
+                                     2\phi\partial_{t}\phi  &=  - \nabla\cdot\left[\phi\bfr^{*}\right]   \\
+           \phi\partial_{t}\bfr  &=  - \frac{1}{2}(\nabla\cdot\left[\phi\bfr^{*}\otimes\bfu\right] + \phi\bfr^{*}\cdot\nabla\bfu) - \nabla\left[\phi^{2}\theta\right] + \frac{1}{\rmRe}\nabla\cdot\left[\phi^{2}\bftau[\bfu]\right]  \\
+                                                   \bfzero  &=  \bfr - \phi\bfu  \\
+        \frac{3}{2}\partial_{t}\left[\phi^{2}\theta\right]  &=  - \frac{3}{2}\nabla\cdot\left[\phi\theta\bfr^{*}\right] - \phi^{2}\theta\nabla\cdot\bfu + \frac{1}{\rmRe}\phi^{2}\bftau[\bfu]:\nabla_{\rms}\bfu + \frac{1}{\rmPe}\nabla\cdot\left[\phi^{2}\nabla\theta\right]
+    \end{align}
+    with:
+    \begin{itemize}
+        \item  Homogeneous BCs that are Dirichlet in both $\bfr$ and $\bfu$ ($\bfzero  =  \bfr  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$).
+        \item  (Potentially) inhomogeneous ICs on $\phi$, $\bfr$, $\theta$.
+    \end{itemize}
+    Similar to the incompressible case, where $\bfr^{*}$ appears in the system it can be taken as either $\bfr$ or $\phi\bfu$ without affecting energy conservation.
+
+    \begin{remark}
+        This is very messy, especially with all the high-degree $\phi^{2}$ terms. This is the only way I could get it all down to just 4 variables, and in fact I'm not 100\% convinced that this formulation will be well-posed. I can make the formulation look much neater by introducing new auxiliary variables (for e.g. $p$ or $\theta$) but if I were to try and list all the possible ways I can write out such a system that would be pretty much this whole thesis, so I'm just presenting my most condensed formulation here. 
+    \end{remark}
+
+    In weak form, one seeks:
+    \begin{align}
+          \phi  \in  \Phi,  &&
+          \bfr  \in  \calR,  &&
+          \bfu  \in  \calU,  &&
+        \theta  \in  \Theta
+    \end{align}
+    such that:
+    \begin{align}
+        &\forall  \chi  \in  \calX,  &  2\langle\chi, \phi\partial_{t}\phi\rangle  &=  - \left\langle\chi, \nabla\cdot\left[\phi\bfr^{*}\right]\right\rangle  \\
+        &\forall  \bfv  \in  \calV,  &  \langle\bfv, \phi\partial_{t}\bfr\rangle  &=  \calA\left[\phi\bfr^{*}; \bfv, \bfu\right] + \left\langle\nabla\cdot\bfv, \phi^{2}\theta\right\rangle - \frac{1}{\rmRe}\left\langle\nabla_{\rms}\bfv, \phi^{2}\bftau[\bfu]\right\rangle  \\
+        &\forall  \bfs  \in  \calS,  &  0  &=  \langle\bfs, \bfr\rangle - \langle\bfs, \phi\bfu\rangle  \\
+        &\forall  \eta  \in  \calH,  &  
+        \begin{split}
+            \frac{3}{2}\left\langle\eta, \partial_{t}\left[\phi^{2}\theta\right]\right\rangle  &=  \frac{3}{2}\left\langle\nabla\eta, \phi\theta\bfr^{*}\right\rangle - \left\langle\eta, \phi^{2}\theta\nabla\cdot\bfu\right\rangle  \\
+            &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \frac{1}{\rmRe}\left\langle\eta, \phi^{2}\nabla_{\rms}\bfu:\bftau[\bfu]\right\rangle - \frac{1}{\rmPe}\left\langle\nabla\eta, \phi^{2}\nabla\theta\right\rangle
+        \end{split}
+    \end{align}
+    where similarly all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T}$ are taken over $\bfOmega\otimes T$, and $\calA$ is the trilinear convective operator defines as in (\ref{eqn:convective operator definition}).
+    
+    \begin{theorem}[Energy conservation for the auxiliary weak formulation of compressible NS]
+        Presuming the following subspace criteria hold (likely with equality for well-posedness):
+        \begin{align}
+            \calU  \leqslant  \calV,  &&
+            \partial_{t}\calR  \leqslant  \calS,
+        \end{align}
+        and the constant function $1  \in  \calH$, then $\rmE\left(t^{N}\right)  =  \rmE(0)$.
+    \end{theorem}
+    \begin{proof}
+        From the given subspace and inclusion criteria, the following results necessarily hold:
+        \begin{align}
+            \bfu  &\in  (\calU  \leqslant)  \calV  &&\implies  &  \begin{split}
+                \langle\bfu, \phi\partial_{t}\bfr\rangle  &=  \mst{\calA\left[\phi\bfr^{*}; \bfu, \bfu\right]} + \left\langle\nabla\cdot\bfu, \phi^{2}\theta\right\rangle  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \frac{1}{\rmRe}\left\langle\nabla_{\rms}\bfu, \phi^{2}\bftau[\bfu]\right\rangle
+            \end{split}  \\
+            &&&&  \int_{\bfOmega\otimes T}\phi\bfu\cdot\partial_{t}\bfr  &=  \int_{\bfOmega\otimes T}\left[(\nabla\cdot\bfu)\phi^{2}\theta - \frac{1}{\rmRe}\phi^{2}\nabla_{\rms}\bfu:\bftau[\bfu]\right]  \\
+            \partial_{t}\bfr  &\in  (\partial_{t}\calR  \leqslant)  \calS  &&\implies  &  0  &=  \langle\partial_{t}\bfr, \bfr\rangle - \langle\partial_{t}\bfr, \phi\bfu\rangle  \\
+            &&&&  0  &=  \int_{\bfOmega\otimes T}[\partial_{t}\bfr\cdot\bfr - \phi\partial_{t}\bfr\cdot\bfu]  \\
+            1  &\in  \calH  &&\implies  &    
+            \begin{split}
+                \frac{3}{2}\left\langle 1, \partial_{t}\left[\phi^{2}\theta\right]\right\rangle  &=  \frac{3}{2}\left\langle\mst{\nabla 1}, \phi\theta\bfr^{*}\right\rangle - \left\langle\eta, \phi^{2}\theta\nabla\cdot\bfu\right\rangle  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+ \frac{1}{\rmRe}\left\langle 1, \nabla_{\rms}\bfu:\phi^{2}\bftau[\bfu]\right\rangle  \\
+                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \frac{1}{\rmPe}\left\langle\mst{\nabla 1}, \phi^{2}\nabla\theta\right\rangle
+            \end{split}  \\
+            &&&&  \frac{3}{2}\int_{\bfOmega\otimes T}\partial_{t}\left[\phi^{2}\theta\right]  &=  \int_{\bfOmega\otimes T}\left[- \phi^{2}\theta(\nabla\cdot\bfu) + \frac{1}{\rmRe}\phi^{2}\nabla_{\rms}\bfu:\bftau[\bfu]\right]
+        \end{align}
+        Summing these, all the non-$\partial_{t}$, right-hand-side terms cancel, giving:
+        \begin{align}
+            \int_{\bfOmega\otimes T}\left[\mst{\phi\bfu\cdot\partial_{t}\bfr} + (\partial_{t}\bfr\cdot\bfr - \mst{\phi\partial_{t}\bfr\cdot\bfu)} + \frac{3}{2}\partial_{t}\left[\phi^{2}\theta\right]\right]  &=  0  \\
+            \partial_{t}\left[\int_{\bfOmega\otimes T}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\phi^{2}\theta\right]\right]  &=  0  \\
+            \rmE\left(t^{N}\right)  &=  \rmE(0)
+        \end{align}
+    \end{proof}
+    

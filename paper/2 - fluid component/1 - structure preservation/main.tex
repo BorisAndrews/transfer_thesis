@@ -1,0 +1,87 @@
+\section{Constructing Structure-Preserving (SP) Timesteppers via FET}
+    When constructing discrete timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve conservational/dissipative structures in the full continuous system. There are many reasons one might seek to do this:
+    \begin{itemize}
+        \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations, such as the topology of the magnetic poential characterised by the magnetic helicity as discussed above. Discretizations that violate these structures can exhibit correspondingly unphysical behavior. This is especially relevant in long term simulations. 
+        
+        In the words of Hamming on the subject of symplectic integrators, a class of structure-preserving (SP) timestepper: \cite{Hamming_1986}
+        \begin{quotation}
+            \emph{``An algorithm which transforms properly with respect to a class of transformations is more basic than one that does not. In a sense the invariant algorithm attacks the problem and not the particular representation used.''}
+        \end{quotation}
+        
+        \BA{(Harmonic oscillator demonstration.)}
+
+        \item  {\bf Quantiative motivations:} By way of example, the conservation of global quantities can often provide useful bounds on the outputs of the timesteppers, which can be useful in proving many results, such as well-posedness. The conservation of local quantities can alternatively help in providing parameter-robust bounds for convergence results, or allow the modification of the equations without fear of modification of the numerical results, such as in the use of augmented Lagrangians. \cite{FMW19, LFM22}
+    \end{itemize}
+    Whatever the motivation, it is logical to ensure the constructed timestepper preserved these structures.
+
+    Consider then a general time-dependent PDE (or system of PDEs) in the generic strong form
+    \begin{equation}\label{eqn:general time-dependent PDE}
+        \bfzero  =  \bfF\!\left[\bfu, \nabla\bfu, \nabla^{2}\bfu, \cdots; \partial_{t}\bfu\right]\!(\bfx; t),
+    \end{equation}
+    where one intends to solve for $\bfu(\bfx; t)$, alongside appropriate initial (ICs) and boundary (BCs) conditions. The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu](t)$ that are conserved/dissipated over time, e.g. such that $\forall  t$ either $\frac{\rmd}{\rmd t}\rmE  =  0$, $\frac{\rmd}{\rmd t}\rmE  \leq  0$, or $\frac{\rmd}{\rmd t}\rmE  =  \calO[\epsilon]$ for some parameter $\epsilon \ll 1$.
+    
+    \line
+    
+    Classical examples one might consider include:
+    \begin{example}[Heat equation]
+        The heat equation,
+        \begin{equation}\label{eqn:heat equation}
+            \partial_{t}u  =  \frac{1}{\rmPe}\Delta u,
+        \end{equation}
+        under homogeneous Dirichlet or Neumann BCs. Here, the energy $\rmE(t)  :=  \frac{1}{2}\int_{\bfOmega}u^{2}$ is dissipated according to
+        \begin{equation}\label{eqn:heat equation dissipation}
+            \frac{\rmd}{\rmd t}\rmE  =  - \frac{1}{\rmPe}\|\nabla u\|^{2}  \leq  0.
+        \end{equation}
+    \end{example}
+    
+    \begin{example}[Hamiltonian systems]
+        Hamiltonian systems with Hamiltonian $\calH[p, q](t)$:
+        \begin{align}
+            \partial_{t}p  =  - \nabla_{q}\calH,  &&
+            \partial_{t}q  =  + \nabla_{p}\calH,
+        \end{align}
+        for $L^{2}$ functional derivatives $\nabla_{p}$, $\nabla_{q}$, on $\bbR^{d}$. These exactly conserve the Hamiltonian, with $\frac{\rmd}{\rmd t}\calH  =  0$.
+
+        Examples include:
+        \begin{itemize}
+            \item  The wave equation,
+            \begin{align}
+                \partial_{t}v  =  c^{2}\Delta u,  &&
+                \partial_{t}u  =  v,
+            \end{align}
+            from the Hamiltonian
+            \begin{equation}
+                \calH(t)  :=  c^{2}\|\nabla u\|_{\bfOmega}^{2} + \|v\|_{\bfOmega}^{2}.
+            \end{equation}
+            \item  The Schrödinger equation,
+            \begin{equation}
+                i\hbar\partial_{t}\Psi  =  \left[- \frac{\hbar^{2}}{2m}\Delta + V\right]\Psi,
+            \end{equation}
+            or, from $\Psi  =  q + ip$,
+            \begin{align}
+                \partial_{t}p  =  - \frac{1}{\hbar}\left[- \frac{\hbar^{2}}{2m}\Delta + V\right]q,  &&
+                \partial_{t}q  =  + \frac{1}{\hbar}\left[- \frac{\hbar^{2}}{2m}\Delta + V\right]p,
+            \end{align}
+            from the Hamiltonian
+            \begin{equation}
+                \calH(t)  :=  \frac{1}{\hbar}\int_{\bfOmega}\left[\frac{\hbar^{2}}{2m}\left(\|\nabla p\|^{2} + \|\nabla q\|^{2}\right) + V\left(p^{2} + q^{2}\right)\right],
+            \end{equation}
+            or
+            \begin{equation}
+                \calH(t)  :=  \frac{1}{\hbar}\int_{\bfOmega}\left[\frac{\hbar^{2}}{2m}\|\nabla\Psi\|^{2} + V|\Psi|^{2}\right].
+            \end{equation}
+        \end{itemize}
+    \end{example}
+
+    \line
+    
+    We present here two possible approaches of tackling the time dependence of (\ref{eqn:general time-dependent PDE}) for constructing numerical timesteppers:
+    \begin{itemize}
+        \item  Traditional Runge--Kutta (RK) methods. (See Subsection \ref{cha:RK methods})
+        \item  A finite-element-in-time (FET) approach. (See Subsection \ref{cha:FET})
+    \end{itemize}
+    The merits of the latter with regard to the construction of global structure--preserving timesteppers are discussed, when finite elements are employed for the discretization in space also.
+
+
+    \input{2 - fluid component/1 - structure preservation/1 - classical timesteppers/main.tex}
+    \input{2 - fluid component/1 - structure preservation/2 - FET/main.tex}
