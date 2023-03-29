@@ -2,10 +2,14 @@
     Consider now the \emph{compressible} NS equations, in the classical strong form:
     \begin{align}
                            \partial_{t}\rho  &=  - \nabla\cdot[\rho\bfu]  \label{eqn:compressible NS mass equation}  \\
-                     \partial_{t}[\rho\bfu]  &=  - \nabla\cdot\left[\rho\bfu^{\otimes 2}\right] - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
-        \frac{3}{2}\partial_{t}[\rho\theta]  &=  - \frac{3}{2}\nabla\cdot[\rho\theta\bfu] - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
+                       \rho\partial_{t}\bfu  &=  - \rho\bfu\cdot\nabla\bfu - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
+        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\rho\bfu\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
     \end{align}
-    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$. $\bftau$ is the deviatoric strain as in (\ref{eqn:strain equation}).
+    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$.
+    
+    $\bftau$ is the deviatoric strain as in (\ref{eqn:strain equation}).
+
+    \shortline
 
     The \emph{compressible} NS system can seen to \emph{conserve}:
     \begin{itemize}
@@ -27,112 +31,233 @@
         \end{equation}
     \end{itemize}
 
+    \shortline
+
     Again, it is advantageous for the construction of SP timesteppers to reframe the convective component of the momentum equation (\ref{eqn:compressible NS momentum equation}) in a skew-symmetric form:
-    \begin{equation}
-        \rho\partial_{t}\bfu + \frac{1}{2}\partial_{t}\bfu
-        =
+    \begin{align}
+        \sqrt{\rho}\partial_{t}[\sqrt{\rho}\bfu]
+        &=
+        \rho\partial_{t}\bfu + \frac{1}{2}\partial_{t}\rho\bfu  \\
+        &=
         - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
+    \end{align}
+    With this in mind, take:
+    \begin{align}
+        \rho  =  \sigma^{2}  \label{eqn:sigma definition}  \\
+        \bfr  =  \sigma\bfu  \label{eqn:r definition}
+    \end{align}
+    Wherein the original compressible NS system (\ref{eqn:compressible NS mass equation}--\ref{eqn:compressible NS energy equation}) was posed with ICs defined on $\rho$, $\bfu$, $\theta$---(one can interpret this as a system evolving in $\rho$, $\bfu$, $\theta$)---we propose a system with ICs defined on $\sigma$, $\bfr$, $\theta$---(one can interpret this as a system evolving in $\sigma$, $\bfr$, $\theta$, coupled with $\bfu = 1/\sigma\cdot\bfr$ to keep the system multiplicative for computation)---that is identical in the continuous case:
+    \begin{align}
+                                   2\sigma\partial_{t}\sigma  &=  - \nabla\cdot\left[\sigma\bfr\right]  \\
+                                      \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\sigma\bfr\otimes\bfu\right] + \sigma\bfr\cdot\nabla\bfu\right) - \nabla[\sigma^{2}\theta] + \frac{1}{\rmRe}\nabla\cdot\left[\sigma^{2}\bftau[\bfu]\right]  \\
+        \frac{3}{2}\partial_{t}\left[\sigma^{2}\theta\right]  &=  - \frac{3}{2}\nabla\cdot\left[\sigma\theta\bfr\right] - \sigma^{2}\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\|\sigma\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\sigma^{2}\nabla\theta\right]  \label{eqn:compressible NS sqrt energy equation}
+    \end{align}
+
+    In such a reformulation, the energy, $\rmE$, and mass, $\rmM$, are redefined as:
+    \begin{align}
+        \rmE[\sigma, \bfr, \theta](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\sigma^{2}\theta\right],  &&
+                      \rmM[\sigma](t)  :=  \int_{\bfOmega}\sigma^{2}.
+    \end{align}
+
+    \begin{remark}
+        While I can \emph{theoretically} construct SP timesteppers for the above system in $\sigma$, $\bfr$, $\theta$ and $\bfu$ only:
+        \begin{itemize}
+            \item  They have a very multiplicative order, which I suspect (although I haven't yet had the chance to run any tests) will vastly reduce the timestepper's computational efficiency.
+            \item  The $\sigma^{2}\partial_{t}\theta$ term in (\ref{eqn:compressible NS sqrt energy equation}) has no nice closed form in a CG-DG-in-time discretization, such as was presented for the incompressible case above, in terms of parameters from the GL polynomials, as far as I can see.
+        \end{itemize}
+        It is for this reason that, instead of considering the system in the fewest variables, (\ref{eqn:r definition}--\ref{eqn:compressible NS sqrt energy equation}) in $\sigma$, $\bfr$, $\theta$ and $\bfu$, I'm going to elect to consider one, for now, in more variables than is needed, by re-introducing $\rho = \sigma^{2}$. It is my hope that this will benefit, not hinder, the timestepper's computational efficiency.
+    \end{remark}
+
+    Consider a system with ICs defined on $\rho$, $\bfr$, $\theta$--(one can interpret this as a system evolving in $\rho$, $\bfr$, $\theta$, coupled with $\bfu = 1/\sigma\cdot\bfr$ \emph{and} $\sigma = \sqrt{\rho}$)---that is \emph{again} identical in the continuous case:
+    \begin{align}
+                         \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:compressible NS final mass equation}  \\
+                   \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfp\otimes\bfu\right] + \bfp\cdot\nabla\bfu\right) - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot\left[\rho\bftau[\bfu]\right]  \\
+        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\bfp\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho\nabla\theta\right]  \label{eqn:compressible NS final energy equation}
+    \end{align}
+    where the momentum, $\bfp$, can be defined as either $\bfp := \sigma\bfr$ or $\bfp := \rho\bfu$.
+
+    In such a reformulation, the energy, $\rmE$, and mass, $\rmM$, are redefined as:
+    \begin{align}
+        \rmE[\rho, \bfr, \theta](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\rho\theta\right],  &&
+                      \rmM[\rho](t)  :=  \int_{\bfOmega}\rho.
+    \end{align}
+
+    \line
+
+    We use the auxiliary function concept to convert (\ref{eqn:compressible NS final mass equation}--\ref{eqn:compressible NS final energy equation}, \ref{eqn:sigma definition}--\ref{eqn:r definition}) into a weak form in space-time that invokes an energy-conservative SP timestepper. Letting $\rho$, $\bfr$, $\theta$ each contain a lifting of the ICs, one can seek:
+    \begin{equation}
+        \rho_{-}    \in  \calD_{-},   \qquad
+        \bfr_{-}    \in  \calR_{-},   \qquad
+        \theta_{-}  \in  \Theta_{-};  \qquad
+        \sigma      \in  \Sigma,      \qquad
+        \bfu        \in  \calU,
     \end{equation}
-
-    We use the auxiliary function concept to convert (\ref{eqn:compressible NS mass equation}, \ref{eqn:compressible NS skew-symmetric momentum equation}, \ref{eqn:compressible NS energy equation}) into a weak form in space-time that invokes an energy-conservative SP timestepper. Letting $\rho$, $\bfu$, $\theta$ each contain a lifting of the ICs, one can seek $\rho_{-} \in \calD_{-}$, $\bfu_{-} \in \calU_{-}$, $\theta \in \Theta_{-}$ such that:
-    \begin{align}
-            (\partial_{t}\rho
-            =)  \bbQ_{\partial_{t}\calD}[\partial_{t}\rho]
-            &=
-            \bbQ_{\partial_{t}\calD}[- \nabla\cdot[\rho_{*}\bfu_{*}]]  \label{eqn:compressible NS weak mass equation}  \\
-        \begin{split}
-            \bbQ_{\partial_{t}\calU}\!\left[\rho\partial_{t}\bfu
-            + \frac{1}{2}\partial_{t}\rho\bfu\right]
-            &=
-            \bbQ_{\partial_{t}\calU}\!\left[- \frac{1}{2}(\nabla\cdot\left[\rho_{*}\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] + \rho_{*}\bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu])\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\left.- \nabla[\rho_{*}\theta_{*}]
-            + \frac{1}{\rmRe}\nabla\cdot[\rho_{*}\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]]\right]
-        \end{split}  \\
-        \begin{split}
-            \frac{3}{2}\bbQ_{\partial_{t}\Theta}\!\left[\partial_{t}[\rho\theta]\tall\!\right]
-            &=
-            \bbQ_{\partial_{t}\Theta}\!\left[- \frac{3}{2}\nabla\cdot\left[\rho_{*}\theta_{*}\bfu_{*}\right]
-            - \rho_{*}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{2\rmRe}\rho_{*}\|\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}
-            + \frac{1}{\rmPe}\nabla\cdot[\rho_{*}\!\nabla\theta_{*}]\right]
-      \end{split}  \label{eqn:compressible NS weak energy equation}
-    \end{align}
-    where similarly $\rho_{*}$, $\bfu_{*}$, $\theta_{*}$ can be taken as either $\rho$, $\bfu$, $\theta$ or the auxiliary projections $\bbQ_{\partial_{t}\calD}[\rho]$, $\bbQ_{\partial_{t}\calU}[\bfu]$, $\bbQ_{\partial_{t}\Theta}[\theta]$, without affecting the resultant timesteppers SP properties.
-
-    In variational form, one seeks:
-    \begin{align}
-                  \rho_{-}  \in  \calD_{-},  &&
-                  \bfu_{-}  \in  \calU_{-},  &&
-          \widetilde{\bfu}  \in  \partial_{t}\calU,  &&
-                \theta_{-}  \in  \Theta_{-},
-    \end{align}
     such that:
     \begin{align}
-        &\forall  \sigma  \in  \partial_{t}\calD,  &
-            \langle\sigma, \partial_{t}\rho\rangle
+            (\partial_{t}\rho
+            =)
+            \bbQ_{\partial_{t}\calD}[\partial_{t}\rho]
             &=
-            - \langle\sigma, \nabla\cdot\left[\rho_{*}\bfu_{*}\right]\rangle  \\
-        &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &
-            \left\langle\widetilde{\bfv}, \rho\partial_{t}\bfu
-            + \frac{1}{2}\partial_{t}\rho\bfu\right\rangle
+            \bbQ_{\partial_{t}\calD}[- \nabla\cdot\bfp_{*}]  \label{eqn:compressible NS weak mass equation}  \\
+            \bbQ_{\calU}[\sigma\partial_{t}\bfr]
             &=
-            \calA[\rho_{*}\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}]
-            + \langle\nabla\cdot\widetilde{\bfv}, \rho_{*}\theta_{*}\rangle
-            - \frac{1}{2\rmRe}\langle\bftau[\widetilde{\bfv}], \rho_{*}\bftau[\widetilde{\bfu}]\rangle  \\
-        &\forall  \bfv  \in  \partial_{t}\calU,  &
-            0
-            &=
-            \langle\bfv, \widetilde{\bfu}\rangle
-            - \langle\bfv, \bfu\rangle  \\
-        &\forall  \eta  \in  \partial_{t}\Theta,  &  
+            \bbQ_{\calU}\!\left[- \frac{1}{2}(\nabla\cdot\left[\bfp_{*}\otimes\bfu\right] + \bfp_{*}\cdot\nabla\bfu)
+            - \nabla[\rho_{*}\theta_{*}]
+            + \frac{1}{\rmRe}\nabla\cdot[\rho_{*}\bftau[\bfu]]\right]  \\
         \begin{split}
-            \frac{3}{2}\langle\eta, \partial_{t}[\rho\theta]\rangle
+            \bbQ_{\partial_{t}\Theta}\left[\frac{3}{2}\bbQ_{\partial_{t}\Theta}[\rho]\partial_{t}\theta\right]
             &=
-            \frac{3}{2}\langle\nabla\eta, \rho_{*}\theta_{*}\bfu_{*}\rangle
-            - \langle\eta, \rho_{*}\theta_{*}\nabla\cdot\widetilde{\bfu}\rangle  \\
-            &\qquad\qquad+ \frac{1}{2\rmRe}\left\langle\eta, \rho_{*}\|\bftau[\widetilde{\bfu}]\|^{2}\right\rangle
-            - \frac{1}{\rmPe}\left\langle\nabla\eta, \rho_{*}\nabla\theta_{*}\right\rangle
-        \end{split}
+            \bbQ_{\partial_{t}\Theta}\!\left[- \frac{3}{2}\bfp_{*}\cdot\nabla\bbQ_{\partial_{t}\calD}[\theta]
+            - \rho_{*}\theta_{*}\nabla\cdot\bfu\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{2\rmRe}\rho_{*}\|\bftau[\bfu]\|^{2}
+            + \frac{1}{\rmPe}\nabla\cdot[\rho_{*}\!\nabla\theta_{*}]\right]
+        \end{split}  \label{eqn:compressible NS weak energy equation}  \\
+            \bbQ_{\Sigma}[\rho_{*}]
+            &=
+            \bbQ_{\Sigma}\!\left[\sigma^{2}\right]  \\
+            \bbQ_{\partial_{t}\calR}[\bfr]
+            &=
+            \bbQ_{\partial_{t}\calR}[\sigma\bfu]
     \end{align}
-    where all inner products, $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T}$, are taken over the space-time domain, $\bfOmega\otimes T$, and $\calA$ is the trilinear convective operator defined as in (\ref{eqn:convective operator definition}).
+    where:
+    \begin{itemize}
+        \item  $\rho_{*}$, $\theta_{*}$ can be taken as either $\rho$, $\theta$ or projections thereof
+        \item  $\bfp_{*}$ represents the momentum, which one represent in any user-defined form in terms of $\sigma$, $\rho$, $\bfu$, $\bfr$ and projections thereof
+    \end{itemize}
+    without affecting the resultant timestepper's SP properties.
+
+    \line
 
     Using the weak form (\ref{eqn:compressible NS weak mass equation}--\ref{eqn:compressible NS weak energy equation}) one can mimic the proofs of:
     \begin{itemize}
-        \item  Energy conservation, provided $1 \in \partial_{t}\Theta$: \BA{(This inclusion concerns me, although it doesn't appear to concern Gay--Balmaz, and he's run numerical simulations!)}
+        \item  Energy conservation, provided $1 \in \partial_{t}\Theta$:
         \begin{align}
-                \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
-                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \frac{3}{2}\rho\theta\right]  \\
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\!\left(\rho\partial_{t}\bfu + \frac{1}{2}\partial_{t}\bfu\right) + \frac{3}{2}\partial_{t}[\rho\theta]\right]  \\
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\bbQ_{\partial_{t}\calU}\!\left[\rho\partial_{t}\bfu + \frac{1}{2}\partial_{t}\bfu\right] + \frac{3}{2}\bbQ_{\partial_{t}\Theta}\!\left[\partial_{t}[\rho\theta]\tall\!\right]\right]  \\
+                \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\int_{\bfOmega}\left[\frac{1}{2}\|\bfr\|^{2} + \frac{3}{2}\rho\theta\right]  \\
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfr\cdot\partial_{t}\bfr + \frac{3}{2}(\partial_{t}\rho\theta + \rho\partial_{t}\theta)\right]  \\
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\sigma\bfu\cdot\partial_{t}\bfr - \frac{3}{2}\theta\bbQ_{\partial_{t}\calD}[\nabla\cdot\bfp_{*}] + \frac{3}{2}\bbQ_{\partial_{\Theta}}[\rho]\partial_{t}\theta\right]  \\
             \begin{split}
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\nabla\cdot\left[\rho_{*}\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] - \cdots\!\right]\right.  \\
-                &\qquad\qquad\qquad\left.+ \bbQ_{\partial_{t}\Theta}\!\left[- \frac{3}{2}\nabla\cdot\left[\rho_{*}\theta_{*}\bfu_{*}\right] - \cdots\right]\right]
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\left(- \frac{1}{2}(\cdots) - \mst{\nabla[\rho_{*}\theta_{*}]} + \mst{\frac{1}{\rmRe}\nabla\cdot[\rho_{*}\bftau[\bfu]]}\right)\right.  \\
+                &\qquad\qquad\qquad- \mst{\frac{3}{2}\bbQ_{\partial_{t}\calD}[\theta]\nabla\cdot\bfp_{*}} + \left(- \mst{\frac{3}{2}\bfp_{*}\cdot\nabla\bbQ_{\partial_{t}\calD}[\theta]}\right.  \\
+                &\qquad\qquad\left.\left.- \mst{\rho_{*}\theta_{*}\nabla\cdot\bfu} + \mst{\frac{1}{2\rmRe}\rho_{*}\|\bftau[\bfu]\|^{2}} + \frac{1}{\rmPe}\mst{\nabla\cdot[\rho_{*}\nabla\theta_{*}]}\right)\right]
             \end{split}  \\
-            \begin{split}
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\bbQ_{\partial_{t}\calU}[\bfu]\cdot\left(- \frac{1}{2}\nabla\cdot\left[\rho_{*}\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] - \cdots\!\right)\right.  \\
-                &\qquad\qquad\qquad\left.+ \left(- \frac{3}{2}\mst{\nabla\cdot\left[\rho_{*}\theta_{*}\bfu_{*}\right]} - \cdots + \frac{1}{\rmPe}\mst{\nabla\cdot[\rho_{*}\!\nabla\theta_{*}]}\right)\right]
-            \end{split}  \\
-            \begin{split}
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\calA\left[\rho_{*}\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \mst{\rho_{*}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]}\tall\right.  \\
-                &\qquad\qquad\qquad\qquad\qquad\qquad- \mst{\frac{1}{2\rmRe}\rho_{*}\|\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}}  \\
-                &\qquad\qquad\qquad\left.- \mst{\rho_{*}\theta_{*}\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]} + \mst{\frac{1}{2\rmRe}\rho_{*}\|\bftau[\bbQ_{\partial_{t}\calU}[\bfu]]\|^{2}}\right]
-            \end{split}  \\
+                &=  \mst{\calA\left[\bfp_{*}; \bfu, \bfu\right]}  \\
                 &=  0
         \end{align}
 
         \item  Mass conservation, provided $1 \in \partial_{t}\calD$:
         \begin{align}
-                \rmM\left(t^{n + 1}\right) - \rmM\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmM  \\
+                \rmM\left(t^{n + 1}\right) - \rmM\left(t^{n}\right)
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmM  \\
                 &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\int_{\bfOmega}\rho  \\
                 &=  \int_{\bfOmega\otimes T^{n}}\partial_{t}\rho  \\
-                &=  \int_{\bfOmega\otimes T^{n}}\bbQ_{\partial_{t}\calD}[- \nabla\cdot[\rho_{*}\bfu_{*}]]  \\
                 &=  - \int_{\bfOmega\otimes T^{n}}\mst{\nabla\cdot[\rho_{*}\bfu_{*}]}  \\
                 &=  0
         \end{align}
     \end{itemize}
     Thus, the resultant timestepper preserves both the energy- and mass-conservative structures.
 
-    \BA{Note on computing $\bbQ_{\partial_{t}\calU}[\bfu]$ offline.}
+    \shortline
 
-    \BA{CG-DG example.}
+    If the following subcomplex diagram commutes for some momentum-like space $\calP$:
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)\otimes L^{2}$};
+        \node (L2)   at (4.5, 0) {$L^{2}\otimes L^{2}$};
+        \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+
+        \node (P)  at (0,   - 2) {$\calP$};
+        \node (Dt) at (4.5, - 2) {$\partial_{t}\calD$};
+        \draw[->] (P) -- (Dt) node[above, midway] {$\rmdiv$};
+
+        \draw[->] (Hdiv) -- (P)  node[left, midway] {$\bbQ_{\calP}$};
+        \draw[->] (L2)   -- (Dt) node[left, midway] {$\bbQ_{\partial_{t}\calD}$};
+    \end{tikzpicture}\end{center}
+    then (\ref{eqn:compressible NS weak mass equation}) states in some sense a compressible analogue to the classical exact incompressibility condition:
+    \begin{equation}
+        \partial_{t}\rho  =  - \nabla\cdot\bbQ_{\calP}[\bfp_{*}]
+    \end{equation}
+
+    \line
+
+    \begin{example}[CG-DG-in-time conservative timestepper for compressible NS]
+        Suppose the spaces take the following CG-DG-in-time tensor product forms, for some order in time, $s$:
+        \begin{align}
+            \calD  =  \Theta  =  \widehat{\calD}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),  &&
+                       \calR  =  \widehat{\calR}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),
+        \end{align}
+        \vspace{- 10mm}
+        \begin{align}
+                      \Sigma  =  \widehat{\Sigma}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right),  &&
+                       \calU  =  \widehat{\calU}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right).
+        \end{align}
+
+        Let $\left(\tau^{n}_{i}\right)_{i \in \{1, \cdots, s\}}$ denote the order-$s$ (shifted) GL points on $T^{n}$, and $\left(\phi^{n}_{j}\right)_{j \in \{1, \cdots, s\}}$ the basis for $\bbDP^{s - 1}\left(T^{n}\right)$ of associated GL polynomials, satisfying $\phi^{n}_{j}(\tau^{n}_{i}) = \delta_{ij}$. $\bbQ_{\partial_{t}\calD}[\rho]$, $\bbQ_{\partial_{t}\calR}[\bfr]$, $\bbQ_{\partial_{t}\Theta}[\theta]$, $\sigma$, $\bfu$ can each be represented in terms of the GL basis as:
+        \begin{align}
+            \bbQ_{\partial_{t}\calD}[\rho]     =  \sum_{i}\rho_{i}^{n}\phi_{i}^{n},  &&
+            \bbQ_{\partial_{t}\calR}[\bfr]     =  \sum_{i}\bfr_{i}^{n}\phi_{i}^{n},  &&
+            \bbQ_{\partial_{t}\Theta}[\theta]  =  \sum_{i}\theta_{i}^{n}\phi_{i}^{n},
+        \end{align}
+        \vspace{- 7mm}
+        \begin{align}
+            \sigma = \sum_{i}\sigma_{i}^{n}\phi_{i}^{n},  &&
+            \bfu   = \sum_{i}\bfu_{i}^{n}\phi_{i}^{n},
+        \end{align}
+        where $*_{i}^{n} = *|_{\tau_{i}^{n}}$, while the derivatives $\partial_{t}\rho$, $\partial_{t}\bfr$, $\partial_{t}\theta$ can be written as:
+        \begin{align}
+            \partial_{t}\rho    =  \sum_{j}\delta\rho_{j}^{n}\phi_{j}^{n},  &&
+            \partial_{t}\bfr    =  \sum_{j}\bfdelta\bfr_{j}^{n}\phi_{j}^{n},  &&
+            \partial_{t}\theta  =  \sum_{j}\delta\theta_{j}^{n}\phi_{j}^{n},
+        \end{align}
+        with updates at $t^{n + 1}$ given as:
+        \begin{align}
+            \rho|_{t^{n + 1}}    =  \rho|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\delta\rho_{j}^{n},  &&
+            \bfr|_{t^{n + 1}}    =  \rho|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\bfdelta\bfr_{j}^{n},  &&
+            \theta|_{t^{n + 1}}  =  \rho|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\delta\theta_{j}^{n},
+        \end{align}
+        for $(b_{j})_{j}$ defined as in (\ref{eqn:b_j definition}). $\rho$, $\bfr$, $\theta$ are given at the GL points as
+        \begin{align}
+            \rho_{i}^{n}    =  \rho|_{t^{n}}   + \delta t^{n}\sum_{j}a_{ij}\delta\rho^{n}_{j},  &&
+            \bfr_{i}^{n}    =  \bfr|_{t^{n}}   + \delta t^{n}\sum_{j}a_{ij}\bfdelta\bfr^{n}_{j},  &&
+            \theta_{i}^{n}  =  \theta|_{t^{n}} + \delta t^{n}\sum_{j}a_{ij}\delta\theta^{n}_{j},
+        \end{align}
+        for $(a_{ij})_{ij}$ defined as in (\ref{eqn:a_ij definition}).
+
+        Choosing $\rho_{*} = \bbQ_{\partial_{t}\calD}[\rho]$, $\theta_{*} = \bbQ_{\partial_{t}\Theta}[\theta]$ and $\bfp_{*} = \bbQ_{\partial_{t}\calD}[\rho]\bfu$, the resultant can then be stated in the weak form, $\forall i$:
+        \begin{align}
+                (\delta\rho_{i}^{n}
+                =)
+                \bbQ_{\widehat{\calD}}\!\left[\delta\rho_{i}^{n}\right]
+                &=
+                \bbQ_{\widehat{\calD}}\!\left[- \sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\bfu_{k}^{n}\right]\right]  \\
+            \begin{split}
+                \bbQ_{\widehat{\calU}}\!\left[\sum_{jk}w_{i}^{jk}\sigma_{j}^{n}\bfdelta\bfr_{k}^{n}\right]
+                &=
+                \bbQ_{\widehat{\calU}}\!\left[- \frac{1}{2}\sum_{jkl}w_{i}^{jkl}\left(\nabla\cdot\left[\rho_{j}^{n}\bfu_{k}^{n}\otimes\bfu_{l}^{n}\right] + \rho_{j}^{n}\bfu_{k}^{n}\cdot\nabla\bfu_{k}^{n}\right)\right.  \\
+                &\qquad\qquad\qquad\left.- \sum_{jk}w_{i}^{jk}\nabla\!\left[\rho_{j}^{n}\theta_{k}^{n}\right]
+                + \frac{1}{\rmRe}\sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]\right]\right]
+            \end{split}  \\
+            \begin{split}
+                \bbQ_{\widehat{\Theta}}\!\left[\frac{3}{2}\sum_{jk}w_{i}^{jk}\rho_{j}^{n}\delta\theta_{k}^{n}\right]
+                &=
+                \bbQ_{\widehat{\Theta}}\!\left[\sum_{jkl}w_{i}^{jkl}\left(- \frac{3}{2}\rho_{j}^{n}\bfu_{k}^{n}\cdot\nabla\theta_{l}^{n}
+                - \rho_{j}^{n}\theta_{l}^{n}\nabla\cdot\bfu_{k}^{n}\right)\right.  \\
+                &\qquad\qquad\qquad+ \frac{1}{2\rmRe}\sum_{jkl}w_{i}^{jkl}\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]:\bftau\!\left[\bfu_{l}^{n}\right]  \\
+                &\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{\rmPe}\sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\nabla\theta_{k}^{n}\right]\right]
+            \end{split}  \\
+                \bbQ_{\widehat{\Sigma}}[\rho_{i}^{n}]
+                &=
+                \bbQ_{\widehat{\Sigma}}\!\left[\sum_{jk}w_{i}^{jk}\sigma_{j}^{n}\sigma_{k}^{n}\right]  \\
+                \left(\bfr_{i}^{n}
+                =\right)
+                \bbQ_{\widehat{\calR}}\!\left[\bfr_{i}^{n}\right]
+                &=
+                \bbQ_{\widehat{\calR}}\!\left[\sum_{jk}w_{i}^{jk}\sigma_{j}^{n}\bfu_{k}^{n}\right]
+        \end{align}
+        where $\left(w_{i}^{jk}\right)_{i}^{jk}$ are defined as in (\ref{eqn:w_i^jk definition}) and $\left(w_{i}^{jkl}\right)_{i}^{jkl}$ are defined similarly:
+        \begin{equation}
+            w_{i}^{jkl}  :=  \frac{\int_{t^{n}}^{t^{n + 1}}\phi^{n}_{i}\phi^{n}_{j}\phi^{n}_{k}\phi^{n}_{l}}{\int_{t^{n}}^{t^{n + 1}}(\phi^{n}_{i})^{2}}
+        \end{equation}
+        When $s = 1$, $w_{i}^{jkl} = \delta_{ij}\delta_{ik}\delta_{il}$, such that this system reduces to exactly the GL method, i.e. Crank--Nicolson. For $s \geq 2$ however, $w_{i}^{jkl} \neq \delta_{ij}\delta_{ik}\delta_{il}$ implying the higher order timestepper differs from the direct, classical GL method, in the convective and viscous heating terms.
+    \end{example}
     

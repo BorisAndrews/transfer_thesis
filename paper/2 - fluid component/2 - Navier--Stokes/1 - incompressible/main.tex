@@ -6,6 +6,8 @@
     \end{align}
     under homogeneous Dirichlet BCs in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) with ICs on $\bfu$.
     
+    \shortline
+
     The incompressible NS system can be seen to dissipate (kinetic) energy,
     \begin{equation}\label{eqn:incompressible NS energy definition}
         \rmE[\bfu](t)  :=  \frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2},
@@ -14,6 +16,8 @@
     \begin{equation}
         \frac{\rmd}{\rmd t}\rmE  =  - \frac{2}{\rmRe}\int_{\bfOmega}\|\nabla_{\rms}\bfu\|^{2}  \leq  0.
     \end{equation}
+
+    \shortline
 
     By incompressibility, the momentum equation (\ref{eqn:incompressible NS classical momentum conservation}) can be rewritten in the following ``skew-symmetric'' form, to ease the analysis and to motivate a weak form that inherits the energy-dissipative structure,
     \begin{equation}\label{eqn:incompressible NS skew-symmetric momentum equation}
@@ -34,6 +38,8 @@
         \BA{If the weak form has exact incomp., then it doesn't matter how you write the convective term (classical/skew-symmetric etc.) since it shouldn't affect the solution. Only the skew-symmetric form gives energy-conserving timesteppers even without exact incomp. A similar result holds true for the \emph{compressible} case.}
     \end{remark}
 
+    \line
+
     We can again use the auxiliary function idea from the heat equation to convert (\ref{eqn:incompressible NS mass conservation}, \ref{eqn:incompressible NS skew-symmetric momentum equation}) into a weak form in space-time that invokes an energy-dissipative SP timestepper. Letting $\bfu$ similarly contain a lifting of the ICs, one can seek $\bfu_{-} \in \calU_{-}$, $p \in \calP$ such that:
     \begin{align}
             0
@@ -47,7 +53,11 @@
             + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]
         \end{split}  \label{eqn:incompressible NS weak form 2}
     \end{align}
-    We write $\bfu_{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$. The energy-dissipative SP property of the resultant timestepper is indepedent of this choice. In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
+    We write $\bfu_{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$.\footnote{Despite the SP property of the resultant timestepper being independent of this choice, I've found it much easier to construct the resultant timestepper in a closed workable form when one unilaterally takes $\bfu_{*} = \bbQ_{\partial_{t}\calU}[\bfu]$. It is for this reason that I opt for this choice later when considering the resultant CG-DG-in-time timestepper, reminiscent of the GL method. I'm not sure, however, whether such a choice will impact the accuracy of the solution (negatively, or perhaps even positively) so I've left this unspecified here for now. I also feel leaving it unspecified helps the reader better understand why we choose to make the auxiliary space projections $\bfu \mapsto \bbQ_{\partial_{t}\calU}[\bfu]$ where we do. \\ The same applies in the compressible case in the following subsection too.} The energy-dissipative SP property of the resultant timestepper is indepedent of this choice.
+    
+    \shortline
+    
+    In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
     \begin{align}
         &\forall                 q  \in  \calP,              &                                                            0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
         &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
@@ -64,26 +74,30 @@
         \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calA  \leq  0$, such that various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
     \end{remark}
 
+    \line
+
     One can again use the weak form (\ref{eqn:incompressible NS weak form 1}--\ref{eqn:incompressible NS weak form 2}) directly to mimic the proof of energy dissipation:
     \begin{align}
         \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
         &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\partial_{t}\bfu  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] - \cdots + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]  \\
-        &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\calA\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
+        &=  \mst{\calA\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
         &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]}p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
         &=  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T^{n}}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}  \leq  0  \label{eqn:incompressible NS weak form dissipation}
     \end{align}
     Thus, the resultant timestepper preserves the energy-dissipative structure.
 
-    Similar to the classical stationary-state case, if the following subcomplex diagram commutes,
+    \shortline
+
+    Similar to the classical stationary-state case, if the following subcomplex diagram commutes:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
-        \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)$};
-        \node (L2)   at (3.5, 0) {$L^{2}$};
+        \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)\otimes L^{2}$};
+        \node (L2)   at (4.5, 0) {$L^{2}\otimes L^{2}$};
         \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
 
         \node (Ut) at (0,   - 2) {$\partial_{t}\calU$};
-        \node (P)  at (3.5, - 2) {$\calP$};
+        \node (P)  at (4.5, - 2) {$\calP$};
         \draw[->] (Ut) -- (P) node[above, midway] {$\rmdiv$};
 
         \draw[->] (Hdiv) -- (Ut) node[left, midway] {$\bbQ_{\partial_{t}\calU}$};
@@ -111,18 +125,20 @@
         Obviously then $\nabla\cdot\bfu  =  0|_{t^{n}}  \implies  \nabla\cdot\bfu  =  0|_{t^{n + 1}}$, however it'd be nice to show this holds pointwise within the timestep interior, $\bfOmega\otimes\left(t^{n}, t^{n + 1}\right)$, too.
     \end{remark}
 
+    \line
+
     When using a tensor product space for $\calU$ in the heat equation, we noted that above that the auxiliary function to be computed, $\bbQ_{\partial_{t}\calU}[u]$, could be eliminated from the weak form (\ref{eqn:heat equation auxiliary weak form}). Due to the nonlinearity of the Navier--Stokes system, this is no longer possible here. An alternative possibility however is available. Since, for tensor product spaces, $\bbQ_{\partial_{t}\calU}$ acts on $\calU$ only in the time component, $\bbQ_{\partial_{t}\calU}[\bfu]$ can be computed offline in such cases $\forall \bfu (\in \calU)$. To illustrate this, consider the following CG-DG-in-time example discretization:
     
     \BA{Can $\partial_{t}\calU$ ever be a FE space if $\calU$ is not a tensor product space?}
 
     \begin{example}[CG-DG-in-time dissipative timestepper for incompressible NS]
-        Suppose $\calU$, $\calP$ take the following CG-DG-in-time tensor product forms:
+        Suppose $\calU$, $\calP$ take the following CG-DG-in-time tensor product forms, for some order-in-time, $s$:
         \begin{align}
             \calU  =  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),  &&
             \calP  =  \widehat{\calP}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right).
         \end{align}
 
-        We make use of GL polynomials to write the resultant timestepper in a concise form, reminiscent of the classical GL RK method. Let $\left(\tau^{n}_{i}\right)_{i \in \{1, \cdots, s\}}$ denote the order-$s$ (shifted) GL points on $T^{n}$, and $\left(\phi^{n}_{j}\right)_{j \in \{1, \cdots, s\}}$ in $\bbDP^{s - 1}\left(T^{n}\right)$ the associated GL polynomials, satisfying $\phi^{n}_{j}(\tau^{n}_{i}) = \delta_{ij}$.
+        We make use of GL polynomials to write the resultant timestepper in a concise form, reminiscent of the classical GL RK method. Let $\left(\tau^{n}_{i}\right)_{i \in \{1, \cdots, s\}}$ denote the order-$s$ (shifted) GL points on $T^{n}$, and $\left(\phi^{n}_{j}\right)_{j \in \{1, \cdots, s\}}$ the basis for $\bbDP^{s - 1}\left(T^{n}\right)$ of associated GL polynomials, satisfying $\phi^{n}_{j}(\tau^{n}_{i}) = \delta_{ij}$.
 
         With $\partial_{t}\bfu \in \partial_{t}\calU = \widehat{\calU}\otimes\bbDP^{s - 1}$, one can represent $\partial_{t}\bfu$ in terms of the GL polynomials as
         \begin{equation}
@@ -133,7 +149,7 @@
             \bfu|_{t^{n + 1}}  =  \bfu|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\bfdelta\bfu^{n}_{j},
         \end{equation}
         where
-        \begin{equation}
+        \begin{equation}\label{eqn:b_j definition}
             b_{j}  :=  \frac{1}{\delta t^{n}}\int_{t^{n}}^{t^{n + 1}}\phi^{n}_{j}.
         \end{equation}
 
@@ -146,7 +162,7 @@
             \bfu|_{\tau^{n}_{i}}  =  \bfu|_{t^{n}} + \delta t^{n}\sum_{j}a_{ij}\bfdelta\bfu^{n}_{j},
         \end{equation}
         where
-        \begin{equation}
+        \begin{equation}\label{eqn:a_ij definition}
             a_{ij}  :=  \frac{1}{\delta t^{n}}\int_{t^{n}}^{\tau^{n}_{i}}\phi^{n}_{j}.
         \end{equation}
         
@@ -161,18 +177,17 @@
         \begin{align}
                                                                                 0  &=  \bbQ_{\widehat{\calP}}[\nabla\cdot\bfu|_{\tau^{n}_{i}}]  \\
             \begin{split}
-                \bfdelta\bfu^{n}_{i}  &=  - \frac{1}{2}\sum_{j, k}\frac{w_{ijk}}{w_{ii}}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\left[\bfu|_{\tau^{n}_{j}}\otimes\bfu|_{\tau^{n}_{k}}\right] + \bfu|_{\tau^{n}_{j}}\cdot\nabla\bfu|_{\tau^{n}_{k}}\right]  \\
+                \bfdelta\bfu^{n}_{i}  &=  - \frac{1}{2}\sum_{j, k}w_{i}^{jk}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\left[\bfu|_{\tau^{n}_{j}}\otimes\bfu|_{\tau^{n}_{k}}\right] + \bfu|_{\tau^{n}_{j}}\cdot\nabla\bfu|_{\tau^{n}_{k}}\right]  \\
                                       &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad- \bbQ_{\widehat{\calU}}\left[\nabla p|_{\tau^{n}_{i}}\right] + \frac{2}{\rmRe}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\nabla_{\rms}\bfu|_{\tau^{n}_{i}}\right]
             \end{split}
         \end{align}
-        where:
-        \begin{align}
-            w_{ii}   &:=  \int_{t^{n}}^{t^{n + 1}}(\phi^{n}_{i})^{2}  \left(=  \|\phi^{n}_{i}\|_{T^{n}}^{2}\right)  \\
-            w_{ijk}  &:=  \int_{t^{n}}^{t^{n + 1}}\phi^{n}_{i}\phi^{n}_{j}\phi^{n}_{k}
-        \end{align}
+        where
+        \begin{equation}\label{eqn:w_i^jk definition}
+            w_{i}^{jk}  :=  \frac{\int_{t^{n}}^{t^{n + 1}}\phi^{n}_{i}\phi^{n}_{j}\phi^{n}_{k}}{\int_{t^{n}}^{t^{n + 1}}(\phi^{n}_{i})^{2}}.
+        \end{equation}
         Up to the convective term, this is identical to the classical GL method.
         
-        At order $s = 1$ or $s = 2$, one finds in fact that $w_{ijk} = w_{ii}\delta_{ij}\delta_{ik}$, such that the timestepper simplfies to exactly the GL method:
+        At order $s = 1$ or $s = 2$, one finds in fact that $w_{ijk} = \delta_{ij}\delta_{ik}$, such that the timestepper simplfies to exactly the GL method:
         \begin{align}
                                0  &=  \bbQ_{\widehat{\calP}}[\nabla\cdot\bfu|_{\tau^{n}_{i}}]  \\
             \bfdelta\bfu^{n}_{i}  &=  - \frac{1}{2}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\left[\bfu|_{\tau^{n}_{i}}\otimes\bfu|_{\tau^{n}_{i}}\right] + \bfu|_{\tau^{n}_{i}}\cdot\nabla\bfu|_{\tau^{n}_{i}}\right] - \bbQ_{\widehat{\calU}}\left[\nabla p|_{\tau^{n}_{i}}\right] + \frac{2}{\rmRe}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\nabla_{\rms}\bfu|_{\tau^{n}_{i}}\right]
