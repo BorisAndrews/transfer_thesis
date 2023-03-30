@@ -128,8 +128,6 @@
     \line
 
     When using a tensor product space for $\calU$ in the heat equation, we noted that above that the auxiliary function to be computed, $\bbQ_{\partial_{t}\calU}[u]$, could be eliminated from the weak form (\ref{eqn:heat equation auxiliary weak form}). Due to the nonlinearity of the Navier--Stokes system, this is no longer possible here. An alternative possibility however is available. Since, for tensor product spaces, $\bbQ_{\partial_{t}\calU}$ acts on $\calU$ only in the time component, $\bbQ_{\partial_{t}\calU}[\bfu]$ can be computed offline in such cases $\forall \bfu (\in \calU)$. To illustrate this, consider the following CG-DG-in-time example discretization:
-    
-    \BA{Can $\partial_{t}\calU$ ever be a FE space if $\calU$ is not a tensor product space?}
 
     \begin{example}[CG-DG-in-time dissipative timestepper for incompressible NS]
         Suppose $\calU$, $\calP$ take the following CG-DG-in-time tensor product forms, for some order-in-time, $s$:
