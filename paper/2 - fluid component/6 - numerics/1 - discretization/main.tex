@@ -25,8 +25,24 @@
             \draw[->] (Hdiv) -- (U) node[left, midway] {$\bbQ_{\widehat{\calU}}$};
             \draw[->] (L2)   -- (P) node[left, midway] {$\bbQ_{\widehat{\calP}}$};
         \end{tikzpicture}\end{center}
-        The vast majority of such FE spaces do not satisfy the levels of conformity the weak/variational forms require. Both $\rmdiv$- and $\bfcurl$-conformity are required in both $\widehat{\calB}$ and $\widehat{\calU}$, whereas FE spaces satisfying the above commutativity properties typically each only offer $\rmdiv$-conformity.
+        The vast majority of such FE spaces do not satisfy the levels of conformity the weak/variational forms require. Both $\rmdiv$- and $\bfcurl$-conformity are required in both $\widehat{\calB}$ and $\widehat{\calU}$ at least, whereas FE spaces satisfying the above commutativity properties typically each only offer $\rmdiv$-conformity.
         
-        The discretizations in \cite{Laakmann_Hu_Farrell_2022} mitigates this through the use of further auxiliary spaces, for the vorticity $\nabla\wedge\bfu$ and current $\nabla\wedge\bfB$. While effective, this serves only to increase the computational complexity of the model. I'd ideally like to consider non-conforming discretizations that simulatenously retain the SP properties promised by a conforming model.
+        The discretizations in \cite{Laakmann_Hu_Farrell_2022} mitigates this through the use of further auxiliary spaces, for the vorticity $\nabla\wedge\bfu$ and current $\nabla\wedge\bfB$. While effective, this serves only to increase the computational complexity of the model. I'd ideally like to consider non-conforming discretizations that simultaneously retain the SP properties promised by a conforming model.
+
+        There are 5 terms in the variational formulation that are ill-defined when $\widehat{\calB}$ and $\widehat{\calU}$ satisfy $\rmdiv$-conformity only:
+        \begin{align}
+            \langle\nabla_{\rms}\widehat{\bfv}, \nabla_{\rms}\widehat{\bfu}\rangle_{\bfOmega},  &&
+            \calC;  &&
+            \langle\nabla\wedge\widehat{\bfC}, \nabla\wedge\widehat{\bfB}\rangle_{\bfOmega},  &&
+            \calD;  &&
+            \calE.
+        \end{align}
+        Considering the requirements an approximation to each of these would require in order \emph{not} to break the SP properties of the timestepper:
+        \begin{itemize}
+            \item  Present for non-conforming discretizations of NS, non-conforming models for the {\bf 1st}, $\langle\nabla_{\rms}\widehat{\bfv}, \nabla_{\rms}\widehat{\bfu}\rangle$, and {\bf 2nd}, $\calC$, term are ubiquitous in the literature. Notably for the 1st, $\langle\nabla_{\rms}\widehat{\bfv}, \nabla_{\rms}\widehat{\bfu}\rangle$, these include interior penalty methods, where the symmetry and non-negativity are retained. For the 2nd, $\calC$, one requires the approximation to retain the skew-symmetric property of the conforming case, or even introduce a dissipation (with $\calC[\bfv; \bfu, \bfu] \leq 0$) that contributes to the energy dissipation as is done in certain upwinding schemes.
+            \item  As similar dissipative and skew-symmetric objects, it is my hope that similar techniques and requirements to those traditionally found on the 1st, $\langle\nabla_{\rms}\widehat{\bfv}, \nabla_{\rms}\widehat{\bfu}\rangle$, and 2nd, $\calC$, will be sufficient for the {\bf 3rd}, $\langle\nabla\wedge\widehat{\bfC}, \nabla\wedge\widehat{\bfB}\rangle$, and {\bf 4th}, $\calD$.
+            \item  For the {\bf 5th}, $\calE$, I'm not sure what the case is. I suspect that I \emph{at least} require the definition to be consistent between the momentum equation and Faraday's law, but I've yet to investigate whether this is sufficient \emph{and} what such approximations will give accurate solutions.
+        \end{itemize}
+        Discussions of these questions are, I suspect, present in the literature. Investigating this is left for future work. (See Chapter \ref{cha:research plan})
     \end{remark}
     

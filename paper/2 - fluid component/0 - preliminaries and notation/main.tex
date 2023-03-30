@@ -1,12 +1,18 @@
 \section*{Preliminaries, Notation and Terminology}
     Since integrals, $\int_{\bfv}$, over the velocity, $\bfv$, have been eliminated from the system, integrals shall henceforth be assumed to be over space, $\bfx$, denoting the integral over $\bfx  \in  \bfS$ for some domain $\bfS  \subset  \bbR^{3}$ as $\int_{\bfS}$.
 
+    \shortline
+
     Let $\bfOmega  \subset  \bbR^{3}$ denote a sufficiently smooth, compact, contractible domain, with boundary $\bfGamma  :=  \partial\bfOmega$, on which the MHD system is considered. Denote the outward-pointing normal on $\bfGamma$ as $\bfn$.
 
     \begin{remark}
         Tokamak geometries, homeomorphic to a torus, and crucially \emph{not} contractible. I assume contractability here to simplify the analysis, i.e. to ensure the de Rham complex on $\bfOmega$ is exact, however I imagine with careful handling most, if not all, of the results here should carry over, albeit with slight modification, to non-contractible domains.
     \end{remark}
+
+    Define the interval $T^{n}  :=  \left[t^{n}, t^{n + 1}\right]$ for a given $t^{n}  <  t^{n + 1}$, with duration $\delta t^{n}  :=  t^{n + 1} - t^{n}$, over which timesteppers for the MHD system are constructed.
     
+    \shortline
+
     Denote the $L^{2}$ inner product on a domain $\bfS  \subset  \bbR^{3}$ (e.g. $\bfOmega$, $\bfGamma$) $\langle-, -\rangle_{\bfS}$ or $(\langle-, -\rangle)|_{\bfS}$,
     \begin{align}
         \langle u,    v   \rangle_{\bfS}  :=  \int_{\bfS}uv,  &&
@@ -21,24 +27,35 @@
         \|u\|_{\bfS}  :=  \langle u, u\rangle_{\bfS}^{\frac{1}{2}}
     \end{equation}
 
-    Define the interval $T^{n}  :=  \left[t^{n}, t^{n + 1}\right]$ for a given $t^{n}  <  t^{n + 1}$, with duration $\delta t^{n}  :=  t^{n + 1} - t^{n}$, over which timesteppers for the MHD system are constructed.
+    \shortline
 
-    Let $\bbQ_{\calF}$ denote the $L^{2}$ projection onto the space $\calF$.
-    
-    In the analysis of a PDE, we use the terms ``weak'' and ``variatonal'' form to represent different interpretations of the same idea. Consider by way of example Poisson's equations,
+    Let $\bbQ_{\calF} : \calF^{*} \rightarrow \calF$ denote the $L^{2}$ projection onto the space $\calF$.
+
+    In the analysis of a PDE, we use the terms ``weak'' and ``variational'' form to represent different interpretations of the same idea. Consider by way of example Poisson's equations,
     \begin{equation}
         \Delta u  =  f,
     \end{equation}
-    with homogeneous Dirichlet/Neumann BCs, on the domain $\bfOmega$:
+    with homogeneous Dirichlet BCs, on the domain $\bfOmega$:
     \begin{itemize}
-        \item  {\bf Variational form:} A typical $H^{1}$ variational form of Poisson's equation might seek $u \in \calU$, for some solution space $\calU \in H^{1}$, such that $\forall v \in \calU$,
+        \item  {\bf Variational form:} A typical $H^{1}$ variational form of Poisson's equation might seek $u \in \calU$, for some solution space $\calU \leqslant H^{1}_{0}$, such that $\forall v \in \calU$,
         \begin{equation}
             - \langle\nabla u, \nabla v\rangle_{\bfOmega}  =  \langle v, f\rangle_{\bfOmega}.
         \end{equation}
-        This is the the form that would employed in Galerkin projection and computation.
-        \item  {\bf Weak form:} This variational form can be equivalently written in terms of ($L^{2}$) projection operators, $\bbQ_{*}$, as
+        This is the form that would be employed in Galerkin projection and computation.
+        \item  {\bf Weak form:} With sufficient regularity on $\calU$, this variational form can be equivalently written in terms of ($L^{2}$) projection operators, $\bbQ_{\calU}$, as
         \begin{equation}
             \bbQ_{\calU}[\Delta u]  =  \bbQ_{\calU}[f],
         \end{equation}
-        where $\Delta u$ is interpreted as a distribution in $H^{- 1}  (\cong (H^{1}_{0})^{*})$. The solution of this is exactly equivalent to the variational form, however is often more clear to compare to the original strong form, and often easier to work with in the analysis.
+        where $\Delta u$ is interpreted as a distribution in $H^{- 1} (\cong (H^{1}_{0})^{*})$. The solution of this is exactly equivalent to the variational form, however is often more clear to compare to the original strong form, and often easier to work with in the analysis.
     \end{itemize}
+    
+    \begin{remark}
+        These projection operators will be used extensively throughout this chapter in the representation of weak forms for PDE systems. Note however the following:
+        \begin{enumerate}
+            \item  To preserve certain structures of the continuous model (See Section \ref{cha:structures}) there are certain commutativity relations that the projection operators $\bbQ_{\calF}$ for the spaces in the weak formulation must satisfy. Spaces with projection operators that satisfy these commutativity properties typically have relatively low regularity.
+            \item  The intricacies of what regularity requirements are needed for the projections in my weak formulations to be well-posed (i.e. such that each $\bbQ_{\calF}$ acts only on object necessarily in $\calF^{*}$) are mostly left for further work (See Section \ref{cha:analysis}) however I'm aware that these requirements are sufficiently strong that those spaces that have the aforementioned commutativity properties are unlikely to satisfy them.
+        \end{enumerate}        
+        This motivates the use of non-conforming discretizations, wherein one still makes use of spaces that are insufficiently regular for the projections to be well-posed, but makes approximations to these projections when needed. (See Section \ref{cha:numerics})
+        
+        Assume for now therefore that if one sees $\bbQ_{\calF}$ then it is acting on an object in $\calF^{*}$. Regularity requirements and the handling of non-conforming discretizations will be left till later in this chapter.
+    \end{remark}
