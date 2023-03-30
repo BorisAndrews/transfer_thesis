@@ -43,11 +43,14 @@
     We can again use the auxiliary function idea from the heat equation to convert (\ref{eqn:incompressible NS mass conservation}, \ref{eqn:incompressible NS skew-symmetric momentum equation}) into a weak form in space-time that invokes an energy-dissipative SP timestepper. Letting $\bfu$ similarly contain a lifting of the ICs, one can seek $\bfu_{-} \in \calU_{-}$, $p \in \calP$ such that:
     \begin{align}
             0
-            &=  \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]  \label{eqn:incompressible NS weak form 1}  \\
+            &=
+            \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]  \label{eqn:incompressible NS weak form 1}  \\
         \begin{split}
             (\partial_{t}\bfu
-            =)  \bbQ_{\partial_{t}\calU}[\partial_{t}\bfu]
-            &=  \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}(\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right]
+            =)
+            \bbQ_{\partial_{t}\calU}[\partial_{t}\bfu]
+            &=
+            \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}(\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right]
             + \bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu])\right.  \\
             &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.- \nabla p
             + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]
@@ -78,7 +81,8 @@
 
     One can again use the weak form (\ref{eqn:incompressible NS weak form 1}--\ref{eqn:incompressible NS weak form 2}) directly to mimic the proof of energy dissipation:
     \begin{align}
-        \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
+        \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)
+        &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
         &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\partial_{t}\bfu  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] - \cdots + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]  \\
@@ -90,7 +94,7 @@
 
     \shortline
 
-    Similar to the classical stationary-state case, if the following subcomplex diagram commutes:
+    Similar to the classical stationary-state case, if the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}(T^{n})$-subcomplex diagram commutes:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)\otimes L^{2}$};
         \node (L2)   at (4.5, 0) {$L^{2}\otimes L^{2}$};
@@ -194,7 +198,7 @@
         \end{align}
         The Crank--Nicolson method, at order $s = 1$, is known classicaly to preserve the energy-dissipative structure for the incompressible Navier--Stokes equations. \BA{[Ref]} This approach offers an intuitive explanation for this, a proof that the same result holds true for the following 2-step GL method, an explanation as to why the same result does \emph{not} hold true at higher order for the classical GL methods, and a modified form of the GL method that preserves the energy dissipative structure up to arbitrary order in time, with a quantifiable energy dissipation from (\ref{eqn:incompressible NS weak form dissipation}).
         
-        With $\partial_{t}\calU = \widehat{\calU}\otimes\bbDP^{s - 1}$, the $\rmdiv\circ\bbQ_{\partial_{t}\calU} = \bbQ_{\calP}\circ\rmdiv$ commutativity relation takes the following recognizable form:
+        With $\partial_{t}\calU = \widehat{\calU}\otimes\bbDP^{s - 1}$, the $\rmdiv\circ\bbQ_{\partial_{t}\calU} = \bbQ_{\calP}\circ\rmdiv$ commutativity relation takes the following recognizable form, as a subcomplex of $\Lambda_{0}^{\bullet}(\bfOmega)$:
         \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)$};
             \node (L2)   at (3.5, 0) {$L^{2}$};
@@ -205,6 +209,6 @@
             \draw[->] (U) -- (P) node[above, midway] {$\rmdiv$};
 
             \draw[->] (Hdiv) -- (U) node[left, midway] {$\bbQ_{\widehat{\calU}}$};
-            \draw[->] (L2)   -- (P)  node[left, midway] {$\bbQ_{\widehat{\calP}}$};
+            \draw[->] (L2)   -- (P) node[left, midway] {$\bbQ_{\widehat{\calP}}$};
         \end{tikzpicture}\end{center}
     \end{example}

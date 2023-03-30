@@ -1,0 +1,231 @@
+\subsection*{The \emph{Incompressible} Case}
+    Consider first the incompressible MHD model as defined in Figure \ref{fig:incompressible strong form}.
+
+    \line
+
+    Timesteppers the preserve conservative energy and magnetic helicity structures for the \emph{ideal}, incompressible (Hall) MHD system were proposed by Laakmann, Hu and Farrell in \cite{Laakmann_Hu_Farrell_2022}. Consider in particular System (3.18a--d) adapted for the inclusion of the Hall term from the Crank--Nicolson timestepper posed by Gawlik and Gay--Balmaz in \cite{Gawlik_Gay--Balmaz_2022}. We re-define this timestepper here, over the spatial domain $\bfOmega$ and interval $T^{n}$.
+
+    \shortline
+
+    Let $\calP$, $\calU$, $\calB$, be function/finite-element spaces defined over $\bfOmega$, such that the following $\Lambda_{0}^{\bullet}(\bfOmega)$-subcomplex diagrams commute:
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (Hcurl1) at (0,   0) {$\bfH_{0}(\bfcurl)$};
+        \node (Hdiv1)  at (3.5, 0) {$\bfH_{0}(\rmdiv)$};
+        \draw[->] (Hcurl1) -- (Hdiv1) node[above, midway] {$\bfcurl$};
+
+        \node (J) at (0,   - 2) {$\calE$};
+        \node (B) at (3.5, - 2) {$\calB$};
+        \draw[->] (J) -- (B) node[above, midway] {$\bfcurl$};
+
+        \draw[->] (Hcurl1) -- (J) node[left, midway] {$\bbQ_{\calE}$};
+        \draw[->] (Hdiv1)  -- (B) node[left, midway] {$\bbQ_{\calB}$};
+        
+        
+        \node (Hcurl2) at (7,    0) {$\bfH_{0}(\bfcurl)$};
+        \node (Hdiv2)  at (10.5, 0) {$\bfH_{0}(\rmdiv)$};
+        \node (L2)     at (14,   0) {$L^{2}$};
+        \draw[->] (Hcurl2) -- (Hdiv2) node[above, midway] {$\bfcurl$};
+        \draw[->] (Hdiv2)  -- (L2)    node[above, midway] {$\rmdiv$};
+
+        \node (J) at (7,    - 2) {$\calV$};
+        \node (B) at (10.5, - 2) {$\calU$};
+        \node (P) at (14,   - 2) {$\calP$};
+        \draw[->] (J) -- (B) node[above, midway] {$\bfcurl$};
+        \draw[->] (B) -- (P) node[above, midway] {$\rmdiv$};
+
+        \draw[->] (Hcurl2) -- (J) node[left, midway] {$\bbQ_{\calV}$};
+        \draw[->] (Hdiv2)  -- (B) node[left, midway] {$\bbQ_{\calU}$};
+        \draw[->] (L2)     -- (P) node[left, midway] {$\bbQ_{\calP}$};
+    \end{tikzpicture}\end{center}
+    for some spaces $\calE$, $\calV$. Suppose $\bfu$, $\bfB$ are given at the start of the interval as:
+    \begin{align}
+        \bfu^{n}  =  \bfu|_{t^{n}}  \in  \calU,  &&
+        \bfB^{n}  =  \bfB|_{t^{n}}  \in  \calB,
+    \end{align}
+    with (pointwise) $\nabla\cdot\bfu^{n} = 0$, $\nabla\cdot\bfB^{n} = 0$. One seeks:
+    \begin{align}
+        \bfu^{n + 1}         \in  \calU,  &&
+        p^{n + \frac{1}{2}}  \in  \calP,  &&
+        \bfB^{n + 1}         \in  \calB,
+    \end{align}
+    such that the following weak form holds:
+    \begin{align}
+                           0  &=  \bbQ_{\calP}\left[\nabla\cdot\bfu^{n + \frac{1}{2}}\right]  \\
+        \begin{split}
+            \bfdelta\bfu^{n}  &=  \bbQ_{\calU}\left[- \bbQ_{\calV}\left[\bbQ_{\calV}\left[\nabla\wedge\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\right] - \nabla p^{n + \frac{1}{2}}\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}\bbQ_{\calV}\left[\bbQ_{\calE}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
+        \end{split}  \\
+        \begin{split}
+            \bfdelta\bfB^{n}  &=  \bbQ_{\calB}\left[- \nabla\wedge\left[\frac{1}{\rmRem}\nabla\wedge\bfB^{n + \frac{1}{2}} - \bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right.\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.+ \rmRH\bbQ_{\calE}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
+        \end{split}
+    \end{align}
+    where:
+    \begin{align}
+        \bfdelta\bfu  :=  \frac{1}{\delta t^{n}}\left(\bfu^{n + 1} - \bfu^{n}\right),  &&
+        \bfdelta\bfB  :=  \frac{1}{\delta t^{n}}\left(\bfB^{n + 1} - \bfB^{n}\right),
+    \end{align}
+    and:
+    \begin{align}
+        \bfu^{n + \frac{1}{2}}  :=  \frac{1}{2}\left(\bfu^{n + 1} + \bfu^{n}\right),  &&
+        \bfB^{n + \frac{1}{2}}  :=  \frac{1}{2}\left(\bfB^{n + 1} + \bfB^{n}\right).
+    \end{align}
+    $\bfu$, $\bfB$ are then given at the end of the interval as:
+    \begin{align}
+        \bfu|_{t^{n + 1}} = \bfu^{n + 1},  &&
+        \bfB|_{t^{n + 1}} = \bfB^{n + 1}.
+    \end{align}
+    
+    \shortline
+
+    Solutions to the above system:
+    \begin{itemize}
+        \item  Exhibit incompressibility, $\nabla\cdot\bfu|_{t^{n + 1}}  =  0$, and Gauss's law, $\nabla\cdot\bfB|_{t^{n + 1}}  =  0$, exactly.
+        \item  Conserve the energy, $\rmE  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right]$, and magnetic helicity, $\rmH_{\rmM}  :=  \calH[\bfA]$, exactly from $t^{n}$ to $t^{n + 1}$.
+    \end{itemize}
+
+    Being a Crank--Nicolson timestepper, the NS-like component of this timestepper much resembles that which was derived from a CG-DG-in-time discretization for the incompressible NS model at lowest order $s = 1$, up to the choice of representation for the convective. The timestepper here uses a mixed vorticity formulation for the convective term, through the use of $\bbQ_{\calV}$ projections on $\bfu^{n + \frac{1}{2}}$ and $\nabla\wedge\bfu^{n + \frac{1}{2}}$. As detailed above, we intend not to use a mixed formulation.
+
+    \line
+
+    We shall now build on the work from Section \ref{cha:Navier--Stokes}, using a FET approach to derive a class of timesteppers for the incompressible (Hall) MHD model (Figure \ref{fig:incompressible strong form}) which:
+    \begin{itemize}
+        \item  Can be defined up to abitrarily high order in time.
+        \item  Incorporate viscous terms, with a quantifiable dissipation on the energy and magnetic helicity.
+    \end{itemize}
+    At lowest order, the resultant timestepper resembles that from \cite{Laakmann_Hu_Farrell_2022} without the mixed vorticity formulation for the convective term.
+
+    \shortline
+
+    Suppose again we consider the problem through the lens of function/finite-element space as defined on the space-time domain, $\bfOmega\otimes T^{n}$. For some $\calP$, $\calU$, $\calB$, we seek:
+    \begin{align}
+        p         \in  \calP,  &&
+        \bfu_{-}  \in  \calU_{-},  &&
+        \bfB_{-}  \in  \calB_{-},
+    \end{align}
+    such that:
+    \begin{align}
+            0
+            &=
+            \bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]  \label{eqn:incompressible MHD weak form 1}  \\
+        \begin{split}
+            (\partial_{t}\bfu
+            =)
+            \bbQ_{\partial_{t}\calU}[\partial_{t}\bfu]
+            &=
+            \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}(\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right]
+            + \bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu])
+            - \nabla p\right.  \\
+            &\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]
+            + \frac{2}{\rmRef}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]
+        \end{split}  \\
+        \begin{split}
+            (\partial_{t}\bfB
+            =)
+            \bbQ_{\partial_{t}\calB}[\partial_{t}\bfB]
+            &=
+            \bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calE}[\bfB]
+            - \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]\tall\right.\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.- \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right]\right]
+        \end{split}
+    \end{align}
+    for a space $\calE$, also defined on $\bfOmega\otimes T^{n}$, defined such that the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}$-subcomplex diagram commutes:
+    \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+        \node (Hcurl) at (0,   0) {$\bfH_{0}(\bfcurl)\otimes L^{2}$};
+        \node (Hdiv)  at (4.5, 0) {$\bfH_{0}(\rmdiv)\otimes L^{2}$};
+        \draw[->] (Hcurl) -- (Hdiv) node[above, midway] {$\bfcurl$};
+
+        \node (J)  at (0,   - 2) {$\calE$};
+        \node (Bt) at (4.5, - 2) {$\partial_{t}\calB$};
+        \draw[->] (J) -- (Bt) node[above, midway] {$\bfcurl$};
+
+        \draw[->] (Hcurl) -- (J)  node[left, midway] {$\bbQ_{\calE}$};
+        \draw[->] (Hdiv)  -- (Bt) node[left, midway] {$\bbQ_{\partial_{t}\calB}$};
+    \end{tikzpicture}\end{center}
+    Again, $\bfu_{*}$ can be taken as either $\bfu$ or $\bbQ_{\partial_{t}\calU}[\bfu]$, although one would typically chose the latter in practice.
+
+    \shortline
+
+    Let $\{-, -, -\}$ denote the antisymmetric vector triple product,
+    \begin{equation}
+        \{\bfa, \bfb, \bfc\}  :=  \bfa\cdot(\bfb\wedge\bfc).
+    \end{equation}
+    We show the resultant timestepper will preserve the dissipative structure in:
+    \begin{itemize}
+        \item  The energy, $\rmE  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right]$:
+        \begin{align}
+                \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\int_{\bfOmega}\left[\frac{1}{2}\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right]  \\
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\partial_{t}\bfu + \frac{2}{\beta}\bfB\cdot\partial_{t}\bfB\right]  \\
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\bbQ_{\partial_{t}\calU}\left[\cdots\tall\right] + \frac{2}{\beta}\bfB\cdot\bbQ_{\partial_{t}\calB}\left[\cdots\tall\right]\right]  \\
+            \begin{split}
+                &=  \mst{\calA\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[p\mst{\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]}\tall\right.  \\
+                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\bbQ_{\partial_{t}\calU}[\bfu], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
+                &\qquad\qquad- \frac{2}{\rmRef}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}  \\
+                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calE}[\bfB]\}}  \\
+                &\qquad\qquad+ \mst{\frac{2\rmRH}{\beta}\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
+                &\qquad\qquad\left.- \frac{1}{\rmRem}\|\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\|^{2}\right]
+            \end{split}  \\
+                &=  - \int_{\bfOmega}\left[\frac{2}{\rmRef}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2} + \frac{1}{\rmRem}\|\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\|^{2}\right]  \leq  0
+        \end{align}
+        
+        \item  The magnetic helicity, $\rmH_{\rmM}  :=  \calH[\bfA]$:
+        \begin{align}
+                \rmH_{\rmM}\left(t^{n + 1}\right) - \rmH_{\rmM}\left(t^{n}\right)
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmH_{\rmM}  \\
+                &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\calH[\bfA]  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\partial_{t}\bfB  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\cdots\tall\right]\right]  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\nabla\wedge\bbQ_{\calE}\left[\cdots\tall\right]  \impliedby  \bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calE}  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bbQ_{\calE}[\bfB]\cdot\left(\cdots\tall\right)  \\
+            \begin{split}
+                &=  2\int_{\bfOmega\otimes T^{n}}\left[\mst{\{\bbQ_{\calE}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calE}[\bfB]\}}\tall\right.  \\
+                &\qquad\qquad- \mst{\rmRH\{\bbQ_{\calE}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
+                &\qquad\qquad\left.- \frac{1}{\rmRem}\bbQ_{\calE}[\bfB]\cdot(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\tall\right]
+            \end{split}  \\
+                &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes T^{n}}\bbQ_{\calE}[\bfB]\cdot(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])  =  \calO\left[\frac{1}{\rmRem}\right]
+        \end{align}
+    \end{itemize}
+    
+    \shortline
+
+    Regarding local structures:
+    \begin{itemize}
+        \item  Identical to the Navier--Stokes case, if the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}(T^{n})$-subcomplex diagram commutes:
+        \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)\otimes L^{2}$};
+            \node (L2)   at (4.5, 0) {$L^{2}\otimes L^{2}$};
+            \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+
+            \node (Ut) at (0,   - 2) {$\partial_{t}\calU$};
+            \node (P)  at (4.5, - 2) {$\calP$};
+            \draw[->] (Ut) -- (P) node[above, midway] {$\rmdiv$};
+
+            \draw[->] (Hdiv) -- (Ut) node[left, midway] {$\bbQ_{\partial_{t}\calU}$};
+            \draw[->] (L2)   -- (P)  node[left, midway] {$\bbQ_{\calP}$};
+        \end{tikzpicture}\end{center}
+        then (\ref{eqn:incompressible MHD weak form 1}) directly gives pointwise incompressibility on the \emph{auxiliary} space, $\bbQ_{\partial_{t}\calU}[\bfu]$,
+        \begin{equation}
+            \nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]  =  0.
+        \end{equation}
+
+        \item  Defining the electric field,
+        \begin{equation}
+            \bfE
+            :=  \bbQ_{\calE}\!\left[- \bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calE}[\bfB]
+            + \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]\tall
+            + \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right],
+        \end{equation}
+        then by the commutativity relation, $\bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calE}$, Faraday's law is satisfied exactly,
+        \begin{equation}
+            \partial_{t}\bfB  =  - \nabla\wedge\bfE.
+        \end{equation}
+        Moreover, provided $\nabla\cdot\bfB|_{t^{n}} = 0$, this implies Gauss's law, $\nabla\cdot\bfB = 0$, holds on all of $\bfOmega\otimes T^{n}$. The proof is identical to that of the continuous case.
+    \end{itemize}
+
+    \line
+
+    \begin{example}{CG-DG-in-time dissipative timestepper for incompressible MHD}
+        \BA{To do.}
+    \end{example}

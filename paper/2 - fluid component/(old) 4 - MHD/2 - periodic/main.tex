@@ -390,18 +390,4 @@
     \begin{itemize}
         \item  Notes about what conformity I need for my function spaces/how to handle the weak formulation for non-conforming discretizations (Talk about how to modify the weak formulation for non-conforming discretization so as not to lose my structure-preserving properties (Exact mass conservation + Faraday's law/Energy conservation + helicity dissipation + bounded change in helicity))
         \item  Talk about 2.5D case
-        \item  Add further work environment for referencing to the further work chapter
-        \item  Change horizontal lines to ```backslash'line'' objects
-        \item  Add compressible transient weak formulation \emph{B} (with the hard-to-compute division integrals)
-        \item  Write up exposition on constructing timesteppers from FEs in time (using example of dissipative discretisations of the heat equation- resultant $\frac{1}{3}$-$\frac{2}{3}$--weighted Runge--Kutta scheme must've been done in the literature some time before... what if the test space is discontinuous in time, what discretization am I getting there?)
-        \item  So I'm pretty convinced the subspace criteria required for energy conservation/helicity dissipation prohibit the FE-in-time formulation from giving rise to a timestepper, since e.g. we require the test space for momentum conservation to be equal to the momentum solution space, and not of lower continuity in time, as is usually the case for constructing timesteppers from FEs in time, and I can't find a way round this. I reckon, the solution is to split transient schemes into 2 separate formulations:
-        \begin{itemize}
-            \item  One like I have already, with energy conservation/helicity dissipation, for periodic problems- lots of interesting maths here on the topic of e.g. robust kernel-capturing multigrid subspaces for problems in space and time.  
-            \item  One that \emph{doesn't} have exact energy conservation/helicity dissipation, but has something quantifiably close, that can actually be used as a timestepper.
-        \end{itemize}
-        \item  How do the energy conservation/helicity dissipation results change when I introduce the coupled system with the particles? Could give rise to a grounds from which to construct the particle pusher, for structure preservation.
-        \item  Add {\tt subequations} environments
-        \item  Improve cross-referencing of equations
-        \item  Modify formulation to use the continuous projection of the electric field in the current identity, so Ampère's law can be tested against functions in $\partial_{t}\calE$ for symmetry/sparsity without losing the preserved structures
-        \item  Since my formulation is best(/only) suited for periodic problem, I might re-introduce the section where I talk about symmetric group deflation for periodic problems (nice content to talk about here with the symmetry group $S^{1}\otimes\bbR$ in a tokamak/what about the symmetry group for the Boltzmann equation? I bet there's literature on that)
     \end{itemize}}
