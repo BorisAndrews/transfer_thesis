@@ -63,18 +63,18 @@
     In variational form, one can seek $\bfu_{-} \in \calU_{-}$, $\widetilde{\bfu} \in \partial_{t}\calU$, $p \in \calP$ such that:
     \begin{align}
         &\forall                 q  \in  \calP,              &                                                            0  &=  \left\langle q, \nabla\cdot\widetilde{\bfu}\right\rangle  \\
-        &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calA\left[\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
+        &\forall  \widetilde{\bfv}  \in  \partial_{t}\calU,  &  \left\langle\widetilde{\bfv}, \partial_{t}\bfu\right\rangle  &=  \calC\left[\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}\right] + \left\langle\nabla\cdot\widetilde{\bfv}, p\right\rangle - \frac{2}{\rmRe}\left\langle\nabla_{\rms}\widetilde{\bfv}, \nabla_{\rms}\widetilde{\bfu}\right\rangle  \\
         &\forall              \bfv  \in  \partial_{t}\calU,  &                                                            0  &=  \left\langle\bfv, \widetilde{\bfu}\right\rangle - \left\langle\bfv, \bfu\right\rangle
     \end{align}
-    where similarly all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T^{n}}$ are taken over the space-time domain, $\bfOmega\otimes T^{n}$, and $\calA[-; -, -]$ is the trilinear convective operator, defined
+    where similarly all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T^{n}}$ are taken over the space-time domain, $\bfOmega\otimes T^{n}$, and $\calC[-; -, -]$ is the trilinear convective operator, defined
     \begin{align}
-        \calA\left[\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu_{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu_{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
+        \calC\left[\bfu_{*}; \widetilde{\bfv}, \widetilde{\bfu}\right]  :=  &\;\frac{1}{2}\left(\left\langle\nabla\widetilde{\bfv}, \widetilde{\bfu}\otimes\bfu_{*}\right\rangle - \left\langle\widetilde{\bfv}, \bfu_{*}\cdot\nabla\widetilde{\bfu}\right\rangle\right)  \label{eqn:convective operator definition}  \\
                                                                          =  &\;\frac{1}{2}\int_{\bfOmega\otimes T}\bfu_{*}\cdot\left(\nabla\widetilde{\bfv}\cdot\widetilde{\bfu} - \nabla\widetilde{\bfu}\cdot\widetilde{\bfv}\right)
     \end{align}
-    This has the crucial skew-symmetry property $\calA\left[\bfu_{*}; \widetilde{\bfu}, \widetilde{\bfu}\right]  =  0$, $\forall \bfu_{*}, \widetilde{\bfu}$.
+    This has the crucial skew-symmetry property $\calC\left[\bfu_{*}; \widetilde{\bfu}, \widetilde{\bfu}\right]  =  0$, $\forall \bfu_{*}, \widetilde{\bfu}$.
 
     \begin{remark}
-        \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calA  \leq  0$, such that various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
+        \BA{Crucial that non-$\bfgrad$-conforming discretizations preserve this skew-symmetry property for energy dissipation! (In fact, is suff. that $\calC  \leq  0$, such that various \emph{dissipative} fluxes (e.g. upwinding) can be considered.)}
     \end{remark}
 
     \line
@@ -86,7 +86,7 @@
         &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}\|\bfu\|^{2}\right]  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\partial_{t}\bfu  \\
         &=  \int_{\bfOmega\otimes T^{n}}\bfu\cdot\bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right] - \cdots + \frac{2}{\rmRe}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]  \\
-        &=  \mst{\calA\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
+        &=  \mst{\calC\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
         &=  \int_{\bfOmega\otimes T^{n}}\left[\mst{\bbQ_{\calP}[\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]]}p - \frac{2}{\rmRe}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}\right]  \\
         &=  - \frac{2}{\rmRe}\int_{\bfOmega\otimes T^{n}}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}  \leq  0  \label{eqn:incompressible NS weak form dissipation}
     \end{align}

@@ -13,11 +13,11 @@
         \node (Hdiv1)  at (3.5, 0) {$\bfH_{0}(\rmdiv)$};
         \draw[->] (Hcurl1) -- (Hdiv1) node[above, midway] {$\bfcurl$};
 
-        \node (J) at (0,   - 2) {$\calE$};
+        \node (J) at (0,   - 2) {$\calG$};
         \node (B) at (3.5, - 2) {$\calB$};
         \draw[->] (J) -- (B) node[above, midway] {$\bfcurl$};
 
-        \draw[->] (Hcurl1) -- (J) node[left, midway] {$\bbQ_{\calE}$};
+        \draw[->] (Hcurl1) -- (J) node[left, midway] {$\bbQ_{\calG}$};
         \draw[->] (Hdiv1)  -- (B) node[left, midway] {$\bbQ_{\calB}$};
         
         
@@ -37,7 +37,7 @@
         \draw[->] (Hdiv2)  -- (B) node[left, midway] {$\bbQ_{\calU}$};
         \draw[->] (L2)     -- (P) node[left, midway] {$\bbQ_{\calP}$};
     \end{tikzpicture}\end{center}
-    for some spaces $\calE$, $\calV$. Suppose $\bfu$, $\bfB$ are given at the start of the interval as:
+    for some spaces $\calG$, $\calV$. Suppose $\bfu$, $\bfB$ are given at the start of the interval as:
     \begin{align}
         \bfu^{n}  =  \bfu|_{t^{n}}  \in  \calU,  &&
         \bfB^{n}  =  \bfB|_{t^{n}}  \in  \calB,
@@ -53,11 +53,11 @@
                            0  &=  \bbQ_{\calP}\left[\nabla\cdot\bfu^{n + \frac{1}{2}}\right]  \\
         \begin{split}
             \bfdelta\bfu^{n}  &=  \bbQ_{\calU}\left[- \bbQ_{\calV}\left[\bbQ_{\calV}\left[\nabla\wedge\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\right] - \nabla p^{n + \frac{1}{2}}\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}\bbQ_{\calV}\left[\bbQ_{\calE}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}\bbQ_{\calV}\left[\bbQ_{\calG}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
         \end{split}  \\
         \begin{split}
-            \bfdelta\bfB^{n}  &=  \bbQ_{\calB}\left[- \nabla\wedge\left[\frac{1}{\rmRem}\nabla\wedge\bfB^{n + \frac{1}{2}} - \bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right.\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.+ \rmRH\bbQ_{\calE}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calE}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
+            \bfdelta\bfB^{n}  &=  \bbQ_{\calB}\left[- \nabla\wedge\left[\frac{1}{\rmRem}\nabla\wedge\bfB^{n + \frac{1}{2}} - \bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right.\right.  \\
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.+ \rmRH\bbQ_{\calG}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
         \end{split}
     \end{align}
     where:
@@ -116,7 +116,7 @@
             \bbQ_{\partial_{t}\calU}\left[- \frac{1}{2}(\nabla\cdot\left[\bfu_{*}\otimes\bbQ_{\partial_{t}\calU}[\bfu]\right]
             + \bfu_{*}\cdot\nabla\bbQ_{\partial_{t}\calU}[\bfu])
             - \nabla p\right.  \\
-            &\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]
+            &\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calG}[\bfB]
             + \frac{2}{\rmRef}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]
         \end{split}  \\
         \begin{split}
@@ -124,22 +124,22 @@
             =)
             \bbQ_{\partial_{t}\calB}[\partial_{t}\bfB]
             &=
-            \bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calE}[\bfB]
-            - \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]\tall\right.\right.  \\
+            \bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calG}[\bfB]
+            - \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calG}[\bfB]\tall\right.\right.  \\
             &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.- \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right]\right]
         \end{split}
     \end{align}
-    for a space $\calE$, also defined on $\bfOmega\otimes T^{n}$, defined such that the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}$-subcomplex diagram commutes:
+    for a space $\calG$, also defined on $\bfOmega\otimes T^{n}$, defined such that the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}$-subcomplex diagram commutes:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
         \node (Hcurl) at (0,   0) {$\bfH_{0}(\bfcurl)\otimes L^{2}$};
         \node (Hdiv)  at (4.5, 0) {$\bfH_{0}(\rmdiv)\otimes L^{2}$};
         \draw[->] (Hcurl) -- (Hdiv) node[above, midway] {$\bfcurl$};
 
-        \node (J)  at (0,   - 2) {$\calE$};
+        \node (J)  at (0,   - 2) {$\calG$};
         \node (Bt) at (4.5, - 2) {$\partial_{t}\calB$};
         \draw[->] (J) -- (Bt) node[above, midway] {$\bfcurl$};
 
-        \draw[->] (Hcurl) -- (J)  node[left, midway] {$\bbQ_{\calE}$};
+        \draw[->] (Hcurl) -- (J)  node[left, midway] {$\bbQ_{\calG}$};
         \draw[->] (Hdiv)  -- (Bt) node[left, midway] {$\bbQ_{\partial_{t}\calB}$};
     \end{tikzpicture}\end{center}
     Again, $\bfu_{*}$ can be taken as either $\bfu$ or $\bbQ_{\partial_{t}\calU}[\bfu]$, although one would typically chose the latter in practice.
@@ -160,11 +160,11 @@
                 &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\partial_{t}\bfu + \frac{2}{\beta}\bfB\cdot\partial_{t}\bfB\right]  \\
                 &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\bbQ_{\partial_{t}\calU}\left[\cdots\tall\right] + \frac{2}{\beta}\bfB\cdot\bbQ_{\partial_{t}\calB}\left[\cdots\tall\right]\right]  \\
             \begin{split}
-                &=  \mst{\calA\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[p\mst{\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]}\tall\right.  \\
-                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\bbQ_{\partial_{t}\calU}[\bfu], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
+                &=  \mst{\calC\left[\bfu_{*}; \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\partial_{t}\calU}[\bfu]\right]} + \int_{\bfOmega\otimes T^{n}}\left[p\mst{\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]}\tall\right.  \\
+                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\bbQ_{\partial_{t}\calU}[\bfu], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calG}[\bfB]\}}  \\
                 &\qquad\qquad- \frac{2}{\rmRef}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2}  \\
-                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calE}[\bfB]\}}  \\
-                &\qquad\qquad+ \frac{2\rmRH}{\beta}\mst{\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
+                &\qquad\qquad+ \mst{\frac{2}{\beta}\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calG}[\bfB]\}}  \\
+                &\qquad\qquad+ \frac{2\rmRH}{\beta}\mst{\{\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calG}[\bfB]\}}  \\
                 &\qquad\qquad\left.- \frac{1}{\rmRem}\|\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\|^{2}\right]
             \end{split}  \\
                 &=  - \int_{\bfOmega}\left[\frac{2}{\rmRef}\|\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\|^{2} + \frac{1}{\rmRem}\|\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\|^{2}\right]  \leq  0
@@ -177,14 +177,14 @@
                 &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\calH[\bfA]  \\
                 &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\partial_{t}\bfB  \\
                 &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\cdots\tall\right]\right]  \\
-                &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\nabla\wedge\bbQ_{\calE}\left[\cdots\tall\right]  \impliedby  \bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calE}  \\
-                &=  2\int_{\bfOmega\otimes T^{n}}\bbQ_{\calE}[\bfB]\cdot\left(\cdots\tall\right)  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bfA\cdot\nabla\wedge\bbQ_{\calG}\left[\cdots\tall\right]  \impliedby  \bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calG}  \\
+                &=  2\int_{\bfOmega\otimes T^{n}}\bbQ_{\calG}[\bfB]\cdot\left(\cdots\tall\right)  \\
             \begin{split}
-                &=  2\int_{\bfOmega\otimes T^{n}}\left[\mst{\{\bbQ_{\calE}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calE}[\bfB]\}}\tall\right.  \\
-                &\qquad\qquad- \rmRH\mst{\{\bbQ_{\calE}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calE}[\bfB]\}}  \\
-                &\qquad\qquad\left.- \frac{1}{\rmRem}\bbQ_{\calE}[\bfB]\cdot(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\tall\right]
+                &=  2\int_{\bfOmega\otimes T^{n}}\left[\mst{\{\bbQ_{\calG}[\bfB], \bbQ_{\partial_{t}\calU}[\bfu], \bbQ_{\calG}[\bfB]\}}\tall\right.  \\
+                &\qquad\qquad- \rmRH\mst{\{\bbQ_{\calG}[\bfB], \nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB], \bbQ_{\calG}[\bfB]\}}  \\
+                &\qquad\qquad\left.- \frac{1}{\rmRem}\bbQ_{\calG}[\bfB]\cdot(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\tall\right]
             \end{split}  \\
-                &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes T^{n}}\bbQ_{\calE}[\bfB]\cdot(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])  =  \calO\left[\frac{1}{\rmRem}\right]
+                &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes T^{n}}(\nabla\wedge\bbQ_{\calG}[\bfB])\cdot\bbQ_{\partial_{t}\calB}[\bfB]  =  \calO\left[\frac{1}{\rmRem}\right]
         \end{align}
     \end{itemize}
     
@@ -213,11 +213,11 @@
         \item  Defining the electric field,
         \begin{equation}
             \bfE
-            :=  \bbQ_{\calE}\!\left[- \bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calE}[\bfB]
-            + \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calE}[\bfB]\tall
+            :=  \bbQ_{\calG}\!\left[- \bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calG}[\bfB]
+            + \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calG}[\bfB]\tall
             + \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right],
         \end{equation}
-        then by the commutativity relation, $\bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calE}$, Faraday's law is satisfied exactly,
+        then by the commutativity relation, $\bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calG}$, Faraday's law is satisfied exactly,
         \begin{equation}
             \partial_{t}\bfB  =  - \nabla\wedge\bfE.
         \end{equation}
@@ -227,5 +227,154 @@
     \line
 
     \begin{example}[CG-DG-in-time dissipative timestepper for incompressible MHD]
-        \BA{To do.}
+        Suppose the spaces take the following CG-DG-in-time tensor product forms, for some order-in-time, $s$:
+        \begin{align}
+            \calP  =  \widehat{\calP}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right),  &&
+            \calU  =  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),  &&
+            \calB  =  \widehat{\calB}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),
+        \end{align}
+        With $\partial_{t}\calB = \widehat{\calB}\otimes\bbDP^{s - 1}$, take
+        \begin{equation}
+            \calG  =  \widehat{\calG}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right),
+        \end{equation}
+        such that the commutativity relation $\bbQ_{\partial_{t}\calB}\circ\bfcurl = \bfcurl\circ\bbQ_{\calG}$ is equivalent to the requirement that the following $\Lambda_{0}^{\bullet}(\bfOmega)$-subcomplex commutes:
+        \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (Hcurl1) at (0,   0) {$\bfH_{0}(\bfcurl)$};
+            \node (Hdiv1)  at (3.5, 0) {$\bfH_{0}(\rmdiv)$};
+            \draw[->] (Hcurl1) -- (Hdiv1) node[above, midway] {$\bfcurl$};
+    
+            \node (J) at (0,   - 2) {$\widehat{\calG}$};
+            \node (B) at (3.5, - 2) {$\widehat{\calB}$};
+            \draw[->] (J) -- (B) node[above, midway] {$\bfcurl$};
+    
+            \draw[->] (Hcurl1) -- (J) node[left, midway] {$\bbQ_{\widehat{\calG}}$};
+            \draw[->] (Hdiv1)  -- (B) node[left, midway] {$\bbQ_{\widehat{\calB}}$};
+        \end{tikzpicture}\end{center}
+        Compare this with the commutativity requirement in the \cite{Laakmann_Hu_Farrell_2022} timestepper.
+
+        Similar to the the CG-DG-in-time timesteppers for the Navier--Stokes models, one can use a basis of GL functions as a basis for $\bbDP^{s - 1}$ to write the resultant timestepper in a closed form, remeniscent of the classical GL method.
+
+        One each timestep interval $T^{n}$, one seeks, $\forall i \in \{1, \cdots, s\}$:
+        \begin{align}
+                       p_{i}^{n}  \in  \widehat{\calP},  &&
+            \bfdelta\bfu_{i}^{n}  \in  \widehat{\calU},  &&
+            \bfdelta\bfB_{i}^{n}  \in  \widehat{\calB},
+        \end{align}
+        such that, taking $\bfu_{*} = \bbQ_{\partial_{t}\calU}[\bfu]$, the following weak form holds, $\forall i \in \{1, \cdots, s\}$:
+        \begin{align}
+                0
+                &=
+                \bbQ_{\widehat{\calP}}\left[\nabla\cdot\bfu_{i}^{n}\right]  \\
+            \begin{split}
+                \left(\bfdelta\bfu_{i}^{n}
+                =\right)
+                \bbQ_{\widehat{\calU}}\left[\bfdelta\bfu_{i}^{n}\right]
+                &=
+                \bbQ_{\widehat{\calU}}\left[- \frac{1}{2}\sum_{jk}w_{i}^{jk}\left(\nabla\cdot\left[\bfu_{j}^{n}\otimes\bfu_{k}^{n}\right]
+                + \bfu_{j}^{n}\cdot\nabla\bfu_{k}^{n}\right)
+                - \nabla p_{i}^{n}\right.  \\
+                &\qquad\qquad\left.+ \frac{2}{\beta}\sum_{jk}w_{i}^{jk}\left(\nabla\wedge\bfB_{j}^{n}\right)\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]
+                + \frac{2}{\rmRef}\nabla\cdot\nabla_{\rms}\bfu_{i}^{n}\right]
+            \end{split}  \\
+            \begin{split}
+                \left(\bfdelta\bfB_{i}^{n}
+                =\right)
+                \bbQ_{\widehat{\calB}}\left[\bfdelta\bfB_{i}^{n}\right]
+                &=
+                \bbQ_{\widehat{\calB}}\left[\nabla\wedge\left[\sum_{jk}w_{i}^{jk}\bfu_{j}^{n}\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]
+                \right.\right.  \\
+                &\qquad\qquad\left.\left.- \rmRH\sum_{jk}w_{i}^{jk}(\nabla\wedge\bfB_{j}^{n})\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]\tall - \frac{1}{\rmRem}\nabla\wedge\bfB_{i}^{n}\right]\right]
+            \end{split}
+        \end{align}
+        where:
+        \begin{align}
+            \bfu_{i}^{n}  :=  \bfu|_{t^{n}} + \delta t^{n}\sum_{j}a_{ij}\bfdelta\bfu_{j}^{n},  &&
+            \bfB_{i}^{n}  :=  \bfB|_{t^{n}} + \delta t^{n}\sum_{j}a_{ij}\bfdelta\bfB_{j}^{n},
+        \end{align}
+        for GL coefficients $(a_{ij})_{ij}$, defined as in (\ref{eqn:a_ij definition}), and GL triple weights $(w_{i}^{jk})_{i}^{jk}$ defined as in (\ref{eqn:w_i^jk definition}). Updates at $t^{n + 1}$ are given in terms of $(\bfdelta\bfu_{i}^{n})_{i}$, $(\bfdelta\bfB_{i}^{n})_{i}$ as:
+        \begin{align}
+            \bfu|_{t^{n + 1}}  :=  \bfu|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\bfdelta\bfu_{j}^{n},  &&
+            \bfB|_{t^{n + 1}}  :=  \bfB|_{t^{n}} + \delta t^{n}\sum_{j}b_{j}\bfdelta\bfB_{j}^{n},
+        \end{align}
+        for GL coefficients $(b_{j})_{j}$, defined as in (\ref{eqn:b_j definition}).
+
+        Similar to the incompressible NS system, this timestepper resembles a classical GL method for steps $s \leq 2$, where $w_{i}^{jk} = \delta_{ij}\delta_{ik}$, but differs at higher order for $s \geq 3$, where this no longer holds true.
+
+        In variational form, one can seek, $\forall i \in \{1, \cdots, s\}$:
+        \begin{align}
+                       p_{i}^{n}  \in  \widehat{\calP},  &&
+            \bfdelta\bfu_{i}^{n}  \in  \widehat{\calU},  &&
+            \bfdelta\bfB_{i}^{n}  \in  \widehat{\calB},  &&
+                    \bfG_{i}^{n}  \in  \widehat{\calG},
+        \end{align}
+        such that, $\forall i \in \{1, \cdots, s\}$:
+        \begin{align}
+            &\forall     q_{i}^{n}  \in  \widehat{\calP},  &
+                0
+                &=
+                \left\langle q_{i}^{n}, \nabla\cdot\bfu_{i}^{n}\right\rangle  \\
+            &\forall  \bfv_{i}^{n}  \in  \widehat{\calU},  &
+            \begin{split}
+                \left\langle\bfv_{i}^{n}, \bfdelta\bfu_{i}^{n}\right\rangle
+                &=
+                \sum_{jk}w_{i}^{jk}\calC\!\left[\bfu_{k}^{n}; \bfv_{i}^{n}, \bfu_{j}^{n}\right]
+                +  \left\langle\nabla\cdot\bfv_{i}^{n}, p_{i}^{n}\right\rangle  \\
+                &\qquad\qquad+ \frac{2}{\beta}\sum_{jk}w_{i}^{jk}\calE\!\left[\bfv_{i}^{n}; \bfB_{j}^{n}; \bfG_{k}^{n}\right]
+                - \frac{2}{\rmRef}\left\langle\nabla_{\rms}\bfv_{i}^{n}, \nabla_{\rms}\bfu_{i}^{n}\right\rangle
+            \end{split}  \\
+            &\forall  \bfC_{i}^{n}  \in  \widehat{\calB},  &
+            \begin{split}
+                \left\langle\bfC_{i}^{n}, \bfdelta\bfB_{i}^{n}\right\rangle
+                &=
+                \sum_{jk}w_{i}^{jk}\calE\!\left[\bfu_{j}^{n}; \bfC_{i}^{n}; \bfG_{k}^{n}\right]  \\
+                &\qquad\qquad+ \rmRH\sum_{jk}w_{i}^{jk}\calD\!\left[\bfG_{k}^{n}; \bfC_{i}^{n}, \bfB_{j}^{n}\right]
+                - \frac{1}{\rmRem}\left\langle\nabla\wedge\bfC_{i}^{n}, \nabla\wedge\bfB_{i}^{n}\right\rangle
+            \end{split}  \\
+            &\forall  \bfH_{i}^{n}  \in  \widehat{\calG},  &
+                0
+                &=
+                \left\langle\bfH_{i}^{n}, \bfG_{i}^{n}\right\rangle
+                - \left\langle\bfH_{i}^{n}, \bfB_{i}^{n}\right\rangle
+        \end{align}
+        where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega}$ are taken over the spatial domain, $\bfOmega$, and:
+        \begin{itemize}
+            \item  $\calC : \widehat{\calU}^{3} \rightarrow \bbR$ is the skew-symmetric convective operator defined in (\ref{eqn:convective operator definition}).
+            \item  $\calD : \widehat{\calG}\times\widehat{\calB}^{2} \rightarrow \bbR$ is defined
+            \begin{equation}
+                \calD\!\left[\widehat{\bfG}; \widehat{\bfB}, \widehat{\bfC}\right]
+                :=
+                \int_{\bfOmega}\left\{\widehat{\bfG}, \nabla\wedge\widehat{\bfB}, \nabla\wedge\widehat{\bfC}\right\},
+            \end{equation}
+            with the skew-symmetry property $\calD\!\left[\widehat{\bfG}; \widehat{\bfB}, \widehat{\bfB}\right]  =  0$, $\forall \widehat{\bfG} \in \widehat{\calG}$, $\widehat{\bfB} \in \widehat{\calB}$.
+            \item  $\calE : \widehat{\calU}\times\widehat{\calB}\times\widehat{\calG} \rightarrow \bbR$ is defined
+            \begin{equation}
+                \calE\!\left[\widehat{\bfu}; \widehat{\bfB}; \widehat{\bfG}\right]
+                :=
+                \int_{\bfOmega}\left\{\widehat{\bfu}, \nabla\wedge\widehat{\bfB}, \widehat{\bfG}\right\}.
+            \end{equation}
+        \end{itemize}
+
+        By the GL orthogonality, the dissipations in the energy, $\rmE$, and magnetic helicity, $\rmH_{\rmM}$, can be quantified concisely as:
+        \begin{align}
+                   \rmE|_{t^{n + 1}} -        \rmE|_{t^{n}}  &=  - \delta t^{n}\sum_{i}\int_{\bfOmega}\left[\frac{2}{\rmRef}\left\|\nabla_{\rms}\bfu_{i}^{n}\right\|^{2} + \frac{1}{\rmRem}\left\|\nabla\wedge\bfB_{i}^{n}\right\|^{2}\right]  \\
+            \rmH_{\rmM}|_{t^{n + 1}} - \rmH_{\rmM}|_{t^{n}}  &=  - \delta t^{n}\frac{2}{\rmRem}\sum_{i}\int_{\bfOmega}\left(\nabla\wedge\bfG_{i}^{n}\right)\cdot\bfB_{i}^{n}
+        \end{align}
+
+        For exact incompressibility, the $\bbQ_{\calP}\circ\rmdiv = \rmdiv\circ\bbQ_{\partial_{t}\calU}$ commutativty property manifests similarly to in the incompressible NS case, in the requirement that the following diagram commutes:
+        \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
+            \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)$};
+            \node (L2)   at (3.5, 0) {$L^{2}$};
+            \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+
+            \node (U) at (0,   - 2) {$\widehat{\calU}$};
+            \node (P) at (3.5, - 2) {$\widehat{\calP}$};
+            \draw[->] (U) -- (P) node[above, midway] {$\rmdiv$};
+
+            \draw[->] (Hdiv) -- (U) node[left, midway] {$\bbQ_{\widehat{\calU}}$};
+            \draw[->] (L2)   -- (P) node[left, midway] {$\bbQ_{\widehat{\calP}}$};
+        \end{tikzpicture}\end{center}
     \end{example}
+
+    \line
+
+    From here, much of the remainder of this chapter is left for future work.

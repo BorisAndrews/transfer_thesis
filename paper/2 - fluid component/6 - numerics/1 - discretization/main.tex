@@ -1,5 +1,32 @@
 \subsection*{Discretization}
-    \BA{Introduction.}
+    \begin{remark}
+        I want to consider now examples of FE spaces that satisfy the commutativity properties:
+        \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]            
+            \node (Hcurl1) at (0,   0) {$\bfH_{0}(\bfcurl)$};
+            \node (Hdiv1)  at (3.5, 0) {$\bfH_{0}(\rmdiv)$};
+            \draw[->] (Hcurl1) -- (Hdiv1) node[above, midway] {$\bfcurl$};
+    
+            \node (J) at (0,   - 2) {$\widehat{\calG}$};
+            \node (B) at (3.5, - 2) {$\widehat{\calB}$};
+            \draw[->] (J) -- (B) node[above, midway] {$\bfcurl$};
+    
+            \draw[->] (Hcurl1) -- (J) node[left, midway] {$\bbQ_{\widehat{\calG}}$};
+            \draw[->] (Hdiv1)  -- (B) node[left, midway] {$\bbQ_{\widehat{\calB}}$};
 
-    \BA{Here I need a note on non-conforming discretizations.}
+
+            \node (Hdiv) at (7,    0) {$\bfH(\rmdiv)$};
+            \node (L2)   at (10.5, 0) {$L^{2}$};
+            \draw[->] (Hdiv) -- (L2) node[above, midway] {$\rmdiv$};
+
+            \node (U) at (7,    - 2) {$\widehat{\calU}$};
+            \node (P) at (10.5, - 2) {$\widehat{\calP}$};
+            \draw[->] (U) -- (P) node[above, midway] {$\rmdiv$};
+
+            \draw[->] (Hdiv) -- (U) node[left, midway] {$\bbQ_{\widehat{\calU}}$};
+            \draw[->] (L2)   -- (P) node[left, midway] {$\bbQ_{\widehat{\calP}}$};
+        \end{tikzpicture}\end{center}
+        The vast majority of such FE spaces do not satisfy the levels of conformity the weak/variational forms require. Both $\rmdiv$- and $\bfcurl$-conformity are required in both $\widehat{\calB}$ and $\widehat{\calU}$, whereas FE spaces satisfying the above commutativity properties typically each only offer $\rmdiv$-conformity.
+        
+        The discretizations in \cite{Laakmann_Hu_Farrell_2022} mitigates this through the use of further auxiliary spaces, for the vorticity $\nabla\wedge\bfu$ and current $\nabla\wedge\bfB$. While effective, this serves only to increase the computational complexity of the model. I'd ideally like to consider non-conforming discretizations that simulatenously retain the SP properties promised by a conforming model.
+    \end{remark}
     
