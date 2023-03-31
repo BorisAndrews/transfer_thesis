@@ -1,5 +1,17 @@
 \subsection*{Preconditioning}
-    \BA{Introduction.}
+    Tokamak-relevant simulations are typically highly turbulent, with large fluid, $\rmRef$, and magnetic, $\rmRem$, Reynolds numbers. These large parameters motivate a need for parameter robustness on the preconditioners used.
 
-    \BA{Bit scary diving in straight on preconditioning for the compressible MHD system first, perhaps talk about doing a base case study for the standard compressible fluid dynamics case first? Or perhaps this could be in the further work section...}
+    The exact preservation of local structures, such as Gauss's law, $\nabla\cdot\bfB = 0$, and the exact incompressibility constraint for incompressible MHD, $\nabla\cdot\bfu = 0$, mean the weak formulations can be modified via the inclusion of terms dependening on these results without affecting the solution. This is one of the key ideas behind augmented Lagrangian preconditioners \cite{FMW19} which have been applied in recent years by Laakmann et al. in \cite{Laakmann_Farrell_Mitchell_22, Laakmann_Hu_Farrell_2022} to incompressible MHD systems like the one considered here to generate preconditioners that are robust in both Reynolds numbers.
+
+    \begin{remark}
+        It is my hope that the ideas behind the parameter-robust preconditioners developed for incompressible (Hall) MHD in \cite{Laakmann_Farrell_Mitchell_22, Laakmann_Hu_Farrell_2022} will extend both to the:
+        \begin{itemize}
+            \item  Slightly modified incompressible MHD model I'm considering here.
+            \item  Fully new compressible MHD model.
+        \end{itemize}
+        
+        The former hope here seems very likely to hold true, I've just yet to investigate this aspect, since I've yet to implement the scheme numerically.
+        
+        The latter feels a bolder ask, but not necessarily impossible. Gauss's law, $\nabla\cdot\bfB = 0$, is still satisfied exactly in this case at least. Perhaps with some change of reference, the exact \emph{compressibility} condition (\ref{eqn:weak incompressibility}), $\partial_{t}\rho  =  - \nabla\cdot\bbQ_{\calP}\left[\bfp^{*}\right]$, could be leveraged to our advantage too, perhaps by the introduction of $\bbQ_{\calP}\left[\bfp^{*}\right]$ as an auxiliary space. (Here in fact a FET approach might also come in handy again!) In any case, this is worth investigating in the compressible NS model before moving onto the full compressible MHD model. (See Chapter \ref{cha:research plan})
+    \end{remark}
     

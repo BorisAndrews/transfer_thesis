@@ -2,8 +2,8 @@
     Consider now the \emph{compressible} NS equations, in the classical strong form:
     \begin{align}
                            \partial_{t}\rho  &=  - \nabla\cdot[\rho\bfu]  \label{eqn:compressible NS mass equation}  \\
-                       \rho\partial_{t}\bfu  &=  - \rho\bfu\cdot\nabla\bfu - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
-        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\rho\bfu\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
+                       \rho\partial_{t}\bfu  &=  - \rho\bfu\cdot\nabla\bfu - \nabla[\rho\theta] + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
+        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\rho\bfu\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRef}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
     \end{align}
     with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$.
     
@@ -39,7 +39,7 @@
         &=
         \rho\partial_{t}\bfu + \frac{1}{2}\partial_{t}\rho\bfu  \\
         &=
-        - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
+        - \frac{1}{2}(\nabla\cdot\left[\rho\bfu\otimes\bfu\right] + \rho\bfu\cdot\nabla\bfu) - \nabla[\rho\theta] + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau[\bfu]]  \label{eqn:compressible NS skew-symmetric momentum equation}
     \end{align}
     With this in mind, take:
     \begin{align}
@@ -49,8 +49,8 @@
     Wherein the original compressible NS system (\ref{eqn:compressible NS mass equation}--\ref{eqn:compressible NS energy equation}) was posed with ICs defined on $\rho$, $\bfu$, $\theta$---(one can interpret this as a system evolving in $\rho$, $\bfu$, $\theta$)---we propose a system with ICs defined on $\sigma$, $\bfr$, $\theta$---(one can interpret this as a system evolving in $\sigma$, $\bfr$, $\theta$, coupled with $\bfu = 1/\sigma\cdot\bfr$ to keep the system multiplicative for computation)---that is identical in the continuous case:
     \begin{align}
                                    2\sigma\partial_{t}\sigma  &=  - \nabla\cdot\left[\sigma\bfr\right]  \\
-                                      \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\sigma\bfr\otimes\bfu\right] + \sigma\bfr\cdot\nabla\bfu\right) - \nabla[\sigma^{2}\theta] + \frac{1}{\rmRe}\nabla\cdot\left[\sigma^{2}\bftau[\bfu]\right]  \\
-        \frac{3}{2}\partial_{t}\left[\sigma^{2}\theta\right]  &=  - \frac{3}{2}\nabla\cdot\left[\sigma\theta\bfr\right] - \sigma^{2}\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\|\sigma\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\sigma^{2}\nabla\theta\right]  \label{eqn:compressible NS sqrt energy equation}
+                                      \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\sigma\bfr\otimes\bfu\right] + \sigma\bfr\cdot\nabla\bfu\right) - \nabla[\sigma^{2}\theta] + \frac{1}{\rmRef}\nabla\cdot\left[\sigma^{2}\bftau[\bfu]\right]  \\
+        \frac{3}{2}\partial_{t}\left[\sigma^{2}\theta\right]  &=  - \frac{3}{2}\nabla\cdot\left[\sigma\theta\bfr\right] - \sigma^{2}\theta\nabla\cdot\bfu + \frac{1}{2\rmRef}\|\sigma\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\sigma^{2}\nabla\theta\right]  \label{eqn:compressible NS sqrt energy equation}
     \end{align}
 
     In such a reformulation, the energy, $\rmE$, and mass, $\rmM$, are redefined as:
@@ -71,8 +71,8 @@
     Consider a system with ICs defined on $\rho$, $\bfr$, $\theta$--(one can interpret this as a system evolving in $\rho$, $\bfr$, $\theta$, coupled with $\bfu = 1/\sigma\cdot\bfr$ \emph{and} $\sigma = \sqrt{\rho}$)---that is \emph{again} identical in the continuous case:
     \begin{align}
                          \partial_{t}\rho  &=  - \nabla\cdot\bfp  \label{eqn:compressible NS final mass equation}  \\
-                   \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfp\otimes\bfu\right] + \bfp\cdot\nabla\bfu\right) - \nabla[\rho\theta] + \frac{1}{\rmRe}\nabla\cdot\left[\rho\bftau[\bfu]\right]  \\
-        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\bfp\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRe}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho\nabla\theta\right]  \label{eqn:compressible NS final energy equation}
+                   \sigma\partial_{t}\bfr  &=  - \frac{1}{2}\left(\nabla\cdot\left[\bfp\otimes\bfu\right] + \bfp\cdot\nabla\bfu\right) - \nabla[\rho\theta] + \frac{1}{\rmRef}\nabla\cdot\left[\rho\bftau[\bfu]\right]  \\
+        \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\bfp\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRef}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot\left[\rho\nabla\theta\right]  \label{eqn:compressible NS final energy equation}
     \end{align}
     where the momentum, $\bfp$, can be defined as either $\bfp := \sigma\bfr$ or $\bfp := \rho\bfu$.
 
@@ -103,13 +103,13 @@
             &=
             \bbQ_{\calU}\!\left[- \frac{1}{2}(\nabla\cdot\left[\bfp_{*}\otimes\bfu\right] + \bfp_{*}\cdot\nabla\bfu)
             - \nabla[\rho_{*}\theta_{*}]
-            + \frac{1}{\rmRe}\nabla\cdot[\rho_{*}\bftau[\bfu]]\right]  \\
+            + \frac{1}{\rmRef}\nabla\cdot[\rho_{*}\bftau[\bfu]]\right]  \\
         \begin{split}
             \bbQ_{\partial_{t}\Theta}\left[\frac{3}{2}\bbQ_{\partial_{t}\Theta}[\rho]\partial_{t}\theta\right]
             &=
             \bbQ_{\partial_{t}\Theta}\!\left[- \frac{3}{2}\bfp_{*}\cdot\nabla\bbQ_{\partial_{t}\calD}[\theta]
             - \rho_{*}\theta_{*}\nabla\cdot\bfu\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{2\rmRe}\rho_{*}\|\bftau[\bfu]\|^{2}
+            &\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{2\rmRef}\rho_{*}\|\bftau[\bfu]\|^{2}
             + \frac{1}{\rmPe}\nabla\cdot[\rho_{*}\!\nabla\theta_{*}]\right]
         \end{split}  \label{eqn:compressible NS weak energy equation}  \\
             \bbQ_{\Sigma}[\rho_{*}]
@@ -138,9 +138,9 @@
                 &=  \int_{\bfOmega\otimes T^{n}}\left[\bfr\cdot\partial_{t}\bfr + \frac{3}{2}(\partial_{t}\rho\theta + \rho\partial_{t}\theta)\right]  \\
                 &=  \int_{\bfOmega\otimes T^{n}}\left[\sigma\bfu\cdot\partial_{t}\bfr - \frac{3}{2}\theta\bbQ_{\partial_{t}\calD}[\nabla\cdot\bfp_{*}] + \frac{3}{2}\bbQ_{\partial_{\Theta}}[\rho]\partial_{t}\theta\right]  \\
             \begin{split}
-                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\left(- \frac{1}{2}(\cdots) - \mst{\nabla[\rho_{*}\theta_{*}]} + \mst{\frac{1}{\rmRe}\nabla\cdot[\rho_{*}\bftau[\bfu]]}\right)\right.  \\
+                &=  \int_{\bfOmega\otimes T^{n}}\left[\bfu\cdot\left(- \frac{1}{2}(\cdots) - \mst{\nabla[\rho_{*}\theta_{*}]} + \mst{\frac{1}{\rmRef}\nabla\cdot[\rho_{*}\bftau[\bfu]]}\right)\right.  \\
                 &\qquad\qquad\qquad- \mst{\frac{3}{2}\bbQ_{\partial_{t}\calD}[\theta]\nabla\cdot\bfp_{*}} + \left(- \mst{\frac{3}{2}\bfp_{*}\cdot\nabla\bbQ_{\partial_{t}\calD}[\theta]}\right.  \\
-                &\qquad\qquad\left.\left.- \mst{\rho_{*}\theta_{*}\nabla\cdot\bfu} + \mst{\frac{1}{2\rmRe}\rho_{*}\|\bftau[\bfu]\|^{2}} + \frac{1}{\rmPe}\mst{\nabla\cdot[\rho_{*}\nabla\theta_{*}]}\right)\right]
+                &\qquad\qquad\left.\left.- \mst{\rho_{*}\theta_{*}\nabla\cdot\bfu} + \mst{\frac{1}{2\rmRef}\rho_{*}\|\bftau[\bfu]\|^{2}} + \frac{1}{\rmPe}\mst{\nabla\cdot[\rho_{*}\nabla\theta_{*}]}\right)\right]
             \end{split}  \\
                 &=  \mst{\calC\left[\bfp_{*}; \bfu, \bfu\right]}  \\
                 &=  0
@@ -174,7 +174,7 @@
         \draw[->] (L2)   -- (Dt) node[left, midway] {$\bbQ_{\partial_{t}\calD}$};
     \end{tikzpicture}\end{center}
     then (\ref{eqn:compressible NS weak mass equation}) states in some sense a compressible analogue to the classical exact incompressibility condition:
-    \begin{equation}
+    \begin{equation}\label{eqn:weak incompressibility}
         \partial_{t}\rho  =  - \nabla\cdot\bbQ_{\calP}[\bfp_{*}]
     \end{equation}
 
@@ -235,14 +235,14 @@
                 &=
                 \bbQ_{\widehat{\calU}}\!\left[- \frac{1}{2}\sum_{jkl}w_{i}^{jkl}\left(\nabla\cdot\left[\rho_{j}^{n}\bfu_{k}^{n}\otimes\bfu_{l}^{n}\right] + \rho_{j}^{n}\bfu_{k}^{n}\cdot\nabla\bfu_{k}^{n}\right)\right.  \\
                 &\qquad\qquad\qquad\left.- \sum_{jk}w_{i}^{jk}\nabla\!\left[\rho_{j}^{n}\theta_{k}^{n}\right]
-                + \frac{1}{\rmRe}\sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]\right]\right]
+                + \frac{1}{\rmRef}\sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]\right]\right]
             \end{split}  \\
             \begin{split}
                 \bbQ_{\widehat{\Theta}}\!\left[\frac{3}{2}\sum_{jk}w_{i}^{jk}\rho_{j}^{n}\delta\theta_{k}^{n}\right]
                 &=
                 \bbQ_{\widehat{\Theta}}\!\left[\sum_{jkl}w_{i}^{jkl}\left(- \frac{3}{2}\rho_{j}^{n}\bfu_{k}^{n}\cdot\nabla\theta_{l}^{n}
                 - \rho_{j}^{n}\theta_{l}^{n}\nabla\cdot\bfu_{k}^{n}\right)\right.  \\
-                &\qquad\qquad\qquad+ \frac{1}{2\rmRe}\sum_{jkl}w_{i}^{jkl}\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]:\bftau\!\left[\bfu_{l}^{n}\right]  \\
+                &\qquad\qquad\qquad+ \frac{1}{2\rmRef}\sum_{jkl}w_{i}^{jkl}\rho_{j}^{n}\bftau\!\left[\bfu_{k}^{n}\right]:\bftau\!\left[\bfu_{l}^{n}\right]  \\
                 &\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{1}{\rmPe}\sum_{jk}w_{i}^{jk}\nabla\cdot\left[\rho_{j}^{n}\nabla\theta_{k}^{n}\right]\right]
             \end{split}  \\
                 \bbQ_{\widehat{\Sigma}}[\rho_{i}^{n}]
