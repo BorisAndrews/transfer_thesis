@@ -1,5 +1,5 @@
 \section{$\bfdelta\bff$ Decompositions}\label{cha:delta f decompositions}
-    This section shall introduce a technique called the \emph{``$\delta\!f$''} decomposition, a splitting on the distribution functions, $f_{\pm}$. The motivation for and benefits provided by this approach shall be discussed in detail in the following section: Section \ref{cha:FEM vs. PiC}.
+    This subsection shall introduce a technique called the \emph{``$\delta\!f$''} decomposition, a splitting on the distribution functions, $f_{\pm}$. The motivation for and benefits provided by this approach shall be discussed in detail in the following subsection: Section \ref{cha:FEM vs. PiC}.
 
     \line
 
@@ -40,7 +40,7 @@
         \end{itemize}
     \end{definition}
     
-    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology here. To the authors' knowledge, the idea of the $\delta\!f$ decomposition in the form first appeared in print in \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations, however the idea dates back
+    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology here. To the authors' knowledge, the idea of the $\delta\!f$ decomposition in the form first appeared in print in \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations.
 
     $\delta\!f$ decompositions offer a way to recover an approachable and familiar fluid model from the Boltzmann equations \emph{without} the unreliable \emph{exact} thermalization assumption $f_{\pm}  =  f_{\pm}^{(0)}$, at the expense of the introduction of the new $\delta\!f_{\pm}$ corrections.
 
@@ -49,7 +49,7 @@
     In its current formulation, the $\delta\!f$ decomposition as described is not \emph{necessarily} well-posed. In deriving the fluid model, the 0 moment conditions on the $\delta\!f_{\pm}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) are required to hold $\forall t$, \emph{however} a distinct kinetic equation is derived for $\delta\!f_{\pm}$ that does not \emph{explicitly} conserve these moment results.
 
     \begin{remark}[Difficulties in proving moment conservation on on $\delta\!f_{\pm}$]
-        It is natural to believe the derived kinetic model \emph{should} conserve these 0 moments. Proving analytically this is the case has proven more difficult than I'd anticipated, however I find it very hard to believe this will not hold true, especially in practice.
+        It is natural to believe the derived kinetic model \emph{should} conserve these 0 moments. Proving analytically this is the case has proven more difficult than I had anticipated, however I find it very hard to believe this will not hold true, especially in practice.
     \end{remark}
 
     \begin{conjecture}[Conservation of moments on $\delta\!f_{\pm}$]\label{con:delta f correction moments}
@@ -73,7 +73,7 @@
             \item  {\bf Claim:} If the 0 moment conditions on $\delta\!f_{\pm}$ (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) hold at time $t  =  0$, then they hold $\forall t$.
             
             \begin{remark}[Incompleteness of proof of Conjecture \ref{con:delta f correction moments}]
-                I'm aware the above claim is insufficient to prove the result of the theorem. Take for example the classical ODE counterexample from Chapter 6 of \cite{Robinson_2004}, for $x(t)  \geq  0$,
+                I am aware the above claim is insufficient to prove the result of the theorem. Take for example the classical ODE counterexample from Chapter 6 of \cite{Robinson_2004}, for $x(t)  \geq  0$,
                 \begin{equation}
                     x'  =  \sqrt{x}.
                 \end{equation}
@@ -86,12 +86,16 @@
                 \end{equation}
                 for some $x_{0}  \geq  0$.
                 
-                This implies to me that either some Lipschitz regularity result on the $\delta\!f$ decomposition, or simply a rephrasing of the problem, would be sufficient to prove this conjecture, however I haven't managed to get either to work yet. (See Chapter \ref{cha:research plan})
+                This implies to me that either some Lipschitz regularity result on the $\delta\!f$ decomposition, or simply a rephrasing of the problem, would be sufficient to prove this conjecture, however I haven't managed to get either to work yet. We leave this for future work.
             \end{remark}
         \end{enumerate}
     \end{proof}
 
-    This result is important with regard to numerical discretization since, as noted above, one derives the fluid model under the assumption that the 0 moment conditions (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $\delta\!f_{\pm}$ corrections hold $\forall t$. Naturally this fails for $t > 0$ in (most) numerical approximations. In a pseudo-particle model for example, these 0 moment conditions will necessarily \emph{never} hold true. Conjecture \ref{con:delta f correction moments} however would imply this error is solely due to the numerical approximation, and not down to any fault in the model, and that the fluid equations still hold a theoretical validity even if the moments of $\delta\!f_{\pm}$ have numerically diverged. \BA{(Would be nice to run some tests later after creation of the PiC model, showing that the moments are roughly conserved, in some weak sense.)}
+    This result is important with regard to numerical discretization since, as noted above, one derives the fluid model under the assumption that the 0 moment conditions (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) on the $\delta\!f_{\pm}$ corrections hold $\forall t$. Naturally this fails for $t > 0$ in (most) numerical approximations. In a pseudo-particle model for example, these 0 moment conditions will necessarily \emph{never} hold true. Conjecture \ref{con:delta f correction moments} however would imply this error is solely due to the numerical approximation, and not down to any fault in the model, and that the fluid equations still hold a theoretical validity even if the moments of $\delta\!f_{\pm}$ have numerically diverged.
+    
+    \begin{remark}[Validation of Conjecture \ref{con:delta f correction moments}]
+        After I have implemented the PiC model, I would like to run some tests showing that the moments are indeed roughly conserved.
+    \end{remark}
 
     \line
 
@@ -134,7 +138,7 @@
         For the corresponding kinetic component, one derives the following leading-order kinetic equations in $\delta\!f_{\pm}$:
         \begin{multline}\label{eqn:linearized Boltzmann equation}
             \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] + \rmCy\!_{\pm}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
-            - \nabla_{\bfv}\cdot\left[\left(\rmKn_{\pm\pm}\bfC_{\pm\pm}^{(0)} + \rmKn_{\pm\mp}\bfC_{\pm\mp}^{(0)}\right)\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right]\right]  \\
+            - \nabla_{\bfv}\cdot\left[\left(\rmKn_{\pm\pm}\partial\bfC_{\pm\pm}^{(0)} + \rmKn_{\pm\mp}\partial\bfC_{\pm\mp}^{(0)}\right)\left[\left(f_{+}^{(0)}, f_{-}^{(0)}\right); \left({\color{white} f_{+}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{+}, \delta\!f_{-}\right)\right]\right]  \\
             =  - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
             - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
             + \frac{2\rmCy\!_{+}}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\bfj^{(0)} - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right]  \\

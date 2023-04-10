@@ -11,7 +11,7 @@
         This both:
         \begin{itemize}
             \item  Reduces the number of component-to-coupling information couplings from $\calO[n^{2}]$, in a classical direct PiC method, to $\calO[n]$, where $n$ is the number of particles in the pseudo-particle layer.
-            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for collisions. For a further discussion see Subsection \ref{cha:gyroaveraging}.
+            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for collisions. For a further discussion see Subsubsection \ref{cha:gyroaveraging}.
         \end{itemize}
         
         \begin{figure}[!ht]
@@ -19,12 +19,12 @@
             \begin{subfigure}{0.5\textwidth}
                 \centering
                 \begin{tikzpicture}[align = center, node distance = 4cm, auto]
-                    \node (1) at (    0,   2.6) {Particle};
-                    \node (2) at (  2.5,   1.3) {Particle};
-                    \node (3) at (  2.5, - 1.3) {Particle};
-                    \node (4) at (    0, - 2.6) {Particle};
-                    \node (5) at (- 2.5, - 1.3) {Particle};
-                    \node (6) at (- 2.5,   1.3) {Particle};
+                    \node (1) at (      0,   2.500) {Particle};
+                    \node (2) at (  2.165,   1.250) {Particle};
+                    \node (3) at (  2.165, - 1.250) {Particle};
+                    \node (4) at (      0, - 2.500) {Particle};
+                    \node (5) at (- 2.165, - 1.250) {Particle};
+                    \node (6) at (- 2.165,   1.250) {Particle};
                     
                     \draw[<->] (1) -- (2);
                     \draw[<->] (1) -- (3);
@@ -52,12 +52,13 @@
                 \centering
                 \begin{tikzpicture}[align = center, node distance = 4cm, auto]
                     \node (Fluid) at (0, 0) {\bf Fluid};
-                    \node (1) at (    0,   2.6) {Particle};
-                    \node (2) at (  2.5,   1.3) {Particle};
-                    \node (3) at (  2.5, - 1.3) {Particle};
-                    \node (4) at (    0, - 2.6) {Particle};
-                    \node (5) at (- 2.5, - 1.3) {Particle};
-                    \node (6) at (- 2.5,   1.3) {Particle};
+                    
+                    \node (1) at (      0,   2.500) {Particle};
+                    \node (2) at (  2.165,   1.250) {Particle};
+                    \node (3) at (  2.165, - 1.250) {Particle};
+                    \node (4) at (      0, - 2.500) {Particle};
+                    \node (5) at (- 2.165, - 1.250) {Particle};
+                    \node (6) at (- 2.165,   1.250) {Particle};
                     
                     \draw[<->] (Fluid) -- (1);
                     \draw[<->] (Fluid) -- (2);
@@ -68,7 +69,7 @@
                 \end{tikzpicture}
                 \caption{Coupling when using a PiC model for the \\ correction in a $\delta\!f$ method.}
             \end{subfigure}
-            \caption{Illustration of how the coupling between the model components (fluids/particles) differs when using a PiC correction vs. a classical PiC model. \BA{(Would like an extension of this diagram when I talk about approaches for and difficulties in parallelization later too.)}}
+            \caption{Illustration of how the coupling between the model components (fluids/particles) differs when using a PiC correction vs. a classical PiC model.}
             \label{fig:PiC decoupling}
         \end{figure}
         

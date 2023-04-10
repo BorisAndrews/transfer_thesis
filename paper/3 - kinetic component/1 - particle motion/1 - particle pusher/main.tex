@@ -1,62 +1,22 @@
-\subsection{Derivation of the Stochastic Particle Pusher}\label{cha:particle pusher}
-    We derive first the SDE system that a pseudo-particle in a Monte Carlo model of (\ref{eqn:linearized Boltzmann equation simplified}) would have to satisfy.
-
-    \BA{This section could perhaps be made more rigorous, but I'm not too worried. The theory's clear and I'm sure it's been done before for similar equations. I'll just leave a remark saying this is more of a heuristic line of reasoning.}
-
-    Consider such a pseudo-particle, in either the ion ($+$) or electron ($-$) phase, with position, $\bfX  =  \bfX_{0}$, and velocity, $\bfV  =  \bfV_{0}$, at time $t  =  0$. this has the associated $\delta$-function IC on $\delta\!f_{\pm}$,\footnote{Clearly such a value for $\delta\!f_{\pm}$ could never exist in the true $\delta\!f$ decomposition, due to it not satisfying the moment conditions (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}). This is purely for sake of argument in deriving the pseudo-particle model.}
-    \begin{equation}
-        \delta\!f_{\pm}  =  \delta^{3}[\bfx - \bfX_{0}]\delta^{3}[\bfv - \bfV_{0}]|_{t = 0}.
-    \end{equation}
-    Consider then the LHS component of (\ref{eqn:linearized Boltzmann equation simplified}),
-    \begin{equation}\label{eqn:homogeneous linearized Boltzmann equation simplified}
-        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}  =  0.
-    \end{equation}
-    By construction, this PDE is one in $\delta\!f_{\pm}$ \emph{only}, with $\delta\!f_{\mp}$ extracted solely to the RHS.\footnote{This RHS shall be discounted until discussion of the particle generation algorithm in Section \ref{cha:particle generation}.} By the conservation structure of (\ref{eqn:homogeneous linearized Boltzmann equation simplified}), at time $t = \delta t (> 0)$, the solution to (\ref{eqn:homogeneous linearized Boltzmann equation simplified}) under this IC will necessarily satisfy
-    \begin{equation}
-        \left.\int_{\bfx, \bfv}\delta\!f_{\pm}\right|_{t = \delta t}  \left(=  \left.\int_{\bfx, \bfv}\delta\!f_{\pm}\right|_{t = 0}\right)  =  1.
-    \end{equation}
-    Provided further that $\forall \bfx, \bfv$,
-    \begin{equation}\label{eqn:PDF non-negativity condition}
-        \delta\!f_{\pm}|_{t = \delta t}  \geq  0,
-    \end{equation}
-    $\delta\!f_{\pm}|_{t = \delta t}$ can be interpreted as a probability distribution; ensuring (\ref{eqn:PDF non-negativity condition}) holds will be discussed further in the following subsection. The particle pusher could theoretically then update the position and velocity of this particle at time $t  =  \delta t$ according to a random position and velocity as sampled from $\delta\!f_{\pm}|_{t = \delta t}  \geq  0$. Under a collection of such pseudo-particles, as the quantity goes to $\infty$, one can expect the behavior of these stochastic pseudo-particles to have a weak convergence in expectation to the solution of the PDE.
-
-    This is no real use yet however, as the solution of a full time-dependent, kinetic PDE is still required, something we are using this Monte Carlo method to avoid having to do. This can be solved by which can be achieved by considering the limit of this pusher as $\delta t  \rightarrow  0_{+}$, which will transform this particle pusher to an SDE system in $\bfX$ and $\bfV$, .
+\subsection{Pseudo-Particle SDEs (Stochastic Neoclassical Transport)}
+    We first derive the SDE systems that pseudo-particle in a Monte Carlo model of the homogeneous LHS of (\ref{eqn:linearized Boltzmann equation simplified 2}) would have to satisfy. These resemble the ODE systems of neoclassical transport, derived from a Vlasov model under the assumption of negligible collisions, with a stochastic Ornstein--Uhlenbeck process--like drift-diffusion term \cite{Gardiner_1985, Karatzas_Shreve_1991, Gard_1998} contributed by the LB collision operator approximation. As such, we refer to this as \emph{stochastic} neoclassical transport.
     
-    Taking $\delta t  \rightarrow  0_{+}$ therefore, note that the dominant regions of $\delta\!f_{\pm}|_{t = \delta t}$ become more localised around $\bfx  =  \bfX_{0}$, $\bfv  =  \bfV_{0}$. The PDE can then be modeled in such as limit, assuming sufficient regularity \BA{(What regularity? Some \emph{bold} claims here!)}, as approximately uniform in $\bfx$, $\bfv$ and naturally $t$, such that the PDE behaves as it would around $\bfX_{0}$, $\bfV_{0}$ and $0$. That is to say, as $\delta t  \rightarrow  0_{+}$,
-    \begin{equation}
-        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfV_{0}] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE_{0} + \bfV_{0}\wedge\bfB_{0})] \mp \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm}|_{\bfX_{0}, \bfV_{0}; 0}[\delta\!f_{\pm}]  \sim  0,
-    \end{equation}
-    where:
+    With conservative 1st and 2nd derivatives in space, $\bfx$, and velocity, $\bfv$, and 1st derivatives in time, $t$, the LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified 2}) takes a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917}. The homogeneous LHS can thus be modeled using a pseudo-particle model where pseudo-particles in either the ion ($+$) or electron ($-$) phase, indexed via $*_{\pm}^{(i)}$, move according to the corresponding SDE system:
     \begin{align}
-        \bfE_{0}  :=  \bfE|_{\bfX_{0}; 0},  &&
-        \bfB_{0}  :=  \bfB|_{\bfX_{0}; 0}.
+        \rmd\bfX_{\pm}^{(i)}  &=  \bfV_{\pm}^{(i)}\rmd t  \label{eqn:stochastic neoclassical transport 1}  \\
+        \rmd\bfV_{\pm}^{(i)}  &=  |\rmCy\!_{\pm}|\left\{\pm\left(\bfE + \bfV_{\pm}^{(i)}\wedge\bfB\right) + \nu_{\pm}^{(i)}\left(\bfU_{\pm} - \bfV_{\pm}^{(i)}\right)\right\}\rmd t + \sqrt{|\rmCy\!_{\pm}|}\sigma_{\pm}^{(i)}\rmd\bfW_{\pm}^{(i)}  \label{eqn:stochastic neoclassical transport 2}
     \end{align}
-    From the homogeneity in $\bfx$, $\bfv$ and $t$, this can be solved at $t  =  \delta t$ by Fourier analysis in $\bfv  \mapsto  \bfomega$, denoted $\widehat{*}$, as
-    \begin{multline}
-        \delta\!f_{\pm}|_{\delta t}  \sim  \frac{1}{\sqrt{2\pi}^{3}}\delta^{3}[\bfx - (\bfX_{0} + \delta t\bfV_{0})]  \\
-        \widehat{\exp\left[\delta t\left(\mp\frac{\rme}{\rmm_{\pm}}i\bfomega\cdot(\bfE_{0} + \bfV_{0}\wedge\bfB_{0}) + \frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}|_{\bfX_{0}, \bfV_{0}; 0}\right)\right]}.
-    \end{multline}
-    Thus, presuming this $\delta\!f_{\pm}|_{\delta t}  \geq  0$, taking a random sample from this distribution for the particle pusher, $\bfX$ and $\bfV$ are given at $\delta t$ as:
+    where the position, $\bfx$, and velocity, $\bfv$, are mapped to the stochastic variables:
     \begin{align}
-        \bfX(\delta t)  &\sim  \bfX_{0} + \delta t\bfV_{0}  \\
-        \bfV(\delta t)  &\sim  \bfV_{0} \pm \delta t\frac{\rme}{\rmm_{\pm}}(\bfE_{0} + \bfV_{0}\wedge\bfB_{0}) + \delta\bfL_{\pm}\left(\delta t\right)
+        \bfx  \mapsto  \bfX_{\pm}^{(i)}(t),  &&
+        \bfv  \mapsto  \bfV_{\pm}^{(i)}(t),
     \end{align}
-    where $\delta\bfL_{\pm}(\delta t)$ is a random variable in $\bbR^{3}$ with characteristic function
-    \begin{equation}
-        \varphi[\delta\bfL_{\pm}](\bfomega)  \sim  \exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}|_{\bfX_{0}, \bfV_{0}; 0}\right].
-    \end{equation}
-    This $\delta\bfL_{\pm}(\delta t)$ can be thought of as analogous to the impulse received by the particle from collisions over the interval $(0, \delta t]$. In the limit $\delta t  \rightarrow  0_{+}$, this finally corresponds to an SDE system of the form:
+    $\sigma_{\pm}^{(i)}  :=  \sqrt{2\nu_{\pm}^{(i)}\rmD_{\pm}^{(i)}}$, and $\bfW_{\pm}^{(i)}(t)$ are normalized, 3D Wiener process, independent for each pseudo-particle.
+
+    Compare this then with the ODE systems of neoclassical transport satisfied by $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ in the Vlasov model:
     \begin{align}
-        \rmd\bfX  &=  \bfV\rmd t  \\
-        \rmd\bfV  &=  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \rmd\bfL_{\pm}
+        \rmd\bfX_{\pm}^{(i)}  &=  \bfV_{\pm}^{(i)}\rmd t  \label{eqn:deterministic neoclassical transport 1}  \\
+        \rmd\bfV_{\pm}^{(i)}  &=  \pm|\rmCy\!_{\pm}|\left(\bfE + \bfV_{\pm}^{(i)}\wedge\bfB\right)\rmd t  \label{eqn:deterministic neoclassical transport 2}
     \end{align}
-    where $\bfL_{\pm}(t)$ is a stochastic process that is:
-    \begin{itemize}
-        \item  Independent for each pseudo-particle
-        \item  With independent increments over time, in the sense of a Lévy process
-    \end{itemize}
-    characterised by the characteristic function of the jump in $\bfL$ over a time interval $(t, t + \delta t]$,
-    \begin{equation}\label{eqn:Levy process characteristic function}
-        \varphi[\bfL_{\pm}(t + \delta t) - \bfL_{\pm}(t)](\bfomega)  =  \exp\left[- \delta t\frac{\rme^{2}}{\rmm_{\pm}}i\bfomega\cdot\widehat{\calC}_{\pm\pm}\right].
-    \end{equation}
+    
+    While the neoclassical transport system exhibits multiscale behavior as $\rmCy\!_{\pm} \rightarrow \infty$, with drift occurring on $t = \calO[1]$ transport timescales, and oscillations occurring on $t = \calO[1/\rmCy\!_{\pm}]$ cyclotron timescales, this system exhibits a similar \emph{stochastic} multiscale behavior.

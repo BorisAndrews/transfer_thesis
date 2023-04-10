@@ -1,0 +1,90 @@
+\paragraph*{Direct Discretization}
+    Direct discretizations define timesteppers in the canonical variables of $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$. For clarity here we will drop the sub- and super-script $*_{\pm}^{(i)}$.
+
+    \shortline
+
+    In particular, we highlight works by Chacón, Chen et al. \cite{Chen_Chacón_Barnes_2011, Chacón_Chen_Barnes_2013, Chen_Chacón_2014, Chen_Chacón_2015} which
+     have developed timesteppers directly on $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ with SP properties for certain pseudo-particle structures highlighted in the gyrokinetic analysis. These particle pushers derive from Crank--Nicolson timestepping schemes. Using notation from the timesteppers in Chapter \ref{cha:fluid component} over the timestep $T^{n} = \left(t^{n}, t^{n + 1}\right]$ of duration $\delta t^{n}$:
+    \begin{align}
+        \bfdelta\bfX^{n}
+            =  \bfV^{n + \frac{1}{2}},  &&
+        \bfdelta\bfV^{n}
+            =  \pm |\rmCy\!_{\pm}|\left(\bfE^{n + \frac{1}{2}} + \bfV^{n + \frac{1}{2}}\wedge\bfB^{n + \frac{1}{2}}\right),
+    \end{align}
+    where:
+    \begin{align}
+        \bfX^{n + \frac{1}{2}}  :=  \bfX|_{t^{n}} + \frac{1}{2}\bfdelta\bfX^{n},  &&
+        \bfV^{n + \frac{1}{2}}  :=  \bfV|_{t^{n}} + \frac{1}{2}\bfdelta\bfV^{n},  &&
+        t^{n + \frac{1}{2}}  :=  t^{n} + \frac{1}{2}\delta t^{n},
+    \end{align}
+    and:
+    \begin{align}
+        \bfE^{n + \frac{1}{2}}  :=  \bfE\left(\bfX^{n + \frac{1}{2}}; t^{n + \frac{1}{2}}\right),  &&
+        \bfB^{n + \frac{1}{2}}  :=  \bfB\left(\bfX^{n + \frac{1}{2}}; t^{n + \frac{1}{2}}\right).
+    \end{align}
+    Updates at $t^{n + 1}$ are given as:
+    \begin{align}
+        \bfX|_{t^{n + 1}}  =  \bfX|_{t^{n}} + \delta t^{n}\bfdelta\bfX^{n},  &&
+        \bfV|_{t^{n + 1}}  =  \bfV|_{t^{n}} + \delta t^{n}\bfdelta\bfV^{n}.
+    \end{align}
+    
+    \shortline
+
+    This Crank--Nicolson timestepper has SP properties. In particular:
+    \begin{itemize}
+        \item  {\bf Energy dissipation:}
+        \begin{equation}
+            \frac{1}{\delta t^{n}}\left(E|_{t^{n + 1}} - E|_{t^{n}}\right)
+                =  \pm |\rmCy_{\pm}|\bfE^{n + \frac{1}{2}}\cdot\bfV^{n + \frac{1}{2}}
+        \end{equation}
+        \item  {\bf Gyrocenter motion:} Presuming sufficient regularity on $\bfB$,
+        \begin{multline}
+            \frac{1}{\delta t^{n}}\left(\bfxi|_{t^{n + 1}} - \bfxi|_{t^{n}}\right)
+                =  V_{\parallel}^{n + \frac{1}{2}}\bfb_{\parallel}^{n + \frac{1}{2}}
+                + \frac{1}{\left(B^{n + \frac{1}{2}}\right)\!^{2}}\bfE^{n + \frac{1}{2}}\wedge\bfB^{n + \frac{1}{2}}  \\
+                \pm \frac{1}{|\rmCy_{\pm}|}\bfV^{n + \frac{1}{2}}\wedge\left(\frac{1}{\delta t^{n}}\left(\frac{1}{\left(B^{n + 1}\right)^{2}}\bfB^{n + 1} - \frac{1}{\left(B^{n}\right)^{2}}\bfB^{n}\right)\right) + \calO\left[\left(\delta t^{n}\right)^{2}\right],
+        \end{multline}
+        for $V_{\parallel}$, $\bfb_{\parallel}$ defined similarly to as was done in the gyrokinetic model. Thus, both the motion of the gyrocenter along the magnetic field lines, and the dominant $\bfE\wedge\bfB$ drift are captured, up to a notable $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ error. The ability, or extent of ability, of this timestepper to capture the gyrocenter motion is referred to as \emph{``asymptotic preservation''} (AP).\footnote{``Asymptotic preservation'' is defined more rigorously in \cite{Ricketson_Chacón_2020}.}
+    \end{itemize}
+
+    \shortline
+
+    \begin{remark}[Direct particle pushers from FET]
+        Recall from Section \ref{cha:SP timesteppers} that the Crank--Nicolson is the lowest order GL timestepper, and from Sections \ref{cha:SP timesteppers} and \ref{cha:Navier--Stokes} that GL(-like) methods can be derived from CG-DG-in-time FET discretization, giving motivation for the strong SP properties. It strikes me that these Crank--Nicolson timesteppers could be expressed in the language of FET too, just as was done for the SP discretizations of the fluid component.
+
+        Using the same notation as in Chapter \ref{cha:fluid component}, I have had some luck using weak formulations in time wherein one seeks $\bfX_{-} \in \calX_{-}$, $\bfV_{-} \in \calV_{-}$ such that:
+        \begin{align}
+            \left(\frac{\rmd}{\rmd t}\bfX
+                =\right)  \bbQ_{\rmd\calX/\rmd t}\!\left[\frac{\rmd}{\rmd t}\bfX\right]
+                &=  \bbQ_{\rmd\calX/\rmd t}\!\left[\left\|\widetilde{\bfb}_{\parallel}\right\|^{2}\bbQ_{\rmd\calV/\rmd t}[\bfV]\right]  \\
+            \left(\frac{\rmd}{\rmd t}\bfV
+                =\right)  \bbQ_{\rmd\calV/\rmd t}\!\left[\frac{\rmd}{\rmd t}\bfV\right]
+                &=  \pm |\rmCy_{\pm}|\bbQ_{\rmd\calV/\rmd t}\!\left[\bfE + \bbQ_{\rmd\calV/\rmd t}[\bfV]\wedge B\widetilde{\bfb}_{\parallel}\right]
+        \end{align}
+        where
+        \begin{equation}
+            \widetilde{\bfb}_{\parallel}  =  B\bbQ_{\rmd\calV/\rmd t}\!\left[\frac{1}{B^{2}}\bfB\right].
+        \end{equation}
+        This exhibits great \emph{exact} SP(/AP) properties, with:
+        \begin{align}
+            \frac{1}{\delta t^{n}}\left(E|_{t^{n + 1}} - E|_{t^{n}}\right)
+                &=  \pm |\rmCy_{\pm}|\frac{1}{\delta t^{n}}\int_{T^{n}}\bfE\cdot\bbQ_{\rmd\calV/\rmd t}[\bfV]  \\
+            \frac{1}{\delta t^{n}}\left(\bfxi|_{t^{n + 1}} - \bfxi|_{t^{n}}\right)
+                &=  \frac{1}{\delta t^{n}}\int_{T^{n}}\left[\widetilde{V}_{\parallel}\widetilde{\bfb}_{\parallel}
+                + \frac{1}{B^{2}}\bfE\wedge B\widetilde{\bfb}_{\parallel}
+                \pm \frac{1}{|\rmCy_{\pm}|}\bfV\wedge\frac{\rmd}{\rmd t}\!\left[\frac{1}{B^{2}}\bfB\right]\right]
+        \end{align}
+        for $\widetilde{V}_{\parallel}  :=  \widetilde{\bfb}_{\parallel}\cdot\bbQ_{\rmd\calV/\rmd t}[\bfV]$, the latter result holding provided $\{{T^{n}} \rightarrow 1\}\otimes\bbR^{3} \subseteq \rmd\calX/\rmd t$, i.e. $\rmd\calX/\rmd t$ contains as elements the constant-in-time basis functions for $\bbR^{3}$.
+
+        Whether this weak formulation is computationally tractable is a different question. The corresponding variational form requires the exact evaluation of integrals over $T^{n}$. Using the trapezium rule to approximate these integrals returns us to the classical Crank--Nicolson timesteppers of Chacón, Chen et al., introducing the $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ errors in the gyrocenter motion result. This is all very much work in progress of course.
+
+        It would be great if these ideas of SP(/AP) particle pushers could \emph{also} derive from FET, as this would offer some hope that, in the future, FET could be used directly on the full hybrid model to derive hybrid FEM-PiC timesteppers with SP properties.
+    \end{remark}
+
+    \begin{remark}[Incorporating gyration-induced drifts within the FET framework]
+        Certain lower-order gyrocenter drifts, such as $\nabla B$ drifts, are induced by varying magnetic fields throughout the particle(/pseudo-particle)'s gyration. When classical Crank--Nicolson-based timesteppers use timesteps on the kinetic/transport timescales, these gyrations are no longer present in the particle path. These gyration-induced drifts therefore are not preserved after discretization, and this structure is lost.
+        
+        In \cite{Ricketson_Chacón_2020}, Ricketson and Chacón build upon the Crank--Nicolson framework, by modifying the definition of $\bfV^{n + \frac{1}{2}}$ in such a way as to re-introduce the $\nabla B$ drift structure. (See also \cite{Koshkarov_et_al_2022})
+
+        I have been thinking about whether a \emph{multifunction} interpretation for $\bfX$ and $\bfV$ would be able to have a similar effect, where at each time $t$, $\bfX$ and $\bfV$ are interpreted as multifunctions over the circular orbit that would be followed by a particle with velocity $\bfV$ at position $\bfX$. Again, this is left for further work.
+    \end{remark}

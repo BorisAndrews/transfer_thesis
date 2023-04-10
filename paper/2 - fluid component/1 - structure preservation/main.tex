@@ -1,4 +1,4 @@
-\section{Constructing Structure-Preserving (SP) Timesteppers via FET}
+\section{Constructing Structure-Preserving (SP) Timesteppers via FET}\label{cha:SP timesteppers}
     When constructing discrete timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve conservational/dissipative structures in the full continuous system. There are many reasons one might seek to do this:
     \begin{itemize}
         \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations, such as the topology of the magnetic potential characterized by the magnetic helicity as discussed above. Discretizations that violate these structures can exhibit correspondingly unphysical behavior. This is especially relevant in long term simulations. 
@@ -7,8 +7,6 @@
         \begin{quotation}
             \emph{``An algorithm which transforms properly with respect to a class of transformations is more basic than one that does not. In a sense the invariant algorithm attacks the problem and not the particular representation used.''}
         \end{quotation}
-        
-        \BA{(Harmonic oscillator demonstration.)}
 
         \item  {\bf Quantitative motivations:} By way of example, the conservation of global quantities can often provide useful bounds on the outputs of the timesteppers, which can be useful in proving many results, such as well-posedness. The conservation of local quantities can alternatively help in providing parameter-robust bounds for convergence results, or allow the modification of the equations without fear of modification of the numerical results, such as in the use of augmented Lagrangians. \cite{FMW19, Laakmann_Farrell_Mitchell_22}
     \end{itemize}
@@ -77,8 +75,8 @@
     
     We present here two possible approaches of tackling the time dependence of (\ref{eqn:general time-dependent PDE}) for constructing numerical timesteppers:
     \begin{itemize}
-        \item  Traditional Runge--Kutta (RK) methods. (See Subsection \ref{cha:RK methods})
-        \item  A finite-element-in-time (FET) approach. (See Subsection \ref{cha:FET})
+        \item  Traditional Runge--Kutta (RK) methods. (See Subsubsection \ref{cha:RK methods})
+        \item  A finite-element-in-time (FET) approach. (See Subsubsection \ref{cha:FET})
     \end{itemize}
     The merits of the latter with regard to the construction of global structure--preserving timesteppers are discussed, when finite elements are employed for the discretization in space also.
 

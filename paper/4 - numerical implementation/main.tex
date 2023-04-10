@@ -1,41 +1,90 @@
 \chapter{Numerical Implementation}
-    \BA{Introduction.}
-
-    \BA{Data management and interaction between the fluid and particle component.}
+    We discuss now briefly the options available for the numerical implementation of the hybrid FEM-PiC scheme. To enhance the portability of the implementation, it is in our favor to avoid a bespoke implementation, as was done within {\tt Python} in the {\tt STRUPHY} code \cite{Holderied_Possanner_Wang_2021, Holderied_2022, Li_et_al_2023}, instead favoring an implementation within a well-maintained and open source FE package.
     
-    \begin{figure}[!ht]
-        \centering
-        \begin{tabular}{ c || c | c | c | c | c }
-            Support for:  &  {\tt Firedrake}  &  {\tt Nektar++}  &  {\tt NGSolve}  &  {\tt deal.ii}  &  Bespoke  \\
-            \hline\hline
-            Open source  &  \bftick  &    &  \bftick  &    &  \bftick  \\
-            \hline
-            Portable  &  \bftick  &  \bftick  &  \bftick  &  \bftick  &  \bfcross  \\
-            \hline\hline
-            FEEC elements  &  \bftick  &  \bfcross  &  \ast\textcolor{darkyellow}{$^{\bf 5}$}  &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline
-            Block/AL preconditioning  &  \bftick  &    &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline
-            Multigrid preconditioning  &  \bftick  &    &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline\hline
-            $> 3$ dimensions  &  \bfcross  &    &    &  \bftick  &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline
-            Fluid/PIC interaction  &  \ast\textcolor{darkyellow}{$^{\bf 2}$}  &  \ast\textcolor{darkyellow}{$^{\bf 3}$}  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-            \hline\hline
-            Deflation  &  \ast\textcolor{darkyellow}{$^{\bf 4}$}  &  \bfcross  &    &    &  \ast\textcolor{darkyellow}{$^{\bf 1}$}  \\
-        \end{tabular}
-        \caption{\BA{Applicability of different numerical implementation frameworks.} \BA{Details about what the \bftick's, \bfcross's and \ast's mean.}}
-    \end{figure}
-    
-    \BA{What each of the \ast's means:
-    \begin{itemize}
-        \item[\ast\textcolor{darkyellow}{$^{\bf 1}$}]  Obviously all of this is supported in a bespoke implementation, in as far as I would have to implement it, however I would have much more control over how it was done in this case.
-        \item[\ast\textcolor{darkyellow}{$^{\bf 2}$}]  There's various possibilities here. Patrick mentioned {\tt DMSwarm} in {\tt PETSc},\footnote{Will Saunders has concerns about the way {\tt DMSwarm} passed particles between MPI ranks- the particles are distributed from one rank to \emph{all possible receiving ranks}---computationally intense already!---then has no checks for existence and uniqueness for a receiving rank. Apparently solving this would be a parallelization nightmare too.} Pablo mentioned a few other ideas and people to get in contact with about this- I'm confident that some of the ideas I'd like to try should already be supported in some form, \emph{without} me having to delve into the nitty-gritty of parallelising the PIC.
-        \item[\ast\textcolor{darkyellow}{$^{\bf 3}$}]  Some of the fluid/PIC integration is implemented in \emph{certain} cases within the ExCALIBUR NEPTUNE project in {\tt NESO} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO}{link}), {\tt NESO-Particles} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Particles}{link}) and {\tt NESO-Spack} (\href{https://github.com/ExCALIBUR-NEPTUNE/NESO-Spack}{link}) within {\tt Nektar++}- works on GPUs and everything!
-        \item[\ast\textcolor{darkyellow}{$^{\bf 4}$}]  Firedrake has DefCon! Obviously, that's going to require some tweaks---as detailed in the Bifurcation Analysis chapter---for the applications I'd like to apply it to, but that's going to be the case for any premade deflation package.
-        \item[\ast\textcolor{darkyellow}{$^{\bf 5}$}]  I'm not sure if {\tt NGSolve} has support for FEEC elements on \emph{non-simplicial} domains- it's unclear from the \href{https://docu.ngsolve.org/latest/i-tutorials/unit-2.3-hcurlhdiv/hcurlhdiv.html}{documentation}.
-    \end{itemize}}
+    As outlined in Chapter \ref{cha:fluid component}, the SP discretizations considered in the fluid component require the use of FE spaces whose projection operators satisfy certain commutativity relations as subcomplexes of the de Rham complex, i.e. FEEC-induced FEs. Being absolutely essential for the success of this scheme, this presents one of the greatest limitations on the options of FE packages, as support for such FE spaces are not yet wholly commonplace. {\tt Firedrake} \cite{Rathgeber_et_al_2016} and {\tt FEniCS}/{\tt FEniCSx} \cite{Logg_Wells_2010, Logg_Mardal_Wells_2012} have potentially the widest support in this area.\footnote{There is also some support for FEEC-induced FEs within {\tt NGSolve} \cite{Schöberl_2015} however the support that is offered is not as rich as within {\tt Firedrake} or {\tt FEniCS}/{\tt FEniCSx}.} Through their interaction with {\tt PETSc} \cite{Balay_et_al_1997, Balay_et_al_2023}, both also offer wide support for different preconditioners and solvers, in particular block and multigrid preconditioners as required by the robust preconditioners implementations in \cite{Laakmann_Hu_Farrell_2022}. From these 2 packages, we will elect to implement the hybrid FEM-PiC scheme within the {\tt Firedrake} package.
 
-    \section*{Summary}
-        \BA{Summary.}
+    \begin{remark}[Difficulties to come in implementation]
+        Choosing the FE package in which we would like the scheme to be implemented represent only 2\% of the battle.
+        
+        One of the main difficulties to come lies in parallel data management between the fluid and kinetic component, Eulerian and Lagrangian in nature respectively. To be more precise, suppose that in parallelization the domain $\bfOmega$ is partitioned into subdomains $\bfOmega_{1}$, $\bfOmega_{2}$, $\cdots$. Let the data associated with each of these domains (FEs and pseudo-particles within each subdomain) be held within an associated MPI rank. (Building on Figure \ref{fig:PiC decoupling}, Figure \ref{fig:PiC decoupling parallel} illustrates how data is coupled within the system after parallelization.) While FEs are naturally stationary and confined to these subdomains, pseudo-particles are not, and can travel between subdomains. In such an event, the data for the pseudo-particle must be migrated between MPI ranks, which can be very computationally cumbersome if not implemented effectively.
+        
+        \begin{figure}[!ht]
+            \centering
+            \begin{tikzpicture}[align = center]%, node distance = 4cm, auto, axis equal]
+                \node (1) at (      0,   2.500) {\bf Fluid};
+                    \node (1p) at (      0,   5.000) {Particles};
+                    \draw[<->] (1) -- (1p);
+                \node (2) at (  2.165,   1.250) {\bf Fluid};
+                    \node (2p) at (  4.330,   2.500) {Particles};
+                    \draw[<->] (2) -- (2p);
+                \node (3) at (  2.165, - 1.250) {\bf Fluid};
+                    \node (3p) at (  4.330, - 2.500) {Particles};
+                    \draw[<->] (3) -- (3p);
+                \node (4) at (      0, - 2.500) {\bf Fluid};
+                    \node (4p) at (      0, - 5.000) {Particles};
+                    \draw[<->] (4) -- (4p);
+                \node (5) at (- 2.165, - 1.250) {\bf Fluid};
+                    \node (5p) at (- 4.330, - 2.500) {Particles};
+                    \draw[<->] (5) -- (5p);
+                \node (6) at (- 2.165,   1.250) {\bf Fluid};
+                    \node (6p) at (- 4.330,   2.500) {Particles};
+                    \draw[<->] (6) -- (6p);
+                
+                \draw[<->] (1) -- (2);
+                \draw[<->] (1) -- (3);
+                \draw[<->] (1) -- (4);
+                \draw[<->] (1) -- (5);
+                \draw[<->] (1) -- (6);
+                
+                \draw[<->] (2) -- (3);
+                \draw[<->] (2) -- (4);
+                \draw[<->] (2) -- (5);
+                \draw[<->] (2) -- (6);
+                
+                \draw[<->] (3) -- (4);
+                \draw[<->] (3) -- (5);
+                \draw[<->] (3) -- (6);
+                
+                \draw[<->] (4) -- (5);
+                \draw[<->] (4) -- (6);
+                
+                \draw[<->] (5) -- (6);
+
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 360] at (      0,   3.750) {};
+                    \node at (      0,   6.500) {$\bfOmega_{1}$};
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 300] at (  3.248,   1.875) {};
+                    \node at (  5.629,   3.250) {$\bfOmega_{2}$};
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 240] at (  3.248, - 1.875) {};
+                    \node at (  5.629, - 3.250) {$\bfOmega_{3}$};
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 180] at (      0, - 3.750) {};
+                    \node at (      0, - 6.500) {$\bfOmega_{4}$};
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 120] at (- 3.248, - 1.875) {};
+                    \node at (- 5.629, - 3.250) {$\bfOmega_{5}$};
+                \node[ellipse, draw, thick, dotted, minimum width = 3cm, minimum height = 4.75cm, rotate = 060] at (- 3.248,   1.875) {};
+                    \node at (- 5.629,   3.250) {$\bfOmega_{6}$};
+            \end{tikzpicture}
+            \caption{Illustration of the coupling of data within the hybrid FEM-PiC model after parallelization between 6 MPI ranks.}
+            \label{fig:PiC decoupling parallel}
+        \end{figure}
+
+        {\tt PETSc} offers {\tt DMSwarm}, a data management object containing the promising MPI rank migration subroutine {\tt DMSwarmMigrate} to aid in the support of particle methods, although I have not yet had the opportunity to properly investigate this. Even if I get the data management working efficiently, getting the pseudo-particles to share data with the fluid layer could still prove difficult.
+    \end{remark}
+
+    \begin{remark}[Test cases for the hybrid model]
+        Once the hybrid model is implemented, I would of course like to finish off with some tokamak-relevant test simulations. In particular, I would like to consider tests for the system's SP properties, as well as its ability to model:
+        \begin{itemize}
+          \item  Effects absent from:
+          \begin{itemize}
+              \item  Ideal MHD, such as magnetic reconnection. \cite{Dungey_1961, Lockwood_2016}
+              \item  Incompressible MHD, such as magnetosonic waves.
+          \end{itemize}
+            \item  Kinetic effects, including kinetic:
+            \begin{itemize}
+                \item  Waves, such as whistler modes. \cite{Chen_2015}
+                \item  Instabilities, such as two-stream instabilities. \cite{ONeil_Malmberg_1968, Stix_1992}
+                \item  Structures, such as beams, double layers and anisotropic pressures.
+            \end{itemize}
+        \end{itemize}
+        I would also like to consider both global tokamak simulations and local flux tube simulations, although the latter would require extending the analysis through this thesis to a 2D setting, which may not always prove possible.
+    \end{remark}
     

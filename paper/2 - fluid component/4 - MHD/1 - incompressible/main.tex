@@ -90,7 +90,7 @@
 
     We shall now build on the work from Section \ref{cha:Navier--Stokes}, using a FET approach to derive a class of timesteppers for the incompressible (Hall) MHD model (Figure \ref{fig:incompressible strong form}) which:
     \begin{itemize}
-        \item  Can be defined up to abitrarily high order in time.
+        \item  Can be defined up to arbitrarily high order in time.
         \item  Incorporate viscous terms, with a quantifiable dissipation on the energy and magnetic helicity.
     \end{itemize}
     At lowest order, the resultant timestepper resembles that from \cite{Laakmann_Hu_Farrell_2022} without the mixed vorticity formulation for the convective term.
@@ -142,7 +142,7 @@
         \draw[->] (Hcurl) -- (J)  node[left, midway] {$\bbQ_{\calG}$};
         \draw[->] (Hdiv)  -- (Bt) node[left, midway] {$\bbQ_{\partial_{t}\calB}$};
     \end{tikzpicture}\end{center}
-    Again, $\bfu_{*}$ can be taken as either $\bfu$ or $\bbQ_{\partial_{t}\calU}[\bfu]$, although one would typically chose the latter in practice.
+    Again, $\bfu_{*}$ can be taken as either $\bfu$ or $\bbQ_{\partial_{t}\calU}[\bfu]$, although one would typically choose the latter in practice.
 
     \shortline
 
@@ -252,7 +252,7 @@
         \end{tikzpicture}\end{center}
         Compare this with the commutativity requirement in the \cite{Laakmann_Hu_Farrell_2022} timestepper.
 
-        Similar to the the CG-DG-in-time timesteppers for the Navier--Stokes models, one can use a basis of GL functions as a basis for $\bbDP^{s - 1}$ to write the resultant timestepper in a closed form, remeniscent of the classical GL method.
+        Similar to the CG-DG-in-time timesteppers for the Navier--Stokes models, one can use a basis of GL functions as a basis for $\bbDP^{s - 1}$ to write the resultant timestepper in a closed form, reminiscent of the classical GL method.
 
         One each timestep interval $T^{n}$, one seeks, $\forall i \in \{1, \cdots, s\}$:
         \begin{align}
@@ -360,7 +360,7 @@
             \rmH_{\rmM}|_{t^{n + 1}} - \rmH_{\rmM}|_{t^{n}}  &=  - \delta t^{n}\frac{2}{\rmRem}\sum_{i}\int_{\bfOmega}\left(\nabla\wedge\bfG_{i}^{n}\right)\cdot\bfB_{i}^{n}
         \end{align}
 
-        For exact incompressibility, the $\bbQ_{\calP}\circ\rmdiv = \rmdiv\circ\bbQ_{\partial_{t}\calU}$ commutativty property manifests similarly to in the incompressible NS case, in the requirement that the following diagram commutes:
+        For exact incompressibility, the $\bbQ_{\calP}\circ\rmdiv = \rmdiv\circ\bbQ_{\partial_{t}\calU}$ commutativity property manifests similarly to in the incompressible NS case, in the requirement that the following diagram commutes:
         \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]
             \node (Hdiv) at (0,   0) {$\bfH(\rmdiv)$};
             \node (L2)   at (3.5, 0) {$L^{2}$};
@@ -377,4 +377,4 @@
 
     \line
 
-    From here, much of the remainder of this chapter is left for future work.
+    From here, much of the remainder of this section is left for future work.

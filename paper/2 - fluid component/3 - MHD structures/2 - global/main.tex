@@ -38,7 +38,7 @@
         \label{fig:linking numbers}
     \end{figure}
     
-    \begin{remark}
+    \begin{remark}[Non-uniqueness of the magnetic potential]
         We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
         
         It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
@@ -56,8 +56,8 @@
         \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
     \end{equation}
 
-    \begin{remark}
-        Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I'm choosing to consider these ones for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.
+    \begin{remark}[Alternative BCs]
+        Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I am choosing to consider these for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.
     \end{remark}
 
     In the incompressible case, \cite{Laakmann_Hu_Farrell_2022} considers the conservation of the following 3 quantities in the incompressible system:\footnote{Note, the hybrid helicity, $\rmH_{\rmH}$, is \emph{not} (necessarily) the helicity of a vector field, except in the case of $a = b = \beta\rmRH/2 (= 1/\rmCy\!_{+})$, where
@@ -75,7 +75,7 @@
     \end{tabular}\end{center}
     where $a$, $b$ satisfy the relation
     \begin{equation}
-        \frac{1}{a} + \frac{1}{b}  =  \frac{4}{\beta\rmRH}  (=  2\rmCy_{+}),
+        \frac{1}{a} + \frac{1}{b}  =  \frac{4}{\beta\rmRH}  (=  2\rmCy\!_{+}),
     \end{equation}
     and $\bfomega$ is the vorticity $\bfomega  :=  \nabla\wedge\bfu$.
     
@@ -100,8 +100,8 @@
     \begin{itemize}
         \item  If both:
         \begin{itemize}
-            \item  One of the ideal kinetic limit $\rmRef  \rightarrow  \infty$, the stress-free BC $\bftau\cdot\bfn  =  \bfzero|_{\bfGamma}$, or the no-slip BC $\bfu\wedge\bfn  =  \bfzero|_{\bfGamma}$, holds.
-            \item  Either the ideal thermal limit, $\rmPe  \rightarrow  \infty$, or the thermal insulation BC $\nabla\theta\cdot\bfn  =  0|_{\bfGamma}$, holds.
+            \item  One of the ideal kinetic limit $\rmRef  \rightarrow  \infty$, the stress-free BC $\bftau\cdot\bfn  =  \bfzero|_{\bfGamma}$, or the no-slip BC $\bfu\wedge\bfn  =  \bfzero|_{\bfGamma}$, holds
+            \item  Either the ideal thermal limit, $\rmPe  \rightarrow  \infty$, or the thermal insulation BC $\nabla\theta\cdot\bfn  =  0|_{\bfGamma}$, holds
         \end{itemize}
         then
         \begin{equation}

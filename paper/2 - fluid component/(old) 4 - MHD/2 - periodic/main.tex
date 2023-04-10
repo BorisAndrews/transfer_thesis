@@ -1,11 +1,11 @@
 \subsection*{Periodic Case}
     \BA{Introduction.}
 
-    \BA{If I'm going to talk about periodic problems, I need to add my ideas about how we incorporate the solve for the frequency in a separate chapter.}
+    \BA{If I am going to talk about periodic problems, I need to add my ideas about how we incorporate the solve for the frequency in a separate section.}
 
     Consider now the time-periodic case, on a domain $\bfOmega\otimes T$ for some interval $T$, with the inclusion of the time derivatives.
     
-    \BA{(Need some references for this paragraph. Should trace the paper trail back a little further from Giacomo's report.)} To derive weak formulations for the periodic problem, the system can be interpreted through the lens of function/finite element spaces and weak formulations in both space \emph{and} time. This can be done through the use of function/finite elements spaces that are tensor product spaces of one in space, $\bfOmega$, and time, $T$. Approaching through the lens of function/finite element spaces in time, has many benefits, notably here including facilitating the construction of structure-preserving discretizations directly from the weak formulation, using specially chosen test spaces. For a further discussion on this topic, see Appendix \BA{(Here's where I used to have a link to the FET appendix...)}. \BA{(Need to mention somewhere about how Firedrake doesn't support 4D+ simulations, and how we combat that.)}
+    \BA{(Need some references for this subparagraph. Should trace the paper trail back a little further from Giacomo's report.)} To derive weak formulations for the periodic problem, the system can be interpreted through the lens of function/finite element spaces and weak formulations in both space \emph{and} time. This can be done through the use of function/finite elements spaces that are tensor product spaces of one in space, $\bfOmega$, and time, $T$. Approaching through the lens of function/finite element spaces in time, has many benefits, notably here including facilitating the construction of structure-preserving discretizations directly from the weak formulation, using specially chosen test spaces. For a further discussion on this topic, see Appendix \BA{(Here's where I used to have a link to the FET appendix...)}. \BA{(Need to mention somewhere about how {\tt Firedrake} doesn't support 4D+ simulations, and how we combat that.)}
 
     Casting into weak form therefore, trial and test spaces are considered to be supported on $\bfOmega\otimes T$. Proceeding directly to the compressible case, consider test functions for each equation in the test spaces as listed in Figure \ref{fig:periodic test spaces}, similarly via the $L^{2}(\bfOmega\otimes T)$ inner product. This takes the variational formulation in Figure \ref{fig:periodic weak form}.
     
@@ -28,7 +28,7 @@
             Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\alpha\partial_{t}\calB$  \\
             Gauss's law  &  $0  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\beta\nabla\cdot\calB$  \\
         \end{tabular}
-        \caption{Test spaces for the (compressible) periodic variation formulation \BA{(I introduce ``$\alpha$'' here, but I used $\alpha$ as notation for a small thing in Subsection \ref{cha:fluid models})}}
+        \caption{Test spaces for the (compressible) periodic variation formulation \BA{(I introduce ``$\alpha$'' here, but I used $\alpha$ as notation for a small thing in Subsubsection \ref{cha:fluid models})}}
         \label{fig:periodic test spaces}
     \end{figure}
 
@@ -65,7 +65,7 @@
         $0  =  \nabla\cdot\bfB$                            &  ...                                               &  ...                                                       \\
     \end{tabular}\end{center}
 
-    \BA{IMPORTANT NOTE: Recently split this up into 2 distinct sections on periodic solutions and timesteppers. Since then I've had real trouble showing both Faraday's law and Gauss's are enforced in the periodic problem formulation, due to the whole nature of the redundancy/gauge invariance in Maxwell's equations. The rest is copied over from how this section previously looked but is now largely wrong. If I can't get this to work soon, I'll just leave it as a remark and move on.}
+    \BA{IMPORTANT NOTE: Recently split this up into 2 distinct subsections on periodic solutions and timesteppers. Since then I have had real trouble showing both Faraday's law and Gauss's are enforced in the periodic problem formulation, due to the whole nature of the redundancy/gauge invariance in Maxwell's equations. The rest is copied over from how this subsection previously looked but is now largely wrong. If I can't get this to work soon, I'll just leave it as a remark and move on.}
     
     Similarly restricting to Hilbert spaces, it is therefore natural to consider weak formulations where $\calM\oplus\calD \xrightarrow{\rmdiv + \partial_{t}} \calP$ and $\calE\oplus\calB \xrightarrow{\cdots} \partial_{t}\calB\oplus *$ form components of subcomplexes of $H\Lambda^{\bullet}\left(\bfOmega\otimes T\right)$, with projection/interpolation maps $\bbQ_{*}$ such that the following diagrams commute:
     \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]

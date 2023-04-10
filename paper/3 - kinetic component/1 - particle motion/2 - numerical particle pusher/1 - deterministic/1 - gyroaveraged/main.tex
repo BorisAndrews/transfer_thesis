@@ -1,0 +1,106 @@
+\paragraph*{Gyroaveraged Discretization}
+    Writing (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}) as a system evolving in parameters that are invariant (up to leading order) over cyclotron-frequency oscillation is referred to as a gyrokinetic approach. This is equivalent in effect to performing a multiscale analysis \cite{Kevorkin_Cole_2012} and as such captures the transport-timescale dynamics induced by the high-frequency oscillations directly.
+    
+    We begin first with an overview of classical gyrokinetic theory. For a further exposition and discussion, see \cite{Woods_2006, Freidberg_2008, Chen_2015}.
+
+    \shortline
+
+    For magnetic field strength $B  :=  \|\bfB\|$, denote the total, $V_{\pm}^{(i)}$, parallel, $V_{\pm\parallel}^{(i)}$, and perpendicular, $V_{\pm\perp}^{(i)}$, particle speeds:
+    \begin{align}
+                 V_{\pm}^{(i)}  :=  \left\|\bfV_{\pm}^{(i)}\right\|,   &&
+        V_{\pm\parallel}^{(i)}  :=  \frac{1}{B}\bfB\cdot\bfV_{\pm}^{(i)},  &&
+            V_{\pm\perp}^{(i)}  :=  \frac{1}{B}\left\|\bfB\wedge\bfV_{\pm}^{(i)}\right\|.
+    \end{align}
+    Define the parallel, $\bfb_{\parallel}$, and perpendicular, $\bfb_{\pm\perp}^{(i)}$, magnetic field directions:
+    \begin{align}
+        \bfb_{\parallel}  :=  \frac{1}{B}\bfB,  &&
+            \bfb_{\pm\perp}^{(i)}  :=  - \frac{1}{B^{2}}\left(\frac{1}{V_{\pm\perp}^{(i)}}\bfV_{\pm}^{(i)}\wedge\bfB\right)\wedge\bfB,
+    \end{align}
+    such that the velocity, $\bfV_{\pm}^{(i)}$, can be decomposed as $\bfV_{\pm}^{(i)}  =  V_{\pm\parallel}^{(i)}\bfb_{\parallel} + V_{\pm\perp}^{(i)}\bfb_{\pm\perp}^{(i)}$. This decomposition splits $\bfV_{\pm}^{(i)}$ into 3 terms that change largely on largely convective timescales, $V_{\pm\parallel}^{(i)}$, $V_{\pm\perp}^{(i)}$, $\bfb_{\parallel}$, and 1 that oscillates largely on cyclotron timescales, $\bfb_{\pm\perp}^{(i)}$, with $\bfb_{\parallel}\cdot\bfb_{\pm\perp}^{(i)}  =  0$. Complete $\bfb_{\parallel}$, $\bfb_{\pm\perp}^{(i)}$ as an orthonormal basis for $\bbR^{3}$ with
+    \begin{equation}
+        \bfb_{\pm*}^{(i)}  :=  \bfb_{\parallel}\wedge\bfb_{\pm\perp}^{(i)}.
+    \end{equation}
+
+    Define then the following pseudo-particle parameters:
+
+    \begin{definition}[Pseudo-particle gyrocenter, magnetic moment and energy]
+        These are defined as follows:
+        \begin{itemize}
+            \item  Gyrocenter, $\bfxi_{\pm}^{(i)}$:
+            \begin{equation}
+                \bfxi_{\pm}^{(i)}\!\left[\bfX_{\pm}^{(i)}, \bfV_{\pm}^{(i)}; \bfB\right]\!(t)  :=  \bfX_{\pm}^{(i)} \mp \frac{1}{|\rmCy\!_{\pm}|B}\bfb_{\pm*}^{(i)}
+            \end{equation}
+            \item  Magnetic moment, $\mu_{\pm}^{(i)}$:
+            \begin{equation}
+                \mu_{\pm}^{(i)}\!\left[\bfV_{\pm}^{(i)}; \bfB\right]\!(t)  :=  \frac{1}{2}\cdot\frac{1}{B}\left(V_{\pm\perp}^{(i)}\right)^{2}
+            \end{equation}
+            \item  Energy, $E_{\pm}^{(i)}$:
+            \begin{equation}
+                E\!\left[\bfV_{\pm}^{(i)}\right]\!(t)  :=  \frac{1}{2}\left\|\bfV_{\pm}^{(i)}\right\|^{2}.
+            \end{equation}
+        \end{itemize}
+    \end{definition}
+
+    $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$ evolve according to the equations:
+    \begin{align}
+        \rmd\bfxi_{\pm}^{(i)} 
+            &=  \left(V_{\pm\parallel}^{(i)}\bfb_{\parallel} + \frac{1}{B^{2}}\bfE\wedge\bfB\right)\rmd t
+            \pm \frac{1}{|\rmCy\!_{\pm}|}\cdot\frac{1}{B^{2}}\left(\bfV_{\pm}^{(i)}\wedge\rmd\bfB - 2V_{\pm\perp}^{(i)}\left(\bfb_{\parallel}\cdot\rmd\bfB\right)\bfb_{\pm*}^{(i)}\right)  \label{eqn:gyrocenter equation}  \\
+        \rmd\mu_{\pm}^{(i)}
+            &=  \pm |\rmCy\!_{\pm}|\frac{1}{B}V_{\pm\perp}^{(i)}\left(\bfE\cdot\bfb_{\pm\perp}^{(i)}\right)\rmd t
+            - \frac{1}{B^{2}}\left(\frac{1}{2}\left(V_{\pm\perp}^{(i)}\right)^{2}\bfb_{\parallel} + V_{\pm\parallel}^{(i)}V_{\pm\perp}^{(i)}\bfb_{\pm\perp}^{(i)}\right)\cdot\rmd\bfB  \label{eqn:magnetic moment equation}  \\
+        \rmd E_{\pm}^{(i)}
+            &=  \pm|\rmCy\!_{\pm}|\left(\bfE\cdot\bfV_{\pm}^{(i)}\right)\rmd t
+    \end{align}
+    with
+    \begin{equation}
+        \rmd\bfB  =  \left(\bfV_{\pm}^{(i)}\cdot\nabla\bfB - \nabla\wedge\bfE\right)\rmd t
+    \end{equation}
+
+    \shortline
+
+    \emph{``Gyroaveraging''} can be interpreted as averaging these equations over the high-frequency oscillations, over a duration of $2\pi/|\rmCy\!_{\pm}|B$. This eliminates any cyclotron frequency oscillations in the parameters, such as those in $\bfb_{\pm\perp}^{(i)}$.
+    
+    After gyroaveraging on (\ref{eqn:gyrocenter equation}--\ref{eqn:magnetic moment equation}) $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$ evolve according to the equations:
+    \begin{align}
+        \begin{split}
+            \rmd\bfxi_{\pm}^{(i)} 
+                &=  \left(V_{\pm\parallel}^{(i)}\bfb_{\parallel} + \frac{1}{B^{2}}\bfE\wedge\bfB\right)\rmd t  \\
+                &\qquad\pm \frac{1}{|\rmCy\!_{\pm}|}\cdot\frac{1}{B^{2}}\left(\left(2E_{\pm}^{(i)} - B\mu_{\pm}^{(i)}\right)\bfb_{\parallel}\wedge\nabla B\tall\right.  \\
+                &\qquad\qquad\left.+ \left(\left(2E_{\pm}^{(i)} - 2B\mu_{\pm}^{(i)}\right)\bfI - \left(2E_{\pm}^{(i)} - 3B\mu_{\pm}^{(i)}\right)\bfb_{\parallel}^{\otimes 2}\right)\cdot\bfj\tall\right)\rmd t + \calO\left[\frac{\rmd t}{(|\rmCy\!_{\pm}|B)^{2}}\right]
+        \end{split}  \label{eqn:gyroaveraged gyrocenter equation}  \\
+        \rmd\mu_{\pm}^{(i)}
+            &=  - \frac{1}{B^{2}}\mu_{\pm}^{(i)}\{\bfE, \bfb_{\parallel}, \nabla B\}\rmd t + \calO\left[\frac{\rmd t}{|\rmCy\!_{\pm}|B}\right]  \\
+        \rmd E_{\pm}^{(i)}
+            &=  \pm|\rmCy\!_{\pm}|V_{\pm\parallel}^{(i)}(\bfE\cdot\bfb_{\parallel})\rmd t
+            - \mu_{\pm}^{(i)}(\nabla\wedge\bfE)\cdot\bfb_{\parallel} + \calO\left[\frac{\rmd t}{|\rmCy\!_{\pm}|B}\right].  \label{eqn:gyroaveraged energy equation}
+    \end{align}
+    where the EM fields $\bfE$, $\bfB$, gradients thereof, and the current $\bfj$ are evaluated at the gyrocenter, $\bfxi_{\pm}^{(i)}$. Terms following $V_{\pm\parallel}^{(i)}\bfb_{\parallel}$ in the gyrocenter evolution equation (\ref{eqn:gyroaveraged gyrocenter equation}) are referred to as \emph{``gyrocenter drifts''}. \cite{Woods_2006, Freidberg_2008, Chen_2015}
+
+    This can be made into a closed system in $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$ by defining $V_{\pm\parallel}^{(i)}$ as
+    \begin{equation}
+        V_{\pm\parallel}^{(i)}  =  \pm \sqrt{2\left(E_{\pm}^{(i)} - B\mu_{\pm}^{(i)}\right)},
+    \end{equation}
+    with the sign of the square root switching whenever $E_{\pm}^{(i)}  =  B\mu_{\pm}^{(i)}$ as gyrocenters oscillate along the magnetic field lines. \cite{Freidberg_2008} This eliminates the multiscale behavior of pseudo-particles in the Vlasov model (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}). One can then model the pseudo-particle motion through a timestepper in $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$.
+
+    \begin{remark}[Verification of the deterministic gyrokinetic model]
+        I \emph{believe} (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged energy equation}) are correct. It's surprisingly hard to find these precise forms in the literature, only certain leading-order results and certain assumptions, such as negligible $\bfj$ or $\bfE$. The best way to confirm them I suspect would just be to run some cyclotron-frequency simulations and check the results line up.
+        
+        Until I am actually implementing these schemes numerically, the exact evolution equations for gyroaveraged $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$ are irrelevant.
+    \end{remark}
+
+    \shortline
+
+    Gyrokinetic expansions and particle pushers can exhibit greater computational efficiency than direct approaches for multiple reasons:
+    \begin{itemize}
+        \item  The multiscale expansion improves the conditioning of the numerical problem to be solved. With large $|\rmCy_{\pm}|$, the ill conditioning exists (primarily) in the high-frequency oscillations, which need not be modeled in a gyrokinetic discretization.
+        \item  Direct discretizations must often be implicit to give SP properties. This is naturally not the case for gyrokinetic particle pushers. 
+        \item  They reduce the number of variables to model from $6$ to $5$.
+    \end{itemize}
+
+    A major drawback however comes in knowing only the pseudo-particle path's gyrocenter at any given time, and not the pseudo-particle itself's exact location. This presents two main problems:
+    \begin{itemize}
+        \item  It is unclear how to handle boundary collisions, since it is unclear when a particle collides with the boundary.
+        \item  In the fluid component of the hybrid model, one must ``test'' against the $\delta$ function representing for the pseudo-particle positions, when casting into a weak form. What this means when the particle location is unknown is up to interpretation.
+    \end{itemize}
+    There is also the drawback that the gyrokinetic expansion holds as $(|\rmCy\!_{\pm}|B) \rightarrow \infty$. Even if it is true that $|\rmCy\!_{\pm}|B \gg 1$ in most locations, certain reactor layouts may feature regions of low magnetic field. If there exists a region within the tokamak where $B \not\gg 1/|\rmCy\!_{\pm}|$ then this assumption breaks down, as the pseudo-particle dynamics lose their multiscale nature, causing the gyrokinetic expansion to fail.

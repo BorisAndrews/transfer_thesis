@@ -17,7 +17,7 @@
             \item  Finite-element exterior calculus (FEEC).
             \item  Parallel-in-time methods.
             \item  Well-studied interpolation and projection error estimates.
-            \item  Language for the analysis and interpretation of non-confoming schemes.
+            \item  Language for the analysis and interpretation of non-conforming schemes.
             \item  Agency over bases for the time discretization with good orthogonality properties.
             \item  Easy extension to high order.
         \end{itemize}
@@ -51,7 +51,7 @@
       \begin{equation}
           \bbU^{\rmh}  :=  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right)  <  \calU.
       \end{equation}
-      Consequently
+      Consequently,
       \begin{equation}
           \partial_{t}\bbU^{\rmh}  :=  \widehat{\calU}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right)  <  \partial_{t}\calU.
       \end{equation}
@@ -70,7 +70,7 @@
           u^{\rmh}(\bfx; t)  =  \sum_{j}\widehat{u}_{j}(\bfx)\phi_{j}(t),  &&
           v^{\rmh}(\bfx; t)  =  \sum_{i}\widehat{v}_{i}(\bfx)\varphi_{i}(t),
       \end{align}
-      for $\left(\widehat{u}_{j}\right)_{j}$, $\left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$. The Petrov--Galerkin-projected variational formulational then seeks $\left(\widehat{u}_{j}\right)_{j \neq 0}$ in $\widehat{\calU}$ such that $\forall  \left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$:
+      for $\left(\widehat{u}_{j}\right)_{j}$, $\left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$. The Petrov--Galerkin-projected variational formulation then seeks $\left(\widehat{u}_{j}\right)_{j \neq 0}$ in $\widehat{\calU}$ such that $\forall  \left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$:
       \begin{align}
           \left\langle\sum_{i}\widehat{v}_{i}\varphi_{i}, \partial_{t}\left[\sum_{j}\widehat{u}_{j}\phi_{j}\right]\right\rangle_{\bfOmega\otimes T^{n}}  &=  - \frac{1}{\rmPe}\left\langle\nabla\left[\sum_{i}\widehat{v}_{i}\varphi_{i}\right], \nabla\left[\sum_{j}\widehat{u}_{j}\phi_{j}\right]\right\rangle_{\bfOmega\otimes T^{n}}  \\
           \sum_{i, j}\left\langle\widehat{v}_{i}, \widehat{u}_{j}\right\rangle_{\bfOmega}\langle\varphi_{i}, \partial_{t}\phi_{j}\rangle_{T^{n}}  &=  - \frac{1}{\rmPe}\sum_{i, j}\left\langle\nabla\widehat{v}_{i}, \nabla\widehat{u}_{j}\right\rangle_{\bfOmega}\langle\varphi_{i}, \phi_{j}\rangle_{T^{n}}
@@ -124,7 +124,7 @@
     \end{align}
     where all inner products $\langle -, -\rangle  =  \langle -, -\rangle_{\bfOmega\otimes T^{n}}$ are taken over the space-time domain, $\bfOmega\otimes T^{n}$.
     
-    When $\calU$ is a tensor product space of one in space and time, as is the case in the above example, (linear) operators in space, such as $\Delta$, and time, such as $\bbQ_{\partial_{t}\calU}$ when $\calU$ is such a tensor product space, commute. Thus when $\calU$ is such a tensor product space, (\ref{eqn:heat equation auxiliary weak form}) and (\ref{eqn:heat equation weak form}) are equivalent.
+    When $\calU$ is a tensor product space of one in space and time, as is the case in the above example, (linear) operators in space, such as $\Delta$, and time, such as $\bbQ_{\partial_{t}\calU}$ when $\calU$ is such a tensor product space, commute. Thus, when $\calU$ is such a tensor product space, (\ref{eqn:heat equation auxiliary weak form}) and (\ref{eqn:heat equation weak form}) are equivalent.
 
     One can use the weak form (\ref{eqn:heat equation auxiliary weak form}) directly to mimic the proof of energy dissipation in the continuous, strong formulation, to show this weak/variational formulations preserve the energy-dissipative structure of the continuous problem:
     \begin{align}

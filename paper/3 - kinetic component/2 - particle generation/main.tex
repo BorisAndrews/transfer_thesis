@@ -1,12 +1,14 @@
 \section{Pseudo-Particle Generation/Elimination}\label{cha:particle generation}
-    The PiC algorithm here depends on modeling pseudo-particles only when needed, i.e. only when kinetic effects are large and the distibution functions, $f_{\pm}$, are far from thermalization, $f_{\pm}^{(0)}$. This requires pseudo-particles---in a numerical sense, objects from a class of pseudo-particles---to be:
+    The PiC algorithm here depends on modeling pseudo-particles only when needed, i.e. only when kinetic effects are large and the distribution functions, $f_{\pm}$, are far from thermalization, $f_{\pm}^{(0)}$. This requires pseudo-particles (in a computational sense, objects generated from a pseudo-particles class) to be:
     \begin{itemize}
-        \item  Generated when required, i.e. constructed as computational objects.
-        \item  Eliminated when not required, i.e. destructed as computational objects.
+        \item  Generated when required, i.e. constructed as computational objects, as determined by the inhomogeneous RHS of (\ref{eqn:linearized Boltzmann equation simplified 1}), $\calF_{\pm}$.
+        \item  Eliminated when no longer required, i.e. destructed as computational objects, as determined by the addition of a mollifying term to the collision operator approximation.
     \end{itemize}
-    The latter, pseudo-particle elimination, shall similarly be discussed here first.
+    The latter, pseudo-particle elimination, shall be discussed here first.
 
-    \BA{Need to put more emphasis on what it means for a particle to have a negative weight; perhaps in the pseudo-particle generation subsection.}
+    \begin{remark}[SP with particle generation/elimination]
+        Both the generation and elimination of particles potentially cause difficulties for exact SP, as each particle introduces its own mass, momentum and energy to the plasma. This is a problem of which I am aware, but have yet to tackle.
+    \end{remark}
     
     
     \input{3 - kinetic component/2 - particle generation/1 - elimination/main.tex}

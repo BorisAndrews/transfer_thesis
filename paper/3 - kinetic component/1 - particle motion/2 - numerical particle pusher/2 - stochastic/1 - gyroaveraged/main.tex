@@ -1,0 +1,34 @@
+\paragraph*{Gyroaveraged Discretization}
+    The addition of the collisional drift-diffusion terms into the evolution equations for $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ introduce drift-diffusion terms into the evolution equations for $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$, calculable by Itô's lemma \cite{Le-Gall_2016}.
+
+    \begin{remark}[Completion and verification of the stochastic gyrokinetic model]
+        I have evaluated the SDEs for $\bfxi_{\pm}^{(i)}$, $E_{\pm}^{(i)}$ as:
+        \begin{align}
+            \begin{split}
+                \rmd\bfxi_{\pm}^{(i)} 
+                    &=  \left\{\cdots\tall\right\} \mp |\rmCy\!_{\pm}|\nu_{\pm}^{(i)}\frac{1}{B}\left(\bfU_{\pm}\wedge\bfb_{\parallel} + V_{\pm\perp}^{(i)}\bfb_{\pm*}^{(i)}\right)\rmd t  \\
+                    &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad+ \sqrt{|\rmCy\!_{\pm}|}\sigma_{\pm}^{(i)}\left(\rmd W_{\pm*}^{(i)}\bfb_{\pm\perp}^{(i)} - \rmd W_{\pm\perp}^{(i)}\bfb_{\pm*}^{(i)}\right)
+            \end{split}  \\
+                \rmd E
+                    &=  \left\{\cdots\tall\right\} + |\rmCy\!_{\pm}|\nu_{\pm}^{(i)}\left\{\left(\bfU_{\pm}\cdot\bfV_{\pm}^{(i)} - 2E_{\pm}^{(i)}\right) + 3D_{\pm}^{(i)}\right\}\rmd t
+                    + \sqrt{|\rmCy\!_{\pm}|}\sigma_{\pm}^{(i)}\bfV_{\pm}^{(i)}\cdot\rmd\bfW_{\pm}^{(i)}
+        \end{align}
+        where:
+        \begin{align}
+          W_{\pm\perp}^{(i)}  :=  \bfW_{\pm}^{(i)}\cdot\bfb_{\pm\perp}^{(i)},  &&
+          W_{\pm*}^{(i)}      :=  \bfW_{\pm}^{(i)}\cdot\bfb_{\pm*}^{(i)}.
+        \end{align}
+
+        I previously evaluated the SDE for $\mu_{\pm}^{(i)}$ too, but have since made my notation \emph{much} more concise, and not had the chance to carry over the old results.
+
+        Again, one can average these equations over the gyro-orbit to obtain gyroaveraged SDEs. I have so far only carried over the gyroaveraged SDE for $E_{\pm}^{(i)}$:
+        \begin{multline}
+          \rmd E
+              =  \left\{\cdots\tall\right\} + |\rmCy\!_{\pm}|\nu_{\pm}^{(i)}\left\{\left(\bfU_{\pm}\cdot\bfV_{\pm}^{(i)} - 2E_{\pm}^{(i)}\right) + 3D_{\pm}^{(i)}\right\}\rmd t  \\
+              + \sqrt{|\rmCy\!_{\pm}|}\sigma_{\pm}^{(i)}\left(V_{\pm\parallel}^{(i)}\rmd W_{\pm 1}^{(i)} + \sqrt{2B\mu_{\pm}^{(i)}}\rmd W_{\pm 2}^{(i)}\right)
+        \end{multline}
+        where $W_{\pm 1}^{(i)}$, $W_{\pm 2}^{(i)}$ are independent Wiener processes.
+
+        As well as filling in the missing equations here, those I do have of course need to be checked in future work.
+    \end{remark}
+

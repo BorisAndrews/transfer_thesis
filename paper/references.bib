@@ -23,9 +23,9 @@
   abstract  = {This paper presents a complete theoretical framework for studying turbulence and transport in rapidly rotating tokamak plasmas. The fundamental scale separations present in plasma turbulence are codified as an asymptotic expansion in the ratio ϵ = ρi/a of the gyroradius to the equilibrium scale length. Proceeding order by order in this expansion, a set of coupled multiscale equations is developed. They describe an instantaneous equilibrium, the fluctuations driven by gradients in the equilibrium quantities, and the transport-timescale evolution of mean profiles of these quantities driven by the interplay between the equilibrium and the fluctuations. The equilibrium distribution functions are local Maxwellians with each flux surface rotating toroidally as a rigid body. The magnetic equilibrium is obtained from the generalized Grad--Shafranov equation for a rotating plasma, determining the magnetic flux function from the mean pressure and velocity profiles of the plasma. The slow (resistive-timescale) evolution of the magnetic field is given by an evolution equation for the safety factor q. Large-scale deviations of the distribution function from a Maxwellian are given by neoclassical theory. The fluctuations are determined by the ‘high-flow’ gyrokinetic equation, from which we derive the governing principle for gyrokinetic turbulence in tokamaks: the conservation and local (in space) cascade of the free energy of the fluctuations (i.e. there is no turbulence spreading). Transport equations for the evolution of the mean density, temperature and flow velocity profiles are derived. These transport equations show how the neoclassical and fluctuating corrections to the equilibrium Maxwellian act back upon the mean profiles through fluxes and heating. The energy and entropy conservation laws for the mean profiles are derived from the transport equations. Total energy, thermal, kinetic and magnetic, is conserved and there is no net turbulent heating. Entropy is produced by the action of fluxes flattening gradients, Ohmic heating and the equilibration of interspecies temperature differences. This equilibration is found to include both turbulent and collisional contributions. Finally, this framework is condensed, in the low-Mach-number limit, to a more concise set of equations suitable for numerical implementation.}
 }
 
-@online{addendum_I,
+@online{addendum,
   author  = {Andrews, B.},
-  title   = {Addendum I: Plasmas and Tokamak Plasmas},
+  title   = {Addendum: Plasmas and Tokamak Plasmas},
   year    = 2023,
   url     = {https://github.com/BorisAndrews/Transfer_Thesis/raw/main/addenda/introduction/main.pdf},
   urldate = {2023-03-15}
@@ -105,6 +105,24 @@
   author   = {Babuška, I.},
   year     = {1972},
   pages    = {1--11}
+}
+
+@inproceedings{Balay_et_al_1997,
+  title     = {Efficient Management of Parallelism in Object Oriented Numerical Software Libraries},
+  booktitle = {Modern Software Tools in Scientific Computing},
+  publisher = {Birkhäuser Press},
+  author    = {Balay, S. and Gropp, W. D. and McInnes, L. C. and Smith, B. F.},
+  editor    = {Arge, E. and Bruaset, A. M. and Langtangen, H. P.},
+  year      = {1997},
+  pages     = {163--202}
+}
+
+@techreport{Balay_et_al_2023,
+  title       = {PETSc/TAO Users Manual},
+  number      = {ANL-21/39 - Revision 3.19},
+  institution = {Argonne National Laboratory},
+  author      = {Balay, S. and Abhyankar, S. and Adams, M. F. and Benson, S. and Brown, J. and Brune, P. and Buschelman, K. and Constantinescu, E. and Dalcin, L. and Dener, A. and Eijkhout, V. and Faibussowitsch, J. and Gropp, W. D. and Hapla, V. and Isaac, T. and Jolivet, P. and Karpeev, D. and Kaushik, D. and Knepley, M. G. and Kong, F. and Kruger, S. and May, D. A. and McInnes, L. C. and Mills, R. T. and Mitchell, L. and Munson, T. and Roman, J. E. and Rupp, K. and Sanan, P. and Sarich, J. and Smith, B. F. and Zampini, S. and Zhang, H. and Zhang, H. and Zhang, J.},
+  year        = {2023}
 }
 
 @article{Berger_1999,
@@ -266,6 +284,18 @@
   pages    = {309--323}
 }
 
+@article{Dungey_1961,
+  title   = {Interplanetary Magnetic Field and the Auroral Zones},
+  volume  = {6},
+  doi     = {10.1103/PhysRevLett.6.47},
+  number  = {2},
+  journal = {Physical Review Letters},
+  author  = {Dungey, J. W.},
+  month   = jan,
+  year    = {1961},
+  pages   = {47--48}
+}
+
 @article{Farrell_Kirby_Marchena-Menéndez_2021,
   title      = {Irksome: Automating Runge–Kutta Time-stepping for Finite Element Methods},
   volume     = {47},
@@ -338,7 +368,6 @@
   year       = {2002}
 }
 
-
 @book{Gard_1998,
   author    = {Gard, T. C.},
   year      = {1998},
@@ -382,6 +411,7 @@
   year     = {2022},
   pages    = {110847}
 }
+
 
 @article{Green_et_al_2022,
   title    = {An Efficient High-Order Numerical Solver for Diffusion Equations with Strong Anisotropy},
@@ -454,7 +484,7 @@
 }
 
 @article{Hu_Lee_Xu_2021,
-  author  = {Hu, K. and Lee, Y. and Xu, J.},
+  author  = {Hu, K. and Lee, Y.-J. and Xu, J.},
   year    = {2021},
   month   = {03},
   pages   = {110284},
@@ -531,6 +561,19 @@
   doi       = {10.1103/PhysRevLett.123.195302}
 }
 
+@article{Koshkarov_et_al_2022,
+  title    = {Fast Nonlinear Iterative Solver for an Implicit, Energy-Conserving, Asymptotic-Preserving Charged-Particle Orbit Integrator},
+  volume   = {459},
+  issn     = {0021-9991},
+  doi      = {10.1016/j.jcp.2022.111146},
+  language = {en},
+  journal  = {Journal of Computational Physics},
+  author   = {Koshkarov, O. and Chacón, L. and Chen, G. and Ricketson, L. F.},
+  month    = jun,
+  year     = {2022},
+  pages    = {111146}
+}
+
 @techreport{La22,
   type        = {MEng Project Report},
   title       = {Variational Time-Steppers that are Finite Element in Time for Firedrake and Irksome},
@@ -543,6 +586,21 @@
   month       = jun,
   year        = {2022},
   pages       = {63}
+}
+
+@article{Laakmann_Farrell_Mitchell_22,
+  title    = {An Augmented Lagrangian Preconditioner for the Magnetohydrodynamics Equations at High Reynolds and Coupling Numbers},
+  volume   = {44},
+  issn     = {1064-8275},
+  doi      = {10.1137/21M1416539},
+  abstract = {The magnetohydrodynamics (MHD) equations are generally known to be difficult to solve numerically, due to their highly nonlinear structure and the strong coupling between the electromagnetic and hydrodynamic variables, especially for high Reynolds and coupling numbers. In this work, we present a scalable augmented Lagrangian preconditioner for a finite element discretization of the B-E formulation of the incompressible viscoresistive MHD equations. For stationary problems, our solver achieves robust performance with respect to the Reynolds and coupling numbers in two dimensions and good results in three dimensions. We extend our method to fully implicit methods for time-dependent problems which we solve robustly in both two and three dimensions. Our approach relies on specialized parameter-robust multigrid methods for the hydrodynamic and electromagnetic blocks. The scheme ensures exactly divergence-free approximations of both the velocity and the magnetic field up to solver tolerances. We confirm the robustness of our solver by numerical experiments in which we consider fluid and magnetic Reynolds numbers and coupling numbers up to 10,000 for stationary problems and up to 100,000 for transient problems in two and three dimensions.},
+  number   = {4},
+  journal  = {SIAM Journal on Scientific Computing},
+  author   = {Laakmann, F. and Farrell, P. E. and Mitchell, L.},
+  month    = aug,
+  year     = {2022},
+  note     = {Publisher: Society for Industrial and Applied Mathematics},
+  pages    = {B1018--B1044}
 }
 
 @article{Laakmann_Hu_Farrell_2022,
@@ -565,7 +623,7 @@
   language = {en},
   number   = {6},
   urldate  = {2023-03-23},
-  journal  = {Zeitschrift für angewandte Mathematik und Physik ZAMP},
+  journal  = {Zeitschrift für angewandte Mathematik und Physik},
   author   = {Lasagni, F. M.},
   month    = nov,
   year     = {1988},
@@ -600,28 +658,53 @@
   pages     = {350}
 }
 
-@article{Laakmann_Farrell_Mitchell_22,
-  title    = {An Augmented Lagrangian Preconditioner for the Magnetohydrodynamics Equations at High Reynolds and Coupling Numbers},
-  volume   = {44},
-  issn     = {1064-8275},
-  doi      = {10.1137/21M1416539},
-  abstract = {The magnetohydrodynamics (MHD) equations are generally known to be difficult to solve numerically, due to their highly nonlinear structure and the strong coupling between the electromagnetic and hydrodynamic variables, especially for high Reynolds and coupling numbers. In this work, we present a scalable augmented Lagrangian preconditioner for a finite element discretization of the B-E formulation of the incompressible viscoresistive MHD equations. For stationary problems, our solver achieves robust performance with respect to the Reynolds and coupling numbers in two dimensions and good results in three dimensions. We extend our method to fully implicit methods for time-dependent problems which we solve robustly in both two and three dimensions. Our approach relies on specialized parameter-robust multigrid methods for the hydrodynamic and electromagnetic blocks. The scheme ensures exactly divergence-free approximations of both the velocity and the magnetic field up to solver tolerances. We confirm the robustness of our solver by numerical experiments in which we consider fluid and magnetic Reynolds numbers and coupling numbers up to 10,000 for stationary problems and up to 100,000 for transient problems in two and three dimensions.},
-  number   = {4},
-  journal  = {SIAM Journal on Scientific Computing},
-  author   = {Laakmann, F. and Farrell, P. E. and Mitchell, L.},
-  month    = aug,
-  year     = {2022},
-  note     = {Publisher: Society for Industrial and Applied Mathematics},
-  pages    = {B1018--B1044}
-}
-
-
 @misc{Li_et_al_2023,
   doi       = {10.48550/ARXIV.2301.10097},
   author    = {Li, Y. and Holderied, F. E. and Possanner, S. and Sonnendrücker, E.},
   title     = {Numerical Simulations for a Hybrid Model of Kinetic Ions and Mass-Less Fluid Electrons in Canonical Formulations},
   publisher = {arXiv},
   year      = {2023}
+}
+
+@article{Lockwood_2016,
+  title    = {Jim Dungey, The Open Magnetosphere, and Space Weather},
+  volume   = {14},
+  issn     = {1542-7390},
+  doi      = {10.1002/2016SW001438},
+  abstract = {In 1961, James W. Dungey published a remarkable two-paged paper in Physics Review Letters that revolutionized our understanding of the Earth's magnetosphere. In it, he used his concept of “magnetic reconnection” to introduce the open magnetosphere model. Dungey died in 2015, but his idea does a great deal more than just live on in the literature. At the same time as making sense of the magnetosphere, it has established key applications in astrophysics, planetary physics, solar and heliospheric physics, and fusion energy research—in fact, any area involving ionized gases threaded by magnetic fields. It is now the basis of our understanding and prediction of space weather phenomena.},
+  number   = {6},
+  journal  = {Space Weather},
+  author   = {Lockwood, M.},
+  month    = jun,
+  year     = {2016},
+  pages    = {380--383}
+}
+
+@book{Logg_Mardal_Wells_2012,
+  title      = {Automated Solution of Differential Equations by the Finite Element Method: The FEniCS Book},
+  isbn       = {978-3-642-23099-8},
+  shorttitle = {Automated Solution of Differential Equations by the Finite Element Method},
+  abstract   = {This book is a tutorial written by researchers and developers behind the FEniCS Project and explores an advanced, expressive approach to the development of mathematical software. The presentation spans mathematical background, software design and the use of FEniCS in applications. Theoretical aspects are complemented with computer code which is available as free/open source software. The book begins with a special introductory tutorial for beginners. Following are chapters in Part I addressing fundamental aspects of the approach to automating the creation of finite element solvers. Chapters in Part II address the design and implementation of the FEnicS software. Chapters in Part III present the application of FEniCS to a wide range of applications, including fluid flow, solid mechanics, electromagnetics and geophysics.},
+  language   = {en},
+  publisher  = {Springer Science \& Business Media},
+  author     = {Logg, A. and Mardal, K.-A. and Wells, G.},
+  month      = feb,
+  year       = {2012}
+}
+
+@article{Logg_Wells_2010,
+  title      = {DOLFIN: Automated Finite Element Computing},
+  volume     = {37},
+  issn       = {0098-3500},
+  shorttitle = {DOLFIN},
+  doi        = {10.1145/1731022.1731030},
+  abstract   = {We describe here a library aimed at automating the solution of partial differential equations using the finite element method. By employing novel techniques for automated code generation, the library combines a high level of expressiveness with efficient computation. Finite element variational forms may be expressed in near mathematical notation, from which low-level code is automatically generated, compiled, and seamlessly integrated with efficient implementations of computational meshes and high-performance linear algebra. Easy-to-use object-oriented interfaces to the library are provided in the form of a C++ library and a Python module. This article discusses the mathematical abstractions and methods used in the design of the library and its implementation. A number of examples are presented to demonstrate the use of the library in application code.},
+  number     = {2},
+  journal    = {ACM Transactions on Mathematical Software},
+  author     = {Logg, A. and Wells, G. N.},
+  month      = apr,
+  year       = {2010},
+  pages      = {20:1--20:28}
 }
 
 @article{Mandelbrot_1960,
@@ -687,6 +770,19 @@
   shorttitle = {Univariate Stable Distributions}
 }
 
+@article{ONeil_Malmberg_1968,
+  title   = {Transition of the Dispersion Roots from Beam‐Type to Landau‐Type Solutions},
+  volume  = {11},
+  issn    = {0031-9171},
+  doi     = {10.1063/1.1692190},
+  number  = {8},
+  journal = {The Physics of Fluids},
+  author  = {O'Neil, T. M. and Malmberg, J. H.},
+  month   = aug,
+  year    = {1968},
+  pages   = {1754--1760}
+}
+
 @article{Parker_Lee_1993,
   title    = {A Fully Nonlinear Characteristic Method for Gyrokinetic Simulation},
   volume   = {5},
@@ -727,7 +823,7 @@
   title      = {Plasma Physics: An Introduction to Laboratory, Space, and Fusion Plasmas},
   isbn       = {978-3-319-63427-2},
   shorttitle = {Plasma Physics},
-  abstract   = {The enlarged new edition of this textbook provides a comprehensive introduction to the basic processes in plasmas and demonstrates that the same fundamental concepts describe cold gas-discharge plasmas, space plasmas, and hot fusion plasmas. Starting from particle drifts in magnetic fields, the principles of magnetic confinement fusion are explained and compared with laser fusion. Collective processes are discussed in terms of plasma waves and instabilities. The concepts of plasma description by magnetohydrodynamics, kinetic theory, and particle simulation are stepwise introduced. Space charge effects in sheath regions, double layers and plasma diodes are given the necessary attention. The novel fundamental mechanisms of dusty plasmas are explored and integrated into the framework of conventional plasmas. The book concludes with a concise description of modern plasma discharges.Written by an internationally renowned researcher in experimental plasma physics, the text keeps the mathematical apparatus simple and emphasizes the underlying concepts. The guidelines of plasma physics are illustrated by a host of practical examples, preferentially from plasma diagnostics. There, Langmuir probe methods, laser interferometry, ionospheric sounding, Faraday rotation, and diagnostics of dusty plasmas are discussed. Though primarily addressing students in plasma physics, the book is easily accessible for researchers in neighboring disciplines, such as space science, astrophysics, material science, applied physics, and electrical engineering.This second edition has been thoroughly revised and contains substantially enlarged chapters on plasma diagnostics, dusty plasmas and plasma discharges. Probe techniques have been rearranged into basic theory and a host of practical examples for probe techniques in dc, rf, and space plasmas. New topics in dusty plasmas, such as plasma crystals, Yukawa balls, phase transitions and attractive forces have been adopted. The chapter on plasma discharges now contains a new section on conventional and high-power impulse magnetron sputtering. The recently discovered electrical asymmetry effect in capacitive rf-discharges is described.The text is based on an introductory course to plasma physics and advanced courses in plasma diagnostics, dusty plasmas, and plasma waves, which the author has taught at Kiel University for three decades. The pedagogical approach combines detailed explanations, a large number of illustrative figures, short summaries of the basics at the end of each chapter, and a selection of problems with detailed solutions.},
+  abstract   = {The enlarged new edition of this textbook provides a comprehensive introduction to the basic processes in plasmas and demonstrates that the same fundamental concepts describe cold gas-discharge plasmas, space plasmas, and hot fusion plasmas. Starting from particle drifts in magnetic fields, the principles of magnetic confinement fusion are explained and compared with laser fusion. Collective processes are discussed in terms of plasma waves and instabilities. The concepts of plasma description by magnetohydrodynamics, kinetic theory, and particle simulation are stepwise introduced. Space charge effects in sheath regions, double layers and plasma diodes are given the necessary attention. The novel fundamental mechanisms of dusty plasmas are explored and integrated into the framework of conventional plasmas. The book concludes with a concise description of modern plasma discharges.Written by an internationally renowned researcher in experimental plasma physics, the text keeps the mathematical apparatus simple and emphasizes the underlying concepts. The guidelines of plasma physics are illustrated by a host of practical examples, preferentially from plasma diagnostics. There, Langmuir probe methods, laser interferometry, ionospheric sounding, Faraday rotation, and diagnostics of dusty plasmas are discussed. Though primarily addressing students in plasma physics, the book is easily accessible for researchers in neighboring disciplines, such as space science, astrophysics, material science, applied physics, and electrical engineering.This second edition has been thoroughly revised and contains substantially enlarged chapters on plasma diagnostics, dusty plasmas and plasma discharges. Probe techniques have been rearranged into basic theory and a host of practical examples for probe techniques in dc, rf, and space plasmas. New topics in dusty plasmas, such as plasma crystals, Yukawa balls, phase transitions and attractive forces have been adopted. The chapter on plasma discharges now contains a new subchapter on conventional and high-power impulse magnetron sputtering. The recently discovered electrical asymmetry effect in capacitive rf-discharges is described.The text is based on an introductory course to plasma physics and advanced courses in plasma diagnostics, dusty plasmas, and plasma waves, which the author has taught at Kiel University for three decades. The pedagogical approach combines detailed explanations, a large number of illustrative figures, short summaries of the basics at the end of each chapter, and a selection of problems with detailed solutions.},
   language   = {en},
   publisher  = {Springer},
   author     = {Piel, A.},
@@ -744,7 +840,34 @@
   pages   = {324--341}
 }
 
+@article{Rathgeber_et_al_2016,
+  title      = {Firedrake: Automating the Finite Element Method by Composing Abstractions},
+  volume     = {43},
+  issn       = {0098-3500},
+  shorttitle = {Firedrake},
+  doi        = {10.1145/2998441},
+  abstract   = {Firedrake is a new tool for automating the numerical solution of partial differential equations. Firedrake adopts the domain-specific language for the finite element method of the FEniCS project, but with a pure Python runtime-only implementation centered on the composition of several existing and new abstractions for particular aspects of scientific computing. The result is a more complete separation of concerns that eases the incorporation of separate contributions from computer scientists, numerical analysts, and application specialists. These contributions may add functionality or improve performance. Firedrake benefits from automatically applying new optimizations. This includes factorizing mixed function spaces, transforming and vectorizing inner loops, and intrinsically supporting block matrix operations. Importantly, Firedrake presents a simple public API for escaping the UFL abstraction. This allows users to implement common operations that fall outside of pure variational formulations, such as flux limiters.},
+  number     = {3},
+  journal    = {ACM Transactions on Mathematical Software},
+  author     = {Rathgeber, F. and Ham, D. A. and Mitchell, L. and Lange, M. and Luporini, Fabio and Mcrae, A. T. T. and Bercea, G.-T. and Markall, G. R. and Kelly, P. H. J.},
+  month      = dec,
+  year       = {2016},
+  pages      = {24:1--24:27}
+}
 
+@article{Ricketson_Chacón_2020,
+  title    = {An Energy-Conserving and Asymptotic-Preserving Charged-Particle Orbit Implicit Time Integrator for Arbitrary Electromagnetic Fields},
+  volume   = {418},
+  issn     = {0021-9991},
+  doi      = {10.1016/j.jcp.2020.109639},
+  abstract = {We present a new implicit asymptotic preserving time integration scheme for charged-particle orbit computation in arbitrary electromagnetic fields. The scheme is built on the Crank-Nicolson integrator and continues to recover full-orbit motion in the small time-step limit, but also recovers all the first-order guiding center drifts as well as the correct gyroradius when stepping over the gyration time-scale. In contrast to previous efforts in this direction, the new scheme also features exact energy conservation. In the derivation of the scheme, we find that a new numerical time-scale is introduced. This scale is analyzed and the resulting restrictions on time-step are derived. Based on this analysis, we develop an adaptive time-stepping strategy the respects these constraints while stepping over the gyration scale when physically justified. It is shown through numerical tests on single-particle motion that the scheme's energy conservation property results in tremendous improvements in accuracy, and that the scheme is able to transition smoothly between magnetized and unmagnetized regimes as a result of the adaptive time-stepping.},
+  language = {en},
+  journal  = {Journal of Computational Physics},
+  author   = {Ricketson, L. F. and Chacón, L.},
+  month    = oct,
+  year     = {2020},
+  pages    = {109639}
+}
 
 @book{Robinson_2004,
   title     = {An Introduction to Ordinary Differential Equations},
@@ -770,6 +893,8 @@
   pages   = {1071--1073}
 }
 
+
+
 @article{Sakomoto_2016,
   author  = {Sakamoto, S},
   title   = {Some Remarks on the Homogeneous Boltzmann Equation with the Fractional Laplacian Term},
@@ -788,6 +913,25 @@
   author  = {Sanz-Serna, J. M.},
   year    = {1988},
   pages   = {877--883}
+}
+
+@article{Schöberl_2015,
+  title  = {C++11 Implementation of Finite Elements in NGSolve},
+  author = {Schoeberl, J.},
+  month  = sep,
+  year   = {2014}
+}
+
+@book{Stix_1992,
+  address   = {New York},
+  edition   = {1},
+  title     = {Waves in Plasmas},
+  isbn      = {978-0-88318-859-0},
+  language  = {en},
+  publisher = {American Institute of Physics Melville},
+  author    = {Stix, T. H.},
+  month     = dec,
+  year      = {1992}
 }
 
 @book{Stokes_1845,

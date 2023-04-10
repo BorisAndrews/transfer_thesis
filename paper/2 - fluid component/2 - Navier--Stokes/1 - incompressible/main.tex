@@ -30,12 +30,8 @@
     \end{align}
     where $\nabla_{\rms}$ again denotes the symmetric gradient.
 
-    \begin{remark}
-        Alternative skew-symmetric forms for the convective term, such as those incorporating the vorticity $\bfomega  :=  \nabla\wedge\bfu$, exist. While these too induce timesteppers that preserve the energy-dissipative structure, we choose not to consider them further here, since we will be considering a similar skew-symmetric form of the convective operator for the \emph{compressible} case in the following subsection.
-    \end{remark}
-
-    \begin{remark}
-        \BA{If the weak form has exact incomp., then it doesn't matter how you write the convective term (classical/skew-symmetric etc.) since it shouldn't affect the solution. Only the skew-symmetric form gives energy-conserving timesteppers even without exact incomp. A similar result holds true for the \emph{compressible} case.}
+    \begin{remark}[Alternative skew-symmetric convective operators]
+        Alternative skew-symmetric forms for the convective term, such as those incorporating the vorticity $\bfomega  :=  \nabla\wedge\bfu$, exist. While these too induce timesteppers that preserve the energy-dissipative structure, we choose not to consider them further here, since we will be considering a similar skew-symmetric form of the convective operator for the \emph{compressible} case in the following subsubsubsection.
     \end{remark}
 
     \line
@@ -56,7 +52,7 @@
             + \frac{2}{\rmRef}\nabla\cdot\nabla_{\rms}\bbQ_{\partial_{t}\calU}[\bfu]\right]
         \end{split}  \label{eqn:incompressible NS weak form 2}
     \end{align}
-    We write $\bfu_{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$.\footnote{Despite the SP property of the resultant timestepper being independent of this choice, I've found it much easier to construct the resultant timestepper in a closed workable form when one unilaterally takes $\bfu_{*} = \bbQ_{\partial_{t}\calU}[\bfu]$. It is for this reason that I opt for this choice later when considering the resultant CG-DG-in-time timestepper, reminiscent of the GL method. I'm not sure, however, whether such a choice will impact the accuracy of the solution (negatively, or perhaps even positively) so I've left this unspecified here for now. I also feel leaving it unspecified helps the reader better understand why we choose to make the auxiliary space projections $\bfu \mapsto \bbQ_{\partial_{t}\calU}[\bfu]$ where we do. \\ The same applies in the compressible case in the following subsection too.} The energy-dissipative SP property of the resultant timestepper is indepedent of this choice.
+    We write $\bfu_{*}$ here to denote \emph{either} $\bfu$ \emph{or} the auxiliary projection $\bbQ_{\partial_{t}\calU}[\bfu]$.\footnote{Despite the SP property of the resultant timestepper being independent of this choice, I have found it much easier to construct the resultant timestepper in a closed workable form when one unilaterally takes $\bfu_{*} = \bbQ_{\partial_{t}\calU}[\bfu]$. It is for this reason that I opt for this choice later when considering the resultant CG-DG-in-time timestepper, reminiscent of the GL method. I am not sure, however, whether such a choice will impact the accuracy of the solution (negatively, or perhaps even positively) so I have left this unspecified here for now. I also feel leaving it unspecified helps the reader better understand why we choose to make the auxiliary space projections $\bfu \mapsto \bbQ_{\partial_{t}\calU}[\bfu]$ where we do. \\ The same applies in the compressible case in the following subsubsubsection too.} The energy-dissipative SP property of the resultant timestepper is independent of this choice.
     
     \shortline
     
@@ -108,12 +104,12 @@
         \nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]  =  0.
     \end{equation}
 
-    \begin{remark}
+    \begin{remark}[Ensuring pointwise incompressibility on $\bfu$]
         \emph{Arguably}, this exact incompressibility condition on the \emph{auxiliary} space makes more sense than that on $\bfu$ itself, $\nabla\cdot\bfu = 0$, since the possibility of this condition being satisfied on $\bfu$ relies on it being satisfied on the ICs of $\bfu$, $\nabla\cdot\bfu = 0|_{t = t^{n}}$, too.
         
-        I suspect that, when $\calU$ is a tensor product space and the incompressibility IC $\nabla\cdot\bfu  =  0|_{t = t^{n}}$ holds pointwise, the above result, $\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]  =  0$, is sufficient to prove pointwise incompressible on $\bfu$ itself, $\nabla\cdot\bfu = 0$. Indeed this is true simply by dimensionality when the time component of such a space-time tensor product construction for $\calU$ is finite-dimensional, as is the case after discretization. I believe it should hold in the infinite-dimensional case too, but I've yet to sort the technicalities of such a proof. Perhaps some new commutation property is necessarily satisfied in the case of tensor product $\calU$?
+        I suspect that, when $\calU$ is a tensor product space and the incompressibility IC $\nabla\cdot\bfu  =  0|_{t = t^{n}}$ holds pointwise, the above result, $\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu]  =  0$, is sufficient to prove pointwise incompressible on $\bfu$ itself, $\nabla\cdot\bfu = 0$. Indeed this is true simply by dimensionality when the time component of such a space-time tensor product construction for $\calU$ is finite-dimensional, as is the case after discretization. I believe it should hold in the infinite-dimensional case too, but I have yet to sort the technicalities of such a proof. Perhaps some new commutation property is necessarily satisfied in the case of tensor product $\calU$?
 
-        The closest I've got is in noting the following:
+        The closest I have got is in noting the following:
         \begin{align}
             0  &=  \int_{\bfOmega\otimes T^{n}}(\nabla\cdot\partial_{t}\bfu)(\nabla\cdot\bbQ_{\partial_{t}\calU}[\bfu])  \\
             &=  \int_{\bfOmega\otimes T^{n}}\nabla\cdot\bbQ_{\partial_{t}\calU}[\partial_{t}\bfu](\nabla\cdot\bfu)  &&\impliedby  \rmdiv\circ\bbQ_{\partial_{t}\calU} = \bbQ_{\calP}\circ\rmdiv  \\
@@ -164,7 +160,7 @@
             a_{ij}  :=  \frac{1}{\delta t^{n}}\int_{t^{n}}^{\tau^{n}_{i}}\phi^{n}_{j}.
         \end{equation}
         
-        With $\tau^{n}_{i} = t^{n} + c_{i}\delta t^{n}$, $\sfA$, $\bfb$, $\bfc$ share definitions with those in the classical GL RK method. (See Subsection \ref{cha:RK methods})
+        With $\tau^{n}_{i} = t^{n} + c_{i}\delta t^{n}$, $\sfA$, $\bfb$, $\bfc$ share definitions with those in the classical GL RK method. (See Subsubsection \ref{cha:RK methods})
 
         Similarly, write $p \in \widehat{P}\otimes\bbDP^{s - 1}$ in terms of the GL polynomial basis as
         \begin{equation}
@@ -185,12 +181,12 @@
         \end{equation}
         Up to the convective term, this is identical to the classical GL method.
         
-        At order $s = 1$ or $s = 2$, one finds in fact that $w_{ijk} = \delta_{ij}\delta_{ik}$, such that the timestepper simplfies to exactly the GL method:
+        At order $s = 1$ or $s = 2$, one finds in fact that $w_{ijk} = \delta_{ij}\delta_{ik}$, such that the timestepper simplifies to exactly the GL method:
         \begin{align}
                                0  &=  \bbQ_{\widehat{\calP}}[\nabla\cdot\bfu|_{\tau^{n}_{i}}]  \\
             \bfdelta\bfu^{n}_{i}  &=  - \frac{1}{2}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\left[\bfu|_{\tau^{n}_{i}}\otimes\bfu|_{\tau^{n}_{i}}\right] + \bfu|_{\tau^{n}_{i}}\cdot\nabla\bfu|_{\tau^{n}_{i}}\right] - \bbQ_{\widehat{\calU}}\left[\nabla p|_{\tau^{n}_{i}}\right] + \frac{2}{\rmRef}\bbQ_{\widehat{\calU}}\left[\nabla\cdot\nabla_{\rms}\bfu|_{\tau^{n}_{i}}\right]
         \end{align}
-        The Crank--Nicolson method, at order $s = 1$, is known classicaly to preserve the energy-dissipative structure for the incompressible Navier--Stokes equations. \BA{[Ref]} This approach offers an intuitive explanation for this, a proof that the same result holds true for the following 2-step GL method, an explanation as to why the same result does \emph{not} hold true at higher order for the classical GL methods, and a modified form of the GL method that preserves the energy dissipative structure up to arbitrary order in time, with a quantifiable energy dissipation from (\ref{eqn:incompressible NS weak form dissipation}).
+        The Crank--Nicolson method, at order $s = 1$, is known classically to preserve the energy-dissipative structure for the incompressible Navier--Stokes equations. This approach offers an intuitive explanation for this, a proof that the same result holds true for the following 2-step GL method, an explanation as to why the same result does \emph{not} hold true at higher order for the classical GL methods, and a modified form of the GL method that preserves the energy dissipative structure up to arbitrary order in time, with a quantifiable energy dissipation from (\ref{eqn:incompressible NS weak form dissipation}).
         
         With $\partial_{t}\calU = \widehat{\calU}\otimes\bbDP^{s - 1}$, the $\rmdiv\circ\bbQ_{\partial_{t}\calU} = \bbQ_{\calP}\circ\rmdiv$ commutativity relation takes the following recognizable form, as a subcomplex of $\Lambda_{0}^{\bullet}(\bfOmega)$:
         \begin{center}\begin{tikzpicture}[align = center, node distance = 4cm, auto]

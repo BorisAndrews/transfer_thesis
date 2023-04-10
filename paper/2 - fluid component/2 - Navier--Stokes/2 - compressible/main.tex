@@ -11,7 +11,7 @@
 
     \shortline
 
-    The \emph{compressible} NS system can seen to \emph{conserve}:
+    The \emph{compressible} NS system can be seen to \emph{conserve}:
     \begin{itemize}
         \item  Energy,
         \begin{equation}\label{eqn:compressible NS energy definition}
@@ -59,13 +59,13 @@
                       \rmM[\sigma](t)  :=  \int_{\bfOmega}\sigma^{2}.
     \end{align}
 
-    \begin{remark}
+    \begin{remark}[Alternative SP weak formulations]
         While I can \emph{theoretically} construct SP timesteppers for the above system in $\sigma$, $\bfr$, $\theta$ and $\bfu$ only:
         \begin{itemize}
             \item  They have a very multiplicative order, which I suspect (although I haven't yet had the chance to run any tests) will vastly reduce the timestepper's computational efficiency.
             \item  The $\sigma^{2}\partial_{t}\theta$ term in (\ref{eqn:compressible NS sqrt energy equation}) has no nice closed form in a CG-DG-in-time discretization, such as was presented for the incompressible case above, in terms of parameters from the GL polynomials, as far as I can see.
         \end{itemize}
-        It is for this reason that, instead of considering the system in the fewest variables, (\ref{eqn:r definition}--\ref{eqn:compressible NS sqrt energy equation}) in $\sigma$, $\bfr$, $\theta$ and $\bfu$, I'm going to elect to consider one, for now, in more variables than is needed, by re-introducing $\rho = \sigma^{2}$. It is my hope that this will benefit, not hinder, the timestepper's computational efficiency.
+        It is for this reason that, instead of considering the system in the fewest variables, (\ref{eqn:r definition}--\ref{eqn:compressible NS sqrt energy equation}) in $\sigma$, $\bfr$, $\theta$ and $\bfu$, I am going to elect to consider one, for now, in more variables than is needed, by re-introducing $\rho = \sigma^{2}$. It is my hope that this will benefit, not hinder, the timestepper's computational efficiency.
     \end{remark}
 
     Consider a system with ICs defined on $\rho$, $\bfr$, $\theta$--(one can interpret this as a system evolving in $\rho$, $\bfr$, $\theta$, coupled with $\bfu = 1/\sigma\cdot\bfr$ \emph{and} $\sigma = \sqrt{\rho}$)---that is \emph{again} identical in the continuous case:
@@ -260,4 +260,12 @@
         \end{equation}
         When $s = 1$, $w_{i}^{jkl} = \delta_{ij}\delta_{ik}\delta_{il}$, such that this system reduces to exactly the GL method, i.e. Crank--Nicolson. For $s \geq 2$ however, $w_{i}^{jkl} \neq \delta_{ij}\delta_{ik}\delta_{il}$ implying the higher order timestepper differs from the direct, classical GL method, in the convective and viscous heating terms.
     \end{example}
+
+    \line
+
+    \begin{remark}[Positivity of $\rho$, $\theta$ (and $\sigma$)]
+        There is another set of local structures in the compressible Navier--Stokes system that I have not touched upon here: the necessary positivity of $\rho$, $\theta$ (and $\sigma$). I am not even sure what would happen to the timestepper if they \emph{did} drop below $0$. I know this question is one that is tackled in classical timestepping schemes in compressible fluid dynamics, although I have not yet studied this area. If all other ideas fail, a timestep can always be chosen that is sufficiently short to ensure this unphysical result does not occur, although it would be very unsatisfying if that is the best solution. 
+        
+        This is another reasons for which I am more concerned about the compressible scheme, and a problem for future work.
+    \end{remark}
     

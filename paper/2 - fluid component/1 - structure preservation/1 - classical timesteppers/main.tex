@@ -29,7 +29,7 @@
         \end{align}
     \end{definition}
     
-    The FET-induced timesteppers discussed in Subsection \ref{cha:FET} are often analogous to collocation methods, especially for linear problems. Consider the following examples:
+    The FET-induced timesteppers discussed in Subsubsection \ref{cha:FET} are often analogous to collocation methods, especially for linear problems. Consider the following examples:
 
     \begin{example}[Gauss--Legendre (GL) methods]
         GL methods use:
@@ -57,7 +57,7 @@
     
     RK methods reduce the problem to one in space, $\bfx$, only. The spatial problem can then be discretized using classical spatial discretization techniques, e.g. the finite-element method (FEM), giving the fully discretized problem.
     
-    Typically supporting the discretization of problems in space, $\bfx$, only, traditional finite-element (FE) software is well-suited for the implementation of RK methods, where the RK method can be performed through either manually-implemented loops on each timestep, or specialist packages when available, such as the \texttt{Irksome} package within \texttt{Firedrake}. \cite{Farrell_Kirby_Marchena-Menéndez_2021}
+    Typically supporting the discretization of problems in space, $\bfx$, only, traditional finite-element (FE) software is well-suited for the implementation of RK methods, where the RK method can be performed through either manually-implemented loops on each timestep, or specialist packages when available, such as the {\tt Irksome} package within {\tt Firedrake}. \cite{Farrell_Kirby_Marchena-Menéndez_2021}
 
     Careful choice of RK method can give timesteppers that preserve the conservative/dissipative structures of the continuous strong form.
 
@@ -74,7 +74,7 @@
     \end{example}
     
     \begin{example}[Hamiltonian systems]
-        Symplectic timesteppers/integrators not only preserve the Hamiltonian in Hamiltonian systems, but further the general symplectic structure. The study and creation of symplectic timesteppers/integrators are the subjects of a wide-ranging, indepdendent field of study. See, for example, \cite{Hairer_Lubich_Wanner_2006}.
+        Symplectic timesteppers/integrators not only preserve the Hamiltonian in Hamiltonian systems, but further the general symplectic structure. The study and creation of symplectic timesteppers/integrators are the subjects of a wide-ranging, independent field of study. See, for example, \cite{Hairer_Lubich_Wanner_2006}.
     \end{example}
     
     \line

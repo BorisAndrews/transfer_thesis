@@ -1,12 +1,12 @@
 \paragraph*{Stochastic Gyrokinetic Theory}
-    As detailed subsection \ref{cha:particle pusher} the linearized collision operators introduce stochastic terms into equations of motion for the particle pusher:
+    As detailed in Subsubsection \ref{cha:particle pusher}, the linearized collision operators introduce stochastic terms into equations of motion for the particle pusher:
     \begin{align}
         \rmd\bfX  =  \bfV\rmd t,  &&
         \rmd\bfV  =  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \rmd\bfL_{\pm}.
     \end{align}
     With the nonlinear collision operator no longer present and pseudo-particle dynamics fully decoupled ``via'' the fluid layer, one need no longer worry about those particle-on-particle effects that are missing from the classical gyrokinetic model. These effects are instead captured in the stochastic motion from the linearized collision operator. One must therefore modify the classical, deterministic gyrokinetic model equations (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) to a new stochastic form.
 
-    Consider from here the Lénard--Bernstein collision operator model from subsection \ref{cha:collision operators}, wherein the stochastic terms $\rmd\bfL_{\pm}$ take the form $\rmd\bfL_{\pm}  =  \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW$.
+    Consider from here the LB collision operator model from subsubsubsection \ref{cha:collision operators}, wherein the stochastic terms $\rmd\bfL_{\pm}$ take the form $\rmd\bfL_{\pm}  =  \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW$.
     
     Decomposing $\bfu$, $\bfW$ into components parallel and perpendicular to the magnetic field, write:
     \begin{align}
@@ -21,7 +21,7 @@
     \end{align}
     Again, after gyroaveraging, this SDE system modifies the gyrokinetic equations \emph{after} gyroaveraging (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) then similarly take the classical deterministic forms as above, with the addition of the following collision operator--induced terms
     \begin{align}
-        \rmd\bfx_{\rmg}  &=  \left\{\cdots\tall\right\}\rmd t \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\left(\frac{\lambda_{\pm}}{B}\bfu\wedge\bfB\rmd t + \sigma_{\pm}\left(\sfI - \frac{1}{B^{2}}\bfB^{\otimes 2}\right)\rmd\widetilde{\bfW}\right)   \\
+        \rmd\bfx_{\rmg}  &=  \left\{\cdots\tall\right\}\rmd t \mp \frac{\rmm_{\pm}}{\rme}\cdot\frac{1}{B}\left(\frac{\lambda_{\pm}}{B}\bfu\wedge\bfB\rmd t + \sigma_{\pm}\left(\bfI - \frac{1}{B^{2}}\bfB^{\otimes 2}\right)\rmd\widetilde{\bfW}\right)   \\
                  \rmd E  &=  \left\{\cdots\tall\right\}\rmd t + \left(\lambda_{\pm}(m_{\pm}u_{\parallel}V_{\parallel} - 2E) + \frac{3\rmm_{\pm}}{2}\sigma_{\pm}^{2}\right)\rmd t + \rmm_{\pm}(V_{\parallel}\rmd W_{\parallel} + V_{\perp}\rmd W_{\perp})  \\
                 \rmd\mu  &=  \left\{\cdots\tall\right\}\rmd t - 2\lambda_{\pm}\mu\rmd t + \rmm_{\pm}\frac{\sigma_{\pm}V_{\perp}}{B}dW_{\perp}
     \end{align}

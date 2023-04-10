@@ -1,21 +1,35 @@
 \subsection*{Elimination}
     \begin{definition}[Bhatnagar--Gross--Krook (BGK) collision operator]
-        In \cite{Bhatnagar_Gross_Krook_1954} Bhatnagar, Gross and Krook propose a linearized approximation to the collision operator. In the notation used in this thesis, this states, for each phase $s$,
-        \begin{equation}
-            \frac{{\rmq_{s}}^{2}}{\rmm_{s}}\nabla_{\bfv}\cdot\bfC_{ss}^{(0)}  =  \nu_{s}\left(f_{s}^{(0)} - f_{s}\right),
-        \end{equation}
-        for a (potentially) phase-dependent decay parameter, $\nu_{s}$.
+        In \cite{Bhatnagar_Gross_Krook_1954} Bhatnagar, Gross and Krook propose a linearized approximation to the collision operator:
+        \begin{align}
+            \nabla_{\bfv}\cdot\bfC_{\pm\pm}^{\rm BGK}  =  \eta_{\pm}\left(f_{\pm}^{(0)} - f_{\pm}\right),  &&
+            \nabla_{\bfv}\cdot\bfC_{\pm\mp}^{\rm BGK}  =  0,
+        \end{align}
+        for decay parameters, $\eta_{\pm}$.
     \end{definition}
-    This can naturally be written in the $\delta\!f$ decomposition in the form
+    This can naturally be written within the $\delta\!f$ decomposition framework as
     \begin{equation}
-        \frac{{\rmq_{s}}^{2}}{\rmm_{s}}\nabla_{\bfv}\cdot\bfC_{ss}^{(0)}  =  - \nu_{s}\delta\!f_{s}.
-     \end{equation}
-    Introducing a BGK-like component to the intra-phase (local) collision operators, $\bfC_{\pm\pm}^{(0)}$, therefore modifies the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}) via the introduction of similar $- \nu_{\pm}\delta\!f_{\pm}$ terms on the RHS:
-    \begin{equation}
-        \partial_{t}\delta\!f_{\pm} + \cdots  =  \calF - \nu_{\pm}\delta\!f_{\pm}
+        \nabla_{\bfv}\cdot\bfC_{\pm\pm}^{\rm BGK}  =  - \eta_{\pm}\delta\!f_{\pm}.
     \end{equation}
 
-    \BA{How does such a term manifest in the pseudo-particle model?}
+    \shortline
 
-    \BA{A particle model---in the physical sense of Section \ref{cha:particle models}---where particles cease to exist after periods of time sampled from an exponential distribution ${\rm Exp}[\nu_{s}]$---essentially with half-life ${\nu_{s}}^{- 1}$---would result in the introduction of a RHS term in the Boltzmann equation (\ref{eqn:Boltzmann equation}) for phase $s$ of the form $- \nu_{s}f_{s}$.}
+    Suppose a small BGK component is introduced into the collision operator approximation, with
+    \begin{equation}
+        \bfC_{\pm_{1}\pm_{2}}^{(0)}  \mapsto  \bfC_{\pm_{1}\pm_{2}}^{(0)} + \frac{1}{|\rmCy_{\pm}|}\bfC_{\pm_{1}\pm_{2}}^{\rm BGK},
+    \end{equation}
+    e.g. in the case of the LB collision operator approximation, one would have $\bfC_{\pm_{1}\pm_{2}}^{(0)} = \bfC_{\pm_{1}\pm_{2}}^{\rm LB} + 1/|\rmCy_{\pm}|\cdot\bfC_{\pm_{1}\pm_{2}}^{\rm BGK}$. The linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified 1}) then states
+    \begin{multline}
+        \partial_{t}\delta\!f_{\pm}
+        + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv]
+        + \rmCy\!_{\pm}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]  \\
+        - \nabla_{\bfv}\cdot\left[\rmKn_{\pm\pm}\partial\bfC_{\pm\pm}^{(0)} + \rmKn_{\pm\mp}\partial\bfC_{\pm\mp}^{(0)}\right]
+        + \eta_{\pm}\delta\!f_{\pm}
+        =  \calF_{\pm}
+    \end{multline}
+    When modeling the homogeneous LHS via the PiC simulation, this has the effect of introducing a decay/half-life effect to the pseudo-particles, whereby after a (potentially) random duration $D_{\pm}^{(i)}$ the pseudo-particle is removed from the simulation, with
+    \begin{equation}
+        \bbE\left[D_{\pm}^{(i)}\right] = \frac{1}{\eta_{\pm}}.
+    \end{equation}
+    After discretization of the system into a timestepper on intervals $T^{n} = \left(t^{n}, t^{n + 1}\right]$, it is computationally convenient if $D_{\pm}^{(i)}$ is the sum of interval durations, $\delta t^{n}$, such that the pseudo-particle ceases to require modeling at some $t^{n}$, at the end of a timestep. This can be achieved by removing each pseudo-particle from the simulation after the timestep $T^{n}$ with probability $1 - \exp\left[\eta_{\pm}\delta t^{n}\right]$, likely independent for each particle.
     

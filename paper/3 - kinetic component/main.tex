@@ -1,46 +1,28 @@
 \chapter{Kinetic Component}\label{cha:kinetic component}
-    Recall the kinetic component of the $\delta\!f$ decomposition, the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}), which we write in the following form:
-    \begin{equation}\label{eqn:linearized Boltzmann equation simplified}
-        \partial_{t}\delta\!f_{\pm} + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv] \pm \frac{\rme}{\rmm_{\pm}}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)] - \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm\pm}  =  \frac{\rme^{2}}{\rmm_{\pm}}\nabla_{\bfv}\cdot\calC_{\pm\mp} + \calF_{\pm}
+    Recall the kinetic component of the $\delta\!f$ decomposition, the linearized Boltzmann equations (\ref{eqn:linearized Boltzmann equation}), which we write in the form,
+    \begin{equation}\label{eqn:linearized Boltzmann equation simplified 1}
+        \partial_{t}\delta\!f_{\pm}
+        + \nabla_{\bfx}\cdot[\delta\!f_{\pm}\bfv]
+        + \rmCy\!_{\pm}\nabla_{\bfv}\cdot[\delta\!f_{\pm}(\bfE + \bfv\wedge\bfB)]
+        - \nabla_{\bfv}\cdot\left[\rmKn_{\pm\pm}\partial\bfC_{\pm\pm}^{(0)} + \rmKn_{\pm\mp}\partial\bfC_{\pm\mp}^{(0)}\right]
+        =  \calF_{\pm}
     \end{equation}
-    Here:
+    neglecting $\calO[\rmCy\!_{\pm}/\rmCy\!_{+}, \rmCy\!_{+}/\rmRef]$ terms, where $\calF_{\pm}$ denotes the inhomogeneous contribution from the RHS of (\ref{eqn:linearized Boltzmann equation}),
+    \begin{multline}\label{eqn:inhomogeneous RHS}
+        \calF_{\pm}[\rho_{\pm}, \bfp, p](\bfx, \bfv; t)
+        :=  - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
+        - \rmCy\!_{+}\partial f_{\pm}^{(0)}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]]  \\
+        + \frac{2\rmCy\!_{+}}{\beta}\cdot\frac{1}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\rmM^{2}\rho_{\rmC}\bfE + \bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\bfj^{(0)} - \rmM^{2}\rho_{\rmC}\bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right].
+    \end{multline}
+
+    For the numerical solution of (\ref{eqn:linearized Boltzmann equation simplified 1}) a Monte Carlo pseudo-particle/PiC approximation is proposed, whereby as the simulation progresses in time, pseudo-particles:
     \begin{itemize}
-        \item  $\calC_{\pm_{1}\pm_{2}}$ denote the linear contributions of $\delta\!f_{\pm_{2}}$ on $\delta\!f_{\pm_{1}}$ from the linearized collision operators:
-        \begin{align}
-            \begin{split}
-                \calC_{\pm\pm}\left[\left(f_{\pm}^{(0)}\right)_{\pm}; \delta\!f_{\pm}\right](\bfx, \bfv; t)  &:=  \partial\bfC_{\pm\pm}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{\pm}^{(0)}\right); \left({\color{white} f_{\pm}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, \delta\!f_{\pm}\right)\right]  \\
-                &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;- \partial\bfC_{\pm\mp}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{\mp}^{(0)}\right); \left({\color{white} f_{\pm}^{(0)}}\!\!\!\!\!\!\!\!\!\delta\!f_{\pm}, 0 \right)\right]
-            \end{split}  \label{eqn:linearized collision operator}  \\
-            \calC_{\pm\mp}\left[\left(f_{\pm}^{(0)}\right)_{\pm}; \delta\!f_{\mp}\right](\bfx, \bfv; t)  &:=   - \partial\bfC_{\pm\mp}^{(0)}\left[\left(f_{\pm}^{(0)}, f_{\mp}^{(0)}\right); \left({\color{white} f_{\pm}^{(0)}}\!\!\!\!\!\!\!\!\!0, \delta\!f_{\mp} \right)\right]
-        \end{align}
-        \item  $\calF_{\pm}$ denotes the inhomogeneous contribution from the RHS of (\ref{eqn:linearized Boltzmann equation}),
-        \begin{multline}
-            \calF_{\pm}[\rho_{\pm}, \bfp, p](\bfx, \bfv; t)  \\
-            :=  - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \partial_{t}[(\rho_{\pm}, \bfp, p)]] - \partial f_{\pm}^{(0)}[(\rho_{\pm}, \bfp, p); \nabla_{\bfx}\cdot[\bfv\otimes(\rho_{\pm}, \bfp, p)]]  \\
-            - \frac{\rho_{\rmC}}{\rho_{\rmM}}\nabla_{\bfv}\cdot\left[f_{\pm}^{(0)}\left(\bfE + \frac{1}{\rho_{\rmC}}\bfj^{(0)}\wedge\bfB\right) - \nabla_{\bfv}\left[f_{\pm}^{(0)}\left(\frac{1}{\rho_{\rmC}}\bfj^{(0)} - \bfu\right)\cdot\left(\bfE + \bfu\wedge\bfB\right)\right]\right],
-        \end{multline}
+        \item  Are generated, according to the inhomogeneous RHS of (\ref{eqn:linearized Boltzmann equation simplified 1}), $\calF_{\pm}$, and eliminated, according to some modification of the system.
+        \item  Move through the simulation domain, via particle pushers determined by the homogeneous LHS of (\ref{eqn:linearized Boltzmann equation simplified 1}).
     \end{itemize}
-    and asymptotic equality, $\sim$, has been substituted for equality, $=$, for sake of presentation. This form is chosen such that the left-hand sides (LHS's) are both homogeneously linear and decoupled in $\delta\!f_{\pm}$.
-
-    \BA{I had to re-write this with a little perspective from earlier, separating up the collisional effects to give a stochastic timestepper that doesn't cause problems with inter-phase effects. I should re-write (\ref{eqn:linearized Boltzmann equation}) accordingly.}
-
-    For the numerical solution of (\ref{eqn:linearized Boltzmann equation simplified}) a Monte Carlo pseudo-particle approximation is proposed, whereby as the simulation progresses in time, particles with (crucially) positive \emph{or} negative (somewhat akin to an ``anti-pseudo-particle'') weights:
-    \begin{itemize}
-        \item  Are generated/eliminated stochastically with initial positions, $\bfx$, and velocities, $\bfv$, according to the RHS of (\ref{eqn:linearized Boltzmann equation simplified}), $\calF_{\pm}$.
-        \item  Move through the simulation domain using stochastic particle pushers deriving from SDEs determined by the LHS of (\ref{eqn:linearized Boltzmann equation simplified}).
-    \end{itemize}
-    The latter of these 2 parts, the pseudo-particle motion, shall be discussed here first.
-
-    \begin{remark}
-        The following work is very much work in progress.
-    \end{remark}
+    The latter of these 2 parts, the pseudo-particle motion, shall be discussed first.
 
 
     \input{3 - kinetic component/1 - particle motion/main.tex}
     \input{3 - kinetic component/2 - particle generation/main.tex}
-
-
-
-    \section*{Summary}
-        \BA{Summary.}
     

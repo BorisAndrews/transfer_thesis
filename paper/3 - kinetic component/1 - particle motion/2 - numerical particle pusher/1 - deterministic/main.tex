@@ -1,0 +1,14 @@
+\subsubsection{Deterministic (Classical) Particle Pushers}
+    To discretize the stochastic neoclassic transport model (\ref{eqn:stochastic neoclassical transport 1}--\ref{eqn:stochastic neoclassical transport 2}), consider first classical discretization techniques for the deterministic neoclassical transport model (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}).
+    
+    Since this system exhibits prominent multiscale behavior, discretizations on the longer transport timescale that accurately capture the particle dynamics induced by oscillation on the shorter cyclotron timescale are non-trivial. There are 2 common approaches, using numerical ODE/SDE discretization techniques on either:
+    \begin{itemize}
+        \item  Pseudo-particle parameters that are invariant (up to leading order) over cyclotron-frequency oscillations, in a gyroaveraged discretization.
+        \item  $\bfX_{\pm}^{(i)}$ and $\bfV_{\pm}^{(i)}$, in what is refereed to here as a \emph{``direct''} discretization.
+    \end{itemize}
+    Each approach has its own benefits and weaknesses.
+
+
+    \input{3 - kinetic component/1 - particle motion/2 - numerical particle pusher/1 - deterministic/1 - gyroaveraged/main.tex}
+    \input{3 - kinetic component/1 - particle motion/2 - numerical particle pusher/1 - deterministic/2 - direct/main.tex}
+    

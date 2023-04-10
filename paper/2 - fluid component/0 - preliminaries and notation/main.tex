@@ -5,7 +5,7 @@
 
     Let $\bfOmega  \subset  \bbR^{3}$ denote a sufficiently smooth, compact, contractible domain, with boundary $\bfGamma  :=  \partial\bfOmega$, on which the MHD system is considered. Denote the outward-pointing normal on $\bfGamma$ as $\bfn$.
 
-    \begin{remark}
+    \begin{remark}[Non-contractability of tokamak geometries]
         Tokamak geometries, homeomorphic to a torus, and crucially \emph{not} contractible. I assume contractability here to simplify the analysis, i.e. to ensure the de Rham complex on $\bfOmega$ is exact, however I imagine with careful handling most, if not all, of the results here should carry over, albeit with slight modification, to non-contractible domains.
     \end{remark}
 
@@ -49,13 +49,13 @@
         where $\Delta u$ is interpreted as a distribution in $H^{- 1} (\cong (H^{1}_{0})^{*})$. The solution of this is exactly equivalent to the variational form, however is often more clear to compare to the original strong form, and often easier to work with in the analysis.
     \end{itemize}
     
-    \begin{remark}
-        These projection operators will be used extensively throughout this chapter in the representation of weak forms for PDE systems. Note however the following:
+    \begin{remark}[Application of projection operators with insufficient regularity, and non-conforming discretizations]
+        These projection operators will be used extensively throughout this section in the representation of weak forms for PDE systems. Note however the following:
         \begin{enumerate}
             \item  To preserve certain structures of the continuous model (See Section \ref{cha:structures}) there are certain commutativity relations that the projection operators $\bbQ_{\calF}$ for the spaces in the weak formulation must satisfy. Spaces with projection operators that satisfy these commutativity properties typically have relatively low regularity.
-            \item  The intricacies of what regularity requirements are needed for the projections in my weak formulations to be well-posed (i.e. such that each $\bbQ_{\calF}$ acts only on object necessarily in $\calF^{*}$) are mostly left for further work (See Section \ref{cha:analysis}) however I'm aware that these requirements are sufficiently strong that those spaces that have the aforementioned commutativity properties are unlikely to satisfy them.
+            \item  The intricacies of what regularity requirements are needed for the projections in my weak formulations to be well-posed (i.e. such that each $\bbQ_{\calF}$ acts only on object necessarily in $\calF^{*}$) are mostly left for further work (See Section \ref{cha:analysis}) however I am aware that these requirements are sufficiently strong that those spaces that have the aforementioned commutativity properties are unlikely to satisfy them.
         \end{enumerate}        
         This motivates the use of non-conforming discretizations, wherein one still makes use of spaces that are insufficiently regular for the projections to be well-posed, but makes approximations to these projections when needed. (See Section \ref{cha:numerics})
         
-        Assume for now therefore that if one sees $\bbQ_{\calF}$ then it is acting on an object in $\calF^{*}$. Regularity requirements and the handling of non-conforming discretizations will be left till later in this chapter.
+        Assume for now therefore that if one sees $\bbQ_{\calF}$ then it is acting on an object in $\calF^{*}$. Regularity requirements and the handling of non-conforming discretizations will be left till later in this section.
     \end{remark}
