@@ -37,12 +37,6 @@
         \caption{Examples of pairs of closed loops in $\bbR^{3}$ with linking numbers $L  \in  \{-2, -1, 0, 1, 2\}$. Vector fields with correspondingly varying helicities exhibit similar twisting structures.}
         \label{fig:linking numbers}
     \end{figure}
-    
-    \begin{remark}[Non-uniqueness of the magnetic potential]
-        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
-        
-        It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
-    \end{remark}
 
     Assume henceforth the homogeneous boundary conditions (BCs) on $\bfGamma$:
     \begin{align}\label{eqn:canonical boundary conditions}
@@ -51,13 +45,19 @@
         \bfzero  =  \bfE\wedge\bfn.
     \end{align}
 
-    Denote a magnetic potential, $\bfA$, defined such that $\bfB  =  \nabla\wedge\bfA$ with BCs $\bfzero  =  \bfA\wedge\bfn|_{\bfGamma}$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$, such a potential necessarily exists, since
+    \begin{remark}[Alternative BCs]
+        Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I am choosing to consider these for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.
+    \end{remark}
+
+    Define a magnetic potential, $\bfA$, such that $\bfB  =  \nabla\wedge\bfA$ with BCs $\bfzero  =  \bfA\wedge\bfn|_{\bfGamma}$. By the exactness of the $\Lambda_{0}^{\bullet}(\bfOmega)$ Hilbert complex on contractible $\bfOmega$, such a potential necessarily exists, since
     \begin{equation}
         \bfB  \in  \ker[\rmdiv; \bfH_{0}(\rmdiv)]  =  \im[\bfcurl; \bfH_{0}(\bfcurl)].
     \end{equation}
-
-    \begin{remark}[Alternative BCs]
-        Various other BCs are considered in the literature ($\bfzero = \bfu\wedge\bfn$, $\bfzero = \bfB\wedge\bfn$, etc.) however I am choosing to consider these for now, since they are crucial for giving conservative/dissipative properties and the global quantities that we are to consider.
+    
+    \begin{remark}[Non-uniqueness of the magnetic potential]
+        We call this $\bfA$ \emph{a}, not \emph{the}, magnetic potential since a continuum of such magnetic potentials can exist, up to the addition of a vector field in the kernel of $\rmdiv$, i.e. a potential gradient.
+        
+        It is irrelevant however here which potential $\bfA$ is chosen, as the conservation/dissipation results still hold.
     \end{remark}
 
     In the incompressible case, \cite{Laakmann_Hu_Farrell_2022} considers the conservation of the following 3 quantities in the incompressible system:\footnote{Note, the hybrid helicity, $\rmH_{\rmH}$, is \emph{not} (necessarily) the helicity of a vector field, except in the case of $a = b = \beta\rmRH/2 (= 1/\rmCy\!_{+})$, where
@@ -79,7 +79,7 @@
     \end{equation}
     and $\bfomega$ is the vorticity $\bfomega  :=  \nabla\wedge\bfu$.
     
-    For the \emph{compressible} case, one can introduce the total mass, $\rmM$, as a conserved quantity, and redefine the energy, $\rmE$, to incorporate the internal energy and variable density. The magnetic helicity, $\rmH_{\rmM}$, remains unchanged, while to the authors' knowledge the hybrid helicity, $\rmH_{\rmH}$, has no direct analogue in the compressible case:
+    For the \emph{compressible} case, one can introduce the total mass, $\rmM$, as a conserved quantity, and redefine the energy, $\rmE$, to incorporate the internal energy and variable density. The magnetic helicity, $\rmH_{\rmM}$, remains unchanged, while to the authors' knowledge the hybrid helicity, $\rmH_{\rmH}$, has no direct analogue in the fully compressible case:
     \begin{center}\begin{tabular}{ c | r : l }
         Properties  &  Symbol  &  Definition  \\
         \hline\hline
@@ -88,12 +88,12 @@
         \hdashline
         Magnetic helicity \cite{Blackman_2015}  &  $\rmH_{\rmM}$  &  $\calH[\bfA]$
     \end{tabular}\end{center}
-    These are the global structures considered by Gawlik and Gay--Balmaz for a similar barotropic non-Hall case in \cite{Gawlik_Gay--Balmaz_2021}.
+    These are the global structures considered by Gawlik and Gay--Balmaz for a similar barotropic non-Hall MHD model in \cite{Gawlik_Gay--Balmaz_2021}.
 
     These quantities have the derivatives:
     \begin{align}
         \frac{\rmd}{\rmd t}\rmM         &=  0  \\
-        \frac{\rmd}{\rmd t}\rmE         &=  \oint_{\bfGamma}\rho\left[\frac{1}{\rmRef}\bftau:\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\nabla\theta\cdot\bfn\right]  \\
+        \frac{\rmd}{\rmd t}\rmE         &=  \int_{\bfGamma}\rho\left[\frac{1}{\rmRef}\bftau:\sym[\bfu\otimes\bfn] + \frac{1}{\rmPe}\nabla\theta\cdot\bfn\right]  \\
         \frac{\rmd}{\rmd t}\rmH_{\rmM}  &=  - \frac{2}{\rmRem}\calH[\bfB]
     \end{align}
     Notably:
@@ -103,15 +103,9 @@
             \item  One of the ideal kinetic limit $\rmRef  \rightarrow  \infty$, the stress-free BC $\bftau\cdot\bfn  =  \bfzero|_{\bfGamma}$, or the no-slip BC $\bfu\wedge\bfn  =  \bfzero|_{\bfGamma}$, holds
             \item  Either the ideal thermal limit, $\rmPe  \rightarrow  \infty$, or the thermal insulation BC $\nabla\theta\cdot\bfn  =  0|_{\bfGamma}$, holds
         \end{itemize}
-        then
-        \begin{equation}
-            \frac{\rmd}{\rmd t}\rmE  =  0.
-        \end{equation}
+        then $\frac{\rmd}{\rmd t}\rmE  =  0$.
 
-        \item  In the ideal magnetic limit, $\rmRem  \rightarrow  \infty$,
-        \begin{equation}
-            \frac{\rmd}{\rmd t}\rmH_{\rmM}  =  0.
-        \end{equation}
+        \item  In the ideal magnetic limit, $\rmRem  \rightarrow  \infty$, $\frac{\rmd}{\rmd t}\rmH_{\rmM}  =  0$.
       \end{itemize}
 
     \line

@@ -1,7 +1,7 @@
 \section{Maxwellian Background: A Fluid Simulation}
     \BA{Important thing of note here is the fact that this is necessarily a \emph{compressible}, and therefore partially \emph{hyperbolic} system, which can cause a lot of difficulties for creating good discretisations and simulations. (C.F. Numerical dissipation.)}
 
-    \BA{If we want to use AL preconditioners \emph{and} FDM, then we need both:
+    \BA{If we would like to use AL preconditioners \emph{and} FDM, then we need both:
     \begin{itemize}
         \item  Exact incompressibility, with $P \cong \nabla\cdot\bfU$ (up to some uniformly finite-dimensional nullspace).
         \item  Tensor product FE spaces.
@@ -9,7 +9,7 @@
     There's 2 ways I see about this:
     \begin{itemize}
         \item  A subcomplex of the higher-regularity, conforming $H^{1}(\rmdiv) \overset{\rmdiv}{\longrightarrow} H^{1}$ constructed from a new FDM basis for $H^{2} \overset{d}{\longrightarrow} H^{1}$.
-        \item  A subcomplex of the standard, non-conforming $H(\rmdiv) \overset{\rmdiv}{\longrightarrow} L^{2}$ constructed from the same basis, such that the non-conforming contributions don't shoot up the density- Pablo's done similar things to this using the FDM CG basis as a basis for DG when using non-conforming DG schemes.
+        \item  A subcomplex of the standard, non-conforming $H(\rmdiv) \overset{\rmdiv}{\longrightarrow} L^{2}$ constructed from the same basis, such that the non-conforming contributions do not shoot up the density- Pablo's done similar things to this using the FDM CG basis as a basis for DG when using non-conforming DG schemes.
     \end{itemize}}
 
     

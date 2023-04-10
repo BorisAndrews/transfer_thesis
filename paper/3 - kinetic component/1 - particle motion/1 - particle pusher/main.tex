@@ -1,5 +1,5 @@
 \subsection{Pseudo-Particle SDEs (Stochastic Neoclassical Transport)}
-    We first derive the SDE systems that pseudo-particle in a Monte Carlo model of the homogeneous LHS of (\ref{eqn:linearized Boltzmann equation simplified 2}) would have to satisfy. These resemble the ODE systems of neoclassical transport, derived from a Vlasov model under the assumption of negligible collisions, with a stochastic Ornstein--Uhlenbeck process--like drift-diffusion term \cite{Gardiner_1985, Karatzas_Shreve_1991, Gard_1998} contributed by the LB collision operator approximation. As such, we refer to this as \emph{stochastic} neoclassical transport.
+    We first derive the SDE systems that pseudo-particles in a Monte Carlo model of the homogeneous LHS of (\ref{eqn:linearized Boltzmann equation simplified 2}) would have to satisfy. These resemble the ODE systems of neoclassical transport, derived from a Vlasov model under the assumption of negligible collisions, with a stochastic Ornstein--Uhlenbeck process--like drift-diffusion term \cite{Gardiner_1985, Karatzas_Shreve_1991, Gard_1998} contributed by the LB collision operator approximation. As such, we refer to this as \emph{stochastic} neoclassical transport.
     
     With conservative 1st and 2nd derivatives in space, $\bfx$, and velocity, $\bfv$, and 1st derivatives in time, $t$, the LHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified 2}) takes a Fokker--Planck-like form \cite{Fokker_1914, Planck_1917}. The homogeneous LHS can thus be modeled using a pseudo-particle model where pseudo-particles in either the ion ($+$) or electron ($-$) phase, indexed via $*_{\pm}^{(i)}$, move according to the corresponding SDE system:
     \begin{align}
@@ -11,12 +11,11 @@
         \bfx  \mapsto  \bfX_{\pm}^{(i)}(t),  &&
         \bfv  \mapsto  \bfV_{\pm}^{(i)}(t),
     \end{align}
-    $\sigma_{\pm}^{(i)}  :=  \sqrt{2\nu_{\pm}^{(i)}\rmD_{\pm}^{(i)}}$, and $\bfW_{\pm}^{(i)}(t)$ are normalized, 3D Wiener process, independent for each pseudo-particle.
+    $\sigma_{\pm}^{(i)}  :=  \sqrt{2\nu_{\pm}^{(i)}\rmD_{\pm}^{(i)}}$, and $\bfW_{\pm}^{(i)}(t)$ are normalized, 3D Wiener processes, independent for each pseudo-particle.
 
     Compare this then with the ODE systems of neoclassical transport satisfied by $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ in the Vlasov model:
     \begin{align}
         \rmd\bfX_{\pm}^{(i)}  &=  \bfV_{\pm}^{(i)}\rmd t  \label{eqn:deterministic neoclassical transport 1}  \\
         \rmd\bfV_{\pm}^{(i)}  &=  \pm|\rmCy\!_{\pm}|\left(\bfE + \bfV_{\pm}^{(i)}\wedge\bfB\right)\rmd t  \label{eqn:deterministic neoclassical transport 2}
     \end{align}
-    
     While the neoclassical transport system exhibits multiscale behavior as $\rmCy\!_{\pm} \rightarrow \infty$, with drift occurring on $t = \calO[1]$ transport timescales, and oscillations occurring on $t = \calO[1/\rmCy\!_{\pm}]$ cyclotron timescales, this system exhibits a similar \emph{stochastic} multiscale behavior.

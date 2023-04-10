@@ -1,36 +1,36 @@
 \subsection*{Generation}
-    Pseudo-particle generation is inherently determined by the inhomogeneous RHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified 1}), $\calF_{\pm}$.
+    Pseudo-particle generation is determined by the inhomogeneous RHS of the linearized Boltzmann equation (\ref{eqn:linearized Boltzmann equation simplified 1}), $\calF_{\pm}$.
     
-    At a given time, $t$, one intends to introduce pseudo-particles to the PiC simulation with position $\bfX_{\pm}^{(i)} \in \bbR^{3}$, velocity $\bfV_{\pm}^{(i)} \in \bbR^{3}$ and weight $w_{\pm}^{(i)} \in \bbR$ to approximate $\calF_{\pm}(\bfx, \bfv; t)$ as the sum of weighted $\delta$ functions. More specifically, the algorithm should seek new $\bfX_{\pm}^{(i)}$, $\bfX_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ such that, \emph{in some weak sense},
+    At a given time, $t$, pseudo-particles must be introduced to the PiC simulation with position $\bfX_{\pm}^{(i)} \in \bbR^{3}$, velocity $\bfV_{\pm}^{(i)} \in \bbR^{3}$ and weight $w_{\pm}^{(i)} \in \bbR$ to approximate $\calF_{\pm}(\bfx, \bfv; t)$ as the sum of weighted $\delta$ functions. More specifically, the algorithm should seek new $\bfX_{\pm}^{(i)}$, $\bfX_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ such that, \emph{in some weak sense},
     \begin{equation}\label{eqn:particle generation approximation}
         \calF_{\pm}|_{t}  \approx  \sum_{i}w_{\pm}^{(i)}\delta^{3}\!\left[\bfx - \bfX_{\pm}^{(i)}\right]\delta^{3}\!\left[\bfv - \bfV_{\pm}^{(i)}\right].
     \end{equation}
 
-    Similar to the pseudo-particle elimination occurring at the times $t^{n}$ between timestep intervals, it makes computational sense for the pseudo-particles to be generated at these times too, such that the algorithm is seeking $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ to approximate $\calF_{\pm}|_{t^{n}}$ for each $n$.
+    Similar to the pseudo-particle elimination occurring at the times $t^{n}$ in between timestep intervals, it makes computational sense for the pseudo-particles to be generated at these times too, such that for each $n$, the algorithm is seeking $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ to approximate $\calF_{\pm}|_{t^{n}}$.
 
     \shortline
 
     \begin{remark}[Negative pseudo-particle weights]
         Notably, the weights, $w_{\pm}^{(i)}$, are potentially \emph{negative}.
         
-        That is not to say that we are modeling anti-particles in any immediate classical sense, but simply that the $\delta\!f$ corrections, $\delta\!f_{\pm}$, can (and must) be negative at some positions and velocities. Recall, the ``particles'' in the PiC simulation are \emph{not} the actual particles within the plasma, but \emph{pseudo}-particles in a Monte Carlo numerical solution that exhibit very similar dynamics to those that would be exhibited by a genuine particle within the plasma.
+        That is not to say that we are modeling anti-particles in any immediate classical sense, but simply that the $\delta\!f$ corrections, $\delta\!f_{\pm}$, can (and must) be negative at some positions and velocities. Recall, the ``particles'' in the PiC simulation are \emph{not} modeling actual particles within the plasma, but \emph{pseudo}-particles in a Monte Carlo numerical solution that exhibit certain similar dynamics to those that would be exhibited by a physical particle within the plasma.
     \end{remark}
 
     \begin{remark}[How to approximate $\calF_{\pm}|_{t^{n}}$]
         The $\calF_{\pm}|_{t^{n}}$ approximation requirement (\ref{eqn:particle generation approximation}) leaves (at least) 2 open questions:
         \begin{enumerate}
-            \item  {\bf What is meant analytically by ``$\calF_{\pm}|_{t^{n}} \approx \cdots$ in some weak sense''?} Perhaps the most obvious interpretation is that $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ are chosen to minimize the dual norm
+            \item  {\bf What is meant analytically by ``$\calF_{\pm}|_{t^{n}} \approx \cdots$ in some weak sense''?} Perhaps the most immediate analytic interpretation is that $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ are chosen to minimize the dual norm
             \begin{multline}\label{eqn:dual minimization problem}
                 \left\|\calF_{\pm}|_{t^{n}} - \sum_{i}w_{\pm}^{(i)}\delta^{3}\!\left[\bfx - \bfX_{\pm}^{(i)}\right]\delta^{3}\!\left[\bfv - \bfV_{\pm}^{(i)}\right]\right\|_{\Phi^{*}}  \\
                 =  \min_{\phi \in \Phi\setminus\{0\}}\!\left\{\frac{1}{\|\phi\|_{\Phi}}\int_{\bfx, \bfv}\phi\left(\calF_{\pm}|_{t^{n}} - \sum_{i}w_{\pm}^{(i)}\delta^{3}\!\left[\bfx - \bfX_{\pm}^{(i)}\right]\delta^{3}\!\left[\bfv - \bfV_{\pm}^{(i)}\right]\right)\right\},
             \end{multline}
-            for some Hilbert space $\Phi$ over $\bfx$, $\bfv$. The definition of the norm $\|-\|_{\Phi}$ however completely alters how $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ will be chosen by the algorithm. If $\|-\|_{\Phi}$ is the $H^{1}$-like norm
+            for some Hilbert space $\Phi$ over $\bfx$, $\bfv$. The definition of the norm $\|-\|_{\Phi}$ completely alters how $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$ will be chosen by the algorithm. If $\|-\|_{\Phi}$ is the $H^{1}$-like norm
             \begin{equation}
-                \|\phi\|_{\Phi}^{2}  :=  \int_{\bfx, \bfv}\left[\phi^{2} + \alpha\|\nabla_{\bfx}\phi\|^{2} + \beta\|\nabla_{\bfv}\phi\|^{2}\right],
+                \|\phi\|_{\Phi}^{2}  :=  \int_{\bfx, \bfv}\left[\phi^{2} + \alpha\|\nabla_{\bfx}\phi\|^{2} + \beta\|\nabla_{\bfv}\phi\|^{2}\right]
             \end{equation}
-            then altering $\alpha$, $\beta$ will alter the fidelity of the approximation over $\bfx$, $\bfv$ respectively.
+            for examples, then altering $\alpha$, $\beta$ will alter the fidelity of the approximation over $\bfx$, $\bfv$ respectively.
 
-            Then there are more direct interpretations, such as taking random $\bfx$, $\bfv$--pointwise evaluations of $\calF_{\pm}|_{t^{n}}$, and generating a pseudo-particle there with corresponding position and velocity if $\calF_{\pm}|_{t^{n}}$ crosses a certain threshold.
+            Alternatively, there are more direct heuristic interpretations, such as sampling random $\bfx$, $\bfv$--pointwise evaluations of $\calF_{\pm}|_{t^{n}}$, and generating a pseudo-particle there with corresponding position and velocity if $\calF_{\pm}|_{t^{n}}$ crosses a certain threshold.
 
             \item  {\bf How do we efficiently compute $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$?} Recall the definition of $\calF_{\pm}$ (\ref{eqn:inhomogeneous RHS}). It is not simple, and will likely not be quick to evaluate, \emph{especially} if one seeks to evaluate and minimize (\ref{eqn:dual minimization problem}). There could be potential here to train a neural network offline to quicker generate suggestions for good $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$, $w_{\pm}^{(i)}$, although that feels excessive.
         \end{enumerate}
@@ -38,12 +38,12 @@
 
     \shortline
 
-    Regarding the number of pseudo-particles we might seek to generate on a timestep $T^{n}$, suppose the numerical implementation and hardware are designed to support an expected $I_{\pm}$ pseudo-particles in each phase at any one time. With an expected $(1 - \exp\left[\eta_{\pm}\delta t^{n}\right])I_{\pm}$ particles eliminated from each phase over $T^{n}$, balance can be achieved by introducing $(1 - \exp\left[\eta_{\pm}\delta t^{n}\right])I_{\pm}$ new particles to the simulation.
+    Regarding the number of pseudo-particles we might seek to generate on a timestep $T^{n}$, suppose the numerical implementation and hardware are designed to support an expected $I_{\pm}$ pseudo-particles in each phase at any given time. With an expected $(1 - \exp\left[\eta_{\pm}\delta t^{n}\right])I_{\pm}$ particles eliminated from each phase over $T^{n}$, balance can be achieved by introducing $(1 - \exp\left[\eta_{\pm}\delta t^{n}\right])I_{\pm}$ new particles to the simulation.
 
     \shortline
 
     \begin{remark}[Pseudo-particle elimination by weight reduction]
-        An alternative approach to particle elimination would be to gradually reduce the pseudo-particle weights, $w_{\pm}^{(i)}$. I find this idea less appealing however than leaving the weight constant and removing the particles, since it could leave many particles with weights so small that they are contributing very little to the plasma dynamics while requiring a great deal of computational work.
+        An alternative approach to particle elimination would be to gradually reduce the pseudo-particle weights, $w_{\pm}^{(i)}$. I find this idea less appealing however than leaving the weight constant and simply removing the particles, since it could leave many particles with weights so small that they are contributing very little to the plasma dynamics, while simultaneously requiring a great deal of computational work.
         
         It makes more sense I feel to eliminate the pseudo-particles whenever possible to free up computational power and memory.
     \end{remark}

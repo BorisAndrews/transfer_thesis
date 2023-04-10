@@ -3,7 +3,7 @@
 
     \line
 
-    Timesteppers the preserve conservative energy and magnetic helicity structures for the \emph{ideal}, incompressible (Hall) MHD system were proposed by Laakmann, Hu and Farrell in \cite{Laakmann_Hu_Farrell_2022}. Consider in particular System (3.18a--d) adapted for the inclusion of the Hall term from the Crank--Nicolson timestepper posed by Gawlik and Gay--Balmaz in \cite{Gawlik_Gay--Balmaz_2022}. We re-define this timestepper here, over the spatial domain $\bfOmega$ and interval $T^{n}$.
+    Timesteppers the preserve conservative energy and magnetic helicity structures for the \emph{ideal}, incompressible (Hall) MHD system were proposed by Laakmann, Hu and Farrell in \cite{Laakmann_Hu_Farrell_2022}. Consider in particular (3.18a--d) therein, adapted for the inclusion of the Hall term from the Crank--Nicolson timestepper posed by Gawlik and Gay--Balmaz in \cite{Gawlik_Gay--Balmaz_2022}. We re-define this timestepper here, over the spatial domain $\bfOmega$ and interval $T^{n}$.
 
     \shortline
 
@@ -52,12 +52,12 @@
     \begin{align}
                            0  &=  \bbQ_{\calP}\left[\nabla\cdot\bfu^{n + \frac{1}{2}}\right]  \\
         \begin{split}
-            \bfdelta\bfu^{n}  &=  \bbQ_{\calU}\left[- \bbQ_{\calV}\left[\bbQ_{\calV}\left[\nabla\wedge\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\right] - \nabla p^{n + \frac{1}{2}}\right.  \\
+            \bfdelta\bfu^{n}  &=  \bbQ_{\calU}\left[- \bbQ_{\calV}\left[\bbQ_{\calV}\left[\nabla\wedge\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\right] - \nabla p^{n + \frac{1}{2}}{\color{white} \frac{2}{\beta}}\right.  \\
             &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.+ \frac{2}{\beta}\bbQ_{\calV}\left[\bbQ_{\calG}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
         \end{split}  \\
         \begin{split}
             \bfdelta\bfB^{n}  &=  \bbQ_{\calB}\left[- \nabla\wedge\left[\frac{1}{\rmRem}\nabla\wedge\bfB^{n + \frac{1}{2}} - \bbQ_{\calV}\left[\bfu^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right.\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.+ \rmRH\bbQ_{\calG}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\;\;\;\left.\left.{\color{white} \frac{1}{\rmRem}}+ \rmRH\bbQ_{\calG}\left[\nabla\wedge\bfB^{n + \frac{1}{2}}\right]\wedge\bbQ_{\calG}\left[\bfB^{n + \frac{1}{2}}\right]\right]\right]
         \end{split}
     \end{align}
     where:
@@ -84,20 +84,20 @@
         \item  Conserve the energy, $\rmE  :=  \int_{\bfOmega}\left[\frac{1}{2}\|\bfu\|^{2} + \frac{1}{\beta}\|\bfB\|^{2}\right]$, and magnetic helicity, $\rmH_{\rmM}  :=  \calH[\bfA]$, exactly from $t^{n}$ to $t^{n + 1}$.
     \end{itemize}
 
-    Being a Crank--Nicolson timestepper, the NS-like component of this timestepper much resembles that which was derived from a CG-DG-in-time discretization for the incompressible NS model at lowest order $s = 1$, up to the choice of representation for the convective. The timestepper here uses a mixed vorticity formulation for the convective term, through the use of $\bbQ_{\calV}$ projections on $\bfu^{n + \frac{1}{2}}$ and $\nabla\wedge\bfu^{n + \frac{1}{2}}$. As detailed above, we intend not to use a mixed formulation.
+    Being a Crank--Nicolson timestepper, the NS-like component of this timestepper much resembles that which was derived from a CG-DG-in-time discretization for the incompressible NS model at lowest order $s = 1$, up to the choice of representation for the convective term. The timestepper here uses a mixed vorticity formulation, through the use of $\bbQ_{\calV}$ projections on $\bfu^{n + \frac{1}{2}}$ and $\nabla\wedge\bfu^{n + \frac{1}{2}}$. As stated above, we intend not to use a mixed formulation.
 
     \line
 
-    We shall now build on the work from Section \ref{cha:Navier--Stokes}, using a FET approach to derive a class of timesteppers for the incompressible (Hall) MHD model (Figure \ref{fig:incompressible strong form}) which:
+    We shall now build on the work from Section \ref{cha:Navier--Stokes}, using a FET approach to derive a class of timesteppers for the incompressible (Hall) MHD model (See Figure \ref{fig:incompressible strong form}) which:
     \begin{itemize}
         \item  Can be defined up to arbitrarily high order in time.
         \item  Incorporate viscous terms, with a quantifiable dissipation on the energy and magnetic helicity.
     \end{itemize}
-    At lowest order, the resultant timestepper resembles that from \cite{Laakmann_Hu_Farrell_2022} without the mixed vorticity formulation for the convective term.
+    At lowest order, the resultant timestepper much resembles that from \cite{Laakmann_Hu_Farrell_2022} using different formulations for the convective terms.
 
     \shortline
 
-    Suppose again we consider the problem through the lens of function/finite-element space as defined on the space-time domain, $\bfOmega\otimes T^{n}$. For some $\calP$, $\calU$, $\calB$, we seek:
+    Suppose again we consider the problem through the lens of function/FE spaces defined on the space-time domain, $\bfOmega\otimes T^{n}$. For some $\calP$, $\calU$, $\calB$, supported on $\bfOmega\otimes T^{n}$, we seek:
     \begin{align}
         p         \in  \calP,  &&
         \bfu_{-}  \in  \calU_{-},  &&
@@ -126,7 +126,7 @@
             &=
             \bbQ_{\partial_{t}\calB}\left[\nabla\wedge\left[\bbQ_{\partial_{t}\calU}[\bfu]\wedge\bbQ_{\calG}[\bfB]
             - \rmRH(\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB])\wedge\bbQ_{\calG}[\bfB]\tall\right.\right.  \\
-            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.- \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right]\right]
+            &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.\left.- \frac{1}{\rmRem}\nabla\wedge\bbQ_{\partial_{t}\calB}[\bfB]\right]\right]
         \end{split}
     \end{align}
     for a space $\calG$, also defined on $\bfOmega\otimes T^{n}$, defined such that the following $\Lambda_{0}^{\bullet}(\bfOmega)\otimes L^{2}$-subcomplex diagram commutes:
@@ -227,7 +227,7 @@
     \line
 
     \begin{example}[CG-DG-in-time dissipative timestepper for incompressible MHD]
-        Suppose the spaces take the following CG-DG-in-time tensor product forms, for some order-in-time, $s$:
+        Suppose the spaces take the following CG-DG-in-time tensor-product forms, for some order-in-time, $s$:
         \begin{align}
             \calP  =  \widehat{\calP}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right),  &&
             \calU  =  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),  &&
@@ -273,7 +273,7 @@
                 \bbQ_{\widehat{\calU}}\left[- \frac{1}{2}\sum_{jk}w_{i}^{jk}\left(\nabla\cdot\left[\bfu_{j}^{n}\otimes\bfu_{k}^{n}\right]
                 + \bfu_{j}^{n}\cdot\nabla\bfu_{k}^{n}\right)
                 - \nabla p_{i}^{n}\right.  \\
-                &\qquad\qquad\left.+ \frac{2}{\beta}\sum_{jk}w_{i}^{jk}\left(\nabla\wedge\bfB_{j}^{n}\right)\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]
+                &\qquad\qquad\qquad\;\;\;\left.+ \frac{2}{\beta}\sum_{jk}w_{i}^{jk}\left(\nabla\wedge\bfB_{j}^{n}\right)\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]
                 + \frac{2}{\rmRef}\nabla\cdot\nabla_{\rms}\bfu_{i}^{n}\right]
             \end{split}  \\
             \begin{split}
@@ -283,7 +283,7 @@
                 &=
                 \bbQ_{\widehat{\calB}}\left[\nabla\wedge\left[\sum_{jk}w_{i}^{jk}\bfu_{j}^{n}\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]
                 \right.\right.  \\
-                &\qquad\qquad\left.\left.- \rmRH\sum_{jk}w_{i}^{jk}(\nabla\wedge\bfB_{j}^{n})\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]\tall - \frac{1}{\rmRem}\nabla\wedge\bfB_{i}^{n}\right]\right]
+                &\qquad\qquad\qquad\left.\left.- \rmRH\sum_{jk}w_{i}^{jk}(\nabla\wedge\bfB_{j}^{n})\wedge\bbQ_{\calG}\left[\bfB_{k}^{n}\right]\tall - \frac{1}{\rmRem}\nabla\wedge\bfB_{i}^{n}\right]\right]
             \end{split}
         \end{align}
         where:
@@ -374,7 +374,3 @@
             \draw[->] (L2)   -- (P) node[left, midway] {$\bbQ_{\widehat{\calP}}$};
         \end{tikzpicture}\end{center}
     \end{example}
-
-    \line
-
-    From here, much of the remainder of this section is left for future work.

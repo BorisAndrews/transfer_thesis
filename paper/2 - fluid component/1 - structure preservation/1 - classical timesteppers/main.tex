@@ -1,5 +1,5 @@
 \subsection*{Runge--Kutta (RK) Methods}\label{cha:RK methods}
-    Traditional approaches for deriving numerical timesteppers from time-dependent PDEs employ a ``timestepping scheme'', typically a Runge--Kutta (RK) method. For an $s$-step method, the RK method of choice is characterized by:
+    Traditional approaches for deriving numerical timesteppers from time-dependent PDEs employ a timestepping ``scheme'', typically a Runge--Kutta (RK) method. For an $s$-step method, the RK method of choice is characterized by some:
     \begin{align}
         \sfA  \in  \bbR^{s \times s},  &&
         \bfb  \in  \bbR^{s},  &&
@@ -29,7 +29,7 @@
         \end{align}
     \end{definition}
     
-    The FET-induced timesteppers discussed in Subsubsection \ref{cha:FET} are often analogous to collocation methods, especially for linear problems. Consider the following examples:
+    For linear problems, the FET-induced timesteppers discussed in the following subsection are often analogous to collocation methods. Consider the following examples:
 
     \begin{example}[Gauss--Legendre (GL) methods]
         GL methods use:
@@ -55,9 +55,9 @@
     
     \line
     
-    RK methods reduce the problem to one in space, $\bfx$, only. The spatial problem can then be discretized using classical spatial discretization techniques, e.g. the finite-element method (FEM), giving the fully discretized problem.
+    RK methods reduce the problem to one in space, $\bfx$, only. The spatial problem can then be discretized using classical spatial discretization techniques, e.g. via the FEM, giving the fully discretized problem.
     
-    Typically supporting the discretization of problems in space, $\bfx$, only, traditional finite-element (FE) software is well-suited for the implementation of RK methods, where the RK method can be performed through either manually-implemented loops on each timestep, or specialist packages when available, such as the {\tt Irksome} package within {\tt Firedrake}. \cite{Farrell_Kirby_Marchena-Menéndez_2021}
+    Typically supporting the discretization of problems in space, $\bfx$, only, traditional FE software is well-suited for the implementation of RK methods, where the RK method can be performed through either manually-implemented loops on each timestep, or specialist packages when available, such as the {\tt Irksome} package within {\tt Firedrake}. \cite{Farrell_Kirby_Marchena-Menéndez_2021}
 
     Careful choice of RK method can give timesteppers that preserve the conservative/dissipative structures of the continuous strong form.
 
@@ -79,5 +79,5 @@
     
     \line
 
-    Most modern finite-element(-in-space) SP timesteppers in MHD rely on bespoke RK methods, in particular the Crank--Nicolson method or slight modifications thereof. This is the approach for time discretization taken by Hu et al. to date. \cite{Hu_Lee_Xu_2021, Laakmann_Hu_Farrell_2022}
+    Most modern FE(-in-space) SP timesteppers in MHD rely on bespoke RK methods, in particular the Crank--Nicolson method or slight modifications thereof. This is the approach for time discretization taken by Hu et al. to date. \cite{Hu_Lee_Xu_2021, Laakmann_Hu_Farrell_2022}
     

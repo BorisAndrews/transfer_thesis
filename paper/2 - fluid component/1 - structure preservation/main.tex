@@ -1,14 +1,14 @@
 \section{Constructing Structure-Preserving (SP) Timesteppers via FET}\label{cha:SP timesteppers}
     When constructing discrete timesteppers for systems with conserved/dissipated quantities, it is natural to seek ones that preserve conservational/dissipative structures in the full continuous system. There are many reasons one might seek to do this:
     \begin{itemize}
-        \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations, such as the topology of the magnetic potential characterized by the magnetic helicity as discussed above. Discretizations that violate these structures can exhibit correspondingly unphysical behavior. This is especially relevant in long term simulations. 
+        \item  {\bf Qualitative motivations:} The physical origins for such quantities often imply important qualitative interpretations. Discretizations that violate these structures can exhibit correspondingly unphysical behavior. This is especially relevant in long-term simulations. 
         
         In the words of Hamming on the subject of symplectic integrators, a class of structure-preserving (SP) timestepper: \cite{Hamming_1986}
         \begin{quotation}
             \emph{``An algorithm which transforms properly with respect to a class of transformations is more basic than one that does not. In a sense the invariant algorithm attacks the problem and not the particular representation used.''}
         \end{quotation}
 
-        \item  {\bf Quantitative motivations:} By way of example, the conservation of global quantities can often provide useful bounds on the outputs of the timesteppers, which can be useful in proving many results, such as well-posedness. The conservation of local quantities can alternatively help in providing parameter-robust bounds for convergence results, or allow the modification of the equations without fear of modification of the numerical results, such as in the use of augmented Lagrangians. \cite{FMW19, Laakmann_Farrell_Mitchell_22}
+        \item  {\bf Quantitative motivations:} By way of example, the conservation of global quantities can often provide useful bounds on the outputs of the timesteppers, which can be useful in proving results such as well-posedness. The conservation of local quantities can alternatively help in providing parameter-robust bounds for convergence results, or allow the modification of the equations without fear of modification of the numerical results, such as in the use of augmented Lagrangians. \cite{FMW19, Laakmann_Farrell_Mitchell_22}
     \end{itemize}
     Whatever the motivation, it is logical to ensure the constructed timestepper preserved these structures.
 
@@ -16,7 +16,7 @@
     \begin{equation}\label{eqn:general time-dependent PDE}
         \bfzero  =  \bfF\!\left[\bfu, \nabla\bfu, \nabla^{2}\bfu, \cdots; \partial_{t}\bfu\right]\!(\bfx; t),
     \end{equation}
-    where one intends to solve for $\bfu(\bfx; t)$, alongside appropriate initial (ICs) and boundary (BCs) conditions. The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu](t)$ that are conserved/dissipated over time, e.g. such that $\forall  t$ either $\frac{\rmd}{\rmd t}\rmE  =  0$, $\frac{\rmd}{\rmd t}\rmE  \leq  0$, or $\frac{\rmd}{\rmd t}\rmE  =  \calO[\epsilon]$ for some parameter $\epsilon \ll 1$.
+    where one intends to solve for $\bfu(\bfx; t)$, alongside appropriate initial conditions (ICs) and boundary conditions (BCs). The physical origins of such systems often imply the existence of certain functionals $\rmE[\bfu](t)$ that are conserved/dissipated over time, i.e. such that $\forall  t$ e.g. $\frac{\rmd}{\rmd t}\rmE  =  0$, $\frac{\rmd}{\rmd t}\rmE  \leq  0$, or $\frac{\rmd}{\rmd t}\rmE  =  \calO[\epsilon]$ for some parameter $\epsilon \ll 1$.
     
     \line
     
@@ -75,10 +75,10 @@
     
     We present here two possible approaches of tackling the time dependence of (\ref{eqn:general time-dependent PDE}) for constructing numerical timesteppers:
     \begin{itemize}
-        \item  Traditional Runge--Kutta (RK) methods. (See Subsubsection \ref{cha:RK methods})
-        \item  A finite-element-in-time (FET) approach. (See Subsubsection \ref{cha:FET})
+        \item  Traditional Runge--Kutta (RK) methods.
+        \item  A finite-element-in-time (FET) approach.
     \end{itemize}
-    The merits of the latter with regard to the construction of global structure--preserving timesteppers are discussed, when finite elements are employed for the discretization in space also.
+    The merits of the latter with regard to the construction of global SP timesteppers are discussed, when FEs are employed for the discretization in space also.
 
 
     \input{2 - fluid component/1 - structure preservation/1 - classical timesteppers/main.tex}

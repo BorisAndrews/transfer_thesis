@@ -1,17 +1,17 @@
 \subsection*{Functions Spaces/Finite Elements in Time (FET)}\label{cha:FET}
-    One can alternatively interpret (\ref{eqn:general time-dependent PDE}) directly over the full space-\emph{time} domain $\bfOmega\otimes T^{n}$. This is interpreted as a domain in the classical spatial sense, with $\bfOmega\otimes T^{n}  \subset  \bbR^{d + 1}$ when $\bfOmega  \subset  \bbR^{d}$. One can discretize the system over this domain using whatever classical technique is desired. In our case this is the finite-element method, or, since the domain is in space-\emph{time}, finite elements in time (FET). The value taken by $\bfu$ at the start of the interval, $\bfu|_{t^{n}}$, can be interpreted as one BC, with the value taken by $\bfu$ at the \emph{end} of the interval, $\bfu|_{t^{n + 1}}$, simply following the definition of the restriction of the solution to the final time.
+    One can alternatively interpret (\ref{eqn:general time-dependent PDE}) directly over the full space-\emph{time} domain $\bfOmega\otimes T^{n}$. This is interpreted as a domain in the classical spatial sense, with $\bfOmega\otimes T^{n}  \subset  \bbR^{d + 1}$ when $\bfOmega  \subset  \bbR^{d}$. One can discretize the system over this domain using whatever classical technique is desired. In our case this is the FEM, or more specifically, since the domain is in space-\emph{time}, FET. The value taken by $\bfu$ at the start of the interval, $\bfu|_{t^{n}}$, can be interpreted as one BC, with the value taken by $\bfu$ at the \emph{end} of the interval, $\bfu|_{t^{n + 1}}$, simply following the definition of the restriction of the solution to the final time.
     
     When using FET, the traditional independent choice of RK method when constructing a timestepper is transferred to one of the behavior of the function spaces and Galerkin discretizations in time, in their continuity, order, etc.
     
     A few key points on FET timesteppers:
     \begin{itemize}
         \item  Due to the tensor product nature of the space-time domain, $\bfOmega\otimes T^{n}$, the space-time trial and test function spaces in variational formulations can often be constructed via the tensor product of spaces on the spatial, $\bfOmega$, and time, $T^{n}$, domains without needing to construct new spaces on the entire space-time domain, $\bfOmega\otimes T^{n}$.
-        \item  The test function spaces need not be identical to the trial function spaces (i.e. a \emph{Petrov}--Galerkin methods) and often won't be. This is natural with the odd order in time.
-        \item  The intention of this approach is typically \emph{not} to solve an even higher dimension FE problem on all of $\bfOmega\otimes T^{n}$, but to pick discrete trial and test spaces in the Galerkin variational formulation that have a fixed, small number of DoFs in time---$\calO[s]$ in the sense of the number of steps of an RK method---such as $*\left(\bfOmega^{\rmh}\right)\otimes\bbP^{s}\left(T^{n}\right)$ or $*\left(\bfOmega^{\rmh}\right)\otimes\bbDP^{s - 1}\left(T^{n}\right)$.
+        \item  The test function spaces need not be identical to the trial function spaces (i.e. it being a \emph{Petrov}--Galerkin methods) and often won't be. This is natural with the odd order in time.
+        \item  The intention of this approach is typically \emph{not} to use a discretization where the number of DoFs in time scale to arbitrarily high degree, implying one must solve an extremely high dimension FE problem on all of $\bfOmega\otimes T^{n}$, but to pick discrete trial and test spaces in the Galerkin variational formulation that have a fixed, small number of layers of DoFs in time---$\calO[s]$ in the sense of the number of steps of an RK method---such as $*\!\left(\bfOmega^{\rmh}\right)\otimes\bbP^{s}\!\left(T^{n}\right)$ or $*\!\left(\bfOmega^{\rmh}\right)\otimes\bbDP^{s - 1}\!\left(T^{n}\right)$. For fixed $s$, one then derives an $s$-step timestepper over $T^{n}$. To increase the accuracy of the solution, either the number of DoFs in space can be increased, or the duration, $\delta t^{n}$ of the timestep can be reduced.
     \end{itemize}
     FET interpretations provide certain benefits over traditional RK techniques:
     \begin{itemize}
-        \item  Crucially, FET often provides variational formulations that align with those needed to prove structure-preserving properties directly.
+        \item  Crucially, FET often provides variational formulations that align with those needed to prove SP properties directly.
         \item  FET interpretations inherit much of the useful results and techniques of traditional spatial FEM, including:
         \begin{itemize}
             \item  Finite-element exterior calculus (FEEC).
@@ -21,7 +21,7 @@
             \item  Agency over bases for the time discretization with good orthogonality properties.
             \item  Easy extension to high order.
         \end{itemize}
-        \item  Solutions provided by FET are meaningful at all times. As noted in Section \ref{cha:FEM vs. PiC} this will be particularly useful in our case when interacting with the kinetic correction in the future. 
+        \item  Solutions provided by FET are meaningful at all times. As noted in Section \ref{cha:FEM vs. PiC} this will be particularly useful in our case when interacting with the kinetic correction in future work.
         \item  FET can be the perfect language for solving problems that are already posed on a space-time domain, such as:
         \begin{itemize}
             \item  Searching for periodic solutions.
@@ -36,7 +36,7 @@
       \begin{enumerate}
           \item  Define $\calU_{-}  :=  \{u  \in  \calU  :  u|_{t^{n}}  =  0\}$ (such that $\calU_{-}  <  \calU$).
           \item  Let $u_{0}  \in  \calU$ be an extension of the ICs $\widehat{u}_{0}$ to be supported the space-time domain, $\bfOmega\otimes T^{n}$.
-          \item  Decompose $u$ with a lifting of the ICs, as $u  :=  u_{0} + u_{-}$. When $u$ is written from here, it can be taken formally as a convenient shorthand for $u_{0} + u_{-}$.
+          \item  Decompose $u$ with a lifting of the ICs, as $u  :=  u_{0} + u_{-}$. When $u$ is written from here, it can be taken formally as shorthand for $u_{0} + u_{-}$.
       \end{enumerate}
       In weak form, one then seeks $u_{-}  \in  \calU_{-}$ such that,
       \begin{equation}\label{eqn:heat equation weak form}
@@ -51,7 +51,7 @@
       \begin{equation}
           \bbU^{\rmh}  :=  \widehat{\calU}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right)  <  \calU.
       \end{equation}
-      Consequently,
+      Consequently,\footnote{At equal order, $\bbP^{*}$ and $\bbDP^{*}$ are naturally equivalent over $T^{n}$. Were $T^{n}$ instead an interval mesh composed of more than 1 interval, they would differ. It is for this reason that we write $\bbU^{\rmh}$ here in terms of $\bbP^{s}$ and $\partial_{t}\bbU^{\rmh}$ in terms of $\bbDP^{s - 1}$. Were one to work over an interval mesh composed of multiple intervals, this distinction would be necessary, with $\bbDP^{s - 1}  =  \frac{\rmd}{\rmd t}\bbP^{s}$.}
       \begin{equation}
           \partial_{t}\bbU^{\rmh}  :=  \widehat{\calU}(\bfOmega)\otimes\bbDP^{s - 1}\left(T^{n}\right)  <  \partial_{t}\calU.
       \end{equation}
@@ -70,7 +70,7 @@
           u^{\rmh}(\bfx; t)  =  \sum_{j}\widehat{u}_{j}(\bfx)\phi_{j}(t),  &&
           v^{\rmh}(\bfx; t)  =  \sum_{i}\widehat{v}_{i}(\bfx)\varphi_{i}(t),
       \end{align}
-      for $\left(\widehat{u}_{j}\right)_{j}$, $\left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$. The Petrov--Galerkin-projected variational formulation then seeks $\left(\widehat{u}_{j}\right)_{j \neq 0}$ in $\widehat{\calU}$ such that $\forall  \left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$:
+      for certain $\left(\widehat{u}_{j}\right)_{j}$, $\left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$. The Petrov--Galerkin-projected variational formulation then seeks $\left(\widehat{u}_{j}\right)_{j \neq 0}$ in $\widehat{\calU}$ such that $\forall  \left(\widehat{v}_{i}\right)_{i}$ in $\widehat{\calU}$:
       \begin{align}
           \left\langle\sum_{i}\widehat{v}_{i}\varphi_{i}, \partial_{t}\left[\sum_{j}\widehat{u}_{j}\phi_{j}\right]\right\rangle_{\bfOmega\otimes T^{n}}  &=  - \frac{1}{\rmPe}\left\langle\nabla\left[\sum_{i}\widehat{v}_{i}\varphi_{i}\right], \nabla\left[\sum_{j}\widehat{u}_{j}\phi_{j}\right]\right\rangle_{\bfOmega\otimes T^{n}}  \\
           \sum_{i, j}\left\langle\widehat{v}_{i}, \widehat{u}_{j}\right\rangle_{\bfOmega}\langle\varphi_{i}, \partial_{t}\phi_{j}\rangle_{T^{n}}  &=  - \frac{1}{\rmPe}\sum_{i, j}\left\langle\nabla\widehat{v}_{i}, \nabla\widehat{u}_{j}\right\rangle_{\bfOmega}\langle\varphi_{i}, \phi_{j}\rangle_{T^{n}}
@@ -117,7 +117,7 @@
     \begin{equation}\label{eqn:heat equation auxiliary weak form}
         (\partial_{t}u  =)  \bbQ_{\partial_{t}\calU}[\partial_{t}u]  =  \frac{1}{\rmPe}\bbQ_{\partial_{t}\calU}[\Delta\bbQ_{\partial_{t}\calU}[u]].
     \end{equation}
-    This is modified slightly from (\ref{eqn:heat equation weak form}) by the introduction of the new $\bbQ_{\partial_{t}\calU}$ projection operator. This can be cast into a variational formulation by the introduction of an \emph{``auxiliary''} variable $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. One seeks $u_{-}  \in  \calU_{-}$, $\widetilde{u}  \in  \partial_{t}\calU$, such that:
+    This is modified slightly from (\ref{eqn:heat equation weak form}) by the introduction of the new $\bbQ_{\partial_{t}\calU}$ projection operator. This can be cast into a variational formulation by the introduction of an ``auxiliary'' variable $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. One seeks $u_{-}  \in  \calU_{-}$, $\widetilde{u}  \in  \partial_{t}\calU$, such that:
     \begin{align}
         &\forall  \widetilde{v}  \in  \partial_{t}\calU,  &  \langle\widetilde{v}, \partial_{t}u\rangle  &=  - \frac{1}{\rmPe}\langle\nabla\widetilde{v}, \nabla\widetilde{u}\rangle  \label{eqn:heat equation auxiliary variational form 1}  \\
         &\forall              v  \in  \partial_{t}\calU,  &                                0  &=  \langle v, \widetilde{u}\rangle - \langle v, u\rangle  \label{eqn:heat equation auxiliary variational form 2}
@@ -126,7 +126,7 @@
     
     When $\calU$ is a tensor product space of one in space and time, as is the case in the above example, (linear) operators in space, such as $\Delta$, and time, such as $\bbQ_{\partial_{t}\calU}$ when $\calU$ is such a tensor product space, commute. Thus, when $\calU$ is such a tensor product space, (\ref{eqn:heat equation auxiliary weak form}) and (\ref{eqn:heat equation weak form}) are equivalent.
 
-    One can use the weak form (\ref{eqn:heat equation auxiliary weak form}) directly to mimic the proof of energy dissipation in the continuous, strong formulation, to show this weak/variational formulations preserve the energy-dissipative structure of the continuous problem:
+    One can use the weak form (\ref{eqn:heat equation auxiliary weak form}) directly to mimic the proof of energy dissipation in the continuous, strong formulation, to show this weak/variational formulation preserves the energy-dissipative structure of the continuous problem:
     \begin{align}
         \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\rmE  \\
         &=  \int_{T^{n}}\frac{\rmd}{\rmd t}\left[\frac{1}{2}\int_{\bfOmega}u^{2}\right]  \\
@@ -139,8 +139,8 @@
 
     This approach both:
     \begin{itemize}
-        \item  Proves the energy-dissipation SP property both for the GL/CG-DG-in-time timestepper as constructed above, and a wider class of timesteppers for arbitrary $\calU$. 
-        \item  Explains the discrepancy between the energy dissipation and $1/\rmPe\cdot\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}$, since the dissipation is exactly this (potentially semi-)norm on the \emph{auxiliary} function, $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. For tensor product $\calU$, one can in fact write
+        \item  Proves the energy-dissipative SP property not only for the GL/CG-DG-in-time timestepper as constructed above, but also for a wider class of timesteppers for arbitrary $\calU$.
+        \item  Explains the discrepancy between the energy dissipation and $1/\rmPe\cdot\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2}$, since the dissipation is exactly this (semi-)norm on the \emph{auxiliary} function, $\widetilde{u}  =  \bbQ_{\partial_{t}\calU}[u]$. For tensor product $\calU$, one can in fact write
         \begin{equation}
             \rmE\left(t^{n + 1}\right) - \rmE\left(t^{n}\right)  =  - \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla u\|^{2} + \frac{1}{\rmPe}\int_{\bfOmega\otimes T^{n}}\|\nabla(\id - \bbQ_{\partial_{t}\calU})[u]\|^{2},
         \end{equation}

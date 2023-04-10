@@ -7,12 +7,6 @@
     For these equations, the former PiC approach has many benefits over classical PDE techniques:
     \begin{itemize}
         \item  {\bf Particle decoupling from linearity:} Whereas in traditional PiC models, the pseudo-particles interact directly with one another through a distinct EM field---analogous to nonlinear collision operators in the Boltzmann equations (\ref{eqn:Boltzmann equation})---pseudo-particle techniques for the linearized Boltzmann equations require no such coupling, due to the equations' linearity. Particles interact indirectly, via the fluid component. (See Figure \ref{fig:PiC decoupling})
-
-        This both:
-        \begin{itemize}
-            \item  Reduces the number of component-to-coupling information couplings from $\calO[n^{2}]$, in a classical direct PiC method, to $\calO[n]$, where $n$ is the number of particles in the pseudo-particle layer.
-            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for collisions. For a further discussion see Subsubsection \ref{cha:gyroaveraging}.
-        \end{itemize}
         
         \begin{figure}[!ht]
             \centering
@@ -72,10 +66,16 @@
             \caption{Illustration of how the coupling between the model components (fluids/particles) differs when using a PiC correction vs. a classical PiC model.}
             \label{fig:PiC decoupling}
         \end{figure}
-        
-        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions since. While classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist---for FEM for example, see \cite{Fix_Strang_1969, Strang_Fix_2011, Babuška_1972}---Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
 
-        \item  {\bf Non-local collision operators:} Theoretically, hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics.
+        This both:
+        \begin{itemize}
+            \item  Reduces the number of component-to-component information couplings from $\calO[n^{2}]$, in a classical direct PiC method, to $\calO[n]$, where $n$ is the number of particles in the pseudo-particle layer.
+            \item  Eases the application of gyroaveraging techniques, without needing a distinct handling for collisions. For a further discussion see Subsection \ref{cha:particle pushers}.
+        \end{itemize}
+        
+        \item  {\bf Infinite velocity domain:} Lagrangian techniques are preferable under such conditions. While classical Eulerian techniques for the solution of PDEs over infinite velocity domains exist---within FEM for example, see \cite{Fix_Strang_1969, Strang_Fix_2011, Babuška_1972}---Lagrangian techniques require no separate decision and analysis, which can often be relatively arbitrary.
+
+        \item  {\bf Non-local collision operators:} Hand-in-hand with the advantages for infinite velocity domains comes the advantages posed by PiC methods for linearized (local) collision operators, $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, that are non-local in velocity space, $\bfv$. Due to their ability to model both small- and large-angle collisions, non-local collision operators, such as fractional Laplacian models \cite{Cho_2015, Sakomoto_2016, Kiselev_Schmalian_2019} or those derived directly from the molecular chaos hypothesis from classical kinetic theory \cite{Lerner_Trigg_1991}, serve some of the most fundamental and accurate collision operator models in thermodynamics.
         
         Non-local terms pose a huge problem for traditional Eulerian PDE techniques, which rely on the PDE's locality for the creation of sparse, parallelizable matrix solves. This is not a problem for particle models however, where the non-locality can manifest simply as a stochastic process, with occasional larger-amplitude jumps in the velocity.
 
@@ -91,11 +91,11 @@
         \end{align*}
         This is the Fokker Planck--type PDE satisfied by the probability density function (PDF) of a skew-free 1D Lévy flight \cite{Chechkin_et_al_2008} with:
         \begin{align*}
-            \text{Stability parameter: } \alpha,  &&
+            \text{stability parameter: } \alpha,  &&
             \text{scale parameter: } c,           &&
             \text{location parameter: } \mu.
         \end{align*}
-        Its solution can therefore be modeled numerically through the use of a collection of pseudo-particles with velocity $v  =  V(t)$, each evolving according to the same Lévy flights. Example simulations of such flights for varying $\alpha$ are shown in Figure \ref{fig:Levy flight examples}. The increased non-locality of the operator for smaller $\alpha$ can be seen to manifest as an increased frequency of visibly larger jumps at smaller $\alpha$.
+        Its solution can therefore be modeled numerically through the use of a collection of pseudo-particles with velocity $v  =  V(t)$, each evolving according to the same Lévy flights. Example simulations of such flights for varying $\alpha$ are shown in Figure \ref{fig:Levy flight examples}. The increased non-locality of the operator for smaller $\alpha$ can be seen to manifest as an increased frequency of visibly larger jumps.
 
         \begin{figure}[!ht]
             \begin{subfigure}{0.5\textwidth}
@@ -122,11 +122,11 @@
             \label{fig:Levy flight examples}
         \end{figure}
 
-        To quantify why these jumps appear for smaller $\alpha$, consider an example such psseudo-particle with initial velocity $V(0)  =  v_{0}$. The PDF for its position at time $\tau  >  0$, $V(\tau)$, is given by the Lévy $\alpha$-stable distribution \cite{Lévy_1925, Mandelbrot_1960} with:
+        To quantify why these jumps appear for smaller $\alpha$, consider an example such pseudo-particle with initial velocity $V(0)  =  v_{0}$. The PDF for its position at time $\tau  >  0$, $V(\tau)$, is given by the Lévy $\alpha$-stable distribution \cite{Lévy_1925, Mandelbrot_1960} with:
         \begin{align*}
-            \text{Stability parameter: } \alpha,            &&
+            \text{stability parameter: } \alpha,            &&
             \text{scale parameter: } \sqrt[\alpha]{\tau}c,  &&
-            \text{location parameter: } v_{0)} + \tau\mu.
+            \text{location parameter: } v_{0} + \tau\mu.
         \end{align*}
         Equivalently, for initial conditions (ICs) $f|_{t = 0}  =  \delta[v - v_{0}]$ where $\delta$ is the 1D $\delta$ function, the solution $f|_{t = \tau}$ to (\ref{eqn:reduced Boltzmann equation}) at time $t = \tau$ is given by the same distribution. These large jumps can be interpreted as the manifestation of the tail behavior of these distributions, with heavier tails for smaller $\alpha$:
         \begin{itemize}
@@ -137,7 +137,7 @@
             \item  For $\alpha  <  2$, the moments $\bbE\left[|V(\tau)|^{\theta}\right]$ exist \emph{only} for $\theta  <  \alpha$.
         \end{itemize}
         
-        \item  {\bf Regions of high and low thermalization:} Pseudo-particle methods need only model the function where it is largely non-zero. Similarly, for functions that exhibit certain regions of comparatively large and small values, pseudo-particle methods can inherently focus more computational processing power to those regions of larger value, and less to those regions of smaller value.
+        \item  {\bf Regions of high and low thermalization:} Pseudo-particle methods need only model the function where it is largely non-zero. Similarly, for functions that exhibit certain regions of comparatively large and small values, pseudo-particle methods can inherently focus more computational power to those regions of larger $\delta\!f_{\pm}$, and less to those regions of smaller $\delta\!f_{\pm}$.
         
         For plasmas, one might expect different regions where the plasma is:
         \begin{itemize}

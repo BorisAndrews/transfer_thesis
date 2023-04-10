@@ -1,5 +1,5 @@
 \chapter{Fluid Component}\label{cha:fluid component}
-    Consider now the standalone fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$ (and time, $t$) only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specified in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
+    Consider now the standalone fluid component of the $\delta\!f$ decomposition (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) neglecting terms deriving from the $\delta\!f_{\pm}$ corrections. Since we are considering a system over space, $\bfx$, and time, $t$, only, $\nabla_{\bfx}$ shall be denoted as simply $\nabla$. Terms of negligible order as specified in (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) shall also be ignored.
     
     To complete the system, make the following approximations for the spatially dissipative terms deriving from the collision operators:
     \begin{align}
@@ -21,7 +21,7 @@
     such that $\tr[\bftau[\bfu]]  =  0$. The assumption that the stress tensor here is predominantly trace-free is referred to as the \emph{``Stokes hypothesis''}. \cite{Stokes_1845} Its validity is discussed in \cite{Vincenti_Kruger_1975}.
 
     \begin{remark}[Inclusion of bulk viscosity]
-        In hindsight, I have no reason not to include bulk viscous effects, proportional to $\nabla[\rho_{\rmM}\nabla\cdot\bfu]$. They have very little effect on the analysis. It would be counterproductive for me to go through and re-introduce it throughout this section, however in future work I will elect not to omit it.
+        In hindsight, I have no reason \emph{not} to include bulk viscous effects, proportional to $\nabla[\rho_{\rmM}\nabla\cdot\bfu]$; they have very little effect on the analysis. It would be counterproductive for me to go through and re-introduce them throughout this section now, however in future work I will elect not to omit them.
     \end{remark}
 
     Under the assumption of non-relativistic velocity scales, $\rmM  \ll  1$, the material fluid equations (\ref{eqn:PiC-coupled mass conservation}--\ref{eqn:PiC-coupled pressure conservation}) then take the forms:
@@ -31,7 +31,7 @@
                 \partial_{t}\bfp  &=  - \nabla\cdot\left[\rho_{\rmM}\bfu^{\otimes 2}\right] - \nabla p + \frac{2}{\beta}\bfj\wedge\bfB + \frac{1}{\rmRef}\nabla\cdot[\rho_{\rmM}\bftau[\bfu]]  \\
         \frac{3}{2}\partial_{t}p  &=  - \frac{3}{2}\nabla\cdot[p\bfu] - p\nabla\cdot\bfu + \frac{2}{\beta}\bfj\cdot(\bfE + \bfu\wedge\bfB) + \frac{2}{\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho_{\rmM}\nabla\theta]
     \end{align}
-    Due to the non-relativistic assumption, $\rho_{\rmC}$ is no longer present in these equations, i.e. the plasma is functionally \emph{``quasineutral''}.
+    Due to the non-relativistic assumption, $\rho_{\rmC}$ is no longer present in these equations, i.e. the plasma is functionally quasineutral.
 
     These equations are coupled with Maxwell's equations (\ref{eqn:PiC-coupled Maxwell's equations transient}--\ref{eqn:PiC-coupled Maxwell's equations steady-state}) whereby under the same non-relativistic assumption, $\rmM  \ll  1$:
     \begin{align}
@@ -41,14 +41,14 @@
          \nabla\cdot\bfB  &=  0.
     \end{align}
     
-    This system is completed by the thermal equilibrium identity (\ref{eqn:thermal equilibrium identity}), which can be interpreted here as an identity for $\bfj$. Assuming the LB collision operator model from Definition \ref{def:LB collision operators}, and taking again the non-relativistic assumption, $\rmM  \ll  1$, we derive the following identity:
+    This system is completed by the thermal equilibrium identity (\ref{eqn:thermal equilibrium identity}), which can be interpreted here as an identity for $\bfj$. Assuming the LB collision operator model from Definition \ref{def:LB collision operators}, and taking again the non-relativistic assumption, $\rmM  \ll  1$,
     \begin{equation}
-        \frac{1}{\rmRem}\rho_{\rmM}\bfj  =  \bfE + \bfu\wedge\bfB - \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB
+        \frac{1}{\rmRem}\rho_{\rmM}\bfj  =  \bfE + \bfu\wedge\bfB - \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB,
     \end{equation}
-    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants also, defined:
+    where the magnetic Reynolds number, $\rmRem$, and Hall number, $\rmRH$, are dimensionless constants defined:
     \begin{align}
         \rmRem  :=  \frac{2\rmKn_{+-}}{\beta\rmCy\!_{+}^{2}},  &&
-        \rmRH   :=  \frac{2}{\beta\rmCy\!_{+}}
+        \rmRH   :=  \frac{2}{\beta\rmCy\!_{+}}.
     \end{align}
 
     This system can be reduced by solving for $\rho_{\rmC}$, $\bfj$, $\bfE$ as:
@@ -57,7 +57,7 @@
                \bfj  =  \nabla\wedge\bfB,  &&
                \bfE  =  \frac{1}{\rmRem}\rho_{\rmM}\bfj - \bfu\wedge\bfB + \rmRH\frac{1}{\rho_{\rmM}}\bfj\wedge\bfB,
     \end{align}
-    and eliminating $\bfp  =  \rho_{\rmM}\bfu$, $p  =  \rho_{\rmM}\theta$ to give the final compressible MHD system in $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$ only as shown in Figure \ref{fig:compressible strong form}. Initial conditions (ICs) are provided on $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$. Gauss's law, $\nabla\cdot\bfB  =  0$ is enforced on the initial conditions (ICs) at $t  =  0$ only, and holds for later $t  >  0$ by Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$. (See Section \ref{cha:structures})
+    and eliminating $\bfp  =  \rho_{\rmM}\bfu$, $p  =  \rho_{\rmM}\theta$ to give the final compressible MHD system in $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$ only as shown in Figure \ref{fig:compressible strong form}. Initial conditions (ICs) are provided on $\rho_{\rmM}$, $\bfu$, $\theta$, $\bfB$. Gauss's law, $\nabla\cdot\bfB  =  0$ is enforced on the ICs at $t  =  0$ only, and holds for later $t  >  0$ by Faraday's law, $\partial_{t}\bfB  =  - \nabla\wedge\bfE$. (See Section \ref{cha:structures})
 
     \begin{figure}
         \centering
@@ -80,9 +80,9 @@
         \label{fig:compressible strong form}
     \end{figure}
 
-    In the ideal limit, as $\rmRef, \rmRem  \rightarrow  \infty$, the viscous and Ohmic heating terms, $\frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}$ and $\frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2}$ respectively, are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more accurate and rich structure for the analysis and discretization.
+    In the ideal limit, as $\rmRef, \rmRem  \rightarrow  \infty$, the viscous and Ohmic heating terms, $\frac{2}{\beta\rmRef}\rho_{\rmM}\|\bftau[\bfu]\|^{2}$ and $\frac{2}{\beta\rmRem}\rho_{\rmM}\|\nabla\wedge\bfB\|^{2}$ respectively, are negligible. Despite considering turbulent, high-Reynolds systems, they are left in the system, as they give exact energy conservation for general $\rmRef$, $\rmRem$, giving a more accurate and rich structure for the analysis and discretization. In application however, it may be more efficient to omit them.
 
-    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{Laakmann_Hu_Farrell_2022}, incorporating compressibility, a necessary factor in some form for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}). (See Figure \ref{fig:incompressible strong form}) This work therefore offers a good starting point therefore for the analysis, discretization and preconditioning of the compressible system.
+    This system resembles the \emph{incompressible} Hall MHD system presented in \cite{Laakmann_Hu_Farrell_2022}, incorporating compressibility, a necessary factor in some form for kinetic effects, through the inclusion of the energy equation (\ref{eqn:energy conservation}). (See Figure \ref{fig:incompressible strong form}) \cite{Laakmann_Hu_Farrell_2022} and the works leading towards it therefore offer a good starting point for the analysis, discretization and preconditioning of the compressible system.
 
     \begin{figure}
         \centering
@@ -101,7 +101,7 @@
         \label{fig:incompressible strong form}
     \end{figure}
 
-    Since $\rho_{\rmC}$ is eliminated from the system, we shall henceforth write $\rho_{\rmM}$ as simply $\rho$.
+    Since $\rho_{\rmC}$ is eliminated from the system, $\rho_{\rmM}$ shall henceforth be denoted as $\rho$.
 
     
     \input{2 - fluid component/0 - preliminaries and notation/main.tex}

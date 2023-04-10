@@ -5,9 +5,7 @@
                        \rho\partial_{t}\bfu  &=  - \rho\bfu\cdot\nabla\bfu - \nabla[\rho\theta] + \frac{1}{\rmRef}\nabla\cdot[\rho\bftau]  \label{eqn:compressible NS momentum equation}  \\
         \frac{3}{2}\rho\partial_{t}\theta  &=  - \frac{3}{2}\rho\bfu\cdot\nabla\theta - \rho\theta\nabla\cdot\bfu + \frac{1}{2\rmRef}\rho\|\bftau[\bfu]\|^{2} + \frac{1}{\rmPe}\nabla\cdot[\rho\nabla\theta]  \label{eqn:compressible NS energy equation}
     \end{align}
-    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$.
-    
-    $\bftau$ is the deviatoric strain as in (\ref{eqn:strain equation}).
+    with homogeneous BCs that are Dirichlet in $\bfu$ ($\bfzero  =  \bfu|_{\bfGamma}$) and Neumann in $\theta$ ($0  =  \nabla\theta\cdot\bfn|_{\bfGamma}$), alongside ICs on $\rho$, $\bfu$, $\theta$. $\bftau$ is the deviatoric strain as defined in (\ref{eqn:strain equation}).
 
     \shortline
 
@@ -17,18 +15,12 @@
         \begin{equation}\label{eqn:compressible NS energy definition}
             \rmE[\rho, \bfu, p](t)  :=  \int_{\bfOmega}\left[\frac{1}{2}\rho\|\bfu\|^{2} + \frac{3}{2}\rho\theta\right],
         \end{equation}
-        with
-        \begin{equation}
-            \frac{\rmd}{\rmd t}\rmE  =  0.
-        \end{equation}
+        with $\frac{\rmd}{\rmd t}\rmE  =  0$.
         \item  Mass,
         \begin{equation}\label{eqn:compressible NS mass definition}
             \rmM[\rho](t)  :=  \int_{\bfOmega}\rho,
         \end{equation}
-        with
-        \begin{equation}
-            \frac{\rmd}{\rmd t}\rmM  =  0.
-        \end{equation}
+        with $\frac{\rmd}{\rmd t}\rmM  =  0$.
     \end{itemize}
 
     \shortline
@@ -62,7 +54,7 @@
     \begin{remark}[Alternative SP weak formulations]
         While I can \emph{theoretically} construct SP timesteppers for the above system in $\sigma$, $\bfr$, $\theta$ and $\bfu$ only:
         \begin{itemize}
-            \item  They have a very multiplicative order, which I suspect (although I haven't yet had the chance to run any tests) will vastly reduce the timestepper's computational efficiency.
+            \item  They have a very high multiplicative order, which I suspect (although I haven't yet had the chance to run any tests) will vastly reduce the timestepper's computational efficiency.
             \item  The $\sigma^{2}\partial_{t}\theta$ term in (\ref{eqn:compressible NS sqrt energy equation}) has no nice closed form in a CG-DG-in-time discretization, such as was presented for the incompressible case above, in terms of parameters from the GL polynomials, as far as I can see.
         \end{itemize}
         It is for this reason that, instead of considering the system in the fewest variables, (\ref{eqn:r definition}--\ref{eqn:compressible NS sqrt energy equation}) in $\sigma$, $\bfr$, $\theta$ and $\bfu$, I am going to elect to consider one, for now, in more variables than is needed, by re-introducing $\rho = \sigma^{2}$. It is my hope that this will benefit, not hinder, the timestepper's computational efficiency.
@@ -122,7 +114,7 @@
     where:
     \begin{itemize}
         \item  $\rho_{*}$, $\theta_{*}$ can be taken as either $\rho$, $\theta$ or projections thereof
-        \item  $\bfp_{*}$ represents the momentum, which one represent in any user-defined form in terms of $\sigma$, $\rho$, $\bfu$, $\bfr$ and projections thereof
+        \item  $\bfp_{*}$ represents the momentum, which one can represent in any user-defined form in terms of $\sigma$, $\rho$, $\bfu$, $\bfr$ and projections thereof
     \end{itemize}
     without affecting the resultant timestepper's SP properties.
 
@@ -181,7 +173,7 @@
     \line
 
     \begin{example}[CG-DG-in-time conservative timestepper for compressible NS]
-        Suppose the spaces take the following CG-DG-in-time tensor product forms, for some order in time, $s$:
+        Suppose the spaces take the following CG-DG-in-time tensor-product forms, for some order in time, $s$:
         \begin{align}
             \calD  =  \Theta  =  \widehat{\calD}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),  &&
                        \calR  =  \widehat{\calR}(\bfOmega)\otimes\bbP^{s}\left(T^{n}\right),
@@ -223,7 +215,7 @@
         \end{align}
         for $(a_{ij})_{ij}$ defined as in (\ref{eqn:a_ij definition}).
 
-        Choosing $\rho_{*} = \bbQ_{\partial_{t}\calD}[\rho]$, $\theta_{*} = \bbQ_{\partial_{t}\Theta}[\theta]$ and $\bfp_{*} = \bbQ_{\partial_{t}\calD}[\rho]\bfu$, the resultant can then be stated in the weak form, $\forall i$:
+        Choosing $\rho_{*} = \bbQ_{\partial_{t}\calD}[\rho]$, $\theta_{*} = \bbQ_{\partial_{t}\Theta}[\theta]$ and $\bfp_{*} = \bbQ_{\partial_{t}\calD}[\rho]\bfu$, the resultant timestepper can be written in the following weak form, $\forall i$:
         \begin{align}
                 (\delta\rho_{i}^{n}
                 =)
@@ -258,7 +250,7 @@
         \begin{equation}
             w_{i}^{jkl}  :=  \frac{\int_{t^{n}}^{t^{n + 1}}\phi^{n}_{i}\phi^{n}_{j}\phi^{n}_{k}\phi^{n}_{l}}{\int_{t^{n}}^{t^{n + 1}}(\phi^{n}_{i})^{2}}
         \end{equation}
-        When $s = 1$, $w_{i}^{jkl} = \delta_{ij}\delta_{ik}\delta_{il}$, such that this system reduces to exactly the GL method, i.e. Crank--Nicolson. For $s \geq 2$ however, $w_{i}^{jkl} \neq \delta_{ij}\delta_{ik}\delta_{il}$ implying the higher order timestepper differs from the direct, classical GL method, in the convective and viscous heating terms.
+        When $s = 1$, $w_{i}^{jkl} = \delta_{ij}\delta_{ik}\delta_{il}$, such that this system again reduces to exactly the $1$-step GL method, i.e. Crank--Nicolson. For $s \geq 2$ however, $w_{i}^{jkl} \neq \delta_{ij}\delta_{ik}\delta_{il}$ implying the higher order timestepper differs from the direct, classical GL method, in the convective and viscous heating terms.
     \end{example}
 
     \line

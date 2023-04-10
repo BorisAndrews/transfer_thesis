@@ -38,7 +38,7 @@
         \label{fig:incompressible stationary-state weak form}
     \end{figure}
 
-    \BA{(What conformity does this require?)} 4 equations in this model are linear: conservation of mass, (\ref{eqn:mass conservation}), and Maxwell's equations, (\ref{eqn:Ampère's law}-\ref{eqn:Gauss's law}). Ensuring these properties hold \emph{strongly} (i.e. pointwise) is known to lead to more physically accurate and representative numerical results. \BA{[Ref, ...]} \BA{(Definitely want more than just this to talk about the motivation, etc. Would be nice to mention e.g. GEMPIC and over evidence that exact enforcement of these conditions is a good idea.)} As is done in \cite{Laakmann_Farrell_Mitchell_22}, this weak formulation allows one to ensure all but Ampère's law hold strongly, provided certain subspace conditions hold on the function spaces, by considering certain test functions: \BA{(Where \emph{precisely} in \cite{Laakmann_Farrell_Mitchell_22}?)}
+    \BA{(What conformity does this require?)} 4 equations in this model are linear: conservation of mass, (\ref{eqn:mass conservation}), and Maxwell's equations, (\ref{eqn:Ampère's law}-\ref{eqn:Gauss's law}). Ensuring these properties hold \emph{strongly} (i.e. pointwise) is known to lead to more physically accurate and representative numerical results. \BA{[Ref, ...]} \BA{(Definitely would like more than just this to talk about the motivation, etc. Would be nice to mention e.g. GEMPIC and over evidence that exact enforcement of these conditions is a good idea.)} As is done in \cite{Laakmann_Farrell_Mitchell_22}, this weak formulation allows one to ensure all but Ampère's law hold strongly, provided certain subspace conditions hold on the function spaces, by considering certain test functions: \BA{(Where \emph{precisely} in \cite{Laakmann_Farrell_Mitchell_22}?)}
     \begin{center}\begin{tabular}{ c | c | c }
         Equation  &  Test function  &  Subspace condition  \\
         \hline\hline
@@ -123,7 +123,7 @@
     \begin{theorem}[Energy Balance in the Stationary-State Weak Formulation]
         Provided $\calU  \leqslant  \calM$ and $1  \in  \calD$, the boundary fluxes of energy in exact balance, i.e.
         \begin{equation}
-            0  =  \oint_{\bfGamma}\left[- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn.
+            0  =  \int_{\bfGamma}\left[- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right]\cdot\bfn.
         \end{equation}
     \end{theorem}
     \begin{proof}
@@ -133,7 +133,7 @@
     \begin{theorem}[Helicity Balance in the Weak Formulation]
         Provided $\calB  \leqslant  \calJ$, dissipation and boundary flux of magnetic helicity are in exact balance, i.e.
         \begin{equation}
-            0  =  \frac{2}{\rmRem}\int_{\bfOmega}\bfB\cdot\bfj + 2\oint_{\bfGamma}(\bfE\wedge\bfA)\cdot\bfn,
+            0  =  \frac{2}{\rmRem}\int_{\bfOmega}\bfB\cdot\bfj + 2\int_{\bfGamma}(\bfE\wedge\bfA)\cdot\bfn,
         \end{equation}
         where $\bfA$ is a magnetic potential such that $\bfB  =  \nabla\wedge\bfA$.
     \end{theorem}

@@ -4,7 +4,7 @@
     \shortline
 
     In particular, we highlight works by Chacón, Chen et al. \cite{Chen_Chacón_Barnes_2011, Chacón_Chen_Barnes_2013, Chen_Chacón_2014, Chen_Chacón_2015} which
-     have developed timesteppers directly on $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ with SP properties for certain pseudo-particle structures highlighted in the gyrokinetic analysis. These particle pushers derive from Crank--Nicolson timestepping schemes. Using notation from the timesteppers in Chapter \ref{cha:fluid component} over the timestep $T^{n} = \left(t^{n}, t^{n + 1}\right]$ of duration $\delta t^{n}$:
+     have developed timesteppers directly on $\bfX_{\pm}^{(i)}$, $\bfV_{\pm}^{(i)}$ with SP properties for certain pseudo-particle structures highlighted in the gyrokinetic analysis. These particle pushers derive from Crank--Nicolson timestepping schemes. Using notation from the timesteppers in Chapter \ref{cha:fluid component} over the timestep $T^{n} = \left(t^{n}, t^{n + 1}\right]$ of duration $\delta t^{n}$, one seeks $\bfdelta\bfX^{n}$, $\bfdelta\bfV^{n}$ to satisfy:
     \begin{align}
         \bfdelta\bfX^{n}
             =  \bfV^{n + \frac{1}{2}},  &&
@@ -44,13 +44,13 @@
                 + \frac{1}{\left(B^{n + \frac{1}{2}}\right)\!^{2}}\bfE^{n + \frac{1}{2}}\wedge\bfB^{n + \frac{1}{2}}  \\
                 \pm \frac{1}{|\rmCy_{\pm}|}\bfV^{n + \frac{1}{2}}\wedge\left(\frac{1}{\delta t^{n}}\left(\frac{1}{\left(B^{n + 1}\right)^{2}}\bfB^{n + 1} - \frac{1}{\left(B^{n}\right)^{2}}\bfB^{n}\right)\right) + \calO\left[\left(\delta t^{n}\right)^{2}\right],
         \end{multline}
-        for $V_{\parallel}$, $\bfb_{\parallel}$ defined similarly to as was done in the gyrokinetic model. Thus, both the motion of the gyrocenter along the magnetic field lines, and the dominant $\bfE\wedge\bfB$ drift are captured, up to a notable $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ error. The ability, or extent of ability, of this timestepper to capture the gyrocenter motion is referred to as \emph{``asymptotic preservation''} (AP).\footnote{``Asymptotic preservation'' is defined more rigorously in \cite{Ricketson_Chacón_2020}.}
+        for $V_{\parallel}^{n + \frac{1}{2}}$, $\bfb_{\parallel}^{n + \frac{1}{2}}$ defined as in the gyrokinetic model. Both the motion of the gyrocenter along the magnetic field lines and the dominant $\bfE\wedge\bfB$ drift are thus captured, up to a notable $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ error. The ability, or extent of ability, of this timestepper to capture the gyrocenter motion is referred to as \emph{``asymptotic preservation''} (AP).\footnote{``Asymptotic preservation'' is defined more rigorously in \cite{Ricketson_Chacón_2020}.}
     \end{itemize}
 
     \shortline
 
     \begin{remark}[Direct particle pushers from FET]
-        Recall from Section \ref{cha:SP timesteppers} that the Crank--Nicolson is the lowest order GL timestepper, and from Sections \ref{cha:SP timesteppers} and \ref{cha:Navier--Stokes} that GL(-like) methods can be derived from CG-DG-in-time FET discretization, giving motivation for the strong SP properties. It strikes me that these Crank--Nicolson timesteppers could be expressed in the language of FET too, just as was done for the SP discretizations of the fluid component.
+        Recall from Section \ref{cha:SP timesteppers} that the Crank--Nicolson timestepper is the lowest order GL timestepper, and from Sections \ref{cha:SP timesteppers} and \ref{cha:Navier--Stokes} that GL(-like) methods can be derived from CG-DG-in-time FET discretization, giving motivation for the origins of these strong SP properties. It strikes me that these Crank--Nicolson timesteppers could be expressed in the language of FET too, just as was done for the SP discretizations of the fluid component.
 
         Using the same notation as in Chapter \ref{cha:fluid component}, I have had some luck using weak formulations in time wherein one seeks $\bfX_{-} \in \calX_{-}$, $\bfV_{-} \in \calV_{-}$ such that:
         \begin{align}
@@ -74,11 +74,11 @@
                 + \frac{1}{B^{2}}\bfE\wedge B\widetilde{\bfb}_{\parallel}
                 \pm \frac{1}{|\rmCy_{\pm}|}\bfV\wedge\frac{\rmd}{\rmd t}\!\left[\frac{1}{B^{2}}\bfB\right]\right]
         \end{align}
-        for $\widetilde{V}_{\parallel}  :=  \widetilde{\bfb}_{\parallel}\cdot\bbQ_{\rmd\calV/\rmd t}[\bfV]$, the latter result holding provided $\{{T^{n}} \rightarrow 1\}\otimes\bbR^{3} \subseteq \rmd\calX/\rmd t$, i.e. $\rmd\calX/\rmd t$ contains as elements the constant-in-time basis functions for $\bbR^{3}$.
+        for $\widetilde{V}_{\parallel}  :=  \widetilde{\bfb}_{\parallel}\cdot\bbQ_{\rmd\calV/\rmd t}[\bfV]$, the latter result holding provided $\{{T^{n}} \rightarrow 1\}\otimes\bbR^{3}  \leqslant  \rmd\calX/\rmd t$, i.e. $\rmd\calX/\rmd t$ contains as elements the constant-in-time basis functions for $\bbR^{3}$.
 
-        Whether this weak formulation is computationally tractable is a different question. The corresponding variational form requires the exact evaluation of integrals over $T^{n}$. Using the trapezium rule to approximate these integrals returns us to the classical Crank--Nicolson timesteppers of Chacón, Chen et al., introducing the $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ errors in the gyrocenter motion result. This is all very much work in progress.
+        Whether this weak formulation is computationally tractable is another prominent question that I have yet to tackle. The corresponding variational form requires the exact evaluation of integrals over $T^{n}$. These integrals can naturally be evaluated up to arbitrary accuracy to give arbitrary SP/AP of arbitrarily high accuracy too. Using the trapezium rule to approximate these integrals returns us to the classical Crank--Nicolson timesteppers of Chacón, Chen et al., introducing the $\calO\left[\left(\delta t^{n}\right)^{2}\right]$ errors in the gyrocenter motion result.
 
-        It would be great if these ideas of SP(/AP) particle pushers could \emph{also} derive from FET, as this would offer some hope that, in the future, FET could be used directly on the full hybrid model to derive hybrid FEM-PiC timesteppers with SP properties.
+        It would be great if these ideas of SP(/AP) particle pushers could derive from FET, just as was the case for the SP timesteppers in the fluid component, as this would offer some hope that in future work, FET could be used directly on the full hybrid model to derive hybrid FEM-PiC timesteppers with SP properties.
     \end{remark}
 
     \begin{remark}[Incorporating gyration-induced drifts within the FET framework]

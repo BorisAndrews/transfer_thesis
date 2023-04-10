@@ -1,9 +1,9 @@
 \chapter{Introduction: Plasmas and Tokamak Plasmas}
-    Nuclear fusion energy has the potential to provide a nearly unlimited source of clean and safe energy. Fusion reactions do not produce harmful greenhouse gases or long-lived radioactive waste and provide no risk of meltdown, making it a sustainable solution to meet the world's growing demand for energy, from a stable and renewable source: hydrogen (and its isotopes). With the world's energy demands continuously growing, fusion energy presents an attractive option for meeting these demands in a safe and sustainable manner.
+    Nuclear fusion energy has the potential to provide a nearly unlimited source of clean and safe energy. Fusion reactions do not produce harmful greenhouse gases or long-lived radioactive waste and provide no risk of meltdown, and consequently offer a sustainable solution for meeting the world's growing demand for energy from a stable and renewable source: hydrogen (and its isotopes). With the world's energy demands continuously growing, fusion energy presents an attractive option for meeting these demands.
 
     \shortline
       
-    Tokamaks---devices that use strong magnetic fields to contain and control plasmas at exceedingly high temperatures in order to achieve fusion---have proven over the past decades to be an effective leading option for producing and sustaining fusion. Unlike other similar devices, such as stellarators or Z-pinch devices, tokamaks have a relatively simple and well-studied  design with comparatively straightforward engineering, making them easier to scale up to commercial-scale reactors. With its first plasma scheduled for late 2025 \cite{ITER_schedule}, the International Thermonuclear Experimental Reactor (ITER) will be the world's largest tokamak \cite{Meade_2009, ITER_plan}, building towards DEMO: a proposed class of demonstration tokamak, with a target for commercial operation in the 2050s.
+    Magnetic confinement reactors---devices that use strong magnetic fields to contain and control plasmas at exceedingly high temperatures in order to achieve fusion---have proven to be an effective leading option for producing and sustaining fusion over recent decades. Unlike other types of magnetic confinement reactors such as stellarators or Z-pinch devices, tokamaks have a relatively simple and well-studied design with comparatively straightforward engineering, making them easier to scale up to commercial-scale reactors. Under construction in southern France \cite{Claessens_2019}, the International Thermonuclear Experimental Reactor (ITER) will be the world's largest tokamak \cite{Meade_2009, ITER_plan}, building towards DEMO: a proposed class of demonstration tokamak, with a target for commercial operation in the 2050s.
 
     Because of these factors, tokamaks have received extensive funding and support from governments and private organizations around the world, making them potentially the most widely researched and developed fusion technology.
 
@@ -17,14 +17,14 @@
 
     \shortline
 
-    The physical and numerical modeling of plasmas is a crucial area of study for tokamaks because it helps to understand and predict the behavior of the hot plasma in the containment vessel. The plasma must be maintained at high temperatures and densities in order to achieve fusion, and understanding its behavior is essential for optimizing the conditions in the tokamak and improving the fusion efficiency. Plasma modeling allows the simulation of various scenarios, such as changes in the magnetic fields or the heating methods used, and the observation of how these affects the plasma, allowing researchers and engineers to make informed decisions about how to increase the energy yield.
+    The physical and numerical modeling of plasmas are crucial areas of study for tokamaks, as they aid in understanding and predicting the behavior of the hot plasma within the vessel. To achieve fusion, the plasma must be maintained at extremely high temperatures. Understanding its behavior is essential for optimizing the conditions in the tokamak and improving the fusion efficiency. Plasma modeling allows the simulation of various scenarios, such as changes in the magnetic fields or the heating methods used, and the observation of how these affect the plasma, allowing researchers and engineers to make informed decisions about how to increase the energy yield.
 
     In addition, plasma modeling helps to identify and resolve potential problems that may arise during the fusion reaction, such as instabilities in the plasma or unwanted interactions with the chamber walls. By using computer simulations, these issues can be identified and resolved before they occur outside the simulation, making the process safer and more efficient.
     
     \shortline
 
     \begin{remark}[Addendum]
-        For a detailed introduction to plasmas and their modeling, and the great difficulties these pose in tokamak-like environments, I have a more detailed addendum available at \cite{addendum} which is currently a work in progress in parts. I have chosen to omit this in this document for brevity.
+        For a detailed introduction to plasmas and their modeling, and the great difficulties these pose in tokamak-like environments, I am currently working on a more detailed addendum, available at \cite{addendum}, currently a work in progress in parts. I have chosen to omit this in this document for brevity.
         
         This thesis shall make use only of the definitions and identities that follow, with all in a non-dimensionalized form.
     \end{remark}
@@ -54,58 +54,58 @@
                 \beta  \approx  4.249\ldots 10^{- 3}
             \end{equation}
 
-            \item  Knudsen numbers, $\rmKn_{\pm_{1}\pm_{2}}$, satisfying:
+            \item  Interphase Knudsen numbers, $\rmKn_{\pm_{1}\pm_{2}}$, satisfying:
             \begin{itemize}
-              \item  The dominant balance relations:
+              \item  The dominant balance relations,
               \begin{equation}
-                  \max\{\rmKn_{\pm\pm},  \rmKn_{\pm\mp}\}  =  |\rmCy\!_{\pm}|
+                  \max\{\rmKn_{\pm\pm},  \rmKn_{\pm\mp}\}  =  |\rmCy\!_{\pm}|.
               \end{equation}
               
-              \item  The consistency relation:
+              \item  The consistency relation,
               \begin{equation}
-                  \rmKn_{+-}  =  \alpha\rmKn_{-+}
+                  \rmKn_{+-}  =  \alpha\rmKn_{-+}.
               \end{equation}
             \end{itemize}
             
-            \item  Fluid Reynolds numbers, ${\rmRef}_{\pm_{1}\pm_{2}}$
+            \item  Fluid Reynolds numbers, ${\rmRef}_{\pm_{1}\pm_{2}}$.
         \end{itemize}
 
         \item  The non-dimensionalized terms: 
         \begin{itemize}
-            \item  Position and velocity vectors, $\bfx, \bfv  \in  \bbR^{3}$ respectively
+            \item  Position and velocity vectors, $\bfx, \bfv  \in  \bbR^{3}$ respectively.
             
-            \item  Time, $t  \in  \bbR$
+            \item  Time, $t  \in  \bbR$.
             
-            \item  Electric and magnetic fields, $\bfE(\bfx; t), \bfB(\bfx; t)  \in  \bbR^{3}$ respectively
+            \item  Electric and magnetic fields, $\bfE(\bfx; t), \bfB(\bfx; t)  \in  \bbR^{3}$ respectively.
             
-            \item  Phase-specific (smoothed) particle distribution functions, $f_{\pm}(\bfx, \bfv; t)  \in  \bbR$
+            \item  Phase-specific particle distribution functions, $f_{\pm}(\bfx, \bfv; t)  \in  \bbR$.
             
             \item  Collision operators, $\bfC_{\pm_{1}\pm_{2}}[f_{\pm_{1}}, f_{\pm_{2}}](\bfx, \bfv; t)  \in  \bbR^{3}$, decomposing into dominant local and non-dominant non-local operators, $\bfC_{\pm_{1}\pm_{2}}^{(0)}[f_{\pm_{1}}|_{\bfx, \bfv; t}, f_{\pm_{2}}|_{\bfx, \bfv; t}](\bfx, \bfv; t),$ \\ $\bfdelta\bfC_{\pm_{1}\pm_{2}}[f_{\pm_{1}}, f_{\pm_{2}}](\bfx, \bfv; t)  \in  \bbR^{3}$ respectively, as
             \begin{equation}
-                \bfC_{\pm_{1}\pm_{2}}  =  \bfC_{\pm_{1}\pm_{2}}^{(0)} + \frac{1}{\rmKn_{\pm_{1}\pm_{2}}{\rmRef}_{\pm_{1}\pm_{2}}}\bfdelta\bfC_{\pm_{1}\pm_{2}}
+                \bfC_{\pm_{1}\pm_{2}}  =  \bfC_{\pm_{1}\pm_{2}}^{(0)} + \frac{1}{\rmKn_{\pm_{1}\pm_{2}}{\rmRef}_{\pm_{1}\pm_{2}}}\bfdelta\bfC_{\pm_{1}\pm_{2}}.
             \end{equation}
 
             \item  Plasma mass and momentum density, $\rho_{\rmM}(\bfx; t)  \in  \bbR$ and $\bfp(\bfx; t)  \in  \bbR^{3}$ respectively, defined:
             \begin{align}
                 \rho_{\rmM}  :=  \int_{\bfv}f_{+},  &&
-                       \bfp  :=  \int_{\bfv}f_{+}\bfv
+                       \bfp  :=  \int_{\bfv}f_{+}\bfv.
             \end{align}
 
-            \item  Plasma pressure, $p(\bfx; t)  \in  \bbR$, defined:
+            \item  Plasma pressure, $p(\bfx; t)  \in  \bbR$, defined
             \begin{equation}
-                p  :=  \frac{1}{3}\left(\int_{\bfv}f_{+}\|\bfv\|^{2} - \frac{1}{\rho_{\rmM}}\|\bfp\|^{2}\right)
+                p  :=  \frac{1}{3}\left(\int_{\bfv}f_{+}\|\bfv\|^{2} - \frac{1}{\rho_{\rmM}}\|\bfp\|^{2}\right).
             \end{equation}
 
             \item  Plasma charge and current density, $\rho_{\rmC}(\bfx; t)  \in  \bbR$ and $\bfj(\bfx; t)  \in  \bbR^{3}$ respectively, defined:
             \begin{align}
                 \rho_{\rmC}  :=  \frac{\beta\rmCy\!_{+}}{2\rmM^{2}}\int_{\bfv}[f_{+} - f_{-}],  &&
-                       \bfj  :=  \frac{\beta\rmCy\!_{+}}{2}\int_{\bfv}[f_{+} - f_{-}]\bfv
+                       \bfj  :=  \frac{\beta\rmCy\!_{+}}{2}\int_{\bfv}[f_{+} - f_{-}]\bfv.
             \end{align}
 
             \item  Plasma velocity and temperature, $\bfu(\bfx; t)  \in  \bbR^{3}$ and $\theta(\bfx; t)  \in  \bbR$ respectively, defined:
             \begin{align}
                   \bfu  :=  \frac{1}{\rho_{\rmM}}\bfp,  &&
-                \theta  :=  \frac{1}{\rho_{\rmM}}p
+                \theta  :=  \frac{1}{\rho_{\rmM}}p.
             \end{align}
         \end{itemize}
 
@@ -123,7 +123,7 @@
                 + \calO\left[1, \frac{1}{\rmRef}\right],
             \end{multline}
 
-            \item  The (leading-order) material conservation equations, in the exact thermalization limit:
+            \item  The (leading-order) magnetohydrodynamic (MHD) equations, under the assumption of exact thermalization:
             \begin{align}
                 \partial_{t}\rho_{\rmM} + \nabla_{\bfx}\cdot\bfp  &=  0  \label{eqn:mass conservation}  \\
                 \rmM^{2}\partial_{t}\rho_{\rmC} + \nabla_{\bfx}\cdot\bfj  &=  0,
@@ -148,9 +148,11 @@
             \end{align}
         \end{itemize}
     \end{enumerate}
+
     We also make use of the following lemma:
+
     \begin{lemma}[Phase-restricted momentum and energy conservation on $(\bfC_{\pm_{1}\pm_{2}}^{(0)})_{\pm_{1}\pm_{2}}$]\label{lem:phase-restricted conservation on local collision operators}
-        The following identities on $(\bfC_{\pm_{1}\pm_{2}}^{(0)})_{\pm_{1}\pm_{2}}$ hold.
+        The following identities on $(\bfC_{\pm_{1}\pm_{2}}^{(0)})_{\pm_{1}\pm_{2}}$ hold:
         \begin{itemize}
             \item  The following two identities hold on $\bfC_{\pm\pm}^{(0)}$:
             \begin{align}
@@ -159,7 +161,7 @@
             \end{align}
             where
             \begin{equation}
-                \epsilon_{\pm\pm}  :=  \frac{1}{\rmKn_{\pm\pm}{\rmRef}_{\pm\pm}}
+                \epsilon_{\pm\pm}  :=  \frac{1}{\rmKn_{\pm\pm}{\rmRef}_{\pm\pm}}.
             \end{equation}
             \item  The following two identities hold on $\bfC_{+-}^{(0)}$ and $\bfC_{-+}^{(0)}$:
             \begin{align}
@@ -168,7 +170,7 @@
             \end{align}
             where
             \begin{equation}
-                \epsilon_{+-}  :=  \frac{1}{\rmKn_{+-}}\max\left\{\frac{1}{{\rmRef}_{++}}, \frac{1}{{\rmRef}_{+-}}, \frac{\alpha}{{\rmRef}_{--}}, \frac{\alpha}{{\rmRef}_{-+}}\right\}
+                \epsilon_{+-}  :=  \frac{1}{\rmKn_{+-}}\max\left\{\frac{1}{{\rmRef}_{++}}, \frac{1}{{\rmRef}_{+-}}, \frac{\alpha}{{\rmRef}_{--}}, \frac{\alpha}{{\rmRef}_{-+}}\right\}.
             \end{equation}
         \end{itemize}
     \end{lemma}

@@ -1,5 +1,5 @@
 \chapter{A Hybrid MHD--Particle Model}\label{cha:delta f corrections}
-    When solving the fully kinetic Boltzmann equations (\ref{eqn:Boltzmann equation}), traditional fluid models rely on the dominance of (local-in-space) leading-order Boltzmann equations (\ref{eqn:leading-order Boltzmann equation}) to reduce the full kinetic model in $\bfx$, $\bfv$ and $t$ to one in $\bfx$ and $t$. The resultant reduction of the distribution functions, $f_{\pm}$, to those $f_{\pm}^{(0)}$ solving (\ref{eqn:leading-order Boltzmann equation}) is referred to as \emph{``thermalization''}.
+    When solving the fully kinetic Boltzmann equations (\ref{eqn:Boltzmann equation}), traditional fluid models rely on the dominance of the (local-in-space) leading-order Boltzmann equations (\ref{eqn:leading-order Boltzmann equation}) to reduce the full kinetic model in $\bfx$, $\bfv$ and $t$ to one in $\bfx$ and $t$ only. The resultant reduction of the distribution functions, $f_{\pm}$, to those $f_{\pm}^{(0)}$ solving (\ref{eqn:leading-order Boltzmann equation}) is referred to as \emph{``thermalization''}.
     
     As noted in \cite{addendum}, the cyclotron numbers $\rmCy\!_{\pm}$, in particular $\rmCy\!_{+}$, are comparatively small under tokamak conditions. As such the dominance of (\ref{eqn:leading-order Boltzmann equation}) in the Boltzmann equations (\ref{eqn:Boltzmann equation}) is very weak. The thermalization assumption is therefore correspondingly very weak.
 
@@ -13,9 +13,11 @@
 
 
     \section*{Summary}
-        We discuss the meaning behind $\delta\!f$ decompositions, and the motivation for using a coupled hybrid FEM--PiC numerical model for the simulation of the components.
+        We discuss the meaning behind $\delta\!f$ decompositions, and the motivation for using a coupled hybrid FEM--PiC numerical model for the simulation of each of the components.
         
         The problem of coupling the FEM and the PiC layer in this $\delta\!f$ decomposition is naturally crucial to its efficacy, both in computational aspects, such as difficulties in parallelization between the Eulerian and Lagrangian interpretations, and in theoretical aspects, such as the creation of timesteppers for the PiC component that maintain the structure-preserving properties of the FEM timestepper. Neither of the two components exists in isolation.
         
-        The remainder of this thesis will discuss the two components individually. Technical aspects of their coupling are left, for now, for further work.
+        \begin{remark}[Separate consideration of the hybrid model components]
+            Despite these remarks, the remainder of this thesis will discuss the two components individually. Technical aspects of their coupling are left, for now, for further work.
+        \end{remark}
     

@@ -1,5 +1,5 @@
 \paragraph*{Gyroaveraged Discretization}
-    Writing (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}) as a system evolving in parameters that are invariant (up to leading order) over cyclotron-frequency oscillation is referred to as a gyrokinetic approach. This is equivalent in effect to performing a multiscale analysis \cite{Kevorkin_Cole_2012} and as such captures the transport-timescale dynamics induced by the high-frequency oscillations directly.
+    Writing (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}) as a system evolving in parameters that are invariant (up to leading order) over cyclotron-frequency oscillations is referred to as a gyrokinetic approach. This is equivalent in effect to performing a multiscale analysis \cite{Kevorkin_Cole_2012} and as such captures the transport-timescale dynamics induced by the high-frequency oscillations directly.
     
     We begin first with an overview of classical gyrokinetic theory. For a further exposition and discussion, see \cite{Woods_2006, Freidberg_2008, Chen_2015}.
 
@@ -16,12 +16,10 @@
         \bfb_{\parallel}  :=  \frac{1}{B}\bfB,  &&
             \bfb_{\pm\perp}^{(i)}  :=  - \frac{1}{B^{2}}\left(\frac{1}{V_{\pm\perp}^{(i)}}\bfV_{\pm}^{(i)}\wedge\bfB\right)\wedge\bfB,
     \end{align}
-    such that the velocity, $\bfV_{\pm}^{(i)}$, can be decomposed as $\bfV_{\pm}^{(i)}  =  V_{\pm\parallel}^{(i)}\bfb_{\parallel} + V_{\pm\perp}^{(i)}\bfb_{\pm\perp}^{(i)}$. This decomposition splits $\bfV_{\pm}^{(i)}$ into 3 terms that change largely on largely convective timescales, $V_{\pm\parallel}^{(i)}$, $V_{\pm\perp}^{(i)}$, $\bfb_{\parallel}$, and 1 that oscillates largely on cyclotron timescales, $\bfb_{\pm\perp}^{(i)}$, with $\bfb_{\parallel}\cdot\bfb_{\pm\perp}^{(i)}  =  0$. Complete $\bfb_{\parallel}$, $\bfb_{\pm\perp}^{(i)}$ as an orthonormal basis for $\bbR^{3}$ with
+    such that the velocity, $\bfV_{\pm}^{(i)}$, can be decomposed as $\bfV_{\pm}^{(i)}  =  V_{\pm\parallel}^{(i)}\bfb_{\parallel} + V_{\pm\perp}^{(i)}\bfb_{\pm\perp}^{(i)}$. This decomposition splits $\bfV_{\pm}^{(i)}$ into 3 terms that change largely on convective timescales, $V_{\pm\parallel}^{(i)}$, $V_{\pm\perp}^{(i)}$, $\bfb_{\parallel}$, and 1 that oscillates largely on cyclotron timescales, $\bfb_{\pm\perp}^{(i)}$, with $\bfb_{\parallel}\cdot\bfb_{\pm\perp}^{(i)}  =  0$. $\bfb_{\parallel}$, $\bfb_{\pm\perp}^{(i)}$ are completed as an orthonormal basis for $\bbR^{3}$ by
     \begin{equation}
         \bfb_{\pm*}^{(i)}  :=  \bfb_{\parallel}\wedge\bfb_{\pm\perp}^{(i)}.
     \end{equation}
-
-    Define then the following pseudo-particle parameters:
 
     \begin{definition}[Pseudo-particle gyrocenter, magnetic moment and energy]
         These are defined as follows:
@@ -84,9 +82,7 @@
     with the sign of the square root switching whenever $E_{\pm}^{(i)}  =  B\mu_{\pm}^{(i)}$ as gyrocenters oscillate along the magnetic field lines. \cite{Freidberg_2008} This eliminates the multiscale behavior of pseudo-particles in the Vlasov model (\ref{eqn:deterministic neoclassical transport 1}--\ref{eqn:deterministic neoclassical transport 2}). One can then model the pseudo-particle motion through a timestepper in $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$.
 
     \begin{remark}[Verification of the deterministic gyrokinetic model]
-        I \emph{believe} (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged energy equation}) are correct. It's surprisingly hard to find these precise forms in the literature, only certain leading-order results and certain assumptions, such as negligible $\bfj$ or $\bfE$. The best way to confirm them I suspect would just be to run some cyclotron-frequency simulations and check the results line up.
-        
-        Until I am actually implementing these schemes numerically, the exact evolution equations for gyroaveraged $\bfxi_{\pm}^{(i)}$, $\mu_{\pm}^{(i)}$, $E_{\pm}^{(i)}$ are irrelevant.
+        I \emph{believe} (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged energy equation}) are correct. It's surprisingly hard to find these precise forms in the literature, only certain leading-order results under certain assumptions, such as negligible $\bfj$ or $\bfE$. The best way to confirm them I suspect would just be to run some cyclotron-frequency simulations and check the results line up.
     \end{remark}
 
     \shortline
@@ -103,4 +99,4 @@
         \item  It is unclear how to handle boundary collisions, since it is unclear when a particle collides with the boundary.
         \item  In the fluid component of the hybrid model, one must ``test'' against the $\delta$ function representing for the pseudo-particle positions, when casting into a weak form. What this means when the particle location is unknown is up to interpretation.
     \end{itemize}
-    There is also the drawback that the gyrokinetic expansion holds as $(|\rmCy\!_{\pm}|B) \rightarrow \infty$. Even if it is true that $|\rmCy\!_{\pm}|B \gg 1$ in most locations, certain reactor layouts may feature regions of low magnetic field. If there exists a region within the tokamak where $B \not\gg 1/|\rmCy\!_{\pm}|$ then this assumption breaks down, as the pseudo-particle dynamics lose their multiscale nature, causing the gyrokinetic expansion to fail.
+    There is also the drawback that the gyrokinetic expansion holds not just as $|\rmCy\!_{\pm}| \rightarrow \infty$, but as $|\rmCy\!_{\pm}|B \rightarrow \infty$. Even if it is true that $\rmCy\!_{\pm} \gg 1$, and $|\rmCy\!_{\pm}|B \gg 1$ in most locations, certain reactor layouts may feature regions of low magnetic field. If there exists a region within the tokamak where $B \not\gg 1/|\rmCy\!_{\pm}|$ then this assumption breaks down, as the pseudo-particle dynamics lose their multiscale nature, causing the gyrokinetic expansion to fail.

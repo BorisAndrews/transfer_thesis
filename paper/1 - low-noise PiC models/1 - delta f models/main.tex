@@ -1,10 +1,10 @@
 \section{$\bfdelta\bff$ Decompositions}\label{cha:delta f decompositions}
-    This subsection shall introduce a technique called the \emph{``$\delta\!f$''} decomposition, a splitting on the distribution functions, $f_{\pm}$. The motivation for and benefits provided by this approach shall be discussed in detail in the following subsection: Section \ref{cha:FEM vs. PiC}.
+    This section shall introduce a technique called the \emph{``$\delta\!f$''} decomposition, a splitting on the distribution functions, $f_{\pm}$. The motivation for and benefits provided by this approach shall be discussed in detail in the following subsection: Section \ref{cha:FEM vs. PiC}.
 
     \line
 
     \begin{definition}[$\delta\!f$ decompositions]\label{def:delta f models}
-        ``$\delta\!f$'' decompositions write the distribution functions $f_{\pm}$ in the form
+        $\delta\!f$ decompositions write the distribution functions $f_{\pm}$ in the form
         \begin{equation}
             f_{\pm}(\bfx, \bfv; t)  =  f_{\pm}^{(0)}[\rho_{\rmM}|_{\bfx; t}, \rho_{\rmC}|_{\bfx; t}, \bfp|_{\bfx; t}, E|_{\bfx; t}](\bfx, \bfv; t) + \frac{1}{\rmCy\!_{+}}\delta\!f_{\pm}(\bfx, \bfv; t),
         \end{equation}
@@ -36,20 +36,20 @@
         Substituting these $\delta\!f$ decompositions $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy\!_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and Maxwell's equations (\ref{eqn:Maxwell's equations transient}--\ref{eqn:Maxwell's equations steady-state}) one can derive a:
         \begin{itemize}
             \item  Fluid (MHD) model in $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$, by taking moments of the Boltzmann equations, and $\bfE$, $\bfB$ through direct evaluation in Maxwell's equations.
-            \item  Kinetic model in $\delta\!f_{\pm}$ that is (inhomogeneously) linear and conservative up to leading order, retrieved directly from the Boltzmann equations.
+            \item  Kinetic (linearized Boltzmann) model in $\delta\!f_{\pm}$ that is (inhomogeneously) linear and conservative up to leading order, retrieved directly from the Boltzmann equations.
         \end{itemize}
     \end{definition}
     
-    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology here. To the authors' knowledge, the idea of the $\delta\!f$ decomposition in the form first appeared in print in \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations.
+    The 2 components in the decomposition, $f_{\pm}^{(0)}$ and $\delta\!f_{\pm}$, are often referred as the \emph{``background''} and \emph{``correction''}, or references with the prefixes \emph{``macro-''} and \emph{``micro-''}. We adopt the former terminology in this thesis. To the authors' knowledge, the idea of the $\delta\!f$ decomposition in this form first appeared in print in 1993 through the works of Lee et al. \cite{Parker_Lee_1993, Dimits_Lee_1993} in application to gyrokinetic simulations.
 
-    $\delta\!f$ decompositions offer a way to recover an approachable and familiar fluid model from the Boltzmann equations \emph{without} the unreliable \emph{exact} thermalization assumption $f_{\pm}  =  f_{\pm}^{(0)}$, at the expense of the introduction of the new $\delta\!f_{\pm}$ corrections.
+    $\delta\!f$ decompositions offer a way to recover an approachable MHD model from the Boltzmann equations \emph{without} the unreliable assumption of \emph{exact} thermalization $f_{\pm}  =  f_{\pm}^{(0)}$. Naturally, this comes at the expense of the introduction of the new $\delta\!f_{\pm}$ corrections.
 
     \line
 
     In its current formulation, the $\delta\!f$ decomposition as described is not \emph{necessarily} well-posed. In deriving the fluid model, the 0 moment conditions on the $\delta\!f_{\pm}$ corrections (\ref{eqn:correction mass moment}--\ref{eqn:correction energy moment}) are required to hold $\forall t$, \emph{however} a distinct kinetic equation is derived for $\delta\!f_{\pm}$ that does not \emph{explicitly} conserve these moment results.
 
     \begin{remark}[Difficulties in proving moment conservation on on $\delta\!f_{\pm}$]
-        It is natural to believe the derived kinetic model \emph{should} conserve these 0 moments. Proving analytically this is the case has proven more difficult than I had anticipated, however I find it very hard to believe this will not hold true, especially in practice.
+        It is natural to believe the derived kinetic model \emph{should} conserve these 0 moments. Proving analytically this is the case has proven more difficult than I had anticipated, however I find it very hard to believe this will not hold true, especially in practice. I plan to complete the following proof in future work
     \end{remark}
 
     \begin{conjecture}[Conservation of moments on $\delta\!f_{\pm}$]\label{con:delta f correction moments}
@@ -100,9 +100,9 @@
     \line
 
     \subsection*{Fluid Component}
-        For a functional $\calL[f]$, let $\partial\calL[f; \delta\!f]$ denotes its $L^{2}$ functional derivative:
+        For a functional $\calL[f]$, let $\partial\calL[f; \delta\!f]$ denote its $L^{2}$ functional derivative,
         \begin{equation}
-            \partial\calL[f; \delta\!f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\!f] - \calL[f])\right\}
+            \partial\calL[f; \delta\!f]  :=  \lim_{\epsilon \rightarrow 0}\left\{\frac{1}{\epsilon}(\calL[f + \epsilon\delta\!f] - \calL[f])\right\}.
         \end{equation}
         Substituting $f_{\pm}  \mapsto  f_{\pm}^{(0)} + 1/\rmCy\!_{+}\cdot\delta\!f_{\pm}$ into the Boltzmann equations (\ref{eqn:Boltzmann equation}) and taking moments, one derives the following leading-order fluid equations in $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $E$:
         \begin{align}
@@ -147,7 +147,7 @@
         
         Up to the linearized local collision operators $\partial\bfC_{\pm_{1}\pm_{2}}^{(0)}$, these equations resemble the original conservative Boltzmann equations (\ref{eqn:Boltzmann equation}) with the addition of an inhomogeneous RHS that is dependent (in part implicitly, through $f_{\pm}^{(0)}$) on the fluid parameters $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$ and their derivatives. The linearization of the collision operator about the thermalized distributions $f_{\pm}^{(0)}$ implies further that these equations are, up to leading order, linear in $\delta\!f_{\pm}$, a statement which does \emph{not} hold true for the original Boltzmann equation in $f_{\pm}$.
 
-        Similar to how the original kinetic Boltzmann equation can be derived from a particle model, this kinetic equation can be viewed as one that might derive from a stochastic particle model with an additional artificial process term by which particles with certain positions and velocities and being generated/eliminated at certain rates dependent on $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$, derived from the inhomogeneous RHS. Substituting $\partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]$ for their values evaluated from the fluid equations \emph{would} leave the RHS dependent only on the \emph{spatial} derivatives of $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$---superficially more suitable for simulation---however this would leave a far more involved RHS, featuring also further linear $\delta\!f_{\pm}$ terms.
+        Similar to how the original kinetic Boltzmann equations can be derived from a particle model, this kinetic equation can be viewed as ones that might be derived from a \emph{stochastic} particle model with an additional artificial process by which particles with certain positions and velocities and being generated/eliminated at certain rates dependent on $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$, derived from the inhomogeneous RHS. Substituting $\partial_{t}[(\rho_{\rmM}, \rho_{\rmC}, \bfp, p)]$ for their values evaluated from the fluid equations \emph{would} leave the RHS dependent only on the \emph{spatial} derivatives of $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$---superficially more suitable for simulation---however this would leave a far more involved RHS, featuring also further linear $\delta\!f_{\pm}$ terms.
 
     \line
 
@@ -168,6 +168,6 @@
         \label{fig:delta f coupling}
     \end{figure}
     
-    Some classical models derived from $\delta\!f$ decompositions reduce this by ignoring the effects of the kinetic component on the fluid component, thus solving a set of MHD equations for the thermalized background, and observing how the corrections evolve ``on top of it'. This is done in many classical gyrokinetic models, including those in \cite{Parker_Lee_1993, Dimits_Lee_1993}. These models however naturally lose validity over time, as the kinetic effects can not affect the dynamics of the thermalized background, as is known to be so prominently the case in tokamak plasmas.
+    Some classical models derived from $\delta\!f$ decompositions reduce this by ignoring the effects of the kinetic component on the fluid component, thus solving a set of MHD equations for the thermalized background, and observing how the corrections evolve ``on top of it''. This kind of analysis is done in many classical gyrokinetic models, including those in \cite{Parker_Lee_1993, Dimits_Lee_1993}. These models however naturally lose validity over time, as the kinetic effects can not affect the dynamics of the thermalized background, as is known to be so prominently the case in tokamak plasmas.
     
-    While it is worth remembering that $\bfj^{(0)}$ does \emph{not} formally equal the current, $\bfj$, we shall henceforth drop the superscript $*^{(0)}$ on $\bfj^{(0)}$, i.e. we shall write as $\bfj^{(0)}$ as $\bfj$.
+    While it is worth remembering that $\bfj^{(0)}$ does \emph{not} formally equal the current, $\bfj$, we shall henceforth drop the superscript $*^{(0)}$ on $\bfj^{(0)}$, i.e. we shall denote as $\bfj^{(0)}$ as $\bfj$.

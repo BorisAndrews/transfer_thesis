@@ -27,9 +27,9 @@
         + \eta_{\pm}\delta\!f_{\pm}
         =  \calF_{\pm}
     \end{multline}
-    When modeling the homogeneous LHS via the PiC simulation, this has the effect of introducing a decay/half-life effect to the pseudo-particles, whereby after a (potentially) random duration $D_{\pm}^{(i)}$ the pseudo-particle is removed from the simulation, with
+    When modeling the homogeneous LHS via the PiC simulation, this could be incorporate by introducing a decay/half-life effect to the pseudo-particles, whereby after a (potentially) random duration $D_{\pm}^{(i)}$ with
     \begin{equation}
-        \bbE\left[D_{\pm}^{(i)}\right] = \frac{1}{\eta_{\pm}}.
+        \bbE\left[D_{\pm}^{(i)}\right] = \frac{1}{\eta_{\pm}},
     \end{equation}
-    After discretization of the system into a timestepper on intervals $T^{n} = \left(t^{n}, t^{n + 1}\right]$, it is computationally convenient if $D_{\pm}^{(i)}$ is the sum of interval durations, $\delta t^{n}$, such that the pseudo-particle ceases to require modeling at some $t^{n}$, at the end of a timestep. This can be achieved by removing each pseudo-particle from the simulation after the timestep $T^{n}$ with probability $1 - \exp\left[\eta_{\pm}\delta t^{n}\right]$, likely independent for each particle.
+    pseudo-particles are removed from the simulation. After discretization of the system into a timestepper on intervals $T^{n} = \left(t^{n}, t^{n + 1}\right]$, it is computationally convenient if $D_{\pm}^{(i)}$ is the sum of interval durations, $\delta t^{n}$, such that the pseudo-particle ceases to require modeling at some $t^{n}$, at the end of a timestep. This can be achieved by removing each pseudo-particle from the simulation after the timestep $T^{n}$ with probability $1 - \exp\left[\eta_{\pm}\delta t^{n}\right]$, likely independent for each particle.
     

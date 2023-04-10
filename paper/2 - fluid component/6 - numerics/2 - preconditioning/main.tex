@@ -6,12 +6,11 @@
     \begin{remark}[Parameter-robust preconditioners]
         It is my hope that the ideas behind the parameter-robust preconditioners developed for incompressible (Hall) MHD in \cite{Laakmann_Farrell_Mitchell_22, Laakmann_Hu_Farrell_2022} will extend both to the:
         \begin{itemize}
-            \item  Slightly modified incompressible MHD model I am considering here.
-            \item  Fully new compressible MHD model.
+            \item  Slightly modified incompressible MHD model, presented here.
+            \item  Fully new compressible MHD model, on which I am currently working.
         \end{itemize}
-        
         The former hope here seems very likely to hold true, I have just yet to investigate this aspect, since I have yet to implement the scheme numerically.
         
-        The latter feels a bolder ask, but not necessarily impossible. Gauss's law, $\nabla\cdot\bfB = 0$, is still satisfied exactly in this case at least. Perhaps with some change of reference, the exact \emph{compressibility} condition (\ref{eqn:weak incompressibility}), $\partial_{t}\rho  =  - \nabla\cdot\bbQ_{\calP}\left[\bfp^{*}\right]$, could be leveraged to our advantage too, perhaps by the introduction of $\bbQ_{\calP}\left[\bfp^{*}\right]$ as an auxiliary space. (Here in fact a FET approach might also come in handy again!) In any case, this is worth investigating in the compressible NS model before moving onto the full compressible MHD model.
+        The latter feels a bolder ask, but not necessarily impossible. Gauss's law, $\nabla\cdot\bfB = 0$, is still satisfied exactly in this case at least. Perhaps with some change of reference, the exact \emph{compressibility} condition (\ref{eqn:weak incompressibility}), $\partial_{t}\rho  =  - \nabla\cdot\bbQ_{\calP}\left[\bfp^{*}\right]$, could be leveraged to our advantage too, perhaps by the introduction of $\bbQ_{\calP}\left[\bfp^{*}\right]$ as an auxiliary space. (Here in fact a FET approach might also come in handy again.) In any case, this is worth investigating in the compressible NS model before moving onto the full compressible MHD model.
     \end{remark}
     

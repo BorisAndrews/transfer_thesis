@@ -28,7 +28,7 @@
             Faraday's law  &  $\partial_{t}\bfB  =  - \nabla\wedge\bfE$  &  (\ref{eqn:Faraday's law})  &  $\alpha\partial_{t}\calB$  \\
             Gauss's law  &  $0  =  \nabla\cdot\bfB$  &  (\ref{eqn:Gauss's law})  &  $\beta\nabla\cdot\calB$  \\
         \end{tabular}
-        \caption{Test spaces for the (compressible) periodic variation formulation \BA{(I introduce ``$\alpha$'' here, but I used $\alpha$ as notation for a small thing in Subsubsection \ref{cha:fluid models})}}
+        \caption{Test spaces for the (compressible) periodic variation formulation \BA{(I introduce ``$\alpha$'' here, but I used $\alpha$ as notation for a small thing in Subsection \ref{cha:fluid models})}}
         \label{fig:periodic test spaces}
     \end{figure}
 
@@ -147,7 +147,7 @@
         \rho  &=  - \nabla\cdot\bfchi
     \end{align}
     
-    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction. (Figures \ref{fig:tensor product EM subcomplexes}--\ref{fig:tensor product momentum subcomplexes})
+    By Corollary \ref{cor:tensor product complex inclusion}, such subcomplexes can be constructed via a tensor product construction. (See Figures \ref{fig:tensor product EM subcomplexes}--\ref{fig:tensor product momentum subcomplexes})
     
     \begin{figure}[!ht]
         \centering
@@ -355,7 +355,7 @@
         provided $\calU  \leqslant  \calM$, $\calE 
          \leqslant  \calE$, and $1  \in  \calD$,
         \begin{equation}
-            \rmE\left(t^{k + 1}\right) - \rmE\left(T\right)  =  \oint_{\bfGamma\otimes T}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
+            \rmE\left(t^{k + 1}\right) - \rmE\left(T\right)  =  \int_{\bfGamma\otimes T}\left(- \frac{1}{2}\|\bfu\|^{2}\bfp - 2p\bfu + \frac{2}{\beta}\bfB\wedge\bfE + \frac{1}{\rmRef}\rho\bftau\cdot\bfu + \frac{1}{\rmPe}\rho\nabla\theta\right)\cdot\bfn
         \end{equation}
     \end{theorem}
     \begin{proof}
@@ -369,8 +369,8 @@
         \end{equation}
         provided $\calB  \leqslant  \calJ$ and $\calB  \leqslant  \calE$,
         \begin{align}
-            \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(T\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T\right\}}\bfB\cdot(\nabla\wedge\bfB) + \oint_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
-            \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T}\calH(\bfB) + \oint_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
+            \rmH_{\rmM}\left(t^{k + 1}\right) - \rmH_{\rmM}\left(T\right)  &=  - \frac{2}{\rmRem}\int_{\bfOmega\otimes\left\{T\right\}}\bfB\cdot(\nabla\wedge\bfB) + \int_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn  \\
+            \left(\tall\right.&=  \left.- \frac{2}{\rmRem}\int_{T}\calH(\bfB) + \int_{\bfGamma\otimes\left\{T\right\}}[\bfA\wedge(\bfE - \nabla\varphi)]\cdot\bfn\tall\right)
         \end{align}
     \end{theorem}
     \begin{proof}

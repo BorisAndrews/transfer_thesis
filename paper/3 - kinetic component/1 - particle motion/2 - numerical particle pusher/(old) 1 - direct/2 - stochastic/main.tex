@@ -1,12 +1,12 @@
 \paragraph*{Stochastic Gyrokinetic Theory}
-    As detailed in Subsubsection \ref{cha:particle pusher}, the linearized collision operators introduce stochastic terms into equations of motion for the particle pusher:
+    As detailed in Subsection \ref{cha:particle pusher}, the linearized collision operators introduce stochastic terms into equations of motion for the particle pusher:
     \begin{align}
         \rmd\bfX  =  \bfV\rmd t,  &&
         \rmd\bfV  =  \pm\frac{\rme}{\rmm_{\pm}}(\bfE + \bfV\wedge\bfB)\rmd t + \rmd\bfL_{\pm}.
     \end{align}
     With the nonlinear collision operator no longer present and pseudo-particle dynamics fully decoupled ``via'' the fluid layer, one need no longer worry about those particle-on-particle effects that are missing from the classical gyrokinetic model. These effects are instead captured in the stochastic motion from the linearized collision operator. One must therefore modify the classical, deterministic gyrokinetic model equations (\ref{eqn:gyroaveraged gyrocenter equation}--\ref{eqn:gyroaveraged magnetic moment equation}) to a new stochastic form.
 
-    Consider from here the LB collision operator model from subsubsubsection \ref{cha:collision operators}, wherein the stochastic terms $\rmd\bfL_{\pm}$ take the form $\rmd\bfL_{\pm}  =  \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW$.
+    Consider from here the LB collision operator model from Subsection \ref{cha:collision operators}, wherein the stochastic terms $\rmd\bfL_{\pm}$ take the form $\rmd\bfL_{\pm}  =  \lambda_{\pm}(\bfu - \bfV)\rmd t + \sigma_{\pm}\rmd\bfW$.
     
     Decomposing $\bfu$, $\bfW$ into components parallel and perpendicular to the magnetic field, write:
     \begin{align}
@@ -32,6 +32,6 @@
     \end{itemize}
     $\widetilde{\bfW}$ is a distinct Wiener process, independent of $\bfW$. \BA{(Proof of independence?)}
 
-    \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ don't need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocenters etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
+    \BA{Extension to stochastic gyrokinetic model: Nonlinear component of collision operator no longer present $\implies$ do not need to worry about particle-on-particle effects- instead this manifests as the new stochastic terms in the particle pushers from the \emph{linearized} collision operator. Similar DEs can be derived in energy/moments/gyrocenters etc., except now with the introduction of stochastic effects- they are now \emph{SDEs}, not just \emph{ODEs}.}
         
     \BA{Particle motion diagrams.}

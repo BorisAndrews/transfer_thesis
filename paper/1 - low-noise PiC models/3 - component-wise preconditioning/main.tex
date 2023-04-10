@@ -1,10 +1,10 @@
 \section{Component-Wise Preconditioning}
-    In the full, coupled, hybrid FEM--PiC model, after discretization and linearization, one will ultimately have to solve a linear system in the degrees of freedom (DoFs) for:
+    In the full, coupled, hybrid FEM--PiC model, after discretization and linearization, one must ultimately solve a linear system in the degrees of freedom (DoFs) for:
     \begin{itemize}
         \item  The Galerkin approximations of the functions in the fluid component: $\rho_{\rmM}$, $\rho_{\rmC}$, $\bfp$, $p$; $\bfE$, $\bfB$
         \item  The discretized positions and velocities for the pseudo-particles in the kinetic components: $(\bfX_{\pm}^{(i)})^{(i)}$, $(\bfV_{\pm}^{(i)})^{(i)}$
     \end{itemize}
-    on each given timestep.
+    on each timestep.
 
     As noted in Section \ref{cha:FEM vs. PiC}, the hybrid FEM--PiC model has the benefit of ``decoupling'' the equations of motion for the pseudo-particles in the numerical model for the kinetic component. (See Figure \ref{fig:delta f coupling}) Due to this particle decoupling, with appropriate ordering on these DoFs, any matrix for this complete, coupled linear system can theoretically take the block form
     \begin{equation}\label{eqn:FEM--PiC block structure}
@@ -40,4 +40,4 @@
     \end{align}
     These inverses correspond to the solution of the standalone MHD timesteppers and particle pushers.
 
-    While the distinct solution of the independent fluid and kinetic numerical models therefore will \emph{not} solve the whole coupled hybrid model, it does potentially pave the way for preconditioners for the hybrid model in the future.
+    While the distinct solution of the independent fluid and kinetic numerical models will \emph{not} solve the whole \emph{coupled} hybrid model, it does potentially pave the way for preconditioners for the hybrid model in the future.
